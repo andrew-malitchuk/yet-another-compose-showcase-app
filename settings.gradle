@@ -13,6 +13,7 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "YACSA"
+
 include ':app'
 include ':feature:books'
 include ':feature:format'
@@ -24,3 +25,6 @@ include ':core:ui'
 include ':core:model'
 include ':domain'
 include ':domain:impl'
+include ':data'
+include ':data:network'
+include ':data:network:impl'

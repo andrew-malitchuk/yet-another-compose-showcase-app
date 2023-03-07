@@ -13,4 +13,25 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "YACSA"
+
 include ':app'
+include ':feature:books'
+include ':feature:format'
+include ':feature:person'
+include ':feature:main'
+include ':core:common'
+include ':core:ui'
+include ':core:model'
+include ':core:localization'
+include ':domain'
+include ':domain:impl'
+include ':data'
+include ':data:network'
+include ':data:network:impl'
+include ':data:datastore'
+include ':data:datastore:impl'
+include ':data:database'
+include ':data:database:impl'
+include ':service'
+include ':service:analytics'
+include ':build-logic'

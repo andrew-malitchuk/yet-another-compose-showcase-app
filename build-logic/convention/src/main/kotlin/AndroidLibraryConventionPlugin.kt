@@ -1,5 +1,6 @@
 import com.android.build.api.variant.LibraryAndroidComponentsExtension
 import com.android.build.gradle.LibraryExtension
+import dev.yacsa.convention.VersionControl.TARGET_SDK
 import dev.yacsa.convention.configureKotlinAndroid
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -18,7 +19,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             with(extensions) {
                 configure<LibraryExtension> {
                     configureKotlinAndroid(this)
-                    defaultConfig.targetSdk = 33
+                    defaultConfig.targetSdk = TARGET_SDK
                 }
             }
         }

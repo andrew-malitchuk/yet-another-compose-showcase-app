@@ -8,7 +8,7 @@ class AndroidHiltConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             pluginManager.apply {
-                apply("dagger.hilt.android.plugin")
+                apply("com.google.dagger.hilt.android")
                 apply("org.jetbrains.kotlin.kapt")
             }
             val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")

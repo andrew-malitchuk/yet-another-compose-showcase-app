@@ -20,30 +20,27 @@ gradlePlugin {
         register("androidApplicationCompose") {
             id = "yacsa.android.application.compose"
             implementationClass = "AndroidApplicationComposeConventionPlugin"
-        
+        }
         register("androidApplication") {
             id = "yacsa.android.application"
             implementationClass = "AndroidApplicationConventionPlugin"
         }
-//        register("androidLibraryCompose") {
-//            id = "yacsa.android.library.compose"
-//            implementationClass = "AndroidLibraryComposeConventionPlugin"
-//        }
-//        register("androidLibrary") {
-//            id = "yacsa.android.library"
-//            implementationClass = "AndroidLibraryConventionPlugin"
-//        }
+        register("androidLibraryCompose") {
+            id = "yacsa.android.library.compose"
+            implementationClass = "AndroidLibraryComposeConventionPlugin"
+        }
+        register("androidLibrary") {
+            id = "yacsa.android.library"
+            implementationClass = "AndroidLibraryConventionPlugin"
+        }
         register("androidFeature") {
             id = "yacsa.android.feature"
             implementationClass = "AndroidFeatureConventionPlugin"
         }
-//        register("androidHilt") {
-//            id = "yacsa.android.hilt"
-//            implementationClass = "AndroidHiltConventionPlugin"
-//        }
-//        register("androidFlavors") {
-//            id = "yacsa.android.application.flavors"
-//            implementationClass = "AndroidApplicationFlavorsConventionPlugin"
-//        }
+        register("androidHilt") {
+            id = "yacsa.android.hilt"
+            implementationClass = "AndroidHiltConventionPlugin"
+        }
     }
 }
+

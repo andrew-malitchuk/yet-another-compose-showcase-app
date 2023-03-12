@@ -17,5 +17,8 @@ dependencies {
     implementation("androidx.compose.material:material:1.3.1")
 
     implementation(project(":core:ui"))
+    implementation(project(":feature:navigation"))
+    implementation(project(":feature:books"))
+    implementation(project(":feature:format"))
 
 }

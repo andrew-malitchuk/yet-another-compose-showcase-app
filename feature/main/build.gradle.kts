@@ -20,5 +20,6 @@ dependencies {
     implementation(project(":feature:navigation"))
     implementation(project(":feature:books"))
     implementation(project(":feature:format"))
+    implementation(project(":feature:onboarding"))
 
 }

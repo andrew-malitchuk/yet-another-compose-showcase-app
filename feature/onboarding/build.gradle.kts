@@ -4,7 +4,10 @@ plugins {
 }
 
 android {
-    namespace = "dev.yacsa.main"
+    namespace = "dev.yacsa.onboarding"
+    buildFeatures{
+        compose = true
+    }
 }
 
 dependencies {
@@ -13,15 +16,12 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtimeCompose)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.core.splashscreen)
-
-//    implementation(libs.androidx.compose.material3)
     implementation("androidx.compose.material:material:1.3.1")
 
-    implementation(project(":core:ui"))
+    implementation("androidx.compose.ui:ui-tooling:1.3.3")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.3.3")
+
     implementation(project(":feature:navigation"))
-    implementation(project(":feature:books"))
-    implementation(project(":feature:format"))
-    implementation(project(":feature:onboarding"))
+    implementation(project(":core:ui"))
 
 }

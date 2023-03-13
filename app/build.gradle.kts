@@ -24,6 +24,7 @@ dependencies {
     implementation(project(":feature:format"))
     implementation(project(":feature:main"))
     implementation(project(":feature:person"))
+    implementation(project(":feature:navigation"))
 
     implementation(project(":core:common"))
     implementation(project(":core:localization"))
@@ -41,4 +42,15 @@ dependencies {
     implementation(project(":domain:impl"))
 
     implementation(project(":service:analytics"))
+
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtimeCompose)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.compose.material3)
+
+
+//    implementation("androidx.compose.ui:ui-tooling-preview:1.3.3")
+//    implementation("androidx.compose.ui:ui-tooling:1.3.3")
 }

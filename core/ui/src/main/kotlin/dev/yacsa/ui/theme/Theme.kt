@@ -34,6 +34,7 @@ fun YacsaTheme(
     CompositionLocalProvider(
         LocalYacsaColors provides colors,
         LocalYacsaTypography provides typography,
+        LocalYacsaSpacing provides spacing,
         content = content
     )
 }

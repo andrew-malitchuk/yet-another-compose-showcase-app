@@ -1,5 +1,5 @@
 [versions]
-androidGradlePlugin = "7.4.1"
+androidGradlePlugin = "7.4.2"
 androidxComposeCompiler = "1.4.1"
 androidxComposeBom = "2023.01.00"
 androidxCore = "1.9.0"
@@ -12,6 +12,9 @@ androidxAppCompat = "1.5.1"
 androidxActivity = "1.6.1"
 androidxComposeMaterial3 = "1.1.0-alpha06"
 androidxCoreSplashscreen = "1.0.0"
+retrofit = "2.9.0"
+okhttp = "4.10.0"
+
 
 [libraries]
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
@@ -28,6 +31,8 @@ androidx-lifecycle-runtimeCompose = { group = "androidx.lifecycle", name = "life
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigation" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "androidxComposeMaterial3" }
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidxCoreSplashscreen" }
+retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 
 
 

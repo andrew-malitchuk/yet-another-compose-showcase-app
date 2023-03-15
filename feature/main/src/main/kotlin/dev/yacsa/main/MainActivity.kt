@@ -1,6 +1,7 @@
 package dev.yacsa.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.compose.setContent
@@ -8,15 +9,21 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import dev.yacsa.main.navigation.RootNavigationGraph
 import dev.yacsa.navigation.NavigationDirection
+import dev.yacsa.network.source.BooksNetSource
 import dev.yacsa.ui.theme.YacsaTheme
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var booksNetSource: BooksNetSource
 
     // TODO: add
 //    @Inject
@@ -33,7 +40,7 @@ class MainActivity : ComponentActivity() {
         }
         GlobalScope.launch(Dispatchers.Main) {
             delay(1_000L)
-            isSplashShown=false
+            isSplashShown = false
         }
         setContent {
             val navHostController = rememberNavController()
@@ -48,6 +55,11 @@ class MainActivity : ComponentActivity() {
                 )
             }
         }
+
+        GlobalScope.launch(IO) {
+            Log.d("foo", "${booksNetSource.getBooks(1)}")
+        }
+
     }
 
 }

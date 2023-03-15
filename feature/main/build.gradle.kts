@@ -24,4 +24,6 @@ dependencies {
     implementation(project(":feature:format"))
     implementation(project(":feature:onboarding"))
 
+    implementation(project(":data:network"))
+
 }

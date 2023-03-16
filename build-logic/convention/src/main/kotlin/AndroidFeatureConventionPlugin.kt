@@ -10,6 +10,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
             pluginManager.apply{
                 apply("yacsa.android.library")
                 apply("yacsa.android.hilt")
+                apply("com.google.devtools.ksp")
             }
             val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
 

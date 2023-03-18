@@ -6,24 +6,24 @@ import dev.yacsa.database.impl.dao.base.BaseDbDao
 import dev.yacsa.database.model.BookDbModel
 
 @Dao
-interface BookDbDao : BaseDbDao<BookDbModel> {
+interface BookDbDao {
 
     @Query("SELECT * FROM ${YacsaDb.Table.BOOK} WHERE id=:id")
-    override suspend fun get(id: Int): BookDbModel?
+    suspend fun get(id: Int): BookDbModel?
 
     @Query("SELECT * FROM ${YacsaDb.Table.BOOK}")
-    override suspend fun get(): List<BookDbModel>?
+    suspend fun get(): List<BookDbModel>?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    override suspend fun insert(value: BookDbModel)
+    suspend fun insert(value: BookDbModel)
 
     @Update
-    override suspend fun update(value: BookDbModel)
+    suspend fun update(value: BookDbModel)
 
     @Query("DELETE FROM ${YacsaDb.Table.BOOK} WHERE id=:id")
-    override suspend fun delete(id: Int) 
+    suspend fun delete(id: Int)
 
     @Query("DELETE FROM ${YacsaDb.Table.BOOK}")
-    override suspend fun deleteAll()
+    suspend fun deleteAll()
 
 }

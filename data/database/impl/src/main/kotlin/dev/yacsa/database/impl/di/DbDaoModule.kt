@@ -9,7 +9,7 @@ import dev.yacsa.database.impl.dao.BookDbDao
 
 @Module
 @InstallIn(SingletonComponent::class)
-class DaoModule {
+class DbDaoModule {
 
     @Provides
     fun providesBookDao(

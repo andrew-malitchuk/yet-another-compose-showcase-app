@@ -25,5 +25,6 @@ dependencies {
     implementation(project(":feature:onboarding"))
 
     implementation(project(":data:network"))
+    implementation(project(":data:datastore"))
 
 }

@@ -7,6 +7,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.compose.setContent
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
+import dev.yacsa.datastore.model.PreferencesDataStoreModel
+import dev.yacsa.datastore.model.ThemeDateStoreModel
+import dev.yacsa.datastore.source.PreferencesDataStoreSource
 import dev.yacsa.main.navigation.RootNavigationGraph
 import dev.yacsa.navigation.NavigationDirection
 import dev.yacsa.network.source.BooksNetSource
@@ -16,6 +19,7 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import logcat.logcat
 import javax.inject.Inject
 
 
@@ -24,6 +28,10 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var booksNetSource: BooksNetSource
+
+    @Inject
+    lateinit var prefereDataSource: PreferencesDataStoreSource
+
 
     // TODO: add
 //    @Inject
@@ -59,6 +67,15 @@ class MainActivity : ComponentActivity() {
         GlobalScope.launch(IO) {
             Log.d("foo", "${booksNetSource.getBooks(1)}")
         }
+
+        GlobalScope.launch(IO) {
+            prefereDataSource.updateData(PreferencesDataStoreModel(theme=ThemeDateStoreModel.DARK))
+
+            prefereDataSource.getData().collect{
+                Log.d("foo",it.toString())
+            }
+        }
+
 
     }
 

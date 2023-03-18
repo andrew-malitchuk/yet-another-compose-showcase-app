@@ -58,12 +58,12 @@ class NetworkModule {
     @Provides
     @Named("interceptor_chucker")
     fun providesInterceptorChucker(
-        @ApplicationContext context: Context
+        @ApplicationContext applicationContext: Context
     ): Interceptor {
-        return ChuckerInterceptor.Builder(context).apply {
+        return ChuckerInterceptor.Builder(applicationContext).apply {
             collector(
                 ChuckerCollector(
-                    context,
+                    applicationContext,
                     true,
                     RetentionManager.Period.FOREVER
                 )

@@ -12,7 +12,7 @@ const val DB_VERSION=1
     entities = [
         BookDbModel::class
     ],
-    exportSchema = false
+    exportSchema =true
 )
 abstract class YacsaDb:RoomDatabase(){
     abstract fun bookDao(): BookDbDao

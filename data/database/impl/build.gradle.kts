@@ -5,6 +5,14 @@ plugins {
 
 android {
     namespace = "dev.yacsa.database.impl"
+
+    defaultConfig {
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments(mapOf("room.schemaLocation" to "$projectDir/schemas"))
+            }
+        }
+    }
 }
 
 dependencies {

@@ -6,7 +6,7 @@ plugins {
 
 android {
     defaultConfig {
-        namespace="dev.yacsa.app"
+        namespace = "dev.yacsa.app"
     }
     buildTypes {
         val debug by getting {
@@ -35,8 +35,12 @@ dependencies {
     implementation(project(":data:database:impl"))
     implementation(project(":data:datastore"))
     implementation(project(":data:datastore:impl"))
+    implementation(project(":data:cryptodatastore"))
+    implementation(project(":data:cryptodatastore:impl"))
     implementation(project(":data:network"))
     implementation(project(":data:network:impl"))
+    implementation(project(":data:repository"))
+    implementation(project(":data:repository:impl"))
 
     implementation(project(":domain"))
     implementation(project(":domain:impl"))

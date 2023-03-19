@@ -17,7 +17,7 @@ class ServiceModule {
 
     @Singleton
     @Provides
-    fun provideBooksApiService(
+    fun providesBooksApiService(
         @Named("base_url") baseUrl: String,
         okHttpClient: OkHttpClient,
         converter: Converter.Factory

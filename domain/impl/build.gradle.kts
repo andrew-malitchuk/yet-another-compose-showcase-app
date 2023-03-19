@@ -1,5 +1,6 @@
 plugins {
     id("yacsa.android.library")
+    id("yacsa.android.hilt")
 }
 
 android {
@@ -7,5 +8,5 @@ android {
 }
 
 dependencies {
-
+    implementation(project(":domain"))
 }

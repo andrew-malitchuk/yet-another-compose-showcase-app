@@ -5,9 +5,6 @@ plugins {
 
 android {
     namespace = "dev.yacsa.onboarding"
-    buildFeatures{
-        compose = true
-    }
 }
 
 dependencies {

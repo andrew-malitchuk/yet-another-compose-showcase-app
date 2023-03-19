@@ -26,5 +26,6 @@ dependencies {
 
     implementation(project(":data:network"))
     implementation(project(":data:datastore"))
+    implementation(project(":data:cryptodatastore"))
 
 }

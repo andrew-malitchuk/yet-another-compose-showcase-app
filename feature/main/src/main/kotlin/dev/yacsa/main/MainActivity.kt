@@ -7,6 +7,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.compose.setContent
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
+import dev.yacsa.cryptodatastore.model.AccessTokenCryptoDataStoreModel
+import dev.yacsa.cryptodatastore.source.AccessTokenCryptoDataStoreSource
 import dev.yacsa.datastore.model.PreferencesDataStoreModel
 import dev.yacsa.datastore.model.ThemeDateStoreModel
 import dev.yacsa.datastore.source.PreferencesDataStoreSource
@@ -31,6 +33,9 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var prefereDataSource: PreferencesDataStoreSource
+
+    @Inject
+    lateinit var accessTokenCryptoDataStoreSource: AccessTokenCryptoDataStoreSource
 
 
     // TODO: add
@@ -73,6 +78,14 @@ class MainActivity : ComponentActivity() {
 
             prefereDataSource.getData().collect{
                 Log.d("foo",it.toString())
+            }
+        }
+
+        GlobalScope.launch(IO) {
+            accessTokenCryptoDataStoreSource.updateData(AccessTokenCryptoDataStoreModel("foobar"))
+
+            accessTokenCryptoDataStoreSource.getData().collect{
+                Log.d("foo", it.toString())
             }
         }
 

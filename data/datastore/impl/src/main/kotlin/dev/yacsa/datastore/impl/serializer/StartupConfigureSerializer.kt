@@ -1,22 +1,22 @@
 package dev.yacsa.datastore.impl.serializer
 
 import androidx.datastore.core.Serializer
-import dev.yacsa.datastore.model.PreferencesDataStoreModel
+import dev.yacsa.datastore.model.StartUpConfigureDataStoreModel
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import java.io.InputStream
 import java.io.OutputStream
 
 // TODO: somehow remove boilerplate
-object PreferencesSerializer : Serializer<PreferencesDataStoreModel> {
+object StartupConfigureSerializer : Serializer<StartUpConfigureDataStoreModel> {
 
-    override val defaultValue: PreferencesDataStoreModel
-        get() = PreferencesDataStoreModel()
+    override val defaultValue: StartUpConfigureDataStoreModel
+        get() = StartUpConfigureDataStoreModel()
 
-    override suspend fun readFrom(input: InputStream): PreferencesDataStoreModel {
+    override suspend fun readFrom(input: InputStream): StartUpConfigureDataStoreModel {
         return try {
             Json.decodeFromString(
-                deserializer = PreferencesDataStoreModel.serializer(),
+                deserializer = StartUpConfigureDataStoreModel.serializer(),
                 string = input.readBytes().decodeToString()
             )
         } catch (e: SerializationException) {
@@ -25,10 +25,10 @@ object PreferencesSerializer : Serializer<PreferencesDataStoreModel> {
         }
     }
 
-    override suspend fun writeTo(t: PreferencesDataStoreModel, output: OutputStream) {
+    override suspend fun writeTo(t: StartUpConfigureDataStoreModel, output: OutputStream) {
         output.write(
             Json.encodeToString(
-                serializer = PreferencesDataStoreModel.serializer(),
+                serializer = StartUpConfigureDataStoreModel.serializer(),
                 value = t
             ).encodeToByteArray()
         )

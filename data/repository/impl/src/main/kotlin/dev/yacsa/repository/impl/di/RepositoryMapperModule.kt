@@ -13,7 +13,7 @@ import dev.yacsa.repository.impl.mapper.StartUpConfigureRepoDataStoreMapper
 class RepositoryMapperModule {
 
     @Provides
-    fun provideGreetingMapper(): StartUpConfigureRepoDataStoreMapper {
+    fun providesGreetingMapper(): StartUpConfigureRepoDataStoreMapper {
         return StartUpConfigureRepoDataStoreMapper()
     }
 

@@ -12,6 +12,7 @@ import dev.yacsa.cryptodatastore.source.AccessTokenCryptoDataStoreSource
 import dev.yacsa.datastore.model.PreferencesDataStoreModel
 import dev.yacsa.datastore.model.ThemeDateStoreModel
 import dev.yacsa.datastore.source.PreferencesDataStoreSource
+import dev.yacsa.domain.usecase.GetStartUpConfigureUseCase
 import dev.yacsa.main.navigation.RootNavigationGraph
 import dev.yacsa.navigation.NavigationDirection
 import dev.yacsa.network.source.BooksNetSource
@@ -37,6 +38,9 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var accessTokenCryptoDataStoreSource: AccessTokenCryptoDataStoreSource
 
+    @Inject
+    lateinit var getStartUpConfigureUseCase: GetStartUpConfigureUseCase
+
 
     // TODO: add
 //    @Inject
@@ -47,7 +51,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
-        val isDarkTheme = true
+        val isDarkTheme = false
         splashScreen.setKeepOnScreenCondition {
             isSplashShown
         }
@@ -69,26 +73,9 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        GlobalScope.launch(IO) {
-            Log.d("foo", "${booksNetSource.getBooks(1)}")
+        GlobalScope.launch(IO){
+            Log.d("foobar", getStartUpConfigureUseCase().toString())
         }
-
-        GlobalScope.launch(IO) {
-            prefereDataSource.updateData(PreferencesDataStoreModel(theme=ThemeDateStoreModel.DARK))
-
-            prefereDataSource.getData().collect{
-                Log.d("foo",it.toString())
-            }
-        }
-
-        GlobalScope.launch(IO) {
-            accessTokenCryptoDataStoreSource.updateData(AccessTokenCryptoDataStoreModel("foobar"))
-
-            accessTokenCryptoDataStoreSource.getData().collect{
-                Log.d("foo", it.toString())
-            }
-        }
-
 
     }
 

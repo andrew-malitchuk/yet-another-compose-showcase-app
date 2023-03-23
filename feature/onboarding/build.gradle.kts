@@ -14,9 +14,11 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtimeCompose)
     implementation(libs.androidx.navigation.compose)
     implementation("androidx.compose.material:material:1.3.1")
+    implementation("com.google.accompanist:accompanist-pager:0.28.0")
+    implementation("com.google.accompanist:accompanist-pager-indicators:0.28.0")
 
-    implementation("androidx.compose.ui:ui-tooling:1.3.3")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.3.3")
+    implementation("androidx.compose.ui:ui-tooling:1.4.0")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.4.0")
 
     implementation(project(":feature:navigation"))
     implementation(project(":core:ui"))

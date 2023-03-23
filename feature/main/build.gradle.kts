@@ -28,4 +28,6 @@ dependencies {
     implementation(project(":data:datastore"))
     implementation(project(":data:cryptodatastore"))
 
+    implementation(project(":domain"))
+
 }

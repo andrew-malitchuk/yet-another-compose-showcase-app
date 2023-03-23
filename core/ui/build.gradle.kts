@@ -11,6 +11,8 @@ dependencies {
 //    implementation(libs.androidx.compose.material3)
     implementation("androidx.compose.material:material:1.3.1")
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.28.0")
+    implementation("com.google.accompanist:accompanist-pager:0.28.0")
+
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)

@@ -5,9 +5,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.KeyboardArrowLeft
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -18,16 +18,19 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.pager.*
 import dev.yacsa.ui.theme.YacsaTheme
+import kotlinx.coroutines.launch
 import logcat.logcat
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun OnboardingScreen(
-    onClick: () -> Unit,
+    onBackClick: () -> Unit,
+    onDoneClick: () -> Unit,
     onboardingViewModel: OnboardingViewModel = viewModel(),
 ) {
 
     val state = rememberPagerState()
+    val scope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier
@@ -36,11 +39,17 @@ fun OnboardingScreen(
     ) {
         TopSection(
             buttonType = onboardingViewModel.buttonType,
-            onBackClick = {
-
-            },
+            onBackClick = onBackClick,
             onSkipClick = {
-
+                scope.launch {
+                    with(state) {
+                        if (this.currentPage != this.pageCount-1) {
+                            state.animateScrollToPage(state.currentPage + 1)
+                        } else {
+                            onDoneClick()
+                        }
+                    }
+                }
             }
         )
         HorizontalPager(
@@ -49,7 +58,7 @@ fun OnboardingScreen(
             modifier = Modifier
                 .weight(1f, true)
         ) { page ->
-            if (this.currentPage == (state.pageCount-1)) {
+            if (this.currentPage == (state.pageCount - 1)) {
                 onboardingViewModel.buttonType = OnboardingViewModel.ButtonType.SKIP
             } else {
                 onboardingViewModel.buttonType = OnboardingViewModel.ButtonType.NEXT
@@ -187,6 +196,11 @@ fun BottomSection(state: PagerState) {
 
 }
 
+@OptIn(ExperimentalPagerApi::class)
+fun foo(state: PagerState) {
+
+}
+
 
 //@Preview(showBackground = true)
 //@Composable
@@ -200,6 +214,6 @@ fun BottomSection(state: PagerState) {
 @Composable
 fun PreviewOnboardingScreen_Light() {
     YacsaTheme(useDarkTheme = false) {
-        OnboardingScreen(onboardingViewModel = OnboardingViewModel(), onClick = {})
+        OnboardingScreen({}, {}, OnboardingViewModel())
     }
 }

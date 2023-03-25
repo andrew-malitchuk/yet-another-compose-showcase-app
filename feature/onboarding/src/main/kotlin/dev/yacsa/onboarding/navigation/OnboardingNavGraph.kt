@@ -1,5 +1,6 @@
 package dev.yacsa.onboarding.navigation
 
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -13,9 +14,9 @@ fun NavGraphBuilder.onboardingNavGraph(navController: NavHostController) {
         route = NavigationDirection.Onboarding.route
     ) {
         composable(OnboardingDirection.Onboarding.route) {
-            OnboardingScreen() {
+            OnboardingScreen(onboardingViewModel = viewModel(), onClick = {
                 navController.navigate("books")
-            }
+            })
         }
     }
 }

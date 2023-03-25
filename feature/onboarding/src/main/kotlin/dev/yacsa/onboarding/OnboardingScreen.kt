@@ -11,18 +11,24 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.KeyboardArrowLeft
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.pager.*
 import dev.yacsa.ui.theme.YacsaTheme
+import logcat.logcat
 import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
+import java.lang.Math.abs
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun OnboardingScreen(
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    onboardingViewModel: OnboardingViewModel = viewModel(),
 ) {
 
     val state = rememberPagerState()
@@ -39,17 +45,20 @@ fun OnboardingScreen(
             }
         )
         HorizontalPager(
-            count = 3,
+            count = onboardingViewModel.onboardingPages.size,
             state = state,
             modifier = Modifier
                 .weight(1f, true)
-                .background(Color.Cyan)
-        ) {
-            OnBoardingItem(
-                dev.yacsa.ui.R.drawable.ic_launcher_foreground,
-                "foo",
-                "bar"
-            )
+        ) { page ->
+
+            onboardingViewModel.onboardingPages[page].let {
+                OnBoardingItem(
+                    it.imageId,
+                    it.header,
+                    it.caption,
+                    state = state
+                )
+            }
         }
         BottomSection(state)
     }
@@ -89,36 +98,61 @@ fun TopSection(
     }
 }
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun OnBoardingItem(
     @DrawableRes imageId: Int,
     header: String,
     caption: String,
+    state: PagerState
 ) {
+    val position = state.currentPageOffset
+    val scaleMultiplier = 0.25
+    val minScale = 0.75
+    val scaleValue = if (position < 0) {
+        (((minScale - (-position) * scaleMultiplier).toFloat() + scaleMultiplier).toFloat())
+    } else if (position > 0 && position <= 1) {
+        (((minScale - position * scaleMultiplier).toFloat() + scaleMultiplier).toFloat())
+    } else {
+        1f
+    }
+    val alphaValue = if (position < 0) {
+        (1 - abs(position))
+    } else if (position > 0 && position <= 1) {
+        (1 - position)
+    } else {
+        1f
+    }
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
             painter = painterResource(id = imageId),
             contentDescription = null,
-            modifier = Modifier.padding(
-                start = 50.dp,
-                end = 50.dp,
-            )
+            modifier = Modifier
+                .padding(
+                    start = 50.dp,
+                    end = 50.dp,
+                )
+                .scale(scaleValue)
+                .alpha(alphaValue),
         )
         Spacer(
             modifier = Modifier.height(26.dp)
         )
         Text(
             text = header,
-            style = YacsaTheme.typography.heading
+            style = YacsaTheme.typography.heading,
+            modifier = Modifier.alpha(alphaValue),
         )
         Spacer(
             modifier = Modifier.height(8.dp)
         )
         Text(
             text = caption,
-            style = YacsaTheme.typography.caption
+            style = YacsaTheme.typography.caption,
+            modifier = Modifier.alpha(alphaValue),
         )
     }
 
@@ -133,9 +167,8 @@ fun BottomSection(state: PagerState) {
     ) {
         HorizontalPagerIndicator(
             pagerState = state,
-            activeColor = Color.Black,
-            inactiveColor = Color(0xFF00BB00),
-            indicatorShape = CutCornerShape(size = 4.dp),
+            activeColor = YacsaTheme.colors.primaryText,
+            inactiveColor = YacsaTheme.colors.secondaryText,
             modifier = Modifier.align(Alignment.CenterVertically)
         )
     }
@@ -147,7 +180,7 @@ fun BottomSection(state: PagerState) {
 @Composable
 fun PreviewOnboardingScreen_Dark() {
     YacsaTheme(useDarkTheme = true) {
-        OnboardingScreen() {}
+        OnboardingScreen(onboardingViewModel = OnboardingViewModel(), onClick = {})
     }
 }
 

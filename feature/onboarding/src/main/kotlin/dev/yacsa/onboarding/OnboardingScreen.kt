@@ -34,7 +34,7 @@ fun OnboardingScreen(
     val state = rememberPagerState()
 
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize().background(color = YacsaTheme.colors.primaryBackground)
     ) {
         TopSection(
             onBackClick = {
@@ -117,7 +117,7 @@ fun OnBoardingItem(
         1f
     }
     val alphaValue = if (position < 0) {
-        (1 - abs(position))
+        (1 - kotlin.math.abs(position))
     } else if (position > 0 && position <= 1) {
         (1 - position)
     } else {
@@ -169,25 +169,25 @@ fun BottomSection(state: PagerState) {
             pagerState = state,
             activeColor = YacsaTheme.colors.primaryText,
             inactiveColor = YacsaTheme.colors.secondaryText,
-            modifier = Modifier.align(Alignment.CenterVertically)
+            modifier = Modifier.align(Alignment.CenterVertically).padding(bottom = 16.dp)
         )
     }
 
 }
 
 
+//@Preview(showBackground = true)
+//@Composable
+//fun PreviewOnboardingScreen_Dark() {
+//    YacsaTheme(useDarkTheme = true) {
+//        OnboardingScreen(onboardingViewModel = OnboardingViewModel(), onClick = {})
+//    }
+//}
+//
 @Preview(showBackground = true)
 @Composable
-fun PreviewOnboardingScreen_Dark() {
-    YacsaTheme(useDarkTheme = true) {
+fun PreviewOnboardingScreen_Light() {
+    YacsaTheme(useDarkTheme = false) {
         OnboardingScreen(onboardingViewModel = OnboardingViewModel(), onClick = {})
     }
 }
-
-//@Preview(showBackground = true)
-//@Composable
-//fun PreviewOnboardingScreen_Light() {
-//    YacsaTheme(useDarkTheme = false) {
-//        OnboardingScreen() {}
-//    }
-//}

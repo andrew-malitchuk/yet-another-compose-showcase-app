@@ -4,7 +4,6 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.material.icons.Icons
@@ -13,7 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -21,8 +19,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.pager.*
 import dev.yacsa.ui.theme.YacsaTheme
 import logcat.logcat
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
-import java.lang.Math.abs
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -34,9 +30,12 @@ fun OnboardingScreen(
     val state = rememberPagerState()
 
     Column(
-        modifier = Modifier.fillMaxSize().background(color = YacsaTheme.colors.primaryBackground)
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = YacsaTheme.colors.primaryBackground)
     ) {
         TopSection(
+            buttonType = onboardingViewModel.buttonType,
             onBackClick = {
 
             },
@@ -50,7 +49,11 @@ fun OnboardingScreen(
             modifier = Modifier
                 .weight(1f, true)
         ) { page ->
-
+            if (this.currentPage == (state.pageCount-1)) {
+                onboardingViewModel.buttonType = OnboardingViewModel.ButtonType.SKIP
+            } else {
+                onboardingViewModel.buttonType = OnboardingViewModel.ButtonType.NEXT
+            }
             onboardingViewModel.onboardingPages[page].let {
                 OnBoardingItem(
                     it.imageId,
@@ -67,7 +70,8 @@ fun OnboardingScreen(
 @Composable
 fun TopSection(
     onBackClick: () -> Unit = {},
-    onSkipClick: () -> Unit = {}
+    onSkipClick: () -> Unit = {},
+    buttonType: OnboardingViewModel.ButtonType
 ) {
     Box(
         modifier = Modifier
@@ -89,9 +93,15 @@ fun TopSection(
             modifier = Modifier.align(Alignment.CenterEnd),
             contentPadding = PaddingValues(0.dp)
         ) {
+
+            val textForButton = when (buttonType) {
+                OnboardingViewModel.ButtonType.SKIP -> "Skip"
+                OnboardingViewModel.ButtonType.NEXT -> "Next"
+            }
+
             Text(
                 // TODO: move
-                text = "Skip",
+                text = textForButton,
                 color = YacsaTheme.colors.primaryText
             )
         }
@@ -169,7 +179,9 @@ fun BottomSection(state: PagerState) {
             pagerState = state,
             activeColor = YacsaTheme.colors.primaryText,
             inactiveColor = YacsaTheme.colors.secondaryText,
-            modifier = Modifier.align(Alignment.CenterVertically).padding(bottom = 16.dp)
+            modifier = Modifier
+                .align(Alignment.CenterVertically)
+                .padding(bottom = 16.dp)
         )
     }
 

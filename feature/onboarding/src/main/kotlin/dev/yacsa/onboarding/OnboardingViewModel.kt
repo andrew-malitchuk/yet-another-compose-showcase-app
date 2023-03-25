@@ -1,6 +1,9 @@
 package dev.yacsa.onboarding
 
 import androidx.annotation.DrawableRes
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -9,6 +12,10 @@ import javax.inject.Inject
 class OnboardingViewModel @Inject constructor(
 
 ) : ViewModel() {
+
+
+    var buttonType: ButtonType by mutableStateOf(ButtonType.NEXT)
+
 
     var onboardingPages = listOf(
         OnboadringPage(
@@ -34,5 +41,8 @@ class OnboardingViewModel @Inject constructor(
         val caption: String,
     )
 
+    enum class ButtonType {
+        SKIP, NEXT
+    }
 
 }

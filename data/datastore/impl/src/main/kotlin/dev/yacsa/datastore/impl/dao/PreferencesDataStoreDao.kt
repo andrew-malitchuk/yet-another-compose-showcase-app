@@ -1,29 +1,27 @@
 package dev.yacsa.datastore.impl.dao
 
 import android.content.Context
+import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dev.yacsa.datastore.impl.dao.base.BaseDataStoreDao
 import dev.yacsa.datastore.impl.serializer.PreferencesSerializer
 import dev.yacsa.datastore.model.PreferencesDataStoreModel
+import dev.yacsa.datastore.model.StartUpConfigureDataStoreModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
+import javax.inject.Named
 
 class PreferencesDataStoreDao @Inject constructor(
-    @ApplicationContext private val appContext: Context
+    @Named("preferencesDataStore") private val dataStore: DataStore<PreferencesDataStoreModel>
 ) : BaseDataStoreDao<PreferencesDataStoreModel>() {
 
-    override val Context.dataStore by dataStore(
-        PREFERENCES_DATASTORE_FILENAME,
-        PreferencesSerializer
-    )
-
     override fun getData(): Flow<PreferencesDataStoreModel> {
-        return appContext.dataStore.data
+        return dataStore.data
     }
 
     override suspend fun updateData(value: PreferencesDataStoreModel) {
-        appContext.dataStore.updateData {
+        dataStore.updateData {
             it.copy(
                 theme = value.theme
             )

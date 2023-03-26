@@ -6,8 +6,10 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.yacsa.domain.impl.usecase.GetPreferencesUseCaseImpl
 import dev.yacsa.domain.impl.usecase.GetStartUpConfigureUseCaseImpl
+import dev.yacsa.domain.impl.usecase.UpdateStartUpConfigureUseCaseImpl
 import dev.yacsa.domain.usecase.GetPreferencesUseCase
 import dev.yacsa.domain.usecase.GetStartUpConfigureUseCase
+import dev.yacsa.domain.usecase.UpdateStartUpConfigureUseCase
 import javax.inject.Singleton
 
 @Suppress("UnnecessaryAbstractClass")
@@ -26,5 +28,11 @@ abstract class DomainModule {
     abstract fun bindsGetStartUpConfigureUseCase(
         getStartUpConfigureUseCaseImpl: GetStartUpConfigureUseCaseImpl
     ): GetStartUpConfigureUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindsUpdateStartUpConfigureUseCase(
+        updateStartUpConfigureUseCaseImpl: UpdateStartUpConfigureUseCaseImpl
+    ): UpdateStartUpConfigureUseCase
 
 }

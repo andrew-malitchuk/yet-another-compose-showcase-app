@@ -11,23 +11,18 @@ import dev.yacsa.datastore.model.PreferencesDataStoreModel
 import dev.yacsa.datastore.model.StartUpConfigureDataStoreModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
+import javax.inject.Named
 
 class StartupConfigureDataStoreDao @Inject constructor(
-    @ApplicationContext private val appContext: Context
+    @Named("startUpConfigureDataStore") private val dataStore: DataStore<StartUpConfigureDataStoreModel>
 ) : BaseDataStoreDao<StartUpConfigureDataStoreModel>() {
 
-    override val Context.dataStore by dataStore(
-        STARTUP_CONFIGURE_DATASTORE_FILENAME,
-        StartupConfigureSerializer
-    )
-
-
     override fun getData(): Flow<StartUpConfigureDataStoreModel> {
-        return appContext.dataStore.data
+        return dataStore.data
     }
 
     override suspend fun updateData(value: StartUpConfigureDataStoreModel) {
-        appContext.dataStore.updateData {
+        dataStore.updateData {
             it.copy(
                 hasBeenOnboardingShown = value.hasBeenOnboardingShown
             )

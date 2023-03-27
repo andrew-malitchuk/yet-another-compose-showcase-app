@@ -15,8 +15,10 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.pager.*
+import dev.yacsa.domain.usecase.UpdateStartUpConfigureUseCase
 import dev.yacsa.ui.theme.YacsaTheme
 import kotlinx.coroutines.launch
 import logcat.logcat
@@ -26,7 +28,7 @@ import logcat.logcat
 fun OnboardingScreen(
     onBackClick: () -> Unit,
     onDoneClick: () -> Unit,
-    onboardingViewModel: OnboardingViewModel = viewModel(),
+    onboardingViewModel: OnboardingViewModel = hiltViewModel()
 ) {
 
     val state = rememberPagerState()
@@ -43,10 +45,11 @@ fun OnboardingScreen(
             onSkipClick = {
                 scope.launch {
                     with(state) {
-                        if (this.currentPage != this.pageCount-1) {
+                        if (this.currentPage != this.pageCount - 1) {
                             state.animateScrollToPage(state.currentPage + 1)
                         } else {
-                            onDoneClick()
+                            onboardingViewModel.updateStartUpConfigure()
+                            onboardingViewModel.getStartUpConfigure()
                         }
                     }
                 }
@@ -214,6 +217,6 @@ fun foo(state: PagerState) {
 @Composable
 fun PreviewOnboardingScreen_Light() {
     YacsaTheme(useDarkTheme = false) {
-        OnboardingScreen({}, {}, OnboardingViewModel())
+//        OnboardingScreen({}, {}, OnboardingViewModel(UpdateStartUpConfigureUseCase()))
     }
 }

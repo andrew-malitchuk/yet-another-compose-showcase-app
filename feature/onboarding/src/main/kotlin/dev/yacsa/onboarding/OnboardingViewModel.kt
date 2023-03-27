@@ -5,14 +5,32 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.yacsa.domain.model.StartUpConfigureDomainModel
+import dev.yacsa.domain.usecase.GetStartUpConfigureUseCase
+import dev.yacsa.domain.usecase.UpdateStartUpConfigureUseCase
+import kotlinx.coroutines.launch
+import logcat.logcat
 import javax.inject.Inject
 
 @HiltViewModel
 class OnboardingViewModel @Inject constructor(
-
+    private val updateStartUpConfigureUseCase: UpdateStartUpConfigureUseCase,
+    private val getStartUpConfigureUseCase: GetStartUpConfigureUseCase
 ) : ViewModel() {
 
+    fun updateStartUpConfigure() {
+        viewModelScope.launch {
+            updateStartUpConfigureUseCase(StartUpConfigureDomainModel(true))
+        }
+    }
+
+    fun getStartUpConfigure() {
+        viewModelScope.launch {
+            logcat { getStartUpConfigureUseCase().toString() }
+        }
+    }
 
     var buttonType: ButtonType by mutableStateOf(ButtonType.NEXT)
 

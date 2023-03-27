@@ -17,6 +17,8 @@ dependencies {
 
 //    implementation(libs.androidx.compose.material3)
     implementation("androidx.compose.material:material:1.3.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
+
 
     implementation(project(":core:ui"))
     implementation(project(":feature:navigation"))

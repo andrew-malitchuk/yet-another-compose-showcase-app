@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.compose.setContent
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import dev.yacsa.cryptodatastore.model.AccessTokenCryptoDataStoreModel
@@ -38,10 +39,6 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var accessTokenCryptoDataStoreSource: AccessTokenCryptoDataStoreSource
 
-    @Inject
-    lateinit var getStartUpConfigureUseCase: GetStartUpConfigureUseCase
-
-
     // TODO: add
 //    @Inject
 //    lateinit var networkMonitor: NetworkMonitor
@@ -72,11 +69,6 @@ class MainActivity : ComponentActivity() {
                 )
             }
         }
-
-        GlobalScope.launch(IO){
-            Log.d("foobar", getStartUpConfigureUseCase().toString())
-        }
-
     }
 
 }

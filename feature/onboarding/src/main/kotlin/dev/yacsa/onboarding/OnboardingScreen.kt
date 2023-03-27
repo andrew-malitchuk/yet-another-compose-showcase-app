@@ -48,8 +48,11 @@ fun OnboardingScreen(
                         if (this.currentPage != this.pageCount - 1) {
                             state.animateScrollToPage(state.currentPage + 1)
                         } else {
-                            onboardingViewModel.updateStartUpConfigure()
-                            onboardingViewModel.getStartUpConfigure()
+                            with(onboardingViewModel) {
+                                updateStartUpConfigure()
+                                getStartUpConfigure()
+                            }
+                            onDoneClick()
                         }
                     }
                 }

@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import dev.yacsa.database.YacsaDb
-import dev.yacsa.database.model.base.DbModel
+import dev.yacsa.database.model.base.BaseDbModel
 
 @Entity(tableName = YacsaDb.Table.BOOK)
 data class BookDbModel(
@@ -31,4 +31,4 @@ data class BookDbModel(
 //    val formats: FormatsNetModel?,
     @ColumnInfo(name = "download_count")
     val downloadCount: Int?,
-) : DbModel
+) : BaseDbModel

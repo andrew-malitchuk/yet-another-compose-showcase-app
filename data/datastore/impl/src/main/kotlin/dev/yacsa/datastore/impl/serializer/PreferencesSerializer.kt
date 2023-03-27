@@ -7,6 +7,7 @@ import kotlinx.serialization.json.Json
 import java.io.InputStream
 import java.io.OutputStream
 
+// TODO: somehow remove boilerplate
 object PreferencesSerializer : Serializer<PreferencesDataStoreModel> {
 
     override val defaultValue: PreferencesDataStoreModel

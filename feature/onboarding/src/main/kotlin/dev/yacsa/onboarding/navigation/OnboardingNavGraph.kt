@@ -13,9 +13,15 @@ fun NavGraphBuilder.onboardingNavGraph(navController: NavHostController) {
         route = NavigationDirection.Onboarding.route
     ) {
         composable(OnboardingDirection.Onboarding.route) {
-            OnboardingScreen() {
-                navController.navigate("books")
-            }
+            OnboardingScreen(
+                onBackClick = {
+                    navController.navigate("books")
+
+                },
+                onDoneClick = {
+                    navController.navigate("books")
+                }
+            )
         }
     }
 }

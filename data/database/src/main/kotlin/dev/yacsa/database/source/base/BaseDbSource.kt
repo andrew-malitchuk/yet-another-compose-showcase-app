@@ -1,8 +1,8 @@
 package dev.yacsa.database.source.base
 
-import dev.yacsa.database.model.base.DbModel
+import dev.yacsa.database.model.base.BaseDbModel
 
-interface BaseDbSource<T : DbModel> {
+interface BaseDbSource<T : BaseDbModel> {
 
     suspend fun get(id: Int): T?
     suspend fun get(): List<T>?

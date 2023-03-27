@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.compose.setContent
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import dev.yacsa.cryptodatastore.model.AccessTokenCryptoDataStoreModel
@@ -12,6 +13,7 @@ import dev.yacsa.cryptodatastore.source.AccessTokenCryptoDataStoreSource
 import dev.yacsa.datastore.model.PreferencesDataStoreModel
 import dev.yacsa.datastore.model.ThemeDateStoreModel
 import dev.yacsa.datastore.source.PreferencesDataStoreSource
+import dev.yacsa.domain.usecase.GetStartUpConfigureUseCase
 import dev.yacsa.main.navigation.RootNavigationGraph
 import dev.yacsa.navigation.NavigationDirection
 import dev.yacsa.network.source.BooksNetSource
@@ -37,7 +39,6 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var accessTokenCryptoDataStoreSource: AccessTokenCryptoDataStoreSource
 
-
     // TODO: add
 //    @Inject
 //    lateinit var networkMonitor: NetworkMonitor
@@ -47,7 +48,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
-        val isDarkTheme = true
+        val isDarkTheme = false
         splashScreen.setKeepOnScreenCondition {
             isSplashShown
         }
@@ -68,28 +69,6 @@ class MainActivity : ComponentActivity() {
                 )
             }
         }
-
-        GlobalScope.launch(IO) {
-            Log.d("foo", "${booksNetSource.getBooks(1)}")
-        }
-
-        GlobalScope.launch(IO) {
-            prefereDataSource.updateData(PreferencesDataStoreModel(theme=ThemeDateStoreModel.DARK))
-
-            prefereDataSource.getData().collect{
-                Log.d("foo",it.toString())
-            }
-        }
-
-        GlobalScope.launch(IO) {
-            accessTokenCryptoDataStoreSource.updateData(AccessTokenCryptoDataStoreModel("foobar"))
-
-            accessTokenCryptoDataStoreSource.getData().collect{
-                Log.d("foo", it.toString())
-            }
-        }
-
-
     }
 
 }

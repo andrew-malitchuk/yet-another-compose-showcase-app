@@ -54,6 +54,9 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.compose.material3)
 
+    implementation("com.squareup.logcat:logcat:0.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
+
 
 //    implementation("androidx.compose.ui:ui-tooling-preview:1.3.3")
 //    implementation("androidx.compose.ui:ui-tooling:1.3.3")

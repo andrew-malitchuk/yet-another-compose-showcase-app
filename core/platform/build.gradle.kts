@@ -1,5 +1,5 @@
 plugins {
-    id("yacsa.android.library")
+    id("yacsa.android.feature")
 }
 
 android {
@@ -7,5 +7,6 @@ android {
 }
 
 dependencies {
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
 
 }

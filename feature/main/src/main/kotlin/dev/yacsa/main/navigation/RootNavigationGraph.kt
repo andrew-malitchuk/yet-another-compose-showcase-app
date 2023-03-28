@@ -3,9 +3,7 @@ package dev.yacsa.main.navigation
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import dev.yacsa.books.navigation.booksNavGraph
-import dev.yacsa.onboarding.OnboardingScreen
 import dev.yacsa.navigation.NavigationDirection
 import dev.yacsa.onboarding.navigation.onboardingNavGraph
 

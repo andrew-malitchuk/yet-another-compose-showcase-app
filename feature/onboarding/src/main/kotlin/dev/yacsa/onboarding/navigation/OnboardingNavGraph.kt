@@ -5,7 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import dev.yacsa.navigation.NavigationDirection
-import dev.yacsa.onboarding.OnboardingScreen
+import dev.yacsa.onboarding.screen.onboarding.OnboardingScreen
 
 fun NavGraphBuilder.onboardingNavGraph(navController: NavHostController) {
     navigation(

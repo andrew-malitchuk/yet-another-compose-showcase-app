@@ -17,9 +17,11 @@ fun NavGraphBuilder.booksNavGraph(navController: NavHostController) {
             AboutScreen() {}
         }
         composable(BooksDirection.List.route) {
-            ListScreen() {
-                navController.navigate(BooksDirection.About.route)
-            }
+            ListScreen(
+                onClick = {
+                    navController.navigate(BooksDirection.About.route)
+                }
+            )
         }
     }
 }

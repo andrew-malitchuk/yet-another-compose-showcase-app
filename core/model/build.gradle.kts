@@ -1,5 +1,7 @@
 plugins {
     id("yacsa.android.library")
+    id("yacsa.android.hilt")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -7,5 +9,5 @@ android {
 }
 
 dependencies {
-
+    implementation(project(":domain"))
 }

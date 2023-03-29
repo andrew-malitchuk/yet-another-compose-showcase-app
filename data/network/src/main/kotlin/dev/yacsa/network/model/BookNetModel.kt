@@ -2,7 +2,7 @@ package dev.yacsa.network.model
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import dev.yacsa.network.model.base.NetModel
+import dev.yacsa.network.model.base.BaseNetModel
 
 /**
  *
@@ -73,4 +73,4 @@ data class BookNetModel(
     val formats: FormatsNetModel?,
     @Json(name = "download_count")
     val downloadCount: Int?,
-) : NetModel
+) : BaseNetModel

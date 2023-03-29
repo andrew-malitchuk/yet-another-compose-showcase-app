@@ -2,7 +2,7 @@ package dev.yacsa.network.model
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import dev.yacsa.network.model.base.NetModel
+import dev.yacsa.network.model.base.BaseNetModel
 
 /**
  *
@@ -23,4 +23,4 @@ data class PersonNetModel(
     val deathYear: Int?,
     @Json(name = "name")
     val name: String?
-) : NetModel
+) : BaseNetModel

@@ -3,6 +3,7 @@ package dev.yacsa.database.impl.source
 import dev.yacsa.database.impl.dao.BookDbDao
 import dev.yacsa.database.model.BookDbModel
 import dev.yacsa.database.source.BookDbSource
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class BookDbSourceImpl @Inject constructor(
@@ -15,6 +16,10 @@ class BookDbSourceImpl @Inject constructor(
 
     override suspend fun get(): List<BookDbModel>? {
         return booksDao.get()
+    }
+
+    override suspend fun getFlow(): Flow<List<BookDbModel>?> {
+        return booksDao.getFlow()
     }
 
     override suspend fun insert(value: BookDbModel) {

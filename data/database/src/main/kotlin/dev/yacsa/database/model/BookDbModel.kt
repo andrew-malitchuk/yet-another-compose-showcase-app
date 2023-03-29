@@ -27,8 +27,8 @@ data class BookDbModel(
     val copyright: Boolean?,
     @ColumnInfo(name = "media_type")
     val mediaType: String?,
-//    @ColumnInfo(name = "formats")
-//    val formats: FormatsNetModel?,
+    @ColumnInfo(name = "formats")
+    val formats: String?,
     @ColumnInfo(name = "download_count")
     val downloadCount: Int?,
 ) : BaseDbModel

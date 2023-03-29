@@ -1,6 +1,7 @@
 plugins {
     id("yacsa.android.feature")
     id("yacsa.android.library.compose")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -16,7 +17,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
-    implementation("androidx.compose.material:material:1.3.1")
+    implementation("androidx.compose.material:material:1.4.0")
     implementation("com.google.accompanist:accompanist-pager:0.28.0")
     implementation("com.google.accompanist:accompanist-pager-indicators:0.28.0")
 
@@ -27,5 +28,6 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":feature:navigation"))
     implementation(project(":core:platform"))
+    implementation(project(":core:model"))
     implementation(project(":core:ui"))
 }

@@ -31,9 +31,6 @@ import javax.inject.Inject
 class MainActivity : ComponentActivity() {
 
     @Inject
-    lateinit var booksNetSource: BooksNetSource
-
-    @Inject
     lateinit var prefereDataSource: PreferencesDataStoreSource
 
     @Inject

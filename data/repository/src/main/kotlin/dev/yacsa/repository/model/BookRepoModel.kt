@@ -14,6 +14,6 @@ data class BookRepoModel(
 //    val languages: List<String?>?,
     val copyright: Boolean?,
     val mediaType: String?,
-//    val formats: FormatsNetModel?,
+    val formats: FormatsRepoModel?,
     val downloadCount: Int?,
 ) : BaseRepoModel

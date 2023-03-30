@@ -5,10 +5,13 @@ import dev.yacsa.network.model.BookNetModel
 import dev.yacsa.repository.impl.mapper.base.RepoDbMapper
 import dev.yacsa.repository.impl.mapper.base.RepoNetMapper
 import dev.yacsa.repository.model.BookRepoModel
+import dev.yacsa.repository.model.FormatsRepoModel
 import javax.inject.Inject
 
-class BookRepoDbMapper @Inject constructor() :
-    RepoDbMapper<BookRepoModel, BookDbModel>() {
+class BookRepoDbMapper @Inject constructor(
+    private val formatsRepoDbMapper:FormatsRepoDbMapper
+) : RepoDbMapper<BookRepoModel, BookDbModel>() {
+
     // TODO: fix
     override fun toRepo(value: BookDbModel): BookRepoModel {
         return BookRepoModel(
@@ -17,6 +20,7 @@ class BookRepoDbMapper @Inject constructor() :
             null,
             value.copyright,
             value.mediaType,
+            formatsRepoDbMapper.toRepo(value.formats),
             value.downloadCount
         )
     }
@@ -28,7 +32,7 @@ class BookRepoDbMapper @Inject constructor() :
             value.title,
             value.copyright,
             value.mediaType,
-            "",
+            formatsRepoDbMapper.toDb(value.formats?: FormatsRepoModel()),
             value.downloadCount
         )
     }

@@ -7,8 +7,9 @@ import dev.yacsa.repository.model.BookRepoModel
 import dev.yacsa.repository.model.StartUpConfigureRepoModel
 import javax.inject.Inject
 
-class BookDomainRepoMapper @Inject constructor() :
-    DomainRepoMapper<BookDomainModel, BookRepoModel>() {
+class BookDomainRepoMapper @Inject constructor(
+    private val formatsDomainRepoMapper: FormatsDomainRepoMapper
+) : DomainRepoMapper<BookDomainModel, BookRepoModel>() {
 
     override fun toDomain(value: BookRepoModel): BookDomainModel {
         return BookDomainModel(
@@ -17,6 +18,7 @@ class BookDomainRepoMapper @Inject constructor() :
             value.subjects,
             value.copyright,
             value.mediaType,
+            value.formats?.let { formatsDomainRepoMapper.toDomain(it) },
             value.downloadCount
         )
     }
@@ -28,6 +30,7 @@ class BookDomainRepoMapper @Inject constructor() :
             value.subjects,
             value.copyright,
             value.mediaType,
+            value.formats?.let { formatsDomainRepoMapper.toRepo(it) },
             value.downloadCount
         )
     }

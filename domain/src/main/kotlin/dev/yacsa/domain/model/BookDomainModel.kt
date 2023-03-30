@@ -8,5 +8,6 @@ data class BookDomainModel(
     val subjects: List<String?>?,
     val copyright: Boolean?,
     val mediaType: String?,
+    val formats: FormatsDomainModel? = FormatsDomainModel(),
     val downloadCount: Int?,
 ) : BaseDomainModel

@@ -11,5 +11,6 @@ data class BookUiModel(
     val subjects: List<String?>?,
     val copyright: Boolean?,
     val mediaType: String?,
+    val formats: FormatsUiModel? = FormatsUiModel(),
     val downloadCount: Int?,
 ) : BaseUiModel, Parcelable

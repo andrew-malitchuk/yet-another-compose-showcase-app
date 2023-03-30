@@ -5,7 +5,9 @@ import dev.yacsa.model.mapper.base.UiDomainMapper
 import dev.yacsa.model.model.BookUiModel
 import javax.inject.Inject
 
-class BookUiDomainMapper @Inject constructor() : UiDomainMapper<BookUiModel, BookDomainModel>() {
+class BookUiDomainMapper @Inject constructor(
+    private val formatsUiDomainMapper: FormatsUiDomainMapper
+) : UiDomainMapper<BookUiModel, BookDomainModel>() {
 
     override fun toUi(value: BookDomainModel): BookUiModel {
         return BookUiModel(
@@ -14,6 +16,7 @@ class BookUiDomainMapper @Inject constructor() : UiDomainMapper<BookUiModel, Boo
             value.subjects,
             value.copyright,
             value.mediaType,
+            value.formats?.let { formatsUiDomainMapper.toUi(it) },
             value.downloadCount
         )
     }
@@ -25,6 +28,7 @@ class BookUiDomainMapper @Inject constructor() : UiDomainMapper<BookUiModel, Boo
             value.subjects,
             value.copyright,
             value.mediaType,
+            value.formats?.let { formatsUiDomainMapper.toDomain(it) },
             value.downloadCount
         )
     }

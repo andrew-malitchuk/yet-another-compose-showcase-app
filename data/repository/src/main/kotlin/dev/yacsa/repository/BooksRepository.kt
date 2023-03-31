@@ -9,6 +9,7 @@ interface BooksRepository {
     suspend fun getBooks(): List<BookRepoModel>
     suspend fun loadBooks(): Flow<List<BookRepoModel>>
     suspend fun saveBooks(values: List<BookRepoModel>)
+    suspend fun saveBook(value: BookRepoModel)
     suspend fun refreshBooks()
 
 

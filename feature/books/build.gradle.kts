@@ -16,6 +16,8 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.28.0")
+    implementation("io.coil-kt:coil-compose:2.2.2")
 
     implementation("androidx.compose.material:material:1.4.0")
     implementation("com.google.accompanist:accompanist-pager:0.28.0")

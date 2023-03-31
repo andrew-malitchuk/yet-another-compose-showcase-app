@@ -1,15 +1,16 @@
-package dev.yacsa.repository.impl.mapper
+package dev.yacsa.repository.impl.mapper.book
 
 import dev.yacsa.database.model.BookDbModel
-import dev.yacsa.network.model.BookNetModel
+import dev.yacsa.repository.impl.mapper.FormatsRepoDbMapper
 import dev.yacsa.repository.impl.mapper.base.RepoDbMapper
-import dev.yacsa.repository.impl.mapper.base.RepoNetMapper
+import dev.yacsa.repository.impl.mapper.person.PersonRepoDbMapper
 import dev.yacsa.repository.model.BookRepoModel
 import dev.yacsa.repository.model.FormatsRepoModel
 import javax.inject.Inject
 
 class BookRepoDbMapper @Inject constructor(
-    private val formatsRepoDbMapper:FormatsRepoDbMapper
+    private val formatsRepoDbMapper: FormatsRepoDbMapper,
+    private val personRepoDbMapper: PersonRepoDbMapper
 ) : RepoDbMapper<BookRepoModel, BookDbModel>() {
 
     // TODO: fix
@@ -17,6 +18,7 @@ class BookRepoDbMapper @Inject constructor(
         return BookRepoModel(
             value.id,
             value.title,
+            null,
             null,
             value.copyright,
             value.mediaType,

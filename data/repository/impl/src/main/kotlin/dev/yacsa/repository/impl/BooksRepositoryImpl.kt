@@ -1,12 +1,17 @@
 package dev.yacsa.repository.impl
 
-import dev.yacsa.database.model.BookDbModel
+import dev.yacsa.database.model.relationships.BookAuthorRelationship
+import dev.yacsa.database.source.BookAuthorRelationshipDbSource
 import dev.yacsa.database.source.BookDbSource
+import dev.yacsa.database.source.PersonDbSource
 import dev.yacsa.network.model.BookNetModel
 import dev.yacsa.network.source.BooksNetSource
 import dev.yacsa.repository.BooksRepository
-import dev.yacsa.repository.impl.mapper.BookRepoDbMapper
-import dev.yacsa.repository.impl.mapper.BookRepoNetMapper
+import dev.yacsa.repository.impl.mapper.book.BookAuthorRepoDbMapper
+import dev.yacsa.repository.impl.mapper.book.BookRepoDbMapper
+import dev.yacsa.repository.impl.mapper.book.BookRepoNetMapper
+import dev.yacsa.repository.impl.mapper.person.PersonRepoDbMapper
+import dev.yacsa.repository.impl.mapper.person.PersonRepoNetMapper
 import dev.yacsa.repository.model.BookRepoModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
@@ -18,7 +23,13 @@ class BooksRepositoryImpl @Inject constructor(
     private val bookDbSource: BookDbSource,
     private val booksNetSource: BooksNetSource,
     private val bookRepoNetMapper: BookRepoNetMapper,
-    private val bookRepoDbMapper: BookRepoDbMapper
+    private val bookRepoDbMapper: BookRepoDbMapper,
+    private val personDbSource: PersonDbSource,
+    private val personRepoNetMapper: PersonRepoNetMapper,
+    private val personRepoDbMapper: PersonRepoDbMapper,
+    private val bookAuthorRelationshipDbSource: BookAuthorRelationshipDbSource,
+    private val bookAuthorRepoDbMapper: BookAuthorRepoDbMapper
+
 ) : BooksRepository {
 
     override suspend fun getBooks(): List<BookRepoModel> {
@@ -27,11 +38,11 @@ class BooksRepositoryImpl @Inject constructor(
     }
 
     override suspend fun loadBooks(): Flow<List<BookRepoModel>> {
-        return bookDbSource
+        return bookAuthorRelationshipDbSource
             .getFlow()
             .filterNotNull()
             .map { list ->
-                list.map(bookRepoDbMapper::toRepo)
+                list.map(bookAuthorRepoDbMapper::toRepo)
             }
             .onEach { list ->
                 if (list.isEmpty()) {
@@ -41,11 +52,49 @@ class BooksRepositoryImpl @Inject constructor(
     }
 
     override suspend fun saveBooks(values: List<BookRepoModel>) {
+        values.forEach {
+            saveBook(it)
+        }
+    }
+
+    override suspend fun saveBook(value: BookRepoModel) {
+
+        val bookDbModel = bookRepoDbMapper.toDb(value)
+        val personDbList = value.authors?.filterNotNull()?.map {
+            personRepoDbMapper.toDb(it)
+        }
+
+        val personDbIds = arrayListOf<Int>()
+
+        personDbList?.let { list ->
+            list.forEach {
+                val id = personDbSource.insert(it)
+                personDbIds.add(id)
+            }
+//            personDbSource.insert(it)
+        }
+
         bookDbSource
             .insert(
-                values
-                    .map(bookRepoDbMapper::toDb)
+                bookDbModel
             )
+
+        val bookAuthorRelationshipList = arrayListOf<BookAuthorRelationship>()
+
+        personDbIds.forEach {
+            bookAuthorRelationshipList.add(
+                BookAuthorRelationship(
+                    bookDbModel.id,
+                    it
+                )
+            )
+        }
+
+        bookAuthorRelationshipList.forEach {
+            bookAuthorRelationshipDbSource.insert(
+                it
+            )
+        }
     }
 
     override suspend fun refreshBooks() {
@@ -54,10 +103,10 @@ class BooksRepositoryImpl @Inject constructor(
 
 
         result.filterNotNull()
-            .map{
+            .map {
                 bookRepoNetMapper.toRepo(it)
             }
-            .also{
+            .also {
                 saveBooks(it)
             }
     }

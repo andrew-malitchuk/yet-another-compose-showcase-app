@@ -18,8 +18,6 @@ import dev.yacsa.network.model.base.BaseNetModel
  *              "death_year": 1970
  *          }
  *      ],
- *      "translators": [
- *      ],
  *      "subjects": [
  *          "British -- Italy -- Fiction",
  *          "England -- Fiction",
@@ -59,8 +57,6 @@ data class BookNetModel(
     val subjects: List<String?>?,
     @Json(name = "authors")
     val authors: List<PersonNetModel?>?,
-    @Json(name = "translators")
-    val translators: List<PersonNetModel?>?,
     @Json(name = "bookshelves")
     val bookshelves: List<String?>?,
     @Json(name = "languages")

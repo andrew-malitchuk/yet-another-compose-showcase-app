@@ -2,7 +2,6 @@ package dev.yacsa.books.screen.list
 
 import androidx.lifecycle.SavedStateHandle
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.yacsa.domain.model.StartUpConfigureDomainModel
 import dev.yacsa.domain.usecase.GetBooksUseCase
 import dev.yacsa.domain.usecase.GetStartUpConfigureUseCase
 import dev.yacsa.domain.usecase.LoadBooksUseCase
@@ -34,7 +33,7 @@ class ListViewModel @Inject constructor(
         return when (intent) {
             is ListIntent.GetBooks -> getBooks()
             is ListIntent.RefreshBooks -> refreshBooks()
-            is ListIntent.BookClicked -> bookClicked(intent.foo)
+            is ListIntent.BookClicked -> bookClicked(intent.bookId)
         }
     }
 
@@ -65,8 +64,8 @@ class ListViewModel @Inject constructor(
             }
     }
 
-    private fun bookClicked(foo: String): Flow<ListUiState.PartialState> {
-        publishEvent(ListEvent.OnBookClick(foo))
+    private fun bookClicked(bookId: Int): Flow<ListUiState.PartialState> {
+        publishEvent(ListEvent.OnBookClick(bookId))
         return emptyFlow()
     }
 

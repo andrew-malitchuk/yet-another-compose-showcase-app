@@ -6,6 +6,7 @@ object YacsaDb {
 
     object Table {
         const val BOOK="book"
+        const val PERSON="person"
     }
 
 }

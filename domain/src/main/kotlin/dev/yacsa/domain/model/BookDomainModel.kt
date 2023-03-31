@@ -6,6 +6,7 @@ data class BookDomainModel(
     val id: Int?,
     val title: String?,
     val subjects: List<String?>?,
+    val authors: List<PersonDomainModel?>? = emptyList(),
     val copyright: Boolean?,
     val mediaType: String?,
     val formats: FormatsDomainModel? = FormatsDomainModel(),

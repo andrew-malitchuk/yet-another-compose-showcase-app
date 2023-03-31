@@ -10,7 +10,7 @@ import dev.yacsa.database.model.base.BaseDbModel
 @Entity(tableName = YacsaDb.Table.BOOK)
 data class BookDbModel(
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
+    @ColumnInfo(name = "bookId")
     val id: Int,
     @ColumnInfo(name = "title")
     val title: String?,

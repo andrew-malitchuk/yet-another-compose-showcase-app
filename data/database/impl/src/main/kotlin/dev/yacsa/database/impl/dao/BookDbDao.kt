@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface BookDbDao {
 
-    @Query("SELECT * FROM ${YacsaDb.Table.BOOK} WHERE id=:id")
+    @Query("SELECT * FROM ${YacsaDb.Table.BOOK} WHERE bookId=:id")
     suspend fun get(id: Int): BookDbModel?
 
     @Query("SELECT * FROM ${YacsaDb.Table.BOOK}")
@@ -20,12 +20,12 @@ interface BookDbDao {
     fun getFlow(): Flow<List<BookDbModel>?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(value: BookDbModel)
+    suspend fun insert(value: BookDbModel):Long
 
     @Update
     suspend fun update(value: BookDbModel)
 
-    @Query("DELETE FROM ${YacsaDb.Table.BOOK} WHERE id=:id")
+    @Query("DELETE FROM ${YacsaDb.Table.BOOK} WHERE bookId=:id")
     suspend fun delete(id: Int)
 
     @Query("DELETE FROM ${YacsaDb.Table.BOOK}")

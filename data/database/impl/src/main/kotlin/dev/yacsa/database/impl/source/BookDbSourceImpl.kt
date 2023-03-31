@@ -22,8 +22,8 @@ class BookDbSourceImpl @Inject constructor(
         return booksDao.getFlow()
     }
 
-    override suspend fun insert(value: BookDbModel) {
-        return booksDao.insert(value)
+    override suspend fun insert(value: BookDbModel): Int {
+        return booksDao.insert(value).toInt()
     }
 
     override suspend fun insert(values: List<BookDbModel>) {

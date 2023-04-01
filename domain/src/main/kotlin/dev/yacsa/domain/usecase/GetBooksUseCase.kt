@@ -4,5 +4,5 @@ import dev.yacsa.domain.model.BookDomainModel
 
 interface GetBooksUseCase {
     @Throws(Throwable::class)
-    suspend fun invoke(): List<BookDomainModel>
+    suspend operator fun invoke(page:Int): List<BookDomainModel>
 }

@@ -12,5 +12,5 @@ interface BooksRepository {
     suspend fun saveBook(value: BookRepoModel)
     suspend fun refreshBooks()
 
-
+    suspend fun refreshBooks(page: Int)
 }

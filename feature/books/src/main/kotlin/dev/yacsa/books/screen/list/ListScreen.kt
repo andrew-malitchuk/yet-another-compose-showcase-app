@@ -44,6 +44,8 @@ fun ListRoute(
 
     val uiState by listViewModel.uiState.collectAsStateWithLifecycle()
 
+    listViewModel.foo()
+
     ListScreen(
         uiState = uiState,
         onRefresh = {
@@ -52,6 +54,9 @@ fun ListRoute(
         onBookClicked = {
 //            listViewModel.acceptIntent(ListIntent.BookClicked(it))
             onClick(it)
+        },
+        foo={
+            listViewModel.bar()
         }
     )
 
@@ -63,7 +68,8 @@ fun ListRoute(
 fun ListScreen(
     uiState: ListUiState,
     onRefresh: () -> Unit,
-    onBookClicked: (Int) -> Unit
+    onBookClicked: (Int) -> Unit,
+    foo: () -> Unit
 ) {
     val systemUiController = rememberSystemUiController()
 
@@ -86,7 +92,8 @@ fun ListScreen(
             ListContent(
                 uiState = uiState,
                 onBookClicked = onBookClicked,
-                modifier = Modifier.pullRefresh(pullRefreshState)
+                modifier = Modifier.pullRefresh(pullRefreshState),
+                foo=foo
             )
         } else {
             systemUiController.setSystemBarsColor(
@@ -109,7 +116,8 @@ fun ListScreen(
 fun ListContent(
     modifier: Modifier = Modifier,
     uiState: ListUiState,
-    onBookClicked: (Int) -> Unit
+    onBookClicked: (Int) -> Unit,
+    foo: () -> Unit
 ) {
 
     val state = rememberLazyListState()
@@ -146,6 +154,9 @@ fun ListContent(
                     item.id ?: 0
                 }
             ) { index, item ->
+                if (index >= uiState.books.size - 1 /*&& !state.endReached && !state.isLoading*/) {
+                    foo()
+                }
                 ListItem(
                     title = item.title ?: "",
                     description = item.authors?.firstOrNull()?.name?:"NI",

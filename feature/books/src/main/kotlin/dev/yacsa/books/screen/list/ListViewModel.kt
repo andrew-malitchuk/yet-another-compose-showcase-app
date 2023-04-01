@@ -1,6 +1,7 @@
 package dev.yacsa.books.screen.list
 
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.yacsa.domain.usecase.GetBooksUseCase
 import dev.yacsa.domain.usecase.GetStartUpConfigureUseCase
@@ -9,6 +10,7 @@ import dev.yacsa.domain.usecase.RefreshBooksUseCase
 import dev.yacsa.model.mapper.BookUiDomainMapper
 import dev.yacsa.platform.viewmodel.BaseViewModel
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,13 +27,17 @@ class ListViewModel @Inject constructor(
     initialState
 ) {
 
+    var fooFlow: MutableStateFlow<ListUiState.PartialState> = MutableStateFlow(ListUiState.PartialState.Loading)
+
     init {
         acceptIntent(ListIntent.GetBooks)
     }
 
+
     override fun mapIntents(intent: ListIntent): Flow<ListUiState.PartialState> {
         return when (intent) {
-            is ListIntent.GetBooks -> getBooks()
+//            is ListIntent.GetBooks -> getBooks()
+            is ListIntent.GetBooks -> fooFlow
             is ListIntent.RefreshBooks -> refreshBooks()
             is ListIntent.BookClicked -> bookClicked(intent.bookId)
         }
@@ -55,6 +61,37 @@ class ListViewModel @Inject constructor(
                         emit(ListUiState.PartialState.Error(it))
                     }
             }
+    }
+
+    fun foo() {
+        viewModelScope.launch {
+            loadBooksUseCase()
+                .onStart {
+                    fooFlow.emit(ListUiState.PartialState.Loading)
+                }
+                .collect { result ->
+                    result
+                        .onSuccess { list ->
+                            fooFlow.emit(
+                                ListUiState.PartialState.Fetched(
+                                    list.map(bookUiDomainMapper::toUi)
+                                )
+                            )
+                        }
+                        .onFailure {
+                            fooFlow.emit(ListUiState.PartialState.Error(it))
+                        }
+                }
+        }
+    }
+
+    var page=0
+    fun bar() {
+        page+=1
+        viewModelScope.launch {
+            getBooksUseCase(page)
+
+        }
     }
 
     private fun refreshBooks(): Flow<ListUiState.PartialState> = flow {

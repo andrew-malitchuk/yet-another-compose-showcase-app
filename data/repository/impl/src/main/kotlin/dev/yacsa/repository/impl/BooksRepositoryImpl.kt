@@ -52,9 +52,13 @@ class BooksRepositoryImpl @Inject constructor(
     }
 
     override suspend fun saveBooks(values: List<BookRepoModel>) {
-        values.forEach {
-            saveBook(it)
-        }
+//        values.forEach {
+//            saveBook(it)
+//        }
+
+        bookDbSource.insert(values.map(bookRepoDbMapper::toDb))
+
+
     }
 
     override suspend fun saveBook(value: BookRepoModel) {
@@ -100,6 +104,20 @@ class BooksRepositoryImpl @Inject constructor(
     override suspend fun refreshBooks() {
         val result = booksNetSource
             .getBooks(1)?.results ?: emptyList<BookNetModel?>()
+
+
+        result.filterNotNull()
+            .map {
+                bookRepoNetMapper.toRepo(it)
+            }
+            .also {
+                saveBooks(it)
+            }
+    }
+
+    override suspend fun refreshBooks(page: Int) {
+        val result = booksNetSource
+            .getBooks(page)?.results ?: emptyList<BookNetModel?>()
 
 
         result.filterNotNull()

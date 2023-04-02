@@ -2,12 +2,17 @@ package dev.yacsa.books.screen.list
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.yacsa.books.screen.list.pagination.BooksSource
 import dev.yacsa.domain.usecase.GetBooksUseCase
 import dev.yacsa.domain.usecase.GetStartUpConfigureUseCase
 import dev.yacsa.domain.usecase.LoadBooksUseCase
 import dev.yacsa.domain.usecase.RefreshBooksUseCase
 import dev.yacsa.model.mapper.BookUiDomainMapper
+import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.platform.viewmodel.BaseViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -42,6 +47,12 @@ class ListViewModel @Inject constructor(
             is ListIntent.BookClicked -> bookClicked(intent.bookId)
         }
     }
+
+    val foo :Flow<PagingData<BookUiModel>> = Pager(PagingConfig(pageSize = 32)) {
+        BooksSource(
+            getBooksUseCase,bookUiDomainMapper
+        )
+    }.flow
 
     private fun getBooks(): Flow<ListUiState.PartialState> = flow {
         loadBooksUseCase()

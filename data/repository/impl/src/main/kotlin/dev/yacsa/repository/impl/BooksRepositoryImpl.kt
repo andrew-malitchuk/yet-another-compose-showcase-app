@@ -37,6 +37,11 @@ class BooksRepositoryImpl @Inject constructor(
         return result.filterNotNull().map(bookRepoNetMapper::toRepo)
     }
 
+    override suspend fun getBook(page:Int): List<BookRepoModel> {
+        val result = booksNetSource.getBooks(page)?.results ?: emptyList()
+        return result.filterNotNull().map(bookRepoNetMapper::toRepo)
+    }
+
     override suspend fun loadBooks(): Flow<List<BookRepoModel>> {
         return bookAuthorRelationshipDbSource
             .getFlow()

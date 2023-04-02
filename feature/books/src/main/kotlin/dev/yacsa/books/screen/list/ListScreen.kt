@@ -1,9 +1,6 @@
 package dev.yacsa.books.screen.list
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.FlingBehavior
-import androidx.compose.foundation.gestures.snapping.SnapFlingBehavior
 import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -11,29 +8,27 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.runtime.*
-import androidx.compose.material.pullrefresh.PullRefreshDefaults
-import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.paging.compose.LazyPagingItems
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.yacsa.books.screen.list.list.ListItem
-import dev.yacsa.domain.model.StartUpConfigureDomainModel
 import dev.yacsa.platform.ext.collectWithLifecycle
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.items
+import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.ui.theme.YacsaTheme
 import kotlinx.coroutines.flow.Flow
-import logcat.logcat
 
 @Composable
 fun ListRoute(
@@ -46,6 +41,8 @@ fun ListRoute(
 
     listViewModel.foo()
 
+    val foo = listViewModel.foo.collectAsLazyPagingItems()
+
     ListScreen(
         uiState = uiState,
         onRefresh = {
@@ -57,7 +54,8 @@ fun ListRoute(
         },
         foo={
             listViewModel.bar()
-        }
+        },
+        stateFoo = foo
     )
 
 }
@@ -69,7 +67,8 @@ fun ListScreen(
     uiState: ListUiState,
     onRefresh: () -> Unit,
     onBookClicked: (Int) -> Unit,
-    foo: () -> Unit
+    foo: () -> Unit,
+    stateFoo: LazyPagingItems<BookUiModel>
 ) {
     val systemUiController = rememberSystemUiController()
 
@@ -85,28 +84,29 @@ fun ListScreen(
             .fillMaxSize()
     ) {
 
-        if (uiState.books.isNotEmpty()) {
-            systemUiController.setSystemBarsColor(
-                color = YacsaTheme.colors.primaryText
-            )
+//        if (uiState.books.isNotEmpty()) {
+//            systemUiController.setSystemBarsColor(
+//                color = YacsaTheme.colors.primaryText
+//            )
             ListContent(
                 uiState = uiState,
                 onBookClicked = onBookClicked,
                 modifier = Modifier.pullRefresh(pullRefreshState),
-                foo=foo
+                foo=foo,
+                stateFoo=stateFoo
             )
-        } else {
-            systemUiController.setSystemBarsColor(
-                color = YacsaTheme.colors.primaryBackground
-            )
-            ListNoContent(uiState = uiState)
-        }
-
-        PullRefreshIndicator(
-            uiState.isLoading,
-            pullRefreshState,
-            Modifier.align(Alignment.TopCenter)
-        )
+//        } else {
+//            systemUiController.setSystemBarsColor(
+//                color = YacsaTheme.colors.primaryBackground
+//            )
+//            ListNoContent(uiState = uiState)
+//        }
+//
+//        PullRefreshIndicator(
+//            uiState.isLoading,
+//            pullRefreshState,
+//            Modifier.align(Alignment.TopCenter)
+//        )
     }
 
 }
@@ -117,8 +117,11 @@ fun ListContent(
     modifier: Modifier = Modifier,
     uiState: ListUiState,
     onBookClicked: (Int) -> Unit,
-    foo: () -> Unit
+    foo: () -> Unit,
+    stateFoo: LazyPagingItems<BookUiModel>
 ) {
+
+    // https://github.com/2307vivek/PagingCompose-Sample/blob/main/app/src/main/java/com/training/pagingcompose/ui/screen/MainScreen.kt
 
     val state = rememberLazyListState()
 
@@ -148,27 +151,39 @@ fun ListContent(
                 ),
             flingBehavior = rememberSnapFlingBehavior(lazyListState = state)
         ) {
-            itemsIndexed(
-                items = uiState.books,
-                key = { _, item ->
-                    item.id ?: 0
-                }
-            ) { index, item ->
-                if (index >= uiState.books.size - 1 /*&& !state.endReached && !state.isLoading*/) {
-                    foo()
-                }
+
+            items(
+                stateFoo
+            ){item->
                 ListItem(
-                    title = item.title ?: "",
-                    description = item.authors?.firstOrNull()?.name?:"NI",
-                    imageUrl = item.formats?.imageJpeg,
+                    title = item?.title ?: "",
+                    description = item?.authors?.firstOrNull()?.name?:"NI",
+                    imageUrl = item?.formats?.imageJpeg,
                     onListItemClick = {
-                        item.id?.let { onBookClicked(it) }
+                        item?.id?.let { onBookClicked(it) }
                     }
                 )
-                if (index < uiState.books.lastIndex) {
-                    Divider()
-                }
             }
+
+//            itemsIndexed(
+//                items = uiState.books,
+//                key = { _, item ->
+//                    item.id ?: 0
+//                }
+//            ) { index, item ->
+//
+//                ListItem(
+//                    title = item.title ?: "",
+//                    description = item.authors?.firstOrNull()?.name?:"NI",
+//                    imageUrl = item.formats?.imageJpeg,
+//                    onListItemClick = {
+//                        item.id?.let { onBookClicked(it) }
+//                    }
+//                )
+//                if (index < uiState.books.lastIndex) {
+//                    Divider()
+//                }
+//            }
         }
     }
 }

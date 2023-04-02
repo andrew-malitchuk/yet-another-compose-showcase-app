@@ -27,6 +27,9 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview:1.4.0")
     implementation("com.squareup.logcat:logcat:0.1")
 
+    implementation("androidx.room:room-paging:2.5.0")
+    implementation("androidx.paging:paging-compose:1.0.0-alpha18")
+
     implementation(project(":domain"))
     implementation(project(":feature:navigation"))
     implementation(project(":core:platform"))

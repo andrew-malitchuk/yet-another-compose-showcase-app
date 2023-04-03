@@ -31,8 +31,10 @@ import androidx.paging.compose.items
 import dev.yacsa.books.screen.list.list.ListErrorItem
 import dev.yacsa.books.screen.list.list.ListLoadingItem
 import dev.yacsa.model.model.BookUiModel
+import dev.yacsa.ui.composable.fab.ScrollUpFab
 import dev.yacsa.ui.theme.YacsaTheme
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 
 @Composable
 fun ListRoute(
@@ -55,7 +57,6 @@ fun ListRoute(
 }
 
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ListScreen(
     onBookClicked: (Int) -> Unit,
@@ -91,6 +92,8 @@ fun ListContent(
         }
     )
 
+    val listState = rememberLazyListState()
+    val coroutineScope = rememberCoroutineScope()
 
     Column {
         TopAppBar(
@@ -111,6 +114,7 @@ fun ListContent(
 
         Box(Modifier.pullRefresh(pullRefreshState)) {
             LazyColumn(
+                state = listState,
                 modifier = modifier
                     .fillMaxSize()
                     // TODO: fix
@@ -167,6 +171,19 @@ fun ListContent(
                         }
                     }
                 }
+            }
+
+            ScrollUpFab(
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    // TODO: fix
+                    .padding(16.dp),
+                isVisibleBecauseOfScrolling = !listState.isScrollInProgress && listState.canScrollBackward
+            ) {
+                coroutineScope.launch {
+                    listState.animateScrollToItem(0)
+                }
+
             }
 
             PullRefreshIndicator(

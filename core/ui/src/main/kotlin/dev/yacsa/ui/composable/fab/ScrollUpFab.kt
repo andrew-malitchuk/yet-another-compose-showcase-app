@@ -24,12 +24,10 @@ fun ScrollUpFab(
         visible = isVisibleBecauseOfScrolling,
         enter = slideInHorizontally {
             with(density) { 16.dp.roundToPx() }
-        } + fadeIn(),
-        exit = fadeOut(
-            animationSpec = keyframes {
-                this.durationMillis = 120
-            }
-        )
+        },
+        exit = slideOutHorizontally {
+            with(density) { 16.dp.roundToPx() }
+        }
     ) {
         FloatingActionButton(
             onClick = { onClick() },

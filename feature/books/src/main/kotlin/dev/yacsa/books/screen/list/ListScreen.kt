@@ -1,40 +1,22 @@
 package dev.yacsa.books.screen.list
 
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.runtime.*
-import androidx.compose.material.pullrefresh.pullRefresh
-import androidx.compose.material.pullrefresh.rememberPullRefreshState
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.paging.LoadState
+import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import dev.yacsa.books.screen.list.list.ListItem
 import dev.yacsa.platform.ext.collectWithLifecycle
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.items
-import dev.yacsa.books.screen.list.list.ListErrorItem
-import dev.yacsa.books.screen.list.list.ListLoadingItem
+import dev.yacsa.books.screen.list.content.ContentError
+import dev.yacsa.books.screen.list.content.ContentFetched
+import dev.yacsa.books.screen.list.content.ContentIsLoading
 import dev.yacsa.model.model.BookUiModel
-import dev.yacsa.ui.composable.fab.ScrollUpFab
 import dev.yacsa.ui.theme.YacsaTheme
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.flowOf
 
 @Composable
 fun ListRoute(
@@ -45,13 +27,14 @@ fun ListRoute(
 
     val uiState by listViewModel.uiState.collectAsStateWithLifecycle()
 
-    val foo = listViewModel.foo.collectAsLazyPagingItems()
+    val pagingState = listViewModel.pagingDataFlow?.collectAsLazyPagingItems()
 
     ListScreen(
         onBookClicked = {
             onClick(it)
         },
-        stateFoo = foo
+        pagingState = pagingState,
+        uiState = uiState
     )
 
 }
@@ -60,138 +43,24 @@ fun ListRoute(
 @Composable
 fun ListScreen(
     onBookClicked: (Int) -> Unit,
-    stateFoo: LazyPagingItems<BookUiModel>
+    pagingState: LazyPagingItems<BookUiModel>?,
+    uiState: ListUiState
 ) {
     val systemUiController = rememberSystemUiController()
 
-    systemUiController.setSystemBarsColor(
-        color = YacsaTheme.colors.primaryText
-    )
-    ListContent(
-        onBookClicked = onBookClicked,
-        stateFoo = stateFoo
-    )
-
-}
-
-@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterialApi::class)
-@Composable
-fun ListContent(
-    modifier: Modifier = Modifier,
-//    uiState: ListUiState,
-    onBookClicked: (Int) -> Unit,
-    stateFoo: LazyPagingItems<BookUiModel>
-) {
-
-    val state = rememberLazyListState()
-
-    val pullRefreshState = rememberPullRefreshState(
-        refreshing = stateFoo.loadState.refresh is LoadState.Loading,
-        onRefresh = {
-            stateFoo.refresh()
-        }
-    )
-
-    val listState = rememberLazyListState()
-    val coroutineScope = rememberCoroutineScope()
-
-    Column {
-        TopAppBar(
-            elevation = 4.dp,
-            title = {
-                Text("I'm a TopAppBar")
-            },
-            backgroundColor = YacsaTheme.colors.primaryText,
-            actions = {
-                IconButton(onClick = {/* Do Something*/ }) {
-                    Icon(Icons.Outlined.Search, null)
-                }
-                IconButton(onClick = { /*TODO*/ }) {
-                    Icon(Icons.Outlined.Settings, null)
-                }
-            }
+    if (!uiState.isLoading && !uiState.isError && pagingState != null) {
+        systemUiController.setSystemBarsColor(
+            color = YacsaTheme.colors.primaryText
         )
-
-        Box(Modifier.pullRefresh(pullRefreshState)) {
-            LazyColumn(
-                state = listState,
-                modifier = modifier
-                    .fillMaxSize()
-                    // TODO: fix
-                    .padding(
-                        horizontal = 16.dp
-                    ),
-                flingBehavior = rememberSnapFlingBehavior(lazyListState = state)
-            ) {
-                items(
-                    stateFoo
-                ) { item ->
-                    ListItem(
-                        title = item?.title ?: "",
-                        description = item?.authors?.firstOrNull()?.name ?: "NI",
-                        imageUrl = item?.formats?.imageJpeg,
-                        onListItemClick = {
-                            item?.id?.let { onBookClicked(it) }
-                        }
-                    )
-                }
-                stateFoo.apply {
-                    when {
-                        loadState.refresh is LoadState.Loading -> {
-                            item {
-                                ListLoadingItem()
-                            }
-                        }
-                        loadState.refresh is LoadState.Error -> {
-                            val error = stateFoo.loadState.append as? LoadState.Error
-                            item {
-                                ListErrorItem(
-                                    error = error?.error?.localizedMessage ?: "SWW",
-                                    onRetry = {
-                                        retry()
-                                    }
-                                )
-                            }
-                        }
-                        loadState.append is LoadState.Loading -> {
-                            item {
-                                ListLoadingItem()
-                            }
-                        }
-                        loadState.append is LoadState.Error -> {
-                            val error = stateFoo.loadState.append as LoadState.Error
-                            item {
-                                ListErrorItem(
-                                    error = error.error.localizedMessage ?: "SWW",
-                                    onRetry = {
-                                        retry()
-                                    }
-                                )
-                            }
-                        }
-                    }
-                }
-            }
-
-            ScrollUpFab(
-                modifier = Modifier
-                    .align(Alignment.BottomEnd)
-                    // TODO: fix
-                    .padding(16.dp),
-                isVisibleBecauseOfScrolling = !listState.isScrollInProgress && listState.canScrollBackward
-            ) {
-                coroutineScope.launch {
-                    listState.animateScrollToItem(0)
-                }
-
-            }
-
-            PullRefreshIndicator(
-                stateFoo.loadState.refresh is LoadState.Loading,
-                pullRefreshState,
-                Modifier.align(Alignment.TopCenter)
-            )
-        }
+        ContentFetched(
+            onBookClicked = onBookClicked,
+            lazyPagingItems = pagingState
+        )
+    } else {
+        systemUiController.setSystemBarsColor(
+            color = YacsaTheme.colors.statusBarColor
+        )
+        ListNoContent(uiState = uiState)
     }
 }
 
@@ -202,58 +71,13 @@ fun ListNoContent(
 ) {
     when {
         uiState.isLoading -> {
-            ListIsLoading()
+            ContentIsLoading()
         }
         uiState.isError -> {
-            ListError()
+            ContentError()
         }
     }
 }
-
-@Composable
-fun ListIsLoading(
-    modifier: Modifier = Modifier
-) {
-    Box(
-        modifier = modifier
-            .fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        CircularProgressIndicator()
-    }
-}
-
-//@Preview
-//@Composable
-//fun Preview_ListIsLoading() {
-//    YacsaTheme {
-//        ListIsLoading()
-//    }
-//}
-
-
-@Composable
-fun ListError(
-    modifier: Modifier = Modifier
-) {
-    Box(
-        modifier = modifier
-            .fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = "some error"
-        )
-    }
-}
-
-//@Preview
-//@Composable
-//fun Preview_ListError() {
-//    YacsaTheme {
-//        ListError()
-//    }
-//}
 
 
 @Composable
@@ -274,6 +98,10 @@ private fun HandleEvents(events: Flow<ListEvent>) {
 @Composable
 fun PreviewListScreen() {
     YacsaTheme(useDarkTheme = true) {
-//        ListScreen(){}
+        ListScreen(
+            {},
+            flowOf(PagingData.empty<BookUiModel>()).collectAsLazyPagingItems(),
+            ListUiState()
+        )
     }
 }

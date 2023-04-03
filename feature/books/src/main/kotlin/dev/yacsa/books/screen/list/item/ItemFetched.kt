@@ -1,4 +1,4 @@
-package dev.yacsa.books.screen.list.list
+package dev.yacsa.books.screen.list.item
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -7,29 +7,27 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import coil.compose.rememberImagePainter
 import coil.request.ImageRequest
 import coil.transform.CircleCropTransformation
 import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
-fun ListItem(
+fun ItemFetched(
     modifier: Modifier = Modifier,
     title: String,
     imageUrl: String?,
     description: String,
-    onListItemClick: ()->Unit
+    onItemContentClick: ()->Unit
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
             .clickable {
-                onListItemClick()
+                onItemContentClick()
             },
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -75,11 +73,11 @@ fun ListItem(
 @Composable
 fun Preview_ListItem_Dark() {
     YacsaTheme(true) {
-        ListItem(
+        ItemFetched(
             title = "title",
             description = "description",
             imageUrl = null,
-            onListItemClick = {}
+            onItemContentClick = {}
         )
     }
 }
@@ -88,12 +86,11 @@ fun Preview_ListItem_Dark() {
 @Composable
 fun Preview_ListItem_Light() {
     YacsaTheme(false) {
-        ListItem(
+        ItemFetched(
             title = "title",
             description = "description",
             imageUrl = null,
-            onListItemClick = {}
-
+            onItemContentClick = {}
         )
     }
 }

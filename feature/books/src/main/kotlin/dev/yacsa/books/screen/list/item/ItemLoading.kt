@@ -1,4 +1,4 @@
-package dev.yacsa.books.screen.list.list
+package dev.yacsa.books.screen.list.item
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.CircularProgressIndicator
@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.dp
 import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
-fun ListLoadingItem(
+fun ItemLoading(
     modifier: Modifier= Modifier
 ){
     Row(
@@ -32,6 +32,6 @@ fun Preview_ListLoadingItem(
 
 ){
     YacsaTheme {
-        ListLoadingItem()
+        ItemLoading()
     }
 }

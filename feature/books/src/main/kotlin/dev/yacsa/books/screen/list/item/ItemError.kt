@@ -1,4 +1,4 @@
-package dev.yacsa.books.screen.list.list
+package dev.yacsa.books.screen.list.item
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.OutlinedButton
@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
-fun ListErrorItem(
+fun ItemError(
     modifier: Modifier = Modifier,
     error: String,
     onRetry: () -> Unit
@@ -48,7 +48,7 @@ fun ListErrorItem(
 @Composable
 fun Preview_ListErrorItem() {
     YacsaTheme {
-        ListErrorItem(
+        ItemError(
             error = "Lorem ipsum",
             onRetry = {}
         )

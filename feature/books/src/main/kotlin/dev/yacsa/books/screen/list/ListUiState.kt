@@ -2,7 +2,9 @@ package dev.yacsa.books.screen.list
 
 import android.os.Parcelable
 import androidx.compose.runtime.Immutable
+import androidx.paging.PagingData
 import dev.yacsa.model.model.BookUiModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.parcelize.Parcelize
 
 @Immutable
@@ -10,7 +12,7 @@ import kotlinx.parcelize.Parcelize
 data class ListUiState(
     val isLoading: Boolean = false,
     val books: List<BookUiModel> = emptyList(),
-    val isError: Boolean = false
+    val isError: Boolean = false,
 ) : Parcelable {
 
     sealed class PartialState {

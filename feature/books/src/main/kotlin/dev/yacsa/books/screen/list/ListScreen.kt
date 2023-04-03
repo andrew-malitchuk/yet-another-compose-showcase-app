@@ -10,6 +10,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.runtime.*
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
@@ -20,12 +21,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.yacsa.books.screen.list.list.ListItem
 import dev.yacsa.platform.ext.collectWithLifecycle
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
+import dev.yacsa.books.screen.list.list.ListErrorItem
+import dev.yacsa.books.screen.list.list.ListLoadingItem
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.ui.theme.YacsaTheme
 import kotlinx.coroutines.flow.Flow
@@ -39,21 +43,11 @@ fun ListRoute(
 
     val uiState by listViewModel.uiState.collectAsStateWithLifecycle()
 
-    listViewModel.foo()
-
     val foo = listViewModel.foo.collectAsLazyPagingItems()
 
     ListScreen(
-        uiState = uiState,
-        onRefresh = {
-            listViewModel.acceptIntent(ListIntent.RefreshBooks)
-        },
         onBookClicked = {
-//            listViewModel.acceptIntent(ListIntent.BookClicked(it))
             onClick(it)
-        },
-        foo={
-            listViewModel.bar()
         },
         stateFoo = foo
     )
@@ -64,66 +58,39 @@ fun ListRoute(
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ListScreen(
-    uiState: ListUiState,
-    onRefresh: () -> Unit,
     onBookClicked: (Int) -> Unit,
-    foo: () -> Unit,
     stateFoo: LazyPagingItems<BookUiModel>
 ) {
     val systemUiController = rememberSystemUiController()
 
-    val pullRefreshState = rememberPullRefreshState(
-        refreshing = uiState.isLoading,
-        onRefresh = {
-            onRefresh()
-        }
+    systemUiController.setSystemBarsColor(
+        color = YacsaTheme.colors.primaryText
     )
-
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
-
-//        if (uiState.books.isNotEmpty()) {
-//            systemUiController.setSystemBarsColor(
-//                color = YacsaTheme.colors.primaryText
-//            )
-            ListContent(
-                uiState = uiState,
-                onBookClicked = onBookClicked,
-                modifier = Modifier.pullRefresh(pullRefreshState),
-                foo=foo,
-                stateFoo=stateFoo
-            )
-//        } else {
-//            systemUiController.setSystemBarsColor(
-//                color = YacsaTheme.colors.primaryBackground
-//            )
-//            ListNoContent(uiState = uiState)
-//        }
-//
-//        PullRefreshIndicator(
-//            uiState.isLoading,
-//            pullRefreshState,
-//            Modifier.align(Alignment.TopCenter)
-//        )
-    }
+    ListContent(
+        onBookClicked = onBookClicked,
+        stateFoo = stateFoo
+    )
 
 }
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun ListContent(
     modifier: Modifier = Modifier,
-    uiState: ListUiState,
+//    uiState: ListUiState,
     onBookClicked: (Int) -> Unit,
-    foo: () -> Unit,
     stateFoo: LazyPagingItems<BookUiModel>
 ) {
 
-    // https://github.com/2307vivek/PagingCompose-Sample/blob/main/app/src/main/java/com/training/pagingcompose/ui/screen/MainScreen.kt
-
     val state = rememberLazyListState()
+
+    val pullRefreshState = rememberPullRefreshState(
+        refreshing = stateFoo.loadState.refresh is LoadState.Loading,
+        onRefresh = {
+            stateFoo.refresh()
+        }
+    )
+
 
     Column {
         TopAppBar(
@@ -142,48 +109,71 @@ fun ListContent(
             }
         )
 
-        LazyColumn(
-            modifier = modifier
-                .fillMaxSize()
-                // TODO: fix
-                .padding(
-                    horizontal = 16.dp
-                ),
-            flingBehavior = rememberSnapFlingBehavior(lazyListState = state)
-        ) {
-
-            items(
-                stateFoo
-            ){item->
-                ListItem(
-                    title = item?.title ?: "",
-                    description = item?.authors?.firstOrNull()?.name?:"NI",
-                    imageUrl = item?.formats?.imageJpeg,
-                    onListItemClick = {
-                        item?.id?.let { onBookClicked(it) }
+        Box(Modifier.pullRefresh(pullRefreshState)) {
+            LazyColumn(
+                modifier = modifier
+                    .fillMaxSize()
+                    // TODO: fix
+                    .padding(
+                        horizontal = 16.dp
+                    ),
+                flingBehavior = rememberSnapFlingBehavior(lazyListState = state)
+            ) {
+                items(
+                    stateFoo
+                ) { item ->
+                    ListItem(
+                        title = item?.title ?: "",
+                        description = item?.authors?.firstOrNull()?.name ?: "NI",
+                        imageUrl = item?.formats?.imageJpeg,
+                        onListItemClick = {
+                            item?.id?.let { onBookClicked(it) }
+                        }
+                    )
+                }
+                stateFoo.apply {
+                    when {
+                        loadState.refresh is LoadState.Loading -> {
+                            item {
+                                ListLoadingItem()
+                            }
+                        }
+                        loadState.refresh is LoadState.Error -> {
+                            val error = stateFoo.loadState.append as? LoadState.Error
+                            item {
+                                ListErrorItem(
+                                    error = error?.error?.localizedMessage ?: "SWW",
+                                    onRetry = {
+                                        retry()
+                                    }
+                                )
+                            }
+                        }
+                        loadState.append is LoadState.Loading -> {
+                            item {
+                                ListLoadingItem()
+                            }
+                        }
+                        loadState.append is LoadState.Error -> {
+                            val error = stateFoo.loadState.append as LoadState.Error
+                            item {
+                                ListErrorItem(
+                                    error = error.error.localizedMessage ?: "SWW",
+                                    onRetry = {
+                                        retry()
+                                    }
+                                )
+                            }
+                        }
                     }
-                )
+                }
             }
 
-//            itemsIndexed(
-//                items = uiState.books,
-//                key = { _, item ->
-//                    item.id ?: 0
-//                }
-//            ) { index, item ->
-//
-//                ListItem(
-//                    title = item.title ?: "",
-//                    description = item.authors?.firstOrNull()?.name?:"NI",
-//                    imageUrl = item.formats?.imageJpeg,
-//                    onListItemClick = {
-//                        item.id?.let { onBookClicked(it) }
-//                    }
-//                )
-//                if (index < uiState.books.lastIndex) {
-//                    Divider()
-//                }
-//            }
+            PullRefreshIndicator(
+                stateFoo.loadState.refresh is LoadState.Loading,
+                pullRefreshState,
+                Modifier.align(Alignment.TopCenter)
+            )
         }
     }
 }

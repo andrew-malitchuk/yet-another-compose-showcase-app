@@ -1,6 +1,8 @@
 package dev.yacsa.books.screen.list
 
+import android.widget.Toast
 import androidx.compose.runtime.*
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -15,6 +17,8 @@ import dev.yacsa.books.screen.list.content.ContentFetched
 import dev.yacsa.books.screen.list.content.ContentIsLoading
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.ui.theme.YacsaTheme
+import dev.yacsa.ui.window.WindowInfo
+import dev.yacsa.ui.window.rememberWindowInfo
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
@@ -29,7 +33,20 @@ fun ListRoute(
 
     val pagingState = listViewModel.pagingDataFlow?.collectAsLazyPagingItems()
 
-    val isGridModeChosen = listViewModel.isGridModeChosen.collectAsStateWithLifecycle(initialValue = false)
+    val windowInfo = rememberWindowInfo()
+
+    when (windowInfo.screenHeightInfo) {
+        WindowInfo.WindowType.Compact -> {
+            Toast.makeText(LocalContext.current, "Compact", Toast.LENGTH_SHORT).show()
+        }
+        WindowInfo.WindowType.Expanded -> {
+            Toast.makeText(LocalContext.current, "Expanded", Toast.LENGTH_SHORT).show()
+        }
+        WindowInfo.WindowType.Medium -> {
+            Toast.makeText(LocalContext.current, "Medium", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 
     ListScreen(
         onBookClicked = {

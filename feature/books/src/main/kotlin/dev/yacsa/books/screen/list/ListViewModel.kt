@@ -23,6 +23,8 @@ class ListViewModel @Inject constructor(
     initialState
 ) {
 
+    var isGridModeChosen : Flow<Boolean> = MutableStateFlow(false)
+
     init {
         acceptIntent(ListIntent.GetBooks)
     }

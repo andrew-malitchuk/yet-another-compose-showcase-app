@@ -29,12 +29,14 @@ fun ListRoute(
 
     val pagingState = listViewModel.pagingDataFlow?.collectAsLazyPagingItems()
 
+    val isGridModeChosen = listViewModel.isGridModeChosen.collectAsStateWithLifecycle(initialValue = false)
+
     ListScreen(
         onBookClicked = {
             onClick(it)
         },
         pagingState = pagingState,
-        uiState = uiState
+        uiState = uiState,
     )
 
 }
@@ -44,7 +46,7 @@ fun ListRoute(
 fun ListScreen(
     onBookClicked: (Int) -> Unit,
     pagingState: LazyPagingItems<BookUiModel>?,
-    uiState: ListUiState
+    uiState: ListUiState,
 ) {
     val systemUiController = rememberSystemUiController()
 
@@ -54,7 +56,7 @@ fun ListScreen(
         )
         ContentFetched(
             onBookClicked = onBookClicked,
-            lazyPagingItems = pagingState
+            lazyPagingItems = pagingState,
         )
     } else {
         systemUiController.setSystemBarsColor(

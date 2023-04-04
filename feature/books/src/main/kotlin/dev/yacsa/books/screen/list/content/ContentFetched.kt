@@ -7,16 +7,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.*
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,8 +25,11 @@ import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
+import dev.yacsa.books.screen.list.content.fetched.ContentFetchedGrid
+import dev.yacsa.books.screen.list.content.fetched.ContentFetchedList
 import dev.yacsa.books.screen.list.item.ItemError
 import dev.yacsa.books.screen.list.item.ItemFetched
+import dev.yacsa.books.screen.list.item.ItemFetchedGrid
 import dev.yacsa.books.screen.list.item.ItemLoading
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.ui.composable.fab.ScrollUpFab
@@ -40,9 +42,13 @@ import kotlinx.coroutines.launch
 fun ContentFetched(
     modifier: Modifier = Modifier,
     onBookClicked: (Int) -> Unit,
-    lazyPagingItems: LazyPagingItems<BookUiModel>
+    lazyPagingItems: LazyPagingItems<BookUiModel>,
 ) {
     val state = rememberLazyListState()
+    val listState = rememberLazyListState()
+    val gridState = rememberLazyGridState()
+
+    val foo = remember { mutableStateOf(false) }
 
     val pullRefreshState = rememberPullRefreshState(
         refreshing = lazyPagingItems.loadState.refresh is LoadState.Loading,
@@ -51,7 +57,6 @@ fun ContentFetched(
         }
     )
 
-    val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
 
     Column {
@@ -65,81 +70,55 @@ fun ContentFetched(
                 IconButton(onClick = {/* Do Something*/ }) {
                     Icon(Icons.Outlined.Search, null)
                 }
-                IconButton(onClick = { /*TODO*/ }) {
-                    Icon(Icons.Outlined.Settings, null)
+                IconButton(onClick = {
+                    foo.value = !foo.value
+                }) {
+                    if(foo.value){
+                        Icon(Icons.Outlined.AddCircle, null)
+
+                    }else{
+                        Icon(Icons.Outlined.Menu, null)
+                    }
                 }
             }
         )
 
         Box(Modifier.pullRefresh(pullRefreshState)) {
-            LazyColumn(
-                state = listState,
-                modifier = modifier
-                    .fillMaxSize()
-                    // TODO: fix
-                    .padding(
-                        horizontal = 16.dp
-                    ),
-                flingBehavior = rememberSnapFlingBehavior(lazyListState = state)
-            ) {
-                items(
-                    lazyPagingItems
-                ) { item ->
-                    ItemFetched(
-                        title = item?.title ?: "",
-                        description = item?.authors?.firstOrNull()?.name ?: "NI",
-                        imageUrl = item?.formats?.imageJpeg,
-                        onItemContentClick = {
-                            item?.id?.let { onBookClicked(it) }
-                        }
-                    )
-                }
-                lazyPagingItems.apply {
-                    when {
-                        loadState.refresh is LoadState.Loading -> {
-                            item {
-                                ItemLoading()
-                            }
-                        }
-                        loadState.refresh is LoadState.Error -> {
-                            val error = lazyPagingItems.loadState.append as? LoadState.Error
-                            item {
-                                ItemError(
-                                    error = error?.error?.localizedMessage ?: "SWW",
-                                    onRetry = {
-                                        retry()
-                                    }
-                                )
-                            }
-                        }
-                        loadState.append is LoadState.Loading -> {
-                            item {
-                                ItemLoading()
-                            }
-                        }
-                        loadState.append is LoadState.Error -> {
-                            val error = lazyPagingItems.loadState.append as LoadState.Error
-                            item {
-                                ItemError(
-                                    error = error.error.localizedMessage ?: "SWW",
-                                    onRetry = {
-                                        retry()
-                                    }
-                                )
-                            }
-                        }
-                    }
-                }
+
+            if (foo.value) {
+                ContentFetchedGrid(
+                    lazyPagingItems = lazyPagingItems,
+                    onBookClicked = onBookClicked,
+                    listState = gridState
+                )
+            } else {
+                ContentFetchedList(
+                    lazyPagingItems = lazyPagingItems,
+                    onBookClicked = onBookClicked,
+                    listState = listState
+                )
             }
+
+
+
             ScrollUpFab(
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
                     // TODO: fix
                     .padding(16.dp),
-                isVisibleBecauseOfScrolling = !listState.isScrollInProgress && listState.canScrollBackward
+                isVisibleBecauseOfScrolling =
+                if (foo.value) {
+                    !gridState.isScrollInProgress && gridState.canScrollBackward
+                } else {
+                    !listState.isScrollInProgress && listState.canScrollBackward
+                }
             ) {
                 coroutineScope.launch {
-                    listState.animateScrollToItem(0)
+                    if (foo.value) {
+                        gridState.animateScrollToItem(0)
+                    } else {
+                        listState.animateScrollToItem(0)
+                    }
                 }
             }
 

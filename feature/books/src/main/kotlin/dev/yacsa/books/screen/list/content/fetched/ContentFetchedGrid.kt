@@ -1,8 +1,8 @@
 package dev.yacsa.books.screen.list.content.fetched
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.grid.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -30,14 +30,14 @@ fun ContentFetchedGrid(
     val span: (LazyGridItemSpanScope) -> GridItemSpan = { GridItemSpan(spanCount) }
 
     LazyVerticalGrid(
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
         state = listState,
         columns = GridCells.Fixed(spanCount),
         modifier = modifier
             .fillMaxSize()
             // TODO: fix
-            .padding(
-                horizontal = 16.dp
-            ),
+            .padding(16.dp),
     ) {
         items(
             lazyPagingItems.itemCount
@@ -45,11 +45,9 @@ fun ContentFetchedGrid(
             lazyPagingItems[index]?.let { item ->
 
                 ItemFetchedGrid(
-                    title = item?.title ?: "",
-                    description = item?.authors?.firstOrNull()?.name ?: "NI",
-                    imageUrl = item?.formats?.imageJpeg,
+                    book = item,
                     onItemContentClick = {
-                        item?.id?.let { onBookClicked(it) }
+                        item.id?.let { onBookClicked(it) }
                     }
                 )
             }

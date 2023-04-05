@@ -21,6 +21,7 @@ import dev.yacsa.ui.window.WindowInfo
 import dev.yacsa.ui.window.rememberWindowInfo
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
+import logcat.logcat
 
 @Composable
 fun ListRoute(
@@ -48,6 +49,7 @@ fun ListRoute(
     }
 
 
+    logcat("ListRoute"){"ListRoute"}
     ListScreen(
         onBookClicked = {
             onClick(it)

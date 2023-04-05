@@ -1,5 +1,6 @@
 package dev.yacsa.books.screen.list.content.fetched
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -15,7 +16,7 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import dev.yacsa.books.screen.list.item.ItemError
-import dev.yacsa.books.screen.list.item.ItemFetched
+import dev.yacsa.books.screen.list.item.ItemFetchedList
 import dev.yacsa.books.screen.list.item.ItemLoading
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.ui.theme.YacsaTheme
@@ -30,6 +31,7 @@ fun ContentFetchedList(
 ) {
 
     LazyColumn(
+        verticalArrangement = Arrangement.spacedBy(8.dp),
         state = listState,
         modifier = modifier
             .fillMaxSize()
@@ -41,14 +43,15 @@ fun ContentFetchedList(
         items(
             lazyPagingItems
         ) { item ->
-            ItemFetched(
-                title = item?.title ?: "",
-                description = item?.authors?.firstOrNull()?.name ?: "NI",
-                imageUrl = item?.formats?.imageJpeg,
-                onItemContentClick = {
-                    item?.id?.let { onBookClicked(it) }
-                }
-            )
+            item?.let {
+                ItemFetchedList(
+                    book = it,
+                    onItemContentClick = {
+                        // TODO: fix
+                        it.id?.let { it1 -> onBookClicked(it1) }
+                    }
+                )
+            }
         }
         lazyPagingItems.apply {
             when {

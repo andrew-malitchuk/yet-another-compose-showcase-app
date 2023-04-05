@@ -21,7 +21,10 @@ fun NavGraphBuilder.booksNavGraph(navController: NavHostController) {
                 onClick = {
                     navController.navigate(
                         BooksDirection.Detalization.getRoute(it),
-                    )
+                    ){
+                        restoreState=true
+                        launchSingleTop=true
+                    }
                 }
             )
         }

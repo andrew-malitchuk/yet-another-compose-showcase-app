@@ -1,12 +1,9 @@
 package dev.yacsa.books.screen.list.content
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.*
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
@@ -24,13 +21,8 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.items
 import dev.yacsa.books.screen.list.content.fetched.ContentFetchedGrid
 import dev.yacsa.books.screen.list.content.fetched.ContentFetchedList
-import dev.yacsa.books.screen.list.item.ItemError
-import dev.yacsa.books.screen.list.item.ItemFetched
-import dev.yacsa.books.screen.list.item.ItemFetchedGrid
-import dev.yacsa.books.screen.list.item.ItemLoading
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.ui.composable.fab.ScrollUpFab
 import dev.yacsa.ui.theme.YacsaTheme

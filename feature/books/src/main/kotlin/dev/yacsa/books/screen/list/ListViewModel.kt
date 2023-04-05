@@ -1,6 +1,7 @@
 package dev.yacsa.books.screen.list
 
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
 import androidx.paging.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.yacsa.books.screen.list.pagination.BooksSource
@@ -10,6 +11,7 @@ import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.platform.viewmodel.BaseViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
+import logcat.logcat
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,6 +26,7 @@ class ListViewModel @Inject constructor(
 ) {
 
     init {
+        logcat { "init" }
         acceptIntent(ListIntent.GetBooks)
     }
 
@@ -37,12 +40,13 @@ class ListViewModel @Inject constructor(
     var pagingDataFlow: Flow<PagingData<BookUiModel>>? = null
 
     private fun getBooks(): Flow<ListUiState.PartialState> = flow<ListUiState.PartialState> {
-        delay(5_000L)
+        logcat { "getBooks" }
+//        delay(5_000L)
         pagingDataFlow = Pager(PagingConfig(pageSize = 32)) {
             BooksSource(
                 getBooksUseCase, bookUiDomainMapper
             )
-        }.flow
+        }.flow.cachedIn(viewModelScope)
         emit(ListUiState.PartialState.Fetched)
     }.onStart {
         emit(ListUiState.PartialState.Loading)

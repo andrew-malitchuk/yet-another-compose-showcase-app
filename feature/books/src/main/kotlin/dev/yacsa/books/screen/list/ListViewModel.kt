@@ -2,15 +2,20 @@ package dev.yacsa.books.screen.list
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import androidx.paging.*
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.yacsa.books.screen.list.pagination.BooksSource
-import dev.yacsa.domain.usecase.GetBooksUseCase
+import dev.yacsa.books.screen.list.pagination.BookRemoteSource
+import dev.yacsa.domain.usecase.*
 import dev.yacsa.model.mapper.BookUiDomainMapper
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.platform.viewmodel.BaseViewModel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.onStart
 import logcat.logcat
 import javax.inject.Inject
 
@@ -18,6 +23,11 @@ import javax.inject.Inject
 class ListViewModel @Inject constructor(
     private val getBooksUseCase: GetBooksUseCase,
     private val bookUiDomainMapper: BookUiDomainMapper,
+    private val getRemoteKeyByBookId: GetRemoteKeyByBookId,
+    private val removeRemoteKeyUseCase: RemoveRemoteKeyUseCase,
+    private val removeAllBooksUseCase: RemoveAllBooksUseCase,
+    private val addAllRemoteKeysUseCase: AddAllRemoteKeysUseCase,
+    private val saveBooksUseCase: SaveBooksUseCase,
     savedStateHandle: SavedStateHandle,
     initialState: ListUiState
 ) : BaseViewModel<ListUiState, ListUiState.PartialState, ListEvent, ListIntent>(
@@ -42,11 +52,27 @@ class ListViewModel @Inject constructor(
     private fun getBooks(): Flow<ListUiState.PartialState> = flow<ListUiState.PartialState> {
         logcat { "getBooks" }
 //        delay(5_000L)
-        pagingDataFlow = Pager(PagingConfig(pageSize = 32)) {
-            BooksSource(
-                getBooksUseCase, bookUiDomainMapper
+//        pagingDataFlow = Pager(PagingConfig(pageSize = 32)) {
+//            BooksSource(
+//                getBooksUseCase, bookUiDomainMapper
+//            )
+//        }.flow.cachedIn(viewModelScope)
+        pagingDataFlow = Pager(
+            config = PagingConfig(pageSize = 32),
+            pagingSourceFactory = {
+
+            },
+            remoteMediator = BookRemoteSource(
+                1,
+                getBooksUseCase,
+                getRemoteKeyByBookId,
+                removeRemoteKeyUseCase,
+                removeAllBooksUseCase,
+                addAllRemoteKeysUseCase,
+                saveBooksUseCase,
             )
-        }.flow.cachedIn(viewModelScope)
+
+            ).flow.cachedIn(viewModelScope)
         emit(ListUiState.PartialState.Fetched)
     }.onStart {
         emit(ListUiState.PartialState.Loading)

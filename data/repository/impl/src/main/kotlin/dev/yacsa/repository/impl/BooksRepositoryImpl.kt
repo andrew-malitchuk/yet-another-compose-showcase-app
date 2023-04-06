@@ -4,15 +4,18 @@ import dev.yacsa.database.model.relationships.BookAuthorRelationship
 import dev.yacsa.database.source.BookAuthorRelationshipDbSource
 import dev.yacsa.database.source.BookDbSource
 import dev.yacsa.database.source.PersonDbSource
+import dev.yacsa.database.source.RemoveKeyDbSource
 import dev.yacsa.network.model.BookNetModel
 import dev.yacsa.network.source.BooksNetSource
 import dev.yacsa.repository.BooksRepository
 import dev.yacsa.repository.impl.mapper.book.BookAuthorRepoDbMapper
 import dev.yacsa.repository.impl.mapper.book.BookRepoDbMapper
 import dev.yacsa.repository.impl.mapper.book.BookRepoNetMapper
+import dev.yacsa.repository.impl.mapper.book.RemoteKeyRepoDbMapper
 import dev.yacsa.repository.impl.mapper.person.PersonRepoDbMapper
 import dev.yacsa.repository.impl.mapper.person.PersonRepoNetMapper
 import dev.yacsa.repository.model.BookRepoModel
+import dev.yacsa.repository.model.RemoteKeyRepoModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
@@ -28,7 +31,9 @@ class BooksRepositoryImpl @Inject constructor(
     private val personRepoNetMapper: PersonRepoNetMapper,
     private val personRepoDbMapper: PersonRepoDbMapper,
     private val bookAuthorRelationshipDbSource: BookAuthorRelationshipDbSource,
-    private val bookAuthorRepoDbMapper: BookAuthorRepoDbMapper
+    private val bookAuthorRepoDbMapper: BookAuthorRepoDbMapper,
+    private val bookRemoveKeyDbSource: RemoveKeyDbSource,
+    private val remoteKeyRepoDbMapper: RemoteKeyRepoDbMapper
 
 ) : BooksRepository {
 
@@ -37,7 +42,7 @@ class BooksRepositoryImpl @Inject constructor(
         return result.filterNotNull().map(bookRepoNetMapper::toRepo)
     }
 
-    override suspend fun getBook(page:Int): List<BookRepoModel> {
+    override suspend fun getBook(page: Int): List<BookRepoModel> {
         val result = booksNetSource.getBooks(page)?.results ?: emptyList()
         return result.filterNotNull().map(bookRepoNetMapper::toRepo)
     }
@@ -132,6 +137,22 @@ class BooksRepositoryImpl @Inject constructor(
             .also {
                 saveBooks(it)
             }
+    }
+
+    override suspend fun removeAll() {
+        bookDbSource.deleteAll()
+    }
+
+    override suspend fun insertAll(remoteKey: List<RemoteKeyRepoModel>) {
+        bookRemoveKeyDbSource.insertAll(remoteKey.map { remoteKeyRepoDbMapper.toDb(it) })
+    }
+
+    override suspend fun remoteId(bookId: Long): RemoteKeyRepoModel? {
+        return bookRemoveKeyDbSource.remoteId(bookId)?.let { remoteKeyRepoDbMapper.toRepo(it) }
+    }
+
+    override suspend fun clearRemoteKeys() {
+        bookRemoveKeyDbSource.clearRemoteKeys()
     }
 
 }

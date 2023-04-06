@@ -49,4 +49,28 @@ abstract class DomainModule {
         refreshBooksUseCaseImpl: RefreshBooksUseCaseImpl
     ): RefreshBooksUseCase
 
+    @Singleton
+    @Binds
+    abstract fun bindsSaveBooksUseCase(
+        saveBooksUseCaseImpl: SaveBooksUseCaseImpl
+    ): SaveBooksUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindsRemoveRemoteKeyUseCase(
+        removeRemoteKeyUseCaseImpl: RemoveRemoteKeyUseCaseImpl
+    ): RemoveRemoteKeyUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindsRemoveAllBooksUseCase(
+        removeAllBooksUseCaseImpl: RemoveAllBooksUseCaseImpl
+    ): RemoveAllBooksUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindsAddAllRemoteKeysUseCase(
+        addAllRemoteKeysUseCaseImpl: AddAllRemoteKeysUseCaseImpl
+    ): AddAllRemoteKeysUseCase
+
 }

@@ -1,7 +1,7 @@
 package dev.yacsa.repository
 
-import dev.yacsa.database.model.BookDbModel
 import dev.yacsa.repository.model.BookRepoModel
+import dev.yacsa.repository.model.RemoteKeyRepoModel
 import kotlinx.coroutines.flow.Flow
 
 interface BooksRepository {
@@ -12,6 +12,11 @@ interface BooksRepository {
     suspend fun saveBooks(values: List<BookRepoModel>)
     suspend fun saveBook(value: BookRepoModel)
     suspend fun refreshBooks()
+    suspend fun removeAll()
 
     suspend fun refreshBooks(page: Int)
+
+    suspend fun insertAll(remoteKey: List<RemoteKeyRepoModel>)
+    suspend fun remoteId(bookId: Long): RemoteKeyRepoModel?
+    suspend fun clearRemoteKeys()
 }

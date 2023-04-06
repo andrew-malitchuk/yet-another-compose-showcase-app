@@ -1,5 +1,6 @@
 package dev.yacsa.database.impl.source
 
+import androidx.paging.PagingSource
 import dev.yacsa.database.impl.dao.BookDbDao
 import dev.yacsa.database.model.BookDbModel
 import dev.yacsa.database.source.BookDbSource
@@ -9,6 +10,10 @@ import javax.inject.Inject
 class BookDbSourceImpl @Inject constructor(
     private val booksDao: BookDbDao
 ): BookDbSource {
+
+    override suspend fun getMovies(): PagingSource<Int, BookDbModel> {
+       return booksDao.getPaging()
+    }
 
     override suspend fun get(id: Int): BookDbModel? {
         return booksDao.get(id)

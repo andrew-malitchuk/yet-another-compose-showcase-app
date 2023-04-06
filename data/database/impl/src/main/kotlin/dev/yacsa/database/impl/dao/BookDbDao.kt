@@ -1,8 +1,8 @@
 package dev.yacsa.database.impl.dao
 
+import androidx.paging.PagingSource
 import androidx.room.*
 import dev.yacsa.database.YacsaDb
-import dev.yacsa.database.impl.dao.base.BaseDbDao
 import dev.yacsa.database.model.BookDbModel
 import kotlinx.coroutines.flow.Flow
 
@@ -15,12 +15,15 @@ interface BookDbDao {
     @Query("SELECT * FROM ${YacsaDb.Table.BOOK}")
     suspend fun get(): List<BookDbModel>?
 
+    @Query("SELECT * FROM ${YacsaDb.Table.BOOK} ORDER BY page")
+    fun getPaging(): PagingSource<Int, BookDbModel>
+
     // TODO: rename to subscribe?
     @Query("SELECT * FROM ${YacsaDb.Table.BOOK}")
     fun getFlow(): Flow<List<BookDbModel>?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(value: BookDbModel):Long
+    suspend fun insert(value: BookDbModel): Long
 
     @Update
     suspend fun update(value: BookDbModel)

@@ -8,6 +8,7 @@ import dev.yacsa.database.impl.YacsaDb
 import dev.yacsa.database.impl.dao.BookAuthorRelationshipDao
 import dev.yacsa.database.impl.dao.BookDbDao
 import dev.yacsa.database.impl.dao.PersonDbDao
+import dev.yacsa.database.impl.dao.RemoteKeyDao
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -32,6 +33,13 @@ class DbDaoModule {
         appDatabase: YacsaDb
     ): BookAuthorRelationshipDao {
         return appDatabase.bookAuthorRelationshipDao()
+    }
+
+    @Provides
+    fun providesRemoteKeyDao(
+        appDatabase: YacsaDb
+    ): RemoteKeyDao {
+        return appDatabase.remoteKeyDao()
     }
 
 }

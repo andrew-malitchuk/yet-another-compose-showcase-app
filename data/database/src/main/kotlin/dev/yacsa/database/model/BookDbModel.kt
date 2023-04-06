@@ -32,4 +32,6 @@ data class BookDbModel(
     val formats: FormatsDbModel,
     @ColumnInfo(name = "download_count")
     val downloadCount: Int?,
+    @ColumnInfo(name = "page")
+    val page: Int?=1
 ) : BaseDbModel

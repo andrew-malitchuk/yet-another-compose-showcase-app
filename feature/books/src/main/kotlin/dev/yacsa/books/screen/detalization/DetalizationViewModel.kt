@@ -2,13 +2,6 @@ package dev.yacsa.books.screen.detalization
 
 import androidx.lifecycle.SavedStateHandle
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.yacsa.books.screen.list.ListEvent
-import dev.yacsa.books.screen.list.ListIntent
-import dev.yacsa.books.screen.list.ListUiState
-import dev.yacsa.domain.usecase.GetBooksUseCase
-import dev.yacsa.domain.usecase.GetStartUpConfigureUseCase
-import dev.yacsa.domain.usecase.LoadBooksUseCase
-import dev.yacsa.domain.usecase.RefreshBooksUseCase
 import dev.yacsa.model.mapper.BookUiDomainMapper
 import dev.yacsa.platform.viewmodel.BaseViewModel
 import kotlinx.coroutines.flow.Flow

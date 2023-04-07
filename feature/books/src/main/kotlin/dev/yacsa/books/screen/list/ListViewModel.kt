@@ -8,10 +8,10 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.yacsa.books.screen.list.pagination.BooksSource
-import dev.yacsa.domain.usecase.GetBooksPagedUseCase
-import dev.yacsa.domain.usecase.GetBooksUseCase
 import dev.yacsa.domain.usecase.RemoveAllBooksUseCase
-import dev.yacsa.domain.usecase.SaveBooksUseCase
+import dev.yacsa.domain.usecase.books.GetBooksUseCase
+import dev.yacsa.domain.usecase.books.LoadBooksUseCase
+import dev.yacsa.domain.usecase.books.SaveBooksUseCase
 import dev.yacsa.model.mapper.BookUiDomainMapper
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.platform.viewmodel.BaseViewModel
@@ -26,7 +26,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ListViewModel @Inject constructor(
     private val getBooksUseCase: GetBooksUseCase,
-    private val getBooksPagedUseCase: GetBooksPagedUseCase,
+    private val loadBooksUseCase: LoadBooksUseCase,
     private val bookUiDomainMapper: BookUiDomainMapper,
     private val removeAllBooksUseCase: RemoveAllBooksUseCase,
     private val saveBooksUseCase: SaveBooksUseCase,
@@ -56,7 +56,7 @@ class ListViewModel @Inject constructor(
         delay(5_000L)
         pagingDataFlow = Pager(PagingConfig(pageSize = 32)) {
             BooksSource(
-                getBooksUseCase, getBooksPagedUseCase, bookUiDomainMapper
+                getBooksUseCase, loadBooksUseCase, bookUiDomainMapper, saveBooksUseCase
             )
         }.flow.cachedIn(viewModelScope)
         emit(ListUiState.PartialState.Fetched)

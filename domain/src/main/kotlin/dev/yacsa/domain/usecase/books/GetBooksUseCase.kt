@@ -1,4 +1,4 @@
-package dev.yacsa.domain.usecase
+package dev.yacsa.domain.usecase.books
 
 import dev.yacsa.domain.model.BookDomainModel
 

@@ -2,15 +2,18 @@ package dev.yacsa.books.screen.list.pagination
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import dev.yacsa.domain.usecase.GetBooksPagedUseCase
-import dev.yacsa.domain.usecase.GetBooksUseCase
+import dev.yacsa.domain.usecase.books.GetBooksUseCase
+import dev.yacsa.domain.usecase.books.LoadBooksUseCase
+import dev.yacsa.domain.usecase.books.SaveBooksUseCase
 import dev.yacsa.model.mapper.BookUiDomainMapper
 import dev.yacsa.model.model.BookUiModel
+import java.io.IOException
 
 class BooksSource(
     private val getBooksUseCase: GetBooksUseCase,
-    private val getBooksPagedUseCase: GetBooksPagedUseCase,
-    private val bookUiDomainMapper: BookUiDomainMapper
+    private val loadBooksUseCase: LoadBooksUseCase,
+    private val bookUiDomainMapper: BookUiDomainMapper,
+    private val saveBooksUseCase: SaveBooksUseCase,
 ) : PagingSource<Int, BookUiModel>() {
 
     override fun getRefreshKey(state: PagingState<Int, BookUiModel>): Int? {
@@ -20,12 +23,22 @@ class BooksSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, BookUiModel> {
         return try {
             val nextPage = params.key ?: 1
-            val response = getBooksPagedUseCase(nextPage).map(bookUiDomainMapper::toUi)
+            val list = try {
+                val fromNet = getBooksUseCase(nextPage)
+                if (fromNet.isNotEmpty()) {
+                    saveBooksUseCase(nextPage, fromNet)
+                }
+                fromNet.map(bookUiDomainMapper::toUi)
+            } catch (e: IOException) {
+                loadBooksUseCase(nextPage).map(bookUiDomainMapper::toUi)
+            }
+
             LoadResult.Page(
-                data = response,
+                data = list,
                 prevKey = if (nextPage == 1) null else nextPage - 1,
-                nextKey = nextPage + 1
+                nextKey = if (list.isEmpty()) null else nextPage + 1
             )
+
         } catch (e: Exception) {
             LoadResult.Error(e)
         }

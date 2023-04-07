@@ -5,7 +5,12 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.yacsa.domain.impl.usecase.*
+import dev.yacsa.domain.impl.usecase.books.GetBooksUseCaseImpl
+import dev.yacsa.domain.impl.usecase.books.LoadBooksUseCaseImpl
 import dev.yacsa.domain.usecase.*
+import dev.yacsa.domain.usecase.books.GetBooksUseCase
+import dev.yacsa.domain.usecase.books.LoadBooksUseCase
+import dev.yacsa.domain.usecase.books.SaveBooksUseCase
 import javax.inject.Singleton
 
 @Suppress("UnnecessaryAbstractClass")
@@ -60,11 +65,5 @@ abstract class DomainModule {
     abstract fun bindsRemoveAllBooksUseCase(
         removeAllBooksUseCaseImpl: RemoveAllBooksUseCaseImpl
     ): RemoveAllBooksUseCase
-
-    @Singleton
-    @Binds
-    abstract fun bindsGetBooksPagedUseCase(
-        getBooksPagedUseCaseImpl: GetBooksPagedUseCaseImpl
-    ): GetBooksPagedUseCase
 
 }

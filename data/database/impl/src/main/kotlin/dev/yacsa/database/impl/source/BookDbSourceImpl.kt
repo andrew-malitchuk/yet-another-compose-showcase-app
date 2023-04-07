@@ -3,11 +3,22 @@ package dev.yacsa.database.impl.source
 import dev.yacsa.database.impl.dao.BookDbDao
 import dev.yacsa.database.model.BookDbModel
 import dev.yacsa.database.source.BookDbSource
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class BookDbSourceImpl @Inject constructor(
     private val booksDao: BookDbDao
-): BookDbSource {
+) : BookDbSource {
+
+    //
+    override suspend fun getPaged(page: Int): List<BookDbModel>? {
+        return booksDao.getPaged(page)
+    }
+
+    override suspend fun removePage(page: Int) {
+        booksDao.removePage(page)
+    }
+    //
 
     override suspend fun get(id: Int): BookDbModel? {
         return booksDao.get(id)
@@ -17,12 +28,16 @@ class BookDbSourceImpl @Inject constructor(
         return booksDao.get()
     }
 
-    override suspend fun insert(value: BookDbModel) {
-        return booksDao.insert(value)
+    override suspend fun getFlow(): Flow<List<BookDbModel>?> {
+        return booksDao.getFlow()
+    }
+
+    override suspend fun insert(value: BookDbModel): Int {
+        return booksDao.insert(value).toInt()
     }
 
     override suspend fun insert(values: List<BookDbModel>) {
-        values.forEach{
+        values.forEach {
             booksDao.insert(it)
         }
     }

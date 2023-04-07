@@ -1,4 +1,4 @@
-package dev.yacsa.onboarding
+package dev.yacsa.onboarding.screen.onboarding
 
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.getValue
@@ -10,6 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.yacsa.domain.model.StartUpConfigureDomainModel
 import dev.yacsa.domain.usecase.GetStartUpConfigureUseCase
 import dev.yacsa.domain.usecase.UpdateStartUpConfigureUseCase
+import dev.yacsa.ui.R
 import kotlinx.coroutines.launch
 import logcat.logcat
 import javax.inject.Inject
@@ -37,17 +38,17 @@ class OnboardingViewModel @Inject constructor(
 
     var onboardingPages = listOf(
         OnboadringPage(
-            dev.yacsa.ui.R.drawable.ic_mobile_application,
+            R.drawable.ic_mobile_application,
             "header #1",
             "caption #1"
         ),
         OnboadringPage(
-            dev.yacsa.ui.R.drawable.ic_mobile_application,
+            R.drawable.ic_mobile_application,
             "header #2",
             "caption #2"
         ),
         OnboadringPage(
-            dev.yacsa.ui.R.drawable.ic_mobile_application,
+            R.drawable.ic_mobile_application,
             "header #3",
             "caption #3"
         ),

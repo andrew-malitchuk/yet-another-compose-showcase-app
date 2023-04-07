@@ -1,6 +1,7 @@
 package dev.yacsa.database.model
 
 import androidx.room.ColumnInfo
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import dev.yacsa.database.YacsaDb
@@ -9,7 +10,7 @@ import dev.yacsa.database.model.base.BaseDbModel
 @Entity(tableName = YacsaDb.Table.BOOK)
 data class BookDbModel(
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
+    @ColumnInfo(name = "bookId")
     val id: Int,
     @ColumnInfo(name = "title")
     val title: String?,
@@ -27,8 +28,10 @@ data class BookDbModel(
     val copyright: Boolean?,
     @ColumnInfo(name = "media_type")
     val mediaType: String?,
-//    @ColumnInfo(name = "formats")
-//    val formats: FormatsNetModel?,
+    @Embedded
+    val formats: FormatsDbModel,
     @ColumnInfo(name = "download_count")
     val downloadCount: Int?,
+    @ColumnInfo(name = "page")
+    var page: Int?=1
 ) : BaseDbModel

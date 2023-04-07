@@ -5,7 +5,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.yacsa.database.impl.YacsaDb
+import dev.yacsa.database.impl.dao.BookAuthorRelationshipDao
 import dev.yacsa.database.impl.dao.BookDbDao
+import dev.yacsa.database.impl.dao.PersonDbDao
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -16,6 +18,20 @@ class DbDaoModule {
         appDatabase: YacsaDb
     ): BookDbDao {
         return appDatabase.bookDao()
+    }
+
+    @Provides
+    fun providesPersonDbDao(
+        appDatabase: YacsaDb
+    ): PersonDbDao {
+        return appDatabase.personDbDao()
+    }
+
+    @Provides
+    fun providesBookAuthorRelationshipDao(
+        appDatabase: YacsaDb
+    ): BookAuthorRelationshipDao {
+        return appDatabase.bookAuthorRelationshipDao()
     }
 
 }

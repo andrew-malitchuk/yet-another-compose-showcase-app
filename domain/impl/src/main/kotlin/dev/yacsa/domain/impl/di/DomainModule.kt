@@ -4,12 +4,13 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import dev.yacsa.domain.impl.usecase.GetPreferencesUseCaseImpl
-import dev.yacsa.domain.impl.usecase.GetStartUpConfigureUseCaseImpl
-import dev.yacsa.domain.impl.usecase.UpdateStartUpConfigureUseCaseImpl
-import dev.yacsa.domain.usecase.GetPreferencesUseCase
-import dev.yacsa.domain.usecase.GetStartUpConfigureUseCase
-import dev.yacsa.domain.usecase.UpdateStartUpConfigureUseCase
+import dev.yacsa.domain.impl.usecase.*
+import dev.yacsa.domain.impl.usecase.books.GetBooksUseCaseImpl
+import dev.yacsa.domain.impl.usecase.books.LoadBooksUseCaseImpl
+import dev.yacsa.domain.usecase.*
+import dev.yacsa.domain.usecase.books.GetBooksUseCase
+import dev.yacsa.domain.usecase.books.LoadBooksUseCase
+import dev.yacsa.domain.usecase.books.SaveBooksUseCase
 import javax.inject.Singleton
 
 @Suppress("UnnecessaryAbstractClass")
@@ -34,5 +35,35 @@ abstract class DomainModule {
     abstract fun bindsUpdateStartUpConfigureUseCase(
         updateStartUpConfigureUseCaseImpl: UpdateStartUpConfigureUseCaseImpl
     ): UpdateStartUpConfigureUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindsGetBooksUseCase(
+        getBooksUseCaseImpl: GetBooksUseCaseImpl
+    ): GetBooksUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindsLoadBooksUseCase(
+        loadBooksUseCaseImpl: LoadBooksUseCaseImpl
+    ): LoadBooksUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindsRefreshBooksUseCase(
+        refreshBooksUseCaseImpl: RefreshBooksUseCaseImpl
+    ): RefreshBooksUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindsSaveBooksUseCase(
+        saveBooksUseCaseImpl: SaveBooksUseCaseImpl
+    ): SaveBooksUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindsRemoveAllBooksUseCase(
+        removeAllBooksUseCaseImpl: RemoveAllBooksUseCaseImpl
+    ): RemoveAllBooksUseCase
 
 }

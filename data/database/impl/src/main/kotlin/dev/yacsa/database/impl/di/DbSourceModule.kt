@@ -4,8 +4,12 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dev.yacsa.database.impl.source.BookAuthorRelationshipDbSourceImpl
 import dev.yacsa.database.impl.source.BookDbSourceImpl
+import dev.yacsa.database.impl.source.PersonDbSourceImpl
+import dev.yacsa.database.source.BookAuthorRelationshipDbSource
 import dev.yacsa.database.source.BookDbSource
+import dev.yacsa.database.source.PersonDbSource
 
 @Suppress("UnnecessaryAbstractClass")
 @Module
@@ -16,5 +20,15 @@ abstract class DbSourceModule {
     abstract fun bindsBookDbSource(
         bookDbSource: BookDbSourceImpl
     ): BookDbSource
+
+    @Binds
+    abstract fun bindsPersonDbSource(
+        personDbSourceImpl: PersonDbSourceImpl
+    ): PersonDbSource
+
+    @Binds
+    abstract fun bindsBookAuthorRelationshipDbSource(
+        bookAuthorRelationshipDbSourceImpl: BookAuthorRelationshipDbSourceImpl
+    ): BookAuthorRelationshipDbSource
 
 }

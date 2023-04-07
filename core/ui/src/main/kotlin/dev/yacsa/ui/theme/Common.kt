@@ -18,6 +18,7 @@ data class YacsaColors(
 
 data class YacsaTypography(
     val heading: TextStyle,
+    val title: TextStyle,
     val body: TextStyle,
     val caption: TextStyle
 )

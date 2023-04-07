@@ -2,7 +2,7 @@ package dev.yacsa.network.model
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import dev.yacsa.network.model.base.NetModel
+import dev.yacsa.network.model.base.BaseNetModel
 
 /**
  *
@@ -17,8 +17,6 @@ import dev.yacsa.network.model.base.NetModel
  *              "birth_year": 1879,
  *              "death_year": 1970
  *          }
- *      ],
- *      "translators": [
  *      ],
  *      "subjects": [
  *          "British -- Italy -- Fiction",
@@ -59,8 +57,6 @@ data class BookNetModel(
     val subjects: List<String?>?,
     @Json(name = "authors")
     val authors: List<PersonNetModel?>?,
-    @Json(name = "translators")
-    val translators: List<PersonNetModel?>?,
     @Json(name = "bookshelves")
     val bookshelves: List<String?>?,
     @Json(name = "languages")
@@ -73,4 +69,4 @@ data class BookNetModel(
     val formats: FormatsNetModel?,
     @Json(name = "download_count")
     val downloadCount: Int?,
-) : NetModel
+) : BaseNetModel

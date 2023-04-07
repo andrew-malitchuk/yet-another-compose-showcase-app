@@ -20,5 +20,4 @@ class StartUpConfigureRepoDataStoreMapper @Inject constructor() :
         )
     }
 
-
 }

@@ -57,20 +57,14 @@ abstract class DomainModule {
 
     @Singleton
     @Binds
-    abstract fun bindsRemoveRemoteKeyUseCase(
-        removeRemoteKeyUseCaseImpl: RemoveRemoteKeyUseCaseImpl
-    ): RemoveRemoteKeyUseCase
-
-    @Singleton
-    @Binds
     abstract fun bindsRemoveAllBooksUseCase(
         removeAllBooksUseCaseImpl: RemoveAllBooksUseCaseImpl
     ): RemoveAllBooksUseCase
 
     @Singleton
     @Binds
-    abstract fun bindsAddAllRemoteKeysUseCase(
-        addAllRemoteKeysUseCaseImpl: AddAllRemoteKeysUseCaseImpl
-    ): AddAllRemoteKeysUseCase
+    abstract fun bindsGetBooksPagedUseCase(
+        getBooksPagedUseCaseImpl: GetBooksPagedUseCaseImpl
+    ): GetBooksPagedUseCase
 
 }

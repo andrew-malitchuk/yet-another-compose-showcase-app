@@ -1,6 +1,5 @@
 package dev.yacsa.database.impl.source
 
-import androidx.paging.PagingSource
 import dev.yacsa.database.impl.dao.BookDbDao
 import dev.yacsa.database.model.BookDbModel
 import dev.yacsa.database.source.BookDbSource
@@ -9,11 +8,17 @@ import javax.inject.Inject
 
 class BookDbSourceImpl @Inject constructor(
     private val booksDao: BookDbDao
-): BookDbSource {
+) : BookDbSource {
 
-    override suspend fun getMovies(): PagingSource<Int, BookDbModel> {
-       return booksDao.getPaging()
+    //
+    override suspend fun getPaged(page: Int): List<BookDbModel>? {
+        return booksDao.getPaged(page)
     }
+
+    override suspend fun removePage(page: Int) {
+        booksDao.removePage(page)
+    }
+    //
 
     override suspend fun get(id: Int): BookDbModel? {
         return booksDao.get(id)
@@ -32,7 +37,7 @@ class BookDbSourceImpl @Inject constructor(
     }
 
     override suspend fun insert(values: List<BookDbModel>) {
-        values.forEach{
+        values.forEach {
             booksDao.insert(it)
         }
     }

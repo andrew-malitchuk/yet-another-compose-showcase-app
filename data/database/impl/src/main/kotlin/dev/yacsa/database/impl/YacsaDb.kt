@@ -5,10 +5,8 @@ import androidx.room.RoomDatabase
 import dev.yacsa.database.impl.dao.BookAuthorRelationshipDao
 import dev.yacsa.database.impl.dao.BookDbDao
 import dev.yacsa.database.impl.dao.PersonDbDao
-import dev.yacsa.database.impl.dao.RemoteKeyDao
 import dev.yacsa.database.model.BookDbModel
 import dev.yacsa.database.model.PersonDbModel
-import dev.yacsa.database.model.RemoteKeyDbModel
 import dev.yacsa.database.model.relationships.BookAuthorRelationship
 
 const val DB_VERSION = 1
@@ -19,7 +17,6 @@ const val DB_VERSION = 1
         BookDbModel::class,
         PersonDbModel::class,
         BookAuthorRelationship::class,
-        RemoteKeyDbModel::class
     ],
     exportSchema = true
 )
@@ -27,5 +24,4 @@ abstract class YacsaDb : RoomDatabase() {
     abstract fun bookDao(): BookDbDao
     abstract fun personDbDao(): PersonDbDao
     abstract fun bookAuthorRelationshipDao(): BookAuthorRelationshipDao
-    abstract fun remoteKeyDao(): RemoteKeyDao
 }

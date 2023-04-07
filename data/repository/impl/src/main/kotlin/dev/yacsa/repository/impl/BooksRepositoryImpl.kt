@@ -4,18 +4,15 @@ import dev.yacsa.database.model.relationships.BookAuthorRelationship
 import dev.yacsa.database.source.BookAuthorRelationshipDbSource
 import dev.yacsa.database.source.BookDbSource
 import dev.yacsa.database.source.PersonDbSource
-import dev.yacsa.database.source.RemoveKeyDbSource
 import dev.yacsa.network.model.BookNetModel
 import dev.yacsa.network.source.BooksNetSource
 import dev.yacsa.repository.BooksRepository
 import dev.yacsa.repository.impl.mapper.book.BookAuthorRepoDbMapper
 import dev.yacsa.repository.impl.mapper.book.BookRepoDbMapper
 import dev.yacsa.repository.impl.mapper.book.BookRepoNetMapper
-import dev.yacsa.repository.impl.mapper.book.RemoteKeyRepoDbMapper
 import dev.yacsa.repository.impl.mapper.person.PersonRepoDbMapper
 import dev.yacsa.repository.impl.mapper.person.PersonRepoNetMapper
 import dev.yacsa.repository.model.BookRepoModel
-import dev.yacsa.repository.model.RemoteKeyRepoModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
@@ -32,9 +29,6 @@ class BooksRepositoryImpl @Inject constructor(
     private val personRepoDbMapper: PersonRepoDbMapper,
     private val bookAuthorRelationshipDbSource: BookAuthorRelationshipDbSource,
     private val bookAuthorRepoDbMapper: BookAuthorRepoDbMapper,
-    private val bookRemoveKeyDbSource: RemoveKeyDbSource,
-    private val remoteKeyRepoDbMapper: RemoteKeyRepoDbMapper
-
 ) : BooksRepository {
 
     override suspend fun getBooks(): List<BookRepoModel> {
@@ -143,16 +137,24 @@ class BooksRepositoryImpl @Inject constructor(
         bookDbSource.deleteAll()
     }
 
-    override suspend fun insertAll(remoteKey: List<RemoteKeyRepoModel>) {
-        bookRemoveKeyDbSource.insertAll(remoteKey.map { remoteKeyRepoDbMapper.toDb(it) })
+    //
+    override suspend fun getBooksPaged(page: Int): List<BookRepoModel> {
+        return bookDbSource.getPaged(page)?.map {
+            bookRepoDbMapper.toRepo(it)
+        } ?: emptyList()
     }
 
-    override suspend fun remoteId(bookId: Long): RemoteKeyRepoModel? {
-        return bookRemoveKeyDbSource.remoteId(bookId)?.let { remoteKeyRepoDbMapper.toRepo(it) }
+    override suspend fun savePaged(page: Int, values: List<BookRepoModel>) {
+
+        val db = values.map { bookRepoDbMapper.toDb(it) }
+        db.forEach { it.page = page }
+
+        bookDbSource.insert(db)
     }
 
-    override suspend fun clearRemoteKeys() {
-        bookRemoveKeyDbSource.clearRemoteKeys()
+    override suspend fun removePage(page: Int) {
+        bookDbSource.removePage(page)
     }
+    //
 
 }

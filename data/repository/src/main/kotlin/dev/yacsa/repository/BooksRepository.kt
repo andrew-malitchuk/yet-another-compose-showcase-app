@@ -1,13 +1,12 @@
 package dev.yacsa.repository
 
 import dev.yacsa.repository.model.BookRepoModel
-import dev.yacsa.repository.model.RemoteKeyRepoModel
 import kotlinx.coroutines.flow.Flow
 
 interface BooksRepository {
 
     suspend fun getBooks(): List<BookRepoModel>
-    suspend fun getBook(page:Int): List<BookRepoModel>
+    suspend fun getBook(page: Int): List<BookRepoModel>
     suspend fun loadBooks(): Flow<List<BookRepoModel>>
     suspend fun saveBooks(values: List<BookRepoModel>)
     suspend fun saveBook(value: BookRepoModel)
@@ -16,7 +15,9 @@ interface BooksRepository {
 
     suspend fun refreshBooks(page: Int)
 
-    suspend fun insertAll(remoteKey: List<RemoteKeyRepoModel>)
-    suspend fun remoteId(bookId: Long): RemoteKeyRepoModel?
-    suspend fun clearRemoteKeys()
+    //
+    suspend fun getBooksPaged(page: Int): List<BookRepoModel>
+    suspend fun savePaged(page: Int, values: List<BookRepoModel>)
+    suspend fun removePage(page: Int)
+    //
 }

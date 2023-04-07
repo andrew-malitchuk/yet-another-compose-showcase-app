@@ -1,6 +1,5 @@
 package dev.yacsa.database.impl.dao
 
-import androidx.paging.PagingSource
 import androidx.room.*
 import dev.yacsa.database.YacsaDb
 import dev.yacsa.database.model.BookDbModel
@@ -14,9 +13,6 @@ interface BookDbDao {
 
     @Query("SELECT * FROM ${YacsaDb.Table.BOOK}")
     suspend fun get(): List<BookDbModel>?
-
-    @Query("SELECT * FROM ${YacsaDb.Table.BOOK} ORDER BY page")
-    fun getPaging(): PagingSource<Int, BookDbModel>
 
     // TODO: rename to subscribe?
     @Query("SELECT * FROM ${YacsaDb.Table.BOOK}")
@@ -33,5 +29,13 @@ interface BookDbDao {
 
     @Query("DELETE FROM ${YacsaDb.Table.BOOK}")
     suspend fun deleteAll()
+
+    //
+    @Query("SELECT * FROM ${YacsaDb.Table.BOOK} WHERE page = :page")
+    suspend fun getPaged(page: Int): List<BookDbModel>?
+
+    @Query("DELETE FROM ${YacsaDb.Table.BOOK} WHERE page = :page")
+    suspend fun removePage(page: Int)
+    //
 
 }

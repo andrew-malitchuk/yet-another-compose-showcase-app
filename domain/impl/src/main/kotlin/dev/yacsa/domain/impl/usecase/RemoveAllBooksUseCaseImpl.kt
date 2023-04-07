@@ -10,5 +10,4 @@ class RemoveAllBooksUseCaseImpl @Inject constructor(
     override suspend fun invoke() {
         booksRepository.removeAll()
     }
-
 }

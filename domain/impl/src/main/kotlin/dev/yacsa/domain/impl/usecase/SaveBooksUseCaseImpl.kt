@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class SaveBooksUseCaseImpl @Inject constructor(
     private val booksRepository: BooksRepository,
-    private val bookDomainRepoMapper: BookDomainRepoMapper
+    private val bookDomainRepoMapper: BookDomainRepoMapper,
 ) : SaveBooksUseCase {
     override suspend fun invoke(page: Int, list: List<BookDomainModel>) {
         booksRepository.removePage(page)

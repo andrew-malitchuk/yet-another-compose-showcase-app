@@ -1,8 +1,9 @@
 package dev.yacsa.ui.composable.fab
 
-import androidx.compose.animation.*
-import androidx.compose.animation.core.keyframes
-import androidx.compose.material.*
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.KeyboardArrowUp
 import androidx.compose.runtime.Composable
@@ -16,7 +17,7 @@ import dev.yacsa.ui.theme.YacsaTheme
 fun ScrollUpFab(
     modifier: Modifier,
     isVisibleBecauseOfScrolling: Boolean,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     val density = LocalDensity.current
     AnimatedVisibility(
@@ -27,18 +28,17 @@ fun ScrollUpFab(
         },
         exit = slideOutHorizontally {
             with(density) { 16.dp.roundToPx() }
-        }
+        },
     ) {
         FloatingActionButton(
             onClick = { onClick() },
         ) {
             androidx.compose.material3.Icon(
                 imageVector = Icons.Outlined.KeyboardArrowUp,
-                contentDescription = null
+                contentDescription = null,
             )
         }
     }
-
 }
 
 @Preview(showBackground = true)
@@ -47,7 +47,7 @@ fun Preview_ScrollUpFab() {
     YacsaTheme {
         ScrollUpFab(
             modifier = Modifier,
-            isVisibleBecauseOfScrolling = true
+            isVisibleBecauseOfScrolling = true,
         ) {}
     }
 }

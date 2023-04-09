@@ -2,7 +2,6 @@ package dev.yacsa.cryptodatastore.impl.cryptomanager
 
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
-import java.io.BufferedInputStream
 import java.io.InputStream
 import java.io.OutputStream
 import java.security.KeyStore
@@ -38,13 +37,13 @@ class CryptoManager @Inject constructor() {
             init(
                 KeyGenParameterSpec.Builder(
                     KEY_STORE_ALIAS,
-                    KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT
+                    KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT,
                 )
                     .setBlockModes(BLOCK_MODE)
                     .setEncryptionPaddings(PADDING)
                     .setUserAuthenticationRequired(false)
                     .setRandomizedEncryptionRequired(true)
-                    .build()
+                    .build(),
             )
         }.generateKey()
     }
@@ -82,5 +81,4 @@ class CryptoManager @Inject constructor() {
         private const val PADDING = KeyProperties.ENCRYPTION_PADDING_PKCS7
         private const val TRANSFORMATION = "$ALGORITHM/$BLOCK_MODE/$PADDING"
     }
-
 }

@@ -1,12 +1,9 @@
 package dev.yacsa.model.mapper
 
-import dev.yacsa.domain.model.BookDomainModel
 import dev.yacsa.domain.model.FormatsDomainModel
 import dev.yacsa.model.mapper.base.UiDomainMapper
-import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.model.model.FormatsUiModel
 import javax.inject.Inject
-
 
 class FormatsUiDomainMapper @Inject constructor() :
     UiDomainMapper<FormatsUiModel, FormatsDomainModel>() {
@@ -19,7 +16,7 @@ class FormatsUiDomainMapper @Inject constructor() :
             value.imageJpeg,
             value.textHtml,
             value.textPlain,
-            value.textplainCharsetusAscii
+            value.textplainCharsetusAscii,
         )
     }
 
@@ -32,8 +29,7 @@ class FormatsUiDomainMapper @Inject constructor() :
             value.imageJpeg,
             value.textHtml,
             value.textPlain,
-            value.textplainCharsetusAscii
+            value.textplainCharsetusAscii,
         )
     }
-
 }

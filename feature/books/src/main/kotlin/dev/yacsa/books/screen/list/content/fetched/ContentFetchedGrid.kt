@@ -25,7 +25,7 @@ fun ContentFetchedGrid(
     spanCount: Int = 2,
     lazyPagingItems: LazyPagingItems<BookUiModel>,
     onBookClicked: (Int) -> Unit,
-    listState: LazyGridState
+    listState: LazyGridState,
 ) {
     val span: (LazyGridItemSpanScope) -> GridItemSpan = { GridItemSpan(spanCount) }
 
@@ -40,7 +40,7 @@ fun ContentFetchedGrid(
             .padding(16.dp),
     ) {
         items(
-            lazyPagingItems.itemCount
+            lazyPagingItems.itemCount,
         ) { index ->
             lazyPagingItems[index]?.let { item ->
 
@@ -48,7 +48,7 @@ fun ContentFetchedGrid(
                     book = item,
                     onItemContentClick = {
                         item.id?.let { onBookClicked(it) }
-                    }
+                    },
                 )
             }
         }
@@ -66,7 +66,7 @@ fun ContentFetchedGrid(
                             error = error?.error?.localizedMessage ?: "SWW",
                             onRetry = {
                                 retry()
-                            }
+                            },
                         )
                     }
                 }
@@ -82,14 +82,13 @@ fun ContentFetchedGrid(
                             error = error.error.localizedMessage ?: "SWW",
                             onRetry = {
                                 retry()
-                            }
+                            },
                         )
                     }
                 }
             }
         }
     }
-
 }
 
 @Preview(showBackground = true)
@@ -100,7 +99,7 @@ fun Preview_ContentFetchedGrid() {
             spanCount = 2,
             lazyPagingItems = flowOf(PagingData.empty<BookUiModel>()).collectAsLazyPagingItems(),
             onBookClicked = {},
-            listState = rememberLazyGridState()
+            listState = rememberLazyGridState(),
         )
     }
 }

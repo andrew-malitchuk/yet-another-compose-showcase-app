@@ -25,16 +25,15 @@ import kotlinx.coroutines.launch
 fun OnboardingScreen(
     onBackClick: () -> Unit,
     onDoneClick: () -> Unit,
-    onboardingViewModel: OnboardingViewModel = hiltViewModel()
+    onboardingViewModel: OnboardingViewModel = hiltViewModel(),
 ) {
-
     val state = rememberPagerState()
     val scope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = YacsaTheme.colors.primaryBackground)
+            .background(color = YacsaTheme.colors.primaryBackground),
     ) {
         TopSection(
             buttonType = onboardingViewModel.buttonType,
@@ -53,13 +52,13 @@ fun OnboardingScreen(
                         }
                     }
                 }
-            }
+            },
         )
         HorizontalPager(
             count = onboardingViewModel.onboardingPages.size,
             state = state,
             modifier = Modifier
-                .weight(1f, true)
+                .weight(1f, true),
         ) { page ->
             if (this.currentPage == (state.pageCount - 1)) {
                 onboardingViewModel.buttonType = OnboardingViewModel.ButtonType.SKIP
@@ -71,7 +70,7 @@ fun OnboardingScreen(
                     it.imageId,
                     it.header,
                     it.caption,
-                    state = state
+                    state = state,
                 )
             }
         }
@@ -83,29 +82,28 @@ fun OnboardingScreen(
 fun TopSection(
     onBackClick: () -> Unit = {},
     onSkipClick: () -> Unit = {},
-    buttonType: OnboardingViewModel.ButtonType
+    buttonType: OnboardingViewModel.ButtonType,
 ) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(12.dp)
+            .padding(12.dp),
     ) {
         IconButton(
             onClick = onBackClick,
-            modifier = Modifier.align(Alignment.CenterStart)
+            modifier = Modifier.align(Alignment.CenterStart),
         ) {
             Icon(
                 imageVector = Icons.Outlined.KeyboardArrowLeft,
                 contentDescription = null,
-                tint = YacsaTheme.colors.primaryText
+                tint = YacsaTheme.colors.primaryText,
             )
         }
         TextButton(
             onClick = onSkipClick,
             modifier = Modifier.align(Alignment.CenterEnd),
-            contentPadding = PaddingValues(0.dp)
+            contentPadding = PaddingValues(0.dp),
         ) {
-
             val textForButton = when (buttonType) {
                 OnboardingViewModel.ButtonType.SKIP -> "Skip"
                 OnboardingViewModel.ButtonType.NEXT -> "Next"
@@ -114,7 +112,7 @@ fun TopSection(
             Text(
                 // TODO: move
                 text = textForButton,
-                color = YacsaTheme.colors.primaryText
+                color = YacsaTheme.colors.primaryText,
             )
         }
     }
@@ -126,7 +124,7 @@ fun OnBoardingItem(
     @DrawableRes imageId: Int,
     header: String,
     caption: String,
-    state: PagerState
+    state: PagerState,
 ) {
     val position = state.currentPageOffset
     val scaleMultiplier = 0.25
@@ -147,7 +145,7 @@ fun OnBoardingItem(
     }
 
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Image(
             painter = painterResource(id = imageId),
@@ -161,7 +159,7 @@ fun OnBoardingItem(
                 .alpha(alphaValue),
         )
         Spacer(
-            modifier = Modifier.height(26.dp)
+            modifier = Modifier.height(26.dp),
         )
         Text(
             text = header,
@@ -169,7 +167,7 @@ fun OnBoardingItem(
             modifier = Modifier.alpha(alphaValue),
         )
         Spacer(
-            modifier = Modifier.height(8.dp)
+            modifier = Modifier.height(8.dp),
         )
         Text(
             text = caption,
@@ -177,7 +175,6 @@ fun OnBoardingItem(
             modifier = Modifier.alpha(alphaValue),
         )
     }
-
 }
 
 @OptIn(ExperimentalPagerApi::class)
@@ -185,7 +182,7 @@ fun OnBoardingItem(
 fun BottomSection(state: PagerState) {
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center
+        horizontalArrangement = Arrangement.Center,
     ) {
         HorizontalPagerIndicator(
             pagerState = state,
@@ -193,25 +190,22 @@ fun BottomSection(state: PagerState) {
             inactiveColor = YacsaTheme.colors.secondaryText,
             modifier = Modifier
                 .align(Alignment.CenterVertically)
-                .padding(bottom = 16.dp)
+                .padding(bottom = 16.dp),
         )
     }
-
 }
 
 @OptIn(ExperimentalPagerApi::class)
 fun foo(state: PagerState) {
-
 }
 
-
-//@Preview(showBackground = true)
-//@Composable
-//fun PreviewOnboardingScreen_Dark() {
+// @Preview(showBackground = true)
+// @Composable
+// fun PreviewOnboardingScreen_Dark() {
 //    YacsaTheme(useDarkTheme = true) {
 //        OnboardingScreen(onboardingViewModel = OnboardingViewModel(), onClick = {})
 //    }
-//}
+// }
 //
 @Preview(showBackground = true)
 @Composable

@@ -26,7 +26,7 @@ import dev.yacsa.ui.theme.YacsaTheme
 fun ItemFetchedList(
     modifier: Modifier = Modifier,
     book: BookUiModel,
-    onItemContentClick: () -> Unit
+    onItemContentClick: () -> Unit,
 ) {
     Row(
         modifier = modifier
@@ -40,9 +40,9 @@ fun ItemFetchedList(
                 ImageRequest.Builder(LocalContext.current)
                     .data(data = book.formats?.imageJpeg)
                     .placeholder(
-                        R.drawable.ic_launcher_foreground
+                        R.drawable.ic_launcher_foreground,
                     )
-                    .build()
+                    .build(),
             )
         // TODO: fix
         Card(
@@ -54,21 +54,21 @@ fun ItemFetchedList(
                 contentDescription = null,
                 modifier = Modifier
                     .height(128.dp)
-                    .aspectRatio(1f / 1.5f)
+                    .aspectRatio(1f / 1.5f),
             )
         }
         Spacer(modifier = modifier.width(16.dp))
         Column(
             modifier = modifier
                 .fillMaxWidth(),
-            verticalArrangement = Arrangement.Top
+            verticalArrangement = Arrangement.Top,
         ) {
             Spacer(modifier = modifier.height(6.dp))
             Text(
                 text = (book.authors?.firstOrNull()?.name ?: "NI"),
                 style = YacsaTheme.typography.caption,
                 maxLines = 1,
-                minLines = 1
+                minLines = 1,
             )
             Spacer(modifier = modifier.height(6.dp))
             Text(
@@ -80,20 +80,17 @@ fun ItemFetchedList(
             Spacer(modifier = modifier.height(6.dp))
             Row(
                 modifier = modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Icon(imageVector = Icons.Outlined.ArrowDropDown, contentDescription = "")
                 Spacer(modifier = modifier.width(4.dp))
                 Text(
                     text = book.downloadCount?.toString() ?: "NI",
-                    style = YacsaTheme.typography.caption
+                    style = YacsaTheme.typography.caption,
                 )
             }
-
         }
-
     }
-
 }
 
 @Preview(showBackground = true)
@@ -102,7 +99,7 @@ fun Preview_ListItem_Dark() {
     YacsaTheme(true) {
         ItemFetchedList(
             book = BookUiModel(1, "foobar", null, emptyList(), true, null, FormatsUiModel(), 10),
-            onItemContentClick = {}
+            onItemContentClick = {},
         )
     }
 }
@@ -113,7 +110,7 @@ fun Preview_ItemFetchedList_Light() {
     YacsaTheme(false) {
         ItemFetchedList(
             book = BookUiModel(1, "foobar", null, emptyList(), true, null, FormatsUiModel(), 10),
-            onItemContentClick = {}
+            onItemContentClick = {},
         )
     }
 }

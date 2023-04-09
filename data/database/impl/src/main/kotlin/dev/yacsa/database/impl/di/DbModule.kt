@@ -23,11 +23,10 @@ class DbModule {
             .databaseBuilder(
                 appContext,
                 YacsaDb::class.java,
-                dev.yacsa.database.YacsaDb.NAME
+                dev.yacsa.database.YacsaDb.NAME,
             )
             .fallbackToDestructiveMigration()
             .allowMainThreadQueries()
             .build()
     }
-
 }

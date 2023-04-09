@@ -13,5 +13,5 @@ data class FormatsUiModel(
     val imageJpeg: String? = "",
     val textHtml: String? = "",
     val textPlain: String? = "",
-    val textplainCharsetusAscii: String? = ""
-):BaseUiModel, Parcelable
+    val textplainCharsetusAscii: String? = "",
+) : BaseUiModel, Parcelable

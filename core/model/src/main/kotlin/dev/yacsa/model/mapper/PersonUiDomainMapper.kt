@@ -5,7 +5,6 @@ import dev.yacsa.model.mapper.base.UiDomainMapper
 import dev.yacsa.model.model.PersonUiModel
 import javax.inject.Inject
 
-
 class PersonUiDomainMapper @Inject constructor() :
     UiDomainMapper<PersonUiModel, PersonDomainModel>() {
 
@@ -14,7 +13,7 @@ class PersonUiDomainMapper @Inject constructor() :
             value.id,
             value.birthYear,
             value.deathYear,
-            value.name
+            value.name,
         )
     }
 
@@ -23,9 +22,7 @@ class PersonUiDomainMapper @Inject constructor() :
             value.id,
             value.birthYear,
             value.deathYear,
-            value.name
+            value.name,
         )
     }
-
-
 }

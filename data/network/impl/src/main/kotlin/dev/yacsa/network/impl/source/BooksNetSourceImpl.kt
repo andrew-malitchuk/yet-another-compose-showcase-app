@@ -6,11 +6,10 @@ import dev.yacsa.network.source.BooksNetSource
 import javax.inject.Inject
 
 class BooksNetSourceImpl @Inject constructor(
-    private val apiService: BooksApiService
+    private val apiService: BooksApiService,
 ) : BooksNetSource {
 
     override suspend fun getBooks(page: Int): ResultNetModel? {
         return apiService.getBooks(page)
     }
-
 }

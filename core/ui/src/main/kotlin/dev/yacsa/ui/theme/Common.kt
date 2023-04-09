@@ -5,7 +5,6 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 
 data class YacsaColors(
     val primaryText: Color,
@@ -13,19 +12,19 @@ data class YacsaColors(
     val secondaryText: Color,
     val secondaryBackground: Color,
     val tintColor: Color,
-    val statusBarColor: Color
+    val statusBarColor: Color,
 )
 
 data class YacsaTypography(
     val heading: TextStyle,
     val title: TextStyle,
     val body: TextStyle,
-    val caption: TextStyle
+    val caption: TextStyle,
 )
 
 data class YacsaShape(
     val padding: Dp,
-    val cornersStyle: Shape
+    val cornersStyle: Shape,
 )
 
 data class YacsaSpacing(

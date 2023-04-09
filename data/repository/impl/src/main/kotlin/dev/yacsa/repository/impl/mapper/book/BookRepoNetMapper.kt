@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class BookRepoNetMapper @Inject constructor(
     private val formatsRepoNetMapper: FormatsRepoNetMapper,
-    private val personRepoNetMapper: PersonRepoNetMapper
+    private val personRepoNetMapper: PersonRepoNetMapper,
 ) : RepoNetMapper<BookRepoModel, BookNetModel>() {
 
     override fun toRepo(value: BookNetModel): BookRepoModel {
@@ -20,7 +20,7 @@ class BookRepoNetMapper @Inject constructor(
             list.forEach { person ->
                 person?.let {
                     authorsRepos.add(
-                        personRepoNetMapper.toRepo(it)
+                        personRepoNetMapper.toRepo(it),
                     )
                 }
             }
@@ -34,7 +34,7 @@ class BookRepoNetMapper @Inject constructor(
             value.copyright,
             value.mediaType,
             value.formats?.let { formatsRepoNetMapper.toRepo(it) } ?: FormatsRepoModel(),
-            value.downloadCount
+            value.downloadCount,
         )
     }
 
@@ -50,9 +50,7 @@ class BookRepoNetMapper @Inject constructor(
             value.copyright,
             value.mediaType,
             value.formats?.let { formatsRepoNetMapper.toNet(it) },
-            value.downloadCount
+            value.downloadCount,
         )
     }
-
-
 }

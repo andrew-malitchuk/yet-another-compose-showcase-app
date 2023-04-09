@@ -15,5 +15,4 @@ class DomainMapperModule {
     fun providesStartUpConfigureDomainRepoMapper(): StartUpConfigureDomainRepoMapper {
         return StartUpConfigureDomainRepoMapper()
     }
-
 }

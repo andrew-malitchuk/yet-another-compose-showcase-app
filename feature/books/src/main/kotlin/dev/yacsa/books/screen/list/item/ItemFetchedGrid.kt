@@ -23,7 +23,7 @@ import dev.yacsa.ui.theme.YacsaTheme
 fun ItemFetchedGrid(
     modifier: Modifier = Modifier,
     book: BookUiModel,
-    onItemContentClick: () -> Unit
+    onItemContentClick: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -36,9 +36,9 @@ fun ItemFetchedGrid(
                 ImageRequest.Builder(LocalContext.current)
                     .data(data = book.formats?.imageJpeg)
                     .placeholder(
-                        R.drawable.ic_launcher_foreground
+                        R.drawable.ic_launcher_foreground,
                     )
-                    .build()
+                    .build(),
             )
         // TODO: fix
         Card(
@@ -50,7 +50,7 @@ fun ItemFetchedGrid(
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .aspectRatio(1f / 1.5f)
+                    .aspectRatio(1f / 1.5f),
             )
         }
         Spacer(modifier = modifier.height(6.dp))
@@ -59,7 +59,7 @@ fun ItemFetchedGrid(
             style = YacsaTheme.typography.caption,
             textAlign = TextAlign.Center,
             maxLines = 1,
-            minLines = 1
+            minLines = 1,
         )
         Spacer(modifier = modifier.height(6.dp))
         Text(
@@ -70,7 +70,6 @@ fun ItemFetchedGrid(
             minLines = 2,
         )
     }
-
 }
 
 @Preview(showBackground = true)
@@ -79,7 +78,7 @@ fun Preview_ItemFetchedGrid() {
     YacsaTheme {
         ItemFetchedGrid(
             book = BookUiModel(1, "foobar", null, emptyList(), true, null, FormatsUiModel(), 10),
-            onItemContentClick = {}
+            onItemContentClick = {},
         )
     }
 }

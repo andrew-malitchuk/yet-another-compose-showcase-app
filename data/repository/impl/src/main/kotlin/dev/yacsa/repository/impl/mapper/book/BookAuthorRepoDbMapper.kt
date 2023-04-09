@@ -9,10 +9,9 @@ import dev.yacsa.repository.model.BookRepoModel
 import dev.yacsa.repository.model.FormatsRepoModel
 import javax.inject.Inject
 
-
 class BookAuthorRepoDbMapper @Inject constructor(
     private val formatsRepoDbMapper: FormatsRepoDbMapper,
-    private val personRepoDbMapper: PersonRepoDbMapper
+    private val personRepoDbMapper: PersonRepoDbMapper,
 ) : RepoDbMapper<BookRepoModel, BookAuthorDbModel>() {
 
     // TODO: fix
@@ -25,7 +24,7 @@ class BookAuthorRepoDbMapper @Inject constructor(
             value.book.copyright,
             value.book.mediaType,
             formatsRepoDbMapper.toRepo(value.book.formats),
-            value.book.downloadCount
+            value.book.downloadCount,
         )
     }
 
@@ -38,9 +37,9 @@ class BookAuthorRepoDbMapper @Inject constructor(
                 value.copyright,
                 value.mediaType,
                 formatsRepoDbMapper.toDb(value.formats ?: FormatsRepoModel()),
-                value.downloadCount
+                value.downloadCount,
             ),
-            author = value.authors?.filterNotNull()?.map(personRepoDbMapper::toDb) ?: emptyList()
+            author = value.authors?.filterNotNull()?.map(personRepoDbMapper::toDb) ?: emptyList(),
         )
     }
 }

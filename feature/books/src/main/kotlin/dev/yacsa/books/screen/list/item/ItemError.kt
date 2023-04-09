@@ -15,28 +15,28 @@ import dev.yacsa.ui.theme.YacsaTheme
 fun ItemError(
     modifier: Modifier = Modifier,
     error: String,
-    onRetry: () -> Unit
+    onRetry: () -> Unit,
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
                 modifier = modifier
                     .padding(16.dp),
                 text = error,
-                textAlign=TextAlign.Center,
-                style = YacsaTheme.typography.caption
+                textAlign = TextAlign.Center,
+                style = YacsaTheme.typography.caption,
             )
             OutlinedButton(
                 modifier = modifier
                     .padding(16.dp),
-                onClick = { onRetry() }
+                onClick = { onRetry() },
             ) {
                 Text(text = "Retry")
             }
@@ -50,7 +50,7 @@ fun Preview_ListErrorItem() {
     YacsaTheme {
         ItemError(
             error = "Lorem ipsum",
-            onRetry = {}
+            onRetry = {},
         )
     }
 }

@@ -11,21 +11,21 @@ import dev.yacsa.database.model.base.BaseDbModel
     tableName = YacsaDb.Table.PERSON,
     indices = [
         Index(
-            value=[
-                "name"
+            value = [
+                "name",
             ],
-            unique = true
-        )
-    ]
+            unique = true,
+        ),
+    ],
 )
 data class PersonDbModel(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "personId")
-    val id: Int=0,
+    val id: Int = 0,
     @ColumnInfo(name = "birth_year")
     val birthYear: Int?,
     @ColumnInfo(name = "death_year")
     val deathYear: Int?,
     @ColumnInfo(name = "name")
-    val name: String?
+    val name: String?,
 ) : BaseDbModel

@@ -1,9 +1,7 @@
 package dev.yacsa.repository.impl.mapper
 
-import dev.yacsa.network.model.BookNetModel
 import dev.yacsa.network.model.FormatsNetModel
 import dev.yacsa.repository.impl.mapper.base.RepoNetMapper
-import dev.yacsa.repository.model.BookRepoModel
 import dev.yacsa.repository.model.FormatsRepoModel
 import javax.inject.Inject
 
@@ -18,7 +16,7 @@ class FormatsRepoNetMapper @Inject constructor() :
             value.imageJpeg,
             value.textHtml,
             value.textPlain,
-            value.textplainCharsetusAscii
+            value.textplainCharsetusAscii,
         )
     }
 
@@ -31,8 +29,7 @@ class FormatsRepoNetMapper @Inject constructor() :
             value.imageJpeg,
             value.textHtml,
             value.textPlain,
-            value.textplainCharsetusAscii
+            value.textplainCharsetusAscii,
         )
     }
-
 }

@@ -13,7 +13,7 @@ class RemoteKeyDomainRepoMapper@Inject constructor() :
             value.prevKey,
             value.currentPage,
             value.nextKey,
-            value.createdAt
+            value.createdAt,
         )
     }
 
@@ -23,8 +23,7 @@ class RemoteKeyDomainRepoMapper@Inject constructor() :
             value.prevKey,
             value.currentPage,
             value.nextKey,
-            value.createdAt
+            value.createdAt,
         )
     }
-
 }

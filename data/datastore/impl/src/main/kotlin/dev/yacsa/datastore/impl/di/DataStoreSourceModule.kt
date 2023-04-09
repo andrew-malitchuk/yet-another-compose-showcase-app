@@ -2,7 +2,6 @@ package dev.yacsa.datastore.impl.di
 
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.yacsa.datastore.impl.source.PreferencesDataStoreSourceImpl
@@ -16,12 +15,11 @@ abstract class DataStoreSourceModule {
 
     @Binds
     abstract fun bindsPreferencesDataStoreSource(
-        preferencesDataStoreSourceImpl: PreferencesDataStoreSourceImpl
+        preferencesDataStoreSourceImpl: PreferencesDataStoreSourceImpl,
     ): PreferencesDataStoreSource
 
     @Binds
     abstract fun bindsStartupConfigureDataStoreSource(
-        startupConfigureDataStoreSourceImpl: StartupConfigureDataStoreSourceImpl
+        startupConfigureDataStoreSourceImpl: StartupConfigureDataStoreSourceImpl,
     ): StartupConfigureDataStoreSource
-
 }

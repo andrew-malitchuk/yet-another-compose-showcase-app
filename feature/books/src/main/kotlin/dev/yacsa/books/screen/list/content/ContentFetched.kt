@@ -51,7 +51,7 @@ fun ContentFetched(
         refreshing = lazyPagingItems.loadState.refresh is LoadState.Loading,
         onRefresh = {
             lazyPagingItems.refresh()
-        }
+        },
     )
 
     val coroutineScope = rememberCoroutineScope()
@@ -64,39 +64,35 @@ fun ContentFetched(
             },
             backgroundColor = YacsaTheme.colors.primaryText,
             actions = {
-                IconButton(onClick = {/* Do Something*/ }) {
+                IconButton(onClick = { /* Do Something*/ }) {
                     Icon(Icons.Outlined.Search, null)
                 }
                 IconButton(onClick = {
                     isGridSelected.value = !isGridSelected.value
                 }) {
-                    if(isGridSelected.value){
+                    if (isGridSelected.value) {
                         Icon(Icons.Outlined.AddCircle, null)
-
-                    }else{
+                    } else {
                         Icon(Icons.Outlined.Menu, null)
                     }
                 }
-            }
+            },
         )
 
         Box(Modifier.pullRefresh(pullRefreshState)) {
-
             if (isGridSelected.value) {
                 ContentFetchedGrid(
                     lazyPagingItems = lazyPagingItems,
                     onBookClicked = onBookClicked,
-                    listState = gridState
+                    listState = gridState,
                 )
             } else {
                 ContentFetchedList(
                     lazyPagingItems = lazyPagingItems,
                     onBookClicked = onBookClicked,
-                    listState = listState
+                    listState = listState,
                 )
             }
-
-
 
             ScrollUpFab(
                 modifier = Modifier
@@ -108,7 +104,7 @@ fun ContentFetched(
                     !gridState.isScrollInProgress && gridState.canScrollBackward
                 } else {
                     !listState.isScrollInProgress && listState.canScrollBackward
-                }
+                },
             ) {
                 coroutineScope.launch {
                     if (isGridSelected.value) {
@@ -122,7 +118,7 @@ fun ContentFetched(
             PullRefreshIndicator(
                 lazyPagingItems.loadState.refresh is LoadState.Loading,
                 pullRefreshState,
-                Modifier.align(Alignment.TopCenter)
+                Modifier.align(Alignment.TopCenter),
             )
         }
     }
@@ -134,7 +130,7 @@ fun Preview_ContentFetched() {
     YacsaTheme {
         ContentFetched(
             onBookClicked = {},
-            lazyPagingItems = flowOf(PagingData.empty<BookUiModel>()).collectAsLazyPagingItems()
+            lazyPagingItems = flowOf(PagingData.empty<BookUiModel>()).collectAsLazyPagingItems(),
         )
     }
 }

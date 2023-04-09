@@ -11,16 +11,16 @@ import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
 fun ContentError(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Box(
         modifier = modifier
             .fillMaxSize(),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
         // TODO: fix
         Text(
-            text = "some error"
+            text = "some error",
         )
     }
 }

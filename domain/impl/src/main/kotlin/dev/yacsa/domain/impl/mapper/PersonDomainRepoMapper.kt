@@ -13,7 +13,7 @@ class PersonDomainRepoMapper @Inject constructor() :
             value.id,
             value.birthYear,
             value.deathYear,
-            value.name
+            value.name,
         )
     }
 
@@ -21,8 +21,7 @@ class PersonDomainRepoMapper @Inject constructor() :
         return PersonDomainModel(
             birthYear = value.birthYear,
             deathYear = value.deathYear,
-            name = value.name
+            name = value.name,
         )
     }
-
 }

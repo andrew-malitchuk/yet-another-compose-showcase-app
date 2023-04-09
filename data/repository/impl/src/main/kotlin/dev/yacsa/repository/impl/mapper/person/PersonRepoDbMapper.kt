@@ -1,9 +1,7 @@
 package dev.yacsa.repository.impl.mapper.person
 
-import dev.yacsa.database.model.FormatsDbModel
 import dev.yacsa.database.model.PersonDbModel
 import dev.yacsa.repository.impl.mapper.base.RepoDbMapper
-import dev.yacsa.repository.model.FormatsRepoModel
 import dev.yacsa.repository.model.PersonRepoModel
 import javax.inject.Inject
 
@@ -15,7 +13,7 @@ class PersonRepoDbMapper @Inject constructor() :
             value.id,
             value.birthYear,
             value.deathYear,
-            value.name
+            value.name,
         )
     }
 
@@ -23,8 +21,7 @@ class PersonRepoDbMapper @Inject constructor() :
         return PersonDbModel(
             birthYear = value.birthYear,
             deathYear = value.deathYear,
-            name = value.name
+            name = value.name,
         )
     }
-
 }

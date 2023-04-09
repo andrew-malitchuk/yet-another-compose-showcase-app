@@ -52,7 +52,7 @@ val baseLightColorPalette = YacsaColors(
     secondaryText = yacsa_theme_light_secondary,
     secondaryBackground = yacsa_theme_light_onSecondary,
     tintColor = yacsa_theme_light_onSurface,
-    statusBarColor = yacsa_theme_light_background
+    statusBarColor = yacsa_theme_light_background,
 )
 
 val baseDarkColorPalette = YacsaColors(
@@ -61,5 +61,5 @@ val baseDarkColorPalette = YacsaColors(
     secondaryText = yacsa_theme_dark_secondary,
     secondaryBackground = yacsa_theme_dark_onSecondary,
     tintColor = yacsa_theme_dark_onSurface,
-    statusBarColor = yacsa_theme_dark_background
+    statusBarColor = yacsa_theme_dark_background,
 )

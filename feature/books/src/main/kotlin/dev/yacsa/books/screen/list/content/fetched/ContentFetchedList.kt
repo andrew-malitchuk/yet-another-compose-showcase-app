@@ -27,9 +27,8 @@ fun ContentFetchedList(
     modifier: Modifier = Modifier,
     lazyPagingItems: LazyPagingItems<BookUiModel>,
     onBookClicked: (Int) -> Unit,
-    listState: LazyListState
+    listState: LazyListState,
 ) {
-
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         state = listState,
@@ -37,11 +36,11 @@ fun ContentFetchedList(
             .fillMaxSize()
             // TODO: fix
             .padding(
-                horizontal = 16.dp
+                horizontal = 16.dp,
             ),
     ) {
         items(
-            lazyPagingItems
+            lazyPagingItems,
         ) { item ->
             item?.let {
                 ItemFetchedList(
@@ -49,7 +48,7 @@ fun ContentFetchedList(
                     onItemContentClick = {
                         // TODO: fix
                         it.id?.let { it1 -> onBookClicked(it1) }
-                    }
+                    },
                 )
             }
         }
@@ -67,7 +66,7 @@ fun ContentFetchedList(
                             error = error?.error?.localizedMessage ?: "SWW",
                             onRetry = {
                                 retry()
-                            }
+                            },
                         )
                     }
                 }
@@ -83,7 +82,7 @@ fun ContentFetchedList(
                             error = error.error.localizedMessage ?: "SWW",
                             onRetry = {
                                 retry()
-                            }
+                            },
                         )
                     }
                 }
@@ -92,7 +91,6 @@ fun ContentFetchedList(
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun Preview_ContentFetchedList() {
@@ -100,7 +98,7 @@ fun Preview_ContentFetchedList() {
         ContentFetchedList(
             lazyPagingItems = flowOf(PagingData.empty<BookUiModel>()).collectAsLazyPagingItems(),
             onBookClicked = {},
-            listState = rememberLazyListState()
+            listState = rememberLazyListState(),
         )
     }
 }

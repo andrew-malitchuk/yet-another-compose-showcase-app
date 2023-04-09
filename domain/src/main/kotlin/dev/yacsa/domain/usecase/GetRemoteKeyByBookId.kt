@@ -4,5 +4,5 @@ import dev.yacsa.domain.model.RemoteKeyDomainModel
 
 interface GetRemoteKeyByBookId {
     @Throws(Throwable::class)
-    operator fun invoke(bookId: Int):RemoteKeyDomainModel
+    operator fun invoke(bookId: Int): RemoteKeyDomainModel
 }

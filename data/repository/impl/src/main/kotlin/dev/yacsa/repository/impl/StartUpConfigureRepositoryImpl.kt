@@ -9,13 +9,13 @@ import javax.inject.Inject
 
 class StartUpConfigureRepositoryImpl @Inject constructor(
     private val startupConfigureDataStoreSource: StartupConfigureDataStoreSource,
-    private val startUpConfigureMapper: StartUpConfigureRepoDataStoreMapper
+    private val startUpConfigureMapper: StartUpConfigureRepoDataStoreMapper,
 ) : StartUpConfigureRepository {
 
     override suspend fun getStartUpConfigure(): StartUpConfigureRepoModel? {
         return startupConfigureDataStoreSource.getData().firstOrNull()?.let {
             startUpConfigureMapper.toRepo(
-                it
+                it,
             )
         }
     }

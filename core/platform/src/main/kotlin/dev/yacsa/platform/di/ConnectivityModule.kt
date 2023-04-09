@@ -15,12 +15,10 @@ class ConnectivityModule {
 
     @Provides
     fun providesConnectivityObserver(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
     ): ConnectivityObserver {
         return NetworkConnectivityObserver(
-            context
+            context,
         )
     }
-
-
 }

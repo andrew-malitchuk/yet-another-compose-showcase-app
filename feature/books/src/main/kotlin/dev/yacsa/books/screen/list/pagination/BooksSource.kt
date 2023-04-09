@@ -36,12 +36,10 @@ class BooksSource(
             LoadResult.Page(
                 data = list,
                 prevKey = if (nextPage == 1) null else nextPage - 1,
-                nextKey = if (list.isEmpty()) null else nextPage + 1
+                nextKey = if (list.isEmpty()) null else nextPage + 1,
             )
-
         } catch (e: Exception) {
             LoadResult.Error(e)
         }
     }
-
 }

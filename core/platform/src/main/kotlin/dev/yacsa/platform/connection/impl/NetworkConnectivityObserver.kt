@@ -13,8 +13,8 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class NetworkConnectivityObserver(
-    private val context: Context
-): ConnectivityObserver {
+    private val context: Context,
+) : ConnectivityObserver {
 
     private val connectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

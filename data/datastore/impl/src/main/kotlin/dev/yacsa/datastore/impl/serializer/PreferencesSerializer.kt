@@ -17,7 +17,7 @@ object PreferencesSerializer : Serializer<PreferencesDataStoreModel> {
         return try {
             Json.decodeFromString(
                 deserializer = PreferencesDataStoreModel.serializer(),
-                string = input.readBytes().decodeToString()
+                string = input.readBytes().decodeToString(),
             )
         } catch (e: SerializationException) {
             e.printStackTrace()
@@ -29,9 +29,8 @@ object PreferencesSerializer : Serializer<PreferencesDataStoreModel> {
         output.write(
             Json.encodeToString(
                 serializer = PreferencesDataStoreModel.serializer(),
-                value = t
-            ).encodeToByteArray()
+                value = t,
+            ).encodeToByteArray(),
         )
     }
-
 }

@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 class LoadBooksUseCaseImpl @Inject constructor(
     private val booksRepository: BooksRepository,
-    private val bookDomainRepoMapper: BookDomainRepoMapper
+    private val bookDomainRepoMapper: BookDomainRepoMapper,
 ) : LoadBooksUseCase {
     override suspend fun invoke(): Flow<Result<List<BookDomainModel>>> {
         return booksRepository
@@ -38,6 +38,5 @@ class LoadBooksUseCaseImpl @Inject constructor(
             .catch {
                 emit(Result.failure(it))
             }
-
     }
 }

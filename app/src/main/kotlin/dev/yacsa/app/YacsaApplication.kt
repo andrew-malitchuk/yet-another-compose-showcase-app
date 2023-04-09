@@ -6,7 +6,7 @@ import logcat.AndroidLogcatLogger
 import logcat.LogPriority
 
 @HiltAndroidApp
-class YacsaApplication : Application(){
+class YacsaApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()

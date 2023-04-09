@@ -10,7 +10,7 @@ import java.io.OutputStream
 import javax.inject.Inject
 
 class AccessTokenSerializer @Inject constructor(
-    private val cryptoManager: CryptoManager
+    private val cryptoManager: CryptoManager,
 ) : Serializer<AccessTokenCryptoDataStoreModel> {
 
     override val defaultValue: AccessTokenCryptoDataStoreModel
@@ -21,7 +21,7 @@ class AccessTokenSerializer @Inject constructor(
         return try {
             Json.decodeFromString(
                 deserializer = AccessTokenCryptoDataStoreModel.serializer(),
-                string = decryptedBytes.decodeToString()
+                string = decryptedBytes.decodeToString(),
             )
         } catch (e: SerializationException) {
             e.printStackTrace()
@@ -33,10 +33,9 @@ class AccessTokenSerializer @Inject constructor(
         cryptoManager.encrypt(
             bytes = Json.encodeToString(
                 serializer = AccessTokenCryptoDataStoreModel.serializer(),
-                value = t
+                value = t,
             ).encodeToByteArray(),
-            outputStream = output
+            outputStream = output,
         )
     }
-
 }

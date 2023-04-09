@@ -1,9 +1,7 @@
 package dev.yacsa.repository.impl.mapper
 
-import dev.yacsa.database.model.BookDbModel
 import dev.yacsa.database.model.FormatsDbModel
 import dev.yacsa.repository.impl.mapper.base.RepoDbMapper
-import dev.yacsa.repository.model.BookRepoModel
 import dev.yacsa.repository.model.FormatsRepoModel
 import javax.inject.Inject
 
@@ -19,7 +17,7 @@ class FormatsRepoDbMapper @Inject constructor() :
             value.imageJpeg,
             value.textHtml,
             value.textPlain,
-            value.textplainCharsetusAscii
+            value.textplainCharsetusAscii,
         )
     }
 
@@ -32,8 +30,7 @@ class FormatsRepoDbMapper @Inject constructor() :
             value.imageJpeg,
             value.textHtml,
             value.textPlain,
-            value.textplainCharsetusAscii
+            value.textplainCharsetusAscii,
         )
     }
-
 }

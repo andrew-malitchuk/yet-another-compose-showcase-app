@@ -10,14 +10,13 @@ class StartUpConfigureRepoDataStoreMapper @Inject constructor() :
 
     override fun toRepo(value: StartUpConfigureDataStoreModel): StartUpConfigureRepoModel {
         return StartUpConfigureRepoModel(
-            value.hasBeenOnboardingShown
+            value.hasBeenOnboardingShown,
         )
     }
 
     override fun toDataStore(value: StartUpConfigureRepoModel): StartUpConfigureDataStoreModel {
         return StartUpConfigureDataStoreModel(
-            value.hasBeenOnboardingShown
+            value.hasBeenOnboardingShown,
         )
     }
-
 }

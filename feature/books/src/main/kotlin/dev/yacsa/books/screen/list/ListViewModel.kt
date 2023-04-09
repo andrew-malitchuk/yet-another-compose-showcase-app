@@ -31,10 +31,10 @@ class ListViewModel @Inject constructor(
     private val removeAllBooksUseCase: RemoveAllBooksUseCase,
     private val saveBooksUseCase: SaveBooksUseCase,
     savedStateHandle: SavedStateHandle,
-    initialState: ListUiState
+    initialState: ListUiState,
 ) : BaseViewModel<ListUiState, ListUiState.PartialState, ListEvent, ListIntent>(
     savedStateHandle,
-    initialState
+    initialState,
 ) {
 
     init {
@@ -56,7 +56,10 @@ class ListViewModel @Inject constructor(
         delay(5_000L)
         pagingDataFlow = Pager(PagingConfig(pageSize = 32)) {
             BooksSource(
-                getBooksUseCase, loadBooksUseCase, bookUiDomainMapper, saveBooksUseCase
+                getBooksUseCase,
+                loadBooksUseCase,
+                bookUiDomainMapper,
+                saveBooksUseCase,
             )
         }.flow.cachedIn(viewModelScope)
         emit(ListUiState.PartialState.Fetched)
@@ -71,22 +74,21 @@ class ListViewModel @Inject constructor(
 
     override fun reduceUiState(
         previousState: ListUiState,
-        partialState: ListUiState.PartialState
+        partialState: ListUiState.PartialState,
     ): ListUiState {
         return when (partialState) {
             is ListUiState.PartialState.Loading -> previousState.copy(
                 isLoading = true,
-                isError = false
+                isError = false,
             )
             is ListUiState.PartialState.Fetched -> previousState.copy(
                 isLoading = false,
-                isError = false
+                isError = false,
             )
             is ListUiState.PartialState.Error -> previousState.copy(
                 isLoading = false,
-                isError = true
+                isError = true,
             )
         }
     }
-
 }

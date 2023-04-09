@@ -1,8 +1,6 @@
 package dev.yacsa.ui.theme
 
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-
 
 val spacing = YacsaSpacing(
     extraSmall = 4.dp,

@@ -1,16 +1,14 @@
 package dev.yacsa.database.impl.source
 
-import dev.yacsa.database.impl.dao.BookDbDao
 import dev.yacsa.database.impl.dao.PersonDbDao
 import dev.yacsa.database.model.PersonDbModel
-import dev.yacsa.database.source.BookDbSource
 import dev.yacsa.database.source.PersonDbSource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class PersonDbSourceImpl @Inject constructor(
-    private val personDao: PersonDbDao
-): PersonDbSource {
+    private val personDao: PersonDbDao,
+) : PersonDbSource {
 
     override suspend fun get(id: Int): PersonDbModel? {
         return personDao.get(id)
@@ -24,12 +22,12 @@ class PersonDbSourceImpl @Inject constructor(
         return personDao.getFlow()
     }
 
-    override suspend fun insert(value: PersonDbModel):Int {
+    override suspend fun insert(value: PersonDbModel): Int {
         return personDao.insert(value).toInt()
     }
 
     override suspend fun insert(values: List<PersonDbModel>) {
-        values.forEach{
+        values.forEach {
             personDao.insert(it)
         }
     }
@@ -57,5 +55,4 @@ class PersonDbSourceImpl @Inject constructor(
     override suspend fun deleteAll() {
         return personDao.deleteAll()
     }
-
 }

@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class BookRepoDbMapper @Inject constructor(
     private val formatsRepoDbMapper: FormatsRepoDbMapper,
-    private val personRepoDbMapper: PersonRepoDbMapper
+    private val personRepoDbMapper: PersonRepoDbMapper,
 ) : RepoDbMapper<BookRepoModel, BookDbModel>() {
 
     // TODO: fix
@@ -23,7 +23,7 @@ class BookRepoDbMapper @Inject constructor(
             value.copyright,
             value.mediaType,
             formatsRepoDbMapper.toRepo(value.formats),
-            value.downloadCount
+            value.downloadCount,
         )
     }
 
@@ -34,8 +34,8 @@ class BookRepoDbMapper @Inject constructor(
             value.title,
             value.copyright,
             value.mediaType,
-            formatsRepoDbMapper.toDb(value.formats?: FormatsRepoModel()),
-            value.downloadCount
+            formatsRepoDbMapper.toDb(value.formats ?: FormatsRepoModel()),
+            value.downloadCount,
         )
     }
 }

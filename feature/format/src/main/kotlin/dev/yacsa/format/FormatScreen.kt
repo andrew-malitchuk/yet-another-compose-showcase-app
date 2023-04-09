@@ -6,13 +6,12 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.semantics.SemanticsProperties.Text
 
 @Composable
 fun FormatScreen() {
     Column(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxSize(),
     ) {
         Text("FormatScreen")
         Button(onClick = {

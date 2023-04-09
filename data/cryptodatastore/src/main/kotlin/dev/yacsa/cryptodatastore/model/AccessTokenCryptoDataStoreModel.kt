@@ -5,5 +5,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class AccessTokenCryptoDataStoreModel(
-    val accessToken: String?=null
+    val accessToken: String? = null,
 ) : BaseCryptoDataStoreModel

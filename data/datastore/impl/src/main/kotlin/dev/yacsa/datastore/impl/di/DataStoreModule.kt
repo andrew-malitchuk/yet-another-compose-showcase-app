@@ -24,30 +24,28 @@ class DataStoreModule {
     @Singleton
     private val Context.startUpConfigureDataStore: DataStore<StartUpConfigureDataStoreModel> by dataStore(
         StartupConfigureDataStoreDao.STARTUP_CONFIGURE_DATASTORE_FILENAME,
-        StartupConfigureSerializer
+        StartupConfigureSerializer,
     )
 
     @Singleton
     private val Context.preferencesDataStore by dataStore(
         PreferencesDataStoreDao.PREFERENCES_DATASTORE_FILENAME,
-        PreferencesSerializer
+        PreferencesSerializer,
     )
 
     @Provides
     @Named("startUpConfigureDataStore")
     fun providesDataStoreStartUpConfigure(
-        @ApplicationContext applicationContext: Context
-    ): DataStore<StartUpConfigureDataStoreModel>{
+        @ApplicationContext applicationContext: Context,
+    ): DataStore<StartUpConfigureDataStoreModel> {
         return applicationContext.startUpConfigureDataStore
     }
 
     @Provides
     @Named("preferencesDataStore")
     fun providesPreferencesDataStore(
-        @ApplicationContext applicationContext: Context
-    ): DataStore<PreferencesDataStoreModel>{
+        @ApplicationContext applicationContext: Context,
+    ): DataStore<PreferencesDataStoreModel> {
         return applicationContext.preferencesDataStore
     }
-
-
 }

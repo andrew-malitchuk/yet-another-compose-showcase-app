@@ -12,10 +12,10 @@ import javax.inject.Inject
 class DetalizationViewModel @Inject constructor(
     private val bookUiDomainMapper: BookUiDomainMapper,
     savedStateHandle: SavedStateHandle,
-    initialState: DetalizationUiState
+    initialState: DetalizationUiState,
 ) : BaseViewModel<DetalizationUiState, DetalizationUiState.PartialState, DetalizationEvent, DetalizationIntent>(
     savedStateHandle,
-    initialState
+    initialState,
 ) {
 
     override fun mapIntents(intent: DetalizationIntent): Flow<DetalizationUiState.PartialState> {
@@ -26,28 +26,26 @@ class DetalizationViewModel @Inject constructor(
     }
 
     private fun getBook(bookId: Int): Flow<DetalizationUiState.PartialState> = flow {
-
     }
 
     override fun reduceUiState(
         previousState: DetalizationUiState,
-        partialState: DetalizationUiState.PartialState
+        partialState: DetalizationUiState.PartialState,
     ): DetalizationUiState {
         return when (partialState) {
             is DetalizationUiState.PartialState.Loading -> previousState.copy(
                 isLoading = true,
-                isError = false
+                isError = false,
             )
             is DetalizationUiState.PartialState.Fetched -> previousState.copy(
                 isLoading = false,
                 book = partialState.value,
-                isError = false
+                isError = false,
             )
             is DetalizationUiState.PartialState.Error -> previousState.copy(
                 isLoading = false,
-                isError = true
+                isError = true,
             )
         }
     }
-
 }

@@ -10,7 +10,7 @@ import kotlinx.parcelize.Parcelize
 data class DetalizationUiState(
     val isLoading: Boolean = false,
     val book: BookUiModel? = null,
-    val isError: Boolean = false
+    val isError: Boolean = false,
 ) : Parcelable {
 
     sealed class PartialState {

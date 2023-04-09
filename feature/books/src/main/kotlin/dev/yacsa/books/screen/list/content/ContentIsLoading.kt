@@ -11,12 +11,12 @@ import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
 fun ContentIsLoading(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Box(
         modifier = modifier
             .fillMaxSize(),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
         CircularProgressIndicator()
     }

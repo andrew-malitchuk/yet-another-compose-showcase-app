@@ -10,15 +10,14 @@ import dev.yacsa.onboarding.navigation.onboardingNavGraph
 @Composable
 fun RootNavigationGraph(
     navController: NavHostController,
-    startDestination: String
+    startDestination: String,
 ) {
     NavHost(
         navController = navController,
         route = NavigationDirection.Root.route,
-        startDestination = startDestination
+        startDestination = startDestination,
     ) {
         booksNavGraph(navController)
         onboardingNavGraph(navController)
     }
-
 }

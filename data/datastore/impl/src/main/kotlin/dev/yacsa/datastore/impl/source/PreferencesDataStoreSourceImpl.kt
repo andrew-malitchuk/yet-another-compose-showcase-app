@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.mapLatest
 import javax.inject.Inject
 
 class PreferencesDataStoreSourceImpl @Inject constructor(
-    private val preferencesDataStoreDao: PreferencesDataStoreDao
+    private val preferencesDataStoreDao: PreferencesDataStoreDao,
 ) : PreferencesDataStoreSource() {
 
     override fun collectSomeData() {
@@ -23,5 +23,4 @@ class PreferencesDataStoreSourceImpl @Inject constructor(
     override suspend fun updateData(value: PreferencesDataStoreModel) {
         preferencesDataStoreDao.updateData(value)
     }
-
 }

@@ -1,8 +1,9 @@
 package dev.yacsa.network.impl.di
 
 import android.content.Context
-import android.util.Log
 import com.chuckerteam.chucker.api.ChuckerCollector
+import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.chuckerteam.chucker.api.RetentionManager
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -10,18 +11,15 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import okhttp3.OkHttpClient
-import retrofit2.Converter
-import retrofit2.converter.moshi.MoshiConverterFactory
-import java.util.concurrent.TimeUnit
-import com.chuckerteam.chucker.api.ChuckerInterceptor
-import com.chuckerteam.chucker.api.RetentionManager
 import logcat.LogPriority
 import logcat.logcat
 import okhttp3.Interceptor
+import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Converter
+import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Named
-
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -30,7 +28,7 @@ class NetworkModule {
     @Provides
     fun providesOkHttpClient(
         @Named("interceptor_chucker") chuckerInterceptor: Interceptor,
-        @Named("interceptor_logging") loggingInterceptor: Interceptor
+        @Named("interceptor_logging") loggingInterceptor: Interceptor,
     ): OkHttpClient {
         return OkHttpClient.Builder().apply {
             connectTimeout(CONNECTION_TIMEOUT, TimeUnit.MILLISECONDS)
@@ -43,7 +41,7 @@ class NetworkModule {
 
     @Provides
     fun providesConverterFactory(
-        moshi: Moshi
+        moshi: Moshi,
     ): Converter.Factory {
         return MoshiConverterFactory.create(moshi)
     }
@@ -58,23 +56,22 @@ class NetworkModule {
     @Provides
     @Named("interceptor_chucker")
     fun providesInterceptorChucker(
-        @ApplicationContext applicationContext: Context
+        @ApplicationContext applicationContext: Context,
     ): Interceptor {
         return ChuckerInterceptor.Builder(applicationContext).apply {
             collector(
                 ChuckerCollector(
                     applicationContext,
                     true,
-                    RetentionManager.Period.FOREVER
-                )
+                    RetentionManager.Period.FOREVER,
+                ),
             )
         }.build()
     }
 
     @Provides
     @Named("interceptor_logging")
-    fun providesInterceptorLogging(
-    ): Interceptor {
+    fun providesInterceptorLogging(): Interceptor {
         return HttpLoggingInterceptor {
             logcat(tag = "network", priority = LogPriority.DEBUG) { it }
         }.setLevel(HttpLoggingInterceptor.Level.BASIC)

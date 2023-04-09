@@ -2,7 +2,7 @@ package dev.yacsa.database.impl.dao.base
 
 import dev.yacsa.database.model.base.BaseDbModel
 
-//interface BaseDbDao<T : DbModel> {
+// interface BaseDbDao<T : DbModel> {
 //
 //    suspend fun get(id: Int): T?
 //    suspend fun get(): List<T>?
@@ -11,7 +11,7 @@ import dev.yacsa.database.model.base.BaseDbModel
 //    suspend fun delete(id: Int)
 //    suspend fun deleteAll()
 //
-//}
+// }
 abstract class BaseDbDao<T : BaseDbModel> {
 
     abstract suspend fun get(id: Int): T?
@@ -20,5 +20,4 @@ abstract class BaseDbDao<T : BaseDbModel> {
     abstract suspend fun update(value: T)
     abstract suspend fun delete(id: Int)
     abstract suspend fun deleteAll()
-
 }

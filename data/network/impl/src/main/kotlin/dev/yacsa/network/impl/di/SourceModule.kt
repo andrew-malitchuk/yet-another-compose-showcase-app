@@ -14,7 +14,6 @@ abstract class SourceModule {
 
     @Binds
     abstract fun bindsBooksNetSource(
-        booksNetSourceImpl: BooksNetSourceImpl
+        booksNetSourceImpl: BooksNetSourceImpl,
     ): BooksNetSource
-
 }

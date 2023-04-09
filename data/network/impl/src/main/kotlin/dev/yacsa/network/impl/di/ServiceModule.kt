@@ -20,7 +20,7 @@ class ServiceModule {
     fun providesBooksApiService(
         @Named("base_url") baseUrl: String,
         okHttpClient: OkHttpClient,
-        converter: Converter.Factory
+        converter: Converter.Factory,
     ): BooksApiService {
         return Retrofit.Builder().apply {
             baseUrl(baseUrl)
@@ -28,5 +28,4 @@ class ServiceModule {
             addConverterFactory(converter)
         }.build().create(BooksApiService::class.java)
     }
-
 }

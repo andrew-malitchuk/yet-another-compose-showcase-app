@@ -4,20 +4,17 @@ import android.os.Parcelable
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import logcat.logcat
-import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 private const val SAVED_UI_STATE_KEY = "savedUiStateKey"
 
-
 abstract class BaseViewModel<UI_STATE : Parcelable, PARTIAL_UI_STATE, EVENT, INTENT>(
     savedStateHandle: SavedStateHandle,
-    initialState: UI_STATE
+    initialState: UI_STATE,
 ) : ViewModel() {
 
     private val intentFlow = MutableSharedFlow<INTENT>()
@@ -56,9 +53,8 @@ abstract class BaseViewModel<UI_STATE : Parcelable, PARTIAL_UI_STATE, EVENT, INT
 
     protected abstract fun reduceUiState(
         previousState: UI_STATE,
-        partialState: PARTIAL_UI_STATE
+        partialState: PARTIAL_UI_STATE,
     ): UI_STATE
-
 
     var errorStateFlow: StateFlow<Exception?> = MutableStateFlow(null)
     var loadingStateFlow: StateFlow<Boolean?> = MutableStateFlow(null)
@@ -69,7 +65,7 @@ abstract class BaseViewModel<UI_STATE : Parcelable, PARTIAL_UI_STATE, EVENT, INT
         loading: StateFlow<Boolean?> = loadingStateFlow,
         error: StateFlow<Exception?> = errorStateFlow,
         result: StateFlow<T>? = null,
-        request: suspend CoroutineScope.() -> T?
+        request: suspend CoroutineScope.() -> T?,
     ): Job = scope.launch {
         try {
             (loading as? MutableStateFlow)?.value = true
@@ -88,5 +84,4 @@ abstract class BaseViewModel<UI_STATE : Parcelable, PARTIAL_UI_STATE, EVENT, INT
             (loading as? MutableStateFlow)?.value = false
         }
     }
-
 }

@@ -1,7 +1,6 @@
 package dev.yacsa.repository.impl.mapper.person
 
 import dev.yacsa.network.model.PersonNetModel
-import dev.yacsa.repository.impl.mapper.base.RepoDbMapper
 import dev.yacsa.repository.impl.mapper.base.RepoNetMapper
 import dev.yacsa.repository.model.PersonRepoModel
 import javax.inject.Inject
@@ -14,7 +13,7 @@ class PersonRepoNetMapper @Inject constructor() :
             null,
             value.birthYear,
             value.deathYear,
-            value.name
+            value.name,
         )
     }
 
@@ -22,8 +21,7 @@ class PersonRepoNetMapper @Inject constructor() :
         return PersonNetModel(
             value.birthYear,
             value.deathYear,
-            value.name
+            value.name,
         )
     }
-
 }

@@ -1,7 +1,8 @@
 package dev.yacsa.books.screen.list
 
 import android.widget.Toast
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.tooling.preview.Preview
@@ -9,13 +10,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import dev.yacsa.platform.ext.collectWithLifecycle
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.yacsa.books.screen.list.content.ContentError
 import dev.yacsa.books.screen.list.content.ContentFetched
 import dev.yacsa.books.screen.list.content.ContentIsLoading
 import dev.yacsa.model.model.BookUiModel
+import dev.yacsa.platform.ext.collectWithLifecycle
 import dev.yacsa.ui.theme.YacsaTheme
 import dev.yacsa.ui.window.WindowInfo
 import dev.yacsa.ui.window.rememberWindowInfo
@@ -26,7 +27,7 @@ import logcat.logcat
 @Composable
 fun ListRoute(
     onClick: (Int) -> Unit,
-    listViewModel: ListViewModel = hiltViewModel()
+    listViewModel: ListViewModel = hiltViewModel(),
 ) {
     HandleEvents(listViewModel.event)
 
@@ -48,8 +49,7 @@ fun ListRoute(
         }
     }
 
-
-    logcat("ListRoute"){"ListRoute"}
+    logcat("ListRoute") { "ListRoute" }
     ListScreen(
         onBookClicked = {
             onClick(it)
@@ -57,9 +57,7 @@ fun ListRoute(
         pagingState = pagingState,
         uiState = uiState,
     )
-
 }
-
 
 @Composable
 fun ListScreen(
@@ -71,7 +69,7 @@ fun ListScreen(
 
     if (!uiState.isLoading && !uiState.isError && pagingState != null) {
         systemUiController.setSystemBarsColor(
-            color = YacsaTheme.colors.primaryText
+            color = YacsaTheme.colors.primaryText,
         )
         ContentFetched(
             onBookClicked = onBookClicked,
@@ -79,12 +77,11 @@ fun ListScreen(
         )
     } else {
         systemUiController.setSystemBarsColor(
-            color = YacsaTheme.colors.statusBarColor
+            color = YacsaTheme.colors.statusBarColor,
         )
         ListNoContent(uiState = uiState)
     }
 }
-
 
 @Composable
 fun ListNoContent(
@@ -100,7 +97,6 @@ fun ListNoContent(
     }
 }
 
-
 @Composable
 private fun HandleEvents(events: Flow<ListEvent>) {
     val uriHandler = LocalUriHandler.current
@@ -114,7 +110,6 @@ private fun HandleEvents(events: Flow<ListEvent>) {
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun PreviewListScreen() {
@@ -122,7 +117,7 @@ fun PreviewListScreen() {
         ListScreen(
             {},
             flowOf(PagingData.empty<BookUiModel>()).collectAsLazyPagingItems(),
-            ListUiState()
+            ListUiState(),
         )
     }
 }

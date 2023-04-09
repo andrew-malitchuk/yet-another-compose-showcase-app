@@ -1,4 +1,3 @@
 package dev.yacsa.ui.theme
 
-class Shape {
-}
+class Shape

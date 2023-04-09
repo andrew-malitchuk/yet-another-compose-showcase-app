@@ -15,23 +15,22 @@ class DbDaoModule {
 
     @Provides
     fun providesBookDao(
-        appDatabase: YacsaDb
+        appDatabase: YacsaDb,
     ): BookDbDao {
         return appDatabase.bookDao()
     }
 
     @Provides
     fun providesPersonDbDao(
-        appDatabase: YacsaDb
+        appDatabase: YacsaDb,
     ): PersonDbDao {
         return appDatabase.personDbDao()
     }
 
     @Provides
     fun providesBookAuthorRelationshipDao(
-        appDatabase: YacsaDb
+        appDatabase: YacsaDb,
     ): BookAuthorRelationshipDao {
         return appDatabase.bookAuthorRelationshipDao()
     }
-
 }

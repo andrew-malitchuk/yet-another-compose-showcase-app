@@ -10,17 +10,16 @@ import dev.yacsa.onboarding.screen.onboarding.OnboardingScreen
 fun NavGraphBuilder.onboardingNavGraph(navController: NavHostController) {
     navigation(
         startDestination = OnboardingDirection.Onboarding.route,
-        route = NavigationDirection.Onboarding.route
+        route = NavigationDirection.Onboarding.route,
     ) {
         composable(OnboardingDirection.Onboarding.route) {
             OnboardingScreen(
                 onBackClick = {
                     navController.navigate("books")
-
                 },
                 onDoneClick = {
                     navController.navigate("books")
-                }
+                },
             )
         }
     }

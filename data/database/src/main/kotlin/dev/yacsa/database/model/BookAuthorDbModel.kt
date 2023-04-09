@@ -18,9 +18,9 @@ data class BookAuthorDbModel(
         associateBy = Junction(
             value = BookAuthorRelationship::class,
             parentColumn = "bookId",
-            entityColumn = "personId"
-        )
+            entityColumn = "personId",
+        ),
     )
-    var author: List<PersonDbModel>
+    var author: List<PersonDbModel>,
 
 ) : BaseDbModel

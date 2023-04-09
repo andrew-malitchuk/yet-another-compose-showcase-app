@@ -1,6 +1,5 @@
 package dev.yacsa.domain.usecase
 
-import dev.yacsa.domain.model.PreferencesDomainModel
 import dev.yacsa.domain.model.StartUpConfigureDomainModel
 
 // TODO: add kdoc

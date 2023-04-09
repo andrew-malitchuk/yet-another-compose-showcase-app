@@ -6,7 +6,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.yacsa.repository.impl.mapper.StartUpConfigureRepoDataStoreMapper
 
-
 @Suppress("UnnecessaryAbstractClass")
 @Module
 @InstallIn(SingletonComponent::class)
@@ -16,5 +15,4 @@ class RepositoryMapperModule {
     fun providesGreetingMapper(): StartUpConfigureRepoDataStoreMapper {
         return StartUpConfigureRepoDataStoreMapper()
     }
-
 }

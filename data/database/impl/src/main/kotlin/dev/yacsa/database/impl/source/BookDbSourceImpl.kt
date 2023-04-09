@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class BookDbSourceImpl @Inject constructor(
-    private val booksDao: BookDbDao
+    private val booksDao: BookDbDao,
 ) : BookDbSource {
 
     //
@@ -65,5 +65,4 @@ class BookDbSourceImpl @Inject constructor(
     override suspend fun deleteAll() {
         return booksDao.deleteAll()
     }
-
 }

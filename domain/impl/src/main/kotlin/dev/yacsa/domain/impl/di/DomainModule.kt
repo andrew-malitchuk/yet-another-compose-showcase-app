@@ -21,49 +21,48 @@ abstract class DomainModule {
     @Singleton
     @Binds
     abstract fun bindsGetPreferencesUseCase(
-        getPreferencesUseCaseImpl: GetPreferencesUseCaseImpl
+        getPreferencesUseCaseImpl: GetPreferencesUseCaseImpl,
     ): GetPreferencesUseCase
 
     @Singleton
     @Binds
     abstract fun bindsGetStartUpConfigureUseCase(
-        getStartUpConfigureUseCaseImpl: GetStartUpConfigureUseCaseImpl
+        getStartUpConfigureUseCaseImpl: GetStartUpConfigureUseCaseImpl,
     ): GetStartUpConfigureUseCase
 
     @Singleton
     @Binds
     abstract fun bindsUpdateStartUpConfigureUseCase(
-        updateStartUpConfigureUseCaseImpl: UpdateStartUpConfigureUseCaseImpl
+        updateStartUpConfigureUseCaseImpl: UpdateStartUpConfigureUseCaseImpl,
     ): UpdateStartUpConfigureUseCase
 
     @Singleton
     @Binds
     abstract fun bindsGetBooksUseCase(
-        getBooksUseCaseImpl: GetBooksUseCaseImpl
+        getBooksUseCaseImpl: GetBooksUseCaseImpl,
     ): GetBooksUseCase
 
     @Singleton
     @Binds
     abstract fun bindsLoadBooksUseCase(
-        loadBooksUseCaseImpl: LoadBooksUseCaseImpl
+        loadBooksUseCaseImpl: LoadBooksUseCaseImpl,
     ): LoadBooksUseCase
 
     @Singleton
     @Binds
     abstract fun bindsRefreshBooksUseCase(
-        refreshBooksUseCaseImpl: RefreshBooksUseCaseImpl
+        refreshBooksUseCaseImpl: RefreshBooksUseCaseImpl,
     ): RefreshBooksUseCase
 
     @Singleton
     @Binds
     abstract fun bindsSaveBooksUseCase(
-        saveBooksUseCaseImpl: SaveBooksUseCaseImpl
+        saveBooksUseCaseImpl: SaveBooksUseCaseImpl,
     ): SaveBooksUseCase
 
     @Singleton
     @Binds
     abstract fun bindsRemoveAllBooksUseCase(
-        removeAllBooksUseCaseImpl: RemoveAllBooksUseCaseImpl
+        removeAllBooksUseCaseImpl: RemoveAllBooksUseCaseImpl,
     ): RemoveAllBooksUseCase
-
 }

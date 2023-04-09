@@ -18,7 +18,7 @@ const val DB_VERSION = 1
         PersonDbModel::class,
         BookAuthorRelationship::class,
     ],
-    exportSchema = true
+    exportSchema = true,
 )
 abstract class YacsaDb : RoomDatabase() {
     abstract fun bookDao(): BookDbDao

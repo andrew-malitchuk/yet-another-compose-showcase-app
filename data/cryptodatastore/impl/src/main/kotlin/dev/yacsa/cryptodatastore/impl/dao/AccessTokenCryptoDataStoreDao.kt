@@ -11,12 +11,12 @@ import javax.inject.Inject
 
 class AccessTokenCryptoDataStoreDao @Inject constructor(
     @ApplicationContext private val appContext: Context,
-    private val accessTokenSerializer: AccessTokenSerializer
+    private val accessTokenSerializer: AccessTokenSerializer,
 ) : BaseCryptoDataStoreDao<AccessTokenCryptoDataStoreModel>() {
 
     override val Context.dataStore by dataStore(
         ACCESS_TOKEN_DATASTORE_FILENAME,
-        accessTokenSerializer
+        accessTokenSerializer,
     )
 
     override fun getData(): Flow<AccessTokenCryptoDataStoreModel> {
@@ -26,7 +26,7 @@ class AccessTokenCryptoDataStoreDao @Inject constructor(
     override suspend fun updateData(value: AccessTokenCryptoDataStoreModel) {
         appContext.dataStore.updateData {
             it.copy(
-                accessToken = value.accessToken
+                accessToken = value.accessToken,
             )
         }
     }
@@ -34,5 +34,4 @@ class AccessTokenCryptoDataStoreDao @Inject constructor(
     companion object {
         const val ACCESS_TOKEN_DATASTORE_FILENAME = "access_token.json"
     }
-
 }

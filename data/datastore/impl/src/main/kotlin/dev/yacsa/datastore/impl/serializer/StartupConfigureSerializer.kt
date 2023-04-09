@@ -17,7 +17,7 @@ object StartupConfigureSerializer : Serializer<StartUpConfigureDataStoreModel> {
         return try {
             Json.decodeFromString(
                 deserializer = StartUpConfigureDataStoreModel.serializer(),
-                string = input.readBytes().decodeToString()
+                string = input.readBytes().decodeToString(),
             )
         } catch (e: SerializationException) {
             e.printStackTrace()
@@ -29,9 +29,8 @@ object StartupConfigureSerializer : Serializer<StartUpConfigureDataStoreModel> {
         output.write(
             Json.encodeToString(
                 serializer = StartUpConfigureDataStoreModel.serializer(),
-                value = t
-            ).encodeToByteArray()
+                value = t,
+            ).encodeToByteArray(),
         )
     }
-
 }

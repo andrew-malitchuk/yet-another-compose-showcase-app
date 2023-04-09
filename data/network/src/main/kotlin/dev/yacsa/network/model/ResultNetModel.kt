@@ -14,5 +14,5 @@ data class ResultNetModel(
     @Json(name = "previous")
     val previous: Any?,
     @Json(name = "results")
-    val results: List<BookNetModel?>?
+    val results: List<BookNetModel?>?,
 ) : BaseNetModel

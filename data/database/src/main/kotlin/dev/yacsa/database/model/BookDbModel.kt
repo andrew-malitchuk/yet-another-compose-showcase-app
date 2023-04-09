@@ -33,5 +33,5 @@ data class BookDbModel(
     @ColumnInfo(name = "download_count")
     val downloadCount: Int?,
     @ColumnInfo(name = "page")
-    var page: Int?=1
+    var page: Int? = 1,
 ) : BaseDbModel

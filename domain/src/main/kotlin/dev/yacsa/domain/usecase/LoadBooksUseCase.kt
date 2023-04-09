@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface LoadBooksUseCase {
     @Throws(Throwable::class)
-    suspend operator fun invoke():Flow<Result<List<BookDomainModel>>>
+    suspend operator fun invoke(): Flow<Result<List<BookDomainModel>>>
 }

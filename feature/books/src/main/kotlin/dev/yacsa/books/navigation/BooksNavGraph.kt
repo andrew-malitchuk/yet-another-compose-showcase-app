@@ -1,6 +1,5 @@
 package dev.yacsa.books.navigation
 
-import androidx.core.os.bundleOf
 import androidx.navigation.*
 import androidx.navigation.compose.composable
 import dev.yacsa.books.screen.about.AboutScreen
@@ -11,7 +10,7 @@ import dev.yacsa.navigation.NavigationDirection
 fun NavGraphBuilder.booksNavGraph(navController: NavHostController) {
     navigation(
         startDestination = BooksDirection.List.route,
-        route = NavigationDirection.Books.route
+        route = NavigationDirection.Books.route,
     ) {
         composable(BooksDirection.About.route) {
             AboutScreen() {}
@@ -21,21 +20,21 @@ fun NavGraphBuilder.booksNavGraph(navController: NavHostController) {
                 onClick = {
                     navController.navigate(
                         BooksDirection.Detalization.getRoute(it),
-                    ){
-                        restoreState=true
-                        launchSingleTop=true
+                    ) {
+                        restoreState = true
+                        launchSingleTop = true
                     }
-                }
+                },
             )
         }
         composable(
             BooksDirection.Detalization.route,
             arguments = listOf(
-                navArgument("bookId") { type = NavType.IntType }
-            )
+                navArgument("bookId") { type = NavType.IntType },
+            ),
         ) { backStackEntry ->
             DetalizationRoute(
-                bookId = backStackEntry.arguments?.getInt("bookId")
+                bookId = backStackEntry.arguments?.getInt("bookId"),
             )
         }
     }

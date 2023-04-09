@@ -61,12 +61,9 @@ class BooksRepositoryImpl @Inject constructor(
 //        }
 
         bookDbSource.insert(values.map(bookRepoDbMapper::toDb))
-
-
     }
 
     override suspend fun saveBook(value: BookRepoModel) {
-
         val bookDbModel = bookRepoDbMapper.toDb(value)
         val personDbList = value.authors?.filterNotNull()?.map {
             personRepoDbMapper.toDb(it)
@@ -84,7 +81,7 @@ class BooksRepositoryImpl @Inject constructor(
 
         bookDbSource
             .insert(
-                bookDbModel
+                bookDbModel,
             )
 
         val bookAuthorRelationshipList = arrayListOf<BookAuthorRelationship>()
@@ -93,14 +90,14 @@ class BooksRepositoryImpl @Inject constructor(
             bookAuthorRelationshipList.add(
                 BookAuthorRelationship(
                     bookDbModel.id,
-                    it
-                )
+                    it,
+                ),
             )
         }
 
         bookAuthorRelationshipList.forEach {
             bookAuthorRelationshipDbSource.insert(
-                it
+                it,
             )
         }
     }
@@ -108,7 +105,6 @@ class BooksRepositoryImpl @Inject constructor(
     override suspend fun refreshBooks() {
         val result = booksNetSource
             .getBooks(1)?.results ?: emptyList<BookNetModel?>()
-
 
         result.filterNotNull()
             .map {
@@ -122,7 +118,6 @@ class BooksRepositoryImpl @Inject constructor(
     override suspend fun refreshBooks(page: Int) {
         val result = booksNetSource
             .getBooks(page)?.results ?: emptyList<BookNetModel?>()
-
 
         result.filterNotNull()
             .map {
@@ -145,7 +140,6 @@ class BooksRepositoryImpl @Inject constructor(
     }
 
     override suspend fun savePaged(page: Int, values: List<BookRepoModel>) {
-
         val db = values.map { bookRepoDbMapper.toDb(it) }
         db.forEach { it.page = page }
 
@@ -156,5 +150,4 @@ class BooksRepositoryImpl @Inject constructor(
         bookDbSource.removePage(page)
     }
     //
-
 }

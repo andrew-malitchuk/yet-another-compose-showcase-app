@@ -5,5 +5,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class PreferencesDataStoreModel(
-    val theme: ThemeDateStoreModel = ThemeDateStoreModel.LIGHT
+    val theme: ThemeDateStoreModel = ThemeDateStoreModel.LIGHT,
 ) : BaseDataStoreModel

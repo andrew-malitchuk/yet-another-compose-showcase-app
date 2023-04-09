@@ -16,12 +16,11 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun bindsBooksRepository(
-        booksRepositoryImpl: BooksRepositoryImpl
+        booksRepositoryImpl: BooksRepositoryImpl,
     ): BooksRepository
 
     @Binds
     abstract fun bindsStartUpConfigureRepository(
-        startUpConfigureRepositoryImpl: StartUpConfigureRepositoryImpl
+        startUpConfigureRepositoryImpl: StartUpConfigureRepositoryImpl,
     ): StartUpConfigureRepository
-
 }

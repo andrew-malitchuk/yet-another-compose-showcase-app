@@ -19,5 +19,5 @@ data class FormatsDbModel(
     @ColumnInfo(name = "text/plain")
     val textPlain: String?,
     @ColumnInfo(name = "text/plain; charset=us-ascii")
-    val textplainCharsetusAscii: String?
-):BaseDbModel
+    val textplainCharsetusAscii: String?,
+) : BaseDbModel

@@ -1,18 +1,14 @@
 package dev.yacsa.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
-
 @Composable
 fun YacsaTheme(
     useDarkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val systemUiController = rememberSystemUiController()
 
@@ -24,10 +20,10 @@ fun YacsaTheme(
 
     with(systemUiController) {
         setSystemBarsColor(
-            color = colors.statusBarColor
+            color = colors.statusBarColor,
         )
         setNavigationBarColor(
-            color = colors.statusBarColor
+            color = colors.statusBarColor,
         )
     }
 
@@ -35,6 +31,6 @@ fun YacsaTheme(
         LocalYacsaColors provides colors,
         LocalYacsaTypography provides typography,
         LocalYacsaSpacing provides spacing,
-        content = content
+        content = content,
     )
 }

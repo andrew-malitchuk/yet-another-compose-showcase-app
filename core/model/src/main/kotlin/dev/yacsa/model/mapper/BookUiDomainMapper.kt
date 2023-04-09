@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class BookUiDomainMapper @Inject constructor(
     private val formatsUiDomainMapper: FormatsUiDomainMapper,
-    private val personUiDomainMapper: PersonUiDomainMapper
+    private val personUiDomainMapper: PersonUiDomainMapper,
 ) : UiDomainMapper<BookUiModel, BookDomainModel>() {
 
     override fun toUi(value: BookDomainModel): BookUiModel {
@@ -19,7 +19,7 @@ class BookUiDomainMapper @Inject constructor(
             value.copyright,
             value.mediaType,
             value.formats?.let { formatsUiDomainMapper.toUi(it) },
-            value.downloadCount
+            value.downloadCount,
         )
     }
 
@@ -32,7 +32,7 @@ class BookUiDomainMapper @Inject constructor(
             value.copyright,
             value.mediaType,
             value.formats?.let { formatsUiDomainMapper.toDomain(it) },
-            value.downloadCount
+            value.downloadCount,
         )
     }
 }

@@ -18,17 +18,16 @@ abstract class DbSourceModule {
 
     @Binds
     abstract fun bindsBookDbSource(
-        bookDbSource: BookDbSourceImpl
+        bookDbSource: BookDbSourceImpl,
     ): BookDbSource
 
     @Binds
     abstract fun bindsPersonDbSource(
-        personDbSourceImpl: PersonDbSourceImpl
+        personDbSourceImpl: PersonDbSourceImpl,
     ): PersonDbSource
 
     @Binds
     abstract fun bindsBookAuthorRelationshipDbSource(
-        bookAuthorRelationshipDbSourceImpl: BookAuthorRelationshipDbSourceImpl
+        bookAuthorRelationshipDbSourceImpl: BookAuthorRelationshipDbSourceImpl,
     ): BookAuthorRelationshipDbSource
-
 }

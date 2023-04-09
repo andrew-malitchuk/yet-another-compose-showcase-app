@@ -1,6 +1,9 @@
 package dev.yacsa.books.screen.list.item
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -11,26 +14,24 @@ import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
 fun ItemLoading(
-    modifier: Modifier= Modifier
-){
+    modifier: Modifier = Modifier,
+) {
     Row(
-        modifier=modifier
+        modifier = modifier
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         CircularProgressIndicator(
             modifier = modifier
-                .padding(16.dp)
+                .padding(16.dp),
         )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_ListLoadingItem(
-
-){
+fun Preview_ListLoadingItem() {
     YacsaTheme {
         ItemLoading()
     }

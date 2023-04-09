@@ -7,5 +7,5 @@ data class RemoteKeyDomainModel(
     val prevKey: Int?,
     val currentPage: Int,
     val nextKey: Int?,
-    val createdAt: Long
+    val createdAt: Long,
 ) : BaseDomainModel

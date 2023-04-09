@@ -18,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class OnboardingViewModel @Inject constructor(
     private val updateStartUpConfigureUseCase: UpdateStartUpConfigureUseCase,
-    private val getStartUpConfigureUseCase: GetStartUpConfigureUseCase
+    private val getStartUpConfigureUseCase: GetStartUpConfigureUseCase,
 ) : ViewModel() {
 
     fun updateStartUpConfigure() {
@@ -35,22 +35,21 @@ class OnboardingViewModel @Inject constructor(
 
     var buttonType: ButtonType by mutableStateOf(ButtonType.NEXT)
 
-
     var onboardingPages = listOf(
         OnboadringPage(
             R.drawable.ic_mobile_application,
             "header #1",
-            "caption #1"
+            "caption #1",
         ),
         OnboadringPage(
             R.drawable.ic_mobile_application,
             "header #2",
-            "caption #2"
+            "caption #2",
         ),
         OnboadringPage(
             R.drawable.ic_mobile_application,
             "header #3",
-            "caption #3"
+            "caption #3",
         ),
     )
 
@@ -63,5 +62,4 @@ class OnboardingViewModel @Inject constructor(
     enum class ButtonType {
         SKIP, NEXT
     }
-
 }

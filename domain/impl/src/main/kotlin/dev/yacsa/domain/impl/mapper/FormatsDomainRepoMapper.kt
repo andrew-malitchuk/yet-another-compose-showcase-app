@@ -17,7 +17,7 @@ class FormatsDomainRepoMapper @Inject constructor() :
             value.imageJpeg,
             value.textHtml,
             value.textPlain,
-            value.textplainCharsetusAscii
+            value.textplainCharsetusAscii,
         )
     }
 
@@ -30,8 +30,7 @@ class FormatsDomainRepoMapper @Inject constructor() :
             value.imageJpeg,
             value.textHtml,
             value.textPlain,
-            value.textplainCharsetusAscii
+            value.textplainCharsetusAscii,
         )
     }
-
 }

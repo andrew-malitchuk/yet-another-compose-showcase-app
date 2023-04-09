@@ -29,5 +29,4 @@ interface PersonDbDao {
 
     @Query("DELETE FROM ${YacsaDb.Table.PERSON}")
     suspend fun deleteAll()
-
 }

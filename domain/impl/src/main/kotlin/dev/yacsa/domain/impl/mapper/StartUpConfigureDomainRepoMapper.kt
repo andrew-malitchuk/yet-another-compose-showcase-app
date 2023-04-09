@@ -3,7 +3,6 @@ package dev.yacsa.domain.impl.mapper
 import dev.yacsa.domain.impl.mapper.base.DomainRepoMapper
 import dev.yacsa.domain.model.StartUpConfigureDomainModel
 import dev.yacsa.repository.model.StartUpConfigureRepoModel
-import dev.yacsa.repository.model.base.BaseRepoModel
 import javax.inject.Inject
 
 class StartUpConfigureDomainRepoMapper @Inject constructor() :
@@ -16,5 +15,4 @@ class StartUpConfigureDomainRepoMapper @Inject constructor() :
     override fun toRepo(value: StartUpConfigureDomainModel): StartUpConfigureRepoModel {
         return StartUpConfigureRepoModel(value.hasBeenOnboardingShown)
     }
-
 }

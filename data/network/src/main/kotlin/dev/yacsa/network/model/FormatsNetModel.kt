@@ -37,5 +37,5 @@ data class FormatsNetModel(
     @Json(name = "text/plain")
     val textPlain: String?,
     @Json(name = "text/plain; charset=us-ascii")
-    val textplainCharsetusAscii: String?
+    val textplainCharsetusAscii: String?,
 ) : BaseNetModel

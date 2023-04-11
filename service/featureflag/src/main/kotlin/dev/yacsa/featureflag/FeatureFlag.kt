@@ -4,5 +4,5 @@ abstract class FeatureFlag{
     /**
      * Global switch for feature
      */
-    abstract fun isFeatureEnabled():Boolean
+    abstract suspend fun isFeatureEnabled():Boolean
 }

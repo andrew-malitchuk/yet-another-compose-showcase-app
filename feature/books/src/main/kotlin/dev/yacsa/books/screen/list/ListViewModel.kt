@@ -7,6 +7,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.yacsa.books.featureflag.BooksFeatureFlag
 import dev.yacsa.books.screen.list.pagination.BooksSource
 import dev.yacsa.domain.usecase.RemoveAllBooksUseCase
 import dev.yacsa.domain.usecase.books.GetBooksUseCase
@@ -20,6 +21,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.launch
 import logcat.logcat
 import javax.inject.Inject
 
@@ -30,6 +32,7 @@ class ListViewModel @Inject constructor(
     private val bookUiDomainMapper: BookUiDomainMapper,
     private val removeAllBooksUseCase: RemoveAllBooksUseCase,
     private val saveBooksUseCase: SaveBooksUseCase,
+    private val booksFeatureFlag: BooksFeatureFlag,
     savedStateHandle: SavedStateHandle,
     initialState: ListUiState,
 ) : BaseViewModel<ListUiState, ListUiState.PartialState, ListEvent, ListIntent>(
@@ -40,6 +43,11 @@ class ListViewModel @Inject constructor(
     init {
         logcat { "init" }
         acceptIntent(ListIntent.GetBooks)
+        viewModelScope.launch {
+            logcat { booksFeatureFlag.isFoo().toString() }
+            logcat { booksFeatureFlag.isFeatureEnabled().toString() }
+        }
+
     }
 
     override fun mapIntents(intent: ListIntent): Flow<ListUiState.PartialState> {

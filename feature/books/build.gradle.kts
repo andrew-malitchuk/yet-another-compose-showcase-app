@@ -35,4 +35,5 @@ dependencies {
     implementation(project(":core:platform"))
     implementation(project(":core:model"))
     implementation(project(":core:ui"))
+    implementation(project(":service:featureflag"))
 }

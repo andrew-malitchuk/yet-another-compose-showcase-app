@@ -2,6 +2,8 @@ plugins {
     id("yacsa.android.application")
     id("yacsa.android.application.compose")
     id("yacsa.android.hilt")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -39,6 +41,8 @@ dependencies {
     implementation(project(":data:cryptodatastore:impl"))
     implementation(project(":data:network"))
     implementation(project(":data:network:impl"))
+    implementation(project(":data:remoteconfig"))
+    implementation(project(":data:remoteconfig:impl"))
     implementation(project(":data:repository"))
     implementation(project(":data:repository:impl"))
 
@@ -46,6 +50,9 @@ dependencies {
     implementation(project(":domain:impl"))
 
     implementation(project(":service:analytics"))
+
+    implementation(project(":service:featureflag"))
+    implementation(project(":service:featureflag:impl"))
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
@@ -57,6 +64,9 @@ dependencies {
     implementation("com.squareup.logcat:logcat:0.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
 
+    implementation("com.google.firebase:firebase-common-ktx:20.3.2")
+    implementation("com.google.firebase:firebase-analytics-ktx:21.2.1")
+    implementation("com.google.firebase:firebase-crashlytics-ktx:18.3.6")
 
 //    implementation("androidx.compose.ui:ui-tooling-preview:1.3.3")
 //    implementation("androidx.compose.ui:ui-tooling:1.3.3")

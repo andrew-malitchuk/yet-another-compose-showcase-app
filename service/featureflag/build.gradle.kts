@@ -2,6 +2,7 @@ plugins {
     id("yacsa.android.library")
     id("yacsa.android.hilt")
     id("kotlinx-serialization")
+    id("kotlin-parcelize")
 }
 
 android {

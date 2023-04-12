@@ -10,15 +10,20 @@ class BooksFeatureFlagImpl @Inject constructor(
 ) : BooksFeatureFlag() {
 
     override suspend fun isFoo(): Boolean {
-        return featureFlagRepository.getFeatureFlagValue(BooksFlags.FOO.key, BooksFlags.FOO.key).getOrElse {
-            false
+        val localValue = featureFlagRepository.loadFeatureFlag(BooksFlags.FOO.key).getOrNull()
+        return if (localValue?.value == null) {
+            featureFlagRepository.getFeatureFlagValue(BooksFlags.FOO.key, BooksFlags.FOO.key)
+                .getOrElse { false }
+        } else {
+            localValue.value!!
         }
     }
 
     override suspend fun isFeatureEnabled(): Boolean {
-        return featureFlagRepository.getFeatureFlagValue(BooksFlags.BOOKS.key,BooksFlags.BOOKS.key).getOrElse {
-            true
-        }
+        return featureFlagRepository.getFeatureFlagValue(BooksFlags.BOOKS.key, BooksFlags.BOOKS.key)
+            .getOrElse {
+                true
+            }
     }
 
 }

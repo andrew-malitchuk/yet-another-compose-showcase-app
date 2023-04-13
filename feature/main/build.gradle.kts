@@ -25,6 +25,7 @@ dependencies {
     implementation(project(":feature:books"))
     implementation(project(":feature:format"))
     implementation(project(":feature:onboarding"))
+    implementation(project(":feature:featureflagmanager"))
 
     implementation(project(":data:network"))
     implementation(project(":data:datastore"))

@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import dev.yacsa.books.navigation.booksNavGraph
+import dev.yacsa.featureflagmanager.navigation.featureFlagNavGraph
 import dev.yacsa.navigation.NavigationDirection
 import dev.yacsa.onboarding.navigation.onboardingNavGraph
 
@@ -19,5 +20,6 @@ fun RootNavigationGraph(
     ) {
         booksNavGraph(navController)
         onboardingNavGraph(navController)
+        featureFlagNavGraph(navController)
     }
 }

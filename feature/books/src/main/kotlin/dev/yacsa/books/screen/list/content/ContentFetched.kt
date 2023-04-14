@@ -40,6 +40,7 @@ fun ContentFetched(
     modifier: Modifier = Modifier,
     onBookClicked: (Int) -> Unit,
     lazyPagingItems: LazyPagingItems<BookUiModel>,
+    onFeatureFlagClick: () -> Unit,
 ) {
     val state = rememberLazyListState()
     val listState = rememberLazyListState()
@@ -64,7 +65,7 @@ fun ContentFetched(
             },
             backgroundColor = YacsaTheme.colors.primaryText,
             actions = {
-                IconButton(onClick = { /* Do Something*/ }) {
+                IconButton(onClick = { onFeatureFlagClick() }) {
                     Icon(Icons.Outlined.Search, null)
                 }
                 IconButton(onClick = {
@@ -131,6 +132,7 @@ fun Preview_ContentFetched() {
         ContentFetched(
             onBookClicked = {},
             lazyPagingItems = flowOf(PagingData.empty<BookUiModel>()).collectAsLazyPagingItems(),
+            onFeatureFlagClick={}
         )
     }
 }

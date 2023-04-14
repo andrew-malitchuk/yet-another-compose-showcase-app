@@ -27,6 +27,7 @@ import logcat.logcat
 @Composable
 fun ListRoute(
     onClick: (Int) -> Unit,
+    onFeatureFlagClick: () -> Unit,
     listViewModel: ListViewModel = hiltViewModel(),
 ) {
     HandleEvents(listViewModel.event)
@@ -54,8 +55,10 @@ fun ListRoute(
         onBookClicked = {
             onClick(it)
         },
+
         pagingState = pagingState,
         uiState = uiState,
+        onFeatureFlagClick = onFeatureFlagClick
     )
 }
 
@@ -64,6 +67,7 @@ fun ListScreen(
     onBookClicked: (Int) -> Unit,
     pagingState: LazyPagingItems<BookUiModel>?,
     uiState: ListUiState,
+    onFeatureFlagClick: () -> Unit,
 ) {
     val systemUiController = rememberSystemUiController()
 
@@ -74,6 +78,7 @@ fun ListScreen(
         ContentFetched(
             onBookClicked = onBookClicked,
             lazyPagingItems = pagingState,
+            onFeatureFlagClick = onFeatureFlagClick
         )
     } else {
         systemUiController.setSystemBarsColor(
@@ -118,6 +123,7 @@ fun PreviewListScreen() {
             {},
             flowOf(PagingData.empty<BookUiModel>()).collectAsLazyPagingItems(),
             ListUiState(),
+            {}
         )
     }
 }

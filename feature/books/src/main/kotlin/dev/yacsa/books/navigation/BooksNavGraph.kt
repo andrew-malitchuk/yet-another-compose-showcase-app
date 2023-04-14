@@ -25,6 +25,11 @@ fun NavGraphBuilder.booksNavGraph(navController: NavHostController) {
                         launchSingleTop = true
                     }
                 },
+                onFeatureFlagClick = {
+                    navController.navigate(
+                        NavigationDirection.FeatureFlag.route
+                    )
+                }
             )
         }
         composable(

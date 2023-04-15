@@ -3,7 +3,6 @@ package dev.yacsa.featureflag
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
+// TODO: fix
 @Parcelize
-data class BaseFeatureFlagModel(
-    val key: String
-) : Parcelable
+open class FooFlag(val key: String) : Parcelable

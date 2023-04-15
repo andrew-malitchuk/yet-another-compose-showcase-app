@@ -1,21 +1,23 @@
 package dev.yacsa.featureflag.impl.container
 
-import dev.yacsa.books.featureflag.booksFeatureFlags
-import dev.yacsa.featureflag.BaseFeatureFlagModel
+import dev.yacsa.books.featureflag.fooList
+import dev.yacsa.featureflag.FooFlag
 import dev.yacsa.repository.FeatureFlagRepository
 import javax.inject.Inject
 
-class FeatureFlagContainer @Inject constructor(
-    private val featureFlagRepository: FeatureFlagRepository
-) {
+class FeatureFlagContainer @Inject constructor() {
 
-    val featureFlagList = arrayListOf<BaseFeatureFlagModel>().also {
-        it.addAll(booksFeatureFlags)
+    @Inject
+    lateinit var featureFlagRepository: FeatureFlagRepository
+
+    val featureFlagList = arrayListOf<FooFlag>().also {
+        it.addAll(fooList)
     }
 
     suspend fun sync() {
-
+        featureFlagList.forEach {
+            featureFlagRepository.updateKey(it.key)
+        }
     }
-
 
 }

@@ -1,5 +1,6 @@
 package dev.yacsa.repository.impl
 
+import dev.yacsa.database.model.FeatureFlagDbModel
 import dev.yacsa.database.source.FeatureFlagDbSource
 import dev.yacsa.remoteconfig.source.RemoteConfigSource
 import dev.yacsa.repository.FeatureFlagRepository
@@ -31,6 +32,15 @@ class FeatureFlagRepositoryImpl @Inject constructor(
 
     override suspend fun updateLocalFeatureFlag(featureFlagRepoModel: FeatureFlagRepoModel) {
         featureFlagDbSource.update(featureFlagRepoDbMapper.toDb(featureFlagRepoModel))
+    }
+
+    override suspend fun updateKey(key: String) {
+        featureFlagDbSource.insert(
+            FeatureFlagDbModel(
+                0,
+                key
+            )
+        )
     }
 
 }

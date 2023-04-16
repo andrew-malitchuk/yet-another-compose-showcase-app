@@ -39,6 +39,7 @@ fun FeatureFlagScreen(
             color = YacsaTheme.colors.primaryText,
         )
         ContentFetched(
+            uiState = uiState
         )
     } else {
         ContentError()

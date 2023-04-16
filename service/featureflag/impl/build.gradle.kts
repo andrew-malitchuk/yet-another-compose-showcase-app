@@ -30,4 +30,5 @@ dependencies {
     implementation(project(":service:featureflag"))
     implementation(project(":feature:books"))
     implementation(project(":data:repository"))
+    implementation(project(":domain"))
 }

@@ -13,6 +13,7 @@ class FeatureFlagRepositoryImpl @Inject constructor(
     private val featureFlagDbSource: FeatureFlagDbSource,
     private val featureFlagRepoDbMapper: FeatureFlagRepoDbMapper,
 ) : FeatureFlagRepository {
+
     override suspend fun getFeatureFlagValue(key: String, debugKey: String): Result<Boolean> {
         return remoteConfigSource.getBoolean(key)
     }
@@ -31,14 +32,14 @@ class FeatureFlagRepositoryImpl @Inject constructor(
     }
 
     override suspend fun loadFeatureFlags(): Result<List<FeatureFlagRepoModel>> {
-        return try{
+        return try {
             val result = featureFlagDbSource.get()
-            if (result==null){
+            if (result == null) {
                 Result.failure(NoSuchElementException())
-            }else{
+            } else {
                 Result.success(result.map(featureFlagRepoDbMapper::toRepo))
             }
-        }catch (ex:Exception){
+        } catch (ex: Exception) {
             Result.failure(ex)
         }
     }

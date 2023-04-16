@@ -45,7 +45,7 @@ class ListViewModel @Inject constructor(
         acceptIntent(ListIntent.GetBooks)
         viewModelScope.launch {
             logcat { booksFeatureFlag.isFoo().toString() }
-            logcat { booksFeatureFlag.isFeatureEnabled().toString() }
+            logcat("isFeatureEnabled") { booksFeatureFlag.isFeatureEnabled().toString() }
         }
 
     }

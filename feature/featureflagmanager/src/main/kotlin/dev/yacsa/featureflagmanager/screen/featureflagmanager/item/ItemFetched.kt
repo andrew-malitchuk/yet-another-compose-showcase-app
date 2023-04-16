@@ -12,17 +12,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.yacsa.featureflag.FooFlag
 import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
 fun ItemFetched(
     modifier: Modifier = Modifier,
-    title: String,
+    item: FooFlag,
     isEnabled: (Boolean) -> Unit,
     isActive: (Boolean) -> Unit
 ) {
-    val checkboxState = remember { mutableStateOf(false) }
-    val switchState = remember { mutableStateOf(false) }
+    val checkboxState = remember { mutableStateOf(item.value != null) }
+    val switchState = remember { mutableStateOf(item.value) }
 
     Column {
         Row(
@@ -35,11 +36,11 @@ fun ItemFetched(
                     .padding(
                         8.dp
                     ),
-                text = title
+                text = item.key
             )
             Spacer(modifier = Modifier.weight(1f))
             Switch(
-                checked = switchState.value,
+                checked = switchState.value?:false,
                 onCheckedChange = {
                     switchState.value = it
                     isActive(it)
@@ -70,7 +71,7 @@ fun ItemFetched(
 fun Preview_ItemFetched() {
     YacsaTheme {
         ItemFetched(
-            title = "foo",
+            item = FooFlag("foo", true),
             isActive = {},
             isEnabled = {}
         )

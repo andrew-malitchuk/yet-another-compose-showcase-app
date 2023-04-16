@@ -3,8 +3,10 @@ package dev.yacsa.featureflagmanager.screen.featureflagmanager
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.yacsa.featureflag.impl.container.FeatureFlagContainer
+import dev.yacsa.featureflag.FooFlag
 import dev.yacsa.platform.viewmodel.BaseViewModel
+import dev.yacsa.repository.FeatureFlagRepository
+import dev.yacsa.repository.model.FeatureFlagRepoModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
@@ -15,6 +17,7 @@ import javax.inject.Inject
 class FeatureFlagViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     initialState: FeatureFlagUiState,
+    private val featureFlagRepository: FeatureFlagRepository
 ) : BaseViewModel<FeatureFlagUiState, FeatureFlagUiState.PartialState, FeatureFlagEvent, FeatureFlagIntent>(
     savedStateHandle,
     initialState,
@@ -29,10 +32,32 @@ class FeatureFlagViewModel @Inject constructor(
         }
     }
 
+
+    fun updateFeatureFlag(fooFlag: FooFlag) {
+        viewModelScope.launch {
+            featureFlagRepository.updateLocalFeatureFlag(
+                FeatureFlagRepoModel(
+                    fooFlag.key,
+                    fooFlag.value
+                )
+            )
+        }
+    }
+
     private fun getAllFeatureFlags(): Flow<FeatureFlagUiState.PartialState> =
         flow {
-            val list = FeatureFlagContainer().featureFlagList
-            emit(FeatureFlagUiState.PartialState.Fetched(list))
+            val list = featureFlagRepository.loadFeatureFlags()
+            if (list.isSuccess) {
+                emit(
+                    FeatureFlagUiState.PartialState.Fetched(
+                        (list.getOrNull()?.map {
+                            FooFlag(it.key, it.value)
+                        } ?: arrayListOf()) as ArrayList<FooFlag>
+                    )
+                )
+            } else {
+                emit(FeatureFlagUiState.PartialState.Error(list.exceptionOrNull()!!))
+            }
         }
 
 

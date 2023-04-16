@@ -30,6 +30,19 @@ class FeatureFlagRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun loadFeatureFlags(): Result<List<FeatureFlagRepoModel>> {
+        return try{
+            val result = featureFlagDbSource.get()
+            if (result==null){
+                Result.failure(NoSuchElementException())
+            }else{
+                Result.success(result.map(featureFlagRepoDbMapper::toRepo))
+            }
+        }catch (ex:Exception){
+            Result.failure(ex)
+        }
+    }
+
     override suspend fun updateLocalFeatureFlag(featureFlagRepoModel: FeatureFlagRepoModel) {
         featureFlagDbSource.update(featureFlagRepoDbMapper.toDb(featureFlagRepoModel))
     }

@@ -33,5 +33,6 @@ dependencies {
     implementation(project(":core:platform"))
     implementation(project(":service:featureflag:impl"))
     implementation(project(":service:featureflag"))
+    implementation(project(":data:repository"))
 
 }

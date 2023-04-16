@@ -5,4 +5,4 @@ import kotlinx.parcelize.Parcelize
 
 // TODO: fix
 @Parcelize
-open class FooFlag(val key: String) : Parcelable
+open class FooFlag(val key: String, var value: Boolean? = null) : Parcelable

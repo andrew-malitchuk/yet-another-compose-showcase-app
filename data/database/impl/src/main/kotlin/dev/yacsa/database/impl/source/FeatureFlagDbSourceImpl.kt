@@ -34,7 +34,8 @@ class FeatureFlagDbSourceImpl @Inject constructor(
     }
 
     override suspend fun update(value: FeatureFlagDbModel) {
-        featureFlagDbDao.update(value)
+//        featureFlagDbDao.update(value)
+        featureFlagDbDao.update(value.key,value.value)
     }
 
     override suspend fun update(values: List<FeatureFlagDbModel>) {

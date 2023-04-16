@@ -19,11 +19,14 @@ interface FeatureFlagDbDao {
     @Query("SELECT * FROM ${YacsaDb.Table.FEATURE_FLAG}")
     fun getFlow(): Flow<List<FeatureFlagDbModel>?>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(value: FeatureFlagDbModel): Long
 
     @Update
     suspend fun update(value: FeatureFlagDbModel)
+
+    @Query("UPDATE ${YacsaDb.Table.FEATURE_FLAG} SET value=:value WHERE key=:key")
+    suspend fun update(key:String, value:Boolean?)
 
     @Query("DELETE FROM ${YacsaDb.Table.FEATURE_FLAG} WHERE id=:id")
     suspend fun delete(id: Int)

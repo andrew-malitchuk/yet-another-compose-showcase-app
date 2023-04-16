@@ -24,7 +24,9 @@ import logcat.logcat
 @Composable
 fun ContentFetched(
     modifier: Modifier = Modifier,
-    uiState: FeatureFlagUiState
+    uiState: FeatureFlagUiState,
+    isEnabled: (FooFlag) -> Unit,
+    isActive: (FooFlag) -> Unit
 ) {
     Column {
         TopAppBar(
@@ -42,16 +44,18 @@ fun ContentFetched(
                     horizontal = 16.dp,
                 ),
         ) {
-            items(items = uiState.featureFlags ?: emptyList()) {
-                ItemFetched(
-                    title = it.key,
-                    isEnabled = {
-                        logcat { it.toString() }
-                    },
-                    isActive = {
-                        logcat { it.toString() }
-                    }
-                )
+            items(items = uiState.featureFlags ?: emptyList()) { item ->
+                ItemFetched(item = item, isEnabled = {
+                    logcat { it.toString() }
+                    isEnabled(item.also {
+                        it.value = null
+                    })
+                }, isActive = { value ->
+                    logcat { value.toString() }
+                    isActive(item.also {
+                        it.value = value
+                    })
+                })
             }
         }
     }
@@ -61,12 +65,10 @@ fun ContentFetched(
 @Preview(showBackground = true)
 fun Preview_ContentFetched() {
     YacsaTheme() {
-        ContentFetched(
-            uiState = FeatureFlagUiState(
-                featureFlags = listOf(
-                    FooFlag("foo")
-                )
-            )
-        )
+        ContentFetched(uiState = FeatureFlagUiState(
+            featureFlags = listOf(
+                FooFlag("foo")
+            ),
+        ), isEnabled = {}, isActive = {})
     }
 }

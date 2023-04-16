@@ -68,6 +68,7 @@ dependencies {
     implementation("com.google.firebase:firebase-common-ktx:20.3.2")
     implementation("com.google.firebase:firebase-analytics-ktx:21.2.1")
     implementation("com.google.firebase:firebase-crashlytics-ktx:18.3.6")
+    implementation("androidx.lifecycle:lifecycle-process:2.6.1")
 
 //    implementation("androidx.compose.ui:ui-tooling-preview:1.3.3")
 //    implementation("androidx.compose.ui:ui-tooling:1.3.3")

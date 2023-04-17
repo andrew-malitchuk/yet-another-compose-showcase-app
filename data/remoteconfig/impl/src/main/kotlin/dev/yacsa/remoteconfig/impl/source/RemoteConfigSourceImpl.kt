@@ -15,6 +15,8 @@ class RemoteConfigSourceImpl @Inject constructor(
     override suspend fun getDouble(key: String): Result<Double> {
         return suspendCoroutine { continuation ->
             try {
+                // TODO: fix, maybe
+                remoteConfig.remoteConfig.reset()
                 remoteConfig.remoteConfig.fetchAndActivate().addOnCompleteListener {
                     if (it.isSuccessful) {
                         val value = remoteConfig.remoteConfig.getDouble(key)
@@ -33,6 +35,8 @@ class RemoteConfigSourceImpl @Inject constructor(
     override suspend fun getBoolean(key: String): Result<Boolean> {
         return suspendCoroutine { continuation ->
             try {
+                // TODO: fix, maybe
+                remoteConfig.remoteConfig.reset()
                 remoteConfig.remoteConfig.fetchAndActivate().addOnCompleteListener {
                     if (it.isSuccessful) {
                         val value = remoteConfig.remoteConfig.getBoolean(key)
@@ -51,6 +55,8 @@ class RemoteConfigSourceImpl @Inject constructor(
     override suspend fun getString(key: String): Result<String> {
         return suspendCoroutine { continuation ->
             try {
+                // TODO: fix, maybe
+                remoteConfig.remoteConfig.reset()
                 remoteConfig.remoteConfig.fetchAndActivate().addOnCompleteListener {
                     if (it.isSuccessful) {
                         val value = remoteConfig.remoteConfig.getString(key)

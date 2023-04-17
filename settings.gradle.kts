@@ -4,6 +4,7 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
+        maven("https://jitpack.io")
     }
 }
 dependencyResolutionManagement {
@@ -11,6 +12,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven("https://jitpack.io")
     }
 }
 rootProject.name = "YACSA"
@@ -23,6 +25,7 @@ include(":feature:main")
 include(":feature:navigation")
 include(":feature:onboarding")
 include(":feature:featureflagmanager")
+include(":feature:notfound")
 include(":core:common")
 include(":core:platform")
 include(":core:ui")

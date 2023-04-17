@@ -28,6 +28,7 @@ dependencies {
     implementation(project(":feature:person"))
     implementation(project(":feature:navigation"))
     implementation(project(":feature:featureflagmanager"))
+    implementation(project(":feature:notfound"))
 
     implementation(project(":core:common"))
     implementation(project(":core:localization"))

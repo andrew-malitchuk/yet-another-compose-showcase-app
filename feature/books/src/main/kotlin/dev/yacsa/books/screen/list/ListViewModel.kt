@@ -21,7 +21,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onStart
-import kotlinx.coroutines.launch
 import logcat.logcat
 import javax.inject.Inject
 
@@ -42,11 +41,12 @@ class ListViewModel @Inject constructor(
 
     init {
         logcat { "init" }
-        acceptIntent(ListIntent.GetBooks)
-        viewModelScope.launch {
-            logcat { booksFeatureFlag.isFoo().toString() }
-            logcat("isFeatureEnabled") { booksFeatureFlag.isFeatureEnabled().toString() }
-        }
+        acceptIntent(ListIntent.CheckFeatureBlock)
+//        acceptIntent(ListIntent.GetBooks)
+//        viewModelScope.launch {
+//            logcat { booksFeatureFlag.isFoo().toString() }
+//            logcat("isFeatureEnabled") { booksFeatureFlag.isFeatureEnabled().toString() }
+//        }
 
     }
 
@@ -54,12 +54,14 @@ class ListViewModel @Inject constructor(
         return when (intent) {
             is ListIntent.GetBooks -> getBooks()
             is ListIntent.BookClicked -> bookClicked(intent.bookId)
+            is ListIntent.CheckFeatureBlock -> checkFeatureStatus()
         }
     }
 
     var pagingDataFlow: Flow<PagingData<BookUiModel>>? = null
 
     private fun getBooks(): Flow<ListUiState.PartialState> = flow<ListUiState.PartialState> {
+        logcat { "getBooks" }
         // Dummy load
         delay(5_000L)
         pagingDataFlow = Pager(PagingConfig(pageSize = 32)) {
@@ -80,6 +82,16 @@ class ListViewModel @Inject constructor(
         return emptyFlow()
     }
 
+    private fun checkFeatureStatus(): Flow<ListUiState.PartialState> = flow {
+        val isBooksFeatureEnabled = booksFeatureFlag.isFeatureEnabled()
+        logcat("isBooksFeatureEnabled") { isBooksFeatureEnabled.toString() }
+        if (isBooksFeatureEnabled) {
+            acceptIntent(ListIntent.GetBooks)
+        } else {
+            emit(ListUiState.PartialState.Blocked)
+        }
+    }
+
     override fun reduceUiState(
         previousState: ListUiState,
         partialState: ListUiState.PartialState,
@@ -88,14 +100,25 @@ class ListViewModel @Inject constructor(
             is ListUiState.PartialState.Loading -> previousState.copy(
                 isLoading = true,
                 isError = false,
+                isFeatureBlocked = false
             )
+
             is ListUiState.PartialState.Fetched -> previousState.copy(
                 isLoading = false,
                 isError = false,
+                isFeatureBlocked = false
             )
+
             is ListUiState.PartialState.Error -> previousState.copy(
                 isLoading = false,
                 isError = true,
+                isFeatureBlocked = false
+            )
+
+            is ListUiState.PartialState.Blocked -> previousState.copy(
+                isLoading = false,
+                isError = false,
+                isFeatureBlocked = true
             )
         }
     }

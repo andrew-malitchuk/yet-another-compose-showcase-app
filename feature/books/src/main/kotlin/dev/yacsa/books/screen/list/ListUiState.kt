@@ -9,11 +9,13 @@ import kotlinx.parcelize.Parcelize
 data class ListUiState(
     val isLoading: Boolean = false,
     val isError: Boolean = false,
+    val isFeatureBlocked: Boolean = false
 ) : Parcelable {
 
     sealed class PartialState {
         object Loading : PartialState()
         object Fetched : PartialState()
         data class Error(val throwable: Throwable) : PartialState()
+        object Blocked : PartialState()
     }
 }

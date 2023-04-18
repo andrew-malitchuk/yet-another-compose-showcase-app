@@ -7,6 +7,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.yacsa.books.featureflag.BooksFeatureFlag
 import dev.yacsa.books.screen.list.pagination.BooksSource
 import dev.yacsa.domain.usecase.RemoveAllBooksUseCase
 import dev.yacsa.domain.usecase.books.GetBooksUseCase
@@ -30,6 +31,7 @@ class ListViewModel @Inject constructor(
     private val bookUiDomainMapper: BookUiDomainMapper,
     private val removeAllBooksUseCase: RemoveAllBooksUseCase,
     private val saveBooksUseCase: SaveBooksUseCase,
+    private val booksFeatureFlag: BooksFeatureFlag,
     savedStateHandle: SavedStateHandle,
     initialState: ListUiState,
 ) : BaseViewModel<ListUiState, ListUiState.PartialState, ListEvent, ListIntent>(
@@ -39,19 +41,21 @@ class ListViewModel @Inject constructor(
 
     init {
         logcat { "init" }
-        acceptIntent(ListIntent.GetBooks)
+        acceptIntent(ListIntent.CheckFeatureBlock)
     }
 
     override fun mapIntents(intent: ListIntent): Flow<ListUiState.PartialState> {
         return when (intent) {
             is ListIntent.GetBooks -> getBooks()
             is ListIntent.BookClicked -> bookClicked(intent.bookId)
+            is ListIntent.CheckFeatureBlock -> checkFeatureStatus()
         }
     }
 
     var pagingDataFlow: Flow<PagingData<BookUiModel>>? = null
 
     private fun getBooks(): Flow<ListUiState.PartialState> = flow<ListUiState.PartialState> {
+        logcat { "getBooks" }
         // Dummy load
         delay(5_000L)
         pagingDataFlow = Pager(PagingConfig(pageSize = 32)) {
@@ -72,6 +76,16 @@ class ListViewModel @Inject constructor(
         return emptyFlow()
     }
 
+    private fun checkFeatureStatus(): Flow<ListUiState.PartialState> = flow {
+        val isBooksFeatureEnabled = booksFeatureFlag.isFeatureEnabled()
+        logcat("isBooksFeatureEnabled") { isBooksFeatureEnabled.toString() }
+        if (isBooksFeatureEnabled) {
+            acceptIntent(ListIntent.GetBooks)
+        } else {
+            emit(ListUiState.PartialState.Blocked)
+        }
+    }
+
     override fun reduceUiState(
         previousState: ListUiState,
         partialState: ListUiState.PartialState,
@@ -80,14 +94,25 @@ class ListViewModel @Inject constructor(
             is ListUiState.PartialState.Loading -> previousState.copy(
                 isLoading = true,
                 isError = false,
+                isFeatureBlocked = false,
             )
+
             is ListUiState.PartialState.Fetched -> previousState.copy(
                 isLoading = false,
                 isError = false,
+                isFeatureBlocked = false,
             )
+
             is ListUiState.PartialState.Error -> previousState.copy(
                 isLoading = false,
                 isError = true,
+                isFeatureBlocked = false,
+            )
+
+            is ListUiState.PartialState.Blocked -> previousState.copy(
+                isLoading = false,
+                isError = false,
+                isFeatureBlocked = true,
             )
         }
     }

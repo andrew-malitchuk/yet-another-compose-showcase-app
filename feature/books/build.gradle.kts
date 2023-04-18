@@ -30,9 +30,12 @@ dependencies {
     implementation("androidx.room:room-paging:2.5.0")
     implementation("androidx.paging:paging-compose:1.0.0-alpha18")
 
+    implementation("com.github.theapache64:rebugger:1.0.0-alpha02")
+
     implementation(project(":domain"))
     implementation(project(":feature:navigation"))
     implementation(project(":core:platform"))
     implementation(project(":core:model"))
     implementation(project(":core:ui"))
+    implementation(project(":service:featureflag"))
 }

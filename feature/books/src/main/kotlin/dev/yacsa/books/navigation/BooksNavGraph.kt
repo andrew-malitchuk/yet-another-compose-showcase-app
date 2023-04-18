@@ -1,7 +1,11 @@
 package dev.yacsa.books.navigation
 
-import androidx.navigation.*
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
+import androidx.navigation.navigation
 import dev.yacsa.books.screen.about.AboutScreen
 import dev.yacsa.books.screen.detalization.DetalizationRoute
 import dev.yacsa.books.screen.list.ListRoute
@@ -24,6 +28,16 @@ fun NavGraphBuilder.booksNavGraph(navController: NavHostController) {
                         restoreState = true
                         launchSingleTop = true
                     }
+                },
+                onFeatureFlagClick = {
+                    navController.navigate(
+                        NavigationDirection.FeatureFlag.route,
+                    )
+                },
+                notFound = {
+                    navController.navigate(
+                        NavigationDirection.NotFound.route,
+                    )
                 },
             )
         }

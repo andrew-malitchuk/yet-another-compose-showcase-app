@@ -2,6 +2,7 @@ package dev.yacsa.books.screen.list
 
 import android.widget.Toast
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
@@ -12,6 +13,7 @@ import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.theapache64.rebugger.Rebugger
 import dev.yacsa.books.screen.list.content.ContentError
 import dev.yacsa.books.screen.list.content.ContentFetched
 import dev.yacsa.books.screen.list.content.ContentIsLoading
@@ -27,9 +29,11 @@ import logcat.logcat
 @Composable
 fun ListRoute(
     onClick: (Int) -> Unit,
+    onFeatureFlagClick: () -> Unit,
+    notFound: () -> Unit,
     listViewModel: ListViewModel = hiltViewModel(),
 ) {
-    HandleEvents(listViewModel.event)
+//    HandleEvents(listViewModel.event)
 
     val uiState by listViewModel.uiState.collectAsStateWithLifecycle()
 
@@ -37,26 +41,46 @@ fun ListRoute(
 
     val windowInfo = rememberWindowInfo()
 
+    Rebugger(
+        trackMap = mapOf(
+            "uiState" to uiState,
+            "pagingState" to pagingState,
+            "windowInfo" to windowInfo,
+        ),
+    )
+
     when (windowInfo.screenHeightInfo) {
         WindowInfo.WindowType.Compact -> {
             Toast.makeText(LocalContext.current, "Compact", Toast.LENGTH_SHORT).show()
         }
+
         WindowInfo.WindowType.Expanded -> {
             Toast.makeText(LocalContext.current, "Expanded", Toast.LENGTH_SHORT).show()
         }
+
         WindowInfo.WindowType.Medium -> {
             Toast.makeText(LocalContext.current, "Medium", Toast.LENGTH_SHORT).show()
         }
     }
 
     logcat("ListRoute") { "ListRoute" }
-    ListScreen(
-        onBookClicked = {
-            onClick(it)
-        },
-        pagingState = pagingState,
-        uiState = uiState,
-    )
+
+    if (uiState.isFeatureBlocked) {
+        // https://github.com/googlecodelabs/android-navigation/issues/113
+        LaunchedEffect(Unit) {
+            notFound()
+        }
+    } else {
+        ListScreen(
+            onBookClicked = {
+                onClick(it)
+            },
+
+            pagingState = pagingState,
+            uiState = uiState,
+            onFeatureFlagClick = onFeatureFlagClick,
+        )
+    }
 }
 
 @Composable
@@ -64,6 +88,7 @@ fun ListScreen(
     onBookClicked: (Int) -> Unit,
     pagingState: LazyPagingItems<BookUiModel>?,
     uiState: ListUiState,
+    onFeatureFlagClick: () -> Unit,
 ) {
     val systemUiController = rememberSystemUiController()
 
@@ -74,6 +99,7 @@ fun ListScreen(
         ContentFetched(
             onBookClicked = onBookClicked,
             lazyPagingItems = pagingState,
+            onFeatureFlagClick = onFeatureFlagClick,
         )
     } else {
         systemUiController.setSystemBarsColor(
@@ -91,6 +117,7 @@ fun ListNoContent(
         uiState.isLoading -> {
             ContentIsLoading()
         }
+
         uiState.isError -> {
             ContentError()
         }
@@ -118,6 +145,7 @@ fun PreviewListScreen() {
             {},
             flowOf(PagingData.empty<BookUiModel>()).collectAsLazyPagingItems(),
             ListUiState(),
+            {},
         )
     }
 }

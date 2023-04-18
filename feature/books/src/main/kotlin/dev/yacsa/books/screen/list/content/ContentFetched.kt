@@ -6,7 +6,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.*
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AddCircle
 import androidx.compose.material.icons.outlined.Menu
@@ -40,6 +44,7 @@ fun ContentFetched(
     modifier: Modifier = Modifier,
     onBookClicked: (Int) -> Unit,
     lazyPagingItems: LazyPagingItems<BookUiModel>,
+    onFeatureFlagClick: () -> Unit,
 ) {
     val state = rememberLazyListState()
     val listState = rememberLazyListState()
@@ -64,7 +69,7 @@ fun ContentFetched(
             },
             backgroundColor = YacsaTheme.colors.primaryText,
             actions = {
-                IconButton(onClick = { /* Do Something*/ }) {
+                IconButton(onClick = { onFeatureFlagClick() }) {
                     Icon(Icons.Outlined.Search, null)
                 }
                 IconButton(onClick = {
@@ -131,6 +136,7 @@ fun Preview_ContentFetched() {
         ContentFetched(
             onBookClicked = {},
             lazyPagingItems = flowOf(PagingData.empty<BookUiModel>()).collectAsLazyPagingItems(),
+            onFeatureFlagClick = {},
         )
     }
 }

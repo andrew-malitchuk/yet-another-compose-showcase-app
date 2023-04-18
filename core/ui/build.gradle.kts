@@ -25,4 +25,6 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.compose.material3)
     implementation("androidx.core:core-splashscreen:1.0.0")
+    implementation(project(":feature:navigation"))
+
 }

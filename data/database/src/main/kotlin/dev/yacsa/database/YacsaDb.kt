@@ -8,5 +8,6 @@ object YacsaDb {
         const val BOOK = "book"
         const val PERSON = "person"
         const val REMOVE_KEY = "remove_key"
+        const val FEATURE_FLAG = "feature_flag"
     }
 }

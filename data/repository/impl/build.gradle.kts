@@ -13,4 +13,5 @@ dependencies {
     implementation(project(":data:database"))
     implementation(project(":data:datastore"))
     implementation(project(":data:cryptodatastore"))
+    implementation(project(":data:remoteconfig"))
 }

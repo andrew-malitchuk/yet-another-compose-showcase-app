@@ -9,7 +9,7 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 class RemoteConfigSourceImpl @Inject constructor(
-    private val remoteConfig: RemoteConfigure
+    private val remoteConfig: RemoteConfigure,
 ) : RemoteConfigSource {
 
     override suspend fun getDouble(key: String): Result<Double> {
@@ -74,6 +74,4 @@ class RemoteConfigSourceImpl @Inject constructor(
             }
         }
     }
-
-
 }

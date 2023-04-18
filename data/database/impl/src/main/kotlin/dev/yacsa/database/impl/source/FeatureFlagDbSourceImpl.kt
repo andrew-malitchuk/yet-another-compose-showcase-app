@@ -6,9 +6,8 @@ import dev.yacsa.database.source.FeatureFlagDbSource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-
 class FeatureFlagDbSourceImpl @Inject constructor(
-    private val featureFlagDbDao: FeatureFlagDbDao
+    private val featureFlagDbDao: FeatureFlagDbDao,
 ) : FeatureFlagDbSource {
 
     override suspend fun get(id: Int): FeatureFlagDbModel? {
@@ -34,7 +33,7 @@ class FeatureFlagDbSourceImpl @Inject constructor(
     }
 
     override suspend fun update(value: FeatureFlagDbModel) {
-        featureFlagDbDao.update(value.key,value.value)
+        featureFlagDbDao.update(value.key, value.value)
     }
 
     override suspend fun update(values: List<FeatureFlagDbModel>) {
@@ -56,5 +55,4 @@ class FeatureFlagDbSourceImpl @Inject constructor(
     override suspend fun deleteAll() {
         featureFlagDbDao.deleteAll()
     }
-
 }

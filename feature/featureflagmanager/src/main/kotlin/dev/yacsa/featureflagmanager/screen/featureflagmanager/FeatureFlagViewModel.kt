@@ -17,7 +17,7 @@ import javax.inject.Inject
 class FeatureFlagViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     initialState: FeatureFlagUiState,
-    private val featureFlagRepository: FeatureFlagRepository
+    private val featureFlagRepository: FeatureFlagRepository,
 ) : BaseViewModel<FeatureFlagUiState, FeatureFlagUiState.PartialState, FeatureFlagEvent, FeatureFlagIntent>(
     savedStateHandle,
     initialState,
@@ -28,14 +28,13 @@ class FeatureFlagViewModel @Inject constructor(
         acceptIntent(FeatureFlagIntent.GetFeatureFlags)
     }
 
-
     fun updateFeatureFlag(featureFlagModel: FeatureFlagModel) {
         viewModelScope.launch {
             featureFlagRepository.updateLocalFeatureFlag(
                 FeatureFlagRepoModel(
                     featureFlagModel.key,
-                    featureFlagModel.value
-                )
+                    featureFlagModel.value,
+                ),
             )
         }
     }
@@ -46,16 +45,17 @@ class FeatureFlagViewModel @Inject constructor(
             if (list.isSuccess) {
                 emit(
                     FeatureFlagUiState.PartialState.Fetched(
-                        (list.getOrNull()?.map {
-                            FeatureFlagModel(it.key, it.value)
-                        } ?: arrayListOf()) as ArrayList<FeatureFlagModel>
-                    )
+                        (
+                            list.getOrNull()?.map {
+                                FeatureFlagModel(it.key, it.value)
+                            } ?: arrayListOf()
+                            ) as ArrayList<FeatureFlagModel>,
+                    ),
                 )
             } else {
                 emit(FeatureFlagUiState.PartialState.Error(list.exceptionOrNull()!!))
             }
         }
-
 
     override fun mapIntents(intent: FeatureFlagIntent): Flow<FeatureFlagUiState.PartialState> {
         return when (intent) {
@@ -76,7 +76,7 @@ class FeatureFlagViewModel @Inject constructor(
             is FeatureFlagUiState.PartialState.Fetched -> previousState.copy(
                 isLoading = false,
                 isError = false,
-                featureFlags = partialState.list
+                featureFlags = partialState.list,
             )
             is FeatureFlagUiState.PartialState.Error -> previousState.copy(
                 isLoading = false,
@@ -84,5 +84,4 @@ class FeatureFlagViewModel @Inject constructor(
             )
         }
     }
-
 }

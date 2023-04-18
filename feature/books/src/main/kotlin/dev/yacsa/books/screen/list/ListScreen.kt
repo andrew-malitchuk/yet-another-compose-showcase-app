@@ -46,9 +46,8 @@ fun ListRoute(
             "uiState" to uiState,
             "pagingState" to pagingState,
             "windowInfo" to windowInfo,
-        )
+        ),
     )
-
 
     when (windowInfo.screenHeightInfo) {
         WindowInfo.WindowType.Compact -> {
@@ -100,7 +99,7 @@ fun ListScreen(
         ContentFetched(
             onBookClicked = onBookClicked,
             lazyPagingItems = pagingState,
-            onFeatureFlagClick = onFeatureFlagClick
+            onFeatureFlagClick = onFeatureFlagClick,
         )
     } else {
         systemUiController.setSystemBarsColor(

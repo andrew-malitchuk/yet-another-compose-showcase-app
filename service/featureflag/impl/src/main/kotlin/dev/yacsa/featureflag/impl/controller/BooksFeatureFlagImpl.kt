@@ -18,5 +18,4 @@ class BooksFeatureFlagImpl @Inject constructor(
         val key = IsBooksFeatureEnabled.key
         return fetchFeatureFlagUseCase(key)
     }
-
 }

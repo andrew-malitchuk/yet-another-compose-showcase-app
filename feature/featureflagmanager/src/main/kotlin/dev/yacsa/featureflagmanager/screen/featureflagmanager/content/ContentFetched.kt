@@ -26,7 +26,7 @@ fun ContentFetched(
     modifier: Modifier = Modifier,
     uiState: FeatureFlagUiState,
     isEnabled: (FeatureFlagModel) -> Unit,
-    isActive: (FeatureFlagModel) -> Unit
+    isActive: (FeatureFlagModel) -> Unit,
 ) {
     Column {
         TopAppBar(
@@ -47,14 +47,18 @@ fun ContentFetched(
             items(items = uiState.featureFlags ?: emptyList()) { item ->
                 ItemFetched(item = item, isEnabled = {
                     logcat { it.toString() }
-                    isEnabled(item.also {
-                        it.value = null
-                    })
+                    isEnabled(
+                        item.also {
+                            it.value = null
+                        },
+                    )
                 }, isActive = { value ->
                     logcat { value.toString() }
-                    isActive(item.also {
-                        it.value = value
-                    })
+                    isActive(
+                        item.also {
+                            it.value = value
+                        },
+                    )
                 })
             }
         }
@@ -65,10 +69,14 @@ fun ContentFetched(
 @Preview(showBackground = true)
 fun Preview_ContentFetched() {
     YacsaTheme() {
-        ContentFetched(uiState = FeatureFlagUiState(
-            featureFlags = listOf(
-                FeatureFlagModel("foo")
+        ContentFetched(
+            uiState = FeatureFlagUiState(
+                featureFlags = listOf(
+                    FeatureFlagModel("foo"),
+                ),
             ),
-        ), isEnabled = {}, isActive = {})
+            isEnabled = {},
+            isActive = {},
+        )
     }
 }

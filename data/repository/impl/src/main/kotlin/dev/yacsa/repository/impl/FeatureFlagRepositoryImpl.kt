@@ -52,9 +52,8 @@ class FeatureFlagRepositoryImpl @Inject constructor(
         featureFlagDbSource.insert(
             FeatureFlagDbModel(
                 0,
-                key
-            )
+                key,
+            ),
         )
     }
-
 }

@@ -94,25 +94,25 @@ class ListViewModel @Inject constructor(
             is ListUiState.PartialState.Loading -> previousState.copy(
                 isLoading = true,
                 isError = false,
-                isFeatureBlocked = false
+                isFeatureBlocked = false,
             )
 
             is ListUiState.PartialState.Fetched -> previousState.copy(
                 isLoading = false,
                 isError = false,
-                isFeatureBlocked = false
+                isFeatureBlocked = false,
             )
 
             is ListUiState.PartialState.Error -> previousState.copy(
                 isLoading = false,
                 isError = true,
-                isFeatureBlocked = false
+                isFeatureBlocked = false,
             )
 
             is ListUiState.PartialState.Blocked -> previousState.copy(
                 isLoading = false,
                 isError = false,
-                isFeatureBlocked = true
+                isFeatureBlocked = true,
             )
         }
     }

@@ -24,7 +24,7 @@ fun ItemFetched(
     modifier: Modifier = Modifier,
     item: FeatureFlagModel,
     isEnabled: (Boolean) -> Unit,
-    isActive: (Boolean) -> Unit
+    isActive: (Boolean) -> Unit,
 ) {
     val checkboxState = remember { mutableStateOf(item.value != null) }
     val switchState = remember { mutableStateOf(item.value) }
@@ -33,23 +33,23 @@ fun ItemFetched(
         Row(
             modifier = Modifier
                 .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
                 modifier = Modifier
                     .padding(
-                        8.dp
+                        8.dp,
                     ),
-                text = item.key
+                text = item.key,
             )
             Spacer(modifier = Modifier.weight(1f))
             Switch(
-                checked = switchState.value?:false,
+                checked = switchState.value ?: false,
                 onCheckedChange = {
                     switchState.value = it
                     isActive(it)
                 },
-                enabled = checkboxState.value
+                enabled = checkboxState.value,
             )
             Checkbox(
                 checked = checkboxState.value,
@@ -59,13 +59,13 @@ fun ItemFetched(
                 },
                 modifier = Modifier
                     .padding(
-                        16.dp
-                    )
+                        16.dp,
+                    ),
             )
         }
         Divider(
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxWidth(),
         )
     }
 }
@@ -77,7 +77,7 @@ fun Preview_ItemFetched() {
         ItemFetched(
             item = FeatureFlagModel("foo", true),
             isActive = {},
-            isEnabled = {}
+            isEnabled = {},
         )
     }
 }

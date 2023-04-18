@@ -15,5 +15,4 @@ abstract class RemoteConfigSourceModule {
     abstract fun bindsRemoteConfigSource(
         remoteConfigSourceImpl: RemoteConfigSourceImpl,
     ): RemoteConfigSource
-
 }

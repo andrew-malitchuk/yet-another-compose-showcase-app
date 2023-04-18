@@ -7,7 +7,6 @@ import androidx.navigation.navigation
 import dev.yacsa.featureflagmanager.screen.featureflagmanager.FeatureFlagRoute
 import dev.yacsa.navigation.NavigationDirection
 
-
 fun NavGraphBuilder.featureFlagNavGraph(navController: NavHostController) {
     navigation(
         startDestination = FeatureFlagDirections.List.route,

@@ -5,7 +5,6 @@ import dev.yacsa.database.YacsaDb
 import dev.yacsa.database.model.FeatureFlagDbModel
 import kotlinx.coroutines.flow.Flow
 
-
 @Dao
 interface FeatureFlagDbDao {
 
@@ -26,7 +25,7 @@ interface FeatureFlagDbDao {
     suspend fun update(value: FeatureFlagDbModel)
 
     @Query("UPDATE ${YacsaDb.Table.FEATURE_FLAG} SET value=:value WHERE key=:key")
-    suspend fun update(key:String, value:Boolean?)
+    suspend fun update(key: String, value: Boolean?)
 
     @Query("DELETE FROM ${YacsaDb.Table.FEATURE_FLAG} WHERE id=:id")
     suspend fun delete(id: Int)

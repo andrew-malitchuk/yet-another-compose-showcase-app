@@ -16,7 +16,7 @@ fun NavGraphBuilder.notFoundNavGraph(navController: NavHostController) {
             NotFoundRoute(
                 onBackClick = {
 //                    navController.popBackStack()
-                }
+                },
             )
         }
     }

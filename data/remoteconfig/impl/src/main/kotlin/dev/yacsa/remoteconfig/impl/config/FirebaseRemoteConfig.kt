@@ -6,8 +6,7 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import javax.inject.Inject
 
-class RemoteConfigure @Inject constructor(
-) {
+class RemoteConfigure @Inject constructor() {
 
     val remoteConfig: FirebaseRemoteConfig by lazy {
         Firebase.remoteConfig
@@ -27,5 +26,4 @@ class RemoteConfigure @Inject constructor(
     companion object {
         const val FETCH_INTERVAL = 100L
     }
-
 }

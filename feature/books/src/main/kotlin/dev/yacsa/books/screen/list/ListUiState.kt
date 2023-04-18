@@ -9,7 +9,7 @@ import kotlinx.parcelize.Parcelize
 data class ListUiState(
     val isLoading: Boolean = false,
     val isError: Boolean = false,
-    val isFeatureBlocked: Boolean = false
+    val isFeatureBlocked: Boolean = false,
 ) : Parcelable {
 
     sealed class PartialState {

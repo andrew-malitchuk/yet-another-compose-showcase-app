@@ -34,11 +34,11 @@ class DbDaoModule {
     ): BookAuthorRelationshipDao {
         return appDatabase.getBookAuthorRelationshipDao()
     }
+
     @Provides
     fun providesFeatureFlagDbDao(
         appDatabase: YacsaDb,
     ): FeatureFlagDbDao {
         return appDatabase.getFeatureFlagDbDao()
     }
-
 }

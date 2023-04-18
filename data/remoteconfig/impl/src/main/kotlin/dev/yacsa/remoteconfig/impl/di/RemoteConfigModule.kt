@@ -14,5 +14,4 @@ class RemoteConfigModule {
     fun providesRemoteConfigure(): RemoteConfigure {
         return RemoteConfigure()
     }
-
 }

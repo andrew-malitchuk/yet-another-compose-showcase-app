@@ -16,7 +16,6 @@ fun NavGraphBuilder.booksNavGraph(navController: NavHostController) {
         startDestination = BooksDirection.List.route,
         route = NavigationDirection.Books.route,
     ) {
-
         composable(BooksDirection.About.route) {
             AboutScreen() {}
         }
@@ -32,14 +31,14 @@ fun NavGraphBuilder.booksNavGraph(navController: NavHostController) {
                 },
                 onFeatureFlagClick = {
                     navController.navigate(
-                        NavigationDirection.FeatureFlag.route
+                        NavigationDirection.FeatureFlag.route,
                     )
                 },
                 notFound = {
                     navController.navigate(
-                        NavigationDirection.NotFound.route
+                        NavigationDirection.NotFound.route,
                     )
-                }
+                },
             )
         }
         composable(

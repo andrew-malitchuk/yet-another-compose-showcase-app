@@ -11,7 +11,7 @@ class FeatureFlagRepoDbMapper @Inject constructor() :
     override fun toRepo(value: FeatureFlagDbModel): FeatureFlagRepoModel {
         return FeatureFlagRepoModel(
             value.key,
-            value.value
+            value.value,
         )
     }
 
@@ -19,8 +19,7 @@ class FeatureFlagRepoDbMapper @Inject constructor() :
         return FeatureFlagDbModel(
             0,
             value.key,
-            value.value
+            value.value,
         )
     }
-
 }

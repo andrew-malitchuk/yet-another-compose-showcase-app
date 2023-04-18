@@ -21,7 +21,6 @@ import dev.yacsa.ui.theme.YacsaTheme
 fun FeatureFlagRoute(
     featureFlagViewModel: FeatureFlagViewModel = hiltViewModel(),
 ) {
-
     val uiState by featureFlagViewModel.uiState.collectAsStateWithLifecycle()
 
     FeatureFlagScreen(
@@ -31,7 +30,7 @@ fun FeatureFlagRoute(
         },
         isActive = {
             featureFlagViewModel.updateFeatureFlag(it)
-        }
+        },
     )
 }
 
@@ -39,7 +38,7 @@ fun FeatureFlagRoute(
 fun FeatureFlagScreen(
     uiState: FeatureFlagUiState,
     isEnabled: (FeatureFlagModel) -> Unit,
-    isActive: (FeatureFlagModel) -> Unit
+    isActive: (FeatureFlagModel) -> Unit,
 ) {
     val systemUiController = rememberSystemUiController()
     if (!uiState.isLoading && !uiState.isError) {
@@ -49,7 +48,7 @@ fun FeatureFlagScreen(
         ContentFetched(
             uiState = uiState,
             isActive = isActive,
-            isEnabled = isEnabled
+            isEnabled = isEnabled,
         )
     } else {
         ContentError()
@@ -59,10 +58,9 @@ fun FeatureFlagScreen(
         modifier = Modifier
             .fillMaxSize(),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(text = "FeatureFlagScreen")
-
     }
 }
 
@@ -73,7 +71,7 @@ fun Preview_FeatureFlagScreen() {
         FeatureFlagScreen(
             FeatureFlagUiState(),
             {},
-            {}
+            {},
         )
     }
 }

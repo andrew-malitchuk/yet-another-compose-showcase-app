@@ -5,7 +5,7 @@ import dev.yacsa.repository.FeatureFlagRepository
 import javax.inject.Inject
 
 class FetchFeatureFlagUseCaseImpl @Inject constructor(
-    private val featureFlagRepository: FeatureFlagRepository
+    private val featureFlagRepository: FeatureFlagRepository,
 ) : FetchFeatureFlagUseCase {
 
     override suspend fun invoke(key: String): Boolean {
@@ -19,5 +19,4 @@ class FetchFeatureFlagUseCaseImpl @Inject constructor(
             remoteKeyValue ?: false
         }
     }
-
 }

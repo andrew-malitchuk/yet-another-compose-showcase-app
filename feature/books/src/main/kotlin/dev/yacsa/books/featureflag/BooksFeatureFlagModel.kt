@@ -9,5 +9,5 @@ object IsGridViewEnabledDebug : FeatureFlagModel("isFooEnabledDebug")
 
 val booksFeatureFlagsList = listOf(
     IsBooksFeatureEnabled,
-    IsGridViewEnabledDebug
+    IsGridViewEnabledDebug,
 )

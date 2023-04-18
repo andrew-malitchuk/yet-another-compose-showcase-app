@@ -4,5 +4,5 @@ import dev.yacsa.repository.model.base.BaseRepoModel
 
 data class FeatureFlagRepoModel(
     val key: String,
-    val value: Boolean? = null
+    val value: Boolean? = null,
 ) : BaseRepoModel

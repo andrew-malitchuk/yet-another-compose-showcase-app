@@ -10,7 +10,7 @@ import kotlinx.parcelize.Parcelize
 data class FeatureFlagUiState(
     val isLoading: Boolean = false,
     val isError: Boolean = false,
-    val featureFlags: List<FeatureFlagModel>? = null
+    val featureFlags: List<FeatureFlagModel>? = null,
 ) : Parcelable {
 
     sealed class PartialState {

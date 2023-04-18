@@ -7,7 +7,6 @@ import androidx.room.PrimaryKey
 import dev.yacsa.database.YacsaDb
 import dev.yacsa.database.model.base.BaseDbModel
 
-
 @Entity(
     tableName = YacsaDb.Table.FEATURE_FLAG,
     indices = [
@@ -26,5 +25,5 @@ data class FeatureFlagDbModel(
     @ColumnInfo(name = "key")
     val key: String,
     @ColumnInfo(name = "value")
-    val value: Boolean? = null
+    val value: Boolean? = null,
 ) : BaseDbModel

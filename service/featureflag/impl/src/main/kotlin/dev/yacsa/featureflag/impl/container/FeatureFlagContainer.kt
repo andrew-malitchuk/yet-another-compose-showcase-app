@@ -19,5 +19,4 @@ class FeatureFlagContainer @Inject constructor() {
             featureFlagRepository.updateKey(it.key)
         }
     }
-
 }

@@ -13,6 +13,6 @@ abstract class FeatureFlagModule {
 
     @Binds
     abstract fun bindsBooksFeatureFlag(
-        booksFeatureFlagImpl: BooksFeatureFlagImpl
+        booksFeatureFlagImpl: BooksFeatureFlagImpl,
     ): BooksFeatureFlag
 }

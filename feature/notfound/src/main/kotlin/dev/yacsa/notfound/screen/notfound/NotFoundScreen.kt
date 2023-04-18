@@ -11,29 +11,27 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import dev.yacsa.ui.theme.YacsaTheme
 
-
 @Composable
 fun NotFoundRoute(
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
 ) {
     NotFoundScreen(onBackClick)
 }
 
 @Composable
 fun NotFoundScreen(
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(text = "404")
         OutlinedButton(onClick = { onBackClick() }) {
             Text("Go Back")
         }
     }
-
 }
 
 @Composable

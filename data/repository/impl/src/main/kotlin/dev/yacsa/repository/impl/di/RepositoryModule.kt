@@ -30,5 +30,4 @@ abstract class RepositoryModule {
     abstract fun bindsFeatureFlagRepository(
         featureFlagRepositoryImpl: FeatureFlagRepositoryImpl,
     ): FeatureFlagRepository
-
 }

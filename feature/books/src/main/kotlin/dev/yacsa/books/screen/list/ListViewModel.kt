@@ -42,12 +42,6 @@ class ListViewModel @Inject constructor(
     init {
         logcat { "init" }
         acceptIntent(ListIntent.CheckFeatureBlock)
-//        acceptIntent(ListIntent.GetBooks)
-//        viewModelScope.launch {
-//            logcat { booksFeatureFlag.isFoo().toString() }
-//            logcat("isFeatureEnabled") { booksFeatureFlag.isFeatureEnabled().toString() }
-//        }
-
     }
 
     override fun mapIntents(intent: ListIntent): Flow<ListUiState.PartialState> {

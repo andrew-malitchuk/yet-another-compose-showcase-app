@@ -3,7 +3,7 @@ package dev.yacsa.featureflagmanager.screen.featureflagmanager
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.yacsa.featureflag.FooFlag
+import dev.yacsa.featureflag.FeatureFlagModel
 import dev.yacsa.platform.viewmodel.BaseViewModel
 import dev.yacsa.repository.FeatureFlagRepository
 import dev.yacsa.repository.model.FeatureFlagRepoModel
@@ -23,22 +23,18 @@ class FeatureFlagViewModel @Inject constructor(
     initialState,
 ) {
 
-
     init {
         logcat { "init" }
         acceptIntent(FeatureFlagIntent.GetFeatureFlags)
-        viewModelScope.launch {
-
-        }
     }
 
 
-    fun updateFeatureFlag(fooFlag: FooFlag) {
+    fun updateFeatureFlag(featureFlagModel: FeatureFlagModel) {
         viewModelScope.launch {
             featureFlagRepository.updateLocalFeatureFlag(
                 FeatureFlagRepoModel(
-                    fooFlag.key,
-                    fooFlag.value
+                    featureFlagModel.key,
+                    featureFlagModel.value
                 )
             )
         }
@@ -51,8 +47,8 @@ class FeatureFlagViewModel @Inject constructor(
                 emit(
                     FeatureFlagUiState.PartialState.Fetched(
                         (list.getOrNull()?.map {
-                            FooFlag(it.key, it.value)
-                        } ?: arrayListOf()) as ArrayList<FooFlag>
+                            FeatureFlagModel(it.key, it.value)
+                        } ?: arrayListOf()) as ArrayList<FeatureFlagModel>
                     )
                 )
             } else {

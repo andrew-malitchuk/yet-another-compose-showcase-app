@@ -12,11 +12,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import dev.yacsa.featureflag.FooFlag
+import dev.yacsa.featureflag.FeatureFlagModel
 import dev.yacsa.featureflagmanager.screen.featureflagmanager.content.ContentError
 import dev.yacsa.featureflagmanager.screen.featureflagmanager.content.ContentFetched
 import dev.yacsa.ui.theme.YacsaTheme
-import logcat.logcat
 
 @Composable
 fun FeatureFlagRoute(
@@ -25,16 +24,12 @@ fun FeatureFlagRoute(
 
     val uiState by featureFlagViewModel.uiState.collectAsStateWithLifecycle()
 
-
     FeatureFlagScreen(
         uiState,
         isEnabled = {
-//            featureFlagViewModel
-            logcat("foo") { it.toString() }
             featureFlagViewModel.updateFeatureFlag(it)
         },
         isActive = {
-            logcat("foo") { it.toString() }
             featureFlagViewModel.updateFeatureFlag(it)
         }
     )
@@ -43,8 +38,8 @@ fun FeatureFlagRoute(
 @Composable
 fun FeatureFlagScreen(
     uiState: FeatureFlagUiState,
-    isEnabled: (FooFlag) -> Unit,
-    isActive: (FooFlag) -> Unit
+    isEnabled: (FeatureFlagModel) -> Unit,
+    isActive: (FeatureFlagModel) -> Unit
 ) {
     val systemUiController = rememberSystemUiController()
     if (!uiState.isLoading && !uiState.isError) {

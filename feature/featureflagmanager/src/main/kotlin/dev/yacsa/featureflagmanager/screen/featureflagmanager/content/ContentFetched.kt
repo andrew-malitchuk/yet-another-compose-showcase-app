@@ -14,7 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.yacsa.featureflag.FooFlag
+import dev.yacsa.featureflag.FeatureFlagModel
 import dev.yacsa.featureflagmanager.screen.featureflagmanager.FeatureFlagUiState
 import dev.yacsa.featureflagmanager.screen.featureflagmanager.item.ItemFetched
 import dev.yacsa.ui.theme.YacsaTheme
@@ -25,8 +25,8 @@ import logcat.logcat
 fun ContentFetched(
     modifier: Modifier = Modifier,
     uiState: FeatureFlagUiState,
-    isEnabled: (FooFlag) -> Unit,
-    isActive: (FooFlag) -> Unit
+    isEnabled: (FeatureFlagModel) -> Unit,
+    isActive: (FeatureFlagModel) -> Unit
 ) {
     Column {
         TopAppBar(
@@ -67,7 +67,7 @@ fun Preview_ContentFetched() {
     YacsaTheme() {
         ContentFetched(uiState = FeatureFlagUiState(
             featureFlags = listOf(
-                FooFlag("foo")
+                FeatureFlagModel("foo")
             ),
         ), isEnabled = {}, isActive = {})
     }

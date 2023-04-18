@@ -10,8 +10,6 @@ class UpdateLocalFeatureFlagUseCaseImpl @Inject constructor(
     private val featureFlagRepository: FeatureFlagRepository
 ) : UpdateLocalFeatureFlagUseCase {
 
-
-    // TODO: fix
     override suspend fun invoke(key: String, value: Boolean?) {
         featureFlagRepository.updateLocalFeatureFlag(
             FeatureFlagRepoModel(

@@ -1,13 +1,13 @@
 package dev.yacsa.books.featureflag
 
-import dev.yacsa.featureflag.FooFlag
+import dev.yacsa.featureflag.FeatureFlagModel
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-object IsBooksFeatureEnabled : FooFlag("isBooksFeatureEnabled")
-object IsFooEnabledDebug : FooFlag("isFooEnabledDebug")
+object IsBooksFeatureEnabled : FeatureFlagModel("isBooksFeatureEnabled")
+object IsGridViewEnabledDebug : FeatureFlagModel("isFooEnabledDebug")
 
-val fooList = listOf(
+val booksFeatureFlagsList = listOf(
     IsBooksFeatureEnabled,
-    IsFooEnabledDebug
+    IsGridViewEnabledDebug
 )

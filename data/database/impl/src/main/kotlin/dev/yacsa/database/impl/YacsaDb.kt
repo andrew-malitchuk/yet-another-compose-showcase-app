@@ -25,8 +25,8 @@ const val DB_VERSION = 1
 )
 abstract class YacsaDb : RoomDatabase() {
     // TODO: rename to get..Dao()
-    abstract fun bookDao(): BookDbDao
-    abstract fun personDbDao(): PersonDbDao
-    abstract fun bookAuthorRelationshipDao(): BookAuthorRelationshipDao
-    abstract fun featureFlagDbDao(): FeatureFlagDbDao
+    abstract fun getBookDao(): BookDbDao
+    abstract fun getPersonDbDao(): PersonDbDao
+    abstract fun getBookAuthorRelationshipDao(): BookAuthorRelationshipDao
+    abstract fun getFeatureFlagDbDao(): FeatureFlagDbDao
 }

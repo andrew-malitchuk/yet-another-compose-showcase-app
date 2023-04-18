@@ -1,6 +1,10 @@
 package dev.yacsa.featureflagmanager.screen.featureflagmanager.item
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Divider
 import androidx.compose.material.Switch
@@ -12,13 +16,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.yacsa.featureflag.FooFlag
+import dev.yacsa.featureflag.FeatureFlagModel
 import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
 fun ItemFetched(
     modifier: Modifier = Modifier,
-    item: FooFlag,
+    item: FeatureFlagModel,
     isEnabled: (Boolean) -> Unit,
     isActive: (Boolean) -> Unit
 ) {
@@ -71,7 +75,7 @@ fun ItemFetched(
 fun Preview_ItemFetched() {
     YacsaTheme {
         ItemFetched(
-            item = FooFlag("foo", true),
+            item = FeatureFlagModel("foo", true),
             isActive = {},
             isEnabled = {}
         )

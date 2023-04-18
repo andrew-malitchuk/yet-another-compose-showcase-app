@@ -17,7 +17,7 @@ interface FeatureFlagDbDao {
 
     // TODO: rename to subscribe?
     @Query("SELECT * FROM ${YacsaDb.Table.FEATURE_FLAG}")
-    fun getFlow(): Flow<List<FeatureFlagDbModel>?>
+    fun subscribe(): Flow<List<FeatureFlagDbModel>?>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(value: FeatureFlagDbModel): Long

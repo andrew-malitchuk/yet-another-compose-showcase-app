@@ -20,7 +20,7 @@ class FeatureFlagDbSourceImpl @Inject constructor(
     }
 
     override suspend fun getFlow(): Flow<List<FeatureFlagDbModel>?> {
-        return featureFlagDbDao.getFlow()
+        return featureFlagDbDao.subscribe()
     }
 
     override suspend fun insert(value: FeatureFlagDbModel): Int {
@@ -34,7 +34,6 @@ class FeatureFlagDbSourceImpl @Inject constructor(
     }
 
     override suspend fun update(value: FeatureFlagDbModel) {
-//        featureFlagDbDao.update(value)
         featureFlagDbDao.update(value.key,value.value)
     }
 

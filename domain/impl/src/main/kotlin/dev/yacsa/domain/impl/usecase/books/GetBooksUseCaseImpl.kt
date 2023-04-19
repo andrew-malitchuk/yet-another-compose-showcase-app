@@ -12,6 +12,6 @@ class GetBooksUseCaseImpl @Inject constructor(
 ) : GetBooksUseCase {
     @Throws(Throwable::class)
     override suspend fun invoke(page: Int): List<BookDomainModel> {
-        return booksRepository.getBook(page).map(bookDomainRepoMapper::toDomain)
+        return booksRepository.getBookByBage(page).map(bookDomainRepoMapper::toDomain)
     }
 }

@@ -36,9 +36,13 @@ class BooksRepositoryImpl @Inject constructor(
         return result.filterNotNull().map(bookRepoNetMapper::toRepo)
     }
 
-    override suspend fun getBook(page: Int): List<BookRepoModel> {
+    override suspend fun getBookByBage(page: Int): List<BookRepoModel> {
         val result = booksNetSource.getBooks(page)?.results ?: emptyList()
         return result.filterNotNull().map(bookRepoNetMapper::toRepo)
+    }
+
+    override suspend fun getBook(id: Int): BookRepoModel? {
+        return booksNetSource.getBook(id)?.let { bookRepoNetMapper.toRepo(it) }
     }
 
     override suspend fun loadBooks(): Flow<List<BookRepoModel>> {
@@ -53,6 +57,10 @@ class BooksRepositoryImpl @Inject constructor(
                     refreshBooks()
                 }
             }
+    }
+
+    override suspend fun loadBook(id: Int): BookRepoModel? {
+        return bookDbSource.get(id)?.let { bookRepoDbMapper.toRepo(it) }
     }
 
     override suspend fun saveBooks(values: List<BookRepoModel>) {

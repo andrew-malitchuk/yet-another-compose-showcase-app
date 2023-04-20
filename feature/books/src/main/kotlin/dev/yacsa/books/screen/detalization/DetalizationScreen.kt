@@ -17,36 +17,31 @@ fun DetalizationRoute(
     detalizationViewModel: DetalizationViewModel = hiltViewModel(),
     bookId: Int?,
 ) {
-
 //    bookId?.let {
 //        detalizationViewModel.acceptIntent(DetalizationIntent.GetBook(it))
 //    }
-
 
     val uiState by detalizationViewModel.uiState.collectAsStateWithLifecycle()
 
     Rebugger(
         trackMap = mapOf(
-            "uiState" to uiState
+            "uiState" to uiState,
         ),
     )
 
     DetalizationScreen(
-        uiState = uiState
+        uiState = uiState,
     )
-
 }
 
 @Composable
 fun DetalizationScreen(
     uiState: DetalizationUiState,
 ) {
-
     val systemUiController = rememberSystemUiController()
 
     when {
         uiState.isError -> {
-
         }
 
         uiState.isLoading -> {
@@ -55,7 +50,7 @@ fun DetalizationScreen(
                     color = Color.White,
                 )
                 setNavigationBarColor(
-                    color = Color.White
+                    color = Color.White,
                 )
             }
             ContentIsLoading()
@@ -67,13 +62,12 @@ fun DetalizationScreen(
                     color = Color.LightGray,
                 )
                 setNavigationBarColor(
-                    color = Color.White
+                    color = Color.White,
                 )
             }
             ContentFetchedPortrait(book = uiState.book)
         }
     }
-
 }
 
 @Preview(showBackground = true)
@@ -81,7 +75,7 @@ fun DetalizationScreen(
 fun Preview_DetalizationScreen() {
     YacsaTheme() {
         DetalizationScreen(
-            DetalizationUiState(isLoading = false, isError = false)
+            DetalizationUiState(isLoading = false, isError = false),
         )
     }
 }

@@ -35,20 +35,19 @@ import dev.yacsa.ui.theme.YacsaTheme
 @Composable
 fun ContentFetchedPortrait(
     modifier: Modifier = Modifier,
-    book: BookUiModel?
+    book: BookUiModel?,
 ) {
     Column(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxSize(),
     ) {
-
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Color.LightGray)
                 .aspectRatio(1f / 1f),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Center,
         ) {
             val painter =
                 rememberAsyncImagePainter(
@@ -77,54 +76,50 @@ fun ContentFetchedPortrait(
                 text = book?.title ?: "SWW",
                 style = YacsaTheme.typography.title,
                 maxLines = 2,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
             )
             Spacer(modifier = modifier.height(6.dp))
             Text(
                 text = book?.authors?.firstOrNull()?.name ?: "SWW",
                 style = YacsaTheme.typography.caption,
                 maxLines = 2,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
             )
-
         }
         Row(
             modifier = Modifier
                 .padding(horizontal = 16.dp, vertical = 8.dp)
                 .fillMaxWidth()
-                .height(IntrinsicSize.Max)
+                .height(IntrinsicSize.Max),
         ) {
-
             // TODO: fix
             Box(
                 modifier = Modifier
                     .width(1.dp)
                     .fillMaxHeight()
-                    .background(Color.DarkGray)
+                    .background(Color.DarkGray),
             )
             Spacer(modifier = Modifier.width(8.dp))
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .fillMaxHeight()
+                    .fillMaxHeight(),
             ) {
                 // TODO: fix
                 Text(
                     text = "Description",
                     style = YacsaTheme.typography.title,
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
                 )
                 Spacer(modifier = modifier.height(6.dp))
                 Text(
                     text = book?.subjects?.toString() ?: "SWW",
                     style = YacsaTheme.typography.caption,
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
                 )
             }
         }
     }
-
-
 }
 
 @Composable

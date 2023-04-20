@@ -24,7 +24,7 @@ class DetalizationViewModel @Inject constructor(
     private val bookId: Int = checkNotNull(savedStateHandle["bookId"])
 
     init {
-        logcat{"bookId:$bookId"}
+        logcat { "bookId:$bookId" }
         acceptIntent(DetalizationIntent.GetBook(bookId))
     }
 
@@ -43,11 +43,10 @@ class DetalizationViewModel @Inject constructor(
         } else {
             emit(
                 DetalizationUiState.PartialState.Fetched(
-                    bookUiDomainMapper.toUi(result)
-                )
+                    bookUiDomainMapper.toUi(result),
+                ),
             )
         }
-
     }
 
     override fun reduceUiState(
@@ -58,7 +57,7 @@ class DetalizationViewModel @Inject constructor(
             is DetalizationUiState.PartialState.Loading -> previousState.copy(
                 isLoading = true,
                 isError = false,
-                book = null
+                book = null,
             )
 
             is DetalizationUiState.PartialState.Fetched -> previousState.copy(
@@ -70,7 +69,7 @@ class DetalizationViewModel @Inject constructor(
             is DetalizationUiState.PartialState.Error -> previousState.copy(
                 isLoading = false,
                 isError = true,
-                book = null
+                book = null,
             )
         }
     }

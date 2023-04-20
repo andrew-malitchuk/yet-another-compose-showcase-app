@@ -15,6 +15,6 @@ class BooksNetSourceImpl @Inject constructor(
     }
 
     override suspend fun getBook(bookId: Int): BookNetModel? {
-       return apiService.getBook(bookId)
+        return apiService.getBook(bookId)
     }
 }

@@ -7,7 +7,6 @@ import dev.yacsa.repository.BooksRepository
 import java.io.IOException
 import javax.inject.Inject
 
-
 class GetOrLoadBookUseCaseImpl @Inject constructor(
     private val booksRepository: BooksRepository,
     private val bookDomainRepoMapper: BookDomainRepoMapper,
@@ -20,7 +19,6 @@ class GetOrLoadBookUseCaseImpl @Inject constructor(
                 booksRepository.saveBook(bookDomainRepoMapper.toRepo(it))
             }
             fromNet
-
         } catch (e: IOException) {
             booksRepository.loadBook(bookId)?.let { bookDomainRepoMapper.toDomain(it) }
         }

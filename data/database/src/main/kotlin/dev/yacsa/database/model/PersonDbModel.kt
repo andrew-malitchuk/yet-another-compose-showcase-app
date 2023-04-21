@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.squareup.moshi.JsonClass
 import dev.yacsa.database.YacsaDb
 import dev.yacsa.database.model.base.BaseDbModel
 
@@ -18,6 +19,7 @@ import dev.yacsa.database.model.base.BaseDbModel
         ),
     ],
 )
+@JsonClass(generateAdapter = true)
 data class PersonDbModel(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "personId")

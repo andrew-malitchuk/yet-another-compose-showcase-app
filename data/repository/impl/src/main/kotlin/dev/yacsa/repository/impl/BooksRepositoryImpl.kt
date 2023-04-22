@@ -7,16 +7,11 @@ import dev.yacsa.database.source.PersonDbSource
 import dev.yacsa.network.model.BookNetModel
 import dev.yacsa.network.source.BooksNetSource
 import dev.yacsa.repository.BooksRepository
-import dev.yacsa.repository.impl.mapper.book.BookAuthorRepoDbMapper
 import dev.yacsa.repository.impl.mapper.book.BookRepoDbMapper
 import dev.yacsa.repository.impl.mapper.book.BookRepoNetMapper
 import dev.yacsa.repository.impl.mapper.person.PersonRepoDbMapper
 import dev.yacsa.repository.impl.mapper.person.PersonRepoNetMapper
 import dev.yacsa.repository.model.BookRepoModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 class BooksRepositoryImpl @Inject constructor(
@@ -28,7 +23,6 @@ class BooksRepositoryImpl @Inject constructor(
     private val personRepoNetMapper: PersonRepoNetMapper,
     private val personRepoDbMapper: PersonRepoDbMapper,
     private val bookAuthorRelationshipDbSource: BookAuthorRelationshipDbSource,
-    private val bookAuthorRepoDbMapper: BookAuthorRepoDbMapper,
 ) : BooksRepository {
 
     override suspend fun getBooks(): List<BookRepoModel> {
@@ -45,19 +39,6 @@ class BooksRepositoryImpl @Inject constructor(
         return booksNetSource.getBook(id)?.let { bookRepoNetMapper.toRepo(it) }
     }
 
-    override suspend fun loadBooks(): Flow<List<BookRepoModel>> {
-        return bookAuthorRelationshipDbSource
-            .getFlow()
-            .filterNotNull()
-            .map { list ->
-                list.map(bookAuthorRepoDbMapper::toRepo)
-            }
-            .onEach { list ->
-                if (list.isEmpty()) {
-                    refreshBooks()
-                }
-            }
-    }
 
     override suspend fun loadBook(id: Int): BookRepoModel? {
         return bookDbSource.get(id)?.let { bookRepoDbMapper.toRepo(it) }

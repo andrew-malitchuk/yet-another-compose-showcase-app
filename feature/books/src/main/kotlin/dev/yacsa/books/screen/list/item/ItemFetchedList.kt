@@ -2,7 +2,14 @@ package dev.yacsa.books.screen.list.item
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
@@ -98,7 +105,7 @@ fun ItemFetchedList(
 fun Preview_ListItem_Dark() {
     YacsaTheme(true) {
         ItemFetchedList(
-            book = BookUiModel(1, "foobar", null, emptyList(), true, null, FormatsUiModel(), 10),
+            book = BookUiModel(1, "foobar", null, emptyList(), emptyList(), emptyList(), emptyList(), true, null, FormatsUiModel(), 10),
             onItemContentClick = {},
         )
     }
@@ -109,7 +116,7 @@ fun Preview_ListItem_Dark() {
 fun Preview_ItemFetchedList_Light() {
     YacsaTheme(false) {
         ItemFetchedList(
-            book = BookUiModel(1, "foobar", null, emptyList(), true, null, FormatsUiModel(), 10),
+            book = BookUiModel(1, "foobar", null, emptyList(), emptyList(),  emptyList(),  emptyList(), true, null, FormatsUiModel(), 10),
             onItemContentClick = {},
         )
     }

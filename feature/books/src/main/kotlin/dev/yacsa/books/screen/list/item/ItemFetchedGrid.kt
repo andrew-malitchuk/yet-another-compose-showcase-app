@@ -1,7 +1,12 @@
 package dev.yacsa.books.screen.list.item
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
@@ -77,7 +82,7 @@ fun ItemFetchedGrid(
 fun Preview_ItemFetchedGrid() {
     YacsaTheme {
         ItemFetchedGrid(
-            book = BookUiModel(1, "foobar", null, emptyList(), true, null, FormatsUiModel(), 10),
+            book = BookUiModel(1, "foobar", null, emptyList(), emptyList(), emptyList(), emptyList(), true, null, FormatsUiModel(), 10),
             onItemContentClick = {},
         )
     }

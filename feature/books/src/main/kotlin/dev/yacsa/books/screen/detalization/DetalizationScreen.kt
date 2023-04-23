@@ -18,9 +18,6 @@ fun DetalizationRoute(
     bookId: Int?,
     onBackClick:()->Unit
 ) {
-//    bookId?.let {
-//        detalizationViewModel.acceptIntent(DetalizationIntent.GetBook(it))
-//    }
 
     val uiState by detalizationViewModel.uiState.collectAsStateWithLifecycle()
 

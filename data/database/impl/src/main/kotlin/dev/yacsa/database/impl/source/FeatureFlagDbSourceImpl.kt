@@ -10,6 +10,10 @@ class FeatureFlagDbSourceImpl @Inject constructor(
     private val featureFlagDbDao: FeatureFlagDbDao,
 ) : FeatureFlagDbSource {
 
+    override suspend fun getKey(key: String): FeatureFlagDbModel? {
+        return featureFlagDbDao.getByKey(key)
+    }
+
     override suspend fun get(id: Int): FeatureFlagDbModel? {
         return featureFlagDbDao.get(id)
     }

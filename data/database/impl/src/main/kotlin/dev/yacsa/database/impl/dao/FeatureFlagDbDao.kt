@@ -14,6 +14,9 @@ interface FeatureFlagDbDao {
     @Query("SELECT * FROM ${YacsaDb.Table.FEATURE_FLAG}")
     suspend fun get(): List<FeatureFlagDbModel>?
 
+    @Query("SELECT * FROM ${YacsaDb.Table.FEATURE_FLAG} WHERE `key`=:key")
+    suspend fun getByKey(key: String): FeatureFlagDbModel?
+
     // TODO: rename to subscribe?
     @Query("SELECT * FROM ${YacsaDb.Table.FEATURE_FLAG}")
     fun subscribe(): Flow<List<FeatureFlagDbModel>?>

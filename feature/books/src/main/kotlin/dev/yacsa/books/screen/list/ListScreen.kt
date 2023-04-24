@@ -5,7 +5,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -33,7 +32,7 @@ fun ListRoute(
     notFound: () -> Unit,
     listViewModel: ListViewModel = hiltViewModel(),
 ) {
-//    HandleEvents(listViewModel.event)
+    HandleEvents(listViewModel.event, onClick, notFound)
 
     val uiState by listViewModel.uiState.collectAsStateWithLifecycle()
 
@@ -73,7 +72,8 @@ fun ListRoute(
     } else {
         ListScreen(
             onBookClicked = {
-                onClick(it)
+//                onClick(it)
+                listViewModel.acceptIntent(ListIntent.BookClicked(it))
             },
 
             pagingState = pagingState,
@@ -125,13 +125,21 @@ fun ListNoContent(
 }
 
 @Composable
-private fun HandleEvents(events: Flow<ListEvent>) {
-    val uriHandler = LocalUriHandler.current
+private fun HandleEvents(
+    events: Flow<ListEvent>,
+    onBookClicked: (Int) -> Unit,
+    notFound: () -> Unit
+) {
 
     events.collectWithLifecycle {
         when (it) {
             is ListEvent.OnBookClick -> {
-                // open detalization
+                logcat("foo"){it.toString()}
+                if (it.isBlocked) {
+                    notFound()
+                } else {
+                    onBookClicked(it.bookId)
+                }
             }
         }
     }

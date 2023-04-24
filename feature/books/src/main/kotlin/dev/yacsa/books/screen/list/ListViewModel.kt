@@ -21,6 +21,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.launch
 import logcat.logcat
 import javax.inject.Inject
 
@@ -72,7 +73,10 @@ class ListViewModel @Inject constructor(
     }
 
     private fun bookClicked(bookId: Int): Flow<ListUiState.PartialState> {
-        publishEvent(ListEvent.OnBookClick(bookId))
+        viewModelScope.launch {
+            val isDetalizationEnabled = booksFeatureFlag.isDetalizationEnabled()
+            publishEvent(ListEvent.OnBookClick(bookId, isDetalizationEnabled))
+        }
         return emptyFlow()
     }
 
@@ -85,6 +89,7 @@ class ListViewModel @Inject constructor(
             emit(ListUiState.PartialState.Blocked)
         }
     }
+
 
     override fun reduceUiState(
         previousState: ListUiState,

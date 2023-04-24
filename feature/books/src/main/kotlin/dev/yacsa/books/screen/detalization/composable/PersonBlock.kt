@@ -28,17 +28,16 @@ fun PersonBlock(
     ) {
         authors.forEach {
             Row(
-                horizontalArrangement = Arrangement.Center
+                horizontalArrangement = Arrangement.Center,
             ) {
                 Icon(imageVector = Icons.Outlined.Person, contentDescription = "")
                 Spacer(modifier = Modifier.width(8.dp))
                 Column() {
                     Text(text = "${it.birthYear}-${it.deathYear}")
-                    Text(text = it.name?:"SWW")
+                    Text(text = it.name ?: "SWW")
                 }
             }
         }
-
     }
 }
 
@@ -52,9 +51,9 @@ fun Preview_PersonBlock() {
                     0,
                     2000,
                     3000,
-                    "Foo Bar"
-                )
-            )
+                    "Foo Bar",
+                ),
+            ),
         )
     }
 }

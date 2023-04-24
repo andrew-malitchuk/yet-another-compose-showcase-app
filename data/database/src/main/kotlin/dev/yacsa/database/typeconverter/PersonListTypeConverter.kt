@@ -1,7 +1,6 @@
 package dev.yacsa.database.typeconverter
 
-
-//class PersonListTypeConverter {
+// class PersonListTypeConverter {
 //
 //    private val moshi: Moshi by lazy { Moshi.Builder().build() }
 //
@@ -28,4 +27,4 @@ package dev.yacsa.database.typeconverter
 //        return listAdapter.fromJson(person)
 //    }
 //
-//}
+// }

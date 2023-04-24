@@ -116,7 +116,7 @@ fun Preview_ListItem_Dark() {
 fun Preview_ItemFetchedList_Light() {
     YacsaTheme(false) {
         ItemFetchedList(
-            book = BookUiModel(1, "foobar", null, emptyList(), emptyList(),  emptyList(),  emptyList(), true, null, FormatsUiModel(), 10),
+            book = BookUiModel(1, "foobar", null, emptyList(), emptyList(), emptyList(), emptyList(), true, null, FormatsUiModel(), 10),
             onItemContentClick = {},
         )
     }

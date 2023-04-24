@@ -4,7 +4,6 @@ import androidx.room.TypeConverter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 
-
 class StringListTypeConvertor {
 
     private val moshi: Moshi = Moshi
@@ -23,5 +22,4 @@ class StringListTypeConvertor {
     fun stringToPerson(values: String): List<String?>? {
         return moshi.parseList<String>(values)
     }
-
 }

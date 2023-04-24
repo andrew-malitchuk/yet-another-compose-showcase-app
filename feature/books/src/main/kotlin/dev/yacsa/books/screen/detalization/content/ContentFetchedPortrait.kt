@@ -46,7 +46,7 @@ import dev.yacsa.ui.theme.YacsaTheme
 fun ContentFetchedPortrait(
     modifier: Modifier = Modifier,
     book: BookUiModel?,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -54,7 +54,7 @@ fun ContentFetchedPortrait(
             .fillMaxSize(),
     ) {
         Box(
-            modifier = Modifier.wrapContentSize()
+            modifier = Modifier.wrapContentSize(),
         ) {
             Column(
                 modifier = Modifier
@@ -94,7 +94,7 @@ fun ContentFetchedPortrait(
                         maxLines = 2,
                         textAlign = TextAlign.Center,
                     )
-                    if(book?.copyright == true){
+                    if (book?.copyright == true) {
                         Text(text = "©")
                     }
                 }
@@ -114,7 +114,6 @@ fun ContentFetchedPortrait(
                         style = YacsaTheme.typography.caption,
                     )
                 }
-
             }
 
             IconButton(
@@ -122,14 +121,13 @@ fun ContentFetchedPortrait(
                     .align(Alignment.TopStart),
                 onClick = {
                     onBackClick()
-                }
+                },
             ) {
                 Icon(
                     imageVector = Icons.Outlined.ArrowBack,
-                    contentDescription = ""
+                    contentDescription = "",
                 )
             }
-
         }
         Row(
             modifier = Modifier
@@ -158,7 +156,7 @@ fun ContentFetchedPortrait(
                 )
                 Spacer(modifier = modifier.height(6.dp))
                 SubjectBlock(
-                    subjects = book?.subjects?.filterNotNull() ?: emptyList()
+                    subjects = book?.subjects?.filterNotNull() ?: emptyList(),
                 )
             }
         }
@@ -191,7 +189,7 @@ fun ContentFetchedPortrait(
                     )
                     Spacer(modifier = modifier.height(6.dp))
                     SubjectBlock(
-                        subjects = book?.languages?.filterNotNull() ?: emptyList()
+                        subjects = book?.languages?.filterNotNull() ?: emptyList(),
                     )
                 }
             }
@@ -225,7 +223,7 @@ fun ContentFetchedPortrait(
                     )
                     Spacer(modifier = modifier.height(6.dp))
                     SubjectBlock(
-                        subjects = book?.bookshelves?.filterNotNull() ?: emptyList()
+                        subjects = book?.bookshelves?.filterNotNull() ?: emptyList(),
                     )
                 }
             }
@@ -258,7 +256,7 @@ fun ContentFetchedPortrait(
                 )
                 Spacer(modifier = modifier.height(6.dp))
                 PersonBlock(
-                    authors = book?.authors?.filterNotNull() ?: emptyList()
+                    authors = book?.authors?.filterNotNull() ?: emptyList(),
                 )
             }
         }
@@ -291,13 +289,11 @@ fun ContentFetchedPortrait(
                     )
                     Spacer(modifier = modifier.height(6.dp))
                     PersonBlock(
-                        authors = book?.translators?.filterNotNull() ?: emptyList()
+                        authors = book?.translators?.filterNotNull() ?: emptyList(),
                     )
                 }
             }
         }
-
-
     }
 }
 

@@ -19,7 +19,7 @@ import dev.yacsa.ui.theme.YacsaTheme
 @Composable
 fun SubjectBlock(
     modifier: Modifier = Modifier,
-    subjects: List<String>
+    subjects: List<String>,
 ) {
     Column(
         modifier = Modifier
@@ -27,16 +27,14 @@ fun SubjectBlock(
     ) {
         subjects.forEach {
             Row(
-                horizontalArrangement = Arrangement.Center
-            ){
+                horizontalArrangement = Arrangement.Center,
+            ) {
                 Icon(imageVector = Icons.Outlined.PlayArrow, contentDescription = "")
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(text = it)
             }
         }
-
     }
-
 }
 
 @Composable
@@ -44,7 +42,7 @@ fun SubjectBlock(
 fun Preview_SubjectBlock() {
     YacsaTheme {
         SubjectBlock(
-            subjects = listOf("Lorem", "Ipsum", "Dolor", "Sit", "Amen")
+            subjects = listOf("Lorem", "Ipsum", "Dolor", "Sit", "Amen"),
         )
     }
 }

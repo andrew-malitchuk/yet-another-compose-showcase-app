@@ -39,7 +39,6 @@ class BooksRepositoryImpl @Inject constructor(
         return booksNetSource.getBook(id)?.let { bookRepoNetMapper.toRepo(it) }
     }
 
-
     override suspend fun loadBook(id: Int): BookRepoModel? {
         return bookDbSource.get(id)?.let { bookRepoDbMapper.toRepo(it) }
     }

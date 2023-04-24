@@ -16,9 +16,8 @@ import dev.yacsa.ui.theme.YacsaTheme
 fun DetalizationRoute(
     detalizationViewModel: DetalizationViewModel = hiltViewModel(),
     bookId: Int?,
-    onBackClick:()->Unit
+    onBackClick: () -> Unit,
 ) {
-
     val uiState by detalizationViewModel.uiState.collectAsStateWithLifecycle()
 
     Rebugger(
@@ -29,14 +28,14 @@ fun DetalizationRoute(
 
     DetalizationScreen(
         uiState = uiState,
-        onBackClick=onBackClick
+        onBackClick = onBackClick,
     )
 }
 
 @Composable
 fun DetalizationScreen(
     uiState: DetalizationUiState,
-    onBackClick:()->Unit
+    onBackClick: () -> Unit,
 ) {
     val systemUiController = rememberSystemUiController()
 
@@ -65,7 +64,7 @@ fun DetalizationScreen(
                     color = Color.White,
                 )
             }
-            ContentFetchedPortrait(book = uiState.book, onBackClick = {onBackClick()})
+            ContentFetchedPortrait(book = uiState.book, onBackClick = { onBackClick() })
         }
     }
 }
@@ -75,8 +74,8 @@ fun DetalizationScreen(
 fun Preview_DetalizationScreen() {
     YacsaTheme() {
         DetalizationScreen(
-            DetalizationUiState(isLoading = false, isError = false,),
-            onBackClick = {}
+            DetalizationUiState(isLoading = false, isError = false),
+            onBackClick = {},
         )
     }
 }

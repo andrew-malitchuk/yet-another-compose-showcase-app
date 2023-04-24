@@ -90,7 +90,6 @@ class ListViewModel @Inject constructor(
         }
     }
 
-
     override fun reduceUiState(
         previousState: ListUiState,
         partialState: ListUiState.PartialState,

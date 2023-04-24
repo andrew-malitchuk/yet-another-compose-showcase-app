@@ -128,13 +128,12 @@ fun ListNoContent(
 private fun HandleEvents(
     events: Flow<ListEvent>,
     onBookClicked: (Int) -> Unit,
-    notFound: () -> Unit
+    notFound: () -> Unit,
 ) {
-
     events.collectWithLifecycle {
         when (it) {
             is ListEvent.OnBookClick -> {
-                logcat("foo"){it.toString()}
+                logcat("foo") { it.toString() }
                 if (it.isBlocked) {
                     notFound()
                 } else {

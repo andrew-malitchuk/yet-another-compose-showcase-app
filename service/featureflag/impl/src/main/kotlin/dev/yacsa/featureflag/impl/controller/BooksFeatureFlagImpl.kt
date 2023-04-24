@@ -2,6 +2,7 @@ package dev.yacsa.featureflag.impl.controller
 
 import dev.yacsa.books.featureflag.BooksFeatureFlag
 import dev.yacsa.books.featureflag.IsBooksFeatureEnabled
+import dev.yacsa.books.featureflag.IsDetalizationEnabled
 import dev.yacsa.domain.usecase.featureflag.FetchFeatureFlagUseCase
 import javax.inject.Inject
 
@@ -11,6 +12,11 @@ class BooksFeatureFlagImpl @Inject constructor(
 
     override suspend fun isGridViewEnabled(): Boolean {
         val key = IsBooksFeatureEnabled.key
+        return fetchFeatureFlagUseCase(key)
+    }
+
+    override suspend fun isDetalizationEnabled(): Boolean {
+        val key = IsDetalizationEnabled.key
         return fetchFeatureFlagUseCase(key)
     }
 

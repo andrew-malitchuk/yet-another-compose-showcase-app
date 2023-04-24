@@ -20,7 +20,7 @@ class FeatureFlagRepositoryImpl @Inject constructor(
 
     override suspend fun loadFeatureFlag(key: String): Result<FeatureFlagRepoModel> {
         return try {
-            val result = featureFlagDbSource.get(1)
+            val result = featureFlagDbSource.getKey(key)
             if (result == null) {
                 Result.failure(NoSuchElementException())
             } else {

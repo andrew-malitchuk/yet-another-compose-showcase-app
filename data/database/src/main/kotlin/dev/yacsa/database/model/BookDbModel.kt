@@ -14,16 +14,16 @@ data class BookDbModel(
     val id: Int,
     @ColumnInfo(name = "title")
     val title: String?,
-//    @ColumnInfo(name = "subjects")
-//    val subjects: List<String?>?,
-//    @ColumnInfo(name = "authors")
-//    val authors: List<PersonNetModel?>?,
-//    @ColumnInfo(name = "translators")
-//    val translators: List<PersonNetModel?>?,
-//    @ColumnInfo(name = "bookshelves")
-//    val bookshelves: List<String?>?,
-//    @ColumnInfo(name = "languages")
-//    val languages: List<String?>?,
+    @ColumnInfo(name = "subjects")
+    val subjects: List<String?>?,
+    @ColumnInfo(name = "authors")
+    val authors: List<PersonDbModel?>?,
+    @ColumnInfo(name = "translators")
+    val translators: List<PersonDbModel?>?,
+    @ColumnInfo(name = "bookshelves")
+    val bookshelves: List<String?>?,
+    @ColumnInfo(name = "languages")
+    val languages: List<String?>?,
     @ColumnInfo(name = "copyright")
     val copyright: Boolean?,
     @ColumnInfo(name = "media_type")

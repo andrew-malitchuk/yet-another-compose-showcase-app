@@ -26,11 +26,25 @@ class BookRepoNetMapper @Inject constructor(
             }
         }
 
+        val translatorsRepos = ArrayList<PersonRepoModel>()
+        value.translators?.let { list ->
+            list.forEach { person ->
+                person?.let {
+                    translatorsRepos.add(
+                        personRepoNetMapper.toRepo(it),
+                    )
+                }
+            }
+        }
+
         return BookRepoModel(
             value.id,
             value.title,
             value.subjects,
             authorsRepos,
+            translatorsRepos,
+            value.bookshelves,
+            value.languages,
             value.copyright,
             value.mediaType,
             value.formats?.let { formatsRepoNetMapper.toRepo(it) } ?: FormatsRepoModel(),
@@ -44,6 +58,7 @@ class BookRepoNetMapper @Inject constructor(
             value.id,
             value.title,
             value.subjects,
+            null,
             null,
             null,
             null,

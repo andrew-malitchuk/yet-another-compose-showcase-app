@@ -4,5 +4,6 @@ import dev.yacsa.featureflag.FeatureFlag
 
 abstract class BooksFeatureFlag : FeatureFlag() {
     abstract suspend fun isGridViewEnabled(): Boolean
+    abstract suspend fun isDetalizationEnabled(): Boolean
     abstract override suspend fun isFeatureEnabled(): Boolean
 }

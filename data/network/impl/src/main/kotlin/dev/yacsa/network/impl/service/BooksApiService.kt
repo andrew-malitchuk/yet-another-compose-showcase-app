@@ -1,5 +1,6 @@
 package dev.yacsa.network.impl.service
 
+import dev.yacsa.network.model.BookNetModel
 import dev.yacsa.network.model.ResultNetModel
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -10,7 +11,7 @@ interface BooksApiService {
     @GET("/books/{id}")
     suspend fun getBook(
         @Path("id") id: Int,
-    ): ResultNetModel?
+    ): BookNetModel?
 
     @GET("/books")
     suspend fun getBooks(

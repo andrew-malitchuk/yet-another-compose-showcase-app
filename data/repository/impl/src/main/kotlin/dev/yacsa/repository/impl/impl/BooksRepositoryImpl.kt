@@ -1,4 +1,4 @@
-package dev.yacsa.repository.impl
+package dev.yacsa.repository.impl.impl
 
 import dev.yacsa.database.model.relationships.BookAuthorRelationship
 import dev.yacsa.database.source.BookAuthorRelationshipDbSource
@@ -6,12 +6,12 @@ import dev.yacsa.database.source.BookDbSource
 import dev.yacsa.database.source.PersonDbSource
 import dev.yacsa.network.model.BookNetModel
 import dev.yacsa.network.source.BooksNetSource
-import dev.yacsa.repository.BooksRepository
 import dev.yacsa.repository.impl.mapper.book.BookRepoDbMapper
 import dev.yacsa.repository.impl.mapper.book.BookRepoNetMapper
 import dev.yacsa.repository.impl.mapper.person.PersonRepoDbMapper
 import dev.yacsa.repository.impl.mapper.person.PersonRepoNetMapper
 import dev.yacsa.repository.model.BookRepoModel
+import dev.yacsa.repository.repository.BooksRepository
 import javax.inject.Inject
 
 class BooksRepositoryImpl @Inject constructor(

@@ -1,4 +1,4 @@
-package dev.yacsa.repository
+package dev.yacsa.repository.repository
 
 import dev.yacsa.repository.model.FeatureFlagRepoModel
 

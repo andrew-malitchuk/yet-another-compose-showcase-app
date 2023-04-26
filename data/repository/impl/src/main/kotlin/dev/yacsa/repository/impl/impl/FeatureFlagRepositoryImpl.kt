@@ -1,11 +1,11 @@
-package dev.yacsa.repository.impl
+package dev.yacsa.repository.impl.impl
 
 import dev.yacsa.database.model.FeatureFlagDbModel
 import dev.yacsa.database.source.FeatureFlagDbSource
 import dev.yacsa.remoteconfig.source.RemoteConfigSource
-import dev.yacsa.repository.FeatureFlagRepository
 import dev.yacsa.repository.impl.mapper.featureflag.FeatureFlagRepoDbMapper
 import dev.yacsa.repository.model.FeatureFlagRepoModel
+import dev.yacsa.repository.repository.FeatureFlagRepository
 import javax.inject.Inject
 
 class FeatureFlagRepositoryImpl @Inject constructor(

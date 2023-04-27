@@ -1,9 +1,9 @@
-package dev.yacsa.repository.impl
+package dev.yacsa.repository.impl.impl
 
 import dev.yacsa.datastore.source.StartupConfigureDataStoreSource
-import dev.yacsa.repository.StartUpConfigureRepository
 import dev.yacsa.repository.impl.mapper.StartUpConfigureRepoDataStoreMapper
 import dev.yacsa.repository.model.StartUpConfigureRepoModel
+import dev.yacsa.repository.repository.StartUpConfigureRepository
 import kotlinx.coroutines.flow.firstOrNull
 import javax.inject.Inject
 

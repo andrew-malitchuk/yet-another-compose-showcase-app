@@ -1,7 +1,7 @@
 package dev.yacsa.domain.impl.usecase.featureflag
 
 import dev.yacsa.domain.usecase.featureflag.FetchFeatureFlagUseCase
-import dev.yacsa.repository.FeatureFlagRepository
+import dev.yacsa.repository.repository.FeatureFlagRepository
 import javax.inject.Inject
 
 class FetchFeatureFlagUseCaseImpl @Inject constructor(

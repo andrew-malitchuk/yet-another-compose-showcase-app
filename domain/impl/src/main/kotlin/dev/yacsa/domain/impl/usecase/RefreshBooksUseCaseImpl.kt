@@ -2,7 +2,7 @@ package dev.yacsa.domain.impl.usecase
 
 import dev.yacsa.domain.usecase.RefreshBooksUseCase
 import dev.yacsa.platform.ext.resultOf
-import dev.yacsa.repository.BooksRepository
+import dev.yacsa.repository.repository.BooksRepository
 import javax.inject.Inject
 
 class RefreshBooksUseCaseImpl @Inject constructor(

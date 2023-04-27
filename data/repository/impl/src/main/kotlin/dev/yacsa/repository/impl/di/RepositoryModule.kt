@@ -4,12 +4,12 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import dev.yacsa.repository.BooksRepository
-import dev.yacsa.repository.FeatureFlagRepository
-import dev.yacsa.repository.StartUpConfigureRepository
-import dev.yacsa.repository.impl.BooksRepositoryImpl
-import dev.yacsa.repository.impl.FeatureFlagRepositoryImpl
-import dev.yacsa.repository.impl.StartUpConfigureRepositoryImpl
+import dev.yacsa.repository.impl.impl.BooksRepositoryImpl
+import dev.yacsa.repository.impl.impl.FeatureFlagRepositoryImpl
+import dev.yacsa.repository.impl.impl.StartUpConfigureRepositoryImpl
+import dev.yacsa.repository.repository.BooksRepository
+import dev.yacsa.repository.repository.FeatureFlagRepository
+import dev.yacsa.repository.repository.StartUpConfigureRepository
 
 @Suppress("UnnecessaryAbstractClass")
 @Module

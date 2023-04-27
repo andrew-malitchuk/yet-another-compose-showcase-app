@@ -2,7 +2,7 @@ package dev.yacsa.featureflag.impl.container
 
 import dev.yacsa.books.featureflag.booksFeatureFlagsList
 import dev.yacsa.featureflag.FeatureFlagModel
-import dev.yacsa.repository.FeatureFlagRepository
+import dev.yacsa.repository.repository.FeatureFlagRepository
 import javax.inject.Inject
 
 class FeatureFlagContainer @Inject constructor() {

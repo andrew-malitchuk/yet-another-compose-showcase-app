@@ -5,8 +5,8 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.yacsa.featureflag.FeatureFlagModel
 import dev.yacsa.platform.viewmodel.BaseViewModel
-import dev.yacsa.repository.FeatureFlagRepository
 import dev.yacsa.repository.model.FeatureFlagRepoModel
+import dev.yacsa.repository.repository.FeatureFlagRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch

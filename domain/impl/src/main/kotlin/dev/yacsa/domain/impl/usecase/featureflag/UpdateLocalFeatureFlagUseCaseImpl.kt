@@ -1,8 +1,8 @@
 package dev.yacsa.domain.impl.usecase.featureflag
 
 import dev.yacsa.domain.usecase.featureflag.UpdateLocalFeatureFlagUseCase
-import dev.yacsa.repository.FeatureFlagRepository
 import dev.yacsa.repository.model.FeatureFlagRepoModel
+import dev.yacsa.repository.repository.FeatureFlagRepository
 import javax.inject.Inject
 
 class UpdateLocalFeatureFlagUseCaseImpl @Inject constructor(

@@ -3,7 +3,7 @@ package dev.yacsa.domain.impl.usecase.books
 import dev.yacsa.domain.impl.mapper.BookDomainRepoMapper
 import dev.yacsa.domain.model.BookDomainModel
 import dev.yacsa.domain.usecase.books.LoadBooksUseCase
-import dev.yacsa.repository.BooksRepository
+import dev.yacsa.repository.repository.BooksRepository
 import javax.inject.Inject
 
 class LoadBooksUseCaseImpl @Inject constructor(

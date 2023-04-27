@@ -1,7 +1,7 @@
 package dev.yacsa.domain.impl.usecase
 
 import dev.yacsa.domain.usecase.RemoveAllBooksUseCase
-import dev.yacsa.repository.BooksRepository
+import dev.yacsa.repository.repository.BooksRepository
 import javax.inject.Inject
 
 class RemoveAllBooksUseCaseImpl @Inject constructor(

@@ -29,9 +29,9 @@ fun NavGraphBuilder.booksNavGraph(navController: NavHostController) {
                         launchSingleTop = true
                     }
                 },
-                onFeatureFlagClick = {
+                onSearch = {
                     navController.navigate(
-                        NavigationDirection.FeatureFlag.route,
+                        NavigationDirection.Search.route,
                     )
                 },
                 notFound = {

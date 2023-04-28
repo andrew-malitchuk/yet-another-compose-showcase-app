@@ -8,6 +8,7 @@ import dev.yacsa.featureflagmanager.navigation.featureFlagNavGraph
 import dev.yacsa.navigation.NavigationDirection
 import dev.yacsa.notfound.navigation.notFoundNavGraph
 import dev.yacsa.onboarding.navigation.onboardingNavGraph
+import dev.yacsa.search.navigation.searchNavGraph
 
 @Composable
 fun RootNavigationGraph(
@@ -23,5 +24,6 @@ fun RootNavigationGraph(
         onboardingNavGraph(navController)
         featureFlagNavGraph(navController)
         notFoundNavGraph(navController)
+        searchNavGraph(navController)
     }
 }

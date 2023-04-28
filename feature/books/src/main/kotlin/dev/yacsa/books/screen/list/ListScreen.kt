@@ -28,7 +28,7 @@ import logcat.logcat
 @Composable
 fun ListRoute(
     onClick: (Int) -> Unit,
-    onFeatureFlagClick: () -> Unit,
+    onSearch: () -> Unit,
     notFound: () -> Unit,
     listViewModel: ListViewModel = hiltViewModel(),
 ) {
@@ -78,7 +78,7 @@ fun ListRoute(
 
             pagingState = pagingState,
             uiState = uiState,
-            onFeatureFlagClick = onFeatureFlagClick,
+            onSearch = onSearch,
         )
     }
 }
@@ -88,7 +88,7 @@ fun ListScreen(
     onBookClicked: (Int) -> Unit,
     pagingState: LazyPagingItems<BookUiModel>?,
     uiState: ListUiState,
-    onFeatureFlagClick: () -> Unit,
+    onSearch: () -> Unit,
 ) {
     val systemUiController = rememberSystemUiController()
 
@@ -99,7 +99,7 @@ fun ListScreen(
         ContentFetched(
             onBookClicked = onBookClicked,
             lazyPagingItems = pagingState,
-            onFeatureFlagClick = onFeatureFlagClick,
+            onSearch = onSearch,
         )
     } else {
         systemUiController.setSystemBarsColor(

@@ -8,6 +8,7 @@ import dev.yacsa.domain.impl.usecase.*
 import dev.yacsa.domain.impl.usecase.books.GetBooksUseCaseImpl
 import dev.yacsa.domain.impl.usecase.books.GetOrLoadBookUseCaseImpl
 import dev.yacsa.domain.impl.usecase.books.LoadBooksUseCaseImpl
+import dev.yacsa.domain.impl.usecase.books.SearchBooksUseCaseImpl
 import dev.yacsa.domain.impl.usecase.featureflag.FetchFeatureFlagUseCaseImpl
 import dev.yacsa.domain.impl.usecase.featureflag.UpdateLocalFeatureFlagUseCaseImpl
 import dev.yacsa.domain.usecase.*
@@ -15,6 +16,7 @@ import dev.yacsa.domain.usecase.books.GetBooksUseCase
 import dev.yacsa.domain.usecase.books.GetOrLoadBookUseCase
 import dev.yacsa.domain.usecase.books.LoadBooksUseCase
 import dev.yacsa.domain.usecase.books.SaveBooksUseCase
+import dev.yacsa.domain.usecase.books.SearchBooksUseCase
 import dev.yacsa.domain.usecase.featureflag.FetchFeatureFlagUseCase
 import dev.yacsa.domain.usecase.featureflag.UpdateLocalFeatureFlagUseCase
 import javax.inject.Singleton
@@ -89,4 +91,10 @@ abstract class DomainModule {
     abstract fun bindsGetOrLoadBookUseCase(
         getOrLoadBookUseCaseImpl: GetOrLoadBookUseCaseImpl,
     ): GetOrLoadBookUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindsSearchBooksUseCase(
+        searchBooksUseCaseImpl: SearchBooksUseCaseImpl,
+    ): SearchBooksUseCase
 }

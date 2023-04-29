@@ -8,16 +8,18 @@ import kotlinx.parcelize.Parcelize
 @Immutable
 @Parcelize
 data class SearchUiState(
-    val isLoading: Boolean = false,
+    val isContentLoading: Boolean = false,
     val isError: Boolean = false,
+    val isResultLoading:Boolean=false,
     val topSearch: List<BookUiModel>? = null,
     val resultSearch: List<BookUiModel>? = null,
 ) : Parcelable {
 
     sealed class PartialState {
-        object Loading : PartialState()
-        data class Fetched(val topSearch:  ArrayList<BookUiModel>) : PartialState()
-        data class Result(val resultSearch: ArrayList<BookUiModel>) : PartialState()
+        object ContentLoading : PartialState()
+        object ResultLoading : PartialState()
+        data class ContentFetched(val topSearch:  List<BookUiModel>) : PartialState()
+        data class ResultFetched(val resultSearch: List<BookUiModel>) : PartialState()
         data class Error(val throwable: Throwable) : PartialState()
     }
 }

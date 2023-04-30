@@ -17,8 +17,9 @@ import dev.yacsa.ui.theme.YacsaTheme
 @Composable
 fun ResultFetched(
     modifier: Modifier = Modifier,
-    resultSearch: List<BookUiModel>
-) {
+    resultSearch: List<BookUiModel>,
+    onBookClicked: (Int) -> Unit,
+    ) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         modifier = modifier
@@ -33,6 +34,7 @@ fun ResultFetched(
                 book = item,
                 onItemContentClick = {
                     // TODO: fix
+                    item.id?.let { onBookClicked(it) }
 
                 },
             )
@@ -45,7 +47,8 @@ fun ResultFetched(
 fun Preview_ResultFetched() {
     YacsaTheme {
         ResultFetched(
-            resultSearch = emptyList()
+            resultSearch = emptyList(),
+            onBookClicked = {}
         )
     }
 }

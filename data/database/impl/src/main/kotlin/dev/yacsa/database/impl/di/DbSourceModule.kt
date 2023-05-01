@@ -8,10 +8,12 @@ import dev.yacsa.database.impl.source.BookAuthorRelationshipDbSourceImpl
 import dev.yacsa.database.impl.source.BookDbSourceImpl
 import dev.yacsa.database.impl.source.FeatureFlagDbSourceImpl
 import dev.yacsa.database.impl.source.PersonDbSourceImpl
+import dev.yacsa.database.impl.source.SearchHistoryDbSourceImpl
 import dev.yacsa.database.source.BookAuthorRelationshipDbSource
 import dev.yacsa.database.source.BookDbSource
 import dev.yacsa.database.source.FeatureFlagDbSource
 import dev.yacsa.database.source.PersonDbSource
+import dev.yacsa.database.source.SearchHistoryDbSource
 
 @Suppress("UnnecessaryAbstractClass")
 @Module
@@ -37,4 +39,9 @@ abstract class DbSourceModule {
     abstract fun bindsFeatureFlagDbSource(
         featureFlagDbSourceImpl: FeatureFlagDbSourceImpl,
     ): FeatureFlagDbSource
+
+    @Binds
+    abstract fun bindsSearchHistoryDbSource(
+        searchHistoryDbSourceImpl: SearchHistoryDbSourceImpl,
+    ): SearchHistoryDbSource
 }

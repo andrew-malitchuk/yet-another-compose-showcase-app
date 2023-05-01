@@ -7,16 +7,19 @@ import dev.yacsa.database.impl.dao.BookAuthorRelationshipDao
 import dev.yacsa.database.impl.dao.BookDbDao
 import dev.yacsa.database.impl.dao.FeatureFlagDbDao
 import dev.yacsa.database.impl.dao.PersonDbDao
+import dev.yacsa.database.impl.dao.SearchHistoryDao
 import dev.yacsa.database.impl.typeconverter.PersonListTypeConverter
 import dev.yacsa.database.impl.typeconverter.StringListTypeConvertor
+import dev.yacsa.database.impl.typeconverter.TimestampConverter
 import dev.yacsa.database.model.BookDbModel
 import dev.yacsa.database.model.FeatureFlagDbModel
 import dev.yacsa.database.model.PersonDbModel
+import dev.yacsa.database.model.SearchHistoryDbModel
 import dev.yacsa.database.model.relationships.BookAuthorRelationship
 
 const val DB_VERSION = 1
 
-@TypeConverters(StringListTypeConvertor::class, PersonListTypeConverter::class)
+@TypeConverters(StringListTypeConvertor::class, PersonListTypeConverter::class, TimestampConverter::class)
 @Database(
     version = DB_VERSION,
     entities = [
@@ -24,6 +27,7 @@ const val DB_VERSION = 1
         PersonDbModel::class,
         BookAuthorRelationship::class,
         FeatureFlagDbModel::class,
+        SearchHistoryDbModel::class,
     ],
     exportSchema = true,
 )
@@ -33,4 +37,5 @@ abstract class YacsaDb : RoomDatabase() {
     abstract fun getPersonDbDao(): PersonDbDao
     abstract fun getBookAuthorRelationshipDao(): BookAuthorRelationshipDao
     abstract fun getFeatureFlagDbDao(): FeatureFlagDbDao
+    abstract fun getSearchHistoryDao(): SearchHistoryDao
 }

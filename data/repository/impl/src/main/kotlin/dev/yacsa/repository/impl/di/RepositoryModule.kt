@@ -6,9 +6,11 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.yacsa.repository.impl.impl.BooksRepositoryImpl
 import dev.yacsa.repository.impl.impl.FeatureFlagRepositoryImpl
+import dev.yacsa.repository.impl.impl.SearchHistoryRepositoryImpl
 import dev.yacsa.repository.impl.impl.StartUpConfigureRepositoryImpl
 import dev.yacsa.repository.repository.BooksRepository
 import dev.yacsa.repository.repository.FeatureFlagRepository
+import dev.yacsa.repository.repository.SearchHistoryRepository
 import dev.yacsa.repository.repository.StartUpConfigureRepository
 
 @Suppress("UnnecessaryAbstractClass")
@@ -30,4 +32,10 @@ abstract class RepositoryModule {
     abstract fun bindsFeatureFlagRepository(
         featureFlagRepositoryImpl: FeatureFlagRepositoryImpl,
     ): FeatureFlagRepository
+
+    @Binds
+    abstract fun bindsSearchHistoryRepository(
+        searchHistoryRepositoryImpl: SearchHistoryRepositoryImpl,
+    ): SearchHistoryRepository
+
 }

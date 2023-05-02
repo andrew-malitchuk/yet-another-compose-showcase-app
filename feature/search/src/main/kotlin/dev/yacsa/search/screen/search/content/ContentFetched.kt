@@ -13,17 +13,21 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.yacsa.search.screen.composable.ChipGroup
 import dev.yacsa.search.screen.search.SearchUiState
 import dev.yacsa.search.screen.search.content.result.ResultEmpty
 import dev.yacsa.search.screen.search.content.result.ResultError
 import dev.yacsa.search.screen.search.content.result.ResultFetched
 import dev.yacsa.search.screen.search.content.result.ResultIsLoading
+import dev.yacsa.ui.composable.keyboard.clearFocusOnKeyboardDismiss
+import dev.yacsa.ui.composable.keyboard.keyboardAsState
 import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
@@ -33,16 +37,22 @@ fun ContentFetched(
     onValueChange: (String) -> Unit,
     uiState: SearchUiState,
     onBookClicked: (Int) -> Unit,
+    onDelete: () -> Unit
 ) {
+
+
+    val isShown by keyboardAsState()
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(8.dp)
     ) {
 
         OutlinedTextField(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+                .clearFocusOnKeyboardDismiss(),
             value = searchText,
             onValueChange = onValueChange,
             keyboardOptions = KeyboardOptions(
@@ -64,6 +74,22 @@ fun ContentFetched(
             singleLine = true,
             placeholder = { Text("Type to search...") }
         )
+
+        if (!uiState.topSearch.isNullOrEmpty()) {
+            // TODO: fix
+            ChipGroup(
+                values = uiState.topSearch.map { it.query ?: "" },
+                defaultColor = YacsaTheme.colors.primaryText,
+                selectedColor = YacsaTheme.colors.statusBarColor,
+                onSelectedChanged = {
+                    onValueChange(it)
+                },
+                onDelete = {
+                    onDelete()
+                }
+            )
+        }
+
 
         if (uiState.isResultLoading) {
             ResultIsLoading()
@@ -95,7 +121,8 @@ fun Preview_ContentFetched() {
             searchText = "Lorem ipsum",
             onValueChange = {},
             uiState = SearchUiState(),
-            onBookClicked = {}
+            onBookClicked = {},
+            onDelete = {}
         )
     }
 }

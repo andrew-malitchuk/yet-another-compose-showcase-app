@@ -26,8 +26,10 @@ fun SearchRoute(
         onValueChange = {
             searchViewModel.searchText.value = it
         },
-        onBookClicked
-
+        onBookClicked,
+        onDelete = {
+            searchViewModel.acceptIntent(SearchIntent.ClearSearch)
+        }
     )
 }
 
@@ -37,6 +39,7 @@ fun SearchScreen(
     searchText: String,
     onValueChange: (String) -> Unit,
     onBookClicked: (Int) -> Unit,
+    onDelete: () -> Unit,
 ) {
     val systemUiController = rememberSystemUiController()
     systemUiController.apply {
@@ -55,7 +58,8 @@ fun SearchScreen(
                 uiState = uiState,
                 searchText = searchText,
                 onValueChange = onValueChange,
-                onBookClicked = onBookClicked
+                onBookClicked = onBookClicked,
+                onDelete = onDelete
             )
         }
     }
@@ -69,6 +73,7 @@ fun Preview_SearchScreen() {
         SearchScreen(
             SearchUiState(),
             "",
+            {},
             {},
             {}
         )

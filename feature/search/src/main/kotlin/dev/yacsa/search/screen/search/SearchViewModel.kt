@@ -4,9 +4,12 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.yacsa.domain.usecase.books.SearchBooksUseCase
+import dev.yacsa.domain.usecase.history.ClearHistoryUseCase
+import dev.yacsa.domain.usecase.history.GetTopSearchUseCase
+import dev.yacsa.domain.usecase.history.InsertSearchHistoryUseCase
 import dev.yacsa.model.mapper.BookUiDomainMapper
+import dev.yacsa.model.mapper.SearchHistoryUiDomainMapper
 import dev.yacsa.platform.viewmodel.BaseViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -23,7 +26,11 @@ class SearchViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     initialState: SearchUiState,
     private val searchBooksUseCase: SearchBooksUseCase,
-    private val booksUiDomainMapper: BookUiDomainMapper
+    private val booksUiDomainMapper: BookUiDomainMapper,
+    private val insertSearchHistoryUseCase: InsertSearchHistoryUseCase,
+    private val getTopSearchUseCase: GetTopSearchUseCase,
+    private val searchHistoryUiDomainMapper: SearchHistoryUiDomainMapper,
+    private val clearHistoryUseCase: ClearHistoryUseCase,
 ) : BaseViewModel<SearchUiState, SearchUiState.PartialState, SearchEvent, SearchIntent>(
     savedStateHandle,
     initialState,
@@ -55,26 +62,35 @@ class SearchViewModel @Inject constructor(
         return when (intent) {
             is SearchIntent.GetTopSearch -> getTopSearch()
             is SearchIntent.Search -> search(intent.query)
+            is SearchIntent.ClearSearch -> clearHistory()
         }
     }
 
     private fun getTopSearch(): Flow<SearchUiState.PartialState> =
         flow<SearchUiState.PartialState> {
             // TODO: remove
-            delay(1_000L)
-            emit(SearchUiState.PartialState.ContentFetched(emptyList()))
+            val result = getTopSearchUseCase().map(searchHistoryUiDomainMapper::toUi)
+            emit(SearchUiState.PartialState.ContentFetched(result))
         }.onStart {
-            emit(SearchUiState.PartialState.ContentLoading)
+//            emit(SearchUiState.PartialState.ContentLoading)
+            emit(SearchUiState.PartialState.ResultLoading)
         }
 
     private fun search(query: String): Flow<SearchUiState.PartialState> =
         flow<SearchUiState.PartialState> {
+            insertSearchHistoryUseCase(query)
             val result = searchBooksUseCase(query).map(booksUiDomainMapper::toUi)
             emit(SearchUiState.PartialState.ResultFetched(result))
+            acceptIntent(SearchIntent.GetTopSearch)
         }.onStart {
             emit(SearchUiState.PartialState.ResultLoading)
         }
 
+    private fun clearHistory(): Flow<SearchUiState.PartialState> =
+        flow {
+            clearHistoryUseCase()
+            emit(SearchUiState.PartialState.ContentFetched(emptyList()))
+        }
 
     override fun reduceUiState(
         previousState: SearchUiState,

@@ -16,6 +16,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowDropDown
+import androidx.compose.material.icons.outlined.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -78,12 +79,17 @@ fun ItemFetchedList(
                 minLines = 1,
             )
             Spacer(modifier = modifier.height(6.dp))
-            Text(
-                text = (book.title ?: "NI"),
-                style = YacsaTheme.typography.title,
-                maxLines = 2,
-                minLines = 2,
-            )
+            Row() {
+                Text(
+                    text = (book.title ?: "NI"),
+                    style = YacsaTheme.typography.title,
+                    maxLines = 2,
+                    minLines = 2,
+                )
+                if (book.isCached) {
+                    Icon(imageVector = Icons.Outlined.Home, contentDescription = null)
+                }
+            }
             Spacer(modifier = modifier.height(6.dp))
             Row(
                 modifier = modifier.fillMaxWidth(),
@@ -105,7 +111,19 @@ fun ItemFetchedList(
 fun Preview_ListItem_Dark() {
     YacsaTheme(true) {
         ItemFetchedList(
-            book = BookUiModel(1, "foobar", null, emptyList(), emptyList(), emptyList(), emptyList(), true, null, FormatsUiModel(), 10),
+            book = BookUiModel(
+                1,
+                "foobar",
+                null,
+                emptyList(),
+                emptyList(),
+                emptyList(),
+                emptyList(),
+                true,
+                null,
+                FormatsUiModel(),
+                10
+            ),
             onItemContentClick = {},
         )
     }
@@ -116,7 +134,21 @@ fun Preview_ListItem_Dark() {
 fun Preview_ItemFetchedList_Light() {
     YacsaTheme(false) {
         ItemFetchedList(
-            book = BookUiModel(1, "foobar", null, emptyList(), emptyList(), emptyList(), emptyList(), true, null, FormatsUiModel(), 10),
+            book = BookUiModel(
+                1,
+                "foobar",
+                null,
+                emptyList(),
+                emptyList(),
+                emptyList(),
+                emptyList(),
+                true,
+                null,
+                FormatsUiModel(),
+                10
+            ).also {
+                   it.isCached=true
+            },
             onItemContentClick = {},
         )
     }

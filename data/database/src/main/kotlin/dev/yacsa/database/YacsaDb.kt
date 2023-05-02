@@ -9,5 +9,6 @@ object YacsaDb {
         const val PERSON = "person"
         const val REMOVE_KEY = "remove_key"
         const val FEATURE_FLAG = "feature_flag"
+        const val SEARCH_HISTORY = "search_history"
     }
 }

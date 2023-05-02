@@ -17,4 +17,9 @@ interface BooksApiService {
     suspend fun getBooks(
         @Query("page") page: Int,
     ): ResultNetModel?
+
+    @GET("/books")
+    suspend fun search(
+        @Query("search") search: String,
+    ): ResultNetModel?
 }

@@ -58,7 +58,7 @@ class ListViewModel @Inject constructor(
     private fun getBooks(): Flow<ListUiState.PartialState> = flow<ListUiState.PartialState> {
         logcat { "getBooks" }
         // Dummy load
-        delay(5_000L)
+        delay(1_000L)
         pagingDataFlow = Pager(PagingConfig(pageSize = 32)) {
             BooksSource(
                 getBooksUseCase,

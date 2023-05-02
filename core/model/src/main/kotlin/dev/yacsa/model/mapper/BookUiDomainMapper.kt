@@ -23,7 +23,9 @@ class BookUiDomainMapper @Inject constructor(
             value.mediaType,
             value.formats?.let { formatsUiDomainMapper.toUi(it) },
             value.downloadCount,
-        )
+        ).also {
+            it.isCached = value.isCached
+        }
     }
 
     override fun toDomain(value: BookUiModel): BookDomainModel {

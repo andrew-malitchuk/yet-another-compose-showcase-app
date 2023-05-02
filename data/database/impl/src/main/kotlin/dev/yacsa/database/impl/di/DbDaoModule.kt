@@ -9,6 +9,7 @@ import dev.yacsa.database.impl.dao.BookAuthorRelationshipDao
 import dev.yacsa.database.impl.dao.BookDbDao
 import dev.yacsa.database.impl.dao.FeatureFlagDbDao
 import dev.yacsa.database.impl.dao.PersonDbDao
+import dev.yacsa.database.impl.dao.SearchHistoryDao
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -40,5 +41,12 @@ class DbDaoModule {
         appDatabase: YacsaDb,
     ): FeatureFlagDbDao {
         return appDatabase.getFeatureFlagDbDao()
+    }
+
+    @Provides
+    fun providesSearchHistoryDao(
+        appDatabase: YacsaDb,
+    ): SearchHistoryDao {
+        return appDatabase.getSearchHistoryDao()
     }
 }

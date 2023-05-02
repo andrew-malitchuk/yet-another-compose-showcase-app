@@ -47,8 +47,6 @@ class DetalizationViewModel @Inject constructor(
                 ),
             )
         }
-
-
     }
 
     override fun reduceUiState(

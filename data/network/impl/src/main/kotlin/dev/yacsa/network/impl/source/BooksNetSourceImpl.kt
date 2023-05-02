@@ -17,4 +17,8 @@ class BooksNetSourceImpl @Inject constructor(
     override suspend fun getBook(bookId: Int): BookNetModel? {
         return apiService.getBook(bookId)
     }
+
+    override suspend fun search(query: String): ResultNetModel? {
+        return apiService.search(query)
+    }
 }

@@ -11,7 +11,7 @@ import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
 fun ResultError(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Box(
         modifier = modifier

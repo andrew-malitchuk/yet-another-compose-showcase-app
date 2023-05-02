@@ -36,5 +36,4 @@ interface SearchHistoryDao {
 
     @Query("DELETE FROM ${YacsaDb.Table.SEARCH_HISTORY}")
     suspend fun deleteAll()
-
 }

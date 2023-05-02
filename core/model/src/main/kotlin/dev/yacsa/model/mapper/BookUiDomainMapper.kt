@@ -24,7 +24,7 @@ class BookUiDomainMapper @Inject constructor(
             value.formats?.let { formatsUiDomainMapper.toUi(it) },
             value.downloadCount,
         ).also {
-            it.isCached=value.isCached
+            it.isCached = value.isCached
         }
     }
 

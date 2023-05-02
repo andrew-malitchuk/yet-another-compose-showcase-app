@@ -13,9 +13,8 @@ import dev.yacsa.ui.theme.YacsaTheme
 @Composable
 fun AnimatedDivider(
     modifier: Modifier = Modifier,
-    state: LazyListState
+    state: LazyListState,
 ) {
-
     val isVisible = state.canScrollBackward
 
     AnimatedVisibility(
@@ -23,10 +22,9 @@ fun AnimatedDivider(
     ) {
         Divider(
             modifier = Modifier,
-            thickness = 1.dp
+            thickness = 1.dp,
         )
     }
-
 }
 
 @Preview
@@ -34,7 +32,7 @@ fun AnimatedDivider(
 fun Preview_AnimatedDivider() {
     YacsaTheme {
         AnimatedDivider(
-            state = rememberLazyListState()
+            state = rememberLazyListState(),
         )
     }
 }

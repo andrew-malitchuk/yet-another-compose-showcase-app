@@ -14,14 +14,14 @@ fun NavGraphBuilder.searchNavGraph(navController: NavHostController) {
     ) {
         composable(SearchDirection.Search.route) {
             SearchRoute(
-                onBookClicked= {
+                onBookClicked = {
                     navController.navigate(
                         "books_detalization/$it",
                     ) {
                         restoreState = true
                         launchSingleTop = true
                     }
-                }
+                },
             )
         }
     }

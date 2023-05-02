@@ -17,7 +17,6 @@ import dev.yacsa.search.screen.search.item.ItemFetchedList
 import dev.yacsa.ui.composable.divider.AnimatedDivider
 import dev.yacsa.ui.theme.YacsaTheme
 
-
 @Composable
 fun ResultFetched(
     modifier: Modifier = Modifier,
@@ -27,7 +26,7 @@ fun ResultFetched(
     val state = rememberLazyListState()
     Column(
         modifier = Modifier
-            .padding(top = 8.dp)
+            .padding(top = 8.dp),
     ) {
         AnimatedDivider(state = state)
         LazyColumn(
@@ -41,7 +40,7 @@ fun ResultFetched(
                 bottom = 16.dp,
                 end = 16.dp,
                 top = 8.dp,
-            )
+            ),
         ) {
             items(items = resultSearch) { item ->
                 ItemFetchedList(
@@ -49,7 +48,6 @@ fun ResultFetched(
                     onItemContentClick = {
                         // TODO: fix
                         item.id?.let { onBookClicked(it) }
-
                     },
                 )
             }
@@ -63,7 +61,7 @@ fun Preview_ResultFetched() {
     YacsaTheme {
         ResultFetched(
             resultSearch = emptyList(),
-            onBookClicked = {}
+            onBookClicked = {},
         )
     }
 }

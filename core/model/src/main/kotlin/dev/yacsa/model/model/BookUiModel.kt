@@ -17,6 +17,6 @@ data class BookUiModel(
     val mediaType: String?,
     val formats: FormatsUiModel? = FormatsUiModel(),
     val downloadCount: Int?,
-) : BaseUiModel, Parcelable{
-    var isCached:Boolean=false
+) : BaseUiModel, Parcelable {
+    var isCached: Boolean = false
 }

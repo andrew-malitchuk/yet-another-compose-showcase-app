@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class GetTopSearchUseCaseImpl @Inject constructor(
     private val searchHistoryRepository: SearchHistoryRepository,
-    private val searchHistoryDomainRepoMapper: SearchHistoryDomainRepoMapper
+    private val searchHistoryDomainRepoMapper: SearchHistoryDomainRepoMapper,
 ) : GetTopSearchUseCase {
 
     override suspend fun invoke(): List<SearchHistoryDomainModel> {
@@ -18,6 +18,4 @@ class GetTopSearchUseCaseImpl @Inject constructor(
     companion object {
         const val TOP = 10
     }
-
-
 }

@@ -15,13 +15,13 @@ fun ChipGroup(
     defaultColor: Color,
     selectedColor: Color,
     onSelectedChanged: (String) -> Unit = {},
-    onDelete: () -> Unit
+    onDelete: () -> Unit,
 ) {
     LazyRow(
         // content padding
         contentPadding = PaddingValues(
-            horizontal = 8.dp
-        )
+            horizontal = 8.dp,
+        ),
     ) {
         items(values) {
             Chip(
@@ -31,19 +31,19 @@ fun ChipGroup(
                     onSelectedChanged(it)
                 },
                 defaultColor = defaultColor,
-                selectedColor = selectedColor
+                selectedColor = selectedColor,
             )
         }
         if (!values.isNullOrEmpty()) {
             item {
                 Chip(
-                    name="❌",
+                    name = "❌",
                     isSelected = false,
                     onSelectionChanged = {
                         onDelete()
                     },
                     defaultColor = defaultColor,
-                    selectedColor = selectedColor
+                    selectedColor = selectedColor,
                 )
             }
         }
@@ -57,6 +57,6 @@ fun Preview_ChipGroup() {
         values = listOf("Foo", "Bar"),
         defaultColor = Color.DarkGray,
         selectedColor = Color.Cyan,
-        onDelete = {}
+        onDelete = {},
     )
 }

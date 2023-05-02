@@ -23,20 +23,21 @@ fun Chip(
     Surface(
         modifier = Modifier.padding(4.dp),
         shape = MaterialTheme.shapes.medium,
-        color = if (isSelected) selectedColor else defaultColor
+        color = if (isSelected) selectedColor else defaultColor,
     ) {
-        Row(modifier = Modifier
-            .toggleable(
-                value = isSelected,
-                onValueChange = {
-                    onSelectionChanged(name)
-                }
-            )
+        Row(
+            modifier = Modifier
+                .toggleable(
+                    value = isSelected,
+                    onValueChange = {
+                        onSelectionChanged(name)
+                    },
+                ),
         ) {
             Text(
                 text = name,
                 color = Color.White,
-                modifier = Modifier.padding(8.dp)
+                modifier = Modifier.padding(8.dp),
             )
         }
     }

@@ -1,6 +1,3 @@
 package dev.yacsa.search.screen.search
 
-
-sealed class SearchEvent {
-
-}
+sealed class SearchEvent

@@ -19,8 +19,9 @@ interface BooksRepository {
     suspend fun getBooksPaged(page: Int): List<BookRepoModel>
     suspend fun savePaged(page: Int, values: List<BookRepoModel>)
     suspend fun removePage(page: Int)
+
     //
-    suspend fun searchOnRemote(query:String): List<BookRepoModel>
+    suspend fun searchOnRemote(query: String): List<BookRepoModel>
 
     suspend fun searchOnLocal(query: String): List<BookRepoModel>
 }

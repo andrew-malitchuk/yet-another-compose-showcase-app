@@ -6,7 +6,6 @@ import dev.yacsa.database.source.SearchHistoryDbSource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-
 class SearchHistoryDbSourceImpl @Inject constructor(
     private val searchHistoryDao: SearchHistoryDao,
 ) : SearchHistoryDbSource {
@@ -60,5 +59,4 @@ class SearchHistoryDbSourceImpl @Inject constructor(
     override suspend fun deleteAll() {
         searchHistoryDao.deleteAll()
     }
-
 }

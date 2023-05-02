@@ -47,7 +47,7 @@ class SearchViewModel @Inject constructor(
                 .stateIn(
                     viewModelScope,
                     SharingStarted.WhileSubscribed(5_000L),
-                    ""
+                    "",
                 )
                 .collect {
                     logcat("foo") { it }
@@ -97,7 +97,6 @@ class SearchViewModel @Inject constructor(
         partialState: SearchUiState.PartialState,
     ): SearchUiState {
         return when (partialState) {
-
             is SearchUiState.PartialState.ContentLoading -> previousState.copy(
                 isContentLoading = true,
                 isResultLoading = false,
@@ -114,14 +113,14 @@ class SearchViewModel @Inject constructor(
                 isContentLoading = false,
                 isResultLoading = false,
                 isError = false,
-                topSearch = partialState.topSearch
+                topSearch = partialState.topSearch,
             )
 
             is SearchUiState.PartialState.ResultFetched -> previousState.copy(
                 isContentLoading = false,
                 isResultLoading = false,
                 isError = false,
-                resultSearch = partialState.resultSearch
+                resultSearch = partialState.resultSearch,
             )
 
             is SearchUiState.PartialState.Error -> previousState.copy(
@@ -129,7 +128,6 @@ class SearchViewModel @Inject constructor(
                 isResultLoading = false,
                 isError = true,
             )
-
         }
     }
 }

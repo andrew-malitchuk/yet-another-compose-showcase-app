@@ -21,7 +21,7 @@ class TimestampConverter {
         }
     }
 
-    companion object{
-        const val TIMESTAMP="yyyy-MM-dd HH:mm:ss"
+    companion object {
+        const val TIMESTAMP = "yyyy-MM-dd HH:mm:ss"
     }
 }

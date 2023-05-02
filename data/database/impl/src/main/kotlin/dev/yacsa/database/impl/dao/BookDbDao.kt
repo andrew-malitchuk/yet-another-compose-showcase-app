@@ -46,8 +46,7 @@ interface BookDbDao {
                 ${YacsaDb.Table.BOOK}
             WHERE
                 (title LIKE '%' || :query || '%')
-        """
+        """,
     )
     fun search(query: String): List<BookDbModel>
-
 }

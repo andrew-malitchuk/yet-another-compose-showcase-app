@@ -8,12 +8,14 @@ import javax.inject.Inject
 
 class SearchHistoryRepositoryImpl @Inject constructor(
     private val searchHistoryDbSource: SearchHistoryDbSource,
-    private val searchHistoryRepoDbMapper: SearchHistoryRepoDbMapper
+    private val searchHistoryRepoDbMapper: SearchHistoryRepoDbMapper,
 ) : SearchHistoryRepository {
 
     override suspend fun getTop(count: Int): List<SearchHistoryRepoModel> {
-        return (searchHistoryDbSource.getTop(count)
-            ?: emptyList()).map(searchHistoryRepoDbMapper::toRepo)
+        return (
+            searchHistoryDbSource.getTop(count)
+                ?: emptyList()
+            ).map(searchHistoryRepoDbMapper::toRepo)
     }
 
     override suspend fun insert(value: SearchHistoryRepoModel) {
@@ -23,5 +25,4 @@ class SearchHistoryRepositoryImpl @Inject constructor(
     override suspend fun deleteAll() {
         searchHistoryDbSource.deleteAll()
     }
-
 }

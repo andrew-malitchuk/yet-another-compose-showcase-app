@@ -14,6 +14,6 @@ data class BookDomainModel(
     val mediaType: String?,
     val formats: FormatsDomainModel? = FormatsDomainModel(),
     val downloadCount: Int?,
-) : BaseDomainModel{
-    var isCached:Boolean=false
+) : BaseDomainModel {
+    var isCached: Boolean = false
 }

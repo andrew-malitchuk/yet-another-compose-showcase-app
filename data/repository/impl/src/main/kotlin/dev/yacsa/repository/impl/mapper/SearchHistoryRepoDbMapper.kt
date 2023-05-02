@@ -16,8 +16,7 @@ class SearchHistoryRepoDbMapper @Inject constructor() :
         return SearchHistoryDbModel(
             0,
             value.query,
-            System.currentTimeMillis()
+            System.currentTimeMillis(),
         )
     }
-
 }

@@ -37,5 +37,4 @@ abstract class RepositoryModule {
     abstract fun bindsSearchHistoryRepository(
         searchHistoryRepositoryImpl: SearchHistoryRepositoryImpl,
     ): SearchHistoryRepository
-
 }

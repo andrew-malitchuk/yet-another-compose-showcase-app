@@ -122,7 +122,7 @@ fun Preview_ListItem_Dark() {
                 true,
                 null,
                 FormatsUiModel(),
-                10
+                10,
             ),
             onItemContentClick = {},
         )
@@ -145,9 +145,9 @@ fun Preview_ItemFetchedList_Light() {
                 true,
                 null,
                 FormatsUiModel(),
-                10
+                10,
             ).also {
-                   it.isCached=true
+                it.isCached = true
             },
             onItemContentClick = {},
         )

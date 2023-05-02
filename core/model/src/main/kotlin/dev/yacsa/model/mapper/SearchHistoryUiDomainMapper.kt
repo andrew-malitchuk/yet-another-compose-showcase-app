@@ -13,7 +13,6 @@ class SearchHistoryUiDomainMapper @Inject constructor() :
     }
 
     override fun toDomain(value: SearchHistoryUiModel): SearchHistoryDomainModel {
-        return SearchHistoryDomainModel(value.query?:"")
+        return SearchHistoryDomainModel(value.query ?: "")
     }
-
 }

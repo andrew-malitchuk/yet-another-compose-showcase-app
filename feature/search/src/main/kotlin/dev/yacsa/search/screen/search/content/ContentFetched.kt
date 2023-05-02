@@ -37,17 +37,14 @@ fun ContentFetched(
     onValueChange: (String) -> Unit,
     uiState: SearchUiState,
     onBookClicked: (Int) -> Unit,
-    onDelete: () -> Unit
+    onDelete: () -> Unit,
 ) {
-
-
     val isShown by keyboardAsState()
 
     Column(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxSize(),
     ) {
-
         OutlinedTextField(
             modifier = Modifier
                 .fillMaxWidth()
@@ -59,7 +56,7 @@ fun ContentFetched(
                 capitalization = KeyboardCapitalization.None,
                 autoCorrect = true,
                 keyboardType = KeyboardType.Text,
-                imeAction = ImeAction.Search
+                imeAction = ImeAction.Search,
             ),
             leadingIcon = {
                 Icon(imageVector = Icons.Outlined.Search, contentDescription = null)
@@ -72,7 +69,7 @@ fun ContentFetched(
                 }
             },
             singleLine = true,
-            placeholder = { Text("Type to search...") }
+            placeholder = { Text("Type to search...") },
         )
 
         if (!uiState.topSearch.isNullOrEmpty()) {
@@ -86,10 +83,9 @@ fun ContentFetched(
                 },
                 onDelete = {
                     onDelete()
-                }
+                },
             )
         }
-
 
         if (uiState.isResultLoading) {
             ResultIsLoading()
@@ -103,14 +99,11 @@ fun ContentFetched(
             } else {
                 ResultFetched(
                     resultSearch = uiState.resultSearch,
-                    onBookClicked = onBookClicked
+                    onBookClicked = onBookClicked,
                 )
             }
         }
-
-
     }
-
 }
 
 @Composable
@@ -122,7 +115,7 @@ fun Preview_ContentFetched() {
             onValueChange = {},
             uiState = SearchUiState(),
             onBookClicked = {},
-            onDelete = {}
+            onDelete = {},
         )
     }
 }

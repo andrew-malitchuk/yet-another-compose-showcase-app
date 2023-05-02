@@ -11,7 +11,6 @@ import dev.yacsa.search.screen.search.content.ContentFetched
 import dev.yacsa.search.screen.search.content.ContentLoading
 import dev.yacsa.ui.theme.YacsaTheme
 
-
 @Composable
 fun SearchRoute(
     searchViewModel: SearchViewModel = hiltViewModel(),
@@ -29,7 +28,7 @@ fun SearchRoute(
         onBookClicked,
         onDelete = {
             searchViewModel.acceptIntent(SearchIntent.ClearSearch)
-        }
+        },
     )
 }
 
@@ -59,11 +58,10 @@ fun SearchScreen(
                 searchText = searchText,
                 onValueChange = onValueChange,
                 onBookClicked = onBookClicked,
-                onDelete = onDelete
+                onDelete = onDelete,
             )
         }
     }
-
 }
 
 @Composable
@@ -75,7 +73,7 @@ fun Preview_SearchScreen() {
             "",
             {},
             {},
-            {}
+            {},
         )
     }
 }

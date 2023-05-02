@@ -8,8 +8,7 @@ class ClearHistoryUseCaseImpl @Inject constructor(
     private val searchHistoryRepository: SearchHistoryRepository,
 ) : ClearHistoryUseCase {
 
-    override suspend fun invoke(){
+    override suspend fun invoke() {
         return searchHistoryRepository.deleteAll()
     }
-
 }

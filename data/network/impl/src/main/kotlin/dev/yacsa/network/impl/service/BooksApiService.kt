@@ -20,7 +20,6 @@ interface BooksApiService {
 
     @GET("/books")
     suspend fun search(
-        @Query("search") search: String
+        @Query("search") search: String,
     ): ResultNetModel?
-
 }

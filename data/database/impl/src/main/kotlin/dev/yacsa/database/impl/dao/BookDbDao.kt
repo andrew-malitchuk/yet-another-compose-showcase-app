@@ -37,4 +37,17 @@ interface BookDbDao {
     @Query("DELETE FROM ${YacsaDb.Table.BOOK} WHERE page = :page")
     suspend fun removePage(page: Int)
     //
+
+    @Query(
+        """
+            SELECT
+                *
+            FROM
+                ${YacsaDb.Table.BOOK}
+            WHERE
+                (title LIKE '%' || :query || '%')
+        """
+    )
+    fun search(query: String): List<BookDbModel>
+
 }

@@ -6,4 +6,5 @@ import dev.yacsa.database.source.base.BaseDbSource
 interface BookDbSource : BaseDbSource<BookDbModel> {
     suspend fun getPaged(page: Int): List<BookDbModel>?
     suspend fun removePage(page: Int)
+    suspend fun search(query: String): List<BookDbModel>
 }

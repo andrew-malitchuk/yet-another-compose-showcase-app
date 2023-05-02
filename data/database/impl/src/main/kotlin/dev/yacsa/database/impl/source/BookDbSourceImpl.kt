@@ -18,6 +18,10 @@ class BookDbSourceImpl @Inject constructor(
     override suspend fun removePage(page: Int) {
         booksDao.removePage(page)
     }
+
+    override suspend fun search(query: String): List<BookDbModel> {
+        return booksDao.search(query)
+    }
     //
 
     override suspend fun get(id: Int): BookDbModel? {

@@ -13,7 +13,7 @@ import dev.yacsa.domain.usecase.RemoveAllBooksUseCase
 import dev.yacsa.domain.usecase.books.GetBooksUseCase
 import dev.yacsa.domain.usecase.books.LoadBooksUseCase
 import dev.yacsa.domain.usecase.books.SaveBooksUseCase
-import dev.yacsa.model.mapper.BookUiDomainMapper
+import dev.yacsa.model.mapper.NewBooksUiDomainMapper
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.platform.viewmodel.BaseViewModel
 import kotlinx.coroutines.delay
@@ -29,7 +29,7 @@ import javax.inject.Inject
 class ListViewModel @Inject constructor(
     private val getBooksUseCase: GetBooksUseCase,
     private val loadBooksUseCase: LoadBooksUseCase,
-    private val bookUiDomainMapper: BookUiDomainMapper,
+    private val bookUiDomainMapper: NewBooksUiDomainMapper,
     private val removeAllBooksUseCase: RemoveAllBooksUseCase,
     private val saveBooksUseCase: SaveBooksUseCase,
     private val booksFeatureFlag: BooksFeatureFlag,

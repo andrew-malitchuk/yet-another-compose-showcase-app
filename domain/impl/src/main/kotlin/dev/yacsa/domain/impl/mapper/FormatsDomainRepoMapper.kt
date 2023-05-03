@@ -10,14 +10,14 @@ class FormatsDomainRepoMapper @Inject constructor() :
 
     override fun toDomain(value: FormatsRepoModel): FormatsDomainModel {
         return FormatsDomainModel(
-            value.applicationEpubZip,
-            value.applicationOctetStream,
-            value.applicationRdfXml,
-            value.applicationxMobipocketEbook,
-            value.imageJpeg,
-            value.textHtml,
-            value.textPlain,
-            value.textplainCharsetusAscii,
+            value.applicationEpubZip?:"",
+            value.applicationOctetStream?:"",
+            value.applicationRdfXml?:"",
+            value.applicationxMobipocketEbook?:"",
+            value.imageJpeg?:"",
+            value.textHtml?:"",
+            value.textPlain?:"",
+            value.textplainCharsetusAscii?:"",
         )
     }
 

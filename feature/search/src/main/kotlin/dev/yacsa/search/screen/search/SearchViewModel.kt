@@ -7,8 +7,8 @@ import dev.yacsa.domain.usecase.books.SearchBooksUseCase
 import dev.yacsa.domain.usecase.history.ClearHistoryUseCase
 import dev.yacsa.domain.usecase.history.GetTopSearchUseCase
 import dev.yacsa.domain.usecase.history.InsertSearchHistoryUseCase
-import dev.yacsa.model.mapper.BookUiDomainMapper
-import dev.yacsa.model.mapper.SearchHistoryUiDomainMapper
+import dev.yacsa.model.mapper.NewBooksUiDomainMapper
+import dev.yacsa.model.mapper.NewSearchHistoryUiDomainMapper
 import dev.yacsa.platform.viewmodel.BaseViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,10 +26,10 @@ class SearchViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     initialState: SearchUiState,
     private val searchBooksUseCase: SearchBooksUseCase,
-    private val booksUiDomainMapper: BookUiDomainMapper,
+    private val booksUiDomainMapper: NewBooksUiDomainMapper,
     private val insertSearchHistoryUseCase: InsertSearchHistoryUseCase,
     private val getTopSearchUseCase: GetTopSearchUseCase,
-    private val searchHistoryUiDomainMapper: SearchHistoryUiDomainMapper,
+    private val searchHistoryUiDomainMapper: NewSearchHistoryUiDomainMapper,
     private val clearHistoryUseCase: ClearHistoryUseCase,
 ) : BaseViewModel<SearchUiState, SearchUiState.PartialState, SearchEvent, SearchIntent>(
     savedStateHandle,

@@ -12,7 +12,7 @@ data class BookDomainModel(
     val languages: List<String?>?,
     val copyright: Boolean?,
     val mediaType: String?,
-    val formats: FormatsDomainModel? = FormatsDomainModel(),
+    val formats: FormatsDomainModel?,
     val downloadCount: Int?,
 ) : BaseDomainModel {
     var isCached: Boolean = false

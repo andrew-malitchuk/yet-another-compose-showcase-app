@@ -47,7 +47,7 @@ class BookRepoNetMapper @Inject constructor(
             value.languages,
             value.copyright,
             value.mediaType,
-            value.formats?.let { formatsRepoNetMapper.toRepo(it) } ?: FormatsRepoModel(),
+            value.formats?.let { formatsRepoNetMapper.toRepo(it) } ?: FormatsRepoModel("","","","","","","","",),
             value.downloadCount,
         )
     }

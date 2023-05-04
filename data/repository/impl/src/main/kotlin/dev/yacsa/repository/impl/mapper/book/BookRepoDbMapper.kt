@@ -42,7 +42,7 @@ class BookRepoDbMapper @Inject constructor(
             value.languages,
             value.copyright,
             value.mediaType,
-            formatsRepoDbMapper.toDb(value.formats ?: FormatsRepoModel()),
+            formatsRepoDbMapper.toDb(value.formats ?: FormatsRepoModel("","","","","","","","",)),
             value.downloadCount,
         )
     }

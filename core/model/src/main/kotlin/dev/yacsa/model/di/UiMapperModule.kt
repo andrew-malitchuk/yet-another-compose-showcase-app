@@ -1,14 +1,13 @@
-package dev.yacsa.model.mapper.di
+package dev.yacsa.model.di
 
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.yacsa.model.mapper.NewBooksUiDomainMapper
+import dev.yacsa.model.mapper.NewBooksUiDomainMapperImpl
 import dev.yacsa.model.mapper.NewFormatsUiDomainMapper
 import dev.yacsa.model.mapper.NewFormatsUiDomainMapperImpl
-import dev.yacsa.model.mapper.NewBooksUiDomainMapperImpl
 import dev.yacsa.model.mapper.NewPersonUiDomainMapper
 import dev.yacsa.model.mapper.NewPersonUiDomainMapperImpl
 import dev.yacsa.model.mapper.NewSearchHistoryUiDomainMapper

@@ -4,7 +4,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.yacsa.domain.error.DataError
-import dev.yacsa.domain.usecase.books.SearchBooksUseCase
+import dev.yacsa.domain.error.NoDataError
+import dev.yacsa.domain.usecase.books.NewSearchBooksUseCase
 import dev.yacsa.domain.usecase.history.NewClearHistoryUseCase
 import dev.yacsa.domain.usecase.history.NewGetTopSearchUseCase
 import dev.yacsa.domain.usecase.history.NewInsertSearchHistoryUseCase
@@ -26,7 +27,7 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     initialState: SearchUiState,
-    private val searchBooksUseCase: SearchBooksUseCase,
+    private val searchBooksUseCase: NewSearchBooksUseCase,
     private val booksUiDomainMapper: BookUiDomainMapper,
     private val insertSearchHistoryUseCase: NewInsertSearchHistoryUseCase,
     private val getTopSearchUseCase: NewGetTopSearchUseCase,
@@ -96,11 +97,31 @@ class SearchViewModel @Inject constructor(
         }
 
     private fun search(query: String): Flow<SearchUiState.PartialState> =
-        flow<SearchUiState.PartialState> {
+        flow {
             insertSearchHistoryUseCase(query).fold({
-                val result = searchBooksUseCase(query).map(booksUiDomainMapper::toUi)
-                emit(SearchUiState.PartialState.ResultFetched(result))
-                acceptIntent(SearchIntent.GetTopSearch)
+                searchBooksUseCase(query).fold(
+                    { error ->
+                        when (error) {
+                            is NoDataError -> {
+                                emit(SearchUiState.PartialState.ResultFetched(emptyList()))
+                            }
+
+                            is DataError -> {
+                                emit(SearchUiState.PartialState.Error(error.throwable))
+                            }
+
+                            else -> {
+                                emit(SearchUiState.PartialState.Error(Throwable("SWW")))
+                            }
+                        }
+
+                    },
+                    {
+                        emit(SearchUiState.PartialState.ResultFetched(it.map(booksUiDomainMapper::toUi)))
+                        acceptIntent(SearchIntent.GetTopSearch)
+                    }
+                )
+
             }, { error ->
                 when (error) {
                     is DataError -> {
@@ -111,9 +132,7 @@ class SearchViewModel @Inject constructor(
                         emit(SearchUiState.PartialState.Error(Throwable("SWW")))
                     }
                 }
-
             })
-
         }.onStart {
             emit(SearchUiState.PartialState.ResultLoading)
         }

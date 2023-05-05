@@ -9,4 +9,8 @@ android {
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
 
+    implementation("io.arrow-kt:arrow-core:1.2.0-RC")
+    implementation("io.arrow-kt:arrow-fx-coroutines:1.2.0-RC")
+    implementation("io.arrow-kt:arrow-optics:1.2.0-RC")
+    ksp("io.arrow-kt:arrow-optics-ksp-plugin:1.2.0-RC")
 }

@@ -26,7 +26,6 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import dev.yacsa.model.model.BookUiModel
-import dev.yacsa.model.model.FormatsUiModel
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
 
@@ -121,7 +120,7 @@ fun Preview_ListItem_Dark() {
                 emptyList(),
                 true,
                 null,
-                FormatsUiModel(),
+                null,
                 10,
             ),
             onItemContentClick = {},
@@ -144,7 +143,7 @@ fun Preview_ItemFetchedList_Light() {
                 emptyList(),
                 true,
                 null,
-                FormatsUiModel(),
+                null,
                 10,
             ).also {
                 it.isCached = true

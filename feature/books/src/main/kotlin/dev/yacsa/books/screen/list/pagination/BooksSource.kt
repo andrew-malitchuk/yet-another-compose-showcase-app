@@ -5,14 +5,14 @@ import androidx.paging.PagingState
 import dev.yacsa.domain.usecase.books.GetBooksUseCase
 import dev.yacsa.domain.usecase.books.LoadBooksUseCase
 import dev.yacsa.domain.usecase.books.SaveBooksUseCase
-import dev.yacsa.model.mapper.BookUiDomainMapper
+import dev.yacsa.model.mapper.NewBooksUiDomainMapper
 import dev.yacsa.model.model.BookUiModel
 import java.io.IOException
 
 class BooksSource(
     private val getBooksUseCase: GetBooksUseCase,
     private val loadBooksUseCase: LoadBooksUseCase,
-    private val bookUiDomainMapper: BookUiDomainMapper,
+    private val bookUiDomainMapper: NewBooksUiDomainMapper,
     private val saveBooksUseCase: SaveBooksUseCase,
 ) : PagingSource<Int, BookUiModel>() {
 

@@ -6,10 +6,10 @@ import dev.yacsa.database.source.BookDbSource
 import dev.yacsa.database.source.PersonDbSource
 import dev.yacsa.network.model.BookNetModel
 import dev.yacsa.network.source.BooksNetSource
-import dev.yacsa.repository.impl.mapper.book.BookRepoDbMapper
-import dev.yacsa.repository.impl.mapper.book.BookRepoNetMapper
-import dev.yacsa.repository.impl.mapper.person.PersonRepoDbMapper
-import dev.yacsa.repository.impl.mapper.person.PersonRepoNetMapper
+import dev.yacsa.repository.impl.mapper.book.NewBookRepoDbMapper
+import dev.yacsa.repository.impl.mapper.book.NewBookRepoNetMapper
+import dev.yacsa.repository.impl.mapper.person.NewPersonRepoDbMapper
+import dev.yacsa.repository.impl.mapper.person.NewPersonRepoNetMapper
 import dev.yacsa.repository.model.BookRepoModel
 import dev.yacsa.repository.repository.BooksRepository
 import javax.inject.Inject
@@ -17,18 +17,14 @@ import javax.inject.Inject
 class BooksRepositoryImpl @Inject constructor(
     private val bookDbSource: BookDbSource,
     private val booksNetSource: BooksNetSource,
-    private val bookRepoNetMapper: BookRepoNetMapper,
-    private val bookRepoDbMapper: BookRepoDbMapper,
+    private val bookRepoNetMapper: NewBookRepoNetMapper,
+    private val bookRepoDbMapper: NewBookRepoDbMapper,
     private val personDbSource: PersonDbSource,
-    private val personRepoNetMapper: PersonRepoNetMapper,
-    private val personRepoDbMapper: PersonRepoDbMapper,
+    private val personRepoNetMapper: NewPersonRepoNetMapper,
+    private val personRepoDbMapper: NewPersonRepoDbMapper,
     private val bookAuthorRelationshipDbSource: BookAuthorRelationshipDbSource,
 ) : BooksRepository {
 
-    override suspend fun getBooks(): List<BookRepoModel> {
-        val result = booksNetSource.getBooks(1)?.results ?: emptyList()
-        return result.filterNotNull().map(bookRepoNetMapper::toRepo)
-    }
 
     override suspend fun getBookByBage(page: Int): List<BookRepoModel> {
         val result = booksNetSource.getBooks(page)?.results ?: emptyList()
@@ -64,7 +60,6 @@ class BooksRepositoryImpl @Inject constructor(
                 val id = personDbSource.insert(it)
                 personDbIds.add(id)
             }
-//            personDbSource.insert(it)
         }
 
         bookDbSource

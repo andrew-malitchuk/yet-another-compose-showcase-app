@@ -1,7 +1,7 @@
 package dev.yacsa.repository.impl.impl
 
 import dev.yacsa.datastore.source.StartupConfigureDataStoreSource
-import dev.yacsa.repository.impl.mapper.StartUpConfigureRepoDataStoreMapper
+import dev.yacsa.repository.impl.mapper.startup.NewStartUpConfigureRepoDataStoreMapper
 import dev.yacsa.repository.model.StartUpConfigureRepoModel
 import dev.yacsa.repository.repository.StartUpConfigureRepository
 import kotlinx.coroutines.flow.firstOrNull
@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class StartUpConfigureRepositoryImpl @Inject constructor(
     private val startupConfigureDataStoreSource: StartupConfigureDataStoreSource,
-    private val startUpConfigureMapper: StartUpConfigureRepoDataStoreMapper,
+    private val startUpConfigureMapper: NewStartUpConfigureRepoDataStoreMapper,
 ) : StartUpConfigureRepository {
 
     override suspend fun getStartUpConfigure(): StartUpConfigureRepoModel? {

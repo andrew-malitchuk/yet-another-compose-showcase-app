@@ -4,7 +4,7 @@ import arrow.core.Either
 import dev.yacsa.domain.error.DataError
 import dev.yacsa.domain.error.DomainError
 import dev.yacsa.domain.error.NoDataError
-import dev.yacsa.domain.impl.mapper.BookDomainRepoMapper
+import dev.yacsa.domain.impl.mapper.NewBookDomainRepoMapper
 import dev.yacsa.domain.model.BookDomainModel
 import dev.yacsa.domain.usecase.books.NewSearchBooksUseCase
 import dev.yacsa.repository.repository.BooksRepository
@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 class NewSearchBooksUseCaseImpl @Inject constructor(
     private val booksRepository: BooksRepository,
-    private val bookDomainRepoMapper: BookDomainRepoMapper,
+    private val bookDomainRepoMapper: NewBookDomainRepoMapper,
 ) : NewSearchBooksUseCase {
 
     override suspend fun invoke(query: String): Either<DomainError, List<BookDomainModel>> {

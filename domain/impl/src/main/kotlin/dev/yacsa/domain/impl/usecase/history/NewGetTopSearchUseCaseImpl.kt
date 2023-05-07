@@ -3,7 +3,7 @@ package dev.yacsa.domain.impl.usecase.history
 import arrow.core.Either
 import dev.yacsa.domain.error.DataError
 import dev.yacsa.domain.error.DomainError
-import dev.yacsa.domain.impl.mapper.SearchHistoryDomainRepoMapper
+import dev.yacsa.domain.impl.mapper.NewSearchHistoryDomainRepoMapper
 import dev.yacsa.domain.model.SearchHistoryDomainModel
 import dev.yacsa.domain.usecase.history.NewGetTopSearchUseCase
 import dev.yacsa.repository.repository.SearchHistoryRepository
@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 class NewGetTopSearchUseCaseImpl @Inject constructor(
     private val searchHistoryRepository: SearchHistoryRepository,
-    private val searchHistoryDomainRepoMapper: SearchHistoryDomainRepoMapper,
+    private val searchHistoryDomainRepoMapper: NewSearchHistoryDomainRepoMapper,
 ) : NewGetTopSearchUseCase {
 
     override suspend fun invoke(): Either<DomainError, List<SearchHistoryDomainModel>> {

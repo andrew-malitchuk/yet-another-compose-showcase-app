@@ -4,7 +4,7 @@ import arrow.core.Either
 import dev.yacsa.domain.error.DataError
 import dev.yacsa.domain.error.DomainError
 import dev.yacsa.domain.error.NoDataError
-import dev.yacsa.domain.impl.mapper.StartUpConfigureDomainRepoMapper
+import dev.yacsa.domain.impl.mapper.NewStartUpConfigureDomainRepoMapper
 import dev.yacsa.domain.model.StartUpConfigureDomainModel
 import dev.yacsa.domain.usecase.startupconfigure.NewGetStartUpConfigureUseCase
 import dev.yacsa.repository.repository.StartUpConfigureRepository
@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 
 class NewGetStartUpConfigureUseCaseImpl @Inject constructor(
-    private val startUpConfigureDomainRepoMapper: StartUpConfigureDomainRepoMapper,
+    private val startUpConfigureDomainRepoMapper: NewStartUpConfigureDomainRepoMapper,
     private val startUpConfigureRepository: StartUpConfigureRepository,
 ) : NewGetStartUpConfigureUseCase {
 

@@ -3,7 +3,7 @@ package dev.yacsa.domain.impl.usecase.books
 import arrow.core.Either
 import dev.yacsa.domain.error.DataError
 import dev.yacsa.domain.error.DomainError
-import dev.yacsa.domain.impl.mapper.BookDomainRepoMapper
+import dev.yacsa.domain.impl.mapper.NewBookDomainRepoMapper
 import dev.yacsa.domain.model.BookDomainModel
 import dev.yacsa.domain.usecase.books.NewGetOrLoadBookUseCase
 import dev.yacsa.repository.repository.BooksRepository
@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class NewGetOrLoadBookUseCaseImpl @Inject constructor(
     private val booksRepository: BooksRepository,
-    private val bookDomainRepoMapper: BookDomainRepoMapper,
+    private val bookDomainRepoMapper: NewBookDomainRepoMapper,
 ) : NewGetOrLoadBookUseCase {
 
     override suspend fun invoke(bookId: Int): Either<DomainError, BookDomainModel> {

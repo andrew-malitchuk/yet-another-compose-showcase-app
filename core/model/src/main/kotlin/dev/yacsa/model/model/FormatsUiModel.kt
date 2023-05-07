@@ -6,12 +6,12 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class FormatsUiModel(
-    val applicationEpubZip: String,
-    val applicationOctetStream: String,
-    val applicationRdfXml: String,
-    val applicationxMobipocketEbook: String,
-    val imageJpeg: String,
-    val textHtml: String,
-    val textPlain: String,
-    val textplainCharsetusAscii: String,
+    val applicationEpubZip: String?,
+    val applicationOctetStream: String?,
+    val applicationRdfXml: String?,
+    val applicationxMobipocketEbook: String?,
+    val imageJpeg: String?,
+    val textHtml: String?,
+    val textPlain: String?,
+    val textplainCharsetusAscii: String?,
 ) : BaseUiModel, Parcelable

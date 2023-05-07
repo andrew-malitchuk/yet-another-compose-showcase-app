@@ -4,7 +4,6 @@ import dev.yacsa.repository.model.BookRepoModel
 
 interface BooksRepository {
 
-    suspend fun getBooks(): List<BookRepoModel>
     suspend fun getBookByBage(page: Int): List<BookRepoModel>
     suspend fun getBook(id: Int): BookRepoModel?
     suspend fun loadBook(id: Int): BookRepoModel?

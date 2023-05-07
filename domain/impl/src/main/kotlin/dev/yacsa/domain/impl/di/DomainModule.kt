@@ -64,12 +64,6 @@ abstract class DomainModule {
 
     @Singleton
     @Binds
-    abstract fun bindsRefreshBooksUseCase(
-        refreshBooksUseCaseImpl: RefreshBooksUseCaseImpl,
-    ): RefreshBooksUseCase
-
-    @Singleton
-    @Binds
     abstract fun bindsSaveBooksUseCase(
         saveBooksUseCaseImpl: SaveBooksUseCaseImpl,
     ): SaveBooksUseCase

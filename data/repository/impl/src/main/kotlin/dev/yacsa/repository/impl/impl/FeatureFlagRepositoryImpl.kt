@@ -3,7 +3,7 @@ package dev.yacsa.repository.impl.impl
 import dev.yacsa.database.model.FeatureFlagDbModel
 import dev.yacsa.database.source.FeatureFlagDbSource
 import dev.yacsa.remoteconfig.source.RemoteConfigSource
-import dev.yacsa.repository.impl.mapper.featureflag.FeatureFlagRepoDbMapper
+import dev.yacsa.repository.impl.mapper.featureflag.NewFeatureFlagRepoDbMapper
 import dev.yacsa.repository.model.FeatureFlagRepoModel
 import dev.yacsa.repository.repository.FeatureFlagRepository
 import javax.inject.Inject
@@ -11,7 +11,7 @@ import javax.inject.Inject
 class FeatureFlagRepositoryImpl @Inject constructor(
     private val remoteConfigSource: RemoteConfigSource,
     private val featureFlagDbSource: FeatureFlagDbSource,
-    private val featureFlagRepoDbMapper: FeatureFlagRepoDbMapper,
+    private val featureFlagRepoDbMapper: NewFeatureFlagRepoDbMapper,
 ) : FeatureFlagRepository {
 
     override suspend fun getFeatureFlagValue(key: String, debugKey: String): Result<Boolean> {

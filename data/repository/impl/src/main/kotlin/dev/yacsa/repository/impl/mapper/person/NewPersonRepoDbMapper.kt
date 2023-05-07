@@ -1,7 +1,7 @@
-package dev.yacsa.repository.impl.mapper.book
+package dev.yacsa.repository.impl.mapper.person
 
-import dev.yacsa.database.model.BookDbModel
-import dev.yacsa.repository.model.BookRepoModel
+import dev.yacsa.database.model.PersonDbModel
+import dev.yacsa.repository.model.PersonRepoModel
 import org.mapstruct.Mapper
 import org.mapstruct.NullValueCheckStrategy
 import org.mapstruct.NullValuePropertyMappingStrategy
@@ -10,14 +10,14 @@ import org.mapstruct.NullValuePropertyMappingStrategy
     nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS,
     nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_DEFAULT,
 )
-interface NewBookRepoDbMapper {
+interface NewPersonRepoDbMapper {
 
     fun toRepo(
-        bookDbModel: BookDbModel
-    ): BookRepoModel
+        personDbModel: PersonDbModel
+    ): PersonRepoModel
 
     fun toDb(
-        bookRepoModel: BookRepoModel
-    ): BookDbModel
+        personRepoModel: PersonRepoModel
+    ): PersonDbModel
 
 }

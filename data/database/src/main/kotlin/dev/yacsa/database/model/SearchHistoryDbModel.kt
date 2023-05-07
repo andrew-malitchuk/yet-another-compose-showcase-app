@@ -15,5 +15,5 @@ data class SearchHistoryDbModel(
     @ColumnInfo(name = "query")
     val query: String?,
     @ColumnInfo(name = "createAt")
-    val createAt: Long,
+    var createAt: Long,
 ) : BaseDbModel

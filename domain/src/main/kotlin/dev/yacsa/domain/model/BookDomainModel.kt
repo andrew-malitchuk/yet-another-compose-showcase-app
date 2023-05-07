@@ -6,13 +6,13 @@ data class BookDomainModel(
     val id: Int?,
     val title: String?,
     val subjects: List<String?>?,
-    val authors: List<PersonDomainModel?>? = emptyList(),
-    val translators: List<PersonDomainModel?>? = emptyList(),
+    val authors: List<PersonDomainModel?>? ,
+    val translators: List<PersonDomainModel?>? ,
     val bookshelves: List<String?>?,
     val languages: List<String?>?,
     val copyright: Boolean?,
     val mediaType: String?,
-    val formats: FormatsDomainModel? = FormatsDomainModel(),
+    val formats: FormatsDomainModel?,
     val downloadCount: Int?,
 ) : BaseDomainModel {
     var isCached: Boolean = false

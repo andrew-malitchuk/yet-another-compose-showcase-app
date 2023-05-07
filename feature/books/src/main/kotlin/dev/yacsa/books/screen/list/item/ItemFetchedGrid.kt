@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import dev.yacsa.model.model.BookUiModel
-import dev.yacsa.model.model.FormatsUiModel
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
 
@@ -82,7 +81,7 @@ fun ItemFetchedGrid(
 fun Preview_ItemFetchedGrid() {
     YacsaTheme {
         ItemFetchedGrid(
-            book = BookUiModel(1, "foobar", null, emptyList(), emptyList(), emptyList(), emptyList(), true, null, FormatsUiModel(), 10),
+            book = BookUiModel(1, "foobar", null, emptyList(), emptyList(), emptyList(), emptyList(), true, null, null, 10),
             onItemContentClick = {},
         )
     }

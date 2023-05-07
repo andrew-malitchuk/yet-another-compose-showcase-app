@@ -4,7 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.yacsa.domain.error.NoDataError
 import dev.yacsa.domain.usecase.books.NewGetOrLoadBookUseCase
-import dev.yacsa.model.mapper.BookUiDomainMapper
+import dev.yacsa.model.mapper.NewBooksUiDomainMapper
 import dev.yacsa.platform.viewmodel.BaseViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetalizationViewModel @Inject constructor(
-    private val bookUiDomainMapper: BookUiDomainMapper,
+    private val bookUiDomainMapper: NewBooksUiDomainMapper,
     private val getOrLoadBookUseCase: NewGetOrLoadBookUseCase,
     savedStateHandle: SavedStateHandle,
     initialState: DetalizationUiState,

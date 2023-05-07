@@ -12,7 +12,7 @@ import dev.yacsa.books.screen.list.pagination.BooksSource
 import dev.yacsa.domain.usecase.books.NewGetBooksUseCase
 import dev.yacsa.domain.usecase.books.NewLoadBooksUseCase
 import dev.yacsa.domain.usecase.books.NewSaveBooksUseCase
-import dev.yacsa.model.mapper.BookUiDomainMapper
+import dev.yacsa.model.mapper.NewBooksUiDomainMapper
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.platform.viewmodel.BaseViewModel
 import kotlinx.coroutines.delay
@@ -28,7 +28,7 @@ import javax.inject.Inject
 class ListViewModel @Inject constructor(
     private val getBooksUseCase: NewGetBooksUseCase,
     private val loadBooksUseCase: NewLoadBooksUseCase,
-    private val bookUiDomainMapper: BookUiDomainMapper,
+    private val bookUiDomainMapper: NewBooksUiDomainMapper,
     private val saveBooksUseCase: NewSaveBooksUseCase,
     private val booksFeatureFlag: BooksFeatureFlag,
     savedStateHandle: SavedStateHandle,

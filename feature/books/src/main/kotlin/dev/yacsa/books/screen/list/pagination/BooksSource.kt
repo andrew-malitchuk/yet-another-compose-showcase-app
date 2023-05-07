@@ -6,13 +6,13 @@ import dev.yacsa.domain.error.DataError
 import dev.yacsa.domain.usecase.books.NewGetBooksUseCase
 import dev.yacsa.domain.usecase.books.NewLoadBooksUseCase
 import dev.yacsa.domain.usecase.books.NewSaveBooksUseCase
-import dev.yacsa.model.mapper.BookUiDomainMapper
+import dev.yacsa.model.mapper.NewBooksUiDomainMapper
 import dev.yacsa.model.model.BookUiModel
 
 class BooksSource(
     private val getBooksUseCase: NewGetBooksUseCase,
     private val loadBooksUseCase: NewLoadBooksUseCase,
-    private val bookUiDomainMapper: BookUiDomainMapper,
+    private val bookUiDomainMapper: NewBooksUiDomainMapper,
     private val saveBooksUseCase: NewSaveBooksUseCase,
 ) : PagingSource<Int, BookUiModel>() {
 

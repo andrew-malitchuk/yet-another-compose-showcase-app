@@ -9,10 +9,9 @@ import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.yacsa.books.featureflag.BooksFeatureFlag
 import dev.yacsa.books.screen.list.pagination.BooksSource
-import dev.yacsa.domain.usecase.RemoveAllBooksUseCase
-import dev.yacsa.domain.usecase.books.GetBooksUseCase
-import dev.yacsa.domain.usecase.books.LoadBooksUseCase
-import dev.yacsa.domain.usecase.books.SaveBooksUseCase
+import dev.yacsa.domain.usecase.books.NewGetBooksUseCase
+import dev.yacsa.domain.usecase.books.NewLoadBooksUseCase
+import dev.yacsa.domain.usecase.books.NewSaveBooksUseCase
 import dev.yacsa.model.mapper.NewBooksUiDomainMapper
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.platform.viewmodel.BaseViewModel
@@ -27,11 +26,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ListViewModel @Inject constructor(
-    private val getBooksUseCase: GetBooksUseCase,
-    private val loadBooksUseCase: LoadBooksUseCase,
+    private val getBooksUseCase: NewGetBooksUseCase,
+    private val loadBooksUseCase: NewLoadBooksUseCase,
     private val bookUiDomainMapper: NewBooksUiDomainMapper,
-    private val removeAllBooksUseCase: RemoveAllBooksUseCase,
-    private val saveBooksUseCase: SaveBooksUseCase,
+    private val saveBooksUseCase: NewSaveBooksUseCase,
     private val booksFeatureFlag: BooksFeatureFlag,
     savedStateHandle: SavedStateHandle,
     initialState: ListUiState,

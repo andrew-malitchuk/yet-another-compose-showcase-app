@@ -5,98 +5,37 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.yacsa.domain.impl.usecase.*
-import dev.yacsa.domain.impl.usecase.books.GetBooksUseCaseImpl
-import dev.yacsa.domain.impl.usecase.books.GetOrLoadBookUseCaseImpl
-import dev.yacsa.domain.impl.usecase.books.LoadBooksUseCaseImpl
-import dev.yacsa.domain.impl.usecase.books.SearchBooksUseCaseImpl
-import dev.yacsa.domain.impl.usecase.featureflag.FetchFeatureFlagUseCaseImpl
-import dev.yacsa.domain.impl.usecase.featureflag.UpdateLocalFeatureFlagUseCaseImpl
+import dev.yacsa.domain.impl.usecase.books.NewGetBooksUseCaseImpl
+import dev.yacsa.domain.impl.usecase.books.NewGetOrLoadBookUseCaseImpl
+import dev.yacsa.domain.impl.usecase.books.NewLoadBooksUseCaseImpl
+import dev.yacsa.domain.impl.usecase.books.NewSaveBooksUseCaseImpl
+import dev.yacsa.domain.impl.usecase.books.NewSearchBooksUseCaseImpl
+import dev.yacsa.domain.impl.usecase.featureflag.NewFetchFeatureFlagUseCaseImpl
+import dev.yacsa.domain.impl.usecase.featureflag.NewUpdateLocalFeatureFlagUseCaseImpl
 import dev.yacsa.domain.impl.usecase.history.NewClearHistoryUseCaseImpl
 import dev.yacsa.domain.impl.usecase.history.NewGetTopSearchUseCaseImpl
 import dev.yacsa.domain.impl.usecase.history.NewInsertSearchHistoryUseCaseImpl
+import dev.yacsa.domain.impl.usecase.startupconfigure.NewGetStartUpConfigureUseCaseImpl
+import dev.yacsa.domain.impl.usecase.startupconfigure.NewUpdateStartUpConfigureUseCaseImpl
 import dev.yacsa.domain.usecase.*
-import dev.yacsa.domain.usecase.books.GetBooksUseCase
-import dev.yacsa.domain.usecase.books.GetOrLoadBookUseCase
-import dev.yacsa.domain.usecase.books.LoadBooksUseCase
-import dev.yacsa.domain.usecase.books.SaveBooksUseCase
-import dev.yacsa.domain.usecase.books.SearchBooksUseCase
-import dev.yacsa.domain.usecase.featureflag.FetchFeatureFlagUseCase
-import dev.yacsa.domain.usecase.featureflag.UpdateLocalFeatureFlagUseCase
+import dev.yacsa.domain.usecase.books.NewGetBooksUseCase
+import dev.yacsa.domain.usecase.books.NewGetOrLoadBookUseCase
+import dev.yacsa.domain.usecase.books.NewLoadBooksUseCase
+import dev.yacsa.domain.usecase.books.NewSaveBooksUseCase
+import dev.yacsa.domain.usecase.books.NewSearchBooksUseCase
+import dev.yacsa.domain.usecase.featureflag.NewFetchFeatureFlagUseCase
+import dev.yacsa.domain.usecase.featureflag.NewUpdateLocalFeatureFlagUseCase
 import dev.yacsa.domain.usecase.history.NewClearHistoryUseCase
 import dev.yacsa.domain.usecase.history.NewGetTopSearchUseCase
 import dev.yacsa.domain.usecase.history.NewInsertSearchHistoryUseCase
+import dev.yacsa.domain.usecase.startupconfigure.NewGetStartUpConfigureUseCase
+import dev.yacsa.domain.usecase.startupconfigure.NewUpdateStartUpConfigureUseCase
 import javax.inject.Singleton
 
 @Suppress("UnnecessaryAbstractClass")
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class DomainModule {
-
-    @Singleton
-    @Binds
-    abstract fun bindsGetPreferencesUseCase(
-        getPreferencesUseCaseImpl: GetPreferencesUseCaseImpl,
-    ): GetPreferencesUseCase
-
-    @Singleton
-    @Binds
-    abstract fun bindsGetStartUpConfigureUseCase(
-        getStartUpConfigureUseCaseImpl: GetStartUpConfigureUseCaseImpl,
-    ): GetStartUpConfigureUseCase
-
-    @Singleton
-    @Binds
-    abstract fun bindsUpdateStartUpConfigureUseCase(
-        updateStartUpConfigureUseCaseImpl: UpdateStartUpConfigureUseCaseImpl,
-    ): UpdateStartUpConfigureUseCase
-
-    @Singleton
-    @Binds
-    abstract fun bindsGetBooksUseCase(
-        getBooksUseCaseImpl: GetBooksUseCaseImpl,
-    ): GetBooksUseCase
-
-    @Singleton
-    @Binds
-    abstract fun bindsLoadBooksUseCase(
-        loadBooksUseCaseImpl: LoadBooksUseCaseImpl,
-    ): LoadBooksUseCase
-
-    @Singleton
-    @Binds
-    abstract fun bindsSaveBooksUseCase(
-        saveBooksUseCaseImpl: SaveBooksUseCaseImpl,
-    ): SaveBooksUseCase
-
-    @Singleton
-    @Binds
-    abstract fun bindsRemoveAllBooksUseCase(
-        removeAllBooksUseCaseImpl: RemoveAllBooksUseCaseImpl,
-    ): RemoveAllBooksUseCase
-
-    @Singleton
-    @Binds
-    abstract fun bindsUpdateLocalFeatureFlagUseCase(
-        UpdateLocalFeatureFlagUseCaseImpl: UpdateLocalFeatureFlagUseCaseImpl,
-    ): UpdateLocalFeatureFlagUseCase
-
-    @Singleton
-    @Binds
-    abstract fun bindsFetchFeatureFlagUseCase(
-        fetchFeatureFlagUseCaseImpl: FetchFeatureFlagUseCaseImpl,
-    ): FetchFeatureFlagUseCase
-
-    @Singleton
-    @Binds
-    abstract fun bindsGetOrLoadBookUseCase(
-        getOrLoadBookUseCaseImpl: GetOrLoadBookUseCaseImpl,
-    ): GetOrLoadBookUseCase
-
-    @Singleton
-    @Binds
-    abstract fun bindsSearchBooksUseCase(
-        searchBooksUseCaseImpl: SearchBooksUseCaseImpl,
-    ): SearchBooksUseCase
 
     @Singleton
     @Binds
@@ -115,4 +54,58 @@ abstract class DomainModule {
     abstract fun bindsNewGetTopSearchUseCase(
         newGetTopSearchUseCaseImpl: NewGetTopSearchUseCaseImpl,
     ): NewGetTopSearchUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindsNewGetBooksUseCase(
+        newGetBooksUseCaseImpl: NewGetBooksUseCaseImpl,
+    ): NewGetBooksUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindsNewSaveBooksUseCase(
+        NewSaveBooksUseCaseImpl: NewSaveBooksUseCaseImpl,
+    ): NewSaveBooksUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindsNewLoadBooksUseCase(
+        newLoadBooksUseCaseImpl: NewLoadBooksUseCaseImpl,
+    ): NewLoadBooksUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindsNewGetOrLoadBookUseCase(
+        newGetOrLoadBookUseCaseImpl: NewGetOrLoadBookUseCaseImpl,
+    ): NewGetOrLoadBookUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindsNewSearchBooksUseCase(
+        newSearchBooksUseCaseImpl: NewSearchBooksUseCaseImpl,
+    ): NewSearchBooksUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindsNewUpdateStartUpConfigureUseCase(
+        newUpdateStartUpConfigureUseCase: NewUpdateStartUpConfigureUseCaseImpl,
+    ): NewUpdateStartUpConfigureUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindsNewGetStartUpConfigureUseCase(
+        newGetStartUpConfigureUseCaseImpl: NewGetStartUpConfigureUseCaseImpl,
+    ): NewGetStartUpConfigureUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindNewFetchFeatureFlagUseCase(
+        newFetchFeatureFlagUseCaseImpl: NewFetchFeatureFlagUseCaseImpl,
+    ): NewFetchFeatureFlagUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindNewUpdateLocalFeatureFlagUseCase(
+        newUpdateLocalFeatureFlagUseCaseImpl: NewUpdateLocalFeatureFlagUseCaseImpl,
+    ): NewUpdateLocalFeatureFlagUseCase
 }

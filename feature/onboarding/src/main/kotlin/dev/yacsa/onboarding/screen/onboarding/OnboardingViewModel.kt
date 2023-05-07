@@ -8,8 +8,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.yacsa.domain.model.StartUpConfigureDomainModel
-import dev.yacsa.domain.usecase.GetStartUpConfigureUseCase
-import dev.yacsa.domain.usecase.UpdateStartUpConfigureUseCase
+import dev.yacsa.domain.usecase.startupconfigure.NewGetStartUpConfigureUseCase
+import dev.yacsa.domain.usecase.startupconfigure.NewUpdateStartUpConfigureUseCase
 import dev.yacsa.ui.R
 import kotlinx.coroutines.launch
 import logcat.logcat
@@ -17,8 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OnboardingViewModel @Inject constructor(
-    private val updateStartUpConfigureUseCase: UpdateStartUpConfigureUseCase,
-    private val getStartUpConfigureUseCase: GetStartUpConfigureUseCase,
+    private val updateStartUpConfigureUseCase: NewUpdateStartUpConfigureUseCase,
+    private val getStartUpConfigureUseCase: NewGetStartUpConfigureUseCase,
 ) : ViewModel() {
 
     fun updateStartUpConfigure() {

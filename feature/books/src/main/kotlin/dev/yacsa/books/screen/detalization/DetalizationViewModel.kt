@@ -2,19 +2,20 @@ package dev.yacsa.books.screen.detalization
 
 import androidx.lifecycle.SavedStateHandle
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.yacsa.domain.usecase.books.GetOrLoadBookUseCase
+import dev.yacsa.domain.error.NoDataError
+import dev.yacsa.domain.usecase.books.NewGetOrLoadBookUseCase
 import dev.yacsa.model.mapper.NewBooksUiDomainMapper
 import dev.yacsa.platform.viewmodel.BaseViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.onStart
 import logcat.logcat
 import javax.inject.Inject
 
 @HiltViewModel
 class DetalizationViewModel @Inject constructor(
-//    private val bookUiDomainMapper: BookUiDomainMapper,
     private val bookUiDomainMapper: NewBooksUiDomainMapper,
-    private val getOrLoadBookUseCase: GetOrLoadBookUseCase,
+    private val getOrLoadBookUseCase: NewGetOrLoadBookUseCase,
     savedStateHandle: SavedStateHandle,
     initialState: DetalizationUiState,
 ) : BaseViewModel<DetalizationUiState, DetalizationUiState.PartialState, DetalizationEvent, DetalizationIntent>(
@@ -37,17 +38,28 @@ class DetalizationViewModel @Inject constructor(
     }
 
     private fun getBook(bookId: Int): Flow<DetalizationUiState.PartialState> = flow {
+        getOrLoadBookUseCase(bookId).fold(
+            { error ->
+                when (error) {
+                    is NoDataError -> {
+                        emit(DetalizationUiState.PartialState.Error(NoSuchElementException()))
+                    }
+
+                    else -> {
+                        emit(DetalizationUiState.PartialState.Error(Exception("SWW")))
+                    }
+                }
+            },
+            {
+                emit(
+                    DetalizationUiState.PartialState.Fetched(
+                        bookUiDomainMapper.toUi(it),
+                    ),
+                )
+            }
+        )
+    }.onStart {
         emit(DetalizationUiState.PartialState.Loading)
-        val result = getOrLoadBookUseCase(bookId)
-        if (result == null) {
-            emit(DetalizationUiState.PartialState.Error(NoSuchElementException()))
-        } else {
-            emit(
-                DetalizationUiState.PartialState.Fetched(
-                    bookUiDomainMapper.toUi(result),
-                ),
-            )
-        }
     }
 
     override fun reduceUiState(

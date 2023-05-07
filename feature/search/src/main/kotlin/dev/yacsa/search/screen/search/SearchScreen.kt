@@ -7,6 +7,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import dev.yacsa.search.screen.search.content.ContentError
 import dev.yacsa.search.screen.search.content.ContentFetched
 import dev.yacsa.search.screen.search.content.ContentLoading
 import dev.yacsa.ui.theme.YacsaTheme
@@ -60,6 +61,10 @@ fun SearchScreen(
                 onBookClicked = onBookClicked,
                 onDelete = onDelete,
             )
+        }else{
+            if(uiState.isError){
+                ContentError()
+            }
         }
     }
 }

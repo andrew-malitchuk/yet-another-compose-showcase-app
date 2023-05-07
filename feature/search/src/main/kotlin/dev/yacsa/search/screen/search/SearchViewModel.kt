@@ -3,10 +3,11 @@ package dev.yacsa.search.screen.search
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.yacsa.domain.error.DataError
 import dev.yacsa.domain.usecase.books.SearchBooksUseCase
-import dev.yacsa.domain.usecase.history.ClearHistoryUseCase
-import dev.yacsa.domain.usecase.history.GetTopSearchUseCase
-import dev.yacsa.domain.usecase.history.InsertSearchHistoryUseCase
+import dev.yacsa.domain.usecase.history.NewClearHistoryUseCase
+import dev.yacsa.domain.usecase.history.NewGetTopSearchUseCase
+import dev.yacsa.domain.usecase.history.NewInsertSearchHistoryUseCase
 import dev.yacsa.model.mapper.NewBooksUiDomainMapper
 import dev.yacsa.model.mapper.NewSearchHistoryUiDomainMapper
 import dev.yacsa.platform.viewmodel.BaseViewModel
@@ -27,10 +28,10 @@ class SearchViewModel @Inject constructor(
     initialState: SearchUiState,
     private val searchBooksUseCase: SearchBooksUseCase,
     private val booksUiDomainMapper: NewBooksUiDomainMapper,
-    private val insertSearchHistoryUseCase: InsertSearchHistoryUseCase,
-    private val getTopSearchUseCase: GetTopSearchUseCase,
+    private val insertSearchHistoryUseCase: NewInsertSearchHistoryUseCase,
+    private val getTopSearchUseCase: NewGetTopSearchUseCase,
     private val searchHistoryUiDomainMapper: NewSearchHistoryUiDomainMapper,
-    private val clearHistoryUseCase: ClearHistoryUseCase,
+    private val clearHistoryUseCase: NewClearHistoryUseCase,
 ) : BaseViewModel<SearchUiState, SearchUiState.PartialState, SearchEvent, SearchIntent>(
     savedStateHandle,
     initialState,
@@ -68,28 +69,73 @@ class SearchViewModel @Inject constructor(
 
     private fun getTopSearch(): Flow<SearchUiState.PartialState> =
         flow<SearchUiState.PartialState> {
-            // TODO: remove
-            val result = getTopSearchUseCase().map(searchHistoryUiDomainMapper::toUi)
-            emit(SearchUiState.PartialState.ContentFetched(result))
+            val result = getTopSearchUseCase()
+            result.fold({ error ->
+                when (error) {
+                    is DataError -> {
+                        emit(SearchUiState.PartialState.Error(error.throwable))
+                    }
+
+                    else -> {
+                        emit(SearchUiState.PartialState.Error(Throwable("SWW")))
+                    }
+                }
+            }, { result ->
+                emit(
+                    SearchUiState.PartialState.ContentFetched(
+                        result.map(
+                            searchHistoryUiDomainMapper::toUi
+                        )
+                    )
+                )
+            })
+
+
         }.onStart {
-//            emit(SearchUiState.PartialState.ContentLoading)
             emit(SearchUiState.PartialState.ResultLoading)
         }
 
     private fun search(query: String): Flow<SearchUiState.PartialState> =
         flow<SearchUiState.PartialState> {
-            insertSearchHistoryUseCase(query)
-            val result = searchBooksUseCase(query).map(booksUiDomainMapper::toUi)
-            emit(SearchUiState.PartialState.ResultFetched(result))
-            acceptIntent(SearchIntent.GetTopSearch)
+            insertSearchHistoryUseCase(query).fold({
+                val result = searchBooksUseCase(query).map(booksUiDomainMapper::toUi)
+                emit(SearchUiState.PartialState.ResultFetched(result))
+                acceptIntent(SearchIntent.GetTopSearch)
+            }, { error ->
+                when (error) {
+                    is DataError -> {
+                        emit(SearchUiState.PartialState.Error(error.throwable))
+                    }
+
+                    else -> {
+                        emit(SearchUiState.PartialState.Error(Throwable("SWW")))
+                    }
+                }
+
+            })
+
         }.onStart {
             emit(SearchUiState.PartialState.ResultLoading)
         }
 
     private fun clearHistory(): Flow<SearchUiState.PartialState> =
         flow {
-            clearHistoryUseCase()
-            emit(SearchUiState.PartialState.ContentFetched(emptyList()))
+            clearHistoryUseCase().fold(
+                {
+                    emit(SearchUiState.PartialState.ContentFetched(emptyList()))
+                },
+                { error ->
+                    when (error) {
+                        is DataError -> {
+                            emit(SearchUiState.PartialState.Error(error.throwable))
+                        }
+
+                        else -> {
+                            emit(SearchUiState.PartialState.Error(Throwable("SWW")))
+                        }
+                    }
+                }
+            )
         }
 
     override fun reduceUiState(

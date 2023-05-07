@@ -20,8 +20,8 @@ fun Project.configureKotlinAndroid(
             minSdk=24
         }
         compileOptions{
-            sourceCompatibility=JavaVersion.VERSION_11
-            targetCompatibility=JavaVersion.VERSION_11
+            sourceCompatibility=JavaVersion.VERSION_17
+            targetCompatibility=JavaVersion.VERSION_17
         }
         kotlinOptions{
             // Treat all Kotlin warnings as errors (disabled by default)
@@ -38,7 +38,7 @@ fun Project.configureKotlinAndroid(
             )
 
             // Set JVM target to 11
-            jvmTarget = JavaVersion.VERSION_11.toString()
+            jvmTarget = JavaVersion.VERSION_17.toString()
         }
     }
     val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")

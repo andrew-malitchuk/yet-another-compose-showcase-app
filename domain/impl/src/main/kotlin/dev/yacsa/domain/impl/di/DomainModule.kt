@@ -11,9 +11,9 @@ import dev.yacsa.domain.impl.usecase.books.LoadBooksUseCaseImpl
 import dev.yacsa.domain.impl.usecase.books.SearchBooksUseCaseImpl
 import dev.yacsa.domain.impl.usecase.featureflag.FetchFeatureFlagUseCaseImpl
 import dev.yacsa.domain.impl.usecase.featureflag.UpdateLocalFeatureFlagUseCaseImpl
-import dev.yacsa.domain.impl.usecase.history.ClearHistoryUseCaseImpl
-import dev.yacsa.domain.impl.usecase.history.GetTopSearchUseCaseImpl
-import dev.yacsa.domain.impl.usecase.history.InsertSearchHistoryUseCaseImpl
+import dev.yacsa.domain.impl.usecase.history.NewClearHistoryUseCaseImpl
+import dev.yacsa.domain.impl.usecase.history.NewGetTopSearchUseCaseImpl
+import dev.yacsa.domain.impl.usecase.history.NewInsertSearchHistoryUseCaseImpl
 import dev.yacsa.domain.usecase.*
 import dev.yacsa.domain.usecase.books.GetBooksUseCase
 import dev.yacsa.domain.usecase.books.GetOrLoadBookUseCase
@@ -22,9 +22,9 @@ import dev.yacsa.domain.usecase.books.SaveBooksUseCase
 import dev.yacsa.domain.usecase.books.SearchBooksUseCase
 import dev.yacsa.domain.usecase.featureflag.FetchFeatureFlagUseCase
 import dev.yacsa.domain.usecase.featureflag.UpdateLocalFeatureFlagUseCase
-import dev.yacsa.domain.usecase.history.ClearHistoryUseCase
-import dev.yacsa.domain.usecase.history.GetTopSearchUseCase
-import dev.yacsa.domain.usecase.history.InsertSearchHistoryUseCase
+import dev.yacsa.domain.usecase.history.NewClearHistoryUseCase
+import dev.yacsa.domain.usecase.history.NewGetTopSearchUseCase
+import dev.yacsa.domain.usecase.history.NewInsertSearchHistoryUseCase
 import javax.inject.Singleton
 
 @Suppress("UnnecessaryAbstractClass")
@@ -100,19 +100,19 @@ abstract class DomainModule {
 
     @Singleton
     @Binds
-    abstract fun bindsGetTopSearchUseCase(
-        getTopSearchUseCaseImpl: GetTopSearchUseCaseImpl,
-    ): GetTopSearchUseCase
+    abstract fun bindsNewClearHistoryUseCase(
+        newClearHistoryUseCaseImpl: NewClearHistoryUseCaseImpl,
+    ): NewClearHistoryUseCase
 
     @Singleton
     @Binds
-    abstract fun bindsInsertSearchHistoryUseCase(
-        insertSearchHistoryUseCaseImpl: InsertSearchHistoryUseCaseImpl,
-    ): InsertSearchHistoryUseCase
+    abstract fun bindsNewInsertSearchHistoryUseCase(
+        newInsertSearchHistoryUseCaseImpl: NewInsertSearchHistoryUseCaseImpl,
+    ): NewInsertSearchHistoryUseCase
 
     @Singleton
     @Binds
-    abstract fun bindsClearHistoryUseCase(
-        clearHistoryUseCaseImpl: ClearHistoryUseCaseImpl,
-    ): ClearHistoryUseCase
+    abstract fun bindsNewGetTopSearchUseCase(
+        newGetTopSearchUseCaseImpl: NewGetTopSearchUseCaseImpl,
+    ): NewGetTopSearchUseCase
 }

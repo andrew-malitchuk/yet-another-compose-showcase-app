@@ -10,4 +10,5 @@ sealed class NavigationDirection(var route: String) {
     object FeatureFlag : NavigationDirection("feature_flag")
     object NotFound : NavigationDirection("not_found")
     object Search : NavigationDirection("search")
+    object Settings : NavigationDirection("settings")
 }

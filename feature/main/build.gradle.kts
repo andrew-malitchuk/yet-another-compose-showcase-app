@@ -28,6 +28,7 @@ dependencies {
     implementation(project(":feature:featureflagmanager"))
     implementation(project(":feature:notfound"))
     implementation(project(":feature:search"))
+    implementation(project(":feature:settings"))
 
     implementation(project(":data:network"))
     implementation(project(":data:datastore"))

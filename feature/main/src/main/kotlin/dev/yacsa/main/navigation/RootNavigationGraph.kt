@@ -9,6 +9,7 @@ import dev.yacsa.navigation.NavigationDirection
 import dev.yacsa.notfound.navigation.notFoundNavGraph
 import dev.yacsa.onboarding.navigation.onboardingNavGraph
 import dev.yacsa.search.navigation.searchNavGraph
+import dev.yacsa.settings.navigation.settingsNavGraph
 
 @Composable
 fun RootNavigationGraph(
@@ -25,5 +26,6 @@ fun RootNavigationGraph(
         featureFlagNavGraph(navController)
         notFoundNavGraph(navController)
         searchNavGraph(navController)
+        settingsNavGraph(navController)
     }
 }

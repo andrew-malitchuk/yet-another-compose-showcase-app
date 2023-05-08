@@ -30,8 +30,11 @@ fun NavGraphBuilder.booksNavGraph(navController: NavHostController) {
                     }
                 },
                 onSearch = {
+//                    navController.navigate(
+//                        NavigationDirection.Search.route,
+//                    )
                     navController.navigate(
-                        NavigationDirection.Search.route,
+                        NavigationDirection.Settings.route,
                     )
                 },
                 notFound = {

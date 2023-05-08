@@ -30,6 +30,7 @@ dependencies {
     implementation(project(":feature:featureflagmanager"))
     implementation(project(":feature:notfound"))
     implementation(project(":feature:search"))
+    implementation(project(":feature:settings"))
 
     implementation(project(":core:common"))
     implementation(project(":core:localization"))

@@ -29,6 +29,7 @@ import dev.yacsa.settings.screen.settings.content.ContentFetched
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.divider.AnimatedDivider
 import dev.yacsa.ui.theme.YacsaTheme
+import logcat.logcat
 
 @Composable
 fun SettingsRoute(
@@ -57,8 +58,12 @@ fun SettingsScreen(
             color = YacsaTheme.colors.secondaryBackground,
         )
     }
+    val foo =rememberTopAppBarState()
     val scrollBehavior =
-        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
+        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(foo)
+
+    logcat("foo"){foo.collapsedFraction.toString()}
+
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -97,7 +102,7 @@ fun SettingsScreen(
             }
         },
     ) { innerPadding ->
-        ContentFetched(innerPadding = innerPadding, state = state)
+        ContentFetched(innerPadding = innerPadding, state = state,foo=foo)
     }
 }
 

@@ -58,15 +58,16 @@ fun SettingsScreen(
             color = YacsaTheme.colors.secondaryBackground,
         )
     }
-    val foo =rememberTopAppBarState()
+    val foo = rememberTopAppBarState()
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(foo)
 
-    logcat("foo"){foo.collapsedFraction.toString()}
+    logcat("foo") { foo.collapsedFraction.toString() }
 
 
     Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        modifier = Modifier
+            .nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             LargeTopAppBar(
                 title = {
@@ -102,8 +103,9 @@ fun SettingsScreen(
             }
         },
     ) { innerPadding ->
-        ContentFetched(innerPadding = innerPadding, state = state,foo=foo)
+        ContentFetched(innerPadding = innerPadding, state = state, foo = foo)
     }
+
 }
 
 @Preview(showBackground = true)

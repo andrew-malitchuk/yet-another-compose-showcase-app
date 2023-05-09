@@ -1,6 +1,7 @@
 package dev.yacsa.settings.screen.settings.content
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,7 +11,6 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Text
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarState
 import androidx.compose.material3.rememberTopAppBarState
@@ -20,6 +20,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.yacsa.settings.screen.settings.item.SettingsItem
 import dev.yacsa.ui.theme.YacsaTheme
 import java.lang.Math.abs
 
@@ -49,19 +50,19 @@ fun ContentFetched(
             modifier = Modifier
                 .fillMaxSize()
                 .clip(RoundedCornerShape(topStart = corner, topEnd = corner))
-                .background(Color.Cyan)
+                .background(Color(0xFFE0DFFD))
         ) {
 
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
                     /*.padding(innerPadding)*/,
-                state = state
+                state = state,
+                contentPadding = PaddingValues( 8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 items(list) { item ->
-                    Text(
-                        text = "foo"
-                    )
+                    SettingsItem()
                 }
             }
         }

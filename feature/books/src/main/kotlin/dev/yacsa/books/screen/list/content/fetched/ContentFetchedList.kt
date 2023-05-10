@@ -1,8 +1,8 @@
 package dev.yacsa.books.screen.list.content.fetched
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -30,14 +30,12 @@ fun ContentFetchedList(
     listState: LazyListState,
 ) {
     LazyColumn(
-        verticalArrangement = Arrangement.spacedBy(8.dp),
         state = listState,
         modifier = modifier
-            .fillMaxSize()
-            // TODO: fix
-            .padding(
-                horizontal = 16.dp,
-            ),
+            .fillMaxSize(),
+        // TODO: fix
+        contentPadding = PaddingValues(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         items(
             lazyPagingItems,
@@ -59,6 +57,7 @@ fun ContentFetchedList(
                         ItemLoading()
                     }
                 }
+
                 loadState.refresh is LoadState.Error -> {
                     val error = lazyPagingItems.loadState.append as? LoadState.Error
                     item {
@@ -70,11 +69,13 @@ fun ContentFetchedList(
                         )
                     }
                 }
+
                 loadState.append is LoadState.Loading -> {
                     item {
                         ItemLoading()
                     }
                 }
+
                 loadState.append is LoadState.Error -> {
                     val error = lazyPagingItems.loadState.append as LoadState.Error
                     item {

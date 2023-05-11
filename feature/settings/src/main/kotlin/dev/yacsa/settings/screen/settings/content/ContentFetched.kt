@@ -20,12 +20,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.chrisbanes.snapper.ExperimentalSnapperApi
 import dev.yacsa.settings.screen.settings.item.SettingsItem
 import dev.yacsa.ui.theme.YacsaTheme
 import java.lang.Math.abs
 
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalSnapperApi::class)
 @Composable
 fun ContentFetched(
     modifier: Modifier = Modifier.fillMaxSize(),
@@ -60,6 +61,7 @@ fun ContentFetched(
                 state = state,
                 contentPadding = PaddingValues( 8.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
+//                flingBehavior = rememberSnapperFlingBehavior(state)
             ) {
                 items(list) { item ->
                     SettingsItem()

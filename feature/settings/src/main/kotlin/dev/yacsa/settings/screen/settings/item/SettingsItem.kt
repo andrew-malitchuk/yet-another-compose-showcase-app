@@ -14,22 +14,29 @@ import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yacsa.ui.R
+import dev.yacsa.ui.composable.modifier.bouncingClickable
 import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
 fun SettingsItem(
     modifier: Modifier = Modifier
 ) {
+    val shape = RoundedCornerShape(16.dp)
     Card(
+        shape = shape,
         modifier = Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .bouncingClickable {
+                println("Clicked...")
+            }
+            .clip(shape),
         border = BorderStroke(1.dp, Color(0xFF7766C6)),
-        shape = RoundedCornerShape(16.dp),
         elevation = 10.dp
     ) {
 
@@ -39,13 +46,16 @@ fun SettingsItem(
             verticalAlignment = Alignment.CenterVertically
         ) {
             SmallFloatingActionButton(onClick = { /*TODO*/ }) {
-                Icon(painter = painterResource(id = R.drawable.icon_gear_six_regular_24), contentDescription = null)
+                Icon(
+                    painter = painterResource(id = R.drawable.icon_gear_six_regular_24),
+                    contentDescription = null
+                )
             }
             Spacer(
                 modifier = Modifier
                     .width(16.dp)
             )
-            Text(text = "foo",style = YacsaTheme.typography.title)
+            Text(text = "foo", style = YacsaTheme.typography.title)
         }
 
     }

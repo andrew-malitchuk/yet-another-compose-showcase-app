@@ -1,6 +1,8 @@
 package dev.yacsa.settings.screen.settings.item
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,22 +22,28 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yacsa.ui.R
-import dev.yacsa.ui.composable.modifier.bouncingClickable
 import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
 fun SettingsItem(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    title: String,
+    @DrawableRes
+    icon: Int,
+    onClick: () -> Unit
 ) {
     val shape = RoundedCornerShape(16.dp)
     Card(
         shape = shape,
         modifier = Modifier
             .fillMaxWidth()
-            .bouncingClickable {
-                println("Clicked...")
-            }
-            .clip(shape),
+            .clip(shape)
+            .clickable {
+                onClick()
+            },
+//            .bouncingClickable {
+//
+//            },
         border = BorderStroke(1.dp, Color(0xFF7766C6)),
         elevation = 10.dp
     ) {
@@ -47,7 +55,7 @@ fun SettingsItem(
         ) {
             SmallFloatingActionButton(onClick = { /*TODO*/ }) {
                 Icon(
-                    painter = painterResource(id = R.drawable.icon_gear_six_regular_24),
+                    painter = painterResource(id = icon),
                     contentDescription = null
                 )
             }
@@ -55,7 +63,7 @@ fun SettingsItem(
                 modifier = Modifier
                     .width(16.dp)
             )
-            Text(text = "foo", style = YacsaTheme.typography.title)
+            Text(text = title, style = YacsaTheme.typography.title)
         }
 
     }
@@ -66,7 +74,9 @@ fun SettingsItem(
 fun Preview_SettingsItem() {
     YacsaTheme {
         SettingsItem(
-
+            title = "foobar",
+            icon = R.drawable.icon_gear_six_regular_24,
+            onClick = {}
         )
     }
 }

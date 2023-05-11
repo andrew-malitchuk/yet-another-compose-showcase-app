@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -22,7 +21,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.chrisbanes.snapper.ExperimentalSnapperApi
 import dev.yacsa.settings.screen.settings.item.SettingsItem
+import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
+import logcat.logcat
 import java.lang.Math.abs
 
 
@@ -32,7 +33,8 @@ fun ContentFetched(
     modifier: Modifier = Modifier.fillMaxSize(),
     innerPadding: PaddingValues,
     state: LazyListState,
-    foo: TopAppBarState
+    foo: TopAppBarState,
+//    onClick:()->Unit
 ) {
     val list = mutableListOf<String>()
     repeat(100) {
@@ -63,8 +65,26 @@ fun ContentFetched(
                 verticalArrangement = Arrangement.spacedBy(8.dp),
 //                flingBehavior = rememberSnapperFlingBehavior(state)
             ) {
-                items(list) { item ->
-                    SettingsItem()
+//                items(list) { item ->
+//                    SettingsItem()
+//                }
+                item{
+                    SettingsItem(
+                        title="Feature flag",
+                        icon = R.drawable.icon_command_regular_24,
+                        onClick = {
+                            logcat { "ff" }
+                        }
+                    )
+                }
+                item{
+                    SettingsItem(
+                        title="Information",
+                        icon = R.drawable.icon_info_regular_24,
+                        onClick = {
+
+                        }
+                    )
                 }
             }
         }

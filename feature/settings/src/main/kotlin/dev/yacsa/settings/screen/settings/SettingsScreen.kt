@@ -34,11 +34,13 @@ import logcat.logcat
 @Composable
 fun SettingsRoute(
     settingsViewModel: SettingsViewModel = hiltViewModel(),
+    onBackClick:()->Unit,
 ) {
     val uiState by settingsViewModel.uiState.collectAsStateWithLifecycle()
 
     SettingsScreen(
         uiState,
+        onBackClick
     )
 }
 
@@ -46,6 +48,7 @@ fun SettingsRoute(
 @Composable
 fun SettingsScreen(
     uiState: SettingsUiState,
+    onBackClick:()->Unit
 ) {
     val systemUiController = rememberSystemUiController()
     val state = rememberLazyListState()
@@ -85,7 +88,7 @@ fun SettingsScreen(
                     }
                 },
                 navigationIcon = {
-                    SmallFloatingActionButton(onClick = { /*TODO*/ }) {
+                    SmallFloatingActionButton(onClick = { onBackClick() }) {
                         Icon(
                             painter = painterResource(id = R.drawable.icon_caret_left_regular_24),
                             contentDescription = null
@@ -112,6 +115,9 @@ fun SettingsScreen(
 @Composable
 fun Preview_SettingsScreen() {
     YacsaTheme {
-        SettingsScreen(uiState = SettingsUiState())
+        SettingsScreen(
+            uiState = SettingsUiState(),
+            onBackClick={}
+        )
     }
 }

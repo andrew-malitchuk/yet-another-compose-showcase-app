@@ -34,15 +34,8 @@ fun ContentFetched(
     innerPadding: PaddingValues,
     state: LazyListState,
     foo: TopAppBarState,
-//    onClick:()->Unit
 ) {
-    val list = mutableListOf<String>()
-    repeat(100) {
-        list.add(it.toString())
-    }
-
     val corner = 16.dp - (16.dp * abs(foo.collapsedFraction))
-
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -58,33 +51,30 @@ fun ContentFetched(
 
             LazyColumn(
                 modifier = Modifier
-                    .fillMaxSize()
-                    /*.padding(innerPadding)*/,
+                    .fillMaxSize(),
                 state = state,
-                contentPadding = PaddingValues( 8.dp),
+                contentPadding = PaddingValues(8.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
-//                flingBehavior = rememberSnapperFlingBehavior(state)
             ) {
-//                items(list) { item ->
-//                    SettingsItem()
-//                }
-                item{
+                item {
                     SettingsItem(
-                        title="Feature flag",
+                        title = "Feature flag",
                         icon = R.drawable.icon_command_regular_24,
                         onClick = {
                             logcat { "ff" }
                         }
                     )
                 }
-                item{
+                item {
                     SettingsItem(
-                        title="Information",
+                        title = "Information",
                         icon = R.drawable.icon_info_regular_24,
                         onClick = {
 
                         }
                     )
+                }
+                item {
                 }
             }
         }

@@ -48,7 +48,7 @@ fun ThemeItem(
         ) {
             SmallFloatingActionButton(onClick = { /*TODO*/ }) {
                 Icon(
-                    painter = painterResource(id = R.drawable.icon_paint_roller_bold_24),
+                    painter = painterResource(id = R.drawable.icon_paint_roller_regular_24),
                     contentDescription = null
                 )
             }
@@ -66,7 +66,7 @@ fun ThemeItem(
                 item {
                     SmallFloatingActionButton(onClick = { /*TODO*/ }) {
                         Icon(
-                            painter = painterResource(id = R.drawable.icon_sun_bold_24),
+                            painter = painterResource(id = R.drawable.icon_sun_regular_24),
                             contentDescription = null
                         )
                     }
@@ -74,7 +74,7 @@ fun ThemeItem(
                 item {
                     SmallFloatingActionButton(onClick = { /*TODO*/ }) {
                         Icon(
-                            painter = painterResource(id = R.drawable.icon_moon_bold_24),
+                            painter = painterResource(id = R.drawable.icon_moon_regular_24),
                             contentDescription = null
                         )
                     }
@@ -82,7 +82,7 @@ fun ThemeItem(
                 item {
                     SmallFloatingActionButton(onClick = { /*TODO*/ }) {
                         Icon(
-                            painter = painterResource(id = R.drawable.icon_android_logo_bold_24),
+                            painter = painterResource(id = R.drawable.icon_android_logo_regular_24),
                             contentDescription = null
                         )
                     }

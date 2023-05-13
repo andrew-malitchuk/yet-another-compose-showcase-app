@@ -20,7 +20,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.yacsa.settings.screen.settings.composable.ThemeButton
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.modifier.bouncingClickable
 import dev.yacsa.ui.theme.YacsaTheme
@@ -60,12 +59,32 @@ fun ThemeItem(
             Text(text = "Theme", style = YacsaTheme.typography.title)
             Spacer(
                 modifier = Modifier
-                    .width(8.dp)
+                    .weight(1f)
             )
+
             LazyRow() {
                 item {
-                    ThemeButton(theme = YacsaTheme, currentTheme = YacsaTheme) {
-
+                    SmallFloatingActionButton(onClick = { /*TODO*/ }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.icon_sun_bold_24),
+                            contentDescription = null
+                        )
+                    }
+                }
+                item {
+                    SmallFloatingActionButton(onClick = { /*TODO*/ }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.icon_moon_bold_24),
+                            contentDescription = null
+                        )
+                    }
+                }
+                item {
+                    SmallFloatingActionButton(onClick = { /*TODO*/ }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.icon_android_logo_bold_24),
+                            contentDescription = null
+                        )
                     }
                 }
             }

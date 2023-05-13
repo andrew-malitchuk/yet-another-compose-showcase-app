@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.chrisbanes.snapper.ExperimentalSnapperApi
 import dev.yacsa.settings.screen.settings.item.SettingsItem
+import dev.yacsa.settings.screen.settings.item.ThemeItem
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
 import logcat.logcat
@@ -75,6 +76,7 @@ fun ContentFetched(
                     )
                 }
                 item {
+                    ThemeItem()
                 }
             }
         }

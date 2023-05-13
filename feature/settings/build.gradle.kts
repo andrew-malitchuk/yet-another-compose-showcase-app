@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "dev.yacsa.search"
+    namespace = "dev.yacsa.settings"
 }
 
 dependencies {

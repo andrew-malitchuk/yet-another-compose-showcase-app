@@ -31,7 +31,6 @@ fun ResultFetched(
         AnimatedDivider(state = state)
         LazyColumn(
             state = state,
-
             verticalArrangement = Arrangement.spacedBy(8.dp),
             modifier = modifier
                 .fillMaxSize(),

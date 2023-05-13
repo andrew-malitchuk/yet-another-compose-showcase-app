@@ -7,14 +7,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.AddCircle
-import androidx.compose.material.icons.outlined.Menu
-import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
@@ -30,6 +22,7 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import dev.yacsa.books.screen.composable.ListToolbar
 import dev.yacsa.books.screen.list.content.fetched.ContentFetchedGrid
 import dev.yacsa.books.screen.list.content.fetched.ContentFetchedList
 import dev.yacsa.model.model.BookUiModel
@@ -45,8 +38,8 @@ fun ContentFetched(
     onBookClicked: (Int) -> Unit,
     lazyPagingItems: LazyPagingItems<BookUiModel>,
     onSearch: () -> Unit,
+    onSettings: () -> Unit,
 ) {
-    val state = rememberLazyListState()
     val listState = rememberLazyListState()
     val gridState = rememberLazyGridState()
 
@@ -62,26 +55,10 @@ fun ContentFetched(
     val coroutineScope = rememberCoroutineScope()
 
     Column {
-        TopAppBar(
-            elevation = 4.dp,
-            title = {
-                Text("Lorem ipsum")
-            },
-            backgroundColor = YacsaTheme.colors.primaryText,
-            actions = {
-                IconButton(onClick = { onSearch() }) {
-                    Icon(Icons.Outlined.Search, null)
-                }
-                IconButton(onClick = {
-                    isGridSelected.value = !isGridSelected.value
-                }) {
-                    if (isGridSelected.value) {
-                        Icon(Icons.Outlined.AddCircle, null)
-                    } else {
-                        Icon(Icons.Outlined.Menu, null)
-                    }
-                }
-            },
+        ListToolbar(
+            state =listState,
+            searchClick = onSearch,
+            settingsClick = onSettings
         )
 
         Box(Modifier.pullRefresh(pullRefreshState)) {
@@ -98,6 +75,7 @@ fun ContentFetched(
                     listState = listState,
                 )
             }
+
 
             ScrollUpFab(
                 modifier = Modifier
@@ -137,6 +115,7 @@ fun Preview_ContentFetched() {
             onBookClicked = {},
             lazyPagingItems = flowOf(PagingData.empty<BookUiModel>()).collectAsLazyPagingItems(),
             onSearch = {},
+            onSettings = {},
         )
     }
 }

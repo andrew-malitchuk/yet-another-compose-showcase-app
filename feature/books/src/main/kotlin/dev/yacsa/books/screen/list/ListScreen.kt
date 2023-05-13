@@ -29,6 +29,7 @@ import logcat.logcat
 fun ListRoute(
     onClick: (Int) -> Unit,
     onSearch: () -> Unit,
+    onSettings: () -> Unit,
     notFound: () -> Unit,
     listViewModel: ListViewModel = hiltViewModel(),
 ) {
@@ -72,13 +73,13 @@ fun ListRoute(
     } else {
         ListScreen(
             onBookClicked = {
-//                onClick(it)
                 listViewModel.acceptIntent(ListIntent.BookClicked(it))
             },
 
             pagingState = pagingState,
             uiState = uiState,
             onSearch = onSearch,
+            onSettings=onSettings
         )
     }
 }
@@ -89,17 +90,19 @@ fun ListScreen(
     pagingState: LazyPagingItems<BookUiModel>?,
     uiState: ListUiState,
     onSearch: () -> Unit,
+    onSettings: () -> Unit,
 ) {
     val systemUiController = rememberSystemUiController()
 
     if (!uiState.isLoading && !uiState.isError && pagingState != null) {
         systemUiController.setSystemBarsColor(
-            color = YacsaTheme.colors.primaryText,
+            color = YacsaTheme.colors.primaryBackground,
         )
         ContentFetched(
             onBookClicked = onBookClicked,
             lazyPagingItems = pagingState,
             onSearch = onSearch,
+            onSettings = onSettings,
         )
     } else {
         systemUiController.setSystemBarsColor(
@@ -153,6 +156,7 @@ fun PreviewListScreen() {
             flowOf(PagingData.empty<BookUiModel>()).collectAsLazyPagingItems(),
             ListUiState(),
             {},
+            {}
         )
     }
 }

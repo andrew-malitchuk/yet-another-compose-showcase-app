@@ -1,13 +1,20 @@
 package dev.yacsa.books.screen.list.content.fetched
 
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
@@ -29,61 +36,80 @@ fun ContentFetchedList(
     onBookClicked: (Int) -> Unit,
     listState: LazyListState,
 ) {
-    LazyColumn(
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        state = listState,
-        modifier = modifier
+
+    val isVisible=listState.canScrollBackward
+
+    val corner = animateDpAsState(
+        targetValue = if(!isVisible) 16.dp else 0.dp,
+        animationSpec = tween(
+            durationMillis = 500
+        )
+    )
+
+    Box(
+        modifier = Modifier
             .fillMaxSize()
-            // TODO: fix
-            .padding(
-                horizontal = 16.dp,
-            ),
+            .clip(RoundedCornerShape(topStart = corner.value, topEnd =corner.value))
+            .background(Color(0xFFE0DFFD))
     ) {
-        items(
-            lazyPagingItems,
-        ) { item ->
-            item?.let {
-                ItemFetchedList(
-                    book = it,
-                    onItemContentClick = {
-                        // TODO: fix
-                        it.id?.let { it1 -> onBookClicked(it1) }
-                    },
-                )
+
+        LazyColumn(
+            state = listState,
+            modifier = modifier
+                .fillMaxSize(),
+            // TODO: fix
+            contentPadding = PaddingValues(8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            items(
+                lazyPagingItems,
+            ) { item ->
+                item?.let {
+                    ItemFetchedList(
+                        book = it,
+                        onItemContentClick = {
+                            // TODO: fix
+                            it.id?.let { it1 -> onBookClicked(it1) }
+                        },
+                    )
+                }
             }
-        }
-        lazyPagingItems.apply {
-            when {
-                loadState.refresh is LoadState.Loading -> {
-                    item {
-                        ItemLoading()
+            lazyPagingItems.apply {
+                when {
+                    loadState.refresh is LoadState.Loading -> {
+                        item {
+                            ItemLoading()
+                        }
                     }
-                }
-                loadState.refresh is LoadState.Error -> {
-                    val error = lazyPagingItems.loadState.append as? LoadState.Error
-                    item {
-                        ItemError(
-                            error = error?.error?.localizedMessage ?: "SWW",
-                            onRetry = {
-                                retry()
-                            },
-                        )
+
+                    loadState.refresh is LoadState.Error -> {
+                        val error = lazyPagingItems.loadState.append as? LoadState.Error
+                        item {
+                            ItemError(
+                                error = error?.error?.localizedMessage ?: "SWW",
+                                onRetry = {
+                                    retry()
+                                },
+                            )
+                        }
                     }
-                }
-                loadState.append is LoadState.Loading -> {
-                    item {
-                        ItemLoading()
+
+                    loadState.append is LoadState.Loading -> {
+                        item {
+                            ItemLoading()
+                        }
                     }
-                }
-                loadState.append is LoadState.Error -> {
-                    val error = lazyPagingItems.loadState.append as LoadState.Error
-                    item {
-                        ItemError(
-                            error = error.error.localizedMessage ?: "SWW",
-                            onRetry = {
-                                retry()
-                            },
-                        )
+
+                    loadState.append is LoadState.Error -> {
+                        val error = lazyPagingItems.loadState.append as LoadState.Error
+                        item {
+                            ItemError(
+                                error = error.error.localizedMessage ?: "SWW",
+                                onRetry = {
+                                    retry()
+                                },
+                            )
+                        }
                     }
                 }
             }

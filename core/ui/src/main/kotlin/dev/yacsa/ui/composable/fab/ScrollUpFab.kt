@@ -1,16 +1,16 @@
 package dev.yacsa.ui.composable.fab
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.KeyboardArrowUp
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
@@ -23,18 +23,24 @@ fun ScrollUpFab(
     AnimatedVisibility(
         modifier = modifier,
         visible = isVisibleBecauseOfScrolling,
-        enter = slideInHorizontally {
-            with(density) { 16.dp.roundToPx() }
-        },
-        exit = slideOutHorizontally {
-            with(density) { 16.dp.roundToPx() }
-        },
+        enter = fadeIn(
+            animationSpec = tween(
+                durationMillis = 250
+            )
+        ),
+        exit = fadeOut(
+            animationSpec = tween(
+                durationMillis = 250
+            )
+        ),
+
     ) {
         FloatingActionButton(
             onClick = { onClick() },
+            backgroundColor= YacsaTheme.colors.primaryText
         ) {
             androidx.compose.material3.Icon(
-                imageVector = Icons.Outlined.KeyboardArrowUp,
+                painter = painterResource(id = R.drawable.icon_arrow_up_regular_24),
                 contentDescription = null,
             )
         }

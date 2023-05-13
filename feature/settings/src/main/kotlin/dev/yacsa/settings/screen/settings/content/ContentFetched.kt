@@ -24,7 +24,6 @@ import dev.yacsa.settings.screen.settings.item.SettingsItem
 import dev.yacsa.settings.screen.settings.item.ThemeItem
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
-import logcat.logcat
 import java.lang.Math.abs
 
 
@@ -35,6 +34,7 @@ fun ContentFetched(
     innerPadding: PaddingValues,
     state: LazyListState,
     foo: TopAppBarState,
+    onFfClick: () -> Unit
 ) {
     val corner = 16.dp - (16.dp * abs(foo.collapsedFraction))
     Box(
@@ -62,7 +62,7 @@ fun ContentFetched(
                         title = "Feature flag",
                         icon = R.drawable.icon_command_regular_24,
                         onClick = {
-                            logcat { "ff" }
+                            onFfClick()
                         }
                     )
                 }
@@ -91,7 +91,8 @@ fun Preview_ContentFetched() {
         ContentFetched(
             innerPadding = PaddingValues(6.dp),
             state = rememberLazyListState(),
-            foo = rememberTopAppBarState()
+            foo = rememberTopAppBarState(),
+            onFfClick = {}
         )
     }
 }

@@ -14,8 +14,11 @@ fun NavGraphBuilder.settingsNavGraph(navController: NavHostController) {
     ) {
         composable(SettingsDirection.Settings.route) {
             SettingsRoute(
-                onBackClick={
+                onBackClick = {
                     navController.popBackStack()
+                },
+                onFfClick = {
+                    navController.navigate(NavigationDirection.FeatureFlag.route)
                 }
             )
         }

@@ -35,12 +35,14 @@ import logcat.logcat
 fun SettingsRoute(
     settingsViewModel: SettingsViewModel = hiltViewModel(),
     onBackClick:()->Unit,
+    onFfClick:()->Unit
 ) {
     val uiState by settingsViewModel.uiState.collectAsStateWithLifecycle()
 
     SettingsScreen(
         uiState,
-        onBackClick
+        onBackClick,
+        onFfClick
     )
 }
 
@@ -48,7 +50,8 @@ fun SettingsRoute(
 @Composable
 fun SettingsScreen(
     uiState: SettingsUiState,
-    onBackClick:()->Unit
+    onBackClick:()->Unit,
+    onFfClick:()->Unit
 ) {
     val systemUiController = rememberSystemUiController()
     val state = rememberLazyListState()
@@ -106,7 +109,12 @@ fun SettingsScreen(
             }
         },
     ) { innerPadding ->
-        ContentFetched(innerPadding = innerPadding, state = state, foo = foo)
+        ContentFetched(
+            innerPadding = innerPadding,
+            state = state,
+            foo = foo,
+            onFfClick=onFfClick
+        )
     }
 
 }
@@ -117,7 +125,8 @@ fun Preview_SettingsScreen() {
     YacsaTheme {
         SettingsScreen(
             uiState = SettingsUiState(),
-            onBackClick={}
+            onBackClick={},
+            onFfClick={}
         )
     }
 }

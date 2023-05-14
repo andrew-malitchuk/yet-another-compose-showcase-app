@@ -6,16 +6,21 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.rememberLottieComposition
 import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
 fun ItemLoading(
     modifier: Modifier = Modifier,
 ) {
+    val composition by rememberLottieComposition(LottieCompositionSpec.Asset("lottie_loading_black.json"))
+
     Row(
         modifier = modifier
             .fillMaxWidth(),
@@ -26,6 +31,13 @@ fun ItemLoading(
             modifier = modifier
                 .padding(16.dp),
         )
+//        LottieAnimation(
+//            modifier = Modifier
+//                .padding(16.dp)
+//            ,
+//            composition = composition,
+//            iterations = LottieConstants.IterateForever,
+//        )
     }
 }
 

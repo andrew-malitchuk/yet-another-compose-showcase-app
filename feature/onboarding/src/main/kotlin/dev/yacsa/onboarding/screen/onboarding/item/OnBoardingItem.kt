@@ -63,7 +63,7 @@ fun OnboardingItem(
     }
 
 
-    val corner = 32.dp - (32.dp * Math.abs(cornerValue))
+    val corner = 64.dp - (64.dp * Math.abs(cornerValue))
 
 
     Box(

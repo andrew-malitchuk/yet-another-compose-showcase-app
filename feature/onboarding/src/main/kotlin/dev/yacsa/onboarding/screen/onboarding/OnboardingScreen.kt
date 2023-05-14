@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.KeyboardArrowLeft
+import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.pager.*
+import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
 import kotlinx.coroutines.launch
 
@@ -97,6 +99,12 @@ fun TopSection(
                 imageVector = Icons.Outlined.KeyboardArrowLeft,
                 contentDescription = null,
                 tint = YacsaTheme.colors.primaryText,
+            )
+        }
+        SmallFloatingActionButton(onClick = { onBackClick() }) {
+            Icon(
+                painter = painterResource(id = R.drawable.icon_caret_left_regular_24),
+                contentDescription = null
             )
         }
         TextButton(
@@ -195,22 +203,10 @@ fun BottomSection(state: PagerState) {
     }
 }
 
-@OptIn(ExperimentalPagerApi::class)
-fun foo(state: PagerState) {
-}
-
-// @Preview(showBackground = true)
-// @Composable
-// fun PreviewOnboardingScreen_Dark() {
-//    YacsaTheme(useDarkTheme = true) {
-//        OnboardingScreen(onboardingViewModel = OnboardingViewModel(), onClick = {})
-//    }
-// }
-//
 @Preview(showBackground = true)
 @Composable
 fun PreviewOnboardingScreen_Light() {
     YacsaTheme(useDarkTheme = false) {
-//        OnboardingScreen({}, {}, OnboardingViewModel(UpdateStartUpConfigureUseCase()))
+
     }
 }

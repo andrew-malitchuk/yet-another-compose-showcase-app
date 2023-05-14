@@ -26,6 +26,5 @@ class NewUpdateStartUpConfigureUseCaseImpl @Inject constructor(
         } catch (ex: Exception) {
             DataError(ex).some()
         }
-
     }
 }

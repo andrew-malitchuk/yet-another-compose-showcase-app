@@ -43,7 +43,7 @@ fun NavGraphBuilder.booksNavGraph(navController: NavHostController) {
                     navController.navigate(
                         NavigationDirection.Settings.route,
                     )
-                }
+                },
             )
         }
         composable(

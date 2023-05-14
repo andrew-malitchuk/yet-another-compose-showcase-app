@@ -6,7 +6,6 @@ import org.mapstruct.Mapper
 import org.mapstruct.NullValueCheckStrategy
 import org.mapstruct.NullValuePropertyMappingStrategy
 
-
 @Mapper(
     nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS,
     nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_DEFAULT,
@@ -14,11 +13,10 @@ import org.mapstruct.NullValuePropertyMappingStrategy
 interface NewStartUpConfigureRepoDataStoreMapper {
 
     fun toRepo(
-        startUpConfigureDataStoreModel: StartUpConfigureDataStoreModel
+        startUpConfigureDataStoreModel: StartUpConfigureDataStoreModel,
     ): StartUpConfigureRepoModel
 
     fun toDataStore(
-        startUpConfigureRepoModel: StartUpConfigureRepoModel
+        startUpConfigureRepoModel: StartUpConfigureRepoModel,
     ): StartUpConfigureDataStoreModel
-
 }

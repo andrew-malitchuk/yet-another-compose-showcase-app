@@ -19,7 +19,7 @@ import androidx.compose.ui.graphics.graphicsLayer
  */
 fun Modifier.bouncingClickable(
     enabled: Boolean = true,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) = composed {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
@@ -31,7 +31,7 @@ fun Modifier.bouncingClickable(
     )
     val opacity by animationTransition.animateFloat(
         targetValueByState = { pressed -> if (pressed) 0.7f else 1f },
-        label = "BouncingClickableOpacityTransition"
+        label = "BouncingClickableOpacityTransition",
     )
 
     this
@@ -44,6 +44,6 @@ fun Modifier.bouncingClickable(
             interactionSource = interactionSource,
             indication = null,
             enabled = enabled,
-            onClick = onClick
+            onClick = onClick,
         )
 }

@@ -6,5 +6,5 @@ import dev.yacsa.domain.model.BookDomainModel
 
 interface NewGetBooksUseCase {
     @Throws(Throwable::class)
-    suspend operator fun invoke(page: Int): Either<DomainError,List<BookDomainModel>>
+    suspend operator fun invoke(page: Int): Either<DomainError, List<BookDomainModel>>
 }

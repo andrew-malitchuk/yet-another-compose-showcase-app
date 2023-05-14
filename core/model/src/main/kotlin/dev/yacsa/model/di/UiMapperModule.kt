@@ -18,27 +18,22 @@ import dev.yacsa.model.mapper.NewSearchHistoryUiDomainMapperImpl
 class UiMapperModule {
 
     @Provides
-    fun providesNewFormatsUiDomainMapper(
-    ): NewFormatsUiDomainMapper {
+    fun providesNewFormatsUiDomainMapper(): NewFormatsUiDomainMapper {
         return NewFormatsUiDomainMapperImpl()
     }
 
     @Provides
-    fun providesNewBooksUiDomainMapper(
-    ): NewBooksUiDomainMapper {
+    fun providesNewBooksUiDomainMapper(): NewBooksUiDomainMapper {
         return NewBooksUiDomainMapperImpl()
     }
 
     @Provides
-    fun providesNewSearchHistoryUiDomainMapper(
-    ): NewSearchHistoryUiDomainMapper {
+    fun providesNewSearchHistoryUiDomainMapper(): NewSearchHistoryUiDomainMapper {
         return NewSearchHistoryUiDomainMapperImpl()
     }
 
     @Provides
-    fun providesNewPersonUiDomainMapper(
-    ): NewPersonUiDomainMapper {
+    fun providesNewPersonUiDomainMapper(): NewPersonUiDomainMapper {
         return NewPersonUiDomainMapperImpl()
     }
-
 }

@@ -51,5 +51,4 @@ class DomainMapperModule {
     fun providesNewBookDomainRepoMapper(): NewBookDomainRepoMapper {
         return NewBookDomainRepoMapperImpl()
     }
-
 }

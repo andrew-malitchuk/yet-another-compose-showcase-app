@@ -25,19 +25,19 @@ fun ScrollUpFab(
         visible = isVisibleBecauseOfScrolling,
         enter = fadeIn(
             animationSpec = tween(
-                durationMillis = 250
-            )
+                durationMillis = 250,
+            ),
         ),
         exit = fadeOut(
             animationSpec = tween(
-                durationMillis = 250
-            )
+                durationMillis = 250,
+            ),
         ),
 
     ) {
         FloatingActionButton(
             onClick = { onClick() },
-            backgroundColor= YacsaTheme.colors.primaryText
+            backgroundColor = YacsaTheme.colors.primaryText,
         ) {
             androidx.compose.material3.Icon(
                 painter = painterResource(id = R.drawable.icon_arrow_up_regular_24),

@@ -1,6 +1,7 @@
 plugins {
     id("yacsa.android.feature")
     id("yacsa.android.library.compose")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -20,6 +21,10 @@ dependencies {
     implementation("com.google.accompanist:accompanist-pager:0.28.0")
     implementation("com.google.accompanist:accompanist-pager-indicators:0.28.0")
 
+
+    implementation("androidx.compose.material3:material3:1.1.0-rc01")
+    implementation("androidx.compose.material3:material3-window-size-class:1.1.0-rc01")
+
     implementation("androidx.compose.ui:ui-tooling:1.4.0")
     implementation("androidx.compose.ui:ui-tooling-preview:1.4.0")
     implementation("com.squareup.logcat:logcat:0.1")
@@ -32,6 +37,7 @@ dependencies {
     implementation("io.arrow-kt:arrow-core:1.2.0-RC")
     implementation("io.arrow-kt:arrow-fx-coroutines:1.2.0-RC")
     implementation("io.arrow-kt:arrow-optics:1.2.0-RC")
+    implementation(project(mapOf("path" to ":core:platform")))
     ksp("io.arrow-kt:arrow-optics-ksp-plugin:1.2.0-RC")
 
 }

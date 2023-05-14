@@ -4,16 +4,14 @@ import dev.yacsa.domain.model.SearchHistoryDomainModel
 import dev.yacsa.repository.model.SearchHistoryRepoModel
 import org.mapstruct.Mapper
 
-
 @Mapper
 interface NewSearchHistoryDomainRepoMapper {
 
     fun toRepo(
-        searchHistoryDomainModel: SearchHistoryDomainModel
+        searchHistoryDomainModel: SearchHistoryDomainModel,
     ): SearchHistoryRepoModel
 
     fun toDomain(
-        searchHistoryRepoModel: SearchHistoryRepoModel
+        searchHistoryRepoModel: SearchHistoryRepoModel,
     ): SearchHistoryDomainModel
-
 }

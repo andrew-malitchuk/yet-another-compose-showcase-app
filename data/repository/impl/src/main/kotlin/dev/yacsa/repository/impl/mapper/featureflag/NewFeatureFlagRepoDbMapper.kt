@@ -13,11 +13,10 @@ import org.mapstruct.NullValuePropertyMappingStrategy
 interface NewFeatureFlagRepoDbMapper {
 
     fun toRepo(
-        featureFlagDbModel: FeatureFlagDbModel
+        featureFlagDbModel: FeatureFlagDbModel,
     ): FeatureFlagRepoModel
 
     fun toDb(
-        featureFlagRepoModel: FeatureFlagRepoModel
+        featureFlagRepoModel: FeatureFlagRepoModel,
     ): FeatureFlagDbModel
-
 }

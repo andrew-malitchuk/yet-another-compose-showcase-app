@@ -12,16 +12,16 @@ class BooksFeatureFlagImpl @Inject constructor(
 
     override suspend fun isGridViewEnabled(): Boolean {
         val key = IsBooksFeatureEnabled.key
-        return fetchFeatureFlagUseCase(key).getOrNull()?:false
+        return fetchFeatureFlagUseCase(key).getOrNull() ?: false
     }
 
     override suspend fun isDetalizationEnabled(): Boolean {
         val key = IsDetalizationEnabled.key
-        return fetchFeatureFlagUseCase(key).getOrNull()?:false
+        return fetchFeatureFlagUseCase(key).getOrNull() ?: false
     }
 
     override suspend fun isFeatureEnabled(): Boolean {
         val key = IsBooksFeatureEnabled.key
-        return fetchFeatureFlagUseCase(key).getOrNull()?:false
+        return fetchFeatureFlagUseCase(key).getOrNull() ?: false
     }
 }

@@ -36,23 +36,21 @@ fun ContentFetchedList(
     onBookClicked: (Int) -> Unit,
     listState: LazyListState,
 ) {
-
-    val isVisible=listState.canScrollBackward
+    val isVisible = listState.canScrollBackward
 
     val corner = animateDpAsState(
-        targetValue = if(!isVisible) 16.dp else 0.dp,
+        targetValue = if (!isVisible) 16.dp else 0.dp,
         animationSpec = tween(
-            durationMillis = 500
-        )
+            durationMillis = 500,
+        ),
     )
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .clip(RoundedCornerShape(topStart = corner.value, topEnd =corner.value))
-            .background(Color(0xFFE0DFFD))
+            .clip(RoundedCornerShape(topStart = corner.value, topEnd = corner.value))
+            .background(Color(0xFFE0DFFD)),
     ) {
-
         LazyColumn(
             state = listState,
             modifier = modifier

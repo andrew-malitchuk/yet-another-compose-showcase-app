@@ -34,15 +34,15 @@ import logcat.logcat
 @Composable
 fun SettingsRoute(
     settingsViewModel: SettingsViewModel = hiltViewModel(),
-    onBackClick:()->Unit,
-    onFfClick:()->Unit
+    onBackClick: () -> Unit,
+    onFfClick: () -> Unit,
 ) {
     val uiState by settingsViewModel.uiState.collectAsStateWithLifecycle()
 
     SettingsScreen(
         uiState,
         onBackClick,
-        onFfClick
+        onFfClick,
     )
 }
 
@@ -50,8 +50,8 @@ fun SettingsRoute(
 @Composable
 fun SettingsScreen(
     uiState: SettingsUiState,
-    onBackClick:()->Unit,
-    onFfClick:()->Unit
+    onBackClick: () -> Unit,
+    onFfClick: () -> Unit,
 ) {
     val systemUiController = rememberSystemUiController()
     val state = rememberLazyListState()
@@ -70,7 +70,6 @@ fun SettingsScreen(
 
     logcat("foo") { foo.collapsedFraction.toString() }
 
-
     Scaffold(
         modifier = Modifier
             .nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -86,7 +85,7 @@ fun SettingsScreen(
                         Spacer(modifier = Modifier.width(8.dp))
                         Icon(
                             painterResource(id = R.drawable.icon_gear_six_bold_24),
-                            contentDescription = null
+                            contentDescription = null,
                         )
                     }
                 },
@@ -94,14 +93,14 @@ fun SettingsScreen(
                     SmallFloatingActionButton(onClick = { onBackClick() }) {
                         Icon(
                             painter = painterResource(id = R.drawable.icon_caret_left_regular_24),
-                            contentDescription = null
+                            contentDescription = null,
                         )
                     }
                 },
                 scrollBehavior = scrollBehavior,
                 colors = TopAppBarDefaults.largeTopAppBarColors(
-                    containerColor = YacsaTheme.colors.primaryBackground
-                )
+                    containerColor = YacsaTheme.colors.primaryBackground,
+                ),
             )
             Column {
                 Spacer(modifier = Modifier.height(64.dp))
@@ -113,10 +112,9 @@ fun SettingsScreen(
             innerPadding = innerPadding,
             state = state,
             foo = foo,
-            onFfClick=onFfClick
+            onFfClick = onFfClick,
         )
     }
-
 }
 
 @Preview(showBackground = true)
@@ -125,8 +123,8 @@ fun Preview_SettingsScreen() {
     YacsaTheme {
         SettingsScreen(
             uiState = SettingsUiState(),
-            onBackClick={},
-            onFfClick={}
+            onBackClick = {},
+            onFfClick = {},
         )
     }
 }

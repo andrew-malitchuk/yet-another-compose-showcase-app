@@ -35,12 +35,12 @@ fun ChipGroup(
                 onClick = {
                     onSelectedChanged(it)
                 },
-                label={
+                label = {
                     Text(
                         text = it,
                         color = YacsaTheme.colors.primaryText,
                     )
-                }
+                },
             )
         }
         if (!values.isNullOrEmpty()) {
@@ -49,7 +49,7 @@ fun ChipGroup(
                     onClick = {
                         onDelete()
                     },
-                    label={
+                    label = {
                         Text(
                             // TODO: Fix
                             text = "Delete",
@@ -58,7 +58,7 @@ fun ChipGroup(
                     },
                     trailingIcon = {
                         Icon(painter = painterResource(id = R.drawable.icon_trash_regular_16), contentDescription = null)
-                    }
+                    },
                 )
             }
         }

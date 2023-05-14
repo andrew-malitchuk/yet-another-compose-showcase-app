@@ -8,11 +8,10 @@ import org.mapstruct.Mapper
 interface NewFormatsDomainRepoMapper {
 
     fun toRepo(
-        formatsDomainModel: FormatsDomainModel
+        formatsDomainModel: FormatsDomainModel,
     ): FormatsRepoModel
 
     fun toDomain(
-        formatsRepoModel: FormatsRepoModel
+        formatsRepoModel: FormatsRepoModel,
     ): FormatsDomainModel
-
 }

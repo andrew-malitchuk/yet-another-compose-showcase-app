@@ -8,11 +8,10 @@ import org.mapstruct.Mapper
 interface NewRemoteKeyDomainRepoMapper {
 
     fun toRepo(
-        remoteKeyDomainModel: RemoteKeyDomainModel
+        remoteKeyDomainModel: RemoteKeyDomainModel,
     ): RemoteKeyRepoModel
 
     fun toDomain(
-        remoteKeyRepoModel: RemoteKeyRepoModel
+        remoteKeyRepoModel: RemoteKeyRepoModel,
     ): RemoteKeyDomainModel
-
 }

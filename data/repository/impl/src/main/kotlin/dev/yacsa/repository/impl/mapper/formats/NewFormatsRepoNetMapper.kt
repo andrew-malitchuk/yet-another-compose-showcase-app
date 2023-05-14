@@ -8,11 +8,10 @@ import org.mapstruct.Mapper
 interface NewFormatsRepoNetMapper {
 
     fun toRepo(
-        formatsNetModel: FormatsNetModel
+        formatsNetModel: FormatsNetModel,
     ): FormatsRepoModel
 
     fun toNet(
-        formatsRepoModel: FormatsRepoModel
+        formatsRepoModel: FormatsRepoModel,
     ): FormatsNetModel
-
 }

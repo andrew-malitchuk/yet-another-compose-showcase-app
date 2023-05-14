@@ -13,11 +13,10 @@ import org.mapstruct.NullValuePropertyMappingStrategy
 interface NewFormatsRepoDbMapper {
 
     fun toRepo(
-        formatsDbModel: FormatsDbModel
+        formatsDbModel: FormatsDbModel,
     ): FormatsRepoModel
 
     fun toDb(
-        formatsRepoModel: FormatsRepoModel
+        formatsRepoModel: FormatsRepoModel,
     ): FormatsDbModel
-
 }

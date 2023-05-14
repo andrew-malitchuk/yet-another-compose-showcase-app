@@ -36,7 +36,6 @@ fun ItemFetchedList(
     book: BookUiModel,
     onItemContentClick: () -> Unit,
 ) {
-
     val painter =
         rememberAsyncImagePainter(
             ImageRequest.Builder(LocalContext.current)
@@ -56,15 +55,13 @@ fun ItemFetchedList(
             },
         border = BorderStroke(1.dp, Color(0xFF7766C6)),
         shape = RoundedCornerShape(16.dp),
-        elevation = 10.dp
+        elevation = 10.dp,
     ) {
-
         Row(
             modifier = Modifier
                 .padding(8.dp),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
-
             Card(
                 elevation = 4.dp,
                 border = BorderStroke(1.dp, Color(0xFF46467A)),
@@ -105,7 +102,7 @@ fun ItemFetchedList(
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.icon_archive_box_regular_16),
-                        contentDescription = null
+                        contentDescription = null,
                     )
                     Spacer(modifier = modifier.width(4.dp))
                     Text(
@@ -114,11 +111,8 @@ fun ItemFetchedList(
                     )
                 }
             }
-
         }
-
     }
-
 
 //    Row(
 //        modifier = modifier
@@ -201,7 +195,7 @@ fun Preview_ListItem_Dark() {
                 true,
                 null,
                 null,
-                10
+                10,
             ),
             onItemContentClick = {},
         )
@@ -224,7 +218,7 @@ fun Preview_ItemFetchedList_Light() {
                 true,
                 null,
                 null,
-                10
+                10,
             ),
             onItemContentClick = {},
         )

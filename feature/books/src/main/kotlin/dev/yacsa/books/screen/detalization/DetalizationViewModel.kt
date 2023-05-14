@@ -56,7 +56,7 @@ class DetalizationViewModel @Inject constructor(
                         bookUiDomainMapper.toUi(it),
                     ),
                 )
-            }
+            },
         )
     }.onStart {
         emit(DetalizationUiState.PartialState.Loading)

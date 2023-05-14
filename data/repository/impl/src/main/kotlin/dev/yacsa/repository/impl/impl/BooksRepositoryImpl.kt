@@ -25,7 +25,6 @@ class BooksRepositoryImpl @Inject constructor(
     private val bookAuthorRelationshipDbSource: BookAuthorRelationshipDbSource,
 ) : BooksRepository {
 
-
     override suspend fun getBookByBage(page: Int): List<BookRepoModel> {
         val result = booksNetSource.getBooks(page)?.results ?: emptyList()
         return result.filterNotNull().map(bookRepoNetMapper::toRepo)

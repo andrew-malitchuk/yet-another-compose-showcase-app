@@ -35,38 +35,37 @@ fun ListToolbar(
                 .fillMaxWidth()
                 .height(64.dp)
                 .padding(horizontal = 8.dp),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.icon_book_regular_24),
-                contentDescription = null
+                contentDescription = null,
             )
             Spacer(
                 modifier = Modifier
-                    .width(8.dp)
+                    .width(8.dp),
             )
             Text(text = "YACSA", style = YacsaTheme.typography.title)
 
             Spacer(
                 modifier = Modifier
-                    .weight(1f)
+                    .weight(1f),
             )
             SmallFloatingActionButton(onClick = { searchClick() }) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_search_regular_24),
-                    contentDescription = null
+                    contentDescription = null,
                 )
             }
             SmallFloatingActionButton(onClick = { settingsClick() }) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_gear_six_regular_24),
-                    contentDescription = null
+                    contentDescription = null,
                 )
             }
         }
         AnimatedDivider(state = state)
     }
-
 }
 
 @Preview(showBackground = true)
@@ -76,8 +75,7 @@ fun Preview_ListToolbar() {
         ListToolbar(
             state = rememberLazyListState(),
             searchClick = {},
-            settingsClick = {}
+            settingsClick = {},
         )
     }
-
 }

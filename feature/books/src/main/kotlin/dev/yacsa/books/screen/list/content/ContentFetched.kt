@@ -56,9 +56,9 @@ fun ContentFetched(
 
     Column {
         ListToolbar(
-            state =listState,
+            state = listState,
             searchClick = onSearch,
-            settingsClick = onSettings
+            settingsClick = onSettings,
         )
 
         Box(Modifier.pullRefresh(pullRefreshState)) {
@@ -75,7 +75,6 @@ fun ContentFetched(
                     listState = listState,
                 )
             }
-
 
             ScrollUpFab(
                 modifier = Modifier

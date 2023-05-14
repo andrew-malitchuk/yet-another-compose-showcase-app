@@ -33,7 +33,7 @@ fun SettingsItem(
     title: String,
     @DrawableRes
     icon: Int,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     val shape = RoundedCornerShape(16.dp)
     Card(
@@ -51,27 +51,25 @@ fun SettingsItem(
 //
 //            },
         border = BorderStroke(1.dp, Color(0xFF7766C6)),
-        elevation = 10.dp
+        elevation = 10.dp,
     ) {
-
         Row(
             modifier = Modifier
                 .padding(8.dp),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             SmallFloatingActionButton(onClick = { /*TODO*/ }) {
                 Icon(
                     painter = painterResource(id = icon),
-                    contentDescription = null
+                    contentDescription = null,
                 )
             }
             Spacer(
                 modifier = Modifier
-                    .width(16.dp)
+                    .width(16.dp),
             )
             Text(text = title, style = YacsaTheme.typography.title)
         }
-
     }
 }
 
@@ -82,7 +80,7 @@ fun Preview_SettingsItem() {
         SettingsItem(
             title = "foobar",
             icon = R.drawable.icon_gear_six_regular_24,
-            onClick = {}
+            onClick = {},
         )
     }
 }

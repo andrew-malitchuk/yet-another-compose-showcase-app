@@ -85,13 +85,11 @@ class SearchViewModel @Inject constructor(
                 emit(
                     SearchUiState.PartialState.ContentFetched(
                         result.map(
-                            searchHistoryUiDomainMapper::toUi
-                        )
-                    )
+                            searchHistoryUiDomainMapper::toUi,
+                        ),
+                    ),
                 )
             })
-
-
         }.onStart {
             emit(SearchUiState.PartialState.ResultLoading)
         }
@@ -114,14 +112,12 @@ class SearchViewModel @Inject constructor(
                                 emit(SearchUiState.PartialState.Error(Throwable("SWW")))
                             }
                         }
-
                     },
                     {
                         emit(SearchUiState.PartialState.ResultFetched(it.map(booksUiDomainMapper::toUi)))
                         acceptIntent(SearchIntent.GetTopSearch)
-                    }
+                    },
                 )
-
             }, { error ->
                 when (error) {
                     is DataError -> {
@@ -153,7 +149,7 @@ class SearchViewModel @Inject constructor(
                             emit(SearchUiState.PartialState.Error(Throwable("SWW")))
                         }
                     }
-                }
+                },
             )
         }
 

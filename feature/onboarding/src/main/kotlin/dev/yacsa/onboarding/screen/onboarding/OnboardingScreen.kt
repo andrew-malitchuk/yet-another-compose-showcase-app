@@ -1,22 +1,21 @@
 package dev.yacsa.onboarding.screen.onboarding
 
-import androidx.annotation.DrawableRes
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.KeyboardArrowLeft
+import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.pager.*
+import dev.yacsa.onboarding.screen.onboarding.item.OnboardingItem
+import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
 import kotlinx.coroutines.launch
 
@@ -66,7 +65,7 @@ fun OnboardingScreen(
                 onboardingViewModel.buttonType = OnboardingViewModel.ButtonType.NEXT
             }
             onboardingViewModel.onboardingPages[page].let {
-                OnBoardingItem(
+                OnboardingItem(
                     it.imageId,
                     it.header,
                     it.caption,
@@ -74,6 +73,7 @@ fun OnboardingScreen(
                 )
             }
         }
+        Spacer(modifier = Modifier.height(6.dp))
         BottomSection(state)
     }
 }
@@ -99,6 +99,12 @@ fun TopSection(
                 tint = YacsaTheme.colors.primaryText,
             )
         }
+        SmallFloatingActionButton(onClick = { onBackClick() }) {
+            Icon(
+                painter = painterResource(id = R.drawable.icon_caret_left_regular_24),
+                contentDescription = null,
+            )
+        }
         TextButton(
             onClick = onSkipClick,
             modifier = Modifier.align(Alignment.CenterEnd),
@@ -120,65 +126,6 @@ fun TopSection(
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun OnBoardingItem(
-    @DrawableRes imageId: Int,
-    header: String,
-    caption: String,
-    state: PagerState,
-) {
-    val position = state.currentPageOffset
-    val scaleMultiplier = 0.25
-    val minScale = 0.75
-    val scaleValue = if (position < 0) {
-        (((minScale - (-position) * scaleMultiplier).toFloat() + scaleMultiplier).toFloat())
-    } else if (position > 0 && position <= 1) {
-        (((minScale - position * scaleMultiplier).toFloat() + scaleMultiplier).toFloat())
-    } else {
-        1f
-    }
-    val alphaValue = if (position < 0) {
-        (1 - kotlin.math.abs(position))
-    } else if (position > 0 && position <= 1) {
-        (1 - position)
-    } else {
-        1f
-    }
-
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        Image(
-            painter = painterResource(id = imageId),
-            contentDescription = null,
-            modifier = Modifier
-                .padding(
-                    start = 50.dp,
-                    end = 50.dp,
-                )
-                .scale(scaleValue)
-                .alpha(alphaValue),
-        )
-        Spacer(
-            modifier = Modifier.height(26.dp),
-        )
-        Text(
-            text = header,
-            style = YacsaTheme.typography.heading,
-            modifier = Modifier.alpha(alphaValue),
-        )
-        Spacer(
-            modifier = Modifier.height(8.dp),
-        )
-        Text(
-            text = caption,
-            style = YacsaTheme.typography.caption,
-            modifier = Modifier.alpha(alphaValue),
-        )
-    }
-}
-
-@OptIn(ExperimentalPagerApi::class)
-@Composable
 fun BottomSection(state: PagerState) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -195,22 +142,9 @@ fun BottomSection(state: PagerState) {
     }
 }
 
-@OptIn(ExperimentalPagerApi::class)
-fun foo(state: PagerState) {
-}
-
-// @Preview(showBackground = true)
-// @Composable
-// fun PreviewOnboardingScreen_Dark() {
-//    YacsaTheme(useDarkTheme = true) {
-//        OnboardingScreen(onboardingViewModel = OnboardingViewModel(), onClick = {})
-//    }
-// }
-//
 @Preview(showBackground = true)
 @Composable
 fun PreviewOnboardingScreen_Light() {
     YacsaTheme(useDarkTheme = false) {
-//        OnboardingScreen({}, {}, OnboardingViewModel(UpdateStartUpConfigureUseCase()))
     }
 }

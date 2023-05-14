@@ -13,11 +13,10 @@ import org.mapstruct.NullValuePropertyMappingStrategy
 interface NewPersonRepoDbMapper {
 
     fun toRepo(
-        personDbModel: PersonDbModel
+        personDbModel: PersonDbModel,
     ): PersonRepoModel
 
     fun toDb(
-        personRepoModel: PersonRepoModel
+        personRepoModel: PersonRepoModel,
     ): PersonDbModel
-
 }

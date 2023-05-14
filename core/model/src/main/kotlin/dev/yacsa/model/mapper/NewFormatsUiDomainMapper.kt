@@ -1,8 +1,6 @@
 package dev.yacsa.model.mapper
 
-import dev.yacsa.domain.model.BookDomainModel
 import dev.yacsa.domain.model.FormatsDomainModel
-import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.model.model.FormatsUiModel
 import org.mapstruct.Mapper
 
@@ -10,11 +8,10 @@ import org.mapstruct.Mapper
 interface NewFormatsUiDomainMapper {
 
     fun toDomain(
-        formatsUiModel: FormatsUiModel
+        formatsUiModel: FormatsUiModel,
     ): FormatsDomainModel
 
     fun toUi(
-        formatsDomainModel: FormatsDomainModel
+        formatsDomainModel: FormatsDomainModel,
     ): FormatsUiModel
-
 }

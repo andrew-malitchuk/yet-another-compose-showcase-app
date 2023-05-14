@@ -9,17 +9,16 @@ import dev.yacsa.domain.usecase.history.NewGetTopSearchUseCase
 import dev.yacsa.repository.repository.SearchHistoryRepository
 import javax.inject.Inject
 
-
 class NewGetTopSearchUseCaseImpl @Inject constructor(
     private val searchHistoryRepository: SearchHistoryRepository,
     private val searchHistoryDomainRepoMapper: NewSearchHistoryDomainRepoMapper,
 ) : NewGetTopSearchUseCase {
 
     override suspend fun invoke(): Either<DomainError, List<SearchHistoryDomainModel>> {
-        return try{
-           val result = searchHistoryRepository.getTop(TOP).map(searchHistoryDomainRepoMapper::toDomain)
+        return try {
+            val result = searchHistoryRepository.getTop(TOP).map(searchHistoryDomainRepoMapper::toDomain)
             Either.Right(result)
-        }catch (ex: Exception) {
+        } catch (ex: Exception) {
             Either.Left(DataError(ex))
         }
     }

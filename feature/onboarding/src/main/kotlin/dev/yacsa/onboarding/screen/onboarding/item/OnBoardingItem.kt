@@ -62,23 +62,20 @@ fun OnboardingItem(
         1f
     }
 
-
     val corner = 64.dp - (64.dp * Math.abs(cornerValue))
-
 
     Box(
         modifier = Modifier
             .fillMaxSize()
             .scale(scaleValue)
             .clip(RoundedCornerShape(size = corner))
-            .background(Color(0xFFE0DFFD))
+            .background(Color(0xFFE0DFFD)),
     ) {
-
         Column(
             modifier = Modifier
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Center,
         ) {
             Image(
                 painter = painterResource(id = imageId),
@@ -111,7 +108,6 @@ fun OnboardingItem(
     }
 }
 
-
 @OptIn(ExperimentalPagerApi::class)
 @Preview(showBackground = true)
 @Composable
@@ -121,7 +117,7 @@ fun Preview_OnboardingItem() {
             imageId = R.drawable.img_mobile_interface,
             header = "foo",
             caption = "bar",
-            state = rememberPagerState()
+            state = rememberPagerState(),
         )
     }
 }

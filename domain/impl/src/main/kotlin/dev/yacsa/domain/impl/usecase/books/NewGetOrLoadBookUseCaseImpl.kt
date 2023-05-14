@@ -41,6 +41,5 @@ class NewGetOrLoadBookUseCaseImpl @Inject constructor(
                 Either.Left(DataError(ex))
             }
         }
-
     }
 }

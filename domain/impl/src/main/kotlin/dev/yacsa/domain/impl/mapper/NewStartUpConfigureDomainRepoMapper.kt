@@ -8,11 +8,10 @@ import org.mapstruct.Mapper
 interface NewStartUpConfigureDomainRepoMapper {
 
     fun toRepo(
-        startUpConfigureDomainModel: StartUpConfigureDomainModel
+        startUpConfigureDomainModel: StartUpConfigureDomainModel,
     ): StartUpConfigureRepoModel
 
     fun toDomain(
-        startUpConfigureRepoModel: StartUpConfigureRepoModel
+        startUpConfigureRepoModel: StartUpConfigureRepoModel,
     ): StartUpConfigureDomainModel
-
 }

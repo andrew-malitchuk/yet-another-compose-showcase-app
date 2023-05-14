@@ -8,11 +8,10 @@ import org.mapstruct.Mapper
 interface NewSearchHistoryUiDomainMapper {
 
     fun toDomain(
-        searchHistoryUiModel: SearchHistoryUiModel
+        searchHistoryUiModel: SearchHistoryUiModel,
     ): SearchHistoryDomainModel
 
     fun toUi(
-        searchHistoryDomainModel: SearchHistoryDomainModel
+        searchHistoryDomainModel: SearchHistoryDomainModel,
     ): SearchHistoryUiModel
-
 }

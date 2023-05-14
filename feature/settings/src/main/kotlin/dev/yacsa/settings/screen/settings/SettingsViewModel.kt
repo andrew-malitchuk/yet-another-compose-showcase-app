@@ -6,7 +6,6 @@ import dev.yacsa.platform.viewmodel.BaseViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
@@ -17,31 +16,30 @@ class SettingsViewModel @Inject constructor(
 ) {
 
     override fun mapIntents(intent: SettingsIntent): Flow<SettingsUiState.PartialState> {
-        return when(intent){
-            is SettingsIntent.GetTheme->TODO()
+        return when (intent) {
+            is SettingsIntent.GetTheme -> TODO()
         }
     }
 
     override fun reduceUiState(
         previousState: SettingsUiState,
-        partialState: SettingsUiState.PartialState
+        partialState: SettingsUiState.PartialState,
     ): SettingsUiState {
         return when (partialState) {
             is SettingsUiState.PartialState.Error -> previousState.copy(
                 isLoading = false,
-                isError = true
+                isError = true,
             )
 
             SettingsUiState.PartialState.Fetched -> previousState.copy(
                 isLoading = false,
-                isError = false
+                isError = false,
             )
 
             SettingsUiState.PartialState.Loading -> previousState.copy(
                 isLoading = true,
-                isError = false
+                isError = false,
             )
         }
     }
-
 }

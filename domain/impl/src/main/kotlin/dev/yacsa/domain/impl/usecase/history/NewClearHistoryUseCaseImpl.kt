@@ -15,7 +15,7 @@ class NewClearHistoryUseCaseImpl @Inject constructor(
 
     // Raise doesnt work
     // https://slack-chats.kotlinlang.org/t/10974556/have-anyone-experienced-this-error-it-happened-right-after-e
-    override suspend fun invoke():Option<DomainError> {
+    override suspend fun invoke(): Option<DomainError> {
         return try {
             searchHistoryRepository.deleteAll()
             none()

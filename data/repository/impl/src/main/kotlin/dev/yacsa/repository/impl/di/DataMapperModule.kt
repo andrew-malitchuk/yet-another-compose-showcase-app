@@ -23,64 +23,52 @@ import dev.yacsa.repository.impl.mapper.search.NewSearchHistoryRepoDbMapperImpl
 import dev.yacsa.repository.impl.mapper.startup.NewStartUpConfigureRepoDataStoreMapper
 import dev.yacsa.repository.impl.mapper.startup.NewStartUpConfigureRepoDataStoreMapperImpl
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 class DataMapperModule {
 
     @Provides
-    fun providesNewBookRepoDbMapper(
-    ): NewBookRepoDbMapper {
+    fun providesNewBookRepoDbMapper(): NewBookRepoDbMapper {
         return NewBookRepoDbMapperImpl()
     }
 
     @Provides
-    fun providesNewBookRepoNetMapper(
-    ): NewBookRepoNetMapper {
+    fun providesNewBookRepoNetMapper(): NewBookRepoNetMapper {
         return NewBookRepoNetMapperImpl()
     }
 
     @Provides
-    fun providesNewPersonRepoNetMapper(
-    ): NewPersonRepoNetMapper {
+    fun providesNewPersonRepoNetMapper(): NewPersonRepoNetMapper {
         return NewPersonRepoNetMapperImpl()
     }
 
     @Provides
-    fun providesNewPersonRepoDbMapper(
-    ): NewPersonRepoDbMapper {
+    fun providesNewPersonRepoDbMapper(): NewPersonRepoDbMapper {
         return NewPersonRepoDbMapperImpl()
     }
 
     @Provides
-    fun providesNewFeatureFlagRepoDbMapper(
-    ): NewFeatureFlagRepoDbMapper {
+    fun providesNewFeatureFlagRepoDbMapper(): NewFeatureFlagRepoDbMapper {
         return NewFeatureFlagRepoDbMapperImpl()
     }
 
     @Provides
-    fun providesNewSearchHistoryRepoDbMapper(
-    ): NewSearchHistoryRepoDbMapper {
+    fun providesNewSearchHistoryRepoDbMapper(): NewSearchHistoryRepoDbMapper {
         return NewSearchHistoryRepoDbMapperImpl()
     }
 
     @Provides
-    fun providesNewFormatsRepoNetMapper(
-    ): NewFormatsRepoNetMapper {
+    fun providesNewFormatsRepoNetMapper(): NewFormatsRepoNetMapper {
         return NewFormatsRepoNetMapperImpl()
     }
 
     @Provides
-    fun providesNewFormatsRepoDbMapper(
-    ): NewFormatsRepoDbMapper {
+    fun providesNewFormatsRepoDbMapper(): NewFormatsRepoDbMapper {
         return NewFormatsRepoDbMapperImpl()
     }
 
-
     @Provides
-    fun providesNewStartUpConfigureRepoDataStoreMapper(
-    ): NewStartUpConfigureRepoDataStoreMapper {
+    fun providesNewStartUpConfigureRepoDataStoreMapper(): NewStartUpConfigureRepoDataStoreMapper {
         return NewStartUpConfigureRepoDataStoreMapperImpl()
     }
-
 }

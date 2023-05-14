@@ -33,7 +33,6 @@ class NewFetchFeatureFlagUseCaseImpl @Inject constructor(
                         } else {
                             Either.Right(localKeyValue.value ?: false)
                         }
-
                     } catch (ex: Exception) {
                         Either.Left(DataError(ex))
                     }

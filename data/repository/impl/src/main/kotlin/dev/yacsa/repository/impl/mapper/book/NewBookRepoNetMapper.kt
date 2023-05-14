@@ -8,11 +8,10 @@ import org.mapstruct.Mapper
 interface NewBookRepoNetMapper {
 
     fun toRepo(
-        bookNetModel: BookNetModel
+        bookNetModel: BookNetModel,
     ): BookRepoModel
 
     fun toNet(
-        bookRepoModel: BookRepoModel
+        bookRepoModel: BookRepoModel,
     ): BookNetModel
-
 }

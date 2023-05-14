@@ -13,11 +13,10 @@ import org.mapstruct.NullValuePropertyMappingStrategy
 interface NewSearchHistoryRepoDbMapper {
 
     fun toRepo(
-        searchHistoryDbModel: SearchHistoryDbModel
+        searchHistoryDbModel: SearchHistoryDbModel,
     ): SearchHistoryRepoModel
 
     fun toDb(
-        searchHistoryRepoModel: SearchHistoryRepoModel
+        searchHistoryRepoModel: SearchHistoryRepoModel,
     ): SearchHistoryDbModel
-
 }

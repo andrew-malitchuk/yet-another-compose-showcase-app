@@ -8,11 +8,10 @@ import org.mapstruct.Mapper
 interface NewPersonDomainRepoMapper {
 
     fun toRepo(
-        personDomainModel: PersonDomainModel
+        personDomainModel: PersonDomainModel,
     ): PersonRepoModel
 
     fun toDomain(
-        personRepoModel: PersonRepoModel
+        personRepoModel: PersonRepoModel,
     ): PersonDomainModel
-
 }

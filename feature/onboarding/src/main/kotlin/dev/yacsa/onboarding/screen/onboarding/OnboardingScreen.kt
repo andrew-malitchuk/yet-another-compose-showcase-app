@@ -102,7 +102,7 @@ fun TopSection(
         SmallFloatingActionButton(onClick = { onBackClick() }) {
             Icon(
                 painter = painterResource(id = R.drawable.icon_caret_left_regular_24),
-                contentDescription = null
+                contentDescription = null,
             )
         }
         TextButton(
@@ -123,7 +123,6 @@ fun TopSection(
         }
     }
 }
-
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -147,6 +146,5 @@ fun BottomSection(state: PagerState) {
 @Composable
 fun PreviewOnboardingScreen_Light() {
     YacsaTheme(useDarkTheme = false) {
-
     }
 }

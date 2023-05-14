@@ -28,7 +28,6 @@ import dev.yacsa.ui.theme.YacsaTheme
 fun ThemeItem(
     modifier: Modifier = Modifier,
 ) {
-
     val shape = RoundedCornerShape(16.dp)
     Card(
         shape = shape,
@@ -36,30 +35,29 @@ fun ThemeItem(
             .fillMaxWidth()
             .clip(shape)
             .bouncingClickable {
-
             },
         border = BorderStroke(1.dp, Color(0xFF7766C6)),
-        elevation = 10.dp
+        elevation = 10.dp,
     ) {
         Row(
             modifier = Modifier
                 .padding(8.dp),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             SmallFloatingActionButton(onClick = { /*TODO*/ }) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_paint_roller_regular_24),
-                    contentDescription = null
+                    contentDescription = null,
                 )
             }
             Spacer(
                 modifier = Modifier
-                    .width(16.dp)
+                    .width(16.dp),
             )
             Text(text = "Theme", style = YacsaTheme.typography.title)
             Spacer(
                 modifier = Modifier
-                    .weight(1f)
+                    .weight(1f),
             )
 
             LazyRow() {
@@ -67,7 +65,7 @@ fun ThemeItem(
                     SmallFloatingActionButton(onClick = { /*TODO*/ }) {
                         Icon(
                             painter = painterResource(id = R.drawable.icon_sun_regular_24),
-                            contentDescription = null
+                            contentDescription = null,
                         )
                     }
                 }
@@ -75,7 +73,7 @@ fun ThemeItem(
                     SmallFloatingActionButton(onClick = { /*TODO*/ }) {
                         Icon(
                             painter = painterResource(id = R.drawable.icon_moon_regular_24),
-                            contentDescription = null
+                            contentDescription = null,
                         )
                     }
                 }
@@ -83,14 +81,13 @@ fun ThemeItem(
                     SmallFloatingActionButton(onClick = { /*TODO*/ }) {
                         Icon(
                             painter = painterResource(id = R.drawable.icon_android_logo_regular_24),
-                            contentDescription = null
+                            contentDescription = null,
                         )
                     }
                 }
             }
         }
     }
-
 }
 
 @Preview(showBackground = true)

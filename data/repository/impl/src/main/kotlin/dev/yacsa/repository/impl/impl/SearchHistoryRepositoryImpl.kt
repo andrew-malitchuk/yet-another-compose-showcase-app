@@ -13,15 +13,17 @@ class SearchHistoryRepositoryImpl @Inject constructor(
 
     override suspend fun getTop(count: Int): List<SearchHistoryRepoModel> {
         return (
-                searchHistoryDbSource.getTop(count)
-                    ?: emptyList()
-                ).map(searchHistoryRepoDbMapper::toRepo)
+            searchHistoryDbSource.getTop(count)
+                ?: emptyList()
+            ).map(searchHistoryRepoDbMapper::toRepo)
     }
 
     override suspend fun insert(value: SearchHistoryRepoModel) {
-        searchHistoryDbSource.insert(searchHistoryRepoDbMapper.toDb(value).also {
-            it.createAt = System.currentTimeMillis()
-        })
+        searchHistoryDbSource.insert(
+            searchHistoryRepoDbMapper.toDb(value).also {
+                it.createAt = System.currentTimeMillis()
+            },
+        )
     }
 
     override suspend fun deleteAll() {

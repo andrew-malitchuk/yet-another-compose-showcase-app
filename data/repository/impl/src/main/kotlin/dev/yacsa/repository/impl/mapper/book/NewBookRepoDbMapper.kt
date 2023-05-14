@@ -13,11 +13,10 @@ import org.mapstruct.NullValuePropertyMappingStrategy
 interface NewBookRepoDbMapper {
 
     fun toRepo(
-        bookDbModel: BookDbModel
+        bookDbModel: BookDbModel,
     ): BookRepoModel
 
     fun toDb(
-        bookRepoModel: BookRepoModel
+        bookRepoModel: BookRepoModel,
     ): BookDbModel
-
 }

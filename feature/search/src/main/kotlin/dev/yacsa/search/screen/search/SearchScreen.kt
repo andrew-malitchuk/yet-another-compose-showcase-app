@@ -61,8 +61,8 @@ fun SearchScreen(
                 onBookClicked = onBookClicked,
                 onDelete = onDelete,
             )
-        }else{
-            if(uiState.isError){
+        } else {
+            if (uiState.isError) {
                 ContentError()
             }
         }

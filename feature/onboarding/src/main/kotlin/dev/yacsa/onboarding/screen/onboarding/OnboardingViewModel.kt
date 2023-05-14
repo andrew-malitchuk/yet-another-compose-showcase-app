@@ -17,7 +17,6 @@ import kotlinx.coroutines.launch
 import logcat.logcat
 import javax.inject.Inject
 
-
 @HiltViewModel
 class OnboardingViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
@@ -72,29 +71,29 @@ class OnboardingViewModel @Inject constructor(
     }
 
     override fun mapIntents(intent: OnboardingIntent): Flow<OnboardingUiState.PartialState> {
-        return when(intent){
-            is OnboardingIntent.GetStatus->TODO()
+        return when (intent) {
+            is OnboardingIntent.GetStatus -> TODO()
         }
     }
 
     override fun reduceUiState(
         previousState: OnboardingUiState,
-        partialState: OnboardingUiState.PartialState
+        partialState: OnboardingUiState.PartialState,
     ): OnboardingUiState {
         return when (partialState) {
             is OnboardingUiState.PartialState.Error -> previousState.copy(
                 isLoading = false,
-                isError = true
+                isError = true,
             )
 
             OnboardingUiState.PartialState.Fetched -> previousState.copy(
                 isLoading = false,
-                isError = false
+                isError = false,
             )
 
             OnboardingUiState.PartialState.Loading -> previousState.copy(
                 isLoading = true,
-                isError = false
+                isError = false,
             )
         }
     }

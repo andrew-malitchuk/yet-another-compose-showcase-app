@@ -26,7 +26,6 @@ import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
 import java.lang.Math.abs
 
-
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalSnapperApi::class)
 @Composable
 fun ContentFetched(
@@ -34,22 +33,20 @@ fun ContentFetched(
     innerPadding: PaddingValues,
     state: LazyListState,
     foo: TopAppBarState,
-    onFfClick: () -> Unit
+    onFfClick: () -> Unit,
 ) {
     val corner = 16.dp - (16.dp * abs(foo.collapsedFraction))
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(innerPadding)
+            .padding(innerPadding),
     ) {
-
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .clip(RoundedCornerShape(topStart = corner, topEnd = corner))
-                .background(Color(0xFFE0DFFD))
+                .background(Color(0xFFE0DFFD)),
         ) {
-
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize(),
@@ -63,7 +60,7 @@ fun ContentFetched(
                         icon = R.drawable.icon_command_regular_24,
                         onClick = {
                             onFfClick()
-                        }
+                        },
                     )
                 }
                 item {
@@ -71,8 +68,7 @@ fun ContentFetched(
                         title = "Information",
                         icon = R.drawable.icon_info_regular_24,
                         onClick = {
-
-                        }
+                        },
                     )
                 }
                 item {
@@ -92,7 +88,7 @@ fun Preview_ContentFetched() {
             innerPadding = PaddingValues(6.dp),
             state = rememberLazyListState(),
             foo = rememberTopAppBarState(),
-            onFfClick = {}
+            onFfClick = {},
         )
     }
 }

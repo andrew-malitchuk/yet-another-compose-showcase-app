@@ -36,7 +36,6 @@ class BooksSource(
                                 LoadResult.Error(Exception("SWW"))
                             }
                         }
-
                     },
                     { result ->
                         LoadResult.Page(
@@ -44,7 +43,7 @@ class BooksSource(
                             prevKey = if (nextPage == 1) null else nextPage - 1,
                             nextKey = if (result.isEmpty()) null else nextPage + 1,
                         )
-                    }
+                    },
                 )
             },
             { result ->
@@ -67,12 +66,12 @@ class BooksSource(
                                     LoadResult.Error(Exception("SWW"))
                                 }
                             }
-                        }
+                        },
                     )
                 } else {
                     LoadResult.Error(Exception("No data"))
                 }
-            }
+            },
         )
     }
 }

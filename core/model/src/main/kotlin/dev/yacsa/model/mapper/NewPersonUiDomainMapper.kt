@@ -4,16 +4,14 @@ import dev.yacsa.domain.model.PersonDomainModel
 import dev.yacsa.model.model.PersonUiModel
 import org.mapstruct.Mapper
 
-
 @Mapper
 interface NewPersonUiDomainMapper {
 
     fun toDomain(
-        personUiModel: PersonUiModel
+        personUiModel: PersonUiModel,
     ): PersonDomainModel
 
     fun toUi(
-        PersonDomainModel: PersonDomainModel
+        PersonDomainModel: PersonDomainModel,
     ): PersonUiModel
-
 }

@@ -10,7 +10,6 @@ import dev.yacsa.repository.model.FeatureFlagRepoModel
 import dev.yacsa.repository.repository.FeatureFlagRepository
 import javax.inject.Inject
 
-
 class NewUpdateLocalFeatureFlagUseCaseImpl @Inject constructor(
     private val featureFlagRepository: FeatureFlagRepository,
 ) : NewUpdateLocalFeatureFlagUseCase {

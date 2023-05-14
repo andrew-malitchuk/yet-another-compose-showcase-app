@@ -10,7 +10,6 @@ import dev.yacsa.domain.usecase.startupconfigure.NewGetStartUpConfigureUseCase
 import dev.yacsa.repository.repository.StartUpConfigureRepository
 import javax.inject.Inject
 
-
 class NewGetStartUpConfigureUseCaseImpl @Inject constructor(
     private val startUpConfigureDomainRepoMapper: NewStartUpConfigureDomainRepoMapper,
     private val startUpConfigureRepository: StartUpConfigureRepository,
@@ -23,12 +22,11 @@ class NewGetStartUpConfigureUseCaseImpl @Inject constructor(
                 Either.Left(NoDataError)
             } else {
                 Either.Right(
-                    startUpConfigureDomainRepoMapper.toDomain(result)
+                    startUpConfigureDomainRepoMapper.toDomain(result),
                 )
             }
         } catch (ex: Exception) {
             Either.Left(DataError(ex))
         }
-
     }
 }

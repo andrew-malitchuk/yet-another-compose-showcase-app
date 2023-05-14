@@ -8,11 +8,10 @@ import org.mapstruct.Mapper
 interface NewPersonRepoNetMapper {
 
     fun toRepo(
-        personNetModel: PersonNetModel
+        personNetModel: PersonNetModel,
     ): PersonRepoModel
 
     fun toNet(
-        personRepoModel: PersonRepoModel
+        personRepoModel: PersonRepoModel,
     ): PersonNetModel
-
 }

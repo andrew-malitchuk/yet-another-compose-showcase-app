@@ -79,7 +79,7 @@ fun ListRoute(
             pagingState = pagingState,
             uiState = uiState,
             onSearch = onSearch,
-            onSettings=onSettings
+            onSettings = onSettings,
         )
     }
 }
@@ -156,7 +156,7 @@ fun PreviewListScreen() {
             flowOf(PagingData.empty<BookUiModel>()).collectAsLazyPagingItems(),
             ListUiState(),
             {},
-            {}
+            {},
         )
     }
 }

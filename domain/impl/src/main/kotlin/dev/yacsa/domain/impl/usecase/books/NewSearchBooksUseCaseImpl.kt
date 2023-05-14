@@ -16,14 +16,14 @@ class NewSearchBooksUseCaseImpl @Inject constructor(
 ) : NewSearchBooksUseCase {
 
     override suspend fun invoke(query: String): Either<DomainError, List<BookDomainModel>> {
-        return try{
-            val fromNet= booksRepository.searchOnRemote(query)
-            if(fromNet.isEmpty()){
+        return try {
+            val fromNet = booksRepository.searchOnRemote(query)
+            if (fromNet.isEmpty()) {
                 Either.Left(NoDataError)
-            }else{
+            } else {
                 Either.Right(fromNet.map(bookDomainRepoMapper::toDomain))
             }
-        }catch (ex:Exception){
+        } catch (ex: Exception) {
             try {
                 val fromDb = booksRepository.searchOnLocal(query)
                 if (fromDb.isEmpty()) {
@@ -31,7 +31,7 @@ class NewSearchBooksUseCaseImpl @Inject constructor(
                 } else {
                     Either.Right(fromDb.map(bookDomainRepoMapper::toDomain))
                 }
-            }catch (ex:Exception) {
+            } catch (ex: Exception) {
                 Either.Left(DataError(ex))
             }
         }

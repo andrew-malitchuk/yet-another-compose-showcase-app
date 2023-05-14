@@ -8,11 +8,10 @@ import org.mapstruct.Mapper
 interface NewBookDomainRepoMapper {
 
     fun toRepo(
-        bookDomainModel: BookDomainModel
+        bookDomainModel: BookDomainModel,
     ): BookRepoModel
 
     fun toDomain(
-        bookRepoModel: BookRepoModel
+        bookRepoModel: BookRepoModel,
     ): BookDomainModel
-
 }

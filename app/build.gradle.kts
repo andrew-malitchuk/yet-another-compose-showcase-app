@@ -58,6 +58,15 @@ dependencies {
     implementation(project(":service:featureflag"))
     implementation(project(":service:featureflag:impl"))
 
+    implementation(project(":service:analytics"))
+    implementation(project(":service:analytics:dispatcher"))
+    implementation(project(":service:analytics:dispatcher:impl"))
+    implementation(project(":service:analytics:provider"))
+    implementation(project(":service:analytics:provider:impl"))
+    implementation(project(":service:analytics:provider:impl:local"))
+    implementation(project(":service:analytics:provider:impl:notification"))
+    implementation(project(":service:analytics:provider:impl:firebase"))
+
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx)

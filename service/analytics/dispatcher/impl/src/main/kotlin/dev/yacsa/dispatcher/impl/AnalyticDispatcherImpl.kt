@@ -11,13 +11,13 @@ class AnalyticDispatcherImpl @Inject constructor(
 ) : AnalyticDispatcher {
 
 
-    override fun setUserProperty(property: UserPropertyAnalyticModel) {
+    override suspend fun setUserProperty(property: UserPropertyAnalyticModel) {
         analyticProviders.forEach {
             it.setProperty(property)
         }
     }
 
-    override fun sendEvent(event: EventAnalyticModel) {
+    override suspend fun sendEvent(event: EventAnalyticModel) {
         analyticProviders.forEach {
             it.log(event)
         }

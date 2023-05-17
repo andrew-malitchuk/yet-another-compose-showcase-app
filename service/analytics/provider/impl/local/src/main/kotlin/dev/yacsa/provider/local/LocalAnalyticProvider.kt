@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class LocalAnalyticProvider @Inject constructor() : AnalyticProvider {
 
-    override fun log(event: EventAnalyticModel) {
+    override suspend fun log(event: EventAnalyticModel) {
         when (event) {
             is ContentViewAnalyticModel -> {
                 logcat { "ContentViewAnalyticModel: ${event.viewName}" }
@@ -22,7 +22,7 @@ class LocalAnalyticProvider @Inject constructor() : AnalyticProvider {
         }
     }
 
-    override fun setProperty(property: UserPropertyAnalyticModel) {
+    override suspend fun setProperty(property: UserPropertyAnalyticModel) {
         logcat { "CustomAnalyticModel: {${property.key} : ${property.value}}" }
     }
 

@@ -5,6 +5,6 @@ import dev.yacsa.analytics.event.base.EventAnalyticModel
 
 interface AnalyticProvider {
     // TODO: arrow?
-    fun log(event: EventAnalyticModel)
-    fun setProperty(property: UserPropertyAnalyticModel)
+    suspend fun log(event: EventAnalyticModel)
+    suspend fun setProperty(property: UserPropertyAnalyticModel)
 }

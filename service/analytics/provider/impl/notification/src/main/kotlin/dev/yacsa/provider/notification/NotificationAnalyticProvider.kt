@@ -14,12 +14,16 @@ import dev.yacsa.analytics.event.ContentViewAnalyticModel
 import dev.yacsa.analytics.event.CustomAnalyticModel
 import dev.yacsa.analytics.event.UserPropertyAnalyticModel
 import dev.yacsa.analytics.event.base.EventAnalyticModel
+import dev.yacsa.domain.model.analytics.AnalyticsDomainModel
+import dev.yacsa.domain.usecase.analytics.AddAnalyticUseCase
 import dev.yacsa.provider.AnalyticProvider
 import dev.yacsa.provider.notification.collection.FiniteList
+import kotlinx.coroutines.DelicateCoroutinesApi
 import javax.inject.Inject
 
 class NotificationAnalyticProvider @Inject constructor(
-    @ApplicationContext private val context: Context
+    @ApplicationContext private val context: Context,
+    private val addAnalyticUseCase: AddAnalyticUseCase
 ) : AnalyticProvider {
 
     val notificationContent = FiniteList<String>(5)
@@ -28,13 +32,20 @@ class NotificationAnalyticProvider @Inject constructor(
         createNotificationChannel()
     }
 
-
-    override fun log(event: EventAnalyticModel) {
+    @OptIn(DelicateCoroutinesApi::class)
+    override suspend fun log(event: EventAnalyticModel) {
         when (event) {
             is ContentViewAnalyticModel -> {
                 showNotification(
                     "YACSA Analytics",
                     getContentViewAnalytic(event)
+                )
+                // TODO: fix?
+                addAnalyticUseCase(
+                    AnalyticsDomainModel(
+                        "content_view",
+                        event.viewName
+                    )
                 )
             }
 
@@ -43,20 +54,32 @@ class NotificationAnalyticProvider @Inject constructor(
                     "YACSA Analytics",
                     getCustomEventAnalytic(event)
                 )
+                addAnalyticUseCase(
+                    AnalyticsDomainModel(
+                        event.eventName,
+                        getCustomAnalyticsParams(event)
+                    )
+                )
             }
         }
     }
 
-    override fun setProperty(property: UserPropertyAnalyticModel) {
+    override suspend fun setProperty(property: UserPropertyAnalyticModel) {
         showNotification(
             "YACSA Analytics",
-            getAnalyticProperty(property)
+            "\uD83E\uDD14 ${getAnalyticProperty(property)}"
+        )
+        addAnalyticUseCase(
+            AnalyticsDomainModel(
+                "user_property",
+                getAnalyticProperty(property)
+            )
         )
     }
 
 
     private fun getAnalyticProperty(property: UserPropertyAnalyticModel): String {
-        return "\uD83E\uDD14 ${property.key} : ${property.value}"
+        return "${property.key} : ${property.value}"
     }
 
     private fun getContentViewAnalytic(event: ContentViewAnalyticModel): String {
@@ -65,6 +88,10 @@ class NotificationAnalyticProvider @Inject constructor(
 
 
     private fun getCustomEventAnalytic(event: CustomAnalyticModel): String {
+        return "\uD83D\uDD14 ${event.eventName} : {${getCustomAnalyticsParams(event)}}"
+    }
+
+    fun getCustomAnalyticsParams(event: CustomAnalyticModel): String {
         var params: String? = null
 
         if (event.getParameters().isNotEmpty()) {
@@ -73,10 +100,8 @@ class NotificationAnalyticProvider @Inject constructor(
         event.getParameters().forEach {
             params += "${it.key} : ${it.value}, "
         }
-
-        return "\uD83D\uDD14 ${event.eventName} : {${params}}"
+        return "{${params}}"
     }
-
 
     @SuppressLint("MissingPermission")
     private fun showNotification(title: String, content: String) {
@@ -85,8 +110,10 @@ class NotificationAnalyticProvider @Inject constructor(
 
         val notification = NotificationCompat.Builder(context, "dev.yacsa")
             .setContentTitle(title)
-            .setStyle(NotificationCompat.BigTextStyle()
-                .bigText(notificationContent.toString()))
+            .setStyle(
+                NotificationCompat.BigTextStyle()
+                    .bigText(notificationContent.toString())
+            )
             .setSmallIcon(dev.yacsa.ui.R.drawable.ic_launcher_foreground)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .build()

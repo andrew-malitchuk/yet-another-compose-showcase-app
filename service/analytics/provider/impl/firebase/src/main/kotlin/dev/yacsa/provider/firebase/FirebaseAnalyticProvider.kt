@@ -18,7 +18,7 @@ class FirebaseAnalyticProvider @Inject constructor() : AnalyticProvider {
         Firebase.analytics
     }
 
-    override fun log(event: EventAnalyticModel) {
+    override suspend fun log(event: EventAnalyticModel) {
         when (event) {
             is ContentViewAnalyticModel -> {
                 firebaseAnalytics.logEvent(
@@ -38,7 +38,7 @@ class FirebaseAnalyticProvider @Inject constructor() : AnalyticProvider {
         }
     }
 
-    override fun setProperty(property: UserPropertyAnalyticModel) {
+    override suspend fun setProperty(property: UserPropertyAnalyticModel) {
         firebaseAnalytics.setUserProperty(
             property.key,
             property.value.toString()

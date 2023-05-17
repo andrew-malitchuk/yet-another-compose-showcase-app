@@ -27,4 +27,6 @@ dependencies {
     implementation("androidx.core:core-splashscreen:1.0.0")
     implementation(project(":feature:navigation"))
 
+    implementation("com.airbnb.android:lottie-compose:6.0.0")
+
 }

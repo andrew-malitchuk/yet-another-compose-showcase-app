@@ -4,11 +4,13 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dev.yacsa.database.impl.source.AnalyticsDbSourceImpl
 import dev.yacsa.database.impl.source.BookAuthorRelationshipDbSourceImpl
 import dev.yacsa.database.impl.source.BookDbSourceImpl
 import dev.yacsa.database.impl.source.FeatureFlagDbSourceImpl
 import dev.yacsa.database.impl.source.PersonDbSourceImpl
 import dev.yacsa.database.impl.source.SearchHistoryDbSourceImpl
+import dev.yacsa.database.source.AnalyticsDbSource
 import dev.yacsa.database.source.BookAuthorRelationshipDbSource
 import dev.yacsa.database.source.BookDbSource
 import dev.yacsa.database.source.FeatureFlagDbSource
@@ -44,4 +46,10 @@ abstract class DbSourceModule {
     abstract fun bindsSearchHistoryDbSource(
         searchHistoryDbSourceImpl: SearchHistoryDbSourceImpl,
     ): SearchHistoryDbSource
+
+    @Binds
+    abstract fun bindsAnalyticsDbSource(
+        analyticsDbSourceImpl: AnalyticsDbSourceImpl,
+    ): AnalyticsDbSource
+
 }

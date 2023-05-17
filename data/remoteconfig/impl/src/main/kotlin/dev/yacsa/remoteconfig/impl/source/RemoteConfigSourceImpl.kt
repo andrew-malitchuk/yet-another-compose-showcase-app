@@ -16,7 +16,6 @@ class RemoteConfigSourceImpl @Inject constructor(
         return suspendCoroutine { continuation ->
             try {
                 remoteConfig.remoteConfig.apply {
-                    reset()
                     fetchAndActivate().addOnCompleteListener {
                         if (it.isSuccessful) {
                             val value = remoteConfig.remoteConfig.getDouble(key)
@@ -37,7 +36,6 @@ class RemoteConfigSourceImpl @Inject constructor(
         return suspendCoroutine { continuation ->
             try {
                 remoteConfig.remoteConfig.apply {
-                    reset()
                     fetchAndActivate().addOnCompleteListener {
                         if (it.isSuccessful) {
                             val value = remoteConfig.remoteConfig.getBoolean(key)
@@ -58,7 +56,6 @@ class RemoteConfigSourceImpl @Inject constructor(
         return suspendCoroutine { continuation ->
             try {
                 remoteConfig.remoteConfig.apply {
-                    reset()
                     fetchAndActivate().addOnCompleteListener {
                         if (it.isSuccessful) {
                             val value = remoteConfig.remoteConfig.getString(key)

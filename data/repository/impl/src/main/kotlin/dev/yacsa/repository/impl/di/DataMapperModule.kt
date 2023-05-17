@@ -4,6 +4,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dev.yacsa.repository.impl.mapper.analytics.AnalyticsRepoDbMapper
+import dev.yacsa.repository.impl.mapper.analytics.AnalyticsRepoDbMapperImpl
 import dev.yacsa.repository.impl.mapper.book.NewBookRepoDbMapper
 import dev.yacsa.repository.impl.mapper.book.NewBookRepoDbMapperImpl
 import dev.yacsa.repository.impl.mapper.book.NewBookRepoNetMapper
@@ -70,5 +72,10 @@ class DataMapperModule {
     @Provides
     fun providesNewStartUpConfigureRepoDataStoreMapper(): NewStartUpConfigureRepoDataStoreMapper {
         return NewStartUpConfigureRepoDataStoreMapperImpl()
+    }
+
+    @Provides
+    fun providesAnalyticsRepoDbMapper(): AnalyticsRepoDbMapper {
+        return AnalyticsRepoDbMapperImpl()
     }
 }

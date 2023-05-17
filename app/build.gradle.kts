@@ -31,6 +31,7 @@ dependencies {
     implementation(project(":feature:notfound"))
     implementation(project(":feature:search"))
     implementation(project(":feature:settings"))
+    implementation(project(":feature:analytics"))
 
     implementation(project(":core:common"))
     implementation(project(":core:localization"))

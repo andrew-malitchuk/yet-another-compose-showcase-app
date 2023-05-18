@@ -29,11 +29,13 @@ class NetworkModule {
     fun providesOkHttpClient(
         @Named("interceptor_chucker") chuckerInterceptor: Interceptor,
         @Named("interceptor_logging") loggingInterceptor: Interceptor,
+        @Named("flipper_okhttp_interceptor") flipperOkhttpInterceptor: Interceptor,
     ): OkHttpClient {
         return OkHttpClient.Builder().apply {
             connectTimeout(CONNECTION_TIMEOUT, TimeUnit.MILLISECONDS)
             readTimeout(READ_TIMEOUT, TimeUnit.MILLISECONDS)
             writeTimeout(WRITE_TIMEOUT, TimeUnit.MILLISECONDS)
+            addInterceptor(flipperOkhttpInterceptor)
             addInterceptor(chuckerInterceptor)
             addInterceptor(loggingInterceptor)
         }.build()

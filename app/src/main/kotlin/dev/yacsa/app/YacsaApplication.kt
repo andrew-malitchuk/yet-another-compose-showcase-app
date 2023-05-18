@@ -1,6 +1,10 @@
 package dev.yacsa.app
 
 import android.app.Application
+import com.facebook.flipper.android.AndroidFlipperClient
+import com.facebook.flipper.plugins.navigation.NavigationFlipperPlugin
+import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
+import com.facebook.soloader.SoLoader
 import com.google.firebase.FirebaseApp
 import dagger.hilt.android.HiltAndroidApp
 import dev.yacsa.featureflag.impl.container.FeatureFlagContainer
@@ -19,6 +23,9 @@ class YacsaApplication : Application() {
     @Inject
     lateinit var featureFlagContainer: FeatureFlagContainer
 
+    @Inject
+    lateinit var networkFlipperPlugin: NetworkFlipperPlugin
+
     private val applicationScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
 
     override fun onCreate() {
@@ -27,6 +34,17 @@ class YacsaApplication : Application() {
         FirebaseApp.initializeApp(this)
         applicationScope.launch {
             featureFlagContainer.sync()
+        }
+        configureFlipper()
+    }
+
+
+    private fun configureFlipper() {
+        SoLoader.init(this, false)
+        with(AndroidFlipperClient.getInstance(this)) {
+            addPlugin(networkFlipperPlugin)
+            addPlugin(NavigationFlipperPlugin.getInstance())
+            start()
         }
     }
 

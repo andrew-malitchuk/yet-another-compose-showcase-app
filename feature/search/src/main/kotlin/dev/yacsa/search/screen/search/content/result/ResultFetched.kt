@@ -1,6 +1,10 @@
 package dev.yacsa.search.screen.search.content.result
 
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,8 +12,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yacsa.model.model.BookUiModel
@@ -24,31 +31,47 @@ fun ResultFetched(
     onBookClicked: (Int) -> Unit,
 ) {
     val state = rememberLazyListState()
+    val isVisible = state.canScrollBackward
+    val corner = animateDpAsState(
+        targetValue = if (!isVisible) 16.dp else 0.dp,
+        animationSpec = tween(
+            durationMillis = 500,
+        ),
+    )
+
     Column(
         modifier = Modifier
             .padding(top = 8.dp),
     ) {
         AnimatedDivider(state = state)
-        LazyColumn(
-            state = state,
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = modifier
-                .fillMaxSize(),
-            contentPadding = PaddingValues(
-                start = 16.dp,
-                bottom = 16.dp,
-                end = 16.dp,
-                top = 8.dp,
-            ),
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(RoundedCornerShape(topStart = corner.value, topEnd = corner.value))
+                .background(Color(0xFFE0DFFD)),
         ) {
-            items(items = resultSearch) { item ->
-                ItemFetchedList(
-                    book = item,
-                    onItemContentClick = {
-                        // TODO: fix
-                        item.id?.let { onBookClicked(it) }
-                    },
-                )
+            LazyColumn(
+                state = state,
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = modifier
+                    .fillMaxSize(),
+                contentPadding = PaddingValues(
+                    start = 16.dp,
+                    bottom = 16.dp,
+                    end = 16.dp,
+                    top = 8.dp,
+                ),
+            ) {
+                items(items = resultSearch) { item ->
+                    ItemFetchedList(
+                        book = item,
+                        onItemContentClick = {
+                            // TODO: fix
+                            item.id?.let { onBookClicked(it) }
+                        },
+                    )
+                }
             }
         }
     }

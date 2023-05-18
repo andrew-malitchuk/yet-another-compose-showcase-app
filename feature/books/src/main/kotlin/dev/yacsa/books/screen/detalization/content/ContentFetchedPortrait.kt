@@ -1,5 +1,6 @@
 package dev.yacsa.books.screen.detalization.content
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -42,12 +43,18 @@ import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun ContentFetchedPortrait(
     modifier: Modifier = Modifier,
     book: BookUiModel?,
     onBackClick: () -> Unit,
 ) {
+
+
+
+
+
     Column(
         modifier = Modifier
             .verticalScroll(rememberScrollState())

@@ -15,7 +15,7 @@ fun NavGraphBuilder.notFoundNavGraph(navController: NavHostController) {
         composable(NotFoundDirections.NotFound.route) {
             NotFoundRoute(
                 onBackClick = {
-//                    navController.popBackStack()
+                    navController.popBackStack()
                 },
             )
         }

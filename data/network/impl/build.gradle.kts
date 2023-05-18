@@ -20,6 +20,8 @@ dependencies {
     debugImplementation("com.github.chuckerteam.chucker:library:3.5.2")
     releaseImplementation("com.github.chuckerteam.chucker:library-no-op:3.5.2")
 
+//    implementation("com.facebook.flipper:flipper-network-plugin:0.190.0")
 
     implementation(project(":data:network"))
+    implementation(project(":service:flipper"))
 }

@@ -26,6 +26,8 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview:1.4.0")
     implementation("com.squareup.logcat:logcat:0.1")
 
+    implementation("androidx.compose.material3:material3:1.1.0-rc01")
+    implementation("androidx.compose.material3:material3-window-size-class:1.1.0-rc01")
 
     implementation(project(":domain"))
     implementation(project(":feature:navigation"))

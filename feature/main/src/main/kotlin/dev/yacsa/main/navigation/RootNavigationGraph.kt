@@ -3,6 +3,7 @@ package dev.yacsa.main.navigation
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import dev.yacsa.analytics.navigation.analyticsNavGraph
 import dev.yacsa.books.navigation.booksNavGraph
 import dev.yacsa.featureflagmanager.navigation.featureFlagNavGraph
 import dev.yacsa.navigation.NavigationDirection
@@ -27,5 +28,6 @@ fun RootNavigationGraph(
         notFoundNavGraph(navController)
         searchNavGraph(navController)
         settingsNavGraph(navController)
+        analyticsNavGraph(navController)
     }
 }

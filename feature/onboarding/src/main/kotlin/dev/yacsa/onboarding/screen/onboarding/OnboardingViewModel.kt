@@ -7,6 +7,10 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.yacsa.analytics.event.ContentViewAnalyticModel
+import dev.yacsa.analytics.event.CustomAnalyticModel
+import dev.yacsa.analytics.event.UserPropertyAnalyticModel
+import dev.yacsa.dispatcher.AnalyticDispatcher
 import dev.yacsa.domain.model.StartUpConfigureDomainModel
 import dev.yacsa.domain.usecase.startupconfigure.NewGetStartUpConfigureUseCase
 import dev.yacsa.domain.usecase.startupconfigure.NewUpdateStartUpConfigureUseCase
@@ -23,10 +27,38 @@ class OnboardingViewModel @Inject constructor(
     initialState: OnboardingUiState,
     private val updateStartUpConfigureUseCase: NewUpdateStartUpConfigureUseCase,
     private val getStartUpConfigureUseCase: NewGetStartUpConfigureUseCase,
+    private val analyticDispatcher: AnalyticDispatcher
 ) : BaseViewModel<OnboardingUiState, OnboardingUiState.PartialState, OnboardingEvent, OnboardingIntent>(
     savedStateHandle,
     initialState,
 ) {
+
+    init {
+        viewModelScope.launch {
+            analyticDispatcher.sendEvent(
+                object : ContentViewAnalyticModel() {
+                    override val viewName = "onboarding"
+
+                }
+            )
+
+            analyticDispatcher.sendEvent(
+                object : CustomAnalyticModel() {
+                    override var eventName: String = "foobar"
+
+                    override fun getParameters(): Map<String, Any> = mapOf(
+                        "bar" to true,
+                        "foo" to 1
+                    )
+
+                }
+            )
+            analyticDispatcher.setUserProperty(object : UserPropertyAnalyticModel() {
+                override val key: String = "name"
+                override val value: Any = "Andrew"
+            })
+        }
+    }
 
     fun updateStartUpConfigure() {
         viewModelScope.launch {
@@ -44,17 +76,17 @@ class OnboardingViewModel @Inject constructor(
 
     var onboardingPages = listOf(
         OnboadringPage(
-            R.drawable.img_mobile_application,
+            R.drawable.illustration_mobile_application,
             "Search",
             "Search and filter books",
         ),
         OnboadringPage(
-            R.drawable.img_mobile_encryption,
+            R.drawable.illustration_mobile_encryption,
             "Favourites",
             "Add books to bookshelf",
         ),
         OnboadringPage(
-            R.drawable.img_mobile_interface,
+            R.drawable.illustration_mobile_interface,
             "Download",
             "All books are free to download",
         ),

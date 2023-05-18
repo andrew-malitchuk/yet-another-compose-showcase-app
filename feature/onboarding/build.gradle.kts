@@ -33,6 +33,8 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":feature:navigation"))
     implementation(project(":core:ui"))
+    implementation(project(":service:analytics"))
+    implementation(project(":service:analytics:dispatcher"))
 
     implementation("io.arrow-kt:arrow-core:1.2.0-RC")
     implementation("io.arrow-kt:arrow-fx-coroutines:1.2.0-RC")

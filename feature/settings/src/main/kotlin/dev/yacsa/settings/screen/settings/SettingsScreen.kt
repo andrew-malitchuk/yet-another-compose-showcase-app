@@ -36,6 +36,7 @@ fun SettingsRoute(
     settingsViewModel: SettingsViewModel = hiltViewModel(),
     onBackClick: () -> Unit,
     onFfClick: () -> Unit,
+    onAnalyticsClick: () -> Unit,
 ) {
     val uiState by settingsViewModel.uiState.collectAsStateWithLifecycle()
 
@@ -43,6 +44,7 @@ fun SettingsRoute(
         uiState,
         onBackClick,
         onFfClick,
+        onAnalyticsClick,
     )
 }
 
@@ -52,6 +54,7 @@ fun SettingsScreen(
     uiState: SettingsUiState,
     onBackClick: () -> Unit,
     onFfClick: () -> Unit,
+    onAnalyticsClick: () -> Unit,
 ) {
     val systemUiController = rememberSystemUiController()
     val state = rememberLazyListState()
@@ -113,6 +116,7 @@ fun SettingsScreen(
             state = state,
             foo = foo,
             onFfClick = onFfClick,
+            onAnalyticsClick=onAnalyticsClick,
         )
     }
 }
@@ -125,6 +129,7 @@ fun Preview_SettingsScreen() {
             uiState = SettingsUiState(),
             onBackClick = {},
             onFfClick = {},
+            onAnalyticsClick={},
         )
     }
 }

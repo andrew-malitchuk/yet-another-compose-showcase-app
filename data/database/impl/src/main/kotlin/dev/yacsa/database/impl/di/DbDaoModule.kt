@@ -5,6 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.yacsa.database.impl.YacsaDb
+import dev.yacsa.database.impl.dao.AnalyticsDbDao
 import dev.yacsa.database.impl.dao.BookAuthorRelationshipDao
 import dev.yacsa.database.impl.dao.BookDbDao
 import dev.yacsa.database.impl.dao.FeatureFlagDbDao
@@ -49,4 +50,12 @@ class DbDaoModule {
     ): SearchHistoryDao {
         return appDatabase.getSearchHistoryDao()
     }
+
+    @Provides
+    fun providesAnalyticsDao(
+        appDatabase: YacsaDb,
+    ): AnalyticsDbDao {
+        return appDatabase.getAnalyticsDao()
+    }
+
 }

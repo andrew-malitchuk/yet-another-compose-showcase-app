@@ -16,6 +16,8 @@ import dev.yacsa.domain.impl.mapper.NewSearchHistoryDomainRepoMapper
 import dev.yacsa.domain.impl.mapper.NewSearchHistoryDomainRepoMapperImpl
 import dev.yacsa.domain.impl.mapper.NewStartUpConfigureDomainRepoMapper
 import dev.yacsa.domain.impl.mapper.NewStartUpConfigureDomainRepoMapperImpl
+import dev.yacsa.domain.impl.mapper.analytics.AnalyticsDomainRepoMapper
+import dev.yacsa.domain.impl.mapper.analytics.AnalyticsDomainRepoMapperImpl
 
 @Suppress("UnnecessaryAbstractClass")
 @Module
@@ -50,5 +52,10 @@ class DomainMapperModule {
     @Provides
     fun providesNewBookDomainRepoMapper(): NewBookDomainRepoMapper {
         return NewBookDomainRepoMapperImpl()
+    }
+
+    @Provides
+    fun providesAnalyticsDomainRepoMapper(): AnalyticsDomainRepoMapper {
+        return AnalyticsDomainRepoMapperImpl()
     }
 }

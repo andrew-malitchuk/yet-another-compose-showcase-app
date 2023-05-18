@@ -4,10 +4,12 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dev.yacsa.repository.impl.impl.AnalyticsRepositoryImpl
 import dev.yacsa.repository.impl.impl.BooksRepositoryImpl
 import dev.yacsa.repository.impl.impl.FeatureFlagRepositoryImpl
 import dev.yacsa.repository.impl.impl.SearchHistoryRepositoryImpl
 import dev.yacsa.repository.impl.impl.StartUpConfigureRepositoryImpl
+import dev.yacsa.repository.repository.AnalyticsRepository
 import dev.yacsa.repository.repository.BooksRepository
 import dev.yacsa.repository.repository.FeatureFlagRepository
 import dev.yacsa.repository.repository.SearchHistoryRepository
@@ -37,4 +39,9 @@ abstract class RepositoryModule {
     abstract fun bindsSearchHistoryRepository(
         searchHistoryRepositoryImpl: SearchHistoryRepositoryImpl,
     ): SearchHistoryRepository
+
+    @Binds
+    abstract fun bindsAnalyticsRepository(
+        analyticsRepositoryImpl: AnalyticsRepositoryImpl,
+    ): AnalyticsRepository
 }

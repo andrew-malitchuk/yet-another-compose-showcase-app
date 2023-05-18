@@ -5,6 +5,9 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.yacsa.domain.impl.usecase.*
+import dev.yacsa.domain.impl.usecase.analytics.AddAnalyticUseCaseImpl
+import dev.yacsa.domain.impl.usecase.analytics.ClearAnalyticsUseCaseImpl
+import dev.yacsa.domain.impl.usecase.analytics.GetAnalyticsUseCaseImpl
 import dev.yacsa.domain.impl.usecase.books.NewGetBooksUseCaseImpl
 import dev.yacsa.domain.impl.usecase.books.NewGetOrLoadBookUseCaseImpl
 import dev.yacsa.domain.impl.usecase.books.NewLoadBooksUseCaseImpl
@@ -18,6 +21,9 @@ import dev.yacsa.domain.impl.usecase.history.NewInsertSearchHistoryUseCaseImpl
 import dev.yacsa.domain.impl.usecase.startupconfigure.NewGetStartUpConfigureUseCaseImpl
 import dev.yacsa.domain.impl.usecase.startupconfigure.NewUpdateStartUpConfigureUseCaseImpl
 import dev.yacsa.domain.usecase.*
+import dev.yacsa.domain.usecase.analytics.AddAnalyticUseCase
+import dev.yacsa.domain.usecase.analytics.ClearAnalyticsUseCase
+import dev.yacsa.domain.usecase.analytics.GetAnalyticsUseCase
 import dev.yacsa.domain.usecase.books.NewGetBooksUseCase
 import dev.yacsa.domain.usecase.books.NewGetOrLoadBookUseCase
 import dev.yacsa.domain.usecase.books.NewLoadBooksUseCase
@@ -108,4 +114,22 @@ abstract class DomainModule {
     abstract fun bindNewUpdateLocalFeatureFlagUseCase(
         newUpdateLocalFeatureFlagUseCaseImpl: NewUpdateLocalFeatureFlagUseCaseImpl,
     ): NewUpdateLocalFeatureFlagUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindAddAnalyticUseCase(
+        addAnalyticUseCaseImpl: AddAnalyticUseCaseImpl,
+    ): AddAnalyticUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindClearAnalyticsUseCase(
+        clearAnalyticsUseCaseImpl: ClearAnalyticsUseCaseImpl,
+    ): ClearAnalyticsUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindGetAnalyticsUseCase(
+        getAnalyticsUseCaseImpl: GetAnalyticsUseCaseImpl,
+    ): GetAnalyticsUseCase
 }

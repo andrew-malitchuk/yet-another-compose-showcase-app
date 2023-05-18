@@ -4,6 +4,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dev.yacsa.model.mapper.AnalyticsUiDomainMapper
+import dev.yacsa.model.mapper.AnalyticsUiDomainMapperImpl
 import dev.yacsa.model.mapper.NewBooksUiDomainMapper
 import dev.yacsa.model.mapper.NewBooksUiDomainMapperImpl
 import dev.yacsa.model.mapper.NewFormatsUiDomainMapper
@@ -35,5 +37,10 @@ class UiMapperModule {
     @Provides
     fun providesNewPersonUiDomainMapper(): NewPersonUiDomainMapper {
         return NewPersonUiDomainMapperImpl()
+    }
+
+    @Provides
+    fun providesAnalyticsUiDomainMapper(): AnalyticsUiDomainMapper {
+        return AnalyticsUiDomainMapperImpl()
     }
 }

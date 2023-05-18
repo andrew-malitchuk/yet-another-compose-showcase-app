@@ -31,6 +31,7 @@ dependencies {
     implementation(project(":feature:notfound"))
     implementation(project(":feature:search"))
     implementation(project(":feature:settings"))
+    implementation(project(":feature:analytics"))
 
     implementation(project(":core:common"))
     implementation(project(":core:localization"))
@@ -58,6 +59,16 @@ dependencies {
     implementation(project(":service:featureflag"))
     implementation(project(":service:featureflag:impl"))
 
+    implementation(project(":service:analytics"))
+    implementation(project(":service:analytics:dispatcher"))
+    implementation(project(":service:analytics:dispatcher:impl"))
+    implementation(project(":service:analytics:provider"))
+    implementation(project(":service:analytics:provider:impl"))
+    implementation(project(":service:analytics:provider:impl:local"))
+    implementation(project(":service:analytics:provider:impl:notification"))
+    implementation(project(":service:analytics:provider:impl:firebase"))
+    implementation(project(":service:flipper"))
+
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx)
@@ -75,4 +86,9 @@ dependencies {
 
 //    implementation("androidx.compose.ui:ui-tooling-preview:1.3.3")
 //    implementation("androidx.compose.ui:ui-tooling:1.3.3")
+
+    debugImplementation("com.facebook.flipper:flipper:0.190.0")
+    debugImplementation("com.facebook.soloader:soloader:0.10.5")
+    releaseImplementation("com.facebook.flipper:flipper-noop:0.190.0")
+    implementation("com.facebook.flipper:flipper-network-plugin:0.190.0")
 }

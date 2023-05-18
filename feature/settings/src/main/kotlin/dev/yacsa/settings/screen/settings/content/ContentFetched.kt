@@ -34,6 +34,7 @@ fun ContentFetched(
     state: LazyListState,
     foo: TopAppBarState,
     onFfClick: () -> Unit,
+    onAnalyticsClick: () -> Unit,
 ) {
     val corner = 16.dp - (16.dp * abs(foo.collapsedFraction))
     Box(
@@ -72,6 +73,15 @@ fun ContentFetched(
                     )
                 }
                 item {
+                    SettingsItem(
+                        title = "Analytics",
+                        icon = R.drawable.icon_flask_regular_24,
+                        onClick = {
+                            onAnalyticsClick()
+                        },
+                    )
+                }
+                item {
                     ThemeItem()
                 }
             }
@@ -89,6 +99,7 @@ fun Preview_ContentFetched() {
             state = rememberLazyListState(),
             foo = rememberTopAppBarState(),
             onFfClick = {},
+            onAnalyticsClick={},
         )
     }
 }

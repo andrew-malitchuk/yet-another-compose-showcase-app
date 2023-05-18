@@ -1,19 +1,19 @@
-package dev.yacsa.notfound.navigation
+package dev.yacsa.analytics.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import dev.yacsa.analytics.screen.analytics.AnalyticsRoute
 import dev.yacsa.navigation.NavigationDirection
-import dev.yacsa.notfound.screen.notfound.NotFoundRoute
 
-fun NavGraphBuilder.notFoundNavGraph(navController: NavHostController) {
+fun NavGraphBuilder.analyticsNavGraph(navController: NavHostController) {
     navigation(
-        startDestination = NotFoundDirections.NotFound.route,
-        route = NavigationDirection.NotFound.route,
+        startDestination = AnalyticsDirection.Analytics.route,
+        route = NavigationDirection.Analytics.route,
     ) {
-        composable(NotFoundDirections.NotFound.route) {
-            NotFoundRoute(
+        composable(AnalyticsDirection.Analytics.route) {
+            AnalyticsRoute(
                 onBackClick = {
                     navController.popBackStack()
                 },

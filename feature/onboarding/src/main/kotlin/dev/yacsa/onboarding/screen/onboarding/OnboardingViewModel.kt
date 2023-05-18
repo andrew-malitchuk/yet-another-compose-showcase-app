@@ -34,28 +34,30 @@ class OnboardingViewModel @Inject constructor(
 ) {
 
     init {
-        analyticDispatcher.sendEvent(
-            object : ContentViewAnalyticModel() {
-                override val viewName = "onboarding"
+        viewModelScope.launch {
+            analyticDispatcher.sendEvent(
+                object : ContentViewAnalyticModel() {
+                    override val viewName = "onboarding"
 
-            }
-        )
+                }
+            )
 
-        analyticDispatcher.sendEvent(
-            object : CustomAnalyticModel(){
-                override var eventName: String = "foobar"
+            analyticDispatcher.sendEvent(
+                object : CustomAnalyticModel() {
+                    override var eventName: String = "foobar"
 
-                override fun getParameters(): Map<String, Any> = mapOf(
-                    "bar" to true,
-                    "foo" to 1
-                )
+                    override fun getParameters(): Map<String, Any> = mapOf(
+                        "bar" to true,
+                        "foo" to 1
+                    )
 
-            }
-        )
-        analyticDispatcher.setUserProperty(object :UserPropertyAnalyticModel(){
-            override val key: String="name"
-            override val value: Any="Andrew"
-        })
+                }
+            )
+            analyticDispatcher.setUserProperty(object : UserPropertyAnalyticModel() {
+                override val key: String = "name"
+                override val value: Any = "Andrew"
+            })
+        }
     }
 
     fun updateStartUpConfigure() {
@@ -74,17 +76,17 @@ class OnboardingViewModel @Inject constructor(
 
     var onboardingPages = listOf(
         OnboadringPage(
-            R.drawable.img_mobile_application,
+            R.drawable.illustration_mobile_application,
             "Search",
             "Search and filter books",
         ),
         OnboadringPage(
-            R.drawable.img_mobile_encryption,
+            R.drawable.illustration_mobile_encryption,
             "Favourites",
             "Add books to bookshelf",
         ),
         OnboadringPage(
-            R.drawable.img_mobile_interface,
+            R.drawable.illustration_mobile_interface,
             "Download",
             "All books are free to download",
         ),

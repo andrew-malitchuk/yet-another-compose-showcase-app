@@ -114,7 +114,7 @@ fun OnboardingItem(
 fun Preview_OnboardingItem() {
     YacsaTheme {
         OnboardingItem(
-            imageId = R.drawable.img_mobile_interface,
+            imageId = R.drawable.illustration_mobile_interface,
             header = "foo",
             caption = "bar",
             state = rememberPagerState(),

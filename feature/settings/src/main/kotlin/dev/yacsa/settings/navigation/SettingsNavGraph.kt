@@ -20,6 +20,9 @@ fun NavGraphBuilder.settingsNavGraph(navController: NavHostController) {
                 onFfClick = {
                     navController.navigate(NavigationDirection.FeatureFlag.route)
                 },
+                onAnalyticsClick={
+                    navController.navigate(NavigationDirection.Analytics.route)
+                }
             )
         }
     }

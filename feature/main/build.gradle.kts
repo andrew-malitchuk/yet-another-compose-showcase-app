@@ -29,6 +29,7 @@ dependencies {
     implementation(project(":feature:notfound"))
     implementation(project(":feature:search"))
     implementation(project(":feature:settings"))
+    implementation(project(":feature:analytics"))
 
     implementation(project(":data:network"))
     implementation(project(":data:datastore"))

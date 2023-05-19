@@ -14,6 +14,7 @@ import dev.yacsa.domain.usecase.books.NewLoadBooksUseCase
 import dev.yacsa.domain.usecase.books.NewSaveBooksUseCase
 import dev.yacsa.model.mapper.NewBooksUiDomainMapper
 import dev.yacsa.model.model.BookUiModel
+import dev.yacsa.platform.connection.ConnectivityObserver
 import dev.yacsa.platform.viewmodel.BaseViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -31,6 +32,7 @@ class ListViewModel @Inject constructor(
     private val bookUiDomainMapper: NewBooksUiDomainMapper,
     private val saveBooksUseCase: NewSaveBooksUseCase,
     private val booksFeatureFlag: BooksFeatureFlag,
+    var connectivityObserver: ConnectivityObserver,
     savedStateHandle: SavedStateHandle,
     initialState: ListUiState,
 ) : BaseViewModel<ListUiState, ListUiState.PartialState, ListEvent, ListIntent>(

@@ -21,6 +21,7 @@ dependencies {
 
 
     implementation(project(":core:ui"))
+    implementation(project(":core:platform"))
     implementation(project(":feature:navigation"))
     implementation(project(":feature:books"))
     implementation(project(":feature:format"))

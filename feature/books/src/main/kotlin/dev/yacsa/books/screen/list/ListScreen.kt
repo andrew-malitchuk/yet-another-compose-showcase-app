@@ -1,8 +1,12 @@
 package dev.yacsa.books.screen.list
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -14,8 +18,10 @@ import com.theapache64.rebugger.Rebugger
 import dev.yacsa.books.screen.list.content.ContentFetched
 import dev.yacsa.books.screen.list.content.ContentIsLoading
 import dev.yacsa.model.model.BookUiModel
+import dev.yacsa.platform.connection.ConnectivityObserver
 import dev.yacsa.platform.ext.collectWithLifecycle
 import dev.yacsa.ui.composable.content.ContentError
+import dev.yacsa.ui.composable.snackbar.OfflineSnackbar
 import dev.yacsa.ui.theme.YacsaTheme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
@@ -35,7 +41,12 @@ fun ListRoute(
 
     val pagingState = listViewModel.pagingDataFlow?.collectAsLazyPagingItems()
 
-//    val windowInfo = rememberWindowInfo()
+    val status by listViewModel.connectivityObserver.observe().collectAsState(
+        initial = ConnectivityObserver.Status.Unavailable
+    )
+
+    val systemUiController = rememberSystemUiController()
+
 
     Rebugger(
         trackMap = mapOf(
@@ -44,6 +55,12 @@ fun ListRoute(
 //            "windowInfo" to windowInfo,
         ),
     )
+
+    val isOfflineMode = when (status) {
+        ConnectivityObserver.Status.Available -> false
+        else -> true
+    }
+
 
 //    when (windowInfo.screenHeightInfo) {
 //        WindowInfo.WindowType.Compact -> {
@@ -61,22 +78,40 @@ fun ListRoute(
 
     logcat("ListRoute") { "ListRoute" }
 
-    if (uiState.isFeatureBlocked) {
-        // https://github.com/googlecodelabs/android-navigation/issues/113
-        LaunchedEffect(Unit) {
-            notFound()
-        }
-    } else {
-        ListScreen(
-            onBookClicked = {
-                listViewModel.acceptIntent(ListIntent.BookClicked(it))
-            },
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
 
-            pagingState = pagingState,
-            uiState = uiState,
-            onSearch = onSearch,
-            onSettings = onSettings,
-        )
+        if (isOfflineMode) {
+            systemUiController.setSystemBarsColor(
+                color = YacsaTheme.colors.primaryText,
+            )
+            OfflineSnackbar(message = "Offline mode")
+        } else {
+            systemUiController.setSystemBarsColor(
+                color = YacsaTheme.colors.primaryBackground,
+            )
+        }
+
+
+        if (uiState.isFeatureBlocked) {
+            // https://github.com/googlecodelabs/android-navigation/issues/113
+            LaunchedEffect(Unit) {
+                notFound()
+            }
+        } else {
+            ListScreen(
+                onBookClicked = {
+                    listViewModel.acceptIntent(ListIntent.BookClicked(it))
+                },
+
+                pagingState = pagingState,
+                uiState = uiState,
+                onSearch = onSearch,
+                onSettings = onSettings,
+            )
+        }
     }
 }
 
@@ -91,9 +126,9 @@ fun ListScreen(
     val systemUiController = rememberSystemUiController()
 
     if (!uiState.isLoading && !uiState.isError && pagingState != null) {
-        systemUiController.setSystemBarsColor(
-            color = YacsaTheme.colors.primaryBackground,
-        )
+//        systemUiController.setSystemBarsColor(
+//            color = YacsaTheme.colors.primaryBackground,
+//        )
         ContentFetched(
             onBookClicked = onBookClicked,
             lazyPagingItems = pagingState,
@@ -101,9 +136,9 @@ fun ListScreen(
             onSettings = onSettings,
         )
     } else {
-        systemUiController.setSystemBarsColor(
-            color = YacsaTheme.colors.statusBarColor,
-        )
+//        systemUiController.setSystemBarsColor(
+//            color = YacsaTheme.colors.statusBarColor,
+//        )
         ListNoContent(uiState = uiState)
     }
 }

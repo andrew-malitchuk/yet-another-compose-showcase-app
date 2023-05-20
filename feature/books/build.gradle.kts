@@ -49,4 +49,7 @@ dependencies {
 
     implementation("com.airbnb.android:lottie-compose:6.0.0")
 
+//    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha09")
+
 }

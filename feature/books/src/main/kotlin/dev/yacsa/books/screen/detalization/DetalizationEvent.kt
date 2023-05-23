@@ -1,3 +1,5 @@
 package dev.yacsa.books.screen.detalization
 
-class DetalizationEvent
+sealed class DetalizationEvent {
+    data class OpenWebBrowserWithDetails(val uri: String) : DetalizationEvent()
+}

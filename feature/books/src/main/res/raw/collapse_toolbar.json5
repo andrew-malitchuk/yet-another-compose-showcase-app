@@ -128,7 +128,20 @@
           {
             target: ['actions'],
             frames: [0, 100],
-            translationX: [0,-550]
+            translationX: [0,-550],
+            alpha: [1,0],
+          },
+          {
+            target: ['author'],
+            frames: [0, 100],
+            translationX: [0,-550],
+            alpha: [1,0]
+          },
+          {
+            target: ['download'],
+            frames: [0, 100],
+            translationX: [0,-550],
+            alpha: [1,0]
           }
         ]
       }

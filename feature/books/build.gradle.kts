@@ -52,4 +52,6 @@ dependencies {
 //    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
     implementation("androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha09")
 
+    implementation("me.saket.telephoto:zoomable:0.3.0")
+
 }

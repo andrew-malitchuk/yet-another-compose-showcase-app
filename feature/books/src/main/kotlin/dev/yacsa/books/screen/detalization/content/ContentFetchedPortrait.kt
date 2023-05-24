@@ -20,9 +20,11 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.yacsa.books.screen.detalization.composable.toolbar.CollapsingToolbar
 import dev.yacsa.books.screen.detalization.content.blocks.AuthorBlock
+import dev.yacsa.books.screen.detalization.content.blocks.BookshelfBlock
 import dev.yacsa.books.screen.detalization.content.blocks.FormatsBlock
 import dev.yacsa.books.screen.detalization.content.blocks.LanguageBlock
 import dev.yacsa.books.screen.detalization.content.blocks.SubjectsBlock
+import dev.yacsa.books.screen.detalization.content.blocks.TranslatorsBlock
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.ui.composable.divider.AnimatedDivider
 import dev.yacsa.ui.theme.YacsaTheme
@@ -55,7 +57,7 @@ fun ContentFetchedPortrait(
                     onBackClick,
                     {
                         coroutineScope.launch {
-                            lazyScrollState.scrollToItem(4, 0)
+                            lazyScrollState.scrollToItem(7, 0)
                         }
                     }
                 )
@@ -81,6 +83,11 @@ fun ContentFetchedPortrait(
                         book?.let { AuthorBlock(it) }
                     }
                 }
+                if (!book?.translators.isNullOrEmpty()) {
+                    item {
+                        book?.let { TranslatorsBlock(it) }
+                    }
+                }
                 if (!book?.languages.isNullOrEmpty()) {
                     item {
                         book?.let { LanguageBlock(it) }
@@ -89,6 +96,11 @@ fun ContentFetchedPortrait(
                 if (!book?.subjects.isNullOrEmpty()) {
                     item {
                         book?.let { SubjectsBlock(it) }
+                    }
+                }
+                if (!book?.bookshelves.isNullOrEmpty()) {
+                    item {
+                        book?.let { BookshelfBlock(it) }
                     }
                 }
                 if (book?.formats != null) {

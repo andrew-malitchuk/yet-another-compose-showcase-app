@@ -10,13 +10,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.yacsa.books.screen.list.item.ItemLanguage
+import dev.yacsa.books.screen.list.item.ItemAuthor
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.ui.theme.YacsaTheme
 
-
 @Composable
-fun LanguageBlock(
+fun TranslatorsBlock(
     book: BookUiModel
 ) {
     Column(
@@ -25,7 +24,7 @@ fun LanguageBlock(
     ) {
         Text(
             modifier = Modifier.fillMaxWidth(),
-            text = "Languages",
+            text = "Translators",
             style = YacsaTheme.typography.title,
             maxLines = 1,
             minLines = 1,
@@ -34,9 +33,9 @@ fun LanguageBlock(
         Spacer(
             modifier = Modifier.height(6.dp)
         )
-        book.languages?.forEach { lang ->
-            lang?.let {
-                ItemLanguage(lang = it) {
+        book.translators?.forEach { person ->
+            person?.let {
+                ItemAuthor(person = it) {
 
                 }
                 Spacer(modifier = Modifier.height(6.dp))
@@ -49,9 +48,9 @@ fun LanguageBlock(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_LanguageBlock() {
+fun Preview_TranslatorsBlock() {
     YacsaTheme {
-        LanguageBlock(
+        TranslatorsBlock(
             book = BookUiModel(
                 null,
                 null,

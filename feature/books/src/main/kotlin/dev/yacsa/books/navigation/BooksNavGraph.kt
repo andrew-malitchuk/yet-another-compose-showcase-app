@@ -53,7 +53,6 @@ fun NavGraphBuilder.booksNavGraph(navController: NavHostController) {
             ),
         ) { backStackEntry ->
             DetalizationRoute(
-                bookId = backStackEntry.arguments?.getInt("bookId"),
                 onBackClick = {
                     navController.popBackStack()
                 },

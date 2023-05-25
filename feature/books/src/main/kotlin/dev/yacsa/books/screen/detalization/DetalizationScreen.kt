@@ -15,7 +15,6 @@ import dev.yacsa.ui.theme.YacsaTheme
 @Composable
 fun DetalizationRoute(
     detalizationViewModel: DetalizationViewModel = hiltViewModel(),
-    bookId: Int?,
     onBackClick: () -> Unit,
 ) {
     val uiState by detalizationViewModel.uiState.collectAsStateWithLifecycle()

@@ -17,7 +17,7 @@ import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
 fun LanguageBlock(
-    book: BookUiModel
+    book: BookUiModel,
     onLanguageClick:(String)->Unit,
     ) {
     Column(

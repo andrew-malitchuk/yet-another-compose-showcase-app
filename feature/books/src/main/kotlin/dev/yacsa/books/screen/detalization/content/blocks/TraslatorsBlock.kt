@@ -16,7 +16,7 @@ import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
 fun TranslatorsBlock(
-    book: BookUiModel
+    book: BookUiModel,
     onTranslatorClick:(String)->Unit,
     ) {
     Column(

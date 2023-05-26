@@ -75,7 +75,13 @@ fun DetalizationScreen(
             ContentFetchedPortrait(
                 book = uiState.book,
                 onBackClick = { onBackClick() },
-                onFormatClick = { onFormatClick(it) })
+                onFormatClick = { onFormatClick(it) },
+                onAuthorClick = {},
+                onTranslatorClick = {},
+                onLanguageClick = {},
+                onSubjectClick = {},
+                onBookshelfClick = {}
+            )
         }
     }
 }

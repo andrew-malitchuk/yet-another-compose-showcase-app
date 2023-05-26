@@ -87,6 +87,8 @@ fun ContentFetched(
             )
         }
 
+
+
         if (uiState.isResultLoading) {
             ResultIsLoading()
         } else {

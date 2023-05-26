@@ -53,15 +53,11 @@ fun ResultFetched(
         ) {
             LazyColumn(
                 state = state,
-                verticalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = modifier
                     .fillMaxSize(),
-                contentPadding = PaddingValues(
-                    start = 16.dp,
-                    bottom = 16.dp,
-                    end = 16.dp,
-                    top = 8.dp,
-                ),
+                // TODO: fix
+                contentPadding = PaddingValues(8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 items(items = resultSearch) { item ->
                     ItemFetchedList(

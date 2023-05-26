@@ -17,7 +17,8 @@ import dev.yacsa.ui.theme.YacsaTheme
 @Composable
 fun TranslatorsBlock(
     book: BookUiModel
-) {
+    onTranslatorClick:(String)->Unit,
+    ) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -36,7 +37,7 @@ fun TranslatorsBlock(
         book.translators?.forEach { person ->
             person?.let {
                 ItemAuthor(person = it) {
-
+                    it.name?.let { it1 -> onTranslatorClick(it1) }
                 }
                 Spacer(modifier = Modifier.height(6.dp))
             }
@@ -64,6 +65,7 @@ fun Preview_TranslatorsBlock() {
                 null,
                 null,
             ),
+            onTranslatorClick={}
         )
     }
 }

@@ -16,8 +16,9 @@ import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
 fun BookshelfBlock(
-    book: BookUiModel
-) {
+    book: BookUiModel,
+    onBookshelfClick:(String)->Unit,
+    ) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -36,7 +37,7 @@ fun BookshelfBlock(
         book.bookshelves?.forEach { lang ->
             lang?.let {
                 ItemBookshelf(bookshelf = it) {
-
+                        onBookshelfClick(it)
                 }
                 Spacer(modifier = Modifier.height(6.dp))
             }
@@ -64,6 +65,7 @@ fun Preview_BookshelfBlock() {
                 null,
                 null,
             ),
+            onBookshelfClick={}
         )
     }
 }

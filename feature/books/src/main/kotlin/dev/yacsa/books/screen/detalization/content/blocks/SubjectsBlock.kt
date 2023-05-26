@@ -19,7 +19,8 @@ import dev.yacsa.ui.theme.YacsaTheme
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SubjectsBlock(
-    book: BookUiModel
+    book: BookUiModel,
+    onSubjectClick:(String)->Unit
 ) {
     Column(
         modifier = Modifier
@@ -39,7 +40,7 @@ fun SubjectsBlock(
         book.subjects?.forEach { subject ->
             subject?.let {
                 ItemSubject(subject = it) {
-
+                    onSubjectClick(it)
                 }
                 Spacer(modifier = Modifier.height(6.dp))
             }
@@ -67,6 +68,7 @@ fun Preview_SubjectsBlock() {
                 null,
                 null,
             ),
+            onSubjectClick={}
         )
     }
 }

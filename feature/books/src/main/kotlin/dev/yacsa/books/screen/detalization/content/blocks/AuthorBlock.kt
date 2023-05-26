@@ -16,8 +16,9 @@ import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
 fun AuthorBlock(
-    book: BookUiModel
-) {
+    book: BookUiModel,
+    onAuthorClick:(String)->Unit,
+    ) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -36,7 +37,7 @@ fun AuthorBlock(
         book.authors?.forEach { person ->
             person?.let {
                 ItemAuthor(person = it) {
-
+                    it.name?.let { it1 -> onAuthorClick(it1) }
                 }
             }
 
@@ -63,6 +64,7 @@ fun Preview_AuthorBlock() {
                 null,
                 null,
             ),
+            onAuthorClick={}
         )
     }
 }

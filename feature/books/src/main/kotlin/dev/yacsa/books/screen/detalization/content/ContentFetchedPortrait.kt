@@ -33,10 +33,14 @@ import kotlinx.coroutines.launch
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun ContentFetchedPortrait(
-    modifier: Modifier = Modifier,
     book: BookUiModel?,
     onBackClick: () -> Unit,
-    onFormatClick: (String) -> Unit
+    onFormatClick: (String) -> Unit,
+    onAuthorClick: (String) -> Unit,
+    onTranslatorClick: (String) -> Unit,
+    onLanguageClick: (String) -> Unit,
+    onSubjectClick: (String) -> Unit,
+    onBookshelfClick: (String) -> Unit,
 ) {
     val systemUiController = rememberSystemUiController()
     with(systemUiController) {
@@ -80,27 +84,27 @@ fun ContentFetchedPortrait(
             ) {
                 if (!book?.authors.isNullOrEmpty()) {
                     item {
-                        book?.let { AuthorBlock(it) }
+                        book?.let { AuthorBlock(it, onAuthorClick) }
                     }
                 }
                 if (!book?.translators.isNullOrEmpty()) {
                     item {
-                        book?.let { TranslatorsBlock(it) }
+                        book?.let { TranslatorsBlock(it, onTranslatorClick) }
                     }
                 }
                 if (!book?.languages.isNullOrEmpty()) {
                     item {
-                        book?.let { LanguageBlock(it) }
+                        book?.let { LanguageBlock(it, onLanguageClick) }
                     }
                 }
                 if (!book?.subjects.isNullOrEmpty()) {
                     item {
-                        book?.let { SubjectsBlock(it) }
+                        book?.let { SubjectsBlock(it, onSubjectClick) }
                     }
                 }
                 if (!book?.bookshelves.isNullOrEmpty()) {
                     item {
-                        book?.let { BookshelfBlock(it) }
+                        book?.let { BookshelfBlock(it, onBookshelfClick) }
                     }
                 }
                 if (book?.formats != null) {
@@ -124,6 +128,13 @@ fun ContentFetchedPortrait(
 @Preview(showBackground = true)
 fun Preview_ContentFetchedPortrait() {
     YacsaTheme {
-        ContentFetchedPortrait(book = null, onBackClick = {}, onFormatClick = {})
+        ContentFetchedPortrait(book = null,
+            onBackClick = {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {})
     }
 }

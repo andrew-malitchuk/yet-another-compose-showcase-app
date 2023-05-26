@@ -18,7 +18,8 @@ import dev.yacsa.ui.theme.YacsaTheme
 @Composable
 fun LanguageBlock(
     book: BookUiModel
-) {
+    onLanguageClick:(String)->Unit,
+    ) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -37,7 +38,7 @@ fun LanguageBlock(
         book.languages?.forEach { lang ->
             lang?.let {
                 ItemLanguage(lang = it) {
-
+                    onLanguageClick(it)
                 }
                 Spacer(modifier = Modifier.height(6.dp))
             }
@@ -65,6 +66,7 @@ fun Preview_LanguageBlock() {
                 null,
                 null,
             ),
+            onLanguageClick ={}
         )
     }
 }

@@ -15,17 +15,22 @@ import androidx.compose.material.icons.outlined.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import dev.yacsa.search.screen.composable.ChipGroup
 import dev.yacsa.search.screen.search.SearchUiState
 import dev.yacsa.search.screen.search.content.result.ResultEmpty
 import dev.yacsa.search.screen.search.content.result.ResultError
 import dev.yacsa.search.screen.search.content.result.ResultFetched
 import dev.yacsa.search.screen.search.content.result.ResultIsLoading
+import dev.yacsa.ui.composable.card.ExpandableCard
 import dev.yacsa.ui.composable.keyboard.clearFocusOnKeyboardDismiss
 import dev.yacsa.ui.composable.keyboard.keyboardAsState
 import dev.yacsa.ui.theme.YacsaTheme
@@ -87,6 +92,22 @@ fun ContentFetched(
             )
         }
 
+        ExpandableCard(
+            "foo",
+            "bar",
+            Color.Cyan
+        ){
+            Text(
+                text = "foobar",
+                color = Color.Cyan, // description color
+                fontSize = 16.sp,
+                textAlign = TextAlign.Start,
+                fontWeight = FontWeight.Normal,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 16.dp)
+            )
+        }
 
 
         if (uiState.isResultLoading) {

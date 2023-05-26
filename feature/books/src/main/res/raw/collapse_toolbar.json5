@@ -1,0 +1,150 @@
+{
+  ConstraintSets: {
+    start: {
+      box: {
+        width: 'spread',
+        height: 288,
+        start: ['parent', 'start'],
+        end: ['parent', 'end'],
+        top: ['parent', 'top'],
+        custom: {
+          background: '#FF74d680'
+        }
+      },
+      img:{
+        width: 'wrap',
+        height: 'wrap',
+        end: ['parent', 'end', 16],
+        top: ['parent', 'top', 16],
+        bottom: ['parent', 'bottom',16],
+      },
+      title: {
+        width: 'spread',
+        start: ['parent', 'start', 16],
+        top: ['back', 'bottom', 8],
+        end: ['img', 'start', 8],
+        custom: {
+          minLines: 2
+        }
+      },
+      author: {
+        width: 'spread',
+        start: ['parent', 'start', 16],
+        bottom: ['download', 'top', 8],
+        end: ['img', 'start', 8],
+        alpha: 1
+      },
+      download: {
+        width: 'spread',
+        start: ['parent', 'start', 16],
+        bottom: ['actions', 'top', 8],
+        end: ['img', 'start', 8],
+        alpha: 1
+      },
+      actions: {
+        width: 'spread',
+        start: ['parent', 'start', 16],
+        bottom: ['parent', 'bottom', 8],
+        end: ['img', 'start', 8],
+        alpha: 1
+      },
+      back : {
+        start: ['parent', 'start',8],
+        top: ['parent', 'top',8]
+      }
+
+    },
+    end: {
+      img:{
+        width: 0,
+        height: 0,
+        end: ['parent', 'end', 16],
+        top: ['parent', 'top', 16],
+        bottom: ['parent', 'bottom',8],
+      },
+      box: {
+        width: 'spread',
+        height: 64,
+        start: ['parent', 'start'],
+        end: ['parent', 'end'],
+        top: ['parent', 'top'],
+        custom: {
+          background: '#FF74d680'
+        }
+      },
+      title: {
+        width: 'spread',
+        start: ['back', 'end', 8],
+        bottom: ['back', 'bottom'],
+        top: ['back', 'top'],
+        custom: {
+          minLines: 2
+        }
+      },
+      author: {
+        width: 'spread',
+        start: ['parent', 'start', 16],
+        bottom: ['download', 'top', 8],
+        alpha: 0
+      },
+      download: {
+        width: 'spread',
+        start: ['parent', 'start', 16],
+        bottom: ['actions', 'top', 8],
+        alpha: 0
+      },
+      actions: {
+        width: 'spread',
+        start: ['parent', 'start', 16],
+        bottom: ['parent', 'bottom', 8],
+        alpha: 0
+      },
+      back : {
+        start: ['parent', 'start', 8],
+        top: ['parent', 'top',8],
+      }
+
+    }
+  },
+  Transitions: {
+    default: {
+      from: 'start',
+      to: 'end',
+      pathMotionArc: 'startVertical',
+      KeyFrames: {
+        KeyAttributes: [
+          {
+            target: ['title'],
+            frames: [0, 5,50,95,100],
+            alpha: [1, 0.1, 0, 0.1, 1]
+          },
+          {
+            target: ['img'],
+            frames: [0, 30, 50, 80, 100],
+            scaleX: [1, 0.8, 0.6, 0.3, 0],
+            scaleY: [1, 0.8, 0.6, 0.3, 0],
+            alpha: [1, 0.2, 0.1, 0, 0]
+          },
+          {
+            target: ['actions'],
+            frames: [0, 100],
+            translationX: [0,-550],
+            alpha: [1,0],
+          },
+          {
+            target: ['author'],
+            frames: [0, 100],
+            translationX: [0,-550],
+            alpha: [1,0]
+          },
+          {
+            target: ['download'],
+            frames: [0, 100],
+            translationX: [0,-550],
+            alpha: [1,0]
+          }
+        ]
+      }
+    }
+  }
+}

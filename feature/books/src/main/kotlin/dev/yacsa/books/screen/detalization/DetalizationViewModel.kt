@@ -7,6 +7,7 @@ import dev.yacsa.domain.usecase.books.NewGetOrLoadBookUseCase
 import dev.yacsa.model.mapper.NewBooksUiDomainMapper
 import dev.yacsa.platform.viewmodel.BaseViewModel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onStart
 import logcat.logcat
@@ -34,6 +35,7 @@ class DetalizationViewModel @Inject constructor(
         return when (intent) {
             is DetalizationIntent.GetBook -> getBook(intent.bookId)
             is DetalizationIntent.RefreshBook -> getBook(intent.bookId)
+            is DetalizationIntent.OnLinkClick -> onLickClick(intent.link)
         }
     }
 
@@ -60,6 +62,12 @@ class DetalizationViewModel @Inject constructor(
         )
     }.onStart {
         emit(DetalizationUiState.PartialState.Loading)
+    }
+
+
+    private fun onLickClick(uri: String): Flow<DetalizationUiState.PartialState> {
+        publishEvent(DetalizationEvent.OpenWebBrowserWithDetails(uri))
+        return emptyFlow()
     }
 
     override fun reduceUiState(

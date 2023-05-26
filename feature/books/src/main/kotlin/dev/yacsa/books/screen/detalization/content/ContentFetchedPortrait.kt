@@ -1,303 +1,123 @@
 package dev.yacsa.books.screen.detalization.content
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.Image
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.ArrowBack
-import androidx.compose.material.icons.outlined.ArrowDropDown
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberAsyncImagePainter
-import coil.request.ImageRequest
-import dev.yacsa.books.screen.detalization.composable.PersonBlock
-import dev.yacsa.books.screen.detalization.composable.SubjectBlock
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import dev.yacsa.books.screen.detalization.composable.toolbar.CollapsingToolbar
+import dev.yacsa.books.screen.detalization.content.blocks.AuthorBlock
+import dev.yacsa.books.screen.detalization.content.blocks.BookshelfBlock
+import dev.yacsa.books.screen.detalization.content.blocks.FormatsBlock
+import dev.yacsa.books.screen.detalization.content.blocks.LanguageBlock
+import dev.yacsa.books.screen.detalization.content.blocks.SubjectsBlock
+import dev.yacsa.books.screen.detalization.content.blocks.TranslatorsBlock
 import dev.yacsa.model.model.BookUiModel
-import dev.yacsa.ui.R
+import dev.yacsa.ui.composable.divider.AnimatedDivider
 import dev.yacsa.ui.theme.YacsaTheme
+import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun ContentFetchedPortrait(
-    modifier: Modifier = Modifier,
     book: BookUiModel?,
     onBackClick: () -> Unit,
+    onFormatClick: (String) -> Unit,
+    onAuthorClick: (String) -> Unit,
+    onTranslatorClick: (String) -> Unit,
+    onLanguageClick: (String) -> Unit,
+    onSubjectClick: (String) -> Unit,
+    onBookshelfClick: (String) -> Unit,
 ) {
+    val systemUiController = rememberSystemUiController()
+    with(systemUiController) {
+        setSystemBarsColor(Color(0xFFE0DFFD))
+        setNavigationBarColor(Color.White)
+    }
+    val lazyScrollState = rememberLazyListState()
+    val coroutineScope = rememberCoroutineScope()
 
-
-
-
-
-    Column(
+    Scaffold(
         modifier = Modifier
-            .verticalScroll(rememberScrollState())
             .fillMaxSize(),
-    ) {
-        Box(
-            modifier = Modifier.wrapContentSize(),
-        ) {
-            Column(
+        topBar = {
+            if (book != null) {
+                CollapsingToolbar(
+                    lazyScrollState,
+                    book,
+                    onBackClick,
+                    {
+                        coroutineScope.launch {
+                            lazyScrollState.scrollToItem(7, 0)
+                        }
+                    }
+                )
+            }
+        },
+    ) { paddingValues ->
+        Column(modifier = Modifier.padding(paddingValues)) {
+            AnimatedDivider(state = lazyScrollState)
+            LazyColumn(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .background(Color.LightGray)
-                    .aspectRatio(1f / 1f),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
+                    .fillMaxSize()
+                    .background(color = Color.White)
+                    .animateContentSize(),
+                state = lazyScrollState,
+                contentPadding = PaddingValues(
+                    horizontal = 16.dp,
+                    vertical = 8.dp
+                ),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                val painter =
-                    rememberAsyncImagePainter(
-                        ImageRequest.Builder(LocalContext.current)
-                            .data(data = book?.formats?.imageJpeg)
-                            .placeholder(
-                                R.drawable.ic_launcher_foreground,
-                            )
-                            .build(),
-                    )
-
-                Card(
-                    elevation = 4.dp,
-                    shape = RoundedCornerShape(8.dp),
-                ) {
-                    Image(
-                        painter = painter,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .height(256.dp)
-                            .aspectRatio(1f / 1.5f),
-                    )
-                }
-                Spacer(modifier = modifier.height(6.dp))
-                Row() {
-                    Text(
-                        text = book?.title ?: "SWW",
-                        style = YacsaTheme.typography.title,
-                        maxLines = 2,
-                        textAlign = TextAlign.Center,
-                    )
-                    if (book?.copyright == true) {
-                        Text(text = "©")
+                if (!book?.authors.isNullOrEmpty()) {
+                    item {
+                        book?.let { AuthorBlock(it, onAuthorClick) }
                     }
                 }
-                Spacer(modifier = modifier.height(6.dp))
-                Text(
-                    text = book?.authors?.firstOrNull()?.name ?: "SWW",
-                    style = YacsaTheme.typography.caption,
-                    maxLines = 2,
-                    textAlign = TextAlign.Center,
-                )
-                Spacer(modifier = modifier.height(6.dp))
-                Row() {
-                    Icon(imageVector = Icons.Outlined.ArrowDropDown, contentDescription = "")
-                    Spacer(modifier = modifier.width(4.dp))
-                    Text(
-                        text = book?.downloadCount?.toString() ?: "NI",
-                        style = YacsaTheme.typography.caption,
-                    )
+                if (!book?.translators.isNullOrEmpty()) {
+                    item {
+                        book?.let { TranslatorsBlock(it, onTranslatorClick) }
+                    }
                 }
-            }
-
-            IconButton(
-                modifier = Modifier
-                    .align(Alignment.TopStart),
-                onClick = {
-                    onBackClick()
-                },
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.ArrowBack,
-                    contentDescription = "",
-                )
-            }
-        }
-        Row(
-            modifier = Modifier
-                .padding(horizontal = 16.dp, vertical = 8.dp)
-                .fillMaxWidth()
-                .height(IntrinsicSize.Max),
-        ) {
-            // TODO: fix
-            Box(
-                modifier = Modifier
-                    .width(1.dp)
-                    .fillMaxHeight()
-                    .background(Color.DarkGray),
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(),
-            ) {
-                // TODO: fix
-                Text(
-                    text = "Subjects",
-                    style = YacsaTheme.typography.title,
-                    textAlign = TextAlign.Center,
-                )
-                Spacer(modifier = modifier.height(6.dp))
-                SubjectBlock(
-                    subjects = book?.subjects?.filterNotNull() ?: emptyList(),
-                )
-            }
-        }
-        if (!book?.languages.isNullOrEmpty()) {
-            Spacer(modifier = Modifier.height(8.dp))
-            Row(
-                modifier = Modifier
-                    .padding(horizontal = 16.dp, vertical = 8.dp)
-                    .fillMaxWidth()
-                    .height(IntrinsicSize.Max),
-            ) {
-                // TODO: fix
-                Box(
-                    modifier = Modifier
-                        .width(1.dp)
-                        .fillMaxHeight()
-                        .background(Color.DarkGray),
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(),
-                ) {
-                    // TODO: fix
-                    Text(
-                        text = "Languages",
-                        style = YacsaTheme.typography.title,
-                        textAlign = TextAlign.Center,
-                    )
-                    Spacer(modifier = modifier.height(6.dp))
-                    SubjectBlock(
-                        subjects = book?.languages?.filterNotNull() ?: emptyList(),
-                    )
+                if (!book?.languages.isNullOrEmpty()) {
+                    item {
+                        book?.let { LanguageBlock(it, onLanguageClick) }
+                    }
                 }
-            }
-        }
-        if (!book?.bookshelves.isNullOrEmpty()) {
-            Spacer(modifier = Modifier.height(8.dp))
-            Row(
-                modifier = Modifier
-                    .padding(horizontal = 16.dp, vertical = 8.dp)
-                    .fillMaxWidth()
-                    .height(IntrinsicSize.Max),
-            ) {
-                // TODO: fix
-                Box(
-                    modifier = Modifier
-                        .width(1.dp)
-                        .fillMaxHeight()
-                        .background(Color.DarkGray),
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(),
-                ) {
-                    // TODO: fix
-                    Text(
-                        text = "Bookshelves",
-                        style = YacsaTheme.typography.title,
-                        textAlign = TextAlign.Center,
-                    )
-                    Spacer(modifier = modifier.height(6.dp))
-                    SubjectBlock(
-                        subjects = book?.bookshelves?.filterNotNull() ?: emptyList(),
-                    )
+                if (!book?.subjects.isNullOrEmpty()) {
+                    item {
+                        book?.let { SubjectsBlock(it, onSubjectClick) }
+                    }
                 }
-            }
-        }
-        Spacer(modifier = Modifier.height(8.dp))
-        Row(
-            modifier = Modifier
-                .padding(horizontal = 16.dp, vertical = 8.dp)
-                .fillMaxWidth()
-                .height(IntrinsicSize.Max),
-        ) {
-            // TODO: fix
-            Box(
-                modifier = Modifier
-                    .width(1.dp)
-                    .fillMaxHeight()
-                    .background(Color.DarkGray),
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(),
-            ) {
-                // TODO: fix
-                Text(
-                    text = "Authors",
-                    style = YacsaTheme.typography.title,
-                    textAlign = TextAlign.Center,
-                )
-                Spacer(modifier = modifier.height(6.dp))
-                PersonBlock(
-                    authors = book?.authors?.filterNotNull() ?: emptyList(),
-                )
-            }
-        }
-        if (!book?.translators.isNullOrEmpty()) {
-            Spacer(modifier = Modifier.height(8.dp))
-            Row(
-                modifier = Modifier
-                    .padding(horizontal = 16.dp, vertical = 8.dp)
-                    .fillMaxWidth()
-                    .height(IntrinsicSize.Max),
-            ) {
-                // TODO: fix
-                Box(
-                    modifier = Modifier
-                        .width(1.dp)
-                        .fillMaxHeight()
-                        .background(Color.DarkGray),
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(),
-                ) {
-                    // TODO: fix
-                    Text(
-                        text = "Translators",
-                        style = YacsaTheme.typography.title,
-                        textAlign = TextAlign.Center,
-                    )
-                    Spacer(modifier = modifier.height(6.dp))
-                    PersonBlock(
-                        authors = book?.translators?.filterNotNull() ?: emptyList(),
-                    )
+                if (!book?.bookshelves.isNullOrEmpty()) {
+                    item {
+                        book?.let { BookshelfBlock(it, onBookshelfClick) }
+                    }
+                }
+                if (book?.formats != null) {
+                    item {
+                        book?.let {
+                            FormatsBlock(
+                                book = it,
+                                onFormatClick = {
+                                    onFormatClick(it)
+                                }
+                            )
+                        }
+                    }
                 }
             }
         }
@@ -308,6 +128,13 @@ fun ContentFetchedPortrait(
 @Preview(showBackground = true)
 fun Preview_ContentFetchedPortrait() {
     YacsaTheme {
-        ContentFetchedPortrait(book = null, onBackClick = {})
+        ContentFetchedPortrait(book = null,
+            onBackClick = {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {})
     }
 }

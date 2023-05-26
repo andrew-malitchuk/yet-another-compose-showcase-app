@@ -23,7 +23,6 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun ExpandableCard(
     header: String, // header
-    description: String, // description
     color: Color, // color
     content: @Composable() () -> Unit,
 ) {

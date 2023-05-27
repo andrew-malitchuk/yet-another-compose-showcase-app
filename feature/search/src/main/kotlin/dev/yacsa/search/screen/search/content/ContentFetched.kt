@@ -1,6 +1,5 @@
 package dev.yacsa.search.screen.search.content
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,7 +14,6 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.OutlinedTextField
@@ -87,15 +85,11 @@ fun ContentFetched(
                     ) {
                         // TODO: fix
                         Text(text = "Search", style = YacsaTheme.typography.heading)
-                        Spacer(modifier = Modifier.weight(1f))
-                        TwoStateButton(
-                            checkedState = checked,
-                            defaultIcon = R.drawable.icon_search_regular_24,
-                            selectedIcon = R.drawable.icon_filter_regulat_24
-                        ) {
-
-                        }
                         Spacer(modifier = Modifier.width(8.dp))
+                        Icon(
+                            painterResource(id = R.drawable.icon_search_bold_24),
+                            contentDescription = null,
+                        )
                     }
                 },
                 navigationIcon = {
@@ -135,84 +129,82 @@ fun ContentFetched(
                         .wrapContentHeight(),
                 ) {
 
-                    if (checked.value) {
-                        Card(
-                            modifier = Modifier.padding(6.dp),
-                            backgroundColor = Color.White,
-                            shape = RoundedCornerShape(8.dp), // shape
-                            border = BorderStroke(1.dp, Color.Cyan), // stroke Width and Color
+
+                    Column {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Column {
-                                OutlinedTextField(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(8.dp)
-                                        .clearFocusOnKeyboardDismiss(),
-                                    value = searchText,
-                                    onValueChange = onValueChange,
-                                    keyboardOptions = KeyboardOptions(
-                                        capitalization = KeyboardCapitalization.None,
-                                        autoCorrect = true,
-                                        keyboardType = KeyboardType.Text,
-                                        imeAction = ImeAction.Search,
-                                    ),
-                                    leadingIcon = {
+                            OutlinedTextField(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .padding(start = 8.dp, end = 4.dp, top = 8.dp, bottom = 8.dp)
+                                    .clearFocusOnKeyboardDismiss(),
+                                value = searchText,
+                                onValueChange = onValueChange,
+                                keyboardOptions = KeyboardOptions(
+                                    capitalization = KeyboardCapitalization.None,
+                                    autoCorrect = true,
+                                    keyboardType = KeyboardType.Text,
+                                    imeAction = ImeAction.Search,
+                                ),
+                                leadingIcon = {
+                                    Icon(
+                                        imageVector = Icons.Outlined.Search,
+                                        contentDescription = null
+                                    )
+                                },
+                                trailingIcon = {
+                                    IconButton(onClick = {
+                                        onValueChange("")
+                                    }) {
                                         Icon(
-                                            imageVector = Icons.Outlined.Search,
+                                            imageVector = Icons.Outlined.Delete,
                                             contentDescription = null
                                         )
-                                    },
-                                    trailingIcon = {
-                                        IconButton(onClick = {
-                                            onValueChange("")
-                                        }) {
-                                            Icon(
-                                                imageVector = Icons.Outlined.Delete,
-                                                contentDescription = null
-                                            )
-                                        }
-                                    },
-                                    singleLine = true,
-                                    placeholder = { Text("Type to search...") },
-                                )
+                                    }
+                                },
+                                singleLine = true,
+                                placeholder = { Text("Type to search...") },
+                            )
+                            TwoStateButton(
+                                modifier = Modifier.padding(
+                                    start = 4.dp,
+                                    end = 8.dp,
+                                    top = 8.dp,
+                                    bottom = 8.dp
+                                ),
+                                checkedState = checked,
+                                defaultIcon = R.drawable.icon_filter_regulat_24,
+                                selectedIcon = R.drawable.icon_filter_bold_24
+                            ) {
 
-                                if (!uiState.topSearch.isNullOrEmpty()) {
-                                    // TODO: fix
-                                    ChipGroup(
-                                        values = uiState.topSearch.map { it.query ?: "" },
-                                        defaultColor = YacsaTheme.colors.primaryText,
-                                        selectedColor = YacsaTheme.colors.statusBarColor,
-                                        onSelectedChanged = {
-                                            onValueChange(it)
-                                        },
-                                        onDelete = {
-                                            onDelete()
-                                        },
-                                    )
-                                }
                             }
                         }
-
-                    } else {
-                        Card(
-                            modifier = Modifier.padding(6.dp),
-                            backgroundColor = Color.White,
-                            shape = RoundedCornerShape(8.dp), // shape
-                            border = BorderStroke(1.dp, Color.Cyan), // stroke Width and Color
-                        ) {
-                            ExpandableCard(
-                                "Sort",
-                                YacsaTheme.colors.primaryText
-                            ) {
-                                ContentFilter()
-                            }
+                        if (!uiState.topSearch.isNullOrEmpty()) {
+                            // TODO: fix
+                            ChipGroup(
+                                values = uiState.topSearch.map { it.query ?: "" },
+                                defaultColor = YacsaTheme.colors.primaryText,
+                                selectedColor = YacsaTheme.colors.statusBarColor,
+                                onSelectedChanged = {
+                                    onValueChange(it)
+                                },
+                                onDelete = {
+                                    onDelete()
+                                },
+                            )
                         }
                     }
 
-
-
-
-
+                    if (checked.value) {
+                        ExpandableCard(
+                            "Filter",
+                            YacsaTheme.colors.primaryText
+                        ) {
+                            ContentFilter()
+                        }
+                    }
 
                     if (uiState.isResultLoading) {
                         ResultIsLoading()

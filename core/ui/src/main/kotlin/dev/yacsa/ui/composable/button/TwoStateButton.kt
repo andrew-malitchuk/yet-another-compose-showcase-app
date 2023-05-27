@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import dev.yacsa.ui.R
@@ -16,6 +17,7 @@ import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
 fun TwoStateButton(
+    modifier:Modifier=Modifier,
     checkedState: MutableState<Boolean>,
     @DrawableRes
     defaultIcon: Int,
@@ -25,6 +27,7 @@ fun TwoStateButton(
 ) {
 //    val checked = remember { mutableStateOf(false) }
     SmallFloatingActionButton(
+        modifier=modifier,
         onClick = {
             onButtonClick(checkedState.value)
         }
@@ -49,6 +52,7 @@ fun TwoStateButton(
 fun Preview_TwoStateButton() {
     YacsaTheme {
         TwoStateButton(
+            Modifier,
             remember { mutableStateOf(false) },
             R.drawable.icon_search_regular_24,
             R.drawable.icon_heart_regulat_24,

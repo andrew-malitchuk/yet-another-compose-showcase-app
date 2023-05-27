@@ -7,7 +7,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.OutlinedButton
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -81,7 +80,7 @@ fun ContentFilter() {
         )
 
         ChipGroup(
-            values = listOf("","bar"),
+            values = listOf("foo","bar"),
             defaultColor = YacsaTheme.colors.primaryText,
             selectedColor = YacsaTheme.colors.statusBarColor,
             onSelectedChanged = {
@@ -89,9 +88,6 @@ fun ContentFilter() {
             },
         )
 
-        OutlinedButton(onClick = { /*TODO*/ }) {
-            Text("Filter")
-        }
     }
 }
 

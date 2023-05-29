@@ -39,10 +39,6 @@ class BooksRepositoryImpl @Inject constructor(
     }
 
     override suspend fun saveBooks(values: List<BookRepoModel>) {
-//        values.forEach {
-//            saveBook(it)
-//        }
-
         bookDbSource.insert(values.map(bookRepoDbMapper::toDb))
     }
 
@@ -141,4 +137,9 @@ class BooksRepositoryImpl @Inject constructor(
         val result = bookDbSource.search(query)
         return result.map(bookRepoDbMapper::toRepo)
     }
+
+    override suspend fun markFavourite(id: Int, favourite: Boolean) {
+        bookDbSource.markFavourite(id,favourite)
+    }
+
 }

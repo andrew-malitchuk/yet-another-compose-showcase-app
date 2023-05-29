@@ -122,6 +122,7 @@ fun Preview_ListItem_Dark() {
                 null,
                 null,
                 10,
+                true
             ),
             onItemContentClick = {},
         )
@@ -145,6 +146,7 @@ fun Preview_ItemFetchedList_Light() {
                 null,
                 null,
                 10,
+                true
             ).also {
                 it.isCached = true
             },

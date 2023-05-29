@@ -109,6 +109,17 @@ fun ItemFetchedList(
                         text = book.downloadCount?.toString() ?: "NI",
                         style = YacsaTheme.typography.caption,
                     )
+                    if (book.isFavourite == true) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.icon_heart_fill_24),
+                            contentDescription = null
+                        )
+                    } else {
+                        Icon(
+                            painter = painterResource(id = R.drawable.icon_heart_regulat_24),
+                            contentDescription = null
+                        )
+                    }
                 }
             }
         }
@@ -196,6 +207,7 @@ fun Preview_ListItem_Dark() {
                 null,
                 null,
                 10,
+                true
             ),
             onItemContentClick = {},
         )
@@ -219,6 +231,7 @@ fun Preview_ItemFetchedList_Light() {
                 null,
                 null,
                 10,
+                true
             ),
             onItemContentClick = {},
         )

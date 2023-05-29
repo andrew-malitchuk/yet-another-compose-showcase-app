@@ -81,7 +81,7 @@ fun ItemFetchedGrid(
 fun Preview_ItemFetchedGrid() {
     YacsaTheme {
         ItemFetchedGrid(
-            book = BookUiModel(1, "foobar", null, emptyList(), emptyList(), emptyList(), emptyList(), true, null, null, 10),
+            book = BookUiModel(1, "foobar", null, emptyList(), emptyList(), emptyList(), emptyList(), true, null, null, 10, true),
             onItemContentClick = {},
         )
     }

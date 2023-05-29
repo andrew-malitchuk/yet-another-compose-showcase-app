@@ -8,6 +8,7 @@ import dev.yacsa.domain.impl.usecase.*
 import dev.yacsa.domain.impl.usecase.analytics.AddAnalyticUseCaseImpl
 import dev.yacsa.domain.impl.usecase.analytics.ClearAnalyticsUseCaseImpl
 import dev.yacsa.domain.impl.usecase.analytics.GetAnalyticsUseCaseImpl
+import dev.yacsa.domain.impl.usecase.books.MarkFavouriteBookImpl
 import dev.yacsa.domain.impl.usecase.books.NewGetBooksUseCaseImpl
 import dev.yacsa.domain.impl.usecase.books.NewGetOrLoadBookUseCaseImpl
 import dev.yacsa.domain.impl.usecase.books.NewLoadBooksUseCaseImpl
@@ -24,6 +25,7 @@ import dev.yacsa.domain.usecase.*
 import dev.yacsa.domain.usecase.analytics.AddAnalyticUseCase
 import dev.yacsa.domain.usecase.analytics.ClearAnalyticsUseCase
 import dev.yacsa.domain.usecase.analytics.GetAnalyticsUseCase
+import dev.yacsa.domain.usecase.books.MarkFavouriteBook
 import dev.yacsa.domain.usecase.books.NewGetBooksUseCase
 import dev.yacsa.domain.usecase.books.NewGetOrLoadBookUseCase
 import dev.yacsa.domain.usecase.books.NewLoadBooksUseCase
@@ -132,4 +134,10 @@ abstract class DomainModule {
     abstract fun bindGetAnalyticsUseCase(
         getAnalyticsUseCaseImpl: GetAnalyticsUseCaseImpl,
     ): GetAnalyticsUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindMarkFavouriteBook(
+        markFavouriteBookImpl: MarkFavouriteBookImpl,
+    ): MarkFavouriteBook
 }

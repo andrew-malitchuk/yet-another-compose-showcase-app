@@ -208,6 +208,7 @@ fun Preview_CollapsingToolbar() {
                 null,
                 null,
                 null,
+                true
             ),
             onBackClick={},
             onDownloadClick={}

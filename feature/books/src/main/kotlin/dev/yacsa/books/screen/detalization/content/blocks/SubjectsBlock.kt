@@ -67,6 +67,7 @@ fun Preview_SubjectsBlock() {
                 null,
                 null,
                 null,
+                true
             ),
             onSubjectClick={}
         )

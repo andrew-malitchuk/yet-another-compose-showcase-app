@@ -29,6 +29,7 @@ fun DetalizationRoute(
             "uiState" to uiState,
         ),
     )
+    detalizationViewModel.foo()
 
     DetalizationScreen(
         uiState = uiState,
@@ -43,7 +44,7 @@ fun DetalizationRoute(
 fun DetalizationScreen(
     uiState: DetalizationUiState,
     onBackClick: () -> Unit,
-    onFormatClick: (String) -> Unit
+    onFormatClick: (String) -> Unit,
 ) {
     val systemUiController = rememberSystemUiController()
 

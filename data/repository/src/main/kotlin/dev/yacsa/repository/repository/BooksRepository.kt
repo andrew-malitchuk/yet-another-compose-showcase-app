@@ -23,4 +23,7 @@ interface BooksRepository {
     suspend fun searchOnRemote(query: String): List<BookRepoModel>
 
     suspend fun searchOnLocal(query: String): List<BookRepoModel>
+
+    suspend fun markFavourite(id:Int, favourite:Boolean)
+
 }

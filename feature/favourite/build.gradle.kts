@@ -1,5 +1,7 @@
 plugins {
     id("yacsa.android.feature")
+    id("yacsa.android.library.compose")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -35,20 +37,14 @@ dependencies {
 
     implementation(project(":domain"))
     implementation(project(":feature:navigation"))
-    implementation(project(":core:platform"))
-    implementation(project(":core:model"))
     implementation(project(":core:ui"))
-    implementation(project(":service:featureflag"))
+    implementation(project(":core:platform"))
+    implementation(project(mapOf("path" to ":core:model")))
+
 
     implementation("io.arrow-kt:arrow-core:1.2.0-RC")
     implementation("io.arrow-kt:arrow-fx-coroutines:1.2.0-RC")
     implementation("io.arrow-kt:arrow-optics:1.2.0-RC")
     ksp("io.arrow-kt:arrow-optics-ksp-plugin:1.2.0-RC")
 
-    implementation("com.airbnb.android:lottie-compose:6.0.0")
-
-//    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
-    implementation("androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha09")
-
-    implementation("me.saket.telephoto:zoomable:0.3.0")
 }

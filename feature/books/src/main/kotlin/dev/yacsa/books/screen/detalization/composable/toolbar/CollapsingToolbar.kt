@@ -94,7 +94,7 @@ fun CollapsingToolbar(
                 ImageRequest.Builder(LocalContext.current)
                     .data(data = book.formats?.imageJpeg)
                     .placeholder(
-                        dev.yacsa.ui.R.drawable.ic_launcher_foreground,
+                        dev.yacsa.ui.R.drawable.app_icon_launcher_foreground,
                     )
                     .build(),
             )

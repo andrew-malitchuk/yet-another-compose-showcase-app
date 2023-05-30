@@ -42,7 +42,7 @@ fun ItemFetchedList(
                 .data(data = book.formats?.imageJpeg)
                 .placeholder(
 //                    R.drawable.ic_launcher_foreground,
-                    R.drawable.ic_launcher_foreground,
+                    R.drawable.app_icon_launcher_foreground,
                 )
                 .build(),
         )

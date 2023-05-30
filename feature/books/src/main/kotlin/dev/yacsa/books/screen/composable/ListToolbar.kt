@@ -28,6 +28,7 @@ fun ListToolbar(
     state: LazyListState,
     searchClick: () -> Unit,
     settingsClick: () -> Unit,
+    favouriteClick: () -> Unit,
 ) {
     Column {
         Row(
@@ -51,6 +52,12 @@ fun ListToolbar(
                 modifier = Modifier
                     .weight(1f),
             )
+            SmallFloatingActionButton(onClick = { favouriteClick() }) {
+                Icon(
+                    painter = painterResource(id = R.drawable.icon_heart_regulat_24),
+                    contentDescription = null,
+                )
+            }
             SmallFloatingActionButton(onClick = { searchClick() }) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_search_regular_24),
@@ -76,6 +83,7 @@ fun Preview_ListToolbar() {
             state = rememberLazyListState(),
             searchClick = {},
             settingsClick = {},
+            favouriteClick = {}
         )
     }
 }

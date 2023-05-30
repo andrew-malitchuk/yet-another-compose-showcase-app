@@ -34,11 +34,11 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterialApi::class, ExperimentalFoundationApi::class)
 @Composable
 fun ContentFetched(
-    modifier: Modifier = Modifier,
     onBookClicked: (Int) -> Unit,
     lazyPagingItems: LazyPagingItems<BookUiModel>,
     onSearch: () -> Unit,
     onSettings: () -> Unit,
+    onFavourite: () -> Unit,
 ) {
     val listState = rememberLazyListState()
     val gridState = rememberLazyGridState()
@@ -59,6 +59,7 @@ fun ContentFetched(
             state = listState,
             searchClick = onSearch,
             settingsClick = onSettings,
+            favouriteClick = onFavourite
         )
 
         Box(Modifier.pullRefresh(pullRefreshState)) {
@@ -115,6 +116,7 @@ fun Preview_ContentFetched() {
             lazyPagingItems = flowOf(PagingData.empty<BookUiModel>()).collectAsLazyPagingItems(),
             onSearch = {},
             onSettings = {},
+            onFavourite = {}
         )
     }
 }

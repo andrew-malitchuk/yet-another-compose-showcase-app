@@ -33,6 +33,7 @@ fun ListRoute(
     onSearch: () -> Unit,
     onSettings: () -> Unit,
     notFound: () -> Unit,
+    onFavourite: () -> Unit,
     listViewModel: ListViewModel = hiltViewModel(),
 ) {
     HandleEvents(listViewModel.event, onClick, notFound)
@@ -110,6 +111,7 @@ fun ListRoute(
                 uiState = uiState,
                 onSearch = onSearch,
                 onSettings = onSettings,
+                onFavourite=onFavourite,
             )
         }
     }
@@ -122,23 +124,19 @@ fun ListScreen(
     uiState: ListUiState,
     onSearch: () -> Unit,
     onSettings: () -> Unit,
+    onFavourite: () -> Unit,
 ) {
     val systemUiController = rememberSystemUiController()
 
     if (!uiState.isLoading && !uiState.isError && pagingState != null) {
-//        systemUiController.setSystemBarsColor(
-//            color = YacsaTheme.colors.primaryBackground,
-//        )
         ContentFetched(
             onBookClicked = onBookClicked,
             lazyPagingItems = pagingState,
             onSearch = onSearch,
             onSettings = onSettings,
+            onFavourite = onFavourite
         )
     } else {
-//        systemUiController.setSystemBarsColor(
-//            color = YacsaTheme.colors.statusBarColor,
-//        )
         ListNoContent(uiState = uiState)
     }
 }
@@ -188,6 +186,7 @@ fun PreviewListScreen() {
             ListUiState(),
             {},
             {},
+            {}
         )
     }
 }

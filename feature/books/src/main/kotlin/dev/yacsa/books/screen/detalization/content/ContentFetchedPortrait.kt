@@ -12,6 +12,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -41,6 +44,7 @@ fun ContentFetchedPortrait(
     onLanguageClick: (String) -> Unit,
     onSubjectClick: (String) -> Unit,
     onBookshelfClick: (String) -> Unit,
+    favourite: MutableState<Boolean?>,
 ) {
     val systemUiController = rememberSystemUiController()
     with(systemUiController) {
@@ -63,7 +67,8 @@ fun ContentFetchedPortrait(
                         coroutineScope.launch {
                             lazyScrollState.scrollToItem(7, 0)
                         }
-                    }
+                    },
+                    favourite
                 )
             }
         },
@@ -128,13 +133,16 @@ fun ContentFetchedPortrait(
 @Preview(showBackground = true)
 fun Preview_ContentFetchedPortrait() {
     YacsaTheme {
-        ContentFetchedPortrait(book = null,
+        ContentFetchedPortrait(
+            book = null,
             onBackClick = {},
             {},
             {},
             {},
             {},
             {},
-            {})
+            {},
+            remember { mutableStateOf(false) }
+        )
     }
 }

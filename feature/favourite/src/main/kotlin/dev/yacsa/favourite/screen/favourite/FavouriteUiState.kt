@@ -1,7 +1,6 @@
 package dev.yacsa.favourite.screen.favourite
 
 import android.os.Parcelable
-import dev.yacsa.model.model.BookUiModel
 import kotlinx.parcelize.Parcelize
 import javax.annotation.concurrent.Immutable
 
@@ -10,13 +9,12 @@ import javax.annotation.concurrent.Immutable
 data class FavouriteUiState(
     val isContentLoading: Boolean = false,
     val isError: Boolean = false,
-    val isResultLoading: Boolean = false,
-    val favouriteList: List<BookUiModel>? = null,
+    val isLoading: Boolean = false,
 ) : Parcelable {
 
     sealed class PartialState {
         object ContentLoading : PartialState()
-        data class ContentFetched(val favouriteList: List<BookUiModel>) : PartialState()
+        object ContentFetched : PartialState()
         data class Error(val throwable: Throwable) : PartialState()
     }
 }

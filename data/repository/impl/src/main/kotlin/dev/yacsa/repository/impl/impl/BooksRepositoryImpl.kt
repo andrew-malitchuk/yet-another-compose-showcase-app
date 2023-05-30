@@ -12,6 +12,8 @@ import dev.yacsa.repository.impl.mapper.person.NewPersonRepoDbMapper
 import dev.yacsa.repository.impl.mapper.person.NewPersonRepoNetMapper
 import dev.yacsa.repository.model.BookRepoModel
 import dev.yacsa.repository.repository.BooksRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class BooksRepositoryImpl @Inject constructor(
@@ -139,7 +141,15 @@ class BooksRepositoryImpl @Inject constructor(
     }
 
     override suspend fun markFavourite(id: Int, favourite: Boolean) {
-        bookDbSource.markFavourite(id,favourite)
+        bookDbSource.markFavourite(id, favourite)
+    }
+
+    override suspend fun subscribeFavourite(): Flow<List<BookRepoModel?>?> {
+        return bookDbSource.getFavourite().map { list ->
+            list?.map {
+                bookRepoDbMapper.toRepo(it)
+            }
+        }
     }
 
 }

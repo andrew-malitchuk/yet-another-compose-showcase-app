@@ -17,8 +17,19 @@ class NewSaveBooksUseCaseImpl @Inject constructor(
 ) : NewSaveBooksUseCase {
     override suspend fun invoke(page: Int, list: List<BookDomainModel>): Option<DomainError> {
         return try {
+            val previous = booksRepository.getBooksPaged(page)
+
+            val temp = list
+
+            previous.forEach {cached->
+               temp.find {income->
+                    income.id == cached.id
+                }?.favourite=cached.favourite
+            }
+
+
             booksRepository.removePage(page)
-            booksRepository.savePaged(page, list.map { bookDomainRepoMapper.toRepo(it) })
+            booksRepository.savePaged(page, temp.map { bookDomainRepoMapper.toRepo(it) })
             none()
         } catch (ex: Exception) {
             DataError(ex).some()

@@ -1,5 +1,7 @@
 package dev.yacsa.books.screen.detalization
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,6 +29,10 @@ class DetalizationViewModel @Inject constructor(
     savedStateHandle,
     initialState,
 ) {
+
+    var checked: MutableState<Boolean?> =
+        mutableStateOf(null)
+
 
     private val bookId: Int = checkNotNull(savedStateHandle["bookId"])
 
@@ -57,6 +63,7 @@ class DetalizationViewModel @Inject constructor(
                 }
             },
             {
+                checked.value= it.favourite == true
                 emit(
                     DetalizationUiState.PartialState.Fetched(
                         bookUiDomainMapper.toUi(it),
@@ -100,9 +107,9 @@ class DetalizationViewModel @Inject constructor(
     }
 
     // TODO: remove
-    fun foo(){
+    fun foo(isFavourite: Boolean) {
         viewModelScope.launch {
-            markFavouriteBook(bookId, true)
+            markFavouriteBook(bookId, isFavourite)
         }
     }
 }

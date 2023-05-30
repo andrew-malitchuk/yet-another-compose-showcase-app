@@ -44,6 +44,11 @@ fun NavGraphBuilder.booksNavGraph(navController: NavHostController) {
                         NavigationDirection.Settings.route,
                     )
                 },
+                onFavourite = {
+                    navController.navigate(
+                        NavigationDirection.Favourite.route
+                    )
+                }
             )
         }
         composable(
@@ -53,7 +58,6 @@ fun NavGraphBuilder.booksNavGraph(navController: NavHostController) {
             ),
         ) { backStackEntry ->
             DetalizationRoute(
-                bookId = backStackEntry.arguments?.getInt("bookId"),
                 onBackClick = {
                     navController.popBackStack()
                 },

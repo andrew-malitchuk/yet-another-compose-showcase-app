@@ -1,6 +1,7 @@
 package dev.yacsa.repository.repository
 
 import dev.yacsa.repository.model.BookRepoModel
+import kotlinx.coroutines.flow.Flow
 
 interface BooksRepository {
 
@@ -25,5 +26,7 @@ interface BooksRepository {
     suspend fun searchOnLocal(query: String): List<BookRepoModel>
 
     suspend fun markFavourite(id:Int, favourite:Boolean)
+
+    suspend fun subscribeFavourite(): Flow<List<BookRepoModel?>?>
 
 }

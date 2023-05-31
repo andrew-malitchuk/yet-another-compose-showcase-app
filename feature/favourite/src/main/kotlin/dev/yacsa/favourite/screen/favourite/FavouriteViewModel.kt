@@ -2,6 +2,7 @@ package dev.yacsa.favourite.screen.favourite
 
 import androidx.lifecycle.SavedStateHandle
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.yacsa.domain.usecase.books.MarkFavouriteBook
 import dev.yacsa.domain.usecase.books.SubscribeToFavourite
 import dev.yacsa.model.mapper.NewBooksUiDomainMapper
 import dev.yacsa.model.model.BookUiModel
@@ -16,6 +17,7 @@ import javax.inject.Inject
 class FavouriteViewModel @Inject constructor(
     var subscribeToFavourite: SubscribeToFavourite,
     var bookUiDomainMapper: NewBooksUiDomainMapper,
+    var markFavouriteBook: MarkFavouriteBook,
     savedStateHandle: SavedStateHandle,
     initialState: FavouriteUiState,
 ) : BaseViewModel<FavouriteUiState, FavouriteUiState.PartialState, FavouriteEvent, FavouriteIntent>(
@@ -32,6 +34,7 @@ class FavouriteViewModel @Inject constructor(
     override fun mapIntents(intent: FavouriteIntent): Flow<FavouriteUiState.PartialState> {
         return when (intent) {
             FavouriteIntent.GetFavourite -> getFavourite()
+            is FavouriteIntent.MarkFavourite -> markFavourite(intent.bookId,intent.isFavourite)
         }
     }
 
@@ -76,5 +79,23 @@ class FavouriteViewModel @Inject constructor(
         }.onStart {
             FavouriteUiState.PartialState.ContentLoading
         }
+
+
+    private fun markFavourite(
+        bookId: Int,
+        isFavourite: Boolean
+    ): Flow<FavouriteUiState.PartialState> {
+        return flow {
+            markFavouriteBook(bookId, isFavourite).fold({
+                    // TODO: send snackbar
+            }, {
+                emit(FavouriteUiState.PartialState.Error(Exception()))
+            })
+
+
+//            val isDetalizationEnabled = booksFeatureFlag.isDetalizationEnabled()
+//            publishEvent(ListEvent.OnBookClick(bookId, isDetalizationEnabled))
+        }
+    }
 
 }

@@ -14,6 +14,9 @@ fun NavGraphBuilder.favouriteNavGraph(navController: NavHostController) {
     ) {
         composable(FavouriteDirection.Favourite.route) {
             FavouriteRoute(
+                onBackClick = {
+                    navController.popBackStack()
+                }
             )
         }
     }

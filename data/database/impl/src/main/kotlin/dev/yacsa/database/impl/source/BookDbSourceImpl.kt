@@ -22,6 +22,14 @@ class BookDbSourceImpl @Inject constructor(
     override suspend fun search(query: String): List<BookDbModel> {
         return booksDao.search(query)
     }
+
+    override suspend fun markFavourite(id:Int, isFavourite: Boolean) {
+        booksDao.markFavourite(id,if(isFavourite){1}else{0})
+    }
+
+    override suspend fun getFavourite(): Flow<List<BookDbModel>?> {
+        return booksDao.getFavouriteFlow()
+    }
     //
 
     override suspend fun get(id: Int): BookDbModel? {

@@ -2,6 +2,7 @@ package dev.yacsa.ui.composable.button
 
 import androidx.annotation.DrawableRes
 import androidx.compose.animation.Crossfade
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconToggleButton
 import androidx.compose.material3.SmallFloatingActionButton
@@ -12,13 +13,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
 fun TwoStateButton(
     modifier:Modifier=Modifier,
-    checkedState: MutableState<Boolean>,
+    checkedState: MutableState<Boolean?>,
     @DrawableRes
     defaultIcon: Int,
     @DrawableRes
@@ -27,18 +29,22 @@ fun TwoStateButton(
 ) {
 //    val checked = remember { mutableStateOf(false) }
     SmallFloatingActionButton(
-        modifier=modifier,
+        elevation = FloatingActionButtonDefaults.elevation(1.dp),
         onClick = {
-            onButtonClick(checkedState.value)
-        }
+            onButtonClick(checkedState.value?:false)
+        },
     ) {
-        IconToggleButton(checked = checkedState.value, onCheckedChange = { checkedState.value = it }) {
+        IconToggleButton(checked = checkedState.value?:false, onCheckedChange = { checkedState.value = it }) {
 
-            Crossfade(targetState = checkedState.value) { isChecked ->
-                if (isChecked) {
-                    Icon(painter = painterResource(id = selectedIcon), contentDescription = null)
+            Crossfade(
+                targetState = checkedState.value
+            ) { isChecked ->
+                if (isChecked==true) {
+                    Icon(
+                        painter = painterResource(id = selectedIcon), contentDescription = null)
                 } else {
-                    Icon(painter = painterResource(id = defaultIcon), contentDescription = null)
+                    Icon(
+                        painter = painterResource(id = defaultIcon), contentDescription = null)
                 }
             }
         }

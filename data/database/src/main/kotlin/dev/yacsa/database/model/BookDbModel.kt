@@ -34,4 +34,6 @@ data class BookDbModel(
     val downloadCount: Int?,
     @ColumnInfo(name = "page")
     var page: Int? = 1,
+    @ColumnInfo(name = "favourite")
+    var favourite: Boolean? = false,
 ) : BaseDbModel

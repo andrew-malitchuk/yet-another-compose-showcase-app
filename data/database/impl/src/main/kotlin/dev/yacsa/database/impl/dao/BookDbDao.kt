@@ -49,4 +49,19 @@ interface BookDbDao {
         """,
     )
     fun search(query: String): List<BookDbModel>
+
+    @Query(
+        """
+            UPDATE 
+                ${YacsaDb.Table.BOOK}
+            SET
+                favourite = :isFavourite
+            WHERE
+                bookId = :id
+        """
+    )
+    fun markFavourite(id:Int, isFavourite:Int)
+
+    @Query("SELECT * FROM ${YacsaDb.Table.BOOK} WHERE favourite = 1")
+    fun getFavouriteFlow(): Flow<List<BookDbModel>?>
 }

@@ -64,6 +64,7 @@ fun Preview_BookshelfBlock() {
                 null,
                 null,
                 null,
+                true
             ),
             onBookshelfClick={}
         )

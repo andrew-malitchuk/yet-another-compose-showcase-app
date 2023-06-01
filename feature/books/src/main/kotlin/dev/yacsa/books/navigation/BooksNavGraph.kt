@@ -44,6 +44,11 @@ fun NavGraphBuilder.booksNavGraph(navController: NavHostController) {
                         NavigationDirection.Settings.route,
                     )
                 },
+                onFavourite = {
+                    navController.navigate(
+                        NavigationDirection.Favourite.route
+                    )
+                }
             )
         }
         composable(

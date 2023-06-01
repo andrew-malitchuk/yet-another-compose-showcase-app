@@ -35,20 +35,12 @@ fun ContentFetched(
     favouriteFlow: State<List<BookUiModel?>?>?,
     uiState: FavouriteUiState,
     innerPadding: PaddingValues,
-    foo: TopAppBarState,
-    state: LazyListState,
+    topAppBarState: TopAppBarState,
+    lazyListState: LazyListState,
     onFavouriteMark: (Int, Boolean) -> Unit
 ) {
-//    if (!foo?.value.isNullOrEmpty())
-//        LazyColumn {
-//            items(items = foo?.value!!) { item ->
-//                Text(item?.title ?: "SWW")
-//            }
-//        } else {
-//        Text("moshi moshi?")
-//    }
 
-    val corner = 16.dp - (16.dp * Math.abs(foo.collapsedFraction))
+    val corner = 16.dp - (16.dp * Math.abs(topAppBarState.collapsedFraction))
     val systemUiController = rememberSystemUiController()
     val shape = RoundedCornerShape(16.dp)
 
@@ -87,7 +79,7 @@ fun ContentFetched(
 
                     if (!favouriteFlow?.value.isNullOrEmpty()) {
                         LazyColumn(
-                            state = state,
+                            state = lazyListState,
                             verticalArrangement = Arrangement.spacedBy(8.dp),
                             contentPadding = PaddingValues(
                                 start = 16.dp,
@@ -97,99 +89,11 @@ fun ContentFetched(
                             )
                         ) {
                             items(items = favouriteFlow?.value!!) { item ->
-//                                val dismissState =
-//                                    rememberDismissState(
-//                                        initialValue = DismissValue.Default,
-//                                    )
-//
-//                                when {
-//                                    dismissState.isDismissed(DismissDirection.EndToStart) -> {
-//                                        item?.id?.let{
-//                                            onFavouriteMark(it,false)
-//                                        }
-//                                    }
-//
-//                                    dismissState.isDismissed(DismissDirection.StartToEnd) -> {
-//
-//                                    }
-//                                }
-//
-//                                SwipeToDismiss(
-//                                    state = dismissState,
-//                                    /***  create dismiss alert Background */
-//                                    background = {
-//                                        val color = when (dismissState.dismissDirection) {
-//                                            DismissDirection.StartToEnd -> Color.Green
-//                                            DismissDirection.EndToStart -> Color.Red
-//                                            null -> Color.Transparent
-//                                        }
-//                                        val direction = dismissState.dismissDirection
-//
-//                                        if (direction == DismissDirection.StartToEnd) {
-//                                            Box(
-//                                                modifier = Modifier
-//                                                    .fillMaxSize()
-//                                                    .padding(8.dp)
-//
-//                                            ) {
-//                                                Column(modifier = Modifier.align(Alignment.CenterStart)) {
-//                                                    Icon(
-//                                                        imageVector = Icons.Default.ArrowForward,
-//                                                        contentDescription = null,
-//                                                        tint = Color.White,
-//                                                        modifier = Modifier.align(Alignment.CenterHorizontally)
-//                                                    )
-//                                                    Text(
-//                                                        text = "Move to Archive",
-//                                                        fontWeight = FontWeight.Bold,
-//                                                        textAlign = TextAlign.Center,
-//                                                        color = Color.White
-//                                                    )
-//                                                }
-//
-//                                            }
-//                                        } else {
-//
-//                                            Box(
-//                                                modifier = Modifier
-//                                                    .fillMaxSize()
-//                                                    .padding(8.dp)
-//
-//                                            ) {
-//                                                Column(modifier = Modifier.align(Alignment.CenterStart)) {
-//                                                    Icon(
-//                                                        imageVector = Icons.Default.ArrowForward,
-//                                                        contentDescription = null,
-//                                                        tint = Color.White,
-//                                                        modifier = Modifier.align(Alignment.CenterHorizontally)
-//                                                    )
-//                                                    Text(
-//                                                        text = "Move to Archive",
-//                                                        fontWeight = FontWeight.Bold,
-//                                                        textAlign = TextAlign.Center,
-//                                                        color = Color.White
-//                                                    )
-//                                                }
-//                                            }
-//                                        }
-//                                    },
-//                                    /**** Dismiss Content */
-//                                    dismissContent = {
-//                                https://github.com/saket/swipe
                                         ItemFetchedList(
                                             book = item!!,
                                             onItemContentClick = { /*TODO*/ },
                                             onFavouriteMark = onFavouriteMark
                                         )
-//                                    },
-//                                    /*** Set Direction to dismiss */
-//                                    directions = setOf(
-//                                        DismissDirection.EndToStart,
-//                                        DismissDirection.StartToEnd
-//                                    ),
-//                                    dismissThresholds = { FractionalThreshold(0.2f) }
-
-//                                )
                             }
                         }
                     } else {

@@ -112,8 +112,8 @@ fun FavouriteScreen(
     ) { innerPadding ->
         ContentFetched(
             innerPadding = innerPadding,
-            state = state,
-            foo = foo,
+            lazyListState = state,
+            topAppBarState = foo,
             uiState = uiState,
             favouriteFlow = favouriteFlow,
             onFavouriteMark = onFavouriteMark

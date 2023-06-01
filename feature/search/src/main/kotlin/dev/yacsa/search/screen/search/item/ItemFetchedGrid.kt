@@ -40,7 +40,7 @@ fun ItemFetchedGrid(
                 ImageRequest.Builder(LocalContext.current)
                     .data(data = book.formats?.imageJpeg)
                     .placeholder(
-                        R.drawable.ic_launcher_foreground,
+                        R.drawable.app_icon_launcher_foreground,
                     )
                     .build(),
             )
@@ -81,7 +81,7 @@ fun ItemFetchedGrid(
 fun Preview_ItemFetchedGrid() {
     YacsaTheme {
         ItemFetchedGrid(
-            book = BookUiModel(1, "foobar", null, emptyList(), emptyList(), emptyList(), emptyList(), true, null, null, 10),
+            book = BookUiModel(1, "foobar", null, emptyList(), emptyList(), emptyList(), emptyList(), true, null, null, 10, true),
             onItemContentClick = {},
         )
     }

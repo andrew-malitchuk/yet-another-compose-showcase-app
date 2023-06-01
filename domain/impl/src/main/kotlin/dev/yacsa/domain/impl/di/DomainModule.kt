@@ -8,11 +8,13 @@ import dev.yacsa.domain.impl.usecase.*
 import dev.yacsa.domain.impl.usecase.analytics.AddAnalyticUseCaseImpl
 import dev.yacsa.domain.impl.usecase.analytics.ClearAnalyticsUseCaseImpl
 import dev.yacsa.domain.impl.usecase.analytics.GetAnalyticsUseCaseImpl
+import dev.yacsa.domain.impl.usecase.books.MarkFavouriteBookImpl
 import dev.yacsa.domain.impl.usecase.books.NewGetBooksUseCaseImpl
 import dev.yacsa.domain.impl.usecase.books.NewGetOrLoadBookUseCaseImpl
 import dev.yacsa.domain.impl.usecase.books.NewLoadBooksUseCaseImpl
 import dev.yacsa.domain.impl.usecase.books.NewSaveBooksUseCaseImpl
 import dev.yacsa.domain.impl.usecase.books.NewSearchBooksUseCaseImpl
+import dev.yacsa.domain.impl.usecase.books.SubscribeToFavouriteImpl
 import dev.yacsa.domain.impl.usecase.featureflag.NewFetchFeatureFlagUseCaseImpl
 import dev.yacsa.domain.impl.usecase.featureflag.NewUpdateLocalFeatureFlagUseCaseImpl
 import dev.yacsa.domain.impl.usecase.history.NewClearHistoryUseCaseImpl
@@ -24,11 +26,13 @@ import dev.yacsa.domain.usecase.*
 import dev.yacsa.domain.usecase.analytics.AddAnalyticUseCase
 import dev.yacsa.domain.usecase.analytics.ClearAnalyticsUseCase
 import dev.yacsa.domain.usecase.analytics.GetAnalyticsUseCase
+import dev.yacsa.domain.usecase.books.MarkFavouriteBook
 import dev.yacsa.domain.usecase.books.NewGetBooksUseCase
 import dev.yacsa.domain.usecase.books.NewGetOrLoadBookUseCase
 import dev.yacsa.domain.usecase.books.NewLoadBooksUseCase
 import dev.yacsa.domain.usecase.books.NewSaveBooksUseCase
 import dev.yacsa.domain.usecase.books.NewSearchBooksUseCase
+import dev.yacsa.domain.usecase.books.SubscribeToFavourite
 import dev.yacsa.domain.usecase.featureflag.NewFetchFeatureFlagUseCase
 import dev.yacsa.domain.usecase.featureflag.NewUpdateLocalFeatureFlagUseCase
 import dev.yacsa.domain.usecase.history.NewClearHistoryUseCase
@@ -132,4 +136,16 @@ abstract class DomainModule {
     abstract fun bindGetAnalyticsUseCase(
         getAnalyticsUseCaseImpl: GetAnalyticsUseCaseImpl,
     ): GetAnalyticsUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindMarkFavouriteBook(
+        markFavouriteBookImpl: MarkFavouriteBookImpl,
+    ): MarkFavouriteBook
+
+    @Singleton
+    @Binds
+    abstract fun bindSubscribeToFavourite(
+        subscribeToFavouriteImpl: SubscribeToFavouriteImpl,
+    ): SubscribeToFavourite
 }

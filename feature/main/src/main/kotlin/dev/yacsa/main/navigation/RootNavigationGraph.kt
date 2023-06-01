@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import dev.yacsa.analytics.navigation.analyticsNavGraph
 import dev.yacsa.books.navigation.booksNavGraph
+import dev.yacsa.favourite.navigation.favouriteNavGraph
 import dev.yacsa.featureflagmanager.navigation.featureFlagNavGraph
 import dev.yacsa.navigation.NavigationDirection
 import dev.yacsa.notfound.navigation.notFoundNavGraph
@@ -29,5 +30,6 @@ fun RootNavigationGraph(
         searchNavGraph(navController)
         settingsNavGraph(navController)
         analyticsNavGraph(navController)
+        favouriteNavGraph(navController)
     }
 }

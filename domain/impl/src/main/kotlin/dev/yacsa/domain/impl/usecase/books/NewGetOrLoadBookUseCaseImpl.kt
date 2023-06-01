@@ -21,8 +21,9 @@ class NewGetOrLoadBookUseCaseImpl @Inject constructor(
                 Either.Left(dev.yacsa.domain.error.NoDataError)
             } else {
                 try {
-                    bookDomainRepoMapper.toDomain(fromNet)
-                    booksRepository.saveBook(fromNet)
+                    val temp = fromNet.id?.let { booksRepository.loadBook(it) }
+
+                    booksRepository.saveBook(fromNet.also { it.favourite = temp?.favourite; it.page=temp?.page })
                     Either.Right(bookDomainRepoMapper.toDomain(fromNet))
                 } catch (ex: Exception) {
                     Either.Left(DataError(ex))

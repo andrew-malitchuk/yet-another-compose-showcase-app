@@ -47,7 +47,7 @@ fun ItemFetchedList(
                 ImageRequest.Builder(LocalContext.current)
                     .data(data = book.formats?.imageJpeg)
                     .placeholder(
-                        R.drawable.ic_launcher_foreground,
+                        R.drawable.app_icon_launcher_foreground,
                     )
                     .build(),
             )
@@ -122,6 +122,7 @@ fun Preview_ListItem_Dark() {
                 null,
                 null,
                 10,
+                true
             ),
             onItemContentClick = {},
         )
@@ -145,6 +146,7 @@ fun Preview_ItemFetchedList_Light() {
                 null,
                 null,
                 10,
+                true
             ).also {
                 it.isCached = true
             },

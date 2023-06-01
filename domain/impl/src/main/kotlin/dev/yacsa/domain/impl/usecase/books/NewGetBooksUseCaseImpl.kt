@@ -16,6 +16,7 @@ class NewGetBooksUseCaseImpl @Inject constructor(
     @Throws(Throwable::class)
     override suspend fun invoke(page: Int): Either<DomainError, List<BookDomainModel>> {
         return try {
+            // туть
             val result = booksRepository.getBookByBage(page).map(bookDomainRepoMapper::toDomain)
             Either.Right(result)
         } catch (ex: Exception) {

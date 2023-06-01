@@ -114,7 +114,7 @@ class NotificationAnalyticProvider @Inject constructor(
                 NotificationCompat.BigTextStyle()
                     .bigText(notificationContent.toString())
             )
-            .setSmallIcon(dev.yacsa.ui.R.drawable.ic_launcher_foreground)
+            .setSmallIcon(dev.yacsa.ui.R.drawable.app_icon_launcher_foreground)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .build()
 

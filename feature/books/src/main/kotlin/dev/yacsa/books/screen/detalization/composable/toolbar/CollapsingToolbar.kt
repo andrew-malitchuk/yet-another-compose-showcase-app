@@ -8,23 +8,29 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,6 +49,7 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import dev.yacsa.books.R
 import dev.yacsa.model.model.BookUiModel
+import dev.yacsa.ui.composable.button.TwoStateButton
 import dev.yacsa.ui.theme.YacsaTheme
 
 @OptIn(ExperimentalMotionApi::class, ExperimentalFoundationApi::class)
@@ -50,8 +57,9 @@ import dev.yacsa.ui.theme.YacsaTheme
 fun CollapsingToolbar(
     lazyScrollState: LazyListState,
     book: BookUiModel,
-    onBackClick:()->Unit,
-    onDownloadClick:()->Unit
+    onBackClick: () -> Unit,
+    onDownloadClick: () -> Unit,
+    favourite: MutableState<Boolean?>
 ) {
     val context = LocalContext.current
     val motionScene = remember {
@@ -86,7 +94,7 @@ fun CollapsingToolbar(
                 ImageRequest.Builder(LocalContext.current)
                     .data(data = book.formats?.imageJpeg)
                     .placeholder(
-                        dev.yacsa.ui.R.drawable.ic_launcher_foreground,
+                        dev.yacsa.ui.R.drawable.app_icon_launcher_foreground,
                     )
                     .build(),
             )
@@ -126,7 +134,9 @@ fun CollapsingToolbar(
         }
 
         Text(
-            modifier = Modifier.layoutId("title").basicMarquee(),
+            modifier = Modifier
+                .layoutId("title")
+                .basicMarquee(),
             text = book.title ?: "SWW",
             style = YacsaTheme.typography.heading,
             maxLines = 2,
@@ -158,30 +168,48 @@ fun CollapsingToolbar(
         }
 
         LazyRow(
-            modifier = Modifier.layoutId("actions")
+            modifier = Modifier
+                .layoutId("actions"),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            contentPadding = PaddingValues(horizontal = 1.dp)
         ) {
             item {
-                SmallFloatingActionButton(onClick = { /*TODO*/ }) {
-                    Icon(
-                        painter = painterResource(id = dev.yacsa.ui.R.drawable.icon_heart_regulat_24),
-                        contentDescription = null,
-                    )
+                TwoStateButton(
+                    checkedState = favourite,
+                    defaultIcon = dev.yacsa.ui.R.drawable.icon_heart_regulat_24,
+                    selectedIcon = dev.yacsa.ui.R.drawable.icon_heart_fill_24
+                ) {
+
                 }
             }
             item {
-                SmallFloatingActionButton(onClick = { onDownloadClick()}) {
-                    Icon(
-                        painter = painterResource(id = dev.yacsa.ui.R.drawable.icon_download_regular_24),
-                        contentDescription = null,
-                    )
+                SmallFloatingActionButton(
+                    elevation = FloatingActionButtonDefaults.elevation(1.dp),
+                    onClick = { onDownloadClick() }
+                ) {
+                    Box(
+                        modifier = Modifier.padding(12.dp),
+                    ) {
+                        Icon(
+                            painter = painterResource(id = dev.yacsa.ui.R.drawable.icon_download_regular_24),
+                            contentDescription = null,
+                        )
+                    }
                 }
             }
             item {
-                SmallFloatingActionButton(onClick = { /*TODO*/ }) {
-                    Icon(
-                        painter = painterResource(id = dev.yacsa.ui.R.drawable.icon_share_regular_24),
-                        contentDescription = null,
-                    )
+                SmallFloatingActionButton(
+                    elevation = FloatingActionButtonDefaults.elevation(1.dp),
+                    onClick = { /*TODO*/ }
+                ) {
+                    Box(
+                        modifier = Modifier.padding(12.dp),
+                    ) {
+                        Icon(
+                            painter = painterResource(id = dev.yacsa.ui.R.drawable.icon_share_regular_24),
+                            contentDescription = null,
+                        )
+                    }
                 }
             }
         }
@@ -208,9 +236,11 @@ fun Preview_CollapsingToolbar() {
                 null,
                 null,
                 null,
+                true
             ),
-            onBackClick={},
-            onDownloadClick={}
+            onBackClick = {},
+            onDownloadClick = {},
+            favourite = remember { mutableStateOf(false) }
         )
     }
 }

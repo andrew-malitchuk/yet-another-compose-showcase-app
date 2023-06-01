@@ -64,6 +64,7 @@ fun Preview_TranslatorsBlock() {
                 null,
                 null,
                 null,
+                true
             ),
             onTranslatorClick={}
         )

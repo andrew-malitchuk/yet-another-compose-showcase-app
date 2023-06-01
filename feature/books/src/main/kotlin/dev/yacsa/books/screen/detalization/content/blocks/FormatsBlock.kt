@@ -106,6 +106,7 @@ fun Preview_FormatsBlock() {
                 null,
                 null,
                 null,
+                true
             ),
             onFormatClick = {}
         )

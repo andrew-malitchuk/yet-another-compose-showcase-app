@@ -1,7 +1,10 @@
 package dev.yacsa.books.screen.detalization
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.tooling.preview.Preview
@@ -18,11 +21,16 @@ import kotlinx.coroutines.flow.Flow
 @Composable
 fun DetalizationRoute(
     detalizationViewModel: DetalizationViewModel = hiltViewModel(),
-    bookId: Int?,
     onBackClick: () -> Unit,
 ) {
     HandleEvents(detalizationViewModel.event)
     val uiState by detalizationViewModel.uiState.collectAsStateWithLifecycle()
+
+//    val checked = remember { detalizationViewModel.checked }
+
+    detalizationViewModel.checked.also {
+        it.value?.let { it1 -> detalizationViewModel.foo(it1) }
+    }
 
     Rebugger(
         trackMap = mapOf(
@@ -35,7 +43,8 @@ fun DetalizationRoute(
         onBackClick = onBackClick,
         onFormatClick = {
             detalizationViewModel.acceptIntent(DetalizationIntent.OnLinkClick(it))
-        }
+        },
+        favourite = detalizationViewModel.checked
     )
 }
 
@@ -43,7 +52,8 @@ fun DetalizationRoute(
 fun DetalizationScreen(
     uiState: DetalizationUiState,
     onBackClick: () -> Unit,
-    onFormatClick: (String) -> Unit
+    onFormatClick: (String) -> Unit,
+    favourite: MutableState<Boolean?>,
 ) {
     val systemUiController = rememberSystemUiController()
 
@@ -72,6 +82,7 @@ fun DetalizationScreen(
                     color = Color.White,
                 )
             }
+
             ContentFetchedPortrait(
                 book = uiState.book,
                 onBackClick = { onBackClick() },
@@ -80,7 +91,8 @@ fun DetalizationScreen(
                 onTranslatorClick = {},
                 onLanguageClick = {},
                 onSubjectClick = {},
-                onBookshelfClick = {}
+                onBookshelfClick = {},
+                favourite = favourite
             )
         }
     }
@@ -107,7 +119,8 @@ fun Preview_DetalizationScreen() {
         DetalizationScreen(
             DetalizationUiState(isLoading = false, isError = false),
             onBackClick = {},
-            onFormatClick={}
+            onFormatClick = {},
+            remember { mutableStateOf(false) }
         )
     }
 }

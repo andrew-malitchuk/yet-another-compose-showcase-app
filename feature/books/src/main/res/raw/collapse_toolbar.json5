@@ -43,6 +43,7 @@
       },
       actions: {
         width: 'spread',
+        height: 'wrap',
         start: ['parent', 'start', 16],
         bottom: ['parent', 'bottom', 8],
         end: ['img', 'start', 8],
@@ -95,6 +96,7 @@
       },
       actions: {
         width: 'spread',
+        height: 'wrap',
         start: ['parent', 'start', 16],
         bottom: ['parent', 'bottom', 8],
         alpha: 0

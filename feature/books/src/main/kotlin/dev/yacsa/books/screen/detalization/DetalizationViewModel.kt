@@ -1,8 +1,12 @@
 package dev.yacsa.books.screen.detalization
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.yacsa.domain.error.NoDataError
+import dev.yacsa.domain.usecase.books.MarkFavouriteBook
 import dev.yacsa.domain.usecase.books.NewGetOrLoadBookUseCase
 import dev.yacsa.model.mapper.NewBooksUiDomainMapper
 import dev.yacsa.platform.viewmodel.BaseViewModel
@@ -10,6 +14,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.launch
 import logcat.logcat
 import javax.inject.Inject
 
@@ -17,12 +22,17 @@ import javax.inject.Inject
 class DetalizationViewModel @Inject constructor(
     private val bookUiDomainMapper: NewBooksUiDomainMapper,
     private val getOrLoadBookUseCase: NewGetOrLoadBookUseCase,
+    private val markFavouriteBook: MarkFavouriteBook,
     savedStateHandle: SavedStateHandle,
     initialState: DetalizationUiState,
 ) : BaseViewModel<DetalizationUiState, DetalizationUiState.PartialState, DetalizationEvent, DetalizationIntent>(
     savedStateHandle,
     initialState,
 ) {
+
+    var checked: MutableState<Boolean?> =
+        mutableStateOf(null)
+
 
     private val bookId: Int = checkNotNull(savedStateHandle["bookId"])
 
@@ -53,6 +63,7 @@ class DetalizationViewModel @Inject constructor(
                 }
             },
             {
+                checked.value= it.favourite == true
                 emit(
                     DetalizationUiState.PartialState.Fetched(
                         bookUiDomainMapper.toUi(it),
@@ -92,6 +103,13 @@ class DetalizationViewModel @Inject constructor(
                 isError = true,
                 book = null,
             )
+        }
+    }
+
+    // TODO: remove
+    fun foo(isFavourite: Boolean) {
+        viewModelScope.launch {
+            markFavouriteBook(bookId, isFavourite)
         }
     }
 }

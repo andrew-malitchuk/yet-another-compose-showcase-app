@@ -63,6 +63,7 @@ fun Preview_AuthorBlock() {
                 null,
                 null,
                 null,
+                true
             ),
             onAuthorClick={}
         )

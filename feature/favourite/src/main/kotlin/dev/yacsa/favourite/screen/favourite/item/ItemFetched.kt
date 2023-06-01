@@ -18,9 +18,12 @@ import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material3.IconToggleButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -30,6 +33,8 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.ui.R
+import dev.yacsa.ui.composable.swipe.SwipeAction
+import dev.yacsa.ui.composable.swipe.SwipeableActionsBox
 import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
@@ -44,11 +49,19 @@ fun ItemFetchedList(
             ImageRequest.Builder(LocalContext.current)
                 .data(data = book.formats?.imageJpeg)
                 .placeholder(
-//                    R.drawable.ic_launcher_foreground,
                     R.drawable.app_icon_launcher_foreground,
                 )
                 .build(),
         )
+    val favouriteAction = SwipeAction(
+        icon = painterResource(id = R.drawable.icon_heart_regulat_24),
+        background = Color.Transparent,
+        onSwipe = {
+            book.id?.let { id ->
+                onFavouriteMark(id, false)
+            }
+        },
+    )
 
     Card(
         modifier = Modifier
@@ -60,84 +73,100 @@ fun ItemFetchedList(
         shape = RoundedCornerShape(16.dp),
         elevation = 10.dp,
     ) {
-        Row(
-            modifier = Modifier
-                .padding(8.dp),
-            verticalAlignment = Alignment.CenterVertically,
+
+        SwipeableActionsBox(
+            modifier = modifier,
+            startActions = listOf(favouriteAction),
+            endActions = listOf(favouriteAction),
+            swipeThreshold = 40.dp,
+            backgroundUntilSwipeThreshold = MaterialTheme.colorScheme.surfaceColorAtElevation(0.dp)
         ) {
             Card(
-                elevation = 4.dp,
-                border = BorderStroke(1.dp, Color(0xFF46467A)),
-                shape = RoundedCornerShape(16.dp),
-            ) {
-                Image(
-                    painter = painter,
-                    contentDescription = null,
-                    modifier = Modifier
-                        .height(128.dp)
-                        .aspectRatio(1f / 1.5f),
-                )
-            }
-            Spacer(modifier = modifier.width(16.dp))
-            Column(
-                modifier = modifier
+                modifier = Modifier
                     .fillMaxWidth(),
-                verticalArrangement = Arrangement.Top,
+                border = BorderStroke(1.dp, Color(0xFF7766C6)),
+                shape = RoundedCornerShape(16.dp),
+                elevation = 10.dp,
             ) {
-                Spacer(modifier = modifier.height(6.dp))
-                Text(
-                    text = (book.authors?.firstOrNull()?.name ?: "NI"),
-                    style = YacsaTheme.typography.caption,
-                    maxLines = 1,
-                    minLines = 1,
-                )
-                Spacer(modifier = modifier.height(6.dp))
-                Text(
-                    text = (book.title ?: "NI"),
-                    style = YacsaTheme.typography.title,
-                    maxLines = 2,
-                    minLines = 2,
-                )
-                Spacer(modifier = modifier.height(6.dp))
                 Row(
-                    modifier = modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .clip(RoundedCornerShape(16.dp)),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.icon_archive_box_regular_16),
-                        contentDescription = null,
-                    )
-                    Spacer(modifier = modifier.width(4.dp))
-                    Text(
-                        text = book.downloadCount?.toString() ?: "NI",
-                        style = YacsaTheme.typography.caption,
-                    )
-                    IconToggleButton(
-                        checked = book.isFavourite == true,
-                        onCheckedChange = {
-                            book.id?.let { id ->
-                                onFavouriteMark(id, it)
-
-                            }
-                            /*checkedState.value = it */
-                        }) {
-
-                        Crossfade(
-                            targetState = book.isFavourite == true
-                        ) { isChecked ->
-                            if (isChecked == true) {
-                                Icon(
-                                    painter = painterResource(id = R.drawable.icon_heart_fill_24),
-                                    contentDescription = null
-                                )
-                            } else {
-                                Icon(
-                                    painter = painterResource(id = R.drawable.icon_heart_regulat_24),
-                                    contentDescription = null
-                                )
-                            }
-                        }
+                    Card(
+                        elevation = 4.dp,
+                        border = BorderStroke(1.dp, Color(0xFF46467A)),
+                        shape = RoundedCornerShape(16.dp),
+                    ) {
+                        Image(
+                            painter = painter,
+                            contentDescription = null,
+                            modifier = Modifier
+                                .height(128.dp)
+                                .aspectRatio(1f / 1.5f),
+                        )
                     }
+                    Spacer(modifier = modifier.width(16.dp))
+                    Column(
+                        modifier = modifier
+                            .fillMaxWidth(),
+                        verticalArrangement = Arrangement.Top,
+                    ) {
+                        Spacer(modifier = modifier.height(6.dp))
+                        Text(
+                            text = (book.authors?.firstOrNull()?.name ?: "NI"),
+                            style = YacsaTheme.typography.caption,
+                            maxLines = 1,
+                            minLines = 1,
+                        )
+                        Spacer(modifier = modifier.height(6.dp))
+                        Text(
+                            text = (book.title ?: "NI"),
+                            style = YacsaTheme.typography.title,
+                            maxLines = 2,
+                            minLines = 2,
+                        )
+                        Spacer(modifier = modifier.height(6.dp))
+                        Row(
+                            modifier = modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.icon_archive_box_regular_16),
+                                contentDescription = null,
+                            )
+                            Spacer(modifier = modifier.width(4.dp))
+                            Text(
+                                text = book.downloadCount?.toString() ?: "NI",
+                                style = YacsaTheme.typography.caption,
+                            )
+                            IconToggleButton(
+                                checked = book.isFavourite == true,
+                                onCheckedChange = {
+                                    book.id?.let { id ->
+                                        onFavouriteMark(id, it)
+
+                                    }
+                                    /*checkedState.value = it */
+                                }) {
+
+                                Crossfade(
+                                    targetState = book.isFavourite == true
+                                ) { isChecked ->
+                                    if (isChecked == true) {
+                                        Icon(
+                                            painter = painterResource(id = R.drawable.icon_heart_fill_24),
+                                            contentDescription = null
+                                        )
+                                    } else {
+                                        Icon(
+                                            painter = painterResource(id = R.drawable.icon_heart_regulat_24),
+                                            contentDescription = null
+                                        )
+                                    }
+                                }
+                            }
 //                    if (book.isFavourite == true) {
 //                        Icon(
 //                            painter = painterResource(id = R.drawable.icon_heart_fill_24),
@@ -149,6 +178,8 @@ fun ItemFetchedList(
 //                            contentDescription = null
 //                        )
 //                    }
+                        }
+                    }
                 }
             }
         }
@@ -239,7 +270,7 @@ fun Preview_ListItem_Dark() {
                 true
             ),
             onItemContentClick = {},
-            onFavouriteMark = { _,_ ->
+            onFavouriteMark = { _, _ ->
 
             },
         )
@@ -266,7 +297,7 @@ fun Preview_ItemFetchedList_Light() {
                 true
             ),
             onItemContentClick = {},
-            onFavouriteMark = { _,_ ->
+            onFavouriteMark = { _, _ ->
 
             },
         )

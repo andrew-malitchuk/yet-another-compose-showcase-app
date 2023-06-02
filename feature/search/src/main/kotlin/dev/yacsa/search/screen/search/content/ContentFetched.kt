@@ -28,6 +28,7 @@ import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -48,12 +49,13 @@ import dev.yacsa.search.screen.search.content.result.ResultEmpty
 import dev.yacsa.search.screen.search.content.result.ResultError
 import dev.yacsa.search.screen.search.content.result.ResultFetched
 import dev.yacsa.search.screen.search.content.result.ResultIsLoading
+import dev.yacsa.search.screen.search.dialog.FilterDialog
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.button.TwoStateButton
-import dev.yacsa.ui.composable.card.ExpandableCard
 import dev.yacsa.ui.composable.divider.AnimatedDivider
 import dev.yacsa.ui.composable.keyboard.clearFocusOnKeyboardDismiss
 import dev.yacsa.ui.theme.YacsaTheme
+import logcat.logcat
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalPagerApi::class)
 @Composable
@@ -72,7 +74,24 @@ fun ContentFetched(
 
     val state = rememberLazyListState()
 
-    val checked = remember { mutableStateOf(false) }
+    val checked: MutableState<Boolean?> = remember {
+        mutableStateOf(null)
+    }
+
+    val showSheet: MutableState<Boolean?> = remember {
+        mutableStateOf(false)
+    }
+    if (showSheet.value==true) {
+        FilterDialog(
+            onDismiss = {
+                showSheet.value = false
+            },
+            onSort = {
+                logcat("foobar"){it.toString()}
+                showSheet.value = false
+            }
+        )
+    }
 
     Scaffold(
         modifier = Modifier
@@ -174,11 +193,11 @@ fun ContentFetched(
                                     top = 8.dp,
                                     bottom = 8.dp
                                 ),
-                                checkedState = checked,
+                                checkedState = showSheet,
                                 defaultIcon = R.drawable.icon_filter_regulat_24,
                                 selectedIcon = R.drawable.icon_filter_bold_24
                             ) {
-
+//                                showSheet.value=it
                             }
                         }
                         if (!uiState.topSearch.isNullOrEmpty()) {
@@ -197,14 +216,14 @@ fun ContentFetched(
                         }
                     }
 
-                    if (checked.value) {
-                        ExpandableCard(
-                            "Filter",
-                            YacsaTheme.colors.primaryText
-                        ) {
-                            ContentFilter()
-                        }
-                    }
+//                    if (checked.value==true) {
+//                        ExpandableCard(
+//                            "Filter",
+//                            YacsaTheme.colors.primaryText
+//                        ) {
+//                            ContentFilter()
+//                        }
+//                    }
 
                     if (uiState.isResultLoading) {
                         ResultIsLoading()
@@ -222,6 +241,11 @@ fun ContentFetched(
                             )
                         }
                     }
+//                    if (showSheet.value==true) {
+//                        FilterDialog() {
+//                            showSheet.value = false
+//                        }
+//                    }
                 }
             }
         }

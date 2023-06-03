@@ -130,8 +130,12 @@ class BooksRepositoryImpl @Inject constructor(
     }
     //
 
-    override suspend fun searchOnRemote(query: String): List<BookRepoModel> {
-        val result = booksNetSource.search(query)?.results ?: emptyList()
+    override suspend fun searchOnRemote(
+        query: String,
+        sort: String?,
+        lang: String?
+    ): List<BookRepoModel> {
+        val result = booksNetSource.search(query,sort,lang)?.results ?: emptyList()
         return result.filterNotNull().map(bookRepoNetMapper::toRepo)
     }
 

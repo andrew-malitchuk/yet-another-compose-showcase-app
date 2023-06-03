@@ -45,7 +45,8 @@ import dev.yacsa.ui.theme.YacsaTheme
 @Composable
 fun FilterDialog(
     onDismiss: () -> Unit,
-    onSort: (FilterDialogResult) -> Unit
+    onSort: (FilterDialogResult) -> Unit,
+    previousContent: FilterDialogResult?
 ) {
     val coroutineScope = rememberCoroutineScope()
     val modalBottomSheetState = rememberModalBottomSheetState()
@@ -56,32 +57,41 @@ fun FilterDialog(
         dragHandle = { BottomSheetDefaults.DragHandle() },
     ) {
         FilterDialogContent(
-            onSort
+            onSort,
+            previousContent
         )
     }
 
 }
 
-@OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class,
+@OptIn(
+    ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class,
     ExperimentalMaterialApi::class
 )
 @Composable
 fun FilterDialogContent(
-    onSort: (FilterDialogResult) -> Unit
+    onSort: (FilterDialogResult) -> Unit,
+    previousContent: FilterDialogResult?
 ) {
+
+    val prevLang = previousContent?.lang
+    val prevSort = previousContent?.sort
 
     val languages = listOf<String>("en", "fr", "ge")
     var chipState by remember { mutableStateOf("") }
 
     val filterResult = remember {
-        FilterDialogResult()
+        FilterDialogResult(
+            prevLang,
+            prevSort
+        )
     }
 
     Column(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
             .fillMaxSize()
-            .padding(vertical = 16.dp)
+            .padding(bottom = 16.dp)
 
     ) {
         Row(
@@ -114,12 +124,12 @@ fun FilterDialogContent(
                     FilterChip(
                         shape = RoundedCornerShape(corner = CornerSize(6.dp)),
                         // TODO: fix
-                        border = BorderStroke(1.dp,Color.Gray),
+                        border = BorderStroke(1.dp, Color.Gray),
                         onClick = {
                             filterResult.lang = it
                             chipState = it
                         },
-                        selected = (chipState == it),
+                        selected = (chipState == it) || (prevLang == it),
                         content = {
                             Text(
                                 text = it,
@@ -148,6 +158,7 @@ fun FilterDialogContent(
                 style = YacsaTheme.typography.caption,
             )
             RowToggleButtonGroup(
+                primarySelection =  filterResult.getSortIndex(prevSort)?:-1,
                 modifier = Modifier,
                 buttonCount = 3,
                 selectedColor = Color.Gray,
@@ -190,7 +201,22 @@ fun FilterDialogContent(
 data class FilterDialogResult(
     var lang: String? = null,
     var sort: String? = null
-)
+) {
+
+    private val sortTypes = arrayListOf<String>("ascending", "descending","popular")
+
+    fun getSortIndex(value:String?):Int?{
+        return if(sortTypes.contains(value)) {
+            sortTypes.indexOf(value)
+        }else{
+            null
+        }
+    }
+
+    fun isFulfilled(): Boolean {
+        return lang != null || sort != null
+    }
+}
 
 @Preview(showBackground = true)
 @Composable
@@ -199,7 +225,8 @@ fun Preview_FilterDialogContent() {
         FilterDialogContent(
             onSort = {
 
-            }
+            },
+            previousContent = null
         )
     }
 }

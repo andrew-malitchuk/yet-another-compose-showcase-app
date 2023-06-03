@@ -21,7 +21,11 @@ interface BooksRepository {
     suspend fun removePage(page: Int)
 
     //
-    suspend fun searchOnRemote(query: String): List<BookRepoModel>
+    suspend fun searchOnRemote(
+        query: String,
+        sort: String?,
+        lang: String?
+    ): List<BookRepoModel>
 
     suspend fun searchOnLocal(query: String): List<BookRepoModel>
 

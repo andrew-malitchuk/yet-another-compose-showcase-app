@@ -10,6 +10,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.yacsa.search.screen.search.content.ContentError
 import dev.yacsa.search.screen.search.content.ContentFetched
 import dev.yacsa.search.screen.search.content.ContentLoading
+import dev.yacsa.search.screen.search.dialog.FilterDialogResult
 import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
@@ -19,6 +20,8 @@ fun SearchRoute(
 ) {
     val uiState by searchViewModel.uiState.collectAsStateWithLifecycle()
     val searchText by searchViewModel.searchText.collectAsState()
+
+    val previousContent by searchViewModel.filterResult.collectAsState()
 
     SearchScreen(
         uiState,
@@ -30,6 +33,11 @@ fun SearchRoute(
         onDelete = {
             searchViewModel.acceptIntent(SearchIntent.ClearSearch)
         },
+        onFilterChanged = {
+            searchViewModel.filterResult.value=it
+            searchViewModel.acceptIntent(SearchIntent.Search(searchText))
+        },
+        previousContent= previousContent
     )
 }
 
@@ -40,6 +48,8 @@ fun SearchScreen(
     onValueChange: (String) -> Unit,
     onBookClicked: (Int) -> Unit,
     onDelete: () -> Unit,
+    onFilterChanged: (FilterDialogResult) -> Unit,
+    previousContent: FilterDialogResult?
 ) {
     val systemUiController = rememberSystemUiController()
     systemUiController.apply {
@@ -60,10 +70,16 @@ fun SearchScreen(
                 onValueChange = onValueChange,
                 onBookClicked = onBookClicked,
                 onDelete = onDelete,
+                onFilterChanged = onFilterChanged,
+                previousContent=previousContent
             )
         } else {
             if (uiState.isError) {
                 ContentError()
+            }else{
+                if(uiState.isResultLoading){
+                    ContentLoading()
+                }
             }
         }
     }
@@ -79,6 +95,8 @@ fun Preview_SearchScreen() {
             {},
             {},
             {},
+            {},
+            null
         )
     }
 }

@@ -15,9 +15,13 @@ class NewSearchBooksUseCaseImpl @Inject constructor(
     private val bookDomainRepoMapper: NewBookDomainRepoMapper,
 ) : NewSearchBooksUseCase {
 
-    override suspend fun invoke(query: String): Either<DomainError, List<BookDomainModel>> {
+    override suspend fun invoke(
+        query: String,
+        sort: String?,
+        lang: String?
+    ): Either<DomainError, List<BookDomainModel>> {
         return try {
-            val fromNet = booksRepository.searchOnRemote(query)
+            val fromNet = booksRepository.searchOnRemote(query, sort, lang)
             if (fromNet.isEmpty()) {
                 Either.Left(NoDataError)
             } else {

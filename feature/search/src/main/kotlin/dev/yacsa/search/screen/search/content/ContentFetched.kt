@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.Badge
+import androidx.compose.material.BadgedBox
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.OutlinedTextField
@@ -50,6 +52,7 @@ import dev.yacsa.search.screen.search.content.result.ResultError
 import dev.yacsa.search.screen.search.content.result.ResultFetched
 import dev.yacsa.search.screen.search.content.result.ResultIsLoading
 import dev.yacsa.search.screen.search.dialog.FilterDialog
+import dev.yacsa.search.screen.search.dialog.FilterDialogResult
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.button.TwoStateButton
 import dev.yacsa.ui.composable.divider.AnimatedDivider
@@ -66,6 +69,8 @@ fun ContentFetched(
     uiState: SearchUiState,
     onBookClicked: (Int) -> Unit,
     onDelete: () -> Unit,
+    onFilterChanged: (FilterDialogResult) -> Unit,
+    previousContent: FilterDialogResult?
 ) {
 
     val foo = rememberTopAppBarState()
@@ -74,22 +79,26 @@ fun ContentFetched(
 
     val state = rememberLazyListState()
 
-    val checked: MutableState<Boolean?> = remember {
-        mutableStateOf(null)
-    }
-
     val showSheet: MutableState<Boolean?> = remember {
         mutableStateOf(false)
     }
-    if (showSheet.value==true) {
+
+    val filterResult = remember {
+        mutableStateOf(false)
+    }
+
+    if (showSheet.value == true) {
         FilterDialog(
             onDismiss = {
                 showSheet.value = false
             },
             onSort = {
-                logcat("foobar"){it.toString()}
+                logcat("foobar") { it.toString() }
+                onFilterChanged(it)
+                filterResult.value = it.isFulfilled()
                 showSheet.value = false
-            }
+            },
+            previousContent = previousContent
         )
     }
 
@@ -147,8 +156,6 @@ fun ContentFetched(
                         .fillMaxSize()
                         .wrapContentHeight(),
                 ) {
-
-
                     Column {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
@@ -186,19 +193,43 @@ fun ContentFetched(
                                 singleLine = true,
                                 placeholder = { Text("Type to search...") },
                             )
-                            TwoStateButton(
+                            BadgedBox(
                                 modifier = Modifier.padding(
                                     start = 4.dp,
-                                    end = 8.dp,
+                                    end = 12.dp,
                                     top = 8.dp,
                                     bottom = 8.dp
                                 ),
-                                checkedState = showSheet,
-                                defaultIcon = R.drawable.icon_filter_regulat_24,
-                                selectedIcon = R.drawable.icon_filter_bold_24
+                                badge = {
+                                    if(filterResult.value){
+                                    Badge( )
+                                    }
+                                }
                             ) {
+                                TwoStateButton(
+                                    modifier = Modifier,
+                                    checkedState = showSheet,
+                                    defaultIcon = R.drawable.icon_filter_regulat_24,
+                                    selectedIcon = R.drawable.icon_filter_bold_24
+                                ) {
 //                                showSheet.value=it
+                                }
                             }
+//                            Box() {
+//                                TwoStateButton(
+//                                    modifier = Modifier.padding(
+//                                        start = 4.dp,
+//                                        end = 8.dp,
+//                                        top = 8.dp,
+//                                        bottom = 8.dp
+//                                    ),
+//                                    checkedState = showSheet,
+//                                    defaultIcon = R.drawable.icon_filter_regulat_24,
+//                                    selectedIcon = R.drawable.icon_filter_bold_24
+//                                ) {
+////                                showSheet.value=it
+//                                }
+//                            }
                         }
                         if (!uiState.topSearch.isNullOrEmpty()) {
                             // TODO: fix
@@ -264,6 +295,8 @@ fun Preview_ContentFetched() {
             uiState = SearchUiState(),
             onBookClicked = {},
             onDelete = {},
+            onFilterChanged = {},
+            previousContent=null
         )
     }
 }

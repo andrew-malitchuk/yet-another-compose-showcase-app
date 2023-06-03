@@ -12,6 +12,7 @@ import dev.yacsa.domain.usecase.history.NewInsertSearchHistoryUseCase
 import dev.yacsa.model.mapper.NewBooksUiDomainMapper
 import dev.yacsa.model.mapper.NewSearchHistoryUiDomainMapper
 import dev.yacsa.platform.viewmodel.BaseViewModel
+import dev.yacsa.search.screen.search.dialog.FilterDialogResult
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -38,6 +39,8 @@ class SearchViewModel @Inject constructor(
     initialState,
 ) {
     val searchText = MutableStateFlow("")
+
+    val filterResult = MutableStateFlow( FilterDialogResult() )
 
     init {
         logcat { "init" }
@@ -97,7 +100,8 @@ class SearchViewModel @Inject constructor(
     private fun search(query: String): Flow<SearchUiState.PartialState> =
         flow {
             insertSearchHistoryUseCase(query).fold({
-                searchBooksUseCase(query).fold(
+                val filter = filterResult.value
+                searchBooksUseCase(query,filter.sort,filter.lang).fold(
                     { error ->
                         when (error) {
                             is NoDataError -> {

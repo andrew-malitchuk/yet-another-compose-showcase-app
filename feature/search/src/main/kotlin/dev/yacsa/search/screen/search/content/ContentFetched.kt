@@ -98,7 +98,12 @@ fun ContentFetched(
                 filterResult.value = it.isFulfilled()
                 showSheet.value = false
             },
-            previousContent = previousContent
+            previousContent = previousContent,
+            onClear = {
+                onFilterChanged(FilterDialogResult())
+                filterResult.value = false
+                showSheet.value = false
+            }
         )
     }
 

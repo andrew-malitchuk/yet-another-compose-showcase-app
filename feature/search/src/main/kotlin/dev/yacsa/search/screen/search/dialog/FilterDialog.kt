@@ -1,7 +1,6 @@
 package dev.yacsa.search.screen.search.dialog
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -18,11 +17,13 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FilterChip
+import androidx.compose.material.Icon
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -46,7 +47,8 @@ import dev.yacsa.ui.theme.YacsaTheme
 fun FilterDialog(
     onDismiss: () -> Unit,
     onSort: (FilterDialogResult) -> Unit,
-    previousContent: FilterDialogResult?
+    previousContent: FilterDialogResult?,
+    onClear:()->Unit
 ) {
     val coroutineScope = rememberCoroutineScope()
     val modalBottomSheetState = rememberModalBottomSheetState()
@@ -58,7 +60,8 @@ fun FilterDialog(
     ) {
         FilterDialogContent(
             onSort,
-            previousContent
+            previousContent,
+            onClear
         )
     }
 
@@ -71,7 +74,8 @@ fun FilterDialog(
 @Composable
 fun FilterDialogContent(
     onSort: (FilterDialogResult) -> Unit,
-    previousContent: FilterDialogResult?
+    previousContent: FilterDialogResult?,
+    onClear:()->Unit
 ) {
 
     val prevLang = previousContent?.lang
@@ -99,12 +103,18 @@ fun FilterDialogContent(
                 .fillMaxWidth()
                 .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
         ) {
             androidx.compose.material.Text(
                 text = "Filter stuff",
                 style = YacsaTheme.typography.heading,
             )
+            Spacer(modifier = Modifier.weight(1f))
+            SmallFloatingActionButton(onClick = { onClear()}) {
+                Icon(
+                    painter = painterResource(id = R.drawable.icon_trash_regular_24),
+                    contentDescription = null,
+                )
+            }
         }
         Divider(modifier = Modifier.fillMaxWidth())
         Spacer(modifier = Modifier.height(16.dp))
@@ -226,7 +236,8 @@ fun Preview_FilterDialogContent() {
             onSort = {
 
             },
-            previousContent = null
+            previousContent = null,
+            {}
         )
     }
 }

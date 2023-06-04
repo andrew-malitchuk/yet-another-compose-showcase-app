@@ -21,5 +21,7 @@ interface BooksApiService {
     @GET("/books")
     suspend fun search(
         @Query("search") search: String,
+        @Query("sort") sort: String?,
+        @Query("languages") lang: String?,
     ): ResultNetModel?
 }

@@ -7,18 +7,22 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import dev.yacsa.search.screen.search.content.ContentError
 import dev.yacsa.search.screen.search.content.ContentFetched
-import dev.yacsa.search.screen.search.content.ContentLoading
+import dev.yacsa.search.screen.search.content.result.ResultIsLoading
+import dev.yacsa.search.screen.search.dialog.FilterDialogResult
+import dev.yacsa.ui.composable.content.ContentError
 import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
 fun SearchRoute(
     searchViewModel: SearchViewModel = hiltViewModel(),
     onBookClicked: (Int) -> Unit,
+    onBackClick:()->Unit
 ) {
     val uiState by searchViewModel.uiState.collectAsStateWithLifecycle()
     val searchText by searchViewModel.searchText.collectAsState()
+
+    val previousContent by searchViewModel.filterResult.collectAsState()
 
     SearchScreen(
         uiState,
@@ -30,6 +34,12 @@ fun SearchRoute(
         onDelete = {
             searchViewModel.acceptIntent(SearchIntent.ClearSearch)
         },
+        onFilterChanged = {
+            searchViewModel.filterResult.value=it
+            searchViewModel.acceptIntent(SearchIntent.Search(searchText))
+        },
+        previousContent= previousContent,
+        onBackClick=onBackClick
     )
 }
 
@@ -40,6 +50,9 @@ fun SearchScreen(
     onValueChange: (String) -> Unit,
     onBookClicked: (Int) -> Unit,
     onDelete: () -> Unit,
+    onFilterChanged: (FilterDialogResult) -> Unit,
+    previousContent: FilterDialogResult?,
+    onBackClick:()->Unit
 ) {
     val systemUiController = rememberSystemUiController()
     systemUiController.apply {
@@ -51,7 +64,7 @@ fun SearchScreen(
         )
     }
     if (uiState.isContentLoading) {
-        ContentLoading()
+        ResultIsLoading()
     } else {
         if (!uiState.isContentLoading && uiState.topSearch != null) {
             ContentFetched(
@@ -60,10 +73,18 @@ fun SearchScreen(
                 onValueChange = onValueChange,
                 onBookClicked = onBookClicked,
                 onDelete = onDelete,
+                onFilterChanged = onFilterChanged,
+                previousContent=previousContent,
+                onBackClick=    onBackClick
+
             )
         } else {
             if (uiState.isError) {
-                ContentError()
+                ContentError(errorMessage = "Moshi moshi?")
+            }else{
+                if(uiState.isResultLoading){
+                    ResultIsLoading()
+                }
             }
         }
     }
@@ -79,6 +100,9 @@ fun Preview_SearchScreen() {
             {},
             {},
             {},
+            {},
+            null,
+            {}
         )
     }
 }

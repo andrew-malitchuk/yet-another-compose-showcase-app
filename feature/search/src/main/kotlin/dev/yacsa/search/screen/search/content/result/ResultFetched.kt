@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -29,8 +30,8 @@ fun ResultFetched(
     modifier: Modifier = Modifier,
     resultSearch: List<BookUiModel>,
     onBookClicked: (Int) -> Unit,
+    state:LazyListState
 ) {
-    val state = rememberLazyListState()
     val isVisible = state.canScrollBackward
     val corner = animateDpAsState(
         targetValue = if (!isVisible) 16.dp else 0.dp,
@@ -53,15 +54,11 @@ fun ResultFetched(
         ) {
             LazyColumn(
                 state = state,
-                verticalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = modifier
                     .fillMaxSize(),
-                contentPadding = PaddingValues(
-                    start = 16.dp,
-                    bottom = 16.dp,
-                    end = 16.dp,
-                    top = 8.dp,
-                ),
+                // TODO: fix
+                contentPadding = PaddingValues(8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 items(items = resultSearch) { item ->
                     ItemFetchedList(
@@ -84,6 +81,7 @@ fun Preview_ResultFetched() {
         ResultFetched(
             resultSearch = emptyList(),
             onBookClicked = {},
+            state = rememberLazyListState()
         )
     }
 }

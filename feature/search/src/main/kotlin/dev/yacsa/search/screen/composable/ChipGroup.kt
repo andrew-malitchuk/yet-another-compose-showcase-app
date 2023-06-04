@@ -21,7 +21,7 @@ fun ChipGroup(
     defaultColor: Color,
     selectedColor: Color,
     onSelectedChanged: (String) -> Unit = {},
-    onDelete: () -> Unit,
+    onDelete: (() -> Unit)?=null,
 ) {
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -43,7 +43,7 @@ fun ChipGroup(
                 },
             )
         }
-        if (!values.isNullOrEmpty()) {
+        if (!values.isNullOrEmpty() && onDelete!=null) {
             item {
                 AssistChip(
                     onClick = {

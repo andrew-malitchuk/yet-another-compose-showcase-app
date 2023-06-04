@@ -22,6 +22,9 @@ fun NavGraphBuilder.searchNavGraph(navController: NavHostController) {
                         launchSingleTop = true
                     }
                 },
+                onBackClick = {
+                    navController.popBackStack()
+                }
             )
         }
     }

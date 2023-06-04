@@ -45,10 +45,14 @@ interface BookDbDao {
             FROM
                 ${YacsaDb.Table.BOOK}
             WHERE
-                (title LIKE '%' || :query || '%')
+                (title LIKE '%' || :query || '%') ||
+                (languages LIKE '%' || :lang || '%')
         """,
     )
-    fun search(query: String): List<BookDbModel>
+    fun search(
+        query: String,
+        lang: String?
+    ): List<BookDbModel>
 
     @Query(
         """

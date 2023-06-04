@@ -29,7 +29,7 @@ class NewSearchBooksUseCaseImpl @Inject constructor(
             }
         } catch (ex: Exception) {
             try {
-                val fromDb = booksRepository.searchOnLocal(query)
+                val fromDb = booksRepository.searchOnLocal(query,sort,lang)
                 if (fromDb.isEmpty()) {
                     Either.Left(NoDataError)
                 } else {

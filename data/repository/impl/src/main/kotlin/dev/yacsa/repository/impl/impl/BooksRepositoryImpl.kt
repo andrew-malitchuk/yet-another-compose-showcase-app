@@ -139,8 +139,12 @@ class BooksRepositoryImpl @Inject constructor(
         return result.filterNotNull().map(bookRepoNetMapper::toRepo)
     }
 
-    override suspend fun searchOnLocal(query: String): List<BookRepoModel> {
-        val result = bookDbSource.search(query)
+    override suspend fun searchOnLocal(
+        query: String,
+        sort: String?,
+        lang: String?
+    ): List<BookRepoModel> {
+        val result = bookDbSource.search(query,sort,lang)
         return result.map(bookRepoDbMapper::toRepo)
     }
 

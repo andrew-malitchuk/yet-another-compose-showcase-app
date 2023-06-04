@@ -19,13 +19,15 @@ class NewInsertSearchHistoryUseCaseImpl @Inject constructor(
 
     override suspend fun invoke(value: String): Option<DomainError> {
         return try {
-            searchHistoryRepository.insert(
-                searchHistoryDomainRepoMapper.toRepo(
-                    SearchHistoryDomainModel(
-                        value,
+            if (value.isNotBlank()) {
+                searchHistoryRepository.insert(
+                    searchHistoryDomainRepoMapper.toRepo(
+                        SearchHistoryDomainModel(
+                            value,
+                        ),
                     ),
-                ),
-            )
+                )
+            }
             none()
         } catch (ex: Exception) {
             DataError(ex).some()

@@ -19,12 +19,26 @@ class BookDbSourceImpl @Inject constructor(
         booksDao.removePage(page)
     }
 
-    override suspend fun search(query: String): List<BookDbModel> {
-        return booksDao.search(query)
+    override suspend fun search(
+        query: String,
+        sort: String?,
+        lang: String?
+    ): List<BookDbModel> {
+       return  when(sort){
+            "ascending" ->  booksDao.search(query, lang).sortedBy { it.title }
+           "descending" ->  booksDao.search(query, lang).sortedByDescending { it.title }
+           else-> booksDao.search(query, lang)
+       }
     }
 
-    override suspend fun markFavourite(id:Int, isFavourite: Boolean) {
-        booksDao.markFavourite(id,if(isFavourite){1}else{0})
+    override suspend fun markFavourite(id: Int, isFavourite: Boolean) {
+        booksDao.markFavourite(
+            id, if (isFavourite) {
+                1
+            } else {
+                0
+            }
+        )
     }
 
     override suspend fun getFavourite(): Flow<List<BookDbModel>?> {

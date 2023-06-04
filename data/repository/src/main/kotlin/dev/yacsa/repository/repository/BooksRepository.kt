@@ -27,7 +27,11 @@ interface BooksRepository {
         lang: String?
     ): List<BookRepoModel>
 
-    suspend fun searchOnLocal(query: String): List<BookRepoModel>
+    suspend fun searchOnLocal(
+        query: String,
+        sort: String?,
+        lang: String?
+    ): List<BookRepoModel>
 
     suspend fun markFavourite(id:Int, favourite:Boolean)
 

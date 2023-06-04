@@ -1,6 +1,7 @@
 package dev.yacsa.search.screen.search.content
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -29,12 +30,12 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import dev.yacsa.search.screen.composable.ChipGroup
 import dev.yacsa.search.screen.composable.SearchToolbar
 import dev.yacsa.search.screen.search.SearchUiState
-import dev.yacsa.search.screen.search.content.result.ResultEmpty
-import dev.yacsa.search.screen.search.content.result.ResultError
 import dev.yacsa.search.screen.search.content.result.ResultFetched
 import dev.yacsa.search.screen.search.content.result.ResultIsLoading
 import dev.yacsa.search.screen.search.dialog.FilterDialog
 import dev.yacsa.search.screen.search.dialog.FilterDialogResult
+import dev.yacsa.ui.composable.content.ContentError
+import dev.yacsa.ui.composable.content.ContentNoData
 import dev.yacsa.ui.composable.keyboard.clearFocusOnKeyboardDismiss
 import dev.yacsa.ui.theme.YacsaTheme
 import logcat.logcat
@@ -49,7 +50,8 @@ fun ContentFetched(
     onBookClicked: (Int) -> Unit,
     onDelete: () -> Unit,
     onFilterChanged: (FilterDialogResult) -> Unit,
-    previousContent: FilterDialogResult?
+    previousContent: FilterDialogResult?,
+    onBackClick:()->Unit
 ) {
 
     val foo = rememberTopAppBarState()
@@ -91,7 +93,7 @@ fun ContentFetched(
         SearchToolbar(
             state = listState,
             onBackClick = {
-
+                onBackClick()
             },
             onFilterClick = {
 
@@ -152,9 +154,9 @@ fun ContentFetched(
         } else {
             if (uiState.resultSearch.isNullOrEmpty()) {
                 if (uiState.isError) {
-                    ResultError()
+                    ContentError(errorMessage = "Moshi moshi?")
                 } else {
-                    ResultEmpty()
+                    ContentNoData(modifier = Modifier.fillMaxSize(),message = "Nothing to show(")
                 }
             } else {
                 ResultFetched(
@@ -164,190 +166,7 @@ fun ContentFetched(
                 )
             }
         }
-
-
     }
-
-
-//    Scaffold(
-//        modifier = Modifier
-//            .nestedScroll(scrollBehavior.nestedScrollConnection),
-//        topBar = {
-//            LargeTopAppBar(
-//                title = {
-//                    Row(
-//                        verticalAlignment = Alignment.CenterVertically,
-//                    ) {
-//                        // TODO: fix
-//                        Text(text = "Search", style = YacsaTheme.typography.heading)
-//                        Spacer(modifier = Modifier.width(8.dp))
-//                        Icon(
-//                            painterResource(id = R.drawable.icon_search_bold_24),
-//                            contentDescription = null,
-//                        )
-//                    }
-//                },
-//                navigationIcon = {
-//                    SmallFloatingActionButton(onClick = { /*onBackClick()*/ }) {
-//                        Icon(
-//                            painter = painterResource(id = R.drawable.icon_caret_left_regular_24),
-//                            contentDescription = null,
-//                        )
-//                    }
-//                },
-//                scrollBehavior = scrollBehavior,
-//                colors = TopAppBarDefaults.largeTopAppBarColors(
-//                    containerColor = YacsaTheme.colors.primaryBackground,
-//                ),
-//            )
-//            Column {
-//                Spacer(modifier = Modifier.height(64.dp))
-//                AnimatedDivider(state = state)
-//            }
-//        },
-//    ) { innerPadding ->
-//        val corner = 16.dp - (16.dp * Math.abs(foo.collapsedFraction))
-//        Box(
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .padding(innerPadding),
-//        ) {
-//            Box(
-//                modifier = Modifier
-//                    .fillMaxSize()
-//                    .clip(RoundedCornerShape(topStart = corner, topEnd = corner))
-//                    .background(Color(0xFFE0DFFD)),
-//            ) {
-//                Column(
-//                    modifier = Modifier
-//                        .fillMaxSize()
-//                        .wrapContentHeight(),
-//                ) {
-//                    Column {
-//                        Row(
-//                            modifier = Modifier.fillMaxWidth(),
-//                            verticalAlignment = Alignment.CenterVertically
-//                        ) {
-//                            OutlinedTextField(
-//                                modifier = Modifier
-//                                    .weight(1f)
-//                                    .padding(start = 8.dp, end = 4.dp, top = 8.dp, bottom = 8.dp)
-//                                    .clearFocusOnKeyboardDismiss(),
-//                                value = searchText,
-//                                onValueChange = onValueChange,
-//                                keyboardOptions = KeyboardOptions(
-//                                    capitalization = KeyboardCapitalization.None,
-//                                    autoCorrect = true,
-//                                    keyboardType = KeyboardType.Text,
-//                                    imeAction = ImeAction.Search,
-//                                ),
-//                                leadingIcon = {
-//                                    Icon(
-//                                        imageVector = Icons.Outlined.Search,
-//                                        contentDescription = null
-//                                    )
-//                                },
-//                                trailingIcon = {
-//                                    IconButton(onClick = {
-//                                        onValueChange("")
-//                                    }) {
-//                                        Icon(
-//                                            imageVector = Icons.Outlined.Delete,
-//                                            contentDescription = null
-//                                        )
-//                                    }
-//                                },
-//                                singleLine = true,
-//                                placeholder = { Text("Type to search...") },
-//                            )
-//                            BadgedBox(
-//                                modifier = Modifier.padding(
-//                                    start = 4.dp,
-//                                    end = 12.dp,
-//                                    top = 8.dp,
-//                                    bottom = 8.dp
-//                                ),
-//                                badge = {
-//                                    if(filterResult.value){
-//                                    Badge( )
-//                                    }
-//                                }
-//                            ) {
-//                                TwoStateButton(
-//                                    modifier = Modifier,
-//                                    checkedState = showSheet,
-//                                    defaultIcon = R.drawable.icon_filter_regulat_24,
-//                                    selectedIcon = R.drawable.icon_filter_bold_24
-//                                ) {
-////                                showSheet.value=it
-//                                }
-//                            }
-////                            Box() {
-////                                TwoStateButton(
-////                                    modifier = Modifier.padding(
-////                                        start = 4.dp,
-////                                        end = 8.dp,
-////                                        top = 8.dp,
-////                                        bottom = 8.dp
-////                                    ),
-////                                    checkedState = showSheet,
-////                                    defaultIcon = R.drawable.icon_filter_regulat_24,
-////                                    selectedIcon = R.drawable.icon_filter_bold_24
-////                                ) {
-//////                                showSheet.value=it
-////                                }
-////                            }
-//                        }
-//                        if (!uiState.topSearch.isNullOrEmpty()) {
-//                            // TODO: fix
-//                            ChipGroup(
-//                                values = uiState.topSearch.map { it.query ?: "" },
-//                                defaultColor = YacsaTheme.colors.primaryText,
-//                                selectedColor = YacsaTheme.colors.statusBarColor,
-//                                onSelectedChanged = {
-//                                    onValueChange(it)
-//                                },
-//                                onDelete = {
-//                                    onDelete()
-//                                },
-//                            )
-//                        }
-//                    }
-//
-////                    if (checked.value==true) {
-////                        ExpandableCard(
-////                            "Filter",
-////                            YacsaTheme.colors.primaryText
-////                        ) {
-////                            ContentFilter()
-////                        }
-////                    }
-//
-//                    if (uiState.isResultLoading) {
-//                        ResultIsLoading()
-//                    } else {
-//                        if (uiState.resultSearch.isNullOrEmpty()) {
-//                            if (uiState.isError) {
-//                                ResultError()
-//                            } else {
-//                                ResultEmpty()
-//                            }
-//                        } else {
-//                            ResultFetched(
-//                                resultSearch = uiState.resultSearch,
-//                                onBookClicked = onBookClicked,
-//                            )
-//                        }
-//                    }
-////                    if (showSheet.value==true) {
-////                        FilterDialog() {
-////                            showSheet.value = false
-////                        }
-////                    }
-//                }
-//            }
-//        }
-//    }
 
 }
 
@@ -362,7 +181,8 @@ fun Preview_ContentFetched() {
             onBookClicked = {},
             onDelete = {},
             onFilterChanged = {},
-            previousContent = null
+            previousContent = null,
+            onBackClick={}
         )
     }
 }

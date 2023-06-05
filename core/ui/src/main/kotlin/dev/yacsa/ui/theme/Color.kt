@@ -1,65 +1,45 @@
 package dev.yacsa.ui.theme
 
-/**
- * Primary - most frequently displayed color across the app.
- * Secondary - accent color.
- *
- * Primary variant -
- * Secondary variant -
- *
- * Surface -
- * Background -
- * Error -
- *
- * On Primary -
- * On Secondary -
- * On Background -
- * On Surface -
- * On Error -
- */
-
 import androidx.compose.ui.graphics.Color
 
+// TODO: fix
+
 //region Light colors
-val yacsa_theme_light_primary = Color(0xFF6750A4)
-val yacsa_theme_light_onPrimary = Color(0xFFFFFFFF)
-val yacsa_theme_light_secondary = Color(0xFF625B71)
-val yacsa_theme_light_onSecondary = Color(0xFFFFFFFF)
-val yacsa_theme_light_error = Color(0xFFBA1A1A)
-val yacsa_theme_light_onError = Color(0xFFFFFFFF)
-val yacsa_theme_light_background = Color(0xFFFFFBFF)
-val yacsa_theme_light_onBackground = Color(0xFF1C1B1E)
-val yacsa_theme_light_surface = Color(0xFFFFFBFF)
-val yacsa_theme_light_onSurface = Color(0xFF1C1B1E)
+val yacsa_theme_light_background = Color(0xFFFFFFFF)
+val yacsa_theme_light_surface = Color(0xFFF7EFE7)
+val yacsa_theme_light_accent = Color(0xFFF77A36)
+val yacsa_theme_light_primary = Color(0xFF62516D)
+val yacsa_theme_light_secondary = Color(0xFF222222)
+val yacsa_theme_light_bar_status = Color(0xFFFFFFFF)
+val yacsa_theme_light_bar_navigation = Color(0xFFCCCCCC)
 //endregion Light colors
 
 //region Dark colors
-val yacsa_theme_dark_primary = Color(0xFFCFBCFF)
-val yacsa_theme_dark_onPrimary = Color(0xFF381E72)
-val yacsa_theme_dark_secondary = Color(0xFFCBC2DB)
-val yacsa_theme_dark_onSecondary = Color(0xFF332D41)
-val yacsa_theme_dark_error = Color(0xFFFFB4AB)
-val yacsa_theme_dark_onError = Color(0xFF690005)
-val yacsa_theme_dark_background = Color(0xFF1C1B1E)
-val yacsa_theme_dark_onBackground = Color(0xFFE6E1E6)
-val yacsa_theme_dark_surface = Color(0xFF1C1B1E)
-val yacsa_theme_dark_onSurface = Color(0xFFE6E1E6)
+val yacsa_theme_dark_background = Color(0xFF000000)
+val yacsa_theme_dark_surface = Color(0xFF222022)
+val yacsa_theme_dark_accent = Color(0xFFF77A36)
+val yacsa_theme_dark_primary = Color(0xFFFFFFFF)
+val yacsa_theme_dark_secondary = Color(0xFFCECECE)
+val yacsa_theme_dark_bar_status = Color(0xFF000000)
+val yacsa_theme_dark_bar_navigation = Color(0xFF8F9491)
 //endregion Dark colors
 
 val baseLightColorPalette = YacsaColors(
-    primaryText = yacsa_theme_light_primary,
-    primaryBackground = yacsa_theme_light_background,
-    secondaryText = yacsa_theme_light_secondary,
-    secondaryBackground = yacsa_theme_light_onSecondary,
-    tintColor = yacsa_theme_light_onSurface,
-    statusBarColor = yacsa_theme_light_background,
+    background = yacsa_theme_light_background,
+    surface = yacsa_theme_light_surface,
+    accent = yacsa_theme_light_accent,
+    primary = yacsa_theme_light_primary,
+    secondary = yacsa_theme_light_secondary,
+    statusBar = yacsa_theme_light_bar_status,
+    navigationBar = yacsa_theme_light_bar_navigation
 )
 
 val baseDarkColorPalette = YacsaColors(
-    primaryText = yacsa_theme_dark_primary,
-    primaryBackground = yacsa_theme_dark_background,
-    secondaryText = yacsa_theme_dark_secondary,
-    secondaryBackground = yacsa_theme_dark_onSecondary,
-    tintColor = yacsa_theme_dark_onSurface,
-    statusBarColor = yacsa_theme_dark_background,
+    background = yacsa_theme_dark_background,
+    surface = yacsa_theme_dark_surface,
+    accent = yacsa_theme_dark_accent,
+    primary = yacsa_theme_dark_primary,
+    secondary = yacsa_theme_dark_secondary,
+    statusBar = yacsa_theme_dark_bar_status,
+    navigationBar = yacsa_theme_dark_bar_navigation
 )

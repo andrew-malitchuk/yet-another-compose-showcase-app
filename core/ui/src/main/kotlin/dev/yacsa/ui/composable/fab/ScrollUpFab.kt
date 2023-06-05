@@ -37,7 +37,7 @@ fun ScrollUpFab(
     ) {
         FloatingActionButton(
             onClick = { onClick() },
-            backgroundColor = YacsaTheme.colors.primaryText,
+            backgroundColor = YacsaTheme.colors.accent,
         ) {
             androidx.compose.material3.Icon(
                 painter = painterResource(id = R.drawable.icon_arrow_up_regular_24),

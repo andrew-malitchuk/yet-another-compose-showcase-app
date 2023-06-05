@@ -1,3 +1,10 @@
 package dev.yacsa.ui.theme
 
-class Shape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.unit.dp
+
+
+val shapes = YacsaShape(
+    padding = 0.dp,
+    cornersStyle = RoundedCornerShape(16.dp)
+)

@@ -5,20 +5,24 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 val typography = YacsaTypography(
-    heading = TextStyle(
+    header = TextStyle(
         fontSize = 24.sp,
         fontWeight = FontWeight.Bold,
     ),
-    title = TextStyle(
-        fontSize = 16.sp,
+    caption = TextStyle(
+        fontSize = 18.sp,
         fontWeight = FontWeight.Bold,
+    ),
+    description = TextStyle(
+        fontSize = 16.sp,
+        fontWeight = FontWeight.Normal,
+    ),
+    title = TextStyle(
+        fontSize = 14.sp,
+        fontWeight = FontWeight.SemiBold
     ),
     body = TextStyle(
         fontSize = 14.sp,
-        fontWeight = FontWeight.Normal,
-    ),
-    caption = TextStyle(
-        fontSize = 14.sp,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.Normal
     ),
 )

@@ -33,6 +33,7 @@ fun TwoStateButton(
         onClick = {
             onButtonClick(checkedState.value?:false)
         },
+        containerColor = YacsaTheme.colors.primary
     ) {
         IconToggleButton(checked = checkedState.value?:false, onCheckedChange = { checkedState.value = it }) {
 
@@ -41,10 +42,10 @@ fun TwoStateButton(
             ) { isChecked ->
                 if (isChecked==true) {
                     Icon(
-                        painter = painterResource(id = selectedIcon), contentDescription = null)
+                        painter = painterResource(id = selectedIcon), contentDescription = null, tint = YacsaTheme.colors.accent)
                 } else {
                     Icon(
-                        painter = painterResource(id = defaultIcon), contentDescription = null)
+                        painter = painterResource(id = defaultIcon), contentDescription = null,tint = YacsaTheme.colors.accent)
                 }
             }
         }

@@ -10,10 +10,13 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import dev.yacsa.datastore.impl.dao.PreferencesDataStoreDao
 import dev.yacsa.datastore.impl.dao.StartupConfigureDataStoreDao
+import dev.yacsa.datastore.impl.dao.ThemeConfigureDataStoreDao.Companion.THEME_CONFIGURE_DATASTORE_FILENAME
 import dev.yacsa.datastore.impl.serializer.PreferencesSerializer
 import dev.yacsa.datastore.impl.serializer.StartupConfigureSerializer
+import dev.yacsa.datastore.impl.serializer.ThemeConfigureSerializer
 import dev.yacsa.datastore.model.PreferencesDataStoreModel
 import dev.yacsa.datastore.model.StartUpConfigureDataStoreModel
+import dev.yacsa.datastore.model.ThemeConfigureDataStoreModel
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -33,6 +36,12 @@ class DataStoreModule {
         PreferencesSerializer,
     )
 
+    @Singleton
+    private val Context.themeConfigureDataStore by dataStore(
+        THEME_CONFIGURE_DATASTORE_FILENAME,
+        ThemeConfigureSerializer,
+    )
+
     @Provides
     @Named("startUpConfigureDataStore")
     fun providesDataStoreStartUpConfigure(
@@ -48,4 +57,13 @@ class DataStoreModule {
     ): DataStore<PreferencesDataStoreModel> {
         return applicationContext.preferencesDataStore
     }
+
+    @Provides
+    @Named("themeConfigureDataStore")
+    fun providesThemeConfigureDataStore(
+        @ApplicationContext applicationContext: Context,
+    ): DataStore<ThemeConfigureDataStoreModel> {
+        return applicationContext.themeConfigureDataStore
+    }
+
 }

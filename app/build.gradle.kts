@@ -23,7 +23,6 @@ android {
 
 dependencies {
     implementation(project(":feature:books"))
-    implementation(project(":feature:format"))
     implementation(project(":feature:main"))
     implementation(project(":feature:person"))
     implementation(project(":feature:navigation"))

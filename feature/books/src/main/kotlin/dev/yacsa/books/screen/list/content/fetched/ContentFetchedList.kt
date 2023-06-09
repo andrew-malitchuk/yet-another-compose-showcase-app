@@ -14,7 +14,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
@@ -49,15 +48,15 @@ fun ContentFetchedList(
         modifier = Modifier
             .fillMaxSize()
             .clip(RoundedCornerShape(topStart = corner.value, topEnd = corner.value))
-            .background(Color(0xFFE0DFFD)),
+            .background(YacsaTheme.colors.surface),
     ) {
         LazyColumn(
             state = listState,
             modifier = modifier
                 .fillMaxSize(),
             // TODO: fix
-            contentPadding = PaddingValues(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+            contentPadding = PaddingValues(YacsaTheme.spacing.small),
+            verticalArrangement = Arrangement.spacedBy(YacsaTheme.spacing.small),
         ) {
             items(
                 lazyPagingItems,

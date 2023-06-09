@@ -19,7 +19,6 @@ rootProject.name = "YACSA"
 
 include(":app")
 include(":feature:books")
-include(":feature:format")
 include(":feature:person")
 include(":feature:main")
 include(":feature:navigation")

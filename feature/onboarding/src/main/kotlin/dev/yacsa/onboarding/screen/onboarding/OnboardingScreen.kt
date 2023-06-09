@@ -3,8 +3,6 @@ package dev.yacsa.onboarding.screen.onboarding
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.KeyboardArrowLeft
 import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -14,25 +12,62 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.pager.*
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.yacsa.onboarding.screen.onboarding.item.OnboardingItem
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
+import dev.yacsa.ui.theme.detectThemeMode
 import kotlinx.coroutines.launch
 
+@Composable
+fun OnboardingRoute(
+    onboardingViewModel: OnboardingViewModel = hiltViewModel(),
+    onBackClick: () -> Unit,
+    onDoneClick: () -> Unit,
+) {
+
+    val onboardingViewModel: OnboardingViewModel = hiltViewModel()
+
+    val currentTheme  by onboardingViewModel.currentTheme
+    val isDarkTheme = currentTheme?.detectThemeMode()?:false
+
+    YacsaTheme(isDarkTheme) {
+        OnboardingScreen(
+            onBackClick,
+            onDoneClick,
+            onboardingViewModel
+        )
+    }
+
+}
+
+// TODO: fix & add route
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun OnboardingScreen(
     onBackClick: () -> Unit,
     onDoneClick: () -> Unit,
-    onboardingViewModel: OnboardingViewModel = hiltViewModel(),
+    onboardingViewModel: OnboardingViewModel
 ) {
+
     val state = rememberPagerState()
     val scope = rememberCoroutineScope()
+
+    val systemUiController = rememberSystemUiController()
+
+    with(systemUiController) {
+        setSystemBarsColor(
+            color = YacsaTheme.colors.background
+        )
+        setNavigationBarColor(
+            color = YacsaTheme.colors.background
+        )
+    }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = YacsaTheme.colors.primaryBackground),
+            .background(color = YacsaTheme.colors.background),
     ) {
         TopSection(
             buttonType = onboardingViewModel.buttonType,
@@ -73,7 +108,7 @@ fun OnboardingScreen(
                 )
             }
         }
-        Spacer(modifier = Modifier.height(6.dp))
+        Spacer(modifier = Modifier.height(YacsaTheme.spacing.small))
         BottomSection(state)
     }
 }
@@ -87,22 +122,16 @@ fun TopSection(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(12.dp),
+            .padding(YacsaTheme.spacing.medium),
     ) {
-        IconButton(
-            onClick = onBackClick,
-            modifier = Modifier.align(Alignment.CenterStart),
+        SmallFloatingActionButton(
+            onClick = { onBackClick() },
+            containerColor = YacsaTheme.colors.accent
         ) {
-            Icon(
-                imageVector = Icons.Outlined.KeyboardArrowLeft,
-                contentDescription = null,
-                tint = YacsaTheme.colors.primaryText,
-            )
-        }
-        SmallFloatingActionButton(onClick = { onBackClick() }) {
             Icon(
                 painter = painterResource(id = R.drawable.icon_caret_left_regular_24),
                 contentDescription = null,
+                tint = YacsaTheme.colors.primary
             )
         }
         TextButton(
@@ -118,7 +147,8 @@ fun TopSection(
             Text(
                 // TODO: move
                 text = textForButton,
-                color = YacsaTheme.colors.primaryText,
+                style = YacsaTheme.typography.title,
+                color = YacsaTheme.colors.primary,
             )
         }
     }
@@ -133,8 +163,8 @@ fun BottomSection(state: PagerState) {
     ) {
         HorizontalPagerIndicator(
             pagerState = state,
-            activeColor = YacsaTheme.colors.primaryText,
-            inactiveColor = YacsaTheme.colors.secondaryText,
+            activeColor = YacsaTheme.colors.accent,
+            inactiveColor = YacsaTheme.colors.primary,
             modifier = Modifier
                 .align(Alignment.CenterVertically)
                 .padding(bottom = 16.dp),

@@ -32,6 +32,7 @@ fun YacsaTheme(
         LocalYacsaTypography provides typography,
         LocalYacsaSpacing provides spacing,
         LocalYacsaShape provides shapes,
+        LocalYacsaDividers provides dividers,
         content = content,
 
     )

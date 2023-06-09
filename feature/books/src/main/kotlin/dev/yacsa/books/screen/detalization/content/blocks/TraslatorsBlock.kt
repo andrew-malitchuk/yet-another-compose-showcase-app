@@ -27,6 +27,7 @@ fun TranslatorsBlock(
             modifier = Modifier.fillMaxWidth(),
             text = "Translators",
             style = YacsaTheme.typography.title,
+            color = YacsaTheme.colors.primary,
             maxLines = 1,
             minLines = 1,
             textAlign = TextAlign.Start,

@@ -17,7 +17,6 @@ import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -47,14 +46,14 @@ fun ContentFetched(
     when {
         uiState.isLoading -> {
             systemUiController.setNavigationBarColor(
-                color = YacsaTheme.colors.statusBarColor,
+                color = YacsaTheme.colors.navigationBar,
             )
             ContentIsLoading()
         }
 
         uiState.isError -> {
             systemUiController.setNavigationBarColor(
-                color = Color(0xFFE0DFFD),
+                color = YacsaTheme.colors.statusBar,
             )
             ContentError(
                 errorMessage = "Moshi moshi?"
@@ -63,22 +62,22 @@ fun ContentFetched(
 
         else -> {
             systemUiController.setNavigationBarColor(
-                color = Color(0xFFE0DFFD),
-            )
+                color = YacsaTheme.colors.statusBar,
+                )
             Box(
                 modifier = Modifier
                     .fillMaxSize()
+                    .background(YacsaTheme.colors.background)
                     .padding(innerPadding),
             ) {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
                         .clip(RoundedCornerShape(topStart = corner, topEnd = corner))
-                        .background(Color(0xFFE0DFFD)),
+                        .background(YacsaTheme.colors.surface)
                 ) {
 
                     if(uiState.analytics.isEmpty()){
-
                         ContentNoData(
                             message = "Nothing to show"
                         )

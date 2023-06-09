@@ -30,6 +30,7 @@ import dev.yacsa.analytics.screen.analytics.content.ContentFetched
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.divider.AnimatedDivider
 import dev.yacsa.ui.theme.YacsaTheme
+import dev.yacsa.ui.theme.detectThemeMode
 import logcat.logcat
 
 @Composable
@@ -39,13 +40,18 @@ fun AnalyticsRoute(
 ) {
     val uiState by analyticsViewModel.uiState.collectAsStateWithLifecycle()
 
-    AnalyticsScreen(
-        uiState,
-        onBackClick,
-        onDeleteClick = {
-            analyticsViewModel.acceptIntent(AnalyticsIntent.Delete)
-        }
-    )
+    val currentTheme  by analyticsViewModel.currentTheme
+    val isDarkTheme = currentTheme?.detectThemeMode()?:false
+
+    YacsaTheme(isDarkTheme) {
+        AnalyticsScreen(
+            uiState,
+            onBackClick,
+            onDeleteClick = {
+                analyticsViewModel.acceptIntent(AnalyticsIntent.Delete)
+            }
+        )
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -60,10 +66,10 @@ fun AnalyticsScreen(
 
     systemUiController.apply {
         setSystemBarsColor(
-            color = YacsaTheme.colors.secondaryBackground,
+            color = YacsaTheme.colors.statusBar,
         )
         setNavigationBarColor(
-            color = YacsaTheme.colors.secondaryBackground,
+            color = YacsaTheme.colors.navigationBar,
         )
     }
     val foo = rememberTopAppBarState()
@@ -82,26 +88,35 @@ fun AnalyticsScreen(
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         // TODO: fix
-                        Text(text = "Analytics", style = YacsaTheme.typography.heading)
+                        Text(
+                            text = "Analytics",
+                            style = YacsaTheme.typography.header,
+                            color = YacsaTheme.colors.primary
+                        )
                         // TODO: fix
                         Spacer(modifier = Modifier.width(8.dp))
-                        Icon(
+                        androidx.compose.material3.Icon(
                             painterResource(id = R.drawable.icon_flask_bold_24),
                             contentDescription = null,
+                            tint = YacsaTheme.colors.accent
                         )
                     }
                 },
                 navigationIcon = {
-                    SmallFloatingActionButton(onClick = { onBackClick() }) {
+                    SmallFloatingActionButton(
+                        onClick = { onBackClick() },
+                        containerColor = YacsaTheme.colors.accent
+                    ) {
                         Icon(
                             painter = painterResource(id = R.drawable.icon_caret_left_regular_24),
                             contentDescription = null,
+                            tint = YacsaTheme.colors.primary
                         )
                     }
                 },
                 scrollBehavior = scrollBehavior,
                 colors = TopAppBarDefaults.largeTopAppBarColors(
-                    containerColor = YacsaTheme.colors.primaryBackground,
+                    containerColor = YacsaTheme.colors.background,
                 ),
             )
             Column {
@@ -110,12 +125,14 @@ fun AnalyticsScreen(
             }
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = {
-                onDeleteClick()
-            }) {
+            FloatingActionButton(
+                onClick = { onDeleteClick() },
+                backgroundColor = YacsaTheme.colors.accent
+            ) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_trash_bold_24),
                     contentDescription = null,
+                    tint = YacsaTheme.colors.primary
                 )
             }
         }

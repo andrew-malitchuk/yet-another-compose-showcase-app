@@ -35,11 +35,14 @@ dependencies {
     implementation(project(":core:ui"))
     implementation(project(":service:analytics"))
     implementation(project(":service:analytics:dispatcher"))
+    implementation(project(":core:model"))
 
     implementation("io.arrow-kt:arrow-core:1.2.0-RC")
     implementation("io.arrow-kt:arrow-fx-coroutines:1.2.0-RC")
     implementation("io.arrow-kt:arrow-optics:1.2.0-RC")
     implementation(project(mapOf("path" to ":core:platform")))
     ksp("io.arrow-kt:arrow-optics-ksp-plugin:1.2.0-RC")
+
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.28.0")
 
 }

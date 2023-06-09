@@ -47,7 +47,7 @@ fun ContentFetched(
     when {
         uiState.isLoading -> {
             systemUiController.setNavigationBarColor(
-                color = YacsaTheme.colors.statusBarColor,
+                color = YacsaTheme.colors.surface,
             )
             ContentIsLoading()
         }
@@ -63,18 +63,19 @@ fun ContentFetched(
 
         else -> {
             systemUiController.setNavigationBarColor(
-                color = Color(0xFFE0DFFD),
+                color =YacsaTheme.colors.surface,
             )
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(innerPadding),
+                    .padding(innerPadding)
+                    .background(YacsaTheme.colors.background),
             ) {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
                         .clip(RoundedCornerShape(topStart = corner, topEnd = corner))
-                        .background(Color(0xFFE0DFFD)),
+                        .background(YacsaTheme.colors.surface),
                 ) {
 
                     if (!favouriteFlow?.value.isNullOrEmpty()) {
@@ -89,11 +90,11 @@ fun ContentFetched(
                             )
                         ) {
                             items(items = favouriteFlow?.value!!) { item ->
-                                        ItemFetchedList(
-                                            book = item!!,
-                                            onItemContentClick = { /*TODO*/ },
-                                            onFavouriteMark = onFavouriteMark
-                                        )
+                                ItemFetchedList(
+                                    book = item!!,
+                                    onItemContentClick = { /*TODO*/ },
+                                    onFavouriteMark = onFavouriteMark
+                                )
                             }
                         }
                     } else {

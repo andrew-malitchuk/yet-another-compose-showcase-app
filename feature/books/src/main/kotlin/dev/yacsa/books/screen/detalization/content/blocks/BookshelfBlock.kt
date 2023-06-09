@@ -27,6 +27,7 @@ fun BookshelfBlock(
             modifier = Modifier.fillMaxWidth(),
             text = "Bookshelf",
             style = YacsaTheme.typography.title,
+            color = YacsaTheme.colors.primary,
             maxLines = 1,
             minLines = 1,
             textAlign = TextAlign.Start,

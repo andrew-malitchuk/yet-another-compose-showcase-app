@@ -1,6 +1,7 @@
 package dev.yacsa.books.screen.list.content
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -17,11 +18,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.yacsa.books.screen.composable.ListToolbar
 import dev.yacsa.books.screen.list.content.fetched.ContentFetchedGrid
 import dev.yacsa.books.screen.list.content.fetched.ContentFetchedList
@@ -42,9 +43,7 @@ fun ContentFetched(
 ) {
     val listState = rememberLazyListState()
     val gridState = rememberLazyGridState()
-
     val isGridSelected = remember { mutableStateOf(false) }
-
     val pullRefreshState = rememberPullRefreshState(
         refreshing = lazyPagingItems.loadState.refresh is LoadState.Loading,
         onRefresh = {
@@ -53,6 +52,18 @@ fun ContentFetched(
     )
 
     val coroutineScope = rememberCoroutineScope()
+    val systemUiController = rememberSystemUiController()
+
+    with(systemUiController) {
+        setSystemBarsColor(
+            color = dev.yacsa.ui.theme.YacsaTheme.colors.background
+        )
+        setNavigationBarColor(
+            color = dev.yacsa.ui.theme.YacsaTheme.colors.surface
+        )
+    }
+
+
 
     Column {
         ListToolbar(
@@ -62,7 +73,12 @@ fun ContentFetched(
             favouriteClick = onFavourite
         )
 
-        Box(Modifier.pullRefresh(pullRefreshState)) {
+        Box(
+            modifier = Modifier
+                .background(YacsaTheme.colors.background)
+                .pullRefresh(pullRefreshState)
+
+        ) {
             if (isGridSelected.value) {
                 ContentFetchedGrid(
                     lazyPagingItems = lazyPagingItems,
@@ -81,7 +97,7 @@ fun ContentFetched(
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
                     // TODO: fix
-                    .padding(16.dp),
+                    .padding(YacsaTheme.spacing.medium),
                 isVisibleBecauseOfScrolling =
                 if (isGridSelected.value) {
                     !gridState.isScrollInProgress && gridState.canScrollBackward

@@ -6,6 +6,7 @@ import dev.yacsa.domain.usecase.books.MarkFavouriteBook
 import dev.yacsa.domain.usecase.books.SubscribeToFavourite
 import dev.yacsa.model.mapper.NewBooksUiDomainMapper
 import dev.yacsa.model.model.BookUiModel
+import dev.yacsa.platform.Theme
 import dev.yacsa.platform.viewmodel.BaseViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -18,12 +19,13 @@ class FavouriteViewModel @Inject constructor(
     var subscribeToFavourite: SubscribeToFavourite,
     var bookUiDomainMapper: NewBooksUiDomainMapper,
     var markFavouriteBook: MarkFavouriteBook,
+    private val theme:Theme,
     savedStateHandle: SavedStateHandle,
     initialState: FavouriteUiState,
 ) : BaseViewModel<FavouriteUiState, FavouriteUiState.PartialState, FavouriteEvent, FavouriteIntent>(
     savedStateHandle,
     initialState,
-) {
+) , Theme by theme{
 
     var flow: Flow<List<BookUiModel?>?>? = null
 

@@ -1,5 +1,6 @@
 package dev.yacsa.settings.screen.settings
 
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -15,7 +16,10 @@ import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -25,10 +29,13 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import dev.yacsa.model.model.theme.ThemeUiModel
 import dev.yacsa.settings.screen.settings.content.ContentFetched
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.divider.AnimatedDivider
+import dev.yacsa.ui.theme.CircularReveal
 import dev.yacsa.ui.theme.YacsaTheme
+import dev.yacsa.ui.theme.detectThemeMode
 import logcat.logcat
 
 @Composable
@@ -40,12 +47,30 @@ fun SettingsRoute(
 ) {
     val uiState by settingsViewModel.uiState.collectAsStateWithLifecycle()
 
-    SettingsScreen(
-        uiState,
-        onBackClick,
-        onFfClick,
-        onAnalyticsClick,
-    )
+    val currentTheme  by settingsViewModel.currentTheme
+    val isDarkTheme = currentTheme?.detectThemeMode()?:false
+
+    val theme:MutableState<ThemeUiModel?>  = settingsViewModel.currentTheme
+
+    theme.value?.let {
+        settingsViewModel.changeTheme(it)
+    }
+
+    CircularReveal(
+        targetState = isDarkTheme,
+        animationSpec = tween(500)
+    ) { isDark ->
+        YacsaTheme(isDark) {
+        SettingsScreen(
+            uiState,
+            onBackClick,
+            onFfClick,
+            onAnalyticsClick,
+            theme
+        )
+        }
+    }
+
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -55,16 +80,17 @@ fun SettingsScreen(
     onBackClick: () -> Unit,
     onFfClick: () -> Unit,
     onAnalyticsClick: () -> Unit,
+    theme: MutableState<ThemeUiModel?>,
 ) {
     val systemUiController = rememberSystemUiController()
     val state = rememberLazyListState()
 
     systemUiController.apply {
         setSystemBarsColor(
-            color = YacsaTheme.colors.secondaryBackground,
+            color = YacsaTheme.colors.surface,
         )
         setNavigationBarColor(
-            color = YacsaTheme.colors.secondaryBackground,
+            color = YacsaTheme.colors.background,
         )
     }
     val foo = rememberTopAppBarState()
@@ -83,26 +109,35 @@ fun SettingsScreen(
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         // TODO: fix
-                        Text(text = "Settings", style = YacsaTheme.typography.heading)
+                        Text(
+                            text = "Settings",
+                            style = YacsaTheme.typography.header,
+                            color = YacsaTheme.colors.primary
+                        )
                         // TODO: fix
                         Spacer(modifier = Modifier.width(8.dp))
                         Icon(
                             painterResource(id = R.drawable.icon_gear_six_bold_24),
                             contentDescription = null,
+                            tint = YacsaTheme.colors.accent
                         )
                     }
                 },
                 navigationIcon = {
-                    SmallFloatingActionButton(onClick = { onBackClick() }) {
+                    SmallFloatingActionButton(
+                        onClick = { onBackClick() },
+                        containerColor = YacsaTheme.colors.accent
+                    ) {
                         Icon(
                             painter = painterResource(id = R.drawable.icon_caret_left_regular_24),
                             contentDescription = null,
+                            tint = YacsaTheme.colors.primary
                         )
                     }
                 },
                 scrollBehavior = scrollBehavior,
                 colors = TopAppBarDefaults.largeTopAppBarColors(
-                    containerColor = YacsaTheme.colors.primaryBackground,
+                    containerColor = YacsaTheme.colors.surface,
                 ),
             )
             Column {
@@ -116,7 +151,8 @@ fun SettingsScreen(
             state = state,
             foo = foo,
             onFfClick = onFfClick,
-            onAnalyticsClick=onAnalyticsClick,
+            onAnalyticsClick = onAnalyticsClick,
+            theme = theme,
         )
     }
 }
@@ -129,7 +165,8 @@ fun Preview_SettingsScreen() {
             uiState = SettingsUiState(),
             onBackClick = {},
             onFfClick = {},
-            onAnalyticsClick={},
+            onAnalyticsClick = {},
+            theme = remember { mutableStateOf(null) },
         )
     }
 }

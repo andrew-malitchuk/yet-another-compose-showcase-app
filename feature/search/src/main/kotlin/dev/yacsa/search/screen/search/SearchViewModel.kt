@@ -11,6 +11,7 @@ import dev.yacsa.domain.usecase.history.NewGetTopSearchUseCase
 import dev.yacsa.domain.usecase.history.NewInsertSearchHistoryUseCase
 import dev.yacsa.model.mapper.NewBooksUiDomainMapper
 import dev.yacsa.model.mapper.NewSearchHistoryUiDomainMapper
+import dev.yacsa.platform.Theme
 import dev.yacsa.platform.viewmodel.BaseViewModel
 import dev.yacsa.search.screen.search.dialog.FilterDialogResult
 import kotlinx.coroutines.flow.Flow
@@ -34,15 +35,19 @@ class SearchViewModel @Inject constructor(
     private val getTopSearchUseCase: NewGetTopSearchUseCase,
     private val searchHistoryUiDomainMapper: NewSearchHistoryUiDomainMapper,
     private val clearHistoryUseCase: NewClearHistoryUseCase,
+    private val theme:Theme
 ) : BaseViewModel<SearchUiState, SearchUiState.PartialState, SearchEvent, SearchIntent>(
     savedStateHandle,
     initialState,
-) {
+),Theme by theme {
     val searchText = MutableStateFlow("")
 
     val filterResult = MutableStateFlow( FilterDialogResult() )
 
     init {
+        viewModelScope.launch {
+            getTheme()
+        }
         logcat { "init" }
         acceptIntent(SearchIntent.GetTopSearch)
 

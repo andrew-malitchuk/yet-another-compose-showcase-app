@@ -1,6 +1,7 @@
 package dev.yacsa.search.screen.composable
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -36,7 +37,9 @@ fun SearchToolbar(
     filterState: MutableState<Boolean>,
     showSheet: MutableState<Boolean?>
 ) {
-    Column {
+    Column(
+        modifier = Modifier.background(YacsaTheme.colors.background)
+    ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -44,17 +47,26 @@ fun SearchToolbar(
                 .padding(horizontal = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            SmallFloatingActionButton(onClick = { onBackClick() }) {
-                Icon(
+            SmallFloatingActionButton(
+                onClick = { onBackClick() },
+                containerColor = YacsaTheme.colors.accent
+            ) {
+                androidx.compose.material.Icon(
                     painter = painterResource(id = R.drawable.icon_caret_left_regular_24),
                     contentDescription = null,
+                    tint = YacsaTheme.colors.primary
                 )
             }
-            Text(text = "Search", style = YacsaTheme.typography.heading)
+            Text(
+                text = "Search",
+                style = YacsaTheme.typography.header,
+                color = YacsaTheme.colors.primary
+            )
             Spacer(modifier = Modifier.width(8.dp))
             Icon(
                 painterResource(id = R.drawable.icon_search_bold_24),
                 contentDescription = null,
+                tint = YacsaTheme.colors.accent
             )
             Spacer(
                 modifier = Modifier
@@ -68,7 +80,7 @@ fun SearchToolbar(
                 ),
                 badge = {
                     if (filterState.value) {
-                        Badge()
+                        Badge(contentColor = YacsaTheme.colors.accent)
                     }
                 }
             ) {
@@ -76,10 +88,11 @@ fun SearchToolbar(
                     modifier = Modifier,
                     checkedState = showSheet,
                     defaultIcon = R.drawable.icon_filter_regulat_24,
-                    selectedIcon = R.drawable.icon_filter_bold_24
-                ) {
-                    showSheet.value = it
-                }
+                    selectedIcon = R.drawable.icon_filter_bold_24,
+                    onButtonClick = {
+                        showSheet.value = it
+                    }
+                )
             }
         }
     }

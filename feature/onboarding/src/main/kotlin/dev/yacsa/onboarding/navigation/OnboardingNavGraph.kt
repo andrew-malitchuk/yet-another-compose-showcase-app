@@ -5,7 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import dev.yacsa.navigation.NavigationDirection
-import dev.yacsa.onboarding.screen.onboarding.OnboardingScreen
+import dev.yacsa.onboarding.screen.onboarding.OnboardingRoute
 
 fun NavGraphBuilder.onboardingNavGraph(navController: NavHostController) {
     navigation(
@@ -13,7 +13,7 @@ fun NavGraphBuilder.onboardingNavGraph(navController: NavHostController) {
         route = NavigationDirection.Onboarding.route,
     ) {
         composable(OnboardingDirection.Onboarding.route) {
-            OnboardingScreen(
+            OnboardingRoute(
                 onBackClick = {
                     navController.navigate("books")
                 },

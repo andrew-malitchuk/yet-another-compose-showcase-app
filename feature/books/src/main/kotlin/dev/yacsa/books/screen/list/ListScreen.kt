@@ -23,6 +23,7 @@ import dev.yacsa.platform.ext.collectWithLifecycle
 import dev.yacsa.ui.composable.content.ContentError
 import dev.yacsa.ui.composable.snackbar.OfflineSnackbar
 import dev.yacsa.ui.theme.YacsaTheme
+import dev.yacsa.ui.theme.detectThemeMode
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import logcat.logcat
@@ -47,7 +48,6 @@ fun ListRoute(
     )
 
     val systemUiController = rememberSystemUiController()
-
 
     Rebugger(
         trackMap = mapOf(
@@ -79,40 +79,44 @@ fun ListRoute(
 
     logcat("ListRoute") { "ListRoute" }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
+    val currentTheme  by listViewModel.currentTheme
+    val isDarkTheme = currentTheme?.detectThemeMode()?:false
 
-        if (isOfflineMode) {
-            systemUiController.setSystemBarsColor(
-                color = YacsaTheme.colors.primaryText,
-            )
-            OfflineSnackbar(message = "Offline mode")
-        } else {
-            systemUiController.setSystemBarsColor(
-                color = YacsaTheme.colors.primaryBackground,
-            )
-        }
+    YacsaTheme(isDarkTheme) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
 
-
-        if (uiState.isFeatureBlocked) {
-            // https://github.com/googlecodelabs/android-navigation/issues/113
-            LaunchedEffect(Unit) {
-                notFound()
+            if (isOfflineMode) {
+                systemUiController.setSystemBarsColor(
+                    color = YacsaTheme.colors.primary,
+                )
+                OfflineSnackbar(message = "Offline mode")
+            } else {
+                systemUiController.setSystemBarsColor(
+                    color = YacsaTheme.colors.background,
+                )
             }
-        } else {
-            ListScreen(
-                onBookClicked = {
-                    listViewModel.acceptIntent(ListIntent.BookClicked(it))
-                },
 
-                pagingState = pagingState,
-                uiState = uiState,
-                onSearch = onSearch,
-                onSettings = onSettings,
-                onFavourite=onFavourite,
-            )
+
+            if (uiState.isFeatureBlocked) {
+                // https://github.com/googlecodelabs/android-navigation/issues/113
+                LaunchedEffect(Unit) {
+                    notFound()
+                }
+            } else {
+                ListScreen(
+                    onBookClicked = {
+                        listViewModel.acceptIntent(ListIntent.BookClicked(it))
+                    },
+                    pagingState = pagingState,
+                    uiState = uiState,
+                    onSearch = onSearch,
+                    onSettings = onSettings,
+                    onFavourite = onFavourite,
+                )
+            }
         }
     }
 }
@@ -126,8 +130,6 @@ fun ListScreen(
     onSettings: () -> Unit,
     onFavourite: () -> Unit,
 ) {
-    val systemUiController = rememberSystemUiController()
-
     if (!uiState.isLoading && !uiState.isError && pagingState != null) {
         ContentFetched(
             onBookClicked = onBookClicked,

@@ -14,12 +14,15 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarState
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.chrisbanes.snapper.ExperimentalSnapperApi
+import dev.yacsa.model.model.theme.ThemeUiModel
 import dev.yacsa.settings.screen.settings.item.SettingsItem
 import dev.yacsa.settings.screen.settings.item.ThemeItem
 import dev.yacsa.ui.R
@@ -35,18 +38,20 @@ fun ContentFetched(
     foo: TopAppBarState,
     onFfClick: () -> Unit,
     onAnalyticsClick: () -> Unit,
+    theme: MutableState<ThemeUiModel?>,
 ) {
     val corner = 16.dp - (16.dp * abs(foo.collapsedFraction))
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(innerPadding),
+            .padding(innerPadding)
+            .background(YacsaTheme.colors.surface)
     ) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .clip(RoundedCornerShape(topStart = corner, topEnd = corner))
-                .background(Color(0xFFE0DFFD)),
+                .background(YacsaTheme.colors.background),
         ) {
             LazyColumn(
                 modifier = Modifier
@@ -82,7 +87,10 @@ fun ContentFetched(
                     )
                 }
                 item {
-                    ThemeItem()
+                    ThemeItem(
+                        Modifier,
+                        theme
+                    )
                 }
             }
         }
@@ -99,7 +107,8 @@ fun Preview_ContentFetched() {
             state = rememberLazyListState(),
             foo = rememberTopAppBarState(),
             onFfClick = {},
-            onAnalyticsClick={},
+            onAnalyticsClick = {},
+            theme = remember { mutableStateOf(null) },
         )
     }
 }

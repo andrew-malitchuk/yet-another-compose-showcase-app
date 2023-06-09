@@ -22,9 +22,9 @@ dependencies {
 
     implementation(project(":core:ui"))
     implementation(project(":core:platform"))
+    implementation(project(":core:model"))
     implementation(project(":feature:navigation"))
     implementation(project(":feature:books"))
-    implementation(project(":feature:format"))
     implementation(project(":feature:onboarding"))
     implementation(project(":feature:featureflagmanager"))
     implementation(project(":feature:notfound"))
@@ -38,5 +38,12 @@ dependencies {
     implementation(project(":data:cryptodatastore"))
 
     implementation(project(":domain"))
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+
+    implementation("io.arrow-kt:arrow-core:1.2.0-RC")
+    implementation("io.arrow-kt:arrow-fx-coroutines:1.2.0-RC")
+    implementation("io.arrow-kt:arrow-optics:1.2.0-RC")
+    ksp("io.arrow-kt:arrow-optics-ksp-plugin:1.2.0-RC")
 
 }

@@ -7,6 +7,7 @@ import dev.yacsa.domain.error.NoDataError
 import dev.yacsa.domain.usecase.analytics.ClearAnalyticsUseCase
 import dev.yacsa.domain.usecase.analytics.GetAnalyticsUseCase
 import dev.yacsa.model.mapper.AnalyticsUiDomainMapper
+import dev.yacsa.platform.Theme
 import dev.yacsa.platform.viewmodel.BaseViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -21,10 +22,11 @@ class AnalyticsViewModel @Inject constructor(
     private val getAnalyticsUseCase: GetAnalyticsUseCase,
     private val clearAnalyticsUseCase: ClearAnalyticsUseCase,
     private val analyticsUiDomainMapper: AnalyticsUiDomainMapper,
-) : BaseViewModel<AnalyticsUiState, AnalyticsUiState.PartialState, AnalyticsEvent, AnalyticsIntent>(
+    private val theme:Theme,
+    ) : BaseViewModel<AnalyticsUiState, AnalyticsUiState.PartialState, AnalyticsEvent, AnalyticsIntent>(
     savedStateHandle,
     initialState,
-) {
+) , Theme by theme{
 
     init {
         acceptIntent(AnalyticsIntent.GetList)

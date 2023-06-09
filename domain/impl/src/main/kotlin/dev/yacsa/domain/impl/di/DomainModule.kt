@@ -22,6 +22,8 @@ import dev.yacsa.domain.impl.usecase.history.NewGetTopSearchUseCaseImpl
 import dev.yacsa.domain.impl.usecase.history.NewInsertSearchHistoryUseCaseImpl
 import dev.yacsa.domain.impl.usecase.startupconfigure.NewGetStartUpConfigureUseCaseImpl
 import dev.yacsa.domain.impl.usecase.startupconfigure.NewUpdateStartUpConfigureUseCaseImpl
+import dev.yacsa.domain.impl.usecase.theme.GetGetThemeUseCaseImpl
+import dev.yacsa.domain.impl.usecase.theme.SetThemeUseCaseImpl
 import dev.yacsa.domain.usecase.*
 import dev.yacsa.domain.usecase.analytics.AddAnalyticUseCase
 import dev.yacsa.domain.usecase.analytics.ClearAnalyticsUseCase
@@ -40,6 +42,8 @@ import dev.yacsa.domain.usecase.history.NewGetTopSearchUseCase
 import dev.yacsa.domain.usecase.history.NewInsertSearchHistoryUseCase
 import dev.yacsa.domain.usecase.startupconfigure.NewGetStartUpConfigureUseCase
 import dev.yacsa.domain.usecase.startupconfigure.NewUpdateStartUpConfigureUseCase
+import dev.yacsa.domain.usecase.theme.GetThemeUseCase
+import dev.yacsa.domain.usecase.theme.SetThemeUseCase
 import javax.inject.Singleton
 
 @Suppress("UnnecessaryAbstractClass")
@@ -148,4 +152,16 @@ abstract class DomainModule {
     abstract fun bindSubscribeToFavourite(
         subscribeToFavouriteImpl: SubscribeToFavouriteImpl,
     ): SubscribeToFavourite
+
+    @Singleton
+    @Binds
+    abstract fun bindGetThemeUseCase(
+        getThemeUseCaseImpl: GetGetThemeUseCaseImpl,
+    ): GetThemeUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindSetThemeUseCase(
+        setThemeUseCaseImpl: SetThemeUseCaseImpl,
+    ): SetThemeUseCase
 }

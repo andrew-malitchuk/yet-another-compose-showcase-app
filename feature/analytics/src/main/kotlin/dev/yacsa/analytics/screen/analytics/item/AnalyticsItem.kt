@@ -1,7 +1,6 @@
 package dev.yacsa.analytics.screen.analytics.item
 
 import androidx.annotation.DrawableRes
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
@@ -21,7 +20,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -39,7 +37,6 @@ fun AnalyticsItem(
 ) {
     val shape = RoundedCornerShape(16.dp)
     Card(
-        shape = shape,
         modifier = Modifier
             .fillMaxWidth()
             .clip(shape)
@@ -49,21 +46,26 @@ fun AnalyticsItem(
             ) {
                 onClick()
             },
-//            .bouncingClickable {
-//
-//            },
-        border = BorderStroke(1.dp, Color(0xFF7766C6)),
-        elevation = 10.dp,
+        contentColor = YacsaTheme.colors.background,
+        backgroundColor = YacsaTheme.colors.background,
+        /*border = BorderStroke(1.dp, YacsaTheme.colors.secondary),*/
+        shape = YacsaTheme.shapes.cornersStyle,
+        elevation = YacsaTheme.spacing.small,
+
     ) {
         Row(
             modifier = Modifier
                 .padding(8.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            SmallFloatingActionButton(onClick = { /*TODO*/ }) {
+            SmallFloatingActionButton(
+                onClick = { },
+                containerColor = YacsaTheme.colors.primary,
+            ) {
                 Icon(
                     painter = painterResource(id = icon),
                     contentDescription = null,
+                    tint = YacsaTheme.colors.accent
                 )
             }
             Spacer(
@@ -71,8 +73,8 @@ fun AnalyticsItem(
                     .width(16.dp),
             )
             Column {
-                Text(text = key, style = YacsaTheme.typography.title)
-                Text(text = value, style = YacsaTheme.typography.caption)
+                Text(text = key, style = YacsaTheme.typography.caption, color = YacsaTheme.colors.primary)
+                Text(text = value, style = YacsaTheme.typography.title, color = YacsaTheme.colors.secondary)
             }
         }
     }

@@ -1,5 +1,6 @@
 package dev.yacsa.search.screen.search.content
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,6 +11,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Search
@@ -89,7 +91,9 @@ fun ContentFetched(
             }
         )
     }
-    Column {
+    Column(
+        modifier = Modifier.background(YacsaTheme.colors.background)
+    ) {
         SearchToolbar(
             state = listState,
             onBackClick = {
@@ -106,6 +110,13 @@ fun ContentFetched(
                 .fillMaxWidth()
                 .padding(start = 8.dp, end = 4.dp, top = 8.dp, bottom = 8.dp)
                 .clearFocusOnKeyboardDismiss(),
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = YacsaTheme.colors.accent,
+                unfocusedBorderColor = YacsaTheme.colors.primary,
+                textColor = YacsaTheme.colors.primary,
+                cursorColor = YacsaTheme.colors.accent,
+                placeholderColor = YacsaTheme.colors.secondary
+            ),
             value = searchText,
             onValueChange = onValueChange,
             keyboardOptions = KeyboardOptions(
@@ -117,7 +128,8 @@ fun ContentFetched(
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Outlined.Search,
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = YacsaTheme.colors.accent
                 )
             },
             trailingIcon = {
@@ -126,7 +138,8 @@ fun ContentFetched(
                 }) {
                     Icon(
                         imageVector = Icons.Outlined.Delete,
-                        contentDescription = null
+                        contentDescription = null,
+                        tint = YacsaTheme.colors.accent
                     )
                 }
             },
@@ -138,8 +151,8 @@ fun ContentFetched(
             // TODO: fix
             ChipGroup(
                 values = uiState.topSearch.map { it.query ?: "" },
-                defaultColor = YacsaTheme.colors.primaryText,
-                selectedColor = YacsaTheme.colors.statusBarColor,
+                defaultColor = YacsaTheme.colors.background,
+                selectedColor = YacsaTheme.colors.surface,
                 onSelectedChanged = {
                     onValueChange(it)
                 },

@@ -9,7 +9,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -27,7 +26,7 @@ fun OfflineSnackbar(
         modifier = Modifier
             .fillMaxWidth()
             .clip(shape)
-            .background(Color(0xFF7766C6))
+            .background(YacsaTheme.colors.primary)
     ) {
         Text(
             modifier = Modifier
@@ -35,7 +34,7 @@ fun OfflineSnackbar(
                 .fillMaxWidth(),
             text = message,
             style = YacsaTheme.typography.title,
-            color = Color.White,
+            color = YacsaTheme.colors.background,
             textAlign = TextAlign.Center
         )
 

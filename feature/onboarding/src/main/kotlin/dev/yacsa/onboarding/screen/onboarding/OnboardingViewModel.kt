@@ -14,6 +14,7 @@ import dev.yacsa.dispatcher.AnalyticDispatcher
 import dev.yacsa.domain.model.StartUpConfigureDomainModel
 import dev.yacsa.domain.usecase.startupconfigure.NewGetStartUpConfigureUseCase
 import dev.yacsa.domain.usecase.startupconfigure.NewUpdateStartUpConfigureUseCase
+import dev.yacsa.platform.Theme
 import dev.yacsa.platform.viewmodel.BaseViewModel
 import dev.yacsa.ui.R
 import kotlinx.coroutines.flow.Flow
@@ -27,13 +28,17 @@ class OnboardingViewModel @Inject constructor(
     initialState: OnboardingUiState,
     private val updateStartUpConfigureUseCase: NewUpdateStartUpConfigureUseCase,
     private val getStartUpConfigureUseCase: NewGetStartUpConfigureUseCase,
-    private val analyticDispatcher: AnalyticDispatcher
+    private val analyticDispatcher: AnalyticDispatcher,
+    private val theme:Theme
 ) : BaseViewModel<OnboardingUiState, OnboardingUiState.PartialState, OnboardingEvent, OnboardingIntent>(
     savedStateHandle,
     initialState,
-) {
+), Theme by theme{
 
     init {
+        viewModelScope.launch {
+            getTheme()
+        }
         viewModelScope.launch {
             analyticDispatcher.sendEvent(
                 object : ContentViewAnalyticModel() {

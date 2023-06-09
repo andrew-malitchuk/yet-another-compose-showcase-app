@@ -12,6 +12,7 @@ import dev.yacsa.search.screen.search.content.result.ResultIsLoading
 import dev.yacsa.search.screen.search.dialog.FilterDialogResult
 import dev.yacsa.ui.composable.content.ContentError
 import dev.yacsa.ui.theme.YacsaTheme
+import dev.yacsa.ui.theme.detectThemeMode
 
 @Composable
 fun SearchRoute(
@@ -23,24 +24,29 @@ fun SearchRoute(
     val searchText by searchViewModel.searchText.collectAsState()
 
     val previousContent by searchViewModel.filterResult.collectAsState()
+    val currentTheme  by searchViewModel.currentTheme
+    val isDarkTheme = currentTheme?.detectThemeMode()?:false
 
-    SearchScreen(
-        uiState,
-        searchText,
-        onValueChange = {
-            searchViewModel.searchText.value = it
-        },
-        onBookClicked,
-        onDelete = {
-            searchViewModel.acceptIntent(SearchIntent.ClearSearch)
-        },
-        onFilterChanged = {
-            searchViewModel.filterResult.value=it
-            searchViewModel.acceptIntent(SearchIntent.Search(searchText))
-        },
-        previousContent= previousContent,
-        onBackClick=onBackClick
-    )
+
+    YacsaTheme(isDarkTheme) {
+        SearchScreen(
+            uiState,
+            searchText,
+            onValueChange = {
+                searchViewModel.searchText.value = it
+            },
+            onBookClicked,
+            onDelete = {
+                searchViewModel.acceptIntent(SearchIntent.ClearSearch)
+            },
+            onFilterChanged = {
+                searchViewModel.filterResult.value = it
+                searchViewModel.acceptIntent(SearchIntent.Search(searchText))
+            },
+            previousContent = previousContent,
+            onBackClick = onBackClick
+        )
+    }
 }
 
 @Composable
@@ -57,10 +63,10 @@ fun SearchScreen(
     val systemUiController = rememberSystemUiController()
     systemUiController.apply {
         setSystemBarsColor(
-            color = YacsaTheme.colors.secondaryBackground,
+            color = YacsaTheme.colors.background,
         )
         setNavigationBarColor(
-            color = YacsaTheme.colors.secondaryBackground,
+            color = YacsaTheme.colors.surface,
         )
     }
     if (uiState.isContentLoading) {

@@ -35,7 +35,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -67,14 +66,10 @@ fun CollapsingToolbar(
     }
 
     val progress by animateFloatAsState(
-//        targetValue = if (lazyScrollState.firstVisibleItemIndex in 0..1) 0f else 1f,
-//        targetValue = if (!lazyScrollState.canScrollBackward) 0f else 1f,
         targetValue = if (!lazyScrollState.canScrollBackward && !lazyScrollState.isScrollInProgress) 0f else 1f,
         tween(500)
     )
     val motionHeight by animateDpAsState(
-//        targetValue = if (lazyScrollState.firstVisibleItemIndex in 0..1) 288.dp else 64.dp,
-//        targetValue = if (!lazyScrollState.canScrollBackward) 288.dp else 64.dp,
         targetValue = if (!lazyScrollState.canScrollBackward && !lazyScrollState.isScrollInProgress) 288.dp else 64.dp,
         tween(500)
     )
@@ -85,9 +80,9 @@ fun CollapsingToolbar(
         progress = progress,
         modifier = Modifier
             .fillMaxWidth()
+            .background(YacsaTheme.colors.background)
             .height(motionHeight)
     ) {
-        val boxProperties = customProperties(id = "box")
 
         val painter =
             rememberAsyncImagePainter(
@@ -103,25 +98,27 @@ fun CollapsingToolbar(
             modifier = Modifier
                 .layoutId("box")
                 .clip(RoundedCornerShape(bottomStart = corner, bottomEnd = corner))
-                .background(Color(0xFFE0DFFD))
+                .background(YacsaTheme.colors.surface)
         )
         SmallFloatingActionButton(
             modifier = Modifier
                 .layoutId("back"),
             onClick = {
                 onBackClick()
-            }
+            },
+            containerColor = YacsaTheme.colors.accent
         ) {
             Icon(
                 painter = painterResource(id = dev.yacsa.ui.R.drawable.icon_caret_left_regular_24),
                 contentDescription = null,
+                tint = YacsaTheme.colors.primary
             )
         }
 
         Card(
             modifier = Modifier.layoutId("img"),
             elevation = 4.dp,
-            border = BorderStroke(1.dp, Color(0xFF46467A)),
+            border = BorderStroke(0.5.dp, YacsaTheme.colors.primary),
             shape = RoundedCornerShape(16.dp),
         ) {
             Image(
@@ -138,7 +135,8 @@ fun CollapsingToolbar(
                 .layoutId("title")
                 .basicMarquee(),
             text = book.title ?: "SWW",
-            style = YacsaTheme.typography.heading,
+            style = YacsaTheme.typography.caption,
+            color = YacsaTheme.colors.primary,
             maxLines = 2,
             textAlign = TextAlign.Start,
         )
@@ -147,6 +145,7 @@ fun CollapsingToolbar(
             modifier = Modifier.layoutId("author"),
             text = book?.authors?.firstOrNull()?.name ?: "SWW",
             style = YacsaTheme.typography.title,
+            color = YacsaTheme.colors.secondary,
             maxLines = 2,
             minLines = 2,
             textAlign = TextAlign.Start,
@@ -159,11 +158,13 @@ fun CollapsingToolbar(
             Icon(
                 painter = painterResource(id = dev.yacsa.ui.R.drawable.icon_archive_box_regular_16),
                 contentDescription = null,
+                tint = YacsaTheme.colors.accent
             )
             Spacer(modifier = Modifier.width(4.dp))
             Text(
                 text = book.downloadCount?.toString() ?: "NI",
-                style = YacsaTheme.typography.caption,
+                style = YacsaTheme.typography.title,
+                color = YacsaTheme.colors.secondary,
             )
         }
 
@@ -178,14 +179,14 @@ fun CollapsingToolbar(
                     checkedState = favourite,
                     defaultIcon = dev.yacsa.ui.R.drawable.icon_heart_regulat_24,
                     selectedIcon = dev.yacsa.ui.R.drawable.icon_heart_fill_24
-                ) {
-
-                }
+                )
             }
             item {
                 SmallFloatingActionButton(
                     elevation = FloatingActionButtonDefaults.elevation(1.dp),
-                    onClick = { onDownloadClick() }
+                    onClick = { onDownloadClick() },
+                    containerColor = YacsaTheme.colors.primary
+
                 ) {
                     Box(
                         modifier = Modifier.padding(12.dp),
@@ -193,6 +194,7 @@ fun CollapsingToolbar(
                         Icon(
                             painter = painterResource(id = dev.yacsa.ui.R.drawable.icon_download_regular_24),
                             contentDescription = null,
+                            tint = YacsaTheme.colors.accent
                         )
                     }
                 }
@@ -200,7 +202,8 @@ fun CollapsingToolbar(
             item {
                 SmallFloatingActionButton(
                     elevation = FloatingActionButtonDefaults.elevation(1.dp),
-                    onClick = { /*TODO*/ }
+                    onClick = { /*TODO*/ },
+                    containerColor = YacsaTheme.colors.primary
                 ) {
                     Box(
                         modifier = Modifier.padding(12.dp),
@@ -208,6 +211,7 @@ fun CollapsingToolbar(
                         Icon(
                             painter = painterResource(id = dev.yacsa.ui.R.drawable.icon_share_regular_24),
                             contentDescription = null,
+                            tint = YacsaTheme.colors.accent
                         )
                     }
                 }

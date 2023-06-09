@@ -17,10 +17,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.yacsa.books.screen.detalization.composable.toolbar.CollapsingToolbar
 import dev.yacsa.books.screen.detalization.content.blocks.AuthorBlock
 import dev.yacsa.books.screen.detalization.content.blocks.BookshelfBlock
@@ -46,17 +44,18 @@ fun ContentFetchedPortrait(
     onBookshelfClick: (String) -> Unit,
     favourite: MutableState<Boolean?>,
 ) {
-    val systemUiController = rememberSystemUiController()
-    with(systemUiController) {
-        setSystemBarsColor(Color(0xFFE0DFFD))
-        setNavigationBarColor(Color.White)
-    }
+//    val systemUiController = rememberSystemUiController()
+//    with(systemUiController) {
+//        setSystemBarsColor(Color(0xFFE0DFFD))
+//        setNavigationBarColor(Color.White)
+//    }
     val lazyScrollState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
 
     Scaffold(
         modifier = Modifier
-            .fillMaxSize(),
+            .fillMaxSize()
+            .background(YacsaTheme.colors.background),
         topBar = {
             if (book != null) {
                 CollapsingToolbar(
@@ -73,12 +72,12 @@ fun ContentFetchedPortrait(
             }
         },
     ) { paddingValues ->
-        Column(modifier = Modifier.padding(paddingValues)) {
+        Column(modifier = Modifier.padding(paddingValues).background(YacsaTheme.colors.background)) {
             AnimatedDivider(state = lazyScrollState)
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(color = Color.White)
+                    .background(YacsaTheme.colors.background)
                     .animateContentSize(),
                 state = lazyScrollState,
                 contentPadding = PaddingValues(

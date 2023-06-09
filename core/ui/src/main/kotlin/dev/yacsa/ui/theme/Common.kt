@@ -3,23 +3,27 @@ package dev.yacsa.ui.theme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 
 data class YacsaColors(
-    val primaryText: Color,
-    val primaryBackground: Color,
-    val secondaryText: Color,
-    val secondaryBackground: Color,
-    val tintColor: Color,
-    val statusBarColor: Color,
+    val background:Color,
+    val surface:Color,
+    val accent:Color,
+    val primary:Color,
+    val secondary:Color,
+
+    val statusBar:Color,
+    val navigationBar:Color,
 )
 
 data class YacsaTypography(
-    val heading: TextStyle,
-    val title: TextStyle,
-    val body: TextStyle,
+    val header: TextStyle,
     val caption: TextStyle,
+    val title: TextStyle,
+    val description: TextStyle,
+    val body: TextStyle,
 )
 
 data class YacsaShape(
@@ -28,6 +32,16 @@ data class YacsaShape(
 )
 
 data class YacsaSpacing(
+    val extraSmall: Dp,
+    val small: Dp,
+    val medium: Dp,
+    val default: Dp,
+    val large: Dp,
+    val extraLarge: Dp,
+)
+
+
+data class YacsaDividers(
     val extraSmall: Dp,
     val small: Dp,
     val medium: Dp,
@@ -50,6 +64,10 @@ object YacsaTheme {
     val spacing: YacsaSpacing
         @Composable
         get() = LocalYacsaSpacing.current
+
+    val dividers: YacsaDividers
+        @Composable
+        get() = LocalYacsaDividers.current
 }
 
 internal val LocalYacsaColors = staticCompositionLocalOf<YacsaColors> {
@@ -65,5 +83,9 @@ internal val LocalYacsaShape = staticCompositionLocalOf<YacsaShape> {
 }
 
 internal val LocalYacsaSpacing = staticCompositionLocalOf<YacsaSpacing> {
+    error("No shapes provided")
+}
+
+internal val LocalYacsaDividers = staticCompositionLocalOf<YacsaDividers> {
     error("No shapes provided")
 }

@@ -14,6 +14,7 @@ import dev.yacsa.domain.usecase.books.NewLoadBooksUseCase
 import dev.yacsa.domain.usecase.books.NewSaveBooksUseCase
 import dev.yacsa.model.mapper.NewBooksUiDomainMapper
 import dev.yacsa.model.model.BookUiModel
+import dev.yacsa.platform.Theme
 import dev.yacsa.platform.connection.ConnectivityObserver
 import dev.yacsa.platform.viewmodel.BaseViewModel
 import kotlinx.coroutines.delay
@@ -33,12 +34,13 @@ class ListViewModel @Inject constructor(
     private val saveBooksUseCase: NewSaveBooksUseCase,
     private val booksFeatureFlag: BooksFeatureFlag,
     var connectivityObserver: ConnectivityObserver,
+    private val theme: Theme,
     savedStateHandle: SavedStateHandle,
     initialState: ListUiState,
 ) : BaseViewModel<ListUiState, ListUiState.PartialState, ListEvent, ListIntent>(
     savedStateHandle,
     initialState,
-) {
+), Theme by theme {
 
     init {
         logcat { "init" }
@@ -82,12 +84,13 @@ class ListViewModel @Inject constructor(
 
     private fun checkFeatureStatus(): Flow<ListUiState.PartialState> = flow {
         val isBooksFeatureEnabled = booksFeatureFlag.isFeatureEnabled()
-        logcat("isBooksFeatureEnabled") { isBooksFeatureEnabled.toString() }
-        if (isBooksFeatureEnabled) {
+            // TODO: fix
+//        logcat("isBooksFeatureEnabled") { isBooksFeatureEnabled.toString() }
+//        if (isBooksFeatureEnabled) {
             acceptIntent(ListIntent.GetBooks)
-        } else {
-            emit(ListUiState.PartialState.Blocked)
-        }
+//        } else {
+//            emit(ListUiState.PartialState.Blocked)
+//        }
     }
 
     override fun reduceUiState(

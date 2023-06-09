@@ -9,6 +9,7 @@ import dev.yacsa.domain.error.NoDataError
 import dev.yacsa.domain.usecase.books.MarkFavouriteBook
 import dev.yacsa.domain.usecase.books.NewGetOrLoadBookUseCase
 import dev.yacsa.model.mapper.NewBooksUiDomainMapper
+import dev.yacsa.platform.Theme
 import dev.yacsa.platform.viewmodel.BaseViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
@@ -23,12 +24,13 @@ class DetalizationViewModel @Inject constructor(
     private val bookUiDomainMapper: NewBooksUiDomainMapper,
     private val getOrLoadBookUseCase: NewGetOrLoadBookUseCase,
     private val markFavouriteBook: MarkFavouriteBook,
+    private val theme: Theme,
     savedStateHandle: SavedStateHandle,
     initialState: DetalizationUiState,
 ) : BaseViewModel<DetalizationUiState, DetalizationUiState.PartialState, DetalizationEvent, DetalizationIntent>(
     savedStateHandle,
     initialState,
-) {
+), Theme by theme {
 
     var checked: MutableState<Boolean?> =
         mutableStateOf(null)

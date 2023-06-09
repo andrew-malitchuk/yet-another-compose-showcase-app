@@ -11,6 +11,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -25,26 +26,30 @@ fun TwoStateButton(
     defaultIcon: Int,
     @DrawableRes
     selectedIcon: Int,
-    onButtonClick: (Boolean) -> Unit
+    onButtonClick: ((Boolean) -> Unit)?=null,
+    containerColor: Color =YacsaTheme.colors.primary
+
 ) {
 //    val checked = remember { mutableStateOf(false) }
     SmallFloatingActionButton(
         elevation = FloatingActionButtonDefaults.elevation(1.dp),
         onClick = {
-            onButtonClick(checkedState.value?:false)
+            onButtonClick?.invoke(checkedState.value?:false)
         },
+        containerColor = containerColor
     ) {
         IconToggleButton(checked = checkedState.value?:false, onCheckedChange = { checkedState.value = it }) {
 
             Crossfade(
                 targetState = checkedState.value
             ) { isChecked ->
+                isChecked?.let { onButtonClick?.invoke(it) }
                 if (isChecked==true) {
                     Icon(
-                        painter = painterResource(id = selectedIcon), contentDescription = null)
+                        painter = painterResource(id = selectedIcon), contentDescription = null, tint = YacsaTheme.colors.accent)
                 } else {
                     Icon(
-                        painter = painterResource(id = defaultIcon), contentDescription = null)
+                        painter = painterResource(id = defaultIcon), contentDescription = null,tint = YacsaTheme.colors.accent)
                 }
             }
         }
@@ -62,7 +67,8 @@ fun Preview_TwoStateButton() {
             remember { mutableStateOf(false) },
             R.drawable.icon_search_regular_24,
             R.drawable.icon_heart_regulat_24,
-            {}
+            {},
+            YacsaTheme.colors.primary
         )
     }
 }

@@ -18,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -69,7 +68,7 @@ fun OnboardingItem(
             .fillMaxSize()
             .scale(scaleValue)
             .clip(RoundedCornerShape(size = corner))
-            .background(Color(0xFFE0DFFD)),
+            .background(YacsaTheme.colors.surface),
     ) {
         Column(
             modifier = Modifier
@@ -82,26 +81,28 @@ fun OnboardingItem(
                 contentDescription = null,
                 modifier = Modifier
                     .padding(
-                        start = 50.dp,
-                        end = 50.dp,
+                        start = YacsaTheme.spacing.extraLarge,
+                        end = YacsaTheme.spacing.extraLarge,
                     )
                     .scale(scaleValue)
                     .alpha(alphaValue),
             )
             Spacer(
-                modifier = Modifier.height(26.dp),
+                modifier = Modifier.height(YacsaTheme.spacing.default),
             )
             Text(
                 text = header,
-                style = YacsaTheme.typography.heading,
+                style = YacsaTheme.typography.header,
+                color = YacsaTheme.colors.primary,
                 modifier = Modifier.alpha(alphaValue),
             )
             Spacer(
-                modifier = Modifier.height(8.dp),
+                modifier = Modifier.height(YacsaTheme.spacing.small),
             )
             Text(
                 text = caption,
-                style = YacsaTheme.typography.caption,
+                style = YacsaTheme.typography.title,
+                color = YacsaTheme.colors.secondary,
                 modifier = Modifier.alpha(alphaValue),
             )
         }

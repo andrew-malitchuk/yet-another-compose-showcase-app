@@ -30,6 +30,7 @@ fun SubjectsBlock(
             modifier = Modifier.fillMaxWidth(),
             text = "Subjects",
             style = YacsaTheme.typography.title,
+            color = YacsaTheme.colors.primary,
             maxLines = 1,
             minLines = 1,
             textAlign = TextAlign.Start,

@@ -26,6 +26,7 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation("androidx.core:core-splashscreen:1.0.0")
     implementation(project(":feature:navigation"))
+    implementation(project(":core:model"))
 
     implementation("com.airbnb.android:lottie-compose:6.0.0")
 

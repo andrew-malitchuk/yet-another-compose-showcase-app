@@ -17,7 +17,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yacsa.model.model.BookUiModel
@@ -45,12 +44,11 @@ fun ResultFetched(
             .padding(top = 8.dp),
     ) {
         AnimatedDivider(state = state)
-
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .clip(RoundedCornerShape(topStart = corner.value, topEnd = corner.value))
-                .background(Color(0xFFE0DFFD)),
+                .background(YacsaTheme.colors.surface),
         ) {
             LazyColumn(
                 state = state,

@@ -20,10 +20,10 @@ fun YacsaTheme(
 
     with(systemUiController) {
         setSystemBarsColor(
-            color = colors.statusBarColor,
+            color = colors.statusBar,
         )
         setNavigationBarColor(
-            color = colors.statusBarColor,
+            color = colors.navigationBar,
         )
     }
 
@@ -31,6 +31,9 @@ fun YacsaTheme(
         LocalYacsaColors provides colors,
         LocalYacsaTypography provides typography,
         LocalYacsaSpacing provides spacing,
+        LocalYacsaShape provides shapes,
+        LocalYacsaDividers provides dividers,
         content = content,
+
     )
 }

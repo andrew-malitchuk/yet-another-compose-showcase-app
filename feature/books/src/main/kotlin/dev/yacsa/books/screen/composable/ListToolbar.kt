@@ -1,5 +1,6 @@
 package dev.yacsa.books.screen.composable
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -30,44 +31,63 @@ fun ListToolbar(
     settingsClick: () -> Unit,
     favouriteClick: () -> Unit,
 ) {
-    Column {
+    Column(
+        modifier = Modifier
+            .background(YacsaTheme.colors.background)
+    ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(64.dp)
-                .padding(horizontal = 8.dp),
+                .padding(horizontal = YacsaTheme.spacing.small),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.icon_book_regular_24),
                 contentDescription = null,
+                tint = YacsaTheme.colors.accent
+
             )
             Spacer(
-                modifier = Modifier
-                    .width(8.dp),
+                modifier = Modifier.width(YacsaTheme.spacing.small),
             )
-            Text(text = "YACSA", style = YacsaTheme.typography.title)
+            Text(
+                text = "YACSA",
+                style = YacsaTheme.typography.title,
+                color = YacsaTheme.colors.primary
+            )
 
             Spacer(
                 modifier = Modifier
                     .weight(1f),
             )
-            SmallFloatingActionButton(onClick = { favouriteClick() }) {
+            SmallFloatingActionButton(
+                containerColor = YacsaTheme.colors.primary,
+                onClick = { favouriteClick() }
+            ) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_heart_regulat_24),
                     contentDescription = null,
+                    tint = YacsaTheme.colors.accent
                 )
             }
-            SmallFloatingActionButton(onClick = { searchClick() }) {
+            SmallFloatingActionButton(
+                containerColor = YacsaTheme.colors.primary,
+                onClick = { searchClick() }) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_search_regular_24),
                     contentDescription = null,
+                    tint = YacsaTheme.colors.accent
+
                 )
             }
-            SmallFloatingActionButton(onClick = { settingsClick() }) {
+            SmallFloatingActionButton(
+                containerColor = YacsaTheme.colors.primary,
+                onClick = { settingsClick() }) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_gear_six_regular_24),
                     contentDescription = null,
+                    tint = YacsaTheme.colors.accent
                 )
             }
         }

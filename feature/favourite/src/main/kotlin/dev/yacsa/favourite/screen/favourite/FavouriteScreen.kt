@@ -1,5 +1,6 @@
 package dev.yacsa.favourite.screen.favourite
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -30,6 +31,7 @@ import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.divider.AnimatedDivider
 import dev.yacsa.ui.theme.YacsaTheme
+import dev.yacsa.ui.theme.detectThemeMode
 
 @Composable
 fun FavouriteRoute(
@@ -40,14 +42,20 @@ fun FavouriteRoute(
 
     val foo = favouriteViewModel.flow?.collectAsStateWithLifecycle(null)
 
-    FavouriteScreen(
-        uiState,
-        foo,
-        onBackClick,
-        onFavouriteMark = { id, isFavourite ->
-            favouriteViewModel.acceptIntent(FavouriteIntent.MarkFavourite(id, isFavourite))
-        }
-    )
+    val currentTheme  by favouriteViewModel.currentTheme
+    val isDarkTheme = currentTheme?.detectThemeMode()?:false
+
+    YacsaTheme(isDarkTheme) {
+
+        FavouriteScreen(
+            uiState,
+            foo,
+            onBackClick,
+            onFavouriteMark = { id, isFavourite ->
+                favouriteViewModel.acceptIntent(FavouriteIntent.MarkFavourite(id, isFavourite))
+            }
+        )
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -65,16 +73,10 @@ fun FavouriteScreen(
     val state = rememberLazyListState()
 
 
-//    if (!uiState.isLoading && !uiState.isError) {
-//        ContentFetched(
-//            foo
-//        )
-//    } else {
-//        ListNoContent(uiState = uiState)
-//    }
     Scaffold(
         modifier = Modifier
-            .nestedScroll(scrollBehavior.nestedScrollConnection),
+            .nestedScroll(scrollBehavior.nestedScrollConnection)
+            .background( YacsaTheme.colors.background),
         topBar = {
             LargeTopAppBar(
                 title = {
@@ -82,26 +84,35 @@ fun FavouriteScreen(
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         // TODO: fix
-                        Text(text = "Favourite", style = YacsaTheme.typography.heading)
+                        Text(
+                            text = "Favourite",
+                            style = YacsaTheme.typography.header,
+                            color = YacsaTheme.colors.primary
+                        )
                         // TODO: fix
                         Spacer(modifier = Modifier.width(8.dp))
-                        Icon(
+                        androidx.compose.material3.Icon(
                             painterResource(id = R.drawable.icon_heart_regulat_24),
                             contentDescription = null,
+                            tint = YacsaTheme.colors.accent
                         )
                     }
                 },
                 navigationIcon = {
-                    SmallFloatingActionButton(onClick = { onBackClick() }) {
+                    SmallFloatingActionButton(
+                        onClick = { onBackClick() },
+                        containerColor = YacsaTheme.colors.accent
+                    ) {
                         Icon(
                             painter = painterResource(id = R.drawable.icon_caret_left_regular_24),
                             contentDescription = null,
+                            tint = YacsaTheme.colors.primary
                         )
                     }
                 },
                 scrollBehavior = scrollBehavior,
                 colors = TopAppBarDefaults.largeTopAppBarColors(
-                    containerColor = YacsaTheme.colors.primaryBackground,
+                    containerColor = YacsaTheme.colors.background,
                 ),
             )
             Column {

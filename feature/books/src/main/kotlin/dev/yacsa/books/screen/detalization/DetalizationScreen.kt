@@ -16,6 +16,7 @@ import dev.yacsa.books.screen.detalization.content.ContentFetchedPortrait
 import dev.yacsa.books.screen.detalization.content.ContentIsLoading
 import dev.yacsa.platform.ext.collectWithLifecycle
 import dev.yacsa.ui.theme.YacsaTheme
+import dev.yacsa.ui.theme.detectThemeMode
 import kotlinx.coroutines.flow.Flow
 
 @Composable
@@ -37,15 +38,19 @@ fun DetalizationRoute(
             "uiState" to uiState,
         ),
     )
+    val currentTheme  by detalizationViewModel.currentTheme
+    val isDarkTheme = currentTheme?.detectThemeMode()?:false
 
-    DetalizationScreen(
-        uiState = uiState,
-        onBackClick = onBackClick,
-        onFormatClick = {
-            detalizationViewModel.acceptIntent(DetalizationIntent.OnLinkClick(it))
-        },
-        favourite = detalizationViewModel.checked
-    )
+    YacsaTheme(isDarkTheme) {
+        DetalizationScreen(
+            uiState = uiState,
+            onBackClick = onBackClick,
+            onFormatClick = {
+                detalizationViewModel.acceptIntent(DetalizationIntent.OnLinkClick(it))
+            },
+            favourite = detalizationViewModel.checked
+        )
+    }
 }
 
 @Composable
@@ -76,10 +81,10 @@ fun DetalizationScreen(
         else -> {
             systemUiController.apply {
                 setSystemBarsColor(
-                    color = Color.LightGray,
+                    color = YacsaTheme.colors.surface,
                 )
                 setNavigationBarColor(
-                    color = Color.White,
+                    color = YacsaTheme.colors.background,
                 )
             }
 

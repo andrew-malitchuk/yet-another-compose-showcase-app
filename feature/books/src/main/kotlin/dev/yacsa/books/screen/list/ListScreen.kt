@@ -16,11 +16,11 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.theapache64.rebugger.Rebugger
 import dev.yacsa.books.screen.list.content.ContentFetched
-import dev.yacsa.books.screen.list.content.ContentIsLoading
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.platform.connection.ConnectivityObserver
 import dev.yacsa.platform.ext.collectWithLifecycle
 import dev.yacsa.ui.composable.content.ContentError
+import dev.yacsa.ui.composable.content.ContentIsLoading
 import dev.yacsa.ui.composable.snackbar.OfflineSnackbar
 import dev.yacsa.ui.theme.YacsaTheme
 import dev.yacsa.ui.theme.detectThemeMode
@@ -153,7 +153,7 @@ fun ListNoContent(
         }
 
         uiState.isError -> {
-            ContentError(errorMessage = "Moshi moshi?")
+            ContentError(errorMessage = "Moshi moshi?"){}
         }
     }
 }

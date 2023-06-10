@@ -57,7 +57,9 @@ fun ContentFetched(
             )
             ContentError(
                 errorMessage = "Moshi moshi?"
-            )
+            ){
+
+            }
         }
 
         else -> {

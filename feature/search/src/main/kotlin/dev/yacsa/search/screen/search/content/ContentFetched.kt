@@ -33,10 +33,10 @@ import dev.yacsa.search.screen.composable.ChipGroup
 import dev.yacsa.search.screen.composable.SearchToolbar
 import dev.yacsa.search.screen.search.SearchUiState
 import dev.yacsa.search.screen.search.content.result.ResultFetched
-import dev.yacsa.search.screen.search.content.result.ResultIsLoading
 import dev.yacsa.search.screen.search.dialog.FilterDialog
 import dev.yacsa.search.screen.search.dialog.FilterDialogResult
 import dev.yacsa.ui.composable.content.ContentError
+import dev.yacsa.ui.composable.content.ContentIsLoading
 import dev.yacsa.ui.composable.content.ContentNoData
 import dev.yacsa.ui.composable.keyboard.clearFocusOnKeyboardDismiss
 import dev.yacsa.ui.theme.YacsaTheme
@@ -163,11 +163,11 @@ fun ContentFetched(
         }
 
         if (uiState.isResultLoading) {
-            ResultIsLoading()
+            ContentIsLoading()
         } else {
             if (uiState.resultSearch.isNullOrEmpty()) {
                 if (uiState.isError) {
-                    ContentError(errorMessage = "Moshi moshi?")
+                    ContentError(errorMessage = "Moshi moshi?"){}
                 } else {
                     ContentNoData(modifier = Modifier.fillMaxSize(),message = "Nothing to show(")
                 }

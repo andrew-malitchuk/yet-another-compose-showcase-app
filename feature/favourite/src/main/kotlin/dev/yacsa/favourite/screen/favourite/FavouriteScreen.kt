@@ -25,7 +25,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.yacsa.favourite.screen.favourite.content.ContentFetched
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.ui.R
@@ -46,7 +45,6 @@ fun FavouriteRoute(
     val isDarkTheme = currentTheme?.detectThemeMode()?:false
 
     YacsaTheme(isDarkTheme) {
-
         FavouriteScreen(
             uiState,
             foo,
@@ -66,7 +64,6 @@ fun FavouriteScreen(
     onBackClick: () -> Unit,
     onFavouriteMark: (Int, Boolean) -> Unit
 ) {
-    val systemUiController = rememberSystemUiController()
     val foo = rememberTopAppBarState()
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(foo)

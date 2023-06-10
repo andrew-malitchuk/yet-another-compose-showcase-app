@@ -1,5 +1,6 @@
 package dev.yacsa.ui.composable.content
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -7,17 +8,20 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -27,37 +31,89 @@ import dev.yacsa.ui.theme.YacsaTheme
 @Composable
 fun ContentError(
     modifier: Modifier = Modifier,
-    errorMessage:String
+    errorMessage: String,
+    onBackClick: () -> Unit
 ) {
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .background(YacsaTheme.colors.background)
+    ) {
 
-        ) {
+//        SmallFloatingActionButton(
+//            modifier = Modifier
+//                .padding(16.dp),
+//            onClick = {
+//                onBackClick()
+//            },
+//            containerColor = YacsaTheme.colors.accent
+//        ) {
+//            Icon(
+//                painter = painterResource(id = R.drawable.icon_caret_left_regular_24),
+//                contentDescription = null,
+//                tint = YacsaTheme.colors.primary
+//            )
+//        }
+
         Box(
             modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(1f)
-                .clip(RoundedCornerShape(size = 16.dp))
-                .align(Alignment.Center)
-                .background(Color(0xFFE0DFFD)),
-            contentAlignment = Alignment.Center
+                .fillMaxHeight(1f)
 
         ) {
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
+            Box(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth()
+                    .aspectRatio(1f)
+                    .clip(RoundedCornerShape(size = 16.dp))
+                    .align(Alignment.Center)
+                    .background(YacsaTheme.colors.surface),
+                contentAlignment = Alignment.Center
+
             ) {
-                Image(
-                    modifier = Modifier
-                        .padding(16.dp),
-                    painter = painterResource(id = R.drawable.illustration_error),
-                    contentDescription = null,
-                )
-                Text(text = "SWW", style = YacsaTheme.typography.title)
-                Spacer(modifier = Modifier.height(6.dp))
-                Text(text = errorMessage, style = YacsaTheme.typography.caption)
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Image(
+                        modifier = Modifier
+                            .padding(16.dp),
+                        painter = painterResource(id = R.drawable.illustration_error),
+                        contentDescription = null,
+                    )
+                    Text(
+                        text = "SWW",
+                        style = YacsaTheme.typography.header,
+                        color = YacsaTheme.colors.primary,
+                    )
+                    Spacer(
+                        modifier = Modifier.height(YacsaTheme.spacing.small),
+                    )
+                    Text(
+                        text = errorMessage,
+                        style = YacsaTheme.typography.title,
+                        color = YacsaTheme.colors.secondary,
+                    )
+                    OutlinedButton(
+                        modifier = Modifier
+                            .wrapContentHeight()
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp),
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            backgroundColor = YacsaTheme.colors.surface,
+                            contentColor = YacsaTheme.colors.accent
+                        ),
+                        border = BorderStroke(1.dp, YacsaTheme.colors.accent),
+                        onClick = {
+                            onBackClick()
+                        }) {
+                        androidx.compose.material.Text(
+                            text = "Okay",
+                            style = YacsaTheme.typography.title,
+                            color = YacsaTheme.colors.accent
+                        )
+                    }
+                }
             }
         }
     }
@@ -68,7 +124,8 @@ fun ContentError(
 fun Preview_ContentError() {
     YacsaTheme() {
         ContentError(
-            errorMessage="Foobar"
+            errorMessage = "Foobar",
+            onBackClick = {}
         )
     }
 }

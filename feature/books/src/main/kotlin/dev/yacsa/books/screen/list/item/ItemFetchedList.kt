@@ -57,7 +57,7 @@ fun ItemFetchedList(
         backgroundColor = YacsaTheme.colors.background,
         /*border = BorderStroke(1.dp, YacsaTheme.colors.secondary),*/
         shape = YacsaTheme.shapes.cornersStyle,
-        elevation = YacsaTheme.spacing.small,
+        elevation = 0.dp,
     ) {
         Row(
             modifier = Modifier
@@ -66,7 +66,7 @@ fun ItemFetchedList(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Card(
-                elevation = YacsaTheme.spacing.extraSmall,
+                elevation = 0.dp,
                 border = BorderStroke(0.5.dp, YacsaTheme.colors.primary),
                 shape = YacsaTheme.shapes.cornersStyle,
             ) {

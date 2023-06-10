@@ -11,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
@@ -19,8 +18,8 @@ fun OfflineSnackbar(
     message: String
 ) {
     val shape = RoundedCornerShape(
-        bottomEnd = 16.dp,
-        bottomStart = 16.dp
+        bottomEnd = YacsaTheme.corners.medium,
+        bottomStart = YacsaTheme.corners.medium
     )
     Box(
         modifier = Modifier
@@ -30,7 +29,7 @@ fun OfflineSnackbar(
     ) {
         Text(
             modifier = Modifier
-                .padding(6.dp)
+                .padding(YacsaTheme.spacing.small)
                 .fillMaxWidth(),
             text = message,
             style = YacsaTheme.typography.title,

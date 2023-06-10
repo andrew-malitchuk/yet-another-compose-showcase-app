@@ -33,7 +33,7 @@ fun ResultFetched(
 ) {
     val isVisible = state.canScrollBackward
     val corner = animateDpAsState(
-        targetValue = if (!isVisible) 16.dp else 0.dp,
+        targetValue = if (!isVisible) YacsaTheme.corners.medium else 0.dp,
         animationSpec = tween(
             durationMillis = 500,
         ),
@@ -41,7 +41,7 @@ fun ResultFetched(
 
     Column(
         modifier = Modifier
-            .padding(top = 8.dp),
+            .padding(top = YacsaTheme.spacing.small),
     ) {
         AnimatedDivider(state = state)
         Box(
@@ -54,9 +54,8 @@ fun ResultFetched(
                 state = state,
                 modifier = modifier
                     .fillMaxSize(),
-                // TODO: fix
-                contentPadding = PaddingValues(8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
+                contentPadding = PaddingValues(YacsaTheme.spacing.small),
+                verticalArrangement = Arrangement.spacedBy(YacsaTheme.spacing.small),
             ) {
                 items(items = resultSearch) { item ->
                     ItemFetchedList(

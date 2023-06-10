@@ -20,7 +20,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dev.chrisbanes.snapper.ExperimentalSnapperApi
 import dev.yacsa.model.model.theme.ThemeUiModel
 import dev.yacsa.settings.screen.settings.item.SettingsItem
@@ -40,7 +39,7 @@ fun ContentFetched(
     onAnalyticsClick: () -> Unit,
     theme: MutableState<ThemeUiModel?>,
 ) {
-    val corner = 16.dp - (16.dp * abs(foo.collapsedFraction))
+    val corner = YacsaTheme.corners.medium - (YacsaTheme.corners.medium * abs(foo.collapsedFraction))
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -57,8 +56,8 @@ fun ContentFetched(
                 modifier = Modifier
                     .fillMaxSize(),
                 state = state,
-                contentPadding = PaddingValues(8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
+                contentPadding = PaddingValues(YacsaTheme.spacing.small),
+                verticalArrangement = Arrangement.spacedBy(YacsaTheme.spacing.small),
             ) {
                 item {
                     SettingsItem(
@@ -103,7 +102,7 @@ fun ContentFetched(
 fun Preview_ContentFetched() {
     YacsaTheme {
         ContentFetched(
-            innerPadding = PaddingValues(6.dp),
+            innerPadding = PaddingValues(YacsaTheme.spacing.small),
             state = rememberLazyListState(),
             foo = rememberTopAppBarState(),
             onFfClick = {},

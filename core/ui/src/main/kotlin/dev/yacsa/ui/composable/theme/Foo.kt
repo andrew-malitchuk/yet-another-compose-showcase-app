@@ -1,4 +1,4 @@
-package dev.yacsa.ui.theme
+package dev.yacsa.ui.composable.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable

@@ -32,7 +32,7 @@ fun TwoStateButton(
 ) {
 //    val checked = remember { mutableStateOf(false) }
     SmallFloatingActionButton(
-        elevation = FloatingActionButtonDefaults.elevation(1.dp),
+        elevation = FloatingActionButtonDefaults.elevation(0.dp),
         onClick = {
             onButtonClick?.invoke(checkedState.value?:false)
         },

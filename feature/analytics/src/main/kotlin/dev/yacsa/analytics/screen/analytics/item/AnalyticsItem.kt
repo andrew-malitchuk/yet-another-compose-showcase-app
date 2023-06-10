@@ -22,7 +22,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
 
@@ -35,7 +34,7 @@ fun AnalyticsItem(
     icon: Int,
     onClick: () -> Unit,
 ) {
-    val shape = RoundedCornerShape(16.dp)
+    val shape = RoundedCornerShape(YacsaTheme.corners.medium)
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -48,14 +47,13 @@ fun AnalyticsItem(
             },
         contentColor = YacsaTheme.colors.background,
         backgroundColor = YacsaTheme.colors.background,
-        /*border = BorderStroke(1.dp, YacsaTheme.colors.secondary),*/
         shape = YacsaTheme.shapes.cornersStyle,
         elevation = YacsaTheme.spacing.small,
 
     ) {
         Row(
             modifier = Modifier
-                .padding(8.dp),
+                .padding(YacsaTheme.spacing.small),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             SmallFloatingActionButton(
@@ -70,7 +68,7 @@ fun AnalyticsItem(
             }
             Spacer(
                 modifier = Modifier
-                    .width(16.dp),
+                    .width(YacsaTheme.spacing.medium),
             )
             Column {
                 Text(text = key, style = YacsaTheme.typography.caption, color = YacsaTheme.colors.primary)

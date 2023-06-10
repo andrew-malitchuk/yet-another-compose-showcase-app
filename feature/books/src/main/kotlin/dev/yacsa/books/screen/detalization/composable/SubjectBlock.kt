@@ -13,7 +13,6 @@ import androidx.compose.material.icons.outlined.PlayArrow
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
@@ -30,7 +29,7 @@ fun SubjectBlock(
                 horizontalArrangement = Arrangement.Center,
             ) {
                 Icon(imageVector = Icons.Outlined.PlayArrow, contentDescription = "")
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(YacsaTheme.spacing.small))
                 Text(text = it)
             }
         }

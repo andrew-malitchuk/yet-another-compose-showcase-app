@@ -6,6 +6,7 @@ val dividers = YacsaDividers(
     extraSmall = 0.25.dp,
     small = 0.5.dp,
     medium = 1.dp,
-    large = 2.dp,
-    extraLarge = 4.dp,
+    default = 2.dp,
+    large = 4.dp,
+    extraLarge = 6.dp,
 )

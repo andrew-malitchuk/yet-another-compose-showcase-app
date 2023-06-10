@@ -3,11 +3,15 @@ package dev.yacsa.books.screen.list.content.fetched
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.grid.*
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyGridItemSpanScope
+import androidx.compose.foundation.lazy.grid.LazyGridState
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
@@ -30,14 +34,14 @@ fun ContentFetchedGrid(
     val span: (LazyGridItemSpanScope) -> GridItemSpan = { GridItemSpan(spanCount) }
 
     LazyVerticalGrid(
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(YacsaTheme.spacing.small),
+        horizontalArrangement = Arrangement.spacedBy(YacsaTheme.spacing.small),
         state = listState,
         columns = GridCells.Fixed(spanCount),
         modifier = modifier
             .fillMaxSize()
             // TODO: fix
-            .padding(16.dp),
+            .padding(YacsaTheme.spacing.medium),
     ) {
         items(
             lazyPagingItems.itemCount,

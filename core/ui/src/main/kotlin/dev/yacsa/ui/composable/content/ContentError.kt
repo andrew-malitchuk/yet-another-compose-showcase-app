@@ -24,7 +24,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
 
@@ -39,22 +38,6 @@ fun ContentError(
             .fillMaxSize()
             .background(YacsaTheme.colors.background)
     ) {
-
-//        SmallFloatingActionButton(
-//            modifier = Modifier
-//                .padding(16.dp),
-//            onClick = {
-//                onBackClick()
-//            },
-//            containerColor = YacsaTheme.colors.accent
-//        ) {
-//            Icon(
-//                painter = painterResource(id = R.drawable.icon_caret_left_regular_24),
-//                contentDescription = null,
-//                tint = YacsaTheme.colors.primary
-//            )
-//        }
-
         Box(
             modifier = Modifier
                 .fillMaxHeight(1f)
@@ -62,10 +45,10 @@ fun ContentError(
         ) {
             Box(
                 modifier = Modifier
-                    .padding(16.dp)
+                    .padding(YacsaTheme.spacing.medium)
                     .fillMaxWidth()
                     .aspectRatio(1f)
-                    .clip(RoundedCornerShape(size = 16.dp))
+                    .clip(RoundedCornerShape(size =YacsaTheme.corners.medium))
                     .align(Alignment.Center)
                     .background(YacsaTheme.colors.surface),
                 contentAlignment = Alignment.Center
@@ -77,7 +60,7 @@ fun ContentError(
                 ) {
                     Image(
                         modifier = Modifier
-                            .padding(16.dp),
+                            .padding(YacsaTheme.spacing.medium),
                         painter = painterResource(id = R.drawable.illustration_error),
                         contentDescription = null,
                     )
@@ -98,12 +81,12 @@ fun ContentError(
                         modifier = Modifier
                             .wrapContentHeight()
                             .fillMaxWidth()
-                            .padding(horizontal = 16.dp),
+                            .padding(horizontal = YacsaTheme.spacing.medium),
                         colors = ButtonDefaults.outlinedButtonColors(
                             backgroundColor = YacsaTheme.colors.surface,
                             contentColor = YacsaTheme.colors.accent
                         ),
-                        border = BorderStroke(1.dp, YacsaTheme.colors.accent),
+                        border = BorderStroke(YacsaTheme.dividers.small, YacsaTheme.colors.accent),
                         onClick = {
                             onBackClick()
                         }) {

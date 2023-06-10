@@ -30,18 +30,18 @@ fun ContentFetched(
 ) {
     Column {
         TopAppBar(
-            elevation = 4.dp,
+            elevation = 0.dp,
             title = {
                 Text("I'm a TopAppBar")
             },
         )
         LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(YacsaTheme.spacing.small),
             modifier = modifier
                 .fillMaxSize()
                 // TODO: fix
                 .padding(
-                    horizontal = 16.dp,
+                    horizontal = YacsaTheme.spacing.medium,
                 ),
         ) {
             items(items = uiState.featureFlags ?: emptyList()) { item ->

@@ -16,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
 
@@ -28,7 +27,7 @@ fun ContentNoData(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(YacsaTheme.spacing.medium),
 
         ) {
         Box(
@@ -47,7 +46,7 @@ fun ContentNoData(
             ) {
                 Image(
                     modifier = Modifier
-                        .padding(16.dp),
+                        .padding(YacsaTheme.spacing.medium),
                     painter = painterResource(id = R.drawable.illustration_no_data),
                     contentDescription = null,
                 )

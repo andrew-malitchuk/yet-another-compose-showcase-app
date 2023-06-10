@@ -46,8 +46,8 @@ fun ItemFetchedGrid(
             )
         // TODO: fix
         Card(
-            elevation = 4.dp,
-            shape = RoundedCornerShape(8.dp),
+            elevation = 0.dp,
+            shape = RoundedCornerShape(YacsaTheme.corners.small),
         ) {
             Image(
                 painter = painter,
@@ -57,7 +57,7 @@ fun ItemFetchedGrid(
                     .aspectRatio(1f / 1.5f),
             )
         }
-        Spacer(modifier = modifier.height(6.dp))
+        Spacer(modifier = modifier.height(YacsaTheme.spacing.small))
         Text(
             text = (book.authors?.firstOrNull()?.name ?: "NI"),
             style = YacsaTheme.typography.caption,
@@ -65,7 +65,7 @@ fun ItemFetchedGrid(
             maxLines = 1,
             minLines = 1,
         )
-        Spacer(modifier = modifier.height(6.dp))
+        Spacer(modifier = modifier.height(YacsaTheme.spacing.small))
         Text(
             text = (book.title ?: "NI"),
             style = YacsaTheme.typography.title,

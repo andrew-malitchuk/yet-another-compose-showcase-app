@@ -15,8 +15,8 @@ import com.google.accompanist.pager.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.yacsa.onboarding.screen.onboarding.item.OnboardingItem
 import dev.yacsa.ui.R
+import dev.yacsa.ui.composable.theme.detectThemeMode
 import dev.yacsa.ui.theme.YacsaTheme
-import dev.yacsa.ui.theme.detectThemeMode
 import kotlinx.coroutines.launch
 
 @Composable
@@ -167,7 +167,7 @@ fun BottomSection(state: PagerState) {
             inactiveColor = YacsaTheme.colors.primary,
             modifier = Modifier
                 .align(Alignment.CenterVertically)
-                .padding(bottom = 16.dp),
+                .padding(bottom = YacsaTheme.spacing.medium),
         )
     }
 }

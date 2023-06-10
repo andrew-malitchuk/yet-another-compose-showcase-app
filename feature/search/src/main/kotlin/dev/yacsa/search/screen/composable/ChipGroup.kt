@@ -12,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
 
@@ -26,10 +25,10 @@ fun ChipGroup(
     onDelete: (() -> Unit)?=null,
 ) {
     LazyRow(
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(YacsaTheme.spacing.small),
         // content padding
         contentPadding = PaddingValues(
-            horizontal = 8.dp,
+            horizontal = YacsaTheme.spacing.small,
         ),
     ) {
         items(values) {

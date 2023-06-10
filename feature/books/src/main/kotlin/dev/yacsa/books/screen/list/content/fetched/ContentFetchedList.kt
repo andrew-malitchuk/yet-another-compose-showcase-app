@@ -38,7 +38,7 @@ fun ContentFetchedList(
     val isVisible = listState.canScrollBackward
 
     val corner = animateDpAsState(
-        targetValue = if (!isVisible) 16.dp else 0.dp,
+        targetValue = if (!isVisible) YacsaTheme.corners.medium else 0.dp,
         animationSpec = tween(
             durationMillis = 500,
         ),

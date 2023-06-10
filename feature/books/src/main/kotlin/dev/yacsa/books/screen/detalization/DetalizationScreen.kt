@@ -15,8 +15,8 @@ import com.theapache64.rebugger.Rebugger
 import dev.yacsa.books.screen.detalization.content.ContentFetchedPortrait
 import dev.yacsa.platform.ext.collectWithLifecycle
 import dev.yacsa.ui.composable.content.ContentIsLoading
+import dev.yacsa.ui.composable.theme.detectThemeMode
 import dev.yacsa.ui.theme.YacsaTheme
-import dev.yacsa.ui.theme.detectThemeMode
 import kotlinx.coroutines.flow.Flow
 
 @Composable

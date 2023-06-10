@@ -41,8 +41,10 @@ fun ExpandableCard(
         backgroundColor = Color.White,
         shape = RoundedCornerShape(8.dp), // shape
         border = BorderStroke(strokeState, color), // stroke Width and Color
-        onClick = { expanded = !expanded }
-    ) {
+        onClick = { expanded = !expanded },
+        elevation = 0.dp,
+
+        ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()

@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Text
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.runtime.Composable
@@ -18,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.divider.AnimatedDivider
 import dev.yacsa.ui.theme.YacsaTheme
@@ -62,7 +64,8 @@ fun ListToolbar(
             )
             SmallFloatingActionButton(
                 containerColor = YacsaTheme.colors.primary,
-                onClick = { favouriteClick() }
+                onClick = { favouriteClick() },
+                elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_heart_regulat_24),
@@ -72,7 +75,8 @@ fun ListToolbar(
             }
             SmallFloatingActionButton(
                 containerColor = YacsaTheme.colors.primary,
-                onClick = { searchClick() }) {
+                onClick = { searchClick() },
+                elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_search_regular_24),
                     contentDescription = null,
@@ -82,7 +86,8 @@ fun ListToolbar(
             }
             SmallFloatingActionButton(
                 containerColor = YacsaTheme.colors.primary,
-                onClick = { settingsClick() }) {
+                onClick = { settingsClick() },
+                elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_gear_six_regular_24),
                     contentDescription = null,

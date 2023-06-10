@@ -24,6 +24,7 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.Text
@@ -112,7 +113,8 @@ fun FilterDialogContent(
             Spacer(modifier = Modifier.weight(1f))
             SmallFloatingActionButton(
                 onClick = { onClear() },
-                containerColor = YacsaTheme.colors.accent
+                containerColor = YacsaTheme.colors.accent,
+                elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_trash_regular_24),

@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Badge
 import androidx.compose.material.BadgedBox
 import androidx.compose.material.Text
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.runtime.Composable
@@ -49,7 +50,8 @@ fun SearchToolbar(
         ) {
             SmallFloatingActionButton(
                 onClick = { onBackClick() },
-                containerColor = YacsaTheme.colors.accent
+                containerColor = YacsaTheme.colors.accent,
+                elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
             ) {
                 androidx.compose.material.Icon(
                     painter = painterResource(id = R.drawable.icon_caret_left_regular_24),

@@ -17,9 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.yacsa.favourite.screen.favourite.FavouriteUiState
 import dev.yacsa.favourite.screen.favourite.item.ItemFetchedList
@@ -40,9 +38,8 @@ fun ContentFetched(
     onFavouriteMark: (Int, Boolean) -> Unit
 ) {
 
-    val corner = 16.dp - (16.dp * Math.abs(topAppBarState.collapsedFraction))
+    val corner = YacsaTheme.corners.medium - (YacsaTheme.corners.medium * Math.abs(topAppBarState.collapsedFraction))
     val systemUiController = rememberSystemUiController()
-    val shape = RoundedCornerShape(16.dp)
 
     when {
         uiState.isLoading -> {
@@ -53,9 +50,6 @@ fun ContentFetched(
         }
 
         uiState.isError -> {
-            systemUiController.setNavigationBarColor(
-                color = Color(0xFFE0DFFD),
-            )
             ContentError(
                 errorMessage = "Moshi moshi?"
             ){
@@ -83,12 +77,12 @@ fun ContentFetched(
                     if (!favouriteFlow?.value.isNullOrEmpty()) {
                         LazyColumn(
                             state = lazyListState,
-                            verticalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalArrangement = Arrangement.spacedBy(YacsaTheme.spacing.small),
                             contentPadding = PaddingValues(
-                                start = 16.dp,
-                                bottom = 16.dp,
-                                end = 16.dp,
-                                top = 8.dp,
+                                start = YacsaTheme.spacing.medium,
+                                bottom = YacsaTheme.spacing.medium,
+                                end = YacsaTheme.spacing.medium,
+                                top = YacsaTheme.spacing.small,
                             )
                         ) {
                             items(items = favouriteFlow?.value!!) { item ->

@@ -22,15 +22,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.yacsa.analytics.screen.analytics.content.ContentFetched
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.divider.AnimatedDivider
+import dev.yacsa.ui.composable.theme.detectThemeMode
 import dev.yacsa.ui.theme.YacsaTheme
-import dev.yacsa.ui.theme.detectThemeMode
 import logcat.logcat
 
 @Composable
@@ -94,7 +93,7 @@ fun AnalyticsScreen(
                             color = YacsaTheme.colors.primary
                         )
                         // TODO: fix
-                        Spacer(modifier = Modifier.width(8.dp))
+                        Spacer(modifier = Modifier.width(YacsaTheme.spacing.small))
                         androidx.compose.material3.Icon(
                             painterResource(id = R.drawable.icon_flask_bold_24),
                             contentDescription = null,
@@ -120,7 +119,7 @@ fun AnalyticsScreen(
                 ),
             )
             Column {
-                Spacer(modifier = Modifier.height(64.dp))
+                Spacer(modifier = Modifier.height(YacsaTheme.spacing.extraLarge))
                 AnimatedDivider(state = state)
             }
         },

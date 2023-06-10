@@ -15,7 +15,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dev.yacsa.featureflag.FeatureFlagModel
 import dev.yacsa.ui.theme.YacsaTheme
 
@@ -37,9 +36,7 @@ fun ItemFetched(
         ) {
             Text(
                 modifier = Modifier
-                    .padding(
-                        8.dp,
-                    ),
+                    .padding( YacsaTheme.spacing.small, ),
                 text = item.key,
             )
             Spacer(modifier = Modifier.weight(1f))
@@ -58,9 +55,7 @@ fun ItemFetched(
                     isEnabled(it)
                 },
                 modifier = Modifier
-                    .padding(
-                        16.dp,
-                    ),
+                    .padding( YacsaTheme.spacing.medium, ),
             )
         }
         Divider(

@@ -2,8 +2,6 @@ package dev.yacsa.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// TODO: fix
-
 //region Light colors
 val yacsa_theme_light_background = Color(0xFFFFFFFF)
 val yacsa_theme_light_surface = Color(0xFFF7EFE7)

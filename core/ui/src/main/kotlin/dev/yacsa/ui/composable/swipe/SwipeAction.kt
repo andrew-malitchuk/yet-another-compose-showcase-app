@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.unit.dp
 import dev.yacsa.ui.theme.YacsaTheme
 
 /**
@@ -65,12 +64,12 @@ fun SwipeAction(
   return SwipeAction(
     icon = {
 //      Image(
-//        modifier = Modifier.padding(16.dp),
+//        modifier = Modifier.padding(YacsaTheme.spacing.medium),
 //        painter = icon,
 //        contentDescription = null
 //      )
       Icon(
-        modifier = Modifier.padding(16.dp),
+        modifier = Modifier.padding(YacsaTheme.spacing.medium),
         painter = icon,
         contentDescription = null,
         tint = YacsaTheme.colors.accent

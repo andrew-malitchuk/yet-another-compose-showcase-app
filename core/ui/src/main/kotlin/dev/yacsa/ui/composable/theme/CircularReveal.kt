@@ -1,4 +1,4 @@
-package dev.yacsa.ui.theme
+package dev.yacsa.ui.composable.theme
 
 import android.graphics.Path
 import android.view.MotionEvent
@@ -28,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import dev.yacsa.ui.theme.YacsaTheme
 import kotlin.math.hypot
 
 @Composable

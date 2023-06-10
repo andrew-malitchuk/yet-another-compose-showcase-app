@@ -17,7 +17,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
@@ -54,12 +53,12 @@ fun ItemError(
                 modifier = Modifier
                     .wrapContentHeight()
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
+                    .padding(horizontal = YacsaTheme.spacing.medium),
                 colors = ButtonDefaults.outlinedButtonColors(
                     backgroundColor = YacsaTheme.colors.surface,
                     contentColor = YacsaTheme.colors.accent
                 ),
-                border = BorderStroke(1.dp, YacsaTheme.colors.accent),
+                border = BorderStroke(YacsaTheme.dividers.small, YacsaTheme.colors.accent),
                 onClick = {
                     onRetry()
                 }) {

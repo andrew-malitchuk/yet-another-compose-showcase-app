@@ -18,7 +18,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dev.yacsa.books.screen.detalization.composable.toolbar.CollapsingToolbar
 import dev.yacsa.books.screen.detalization.content.blocks.AuthorBlock
 import dev.yacsa.books.screen.detalization.content.blocks.BookshelfBlock
@@ -44,11 +43,6 @@ fun ContentFetchedPortrait(
     onBookshelfClick: (String) -> Unit,
     favourite: MutableState<Boolean?>,
 ) {
-//    val systemUiController = rememberSystemUiController()
-//    with(systemUiController) {
-//        setSystemBarsColor(Color(0xFFE0DFFD))
-//        setNavigationBarColor(Color.White)
-//    }
     val lazyScrollState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
 
@@ -81,10 +75,10 @@ fun ContentFetchedPortrait(
                     .animateContentSize(),
                 state = lazyScrollState,
                 contentPadding = PaddingValues(
-                    horizontal = 16.dp,
-                    vertical = 8.dp
+                    horizontal = YacsaTheme.spacing.medium,
+                    vertical = YacsaTheme.spacing.small
                 ),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
+                verticalArrangement = Arrangement.spacedBy(YacsaTheme.spacing.small),
             ) {
                 if (!book?.authors.isNullOrEmpty()) {
                     item {

@@ -11,8 +11,8 @@ import dev.yacsa.search.screen.search.content.ContentFetched
 import dev.yacsa.search.screen.search.dialog.FilterDialogResult
 import dev.yacsa.ui.composable.content.ContentError
 import dev.yacsa.ui.composable.content.ContentIsLoading
+import dev.yacsa.ui.composable.theme.detectThemeMode
 import dev.yacsa.ui.theme.YacsaTheme
-import dev.yacsa.ui.theme.detectThemeMode
 
 @Composable
 fun SearchRoute(

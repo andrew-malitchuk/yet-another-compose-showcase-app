@@ -17,7 +17,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
 
@@ -37,7 +36,7 @@ fun NotFoundScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(YacsaTheme.spacing.medium),
 
         ) {
         SmallFloatingActionButton(onClick = { onBackClick() }) {
@@ -51,15 +50,16 @@ fun NotFoundScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1f)
-                .clip(RoundedCornerShape(size = 16.dp))
+                .clip(RoundedCornerShape(size = YacsaTheme.corners.medium))
                 .align(Alignment.Center)
+                    // TODO: fix
                 .background(Color(0xFFE0DFFD)),
             contentAlignment = Alignment.Center
 
         ) {
             Image(
                 modifier = Modifier
-                    .padding(16.dp),
+                    .padding(YacsaTheme.spacing.medium),
                 painter = painterResource(id = R.drawable.illustration_taken),
                 contentDescription = null,
             )

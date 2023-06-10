@@ -20,7 +20,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
@@ -61,7 +60,7 @@ fun OnboardingItem(
         1f
     }
 
-    val corner = 64.dp - (64.dp * Math.abs(cornerValue))
+    val corner = YacsaTheme.corners.extraLarge - (YacsaTheme.corners.extraLarge * Math.abs(cornerValue))
 
     Box(
         modifier = Modifier

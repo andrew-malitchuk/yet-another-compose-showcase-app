@@ -40,11 +40,20 @@ data class YacsaSpacing(
     val extraLarge: Dp,
 )
 
-
 data class YacsaDividers(
     val extraSmall: Dp,
     val small: Dp,
     val medium: Dp,
+    val default: Dp,
+    val large: Dp,
+    val extraLarge: Dp,
+)
+
+data class YacsaCorners(
+    val extraSmall: Dp,
+    val small: Dp,
+    val medium: Dp,
+    val default: Dp,
     val large: Dp,
     val extraLarge: Dp,
 )
@@ -68,6 +77,10 @@ object YacsaTheme {
     val dividers: YacsaDividers
         @Composable
         get() = LocalYacsaDividers.current
+
+    val corners: YacsaCorners
+        @Composable
+        get() = LocalYacsaCorners.current
 }
 
 internal val LocalYacsaColors = staticCompositionLocalOf<YacsaColors> {
@@ -87,5 +100,9 @@ internal val LocalYacsaSpacing = staticCompositionLocalOf<YacsaSpacing> {
 }
 
 internal val LocalYacsaDividers = staticCompositionLocalOf<YacsaDividers> {
+    error("No shapes provided")
+}
+
+internal val LocalYacsaCorners = staticCompositionLocalOf<YacsaCorners> {
     error("No shapes provided")
 }

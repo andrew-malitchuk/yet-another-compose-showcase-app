@@ -70,12 +70,11 @@ fun ThemeItem(
             .bouncingClickable {
             },
         backgroundColor = YacsaTheme.colors.surface,
-        /*border = BorderStroke(0.5.dp, YacsaTheme.colors.primary),*/
         elevation = 0.dp,
     ) {
         Row(
             modifier = Modifier
-                .padding(8.dp),
+                .padding(YacsaTheme.spacing.small),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             SmallFloatingActionButton(
@@ -90,7 +89,7 @@ fun ThemeItem(
             }
             Spacer(
                 modifier = Modifier
-                    .width(16.dp),
+                    .width(YacsaTheme.spacing.medium),
             )
             Text(
                 text = "Theme",
@@ -103,7 +102,7 @@ fun ThemeItem(
             )
 
             LazyRow(
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(YacsaTheme.spacing.small),
                 contentPadding = PaddingValues(horizontal = 1.dp)
             ) {
                 item {

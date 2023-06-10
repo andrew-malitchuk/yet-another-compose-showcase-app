@@ -48,12 +48,11 @@ fun SettingsItem(
 //
 //            },
         backgroundColor = YacsaTheme.colors.surface,
-        /*border = BorderStroke(0.5.dp, YacsaTheme.colors.primary),*/
         elevation = 0.dp,
     ) {
         Row(
             modifier = Modifier
-                .padding(8.dp),
+                .padding(YacsaTheme.spacing.small),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             SmallFloatingActionButton(
@@ -68,7 +67,7 @@ fun SettingsItem(
             }
             Spacer(
                 modifier = Modifier
-                    .width(16.dp),
+                    .width(YacsaTheme.spacing.medium),
             )
             Text(
                 text = title,

@@ -55,7 +55,6 @@ fun ItemFetchedList(
             },
         contentColor = YacsaTheme.colors.background,
         backgroundColor = YacsaTheme.colors.background,
-        /*border = BorderStroke(1.dp, YacsaTheme.colors.secondary),*/
         shape = YacsaTheme.shapes.cornersStyle,
         elevation = 0.dp,
     ) {
@@ -67,14 +66,14 @@ fun ItemFetchedList(
         ) {
             Card(
                 elevation = 0.dp,
-                border = BorderStroke(0.5.dp, YacsaTheme.colors.primary),
+                border = BorderStroke(YacsaTheme.dividers.small, YacsaTheme.colors.primary),
                 shape = YacsaTheme.shapes.cornersStyle,
             ) {
                 Image(
                     painter = painter,
                     contentDescription = null,
                     modifier = Modifier
-                        .height(124.dp)
+                        .height(128.dp)
                         .aspectRatio(1f / 1.5f),
                 )
             }

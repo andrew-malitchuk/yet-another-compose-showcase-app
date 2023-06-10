@@ -27,7 +27,6 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import dev.yacsa.search.screen.composable.ChipGroup
 import dev.yacsa.search.screen.composable.SearchToolbar
@@ -108,7 +107,7 @@ fun ContentFetched(
         OutlinedTextField(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 8.dp, end = 4.dp, top = 8.dp, bottom = 8.dp)
+                .padding(start = YacsaTheme.spacing.small, end = YacsaTheme.spacing.extraSmall, top = YacsaTheme.spacing.small, bottom = YacsaTheme.spacing.small)
                 .clearFocusOnKeyboardDismiss(),
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 focusedBorderColor = YacsaTheme.colors.accent,

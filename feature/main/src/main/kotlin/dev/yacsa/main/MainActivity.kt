@@ -12,8 +12,8 @@ import dev.yacsa.domain.usecase.theme.GetThemeUseCase
 import dev.yacsa.main.navigation.RootNavigationGraph
 import dev.yacsa.model.model.theme.ThemeUiModel
 import dev.yacsa.navigation.NavigationDirection
+import dev.yacsa.ui.composable.theme.detectThemeMode
 import dev.yacsa.ui.theme.YacsaTheme
-import dev.yacsa.ui.theme.detectThemeMode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay

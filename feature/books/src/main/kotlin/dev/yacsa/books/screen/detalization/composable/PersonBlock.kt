@@ -13,7 +13,6 @@ import androidx.compose.material.icons.outlined.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dev.yacsa.model.model.PersonUiModel
 import dev.yacsa.ui.theme.YacsaTheme
 
@@ -31,7 +30,7 @@ fun PersonBlock(
                 horizontalArrangement = Arrangement.Center,
             ) {
                 Icon(imageVector = Icons.Outlined.Person, contentDescription = "")
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(YacsaTheme.spacing.small))
                 Column() {
                     Text(text = "${it.birthYear}-${it.deathYear}")
                     Text(text = it.name ?: "SWW")

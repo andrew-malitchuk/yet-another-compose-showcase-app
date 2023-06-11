@@ -3,6 +3,7 @@ package dev.yacsa.onboarding.screen.onboarding
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -26,6 +27,7 @@ fun OnboardingRoute(
     onDoneClick: () -> Unit,
 ) {
 
+    // TODO: fix?
     val onboardingViewModel: OnboardingViewModel = hiltViewModel()
 
     val currentTheme  by onboardingViewModel.currentTheme
@@ -126,7 +128,8 @@ fun TopSection(
     ) {
         SmallFloatingActionButton(
             onClick = { onBackClick() },
-            containerColor = YacsaTheme.colors.accent
+            containerColor = YacsaTheme.colors.accent,
+            elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.icon_caret_left_regular_24),

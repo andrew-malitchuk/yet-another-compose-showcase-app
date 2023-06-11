@@ -13,6 +13,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.runtime.Composable
@@ -22,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
 
@@ -48,7 +50,7 @@ fun AnalyticsItem(
         contentColor = YacsaTheme.colors.background,
         backgroundColor = YacsaTheme.colors.background,
         shape = YacsaTheme.shapes.cornersStyle,
-        elevation = YacsaTheme.spacing.small,
+        elevation = 0.dp,
 
     ) {
         Row(
@@ -59,6 +61,7 @@ fun AnalyticsItem(
             SmallFloatingActionButton(
                 onClick = { },
                 containerColor = YacsaTheme.colors.primary,
+                elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
             ) {
                 Icon(
                     painter = painterResource(id = icon),

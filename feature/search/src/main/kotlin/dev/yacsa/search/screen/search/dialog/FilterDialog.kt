@@ -24,6 +24,7 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.Text
@@ -55,7 +56,7 @@ fun FilterDialog(
         containerColor = YacsaTheme.colors.surface,
         onDismissRequest = { onDismiss() },
         sheetState = modalBottomSheetState,
-        shape = RoundedCornerShape(topEnd = 16.dp, topStart = 16.dp),
+        shape = RoundedCornerShape(topEnd = YacsaTheme.corners.medium, topStart = YacsaTheme.corners.medium),
         dragHandle = { BottomSheetDefaults.DragHandle() },
     ) {
         FilterDialogContent(
@@ -95,13 +96,13 @@ fun FilterDialogContent(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
             .fillMaxSize()
-            .padding(bottom = 16.dp)
+            .padding(bottom = YacsaTheme.spacing.medium)
 
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
+                .padding(start = YacsaTheme.spacing.medium, end = YacsaTheme.spacing.medium, bottom = YacsaTheme.spacing.medium),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             androidx.compose.material.Text(
@@ -112,7 +113,8 @@ fun FilterDialogContent(
             Spacer(modifier = Modifier.weight(1f))
             SmallFloatingActionButton(
                 onClick = { onClear() },
-                containerColor = YacsaTheme.colors.accent
+                containerColor = YacsaTheme.colors.accent,
+                elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_trash_regular_24),
@@ -122,10 +124,10 @@ fun FilterDialogContent(
             }
         }
         Divider(modifier = Modifier.fillMaxWidth(), color = YacsaTheme.colors.background)
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(YacsaTheme.spacing.medium))
         Column(
             modifier = Modifier
-                .padding(horizontal = 16.dp)
+                .padding(horizontal = YacsaTheme.spacing.medium)
         ) {
             androidx.compose.material.Text(
                 text = "Language",
@@ -138,7 +140,7 @@ fun FilterDialogContent(
             ) {
                 languages.forEach {
                     FilterChip(
-                        shape = RoundedCornerShape(corner = CornerSize(6.dp)),
+                        shape = RoundedCornerShape(corner = CornerSize(YacsaTheme.corners.small)),
                         colors = androidx.compose.material3.FilterChipDefaults.filterChipColors(
                             containerColor = YacsaTheme.colors.surface,
                             selectedContainerColor = YacsaTheme.colors.background,
@@ -149,8 +151,8 @@ fun FilterDialogContent(
                         border = FilterChipDefaults.filterChipBorder(
                             borderColor = YacsaTheme.colors.secondary,
                             selectedBorderColor = YacsaTheme.colors.primary,
-                            borderWidth = 1.dp,
-                            selectedBorderWidth = 1.dp,
+                            borderWidth = YacsaTheme.dividers.medium,
+                            selectedBorderWidth = YacsaTheme.dividers.medium,
                         ),
                         onClick = {
                             filterResult.lang = it
@@ -167,7 +169,7 @@ fun FilterDialogContent(
                 }
 
             }
-            Spacer(modifier = Modifier.height(6.dp))
+            Spacer(modifier = Modifier.height(YacsaTheme.spacing.small))
             androidx.compose.material.Text(
                 text = "Sort",
                 style = YacsaTheme.typography.caption,
@@ -197,19 +199,19 @@ fun FilterDialogContent(
                 }
             }
         }
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(YacsaTheme.spacing.medium))
         Divider(modifier = Modifier.fillMaxWidth(), color = YacsaTheme.colors.background)
-        Spacer(modifier = Modifier.height(6.dp))
+        Spacer(modifier = Modifier.height(YacsaTheme.spacing.small))
         OutlinedButton(
             modifier = Modifier
                 .fillMaxSize()
                 .wrapContentHeight()
-                .padding(horizontal = 16.dp),
+                .padding(horizontal = YacsaTheme.spacing.medium),
             colors = ButtonDefaults.outlinedButtonColors(
                 backgroundColor = YacsaTheme.colors.surface,
                 contentColor = YacsaTheme.colors.accent
             ),
-            border = BorderStroke(1.dp, YacsaTheme.colors.accent ),
+            border = BorderStroke(YacsaTheme.dividers.medium, YacsaTheme.colors.accent ),
             onClick = {
                 onSort(filterResult)
             }) {

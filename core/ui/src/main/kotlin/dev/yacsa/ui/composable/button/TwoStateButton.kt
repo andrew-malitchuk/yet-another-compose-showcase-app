@@ -32,11 +32,11 @@ fun TwoStateButton(
 ) {
 //    val checked = remember { mutableStateOf(false) }
     SmallFloatingActionButton(
-        elevation = FloatingActionButtonDefaults.elevation(0.dp),
         onClick = {
             onButtonClick?.invoke(checkedState.value?:false)
         },
-        containerColor = containerColor
+        containerColor = containerColor,
+        elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
     ) {
         IconToggleButton(checked = checkedState.value?:false, onCheckedChange = { checkedState.value = it }) {
 

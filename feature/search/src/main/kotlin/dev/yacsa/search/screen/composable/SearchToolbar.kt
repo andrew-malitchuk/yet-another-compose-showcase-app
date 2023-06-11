@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Badge
 import androidx.compose.material.BadgedBox
 import androidx.compose.material.Text
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.runtime.Composable
@@ -44,12 +45,13 @@ fun SearchToolbar(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(64.dp)
-                .padding(horizontal = 8.dp),
+                .padding(horizontal = YacsaTheme.spacing.small),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             SmallFloatingActionButton(
                 onClick = { onBackClick() },
-                containerColor = YacsaTheme.colors.accent
+                containerColor = YacsaTheme.colors.accent,
+                elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
             ) {
                 androidx.compose.material.Icon(
                     painter = painterResource(id = R.drawable.icon_caret_left_regular_24),
@@ -62,7 +64,7 @@ fun SearchToolbar(
                 style = YacsaTheme.typography.header,
                 color = YacsaTheme.colors.primary
             )
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(YacsaTheme.spacing.small))
             Icon(
                 painterResource(id = R.drawable.icon_search_bold_24),
                 contentDescription = null,
@@ -74,9 +76,9 @@ fun SearchToolbar(
             )
             BadgedBox(
                 modifier = Modifier.padding(
-                    start = 4.dp,
-                    top = 8.dp,
-                    bottom = 8.dp
+                    start = YacsaTheme.spacing.extraSmall,
+                    top = YacsaTheme.spacing.small,
+                    bottom = YacsaTheme.spacing.small
                 ),
                 badge = {
                     if (filterState.value) {

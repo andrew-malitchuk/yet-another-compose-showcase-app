@@ -9,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dev.yacsa.books.screen.list.item.ItemAuthor
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.ui.theme.YacsaTheme
@@ -33,7 +32,7 @@ fun AuthorBlock(
             textAlign = TextAlign.Start,
         )
         Spacer(
-            modifier = Modifier.height(6.dp)
+            modifier = Modifier.height(YacsaTheme.spacing.small)
         )
         book.authors?.forEach { person ->
             person?.let {

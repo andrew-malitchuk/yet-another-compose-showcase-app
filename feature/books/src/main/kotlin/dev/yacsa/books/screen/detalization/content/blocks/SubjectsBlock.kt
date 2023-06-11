@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dev.yacsa.books.screen.list.item.ItemSubject
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.ui.theme.YacsaTheme
@@ -36,14 +35,14 @@ fun SubjectsBlock(
             textAlign = TextAlign.Start,
         )
         Spacer(
-            modifier = Modifier.height(6.dp)
+            modifier = Modifier.height(YacsaTheme.spacing.small)
         )
         book.subjects?.forEach { subject ->
             subject?.let {
                 ItemSubject(subject = it) {
                     onSubjectClick(it)
                 }
-                Spacer(modifier = Modifier.height(6.dp))
+                Spacer(modifier = Modifier.height(YacsaTheme.spacing.small))
             }
 
         }

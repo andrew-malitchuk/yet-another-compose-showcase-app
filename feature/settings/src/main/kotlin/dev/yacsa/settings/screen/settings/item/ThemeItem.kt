@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.Card
 import androidx.compose.material.Text
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconToggleButton
 import androidx.compose.material3.SmallFloatingActionButton
@@ -79,7 +80,8 @@ fun ThemeItem(
         ) {
             SmallFloatingActionButton(
                 onClick = { },
-                containerColor = YacsaTheme.colors.primary
+                containerColor = YacsaTheme.colors.primary,
+                elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_paint_roller_regular_24),

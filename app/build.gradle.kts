@@ -90,4 +90,6 @@ dependencies {
     debugImplementation("com.facebook.soloader:soloader:0.10.5")
     releaseImplementation("com.facebook.flipper:flipper-noop:0.190.0")
     implementation("com.facebook.flipper:flipper-network-plugin:0.190.0")
+
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.11")
 }

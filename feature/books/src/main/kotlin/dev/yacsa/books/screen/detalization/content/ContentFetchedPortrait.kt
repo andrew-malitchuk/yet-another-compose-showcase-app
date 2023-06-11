@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -46,78 +47,101 @@ fun ContentFetchedPortrait(
     val lazyScrollState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
 
-    Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(YacsaTheme.colors.background),
-        topBar = {
-            if (book != null) {
-                CollapsingToolbar(
-                    lazyScrollState,
-                    book,
-                    onBackClick,
-                    {
-                        coroutineScope.launch {
-                            lazyScrollState.scrollToItem(7, 0)
-                        }
-                    },
-                    favourite
-                )
-            }
-        },
-    ) { paddingValues ->
-        Column(modifier = Modifier.padding(paddingValues).background(YacsaTheme.colors.background)) {
-            AnimatedDivider(state = lazyScrollState)
-            LazyColumn(
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ) {
+
+        Scaffold(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(YacsaTheme.colors.background),
+            topBar = {
+                if (book != null) {
+                    CollapsingToolbar(
+                        lazyScrollState,
+                        book,
+                        onBackClick,
+                        {
+                            coroutineScope.launch {
+                                lazyScrollState.scrollToItem(7, 0)
+                            }
+                        },
+                        favourite
+                    )
+                }
+            },
+        ) { paddingValues ->
+            Column(
                 modifier = Modifier
-                    .fillMaxSize()
+                    .padding(paddingValues)
                     .background(YacsaTheme.colors.background)
-                    .animateContentSize(),
-                state = lazyScrollState,
-                contentPadding = PaddingValues(
-                    horizontal = YacsaTheme.spacing.medium,
-                    vertical = YacsaTheme.spacing.small
-                ),
-                verticalArrangement = Arrangement.spacedBy(YacsaTheme.spacing.small),
             ) {
-                if (!book?.authors.isNullOrEmpty()) {
-                    item {
-                        book?.let { AuthorBlock(it, onAuthorClick) }
+                AnimatedDivider(state = lazyScrollState)
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(YacsaTheme.colors.background)
+                        .animateContentSize(),
+                    state = lazyScrollState,
+                    contentPadding = PaddingValues(
+                        horizontal = YacsaTheme.spacing.medium,
+                        vertical = YacsaTheme.spacing.small
+                    ),
+                    verticalArrangement = Arrangement.spacedBy(YacsaTheme.spacing.small),
+                ) {
+                    if (!book?.authors.isNullOrEmpty()) {
+                        item {
+                            book?.let { AuthorBlock(it, onAuthorClick) }
+                        }
                     }
-                }
-                if (!book?.translators.isNullOrEmpty()) {
-                    item {
-                        book?.let { TranslatorsBlock(it, onTranslatorClick) }
+                    if (!book?.translators.isNullOrEmpty()) {
+                        item {
+                            book?.let { TranslatorsBlock(it, onTranslatorClick) }
+                        }
                     }
-                }
-                if (!book?.languages.isNullOrEmpty()) {
-                    item {
-                        book?.let { LanguageBlock(it, onLanguageClick) }
+                    if (!book?.languages.isNullOrEmpty()) {
+                        item {
+                            book?.let { LanguageBlock(it, onLanguageClick) }
+                        }
                     }
-                }
-                if (!book?.subjects.isNullOrEmpty()) {
-                    item {
-                        book?.let { SubjectsBlock(it, onSubjectClick) }
+                    if (!book?.subjects.isNullOrEmpty()) {
+                        item {
+                            book?.let { SubjectsBlock(it, onSubjectClick) }
+                        }
                     }
-                }
-                if (!book?.bookshelves.isNullOrEmpty()) {
-                    item {
-                        book?.let { BookshelfBlock(it, onBookshelfClick) }
+                    if (!book?.bookshelves.isNullOrEmpty()) {
+                        item {
+                            book?.let { BookshelfBlock(it, onBookshelfClick) }
+                        }
                     }
-                }
-                if (book?.formats != null) {
-                    item {
-                        book?.let {
-                            FormatsBlock(
-                                book = it,
-                                onFormatClick = {
-                                    onFormatClick(it)
-                                }
-                            )
+                    if (book?.formats != null) {
+                        item {
+                            book?.let {
+                                FormatsBlock(
+                                    book = it,
+                                    onFormatClick = {
+                                        onFormatClick(it)
+                                    }
+                                )
+                            }
                         }
                     }
                 }
             }
+        }
+        if (favourite.value == true) {
+//            KonfettiView(
+//                modifier = Modifier.fillMaxSize(),
+//                parties = listOf(
+//                    Party(
+//                        emitter = Emitter(
+//                            duration = 1,
+//                            TimeUnit.SECONDS
+//                        ).perSecond(30),
+//                        position = Position.Relative(0.5, 0.0)
+//                    )
+//                ),
+//            )
         }
     }
 }

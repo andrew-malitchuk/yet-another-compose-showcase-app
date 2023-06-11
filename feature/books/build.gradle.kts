@@ -53,5 +53,6 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha09")
 
     implementation("me.saket.telephoto:zoomable:0.3.0")
+    implementation("nl.dionsegijn:konfetti-compose:2.0.2")
 
 }

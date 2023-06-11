@@ -1,10 +1,13 @@
 package dev.yacsa.books.screen.detalization
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.tooling.preview.Preview
@@ -18,6 +21,11 @@ import dev.yacsa.ui.composable.content.ContentIsLoading
 import dev.yacsa.ui.composable.theme.detectThemeMode
 import dev.yacsa.ui.theme.YacsaTheme
 import kotlinx.coroutines.flow.Flow
+import nl.dionsegijn.konfetti.compose.KonfettiView
+import nl.dionsegijn.konfetti.core.Party
+import nl.dionsegijn.konfetti.core.Position
+import nl.dionsegijn.konfetti.core.emitter.Emitter
+import java.util.concurrent.TimeUnit
 
 @Composable
 fun DetalizationRoute(
@@ -48,7 +56,8 @@ fun DetalizationRoute(
             onFormatClick = {
                 detalizationViewModel.acceptIntent(DetalizationIntent.OnLinkClick(it))
             },
-            favourite = detalizationViewModel.checked
+            favourite = detalizationViewModel.checked,
+            foo= detalizationViewModel.foo
         )
     }
 }
@@ -59,6 +68,7 @@ fun DetalizationScreen(
     onBackClick: () -> Unit,
     onFormatClick: (String) -> Unit,
     favourite: MutableState<Boolean?>,
+    foo: MutableState<Boolean?>,
 ) {
     val systemUiController = rememberSystemUiController()
 
@@ -87,18 +97,33 @@ fun DetalizationScreen(
                     color = YacsaTheme.colors.background,
                 )
             }
-
-            ContentFetchedPortrait(
-                book = uiState.book,
-                onBackClick = { onBackClick() },
-                onFormatClick = { onFormatClick(it) },
-                onAuthorClick = {},
-                onTranslatorClick = {},
-                onLanguageClick = {},
-                onSubjectClick = {},
-                onBookshelfClick = {},
-                favourite = favourite
-            )
+            Box() {
+                ContentFetchedPortrait(
+                    book = uiState.book,
+                    onBackClick = { onBackClick() },
+                    onFormatClick = { onFormatClick(it) },
+                    onAuthorClick = {},
+                    onTranslatorClick = {},
+                    onLanguageClick = {},
+                    onSubjectClick = {},
+                    onBookshelfClick = {},
+                    favourite = favourite
+                )
+                if(favourite.value==true && foo.value==true) {
+                    KonfettiView(
+                        modifier = Modifier.fillMaxSize(),
+                        parties = listOf(
+                            Party(
+                                emitter = Emitter(
+                                    duration = 1,
+                                    TimeUnit.SECONDS
+                                ).perSecond(30),
+                                position = Position.Relative(0.5, 0.0)
+                            )
+                        ),
+                    )
+                }
+            }
         }
     }
 }
@@ -125,6 +150,7 @@ fun Preview_DetalizationScreen() {
             DetalizationUiState(isLoading = false, isError = false),
             onBackClick = {},
             onFormatClick = {},
+            remember { mutableStateOf(false) },
             remember { mutableStateOf(false) }
         )
     }

@@ -45,7 +45,7 @@ fun SearchToolbar(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(64.dp)
-                .padding(horizontal = 8.dp),
+                .padding(horizontal = YacsaTheme.spacing.small),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             SmallFloatingActionButton(
@@ -64,7 +64,7 @@ fun SearchToolbar(
                 style = YacsaTheme.typography.header,
                 color = YacsaTheme.colors.primary
             )
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(YacsaTheme.spacing.small))
             Icon(
                 painterResource(id = R.drawable.icon_search_bold_24),
                 contentDescription = null,
@@ -76,9 +76,9 @@ fun SearchToolbar(
             )
             BadgedBox(
                 modifier = Modifier.padding(
-                    start = 4.dp,
-                    top = 8.dp,
-                    bottom = 8.dp
+                    start = YacsaTheme.spacing.extraSmall,
+                    top = YacsaTheme.spacing.small,
+                    bottom = YacsaTheme.spacing.small
                 ),
                 badge = {
                     if (filterState.value) {

@@ -73,7 +73,7 @@ fun CollapsingToolbar(
         targetValue = if (!lazyScrollState.canScrollBackward && !lazyScrollState.isScrollInProgress) 288.dp else 64.dp,
         tween(500)
     )
-    val corner = 16.dp - (16.dp * Math.abs(progress))
+    val corner = YacsaTheme.corners.medium - (YacsaTheme.corners.medium * Math.abs(progress))
 
     MotionLayout(
         motionScene = MotionScene(content = motionScene),
@@ -119,8 +119,8 @@ fun CollapsingToolbar(
         Card(
             modifier = Modifier.layoutId("img"),
             elevation = 0.dp,
-            border = BorderStroke(0.5.dp, YacsaTheme.colors.primary),
-            shape = RoundedCornerShape(16.dp),
+            border = BorderStroke(YacsaTheme.dividers.small, YacsaTheme.colors.primary),
+            shape = RoundedCornerShape(YacsaTheme.corners.medium),
         ) {
             Image(
                 painter = painter,
@@ -161,7 +161,7 @@ fun CollapsingToolbar(
                 contentDescription = null,
                 tint = YacsaTheme.colors.accent
             )
-            Spacer(modifier = Modifier.width(4.dp))
+            Spacer(modifier = Modifier.width(YacsaTheme.spacing.extraSmall))
             Text(
                 text = book.downloadCount?.toString() ?: "NI",
                 style = YacsaTheme.typography.title,
@@ -172,7 +172,7 @@ fun CollapsingToolbar(
         LazyRow(
             modifier = Modifier
                 .layoutId("actions"),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(YacsaTheme.spacing.small),
             contentPadding = PaddingValues(horizontal = 1.dp)
         ) {
             item {

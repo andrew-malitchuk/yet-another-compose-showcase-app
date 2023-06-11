@@ -9,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dev.yacsa.books.screen.list.item.ItemBookshelf
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.ui.theme.YacsaTheme
@@ -33,14 +32,14 @@ fun BookshelfBlock(
             textAlign = TextAlign.Start,
         )
         Spacer(
-            modifier = Modifier.height(6.dp)
+            modifier = Modifier.height(YacsaTheme.spacing.small)
         )
         book.bookshelves?.forEach { lang ->
             lang?.let {
                 ItemBookshelf(bookshelf = it) {
                         onBookshelfClick(it)
                 }
-                Spacer(modifier = Modifier.height(6.dp))
+                Spacer(modifier = Modifier.height(YacsaTheme.spacing.small))
             }
 
         }

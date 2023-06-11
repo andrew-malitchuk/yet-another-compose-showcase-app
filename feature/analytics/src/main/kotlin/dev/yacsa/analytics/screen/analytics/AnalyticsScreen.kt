@@ -129,7 +129,8 @@ fun AnalyticsScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = { onDeleteClick() },
-                backgroundColor = YacsaTheme.colors.accent
+                backgroundColor = YacsaTheme.colors.accent,
+                elevation = androidx.compose.material.FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_trash_bold_24),

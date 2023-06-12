@@ -74,8 +74,16 @@ fun NotFoundScreen(
 
 @Composable
 @Preview(showBackground = true)
-fun Preview_NotFoundScreen() {
-    YacsaTheme() {
+fun Preview_NotFoundScreen_Light() {
+    YacsaTheme(false) {
+        NotFoundScreen({})
+    }
+}
+
+@Composable
+@Preview(showBackground = true)
+fun Preview_NotFoundScreen_Dark() {
+    YacsaTheme(true) {
         NotFoundScreen({})
     }
 }

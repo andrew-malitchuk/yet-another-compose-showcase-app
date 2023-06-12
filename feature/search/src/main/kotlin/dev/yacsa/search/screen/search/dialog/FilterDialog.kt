@@ -246,8 +246,22 @@ data class FilterDialogResult(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_FilterDialogContent() {
-    YacsaTheme {
+fun Preview_FilterDialogContent_Light() {
+    YacsaTheme(false) {
+        FilterDialogContent(
+            onSort = {
+
+            },
+            previousContent = null,
+            {}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_FilterDialogContent_Dark() {
+    YacsaTheme(true) {
         FilterDialogContent(
             onSort = {
 

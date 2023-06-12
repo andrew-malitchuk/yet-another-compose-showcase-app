@@ -125,8 +125,22 @@ fun ContentFetched(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_ContentFetched() {
-    YacsaTheme {
+fun Preview_ContentFetched_Light() {
+    YacsaTheme(false) {
+        ContentFetched(
+            onBookClicked = {},
+            lazyPagingItems = flowOf(PagingData.empty<BookUiModel>()).collectAsLazyPagingItems(),
+            onSearch = {},
+            onSettings = {},
+            onFavourite = {}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_ContentFetched_Dark() {
+    YacsaTheme(true) {
         ContentFetched(
             onBookClicked = {},
             lazyPagingItems = flowOf(PagingData.empty<BookUiModel>()).collectAsLazyPagingItems(),

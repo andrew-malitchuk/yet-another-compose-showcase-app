@@ -43,9 +43,18 @@ fun OfflineSnackbar(
 
 @Preview(showBackground = true)
 @Composable
-fun Preivew_OfflineSnackbar() {
+fun Preivew_OfflineSnackbar_Light() {
+    YacsaTheme(false) {
+        OfflineSnackbar(
+            message = "Foobar"
+        )
+    }
+}
 
-    YacsaTheme() {
+@Preview(showBackground = true)
+@Composable
+fun Preivew_OfflineSnackbar_Dark() {
+    YacsaTheme(true) {
         OfflineSnackbar(
             message = "Foobar"
         )

@@ -38,8 +38,18 @@ fun SubjectBlock(
 
 @Composable
 @Preview(showBackground = true)
-fun Preview_SubjectBlock() {
-    YacsaTheme {
+fun Preview_SubjectBlock_Light() {
+    YacsaTheme(false) {
+        SubjectBlock(
+            subjects = listOf("Lorem", "Ipsum", "Dolor", "Sit", "Amen"),
+        )
+    }
+}
+
+@Composable
+@Preview(showBackground = true)
+fun Preview_SubjectBlock_Dark() {
+    YacsaTheme(true) {
         SubjectBlock(
             subjects = listOf("Lorem", "Ipsum", "Dolor", "Sit", "Amen"),
         )

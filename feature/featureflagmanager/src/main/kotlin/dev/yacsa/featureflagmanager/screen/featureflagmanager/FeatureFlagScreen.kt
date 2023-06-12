@@ -143,8 +143,21 @@ fun FeatureFlagScreen(
 
 @Composable
 @Preview(showBackground = true)
-fun Preview_FeatureFlagScreen() {
-    YacsaTheme() {
+fun Preview_FeatureFlagScreen_Light() {
+    YacsaTheme(false) {
+        FeatureFlagScreen(
+            FeatureFlagUiState(),
+            {},
+            {},
+            {}
+        )
+    }
+}
+
+@Composable
+@Preview(showBackground = true)
+fun Preview_FeatureFlagScreen_Dark() {
+    YacsaTheme(true) {
         FeatureFlagScreen(
             FeatureFlagUiState(),
             {},

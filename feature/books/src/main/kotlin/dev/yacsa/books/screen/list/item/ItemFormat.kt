@@ -77,8 +77,20 @@ fun ItemFormat(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_ItemFormat() {
-    YacsaTheme {
+fun Preview_ItemFormat_Light() {
+    YacsaTheme(false) {
+        ItemFormat(
+            type = "foobar.yacsa",
+            link="",
+            onClick = {},
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_ItemFormat_Dark() {
+    YacsaTheme(true) {
         ItemFormat(
             type = "foobar.yacsa",
             link="",

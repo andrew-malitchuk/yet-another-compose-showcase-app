@@ -52,8 +52,20 @@ fun ScrollUpFab(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_ScrollUpFab() {
-    YacsaTheme {
+fun Preview_ScrollUpFab_Light() {
+    YacsaTheme(false) {
+        ScrollUpFab(
+            modifier = Modifier,
+            isVisibleBecauseOfScrolling = true,
+        ) {}
+    }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_ScrollUpFab_Dark() {
+    YacsaTheme(true) {
         ScrollUpFab(
             modifier = Modifier,
             isVisibleBecauseOfScrolling = true,

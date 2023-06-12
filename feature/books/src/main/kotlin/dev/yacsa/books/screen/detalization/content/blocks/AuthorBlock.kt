@@ -48,8 +48,32 @@ fun AuthorBlock(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_AuthorBlock() {
-    YacsaTheme {
+fun Preview_AuthorBlock_Light() {
+    YacsaTheme(false) {
+        AuthorBlock(
+            book = BookUiModel(
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                true
+            ),
+            onAuthorClick={}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_AuthorBlock_Dark() {
+    YacsaTheme(true) {
         AuthorBlock(
             book = BookUiModel(
                 null,

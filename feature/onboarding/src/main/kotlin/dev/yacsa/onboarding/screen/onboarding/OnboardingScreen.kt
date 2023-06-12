@@ -181,3 +181,10 @@ fun PreviewOnboardingScreen_Light() {
     YacsaTheme(useDarkTheme = false) {
     }
 }
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewOnboardingScreen_Dark() {
+    YacsaTheme(useDarkTheme = false) {
+    }
+}

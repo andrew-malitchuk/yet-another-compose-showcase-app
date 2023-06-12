@@ -126,8 +126,28 @@ fun ContentFetched(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 @Preview(showBackground = true)
-fun Preview_ContentFetched() {
-    YacsaTheme() {
+fun Preview_ContentFetched_Light() {
+    YacsaTheme(false) {
+        ContentFetched(
+            uiState = FeatureFlagUiState(
+                featureFlags = listOf(
+                    FeatureFlagModel("foo"),
+                ),
+            ),
+            isEnabled = {},
+            isActive = {},
+            innerPadding = PaddingValues(YacsaTheme.spacing.small),
+            foo = rememberTopAppBarState(),
+            state = rememberLazyListState(),
+            )
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+@Preview(showBackground = true)
+fun Preview_ContentFetched_Dark() {
+    YacsaTheme(true) {
         ContentFetched(
             uiState = FeatureFlagUiState(
                 featureFlags = listOf(

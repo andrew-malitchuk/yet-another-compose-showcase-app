@@ -62,8 +62,18 @@ fun ContentNoData(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_ContentNoData() {
-    YacsaTheme() {
+fun Preview_ContentNoData_Light() {
+    YacsaTheme(false) {
+        ContentNoData(
+            message="Foobar"
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_ContentNoData_Dark() {
+    YacsaTheme(true) {
         ContentNoData(
             message="Foobar"
         )

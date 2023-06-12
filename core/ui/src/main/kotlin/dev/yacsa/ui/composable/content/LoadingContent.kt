@@ -48,7 +48,15 @@ fun ContentIsLoading(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_ContentIsLoading() {
+fun Preview_ContentIsLoading_Light() {
+    YacsaTheme(false) {
+        ContentIsLoading()
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_ContentIsLoading_Dark() {
     YacsaTheme(true) {
         ContentIsLoading()
     }

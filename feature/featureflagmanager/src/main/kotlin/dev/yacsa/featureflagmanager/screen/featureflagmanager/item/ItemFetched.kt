@@ -149,8 +149,20 @@ fun ItemFetched(
 
 @Composable
 @Preview(showBackground = true)
-fun Preview_ItemFetched() {
-    YacsaTheme {
+fun Preview_ItemFetched_Light() {
+    YacsaTheme(false) {
+        ItemFetched(
+            item = FeatureFlagModel("foo", true),
+            isActive = {},
+            isEnabled = {},
+        )
+    }
+}
+
+@Composable
+@Preview(showBackground = true)
+fun Preview_ItemFetched_Dark() {
+    YacsaTheme(true) {
         ItemFetched(
             item = FeatureFlagModel("foo", true),
             isActive = {},

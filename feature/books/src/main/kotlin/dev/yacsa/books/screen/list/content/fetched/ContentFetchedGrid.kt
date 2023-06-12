@@ -97,8 +97,21 @@ fun ContentFetchedGrid(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_ContentFetchedGrid() {
-    YacsaTheme() {
+fun Preview_ContentFetchedGrid_Light() {
+    YacsaTheme(false) {
+        ContentFetchedGrid(
+            spanCount = 2,
+            lazyPagingItems = flowOf(PagingData.empty<BookUiModel>()).collectAsLazyPagingItems(),
+            onBookClicked = {},
+            listState = rememberLazyGridState(),
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_ContentFetchedGrid_Dark() {
+    YacsaTheme(true) {
         ContentFetchedGrid(
             spanCount = 2,
             lazyPagingItems = flowOf(PagingData.empty<BookUiModel>()).collectAsLazyPagingItems(),

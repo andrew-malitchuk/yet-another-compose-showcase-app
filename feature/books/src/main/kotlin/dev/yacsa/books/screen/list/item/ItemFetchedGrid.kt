@@ -78,8 +78,19 @@ fun ItemFetchedGrid(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_ItemFetchedGrid() {
-    YacsaTheme {
+fun Preview_ItemFetchedGrid_Light() {
+    YacsaTheme(false) {
+        ItemFetchedGrid(
+            book = BookUiModel(1, "foobar", null, emptyList(), emptyList(), emptyList(), emptyList(), true, null, null, 10,true),
+            onItemContentClick = {},
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_ItemFetchedGrid_Dark() {
+    YacsaTheme(true) {
         ItemFetchedGrid(
             book = BookUiModel(1, "foobar", null, emptyList(), emptyList(), emptyList(), emptyList(), true, null, null, 10,true),
             onItemContentClick = {},

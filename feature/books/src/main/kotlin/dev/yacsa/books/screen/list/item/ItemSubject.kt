@@ -80,8 +80,19 @@ fun ItemSubject(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_ItemSubject() {
-    YacsaTheme {
+fun Preview_ItemSubject_Ligth() {
+    YacsaTheme(false) {
+        ItemSubject(
+            subject= "Abactus peritus homo est.",
+            onClick = {},
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_ItemSubject_Dark() {
+    YacsaTheme(true) {
         ItemSubject(
             subject= "Abactus peritus homo est.",
             onClick = {},

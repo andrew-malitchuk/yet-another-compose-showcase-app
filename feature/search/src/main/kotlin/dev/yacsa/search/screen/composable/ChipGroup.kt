@@ -22,7 +22,7 @@ fun ChipGroup(
     defaultColor: Color,
     selectedColor: Color,
     onSelectedChanged: (String) -> Unit = {},
-    onDelete: (() -> Unit)?=null,
+    onDelete: (() -> Unit)? = null,
 ) {
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(YacsaTheme.spacing.small),
@@ -44,11 +44,11 @@ fun ChipGroup(
                 },
             )
         }
-        if (!values.isNullOrEmpty() && onDelete!=null) {
+        if (!values.isNullOrEmpty() && onDelete != null) {
             item {
                 AssistChip(
 //                    border =
-                    colors =androidx.compose.material3.AssistChipDefaults.assistChipColors(
+                    colors = androidx.compose.material3.AssistChipDefaults.assistChipColors(
                         containerColor = YacsaTheme.colors.background,
                         labelColor = YacsaTheme.colors.primary,
                         leadingIconContentColor = YacsaTheme.colors.primary
@@ -78,11 +78,26 @@ fun ChipGroup(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_ChipGroup() {
-    ChipGroup(
-        values = listOf("Foo", "Bar"),
-        defaultColor = Color.DarkGray,
-        selectedColor = Color.Cyan,
-        onDelete = {},
-    )
+fun Preview_ChipGroup_Light() {
+    YacsaTheme(false) {
+        ChipGroup(
+            values = listOf("Foo", "Bar"),
+            defaultColor = Color.DarkGray,
+            selectedColor = Color.Cyan,
+            onDelete = {},
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_ChipGroup_Dark() {
+    YacsaTheme(true) {
+        ChipGroup(
+            values = listOf("Foo", "Bar"),
+            defaultColor = Color.DarkGray,
+            selectedColor = Color.Cyan,
+            onDelete = {},
+        )
+    }
 }

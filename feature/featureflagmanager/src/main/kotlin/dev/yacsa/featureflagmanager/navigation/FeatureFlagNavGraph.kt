@@ -13,7 +13,11 @@ fun NavGraphBuilder.featureFlagNavGraph(navController: NavHostController) {
         route = NavigationDirection.FeatureFlag.route,
     ) {
         composable(FeatureFlagDirections.List.route) {
-            FeatureFlagRoute()
+            FeatureFlagRoute(
+                onBackClick = {
+                    navController.popBackStack()
+                }
+            )
         }
     }
 }

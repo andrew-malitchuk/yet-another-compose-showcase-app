@@ -1,5 +1,6 @@
 package dev.yacsa.remoteconfig.impl.source
 
+import arrow.core.Either
 import dev.yacsa.remoteconfig.impl.config.RemoteConfigure
 import dev.yacsa.remoteconfig.source.RemoteConfigSource
 import logcat.logcat
@@ -12,7 +13,7 @@ class RemoteConfigSourceImpl @Inject constructor(
     private val remoteConfig: RemoteConfigure,
 ) : RemoteConfigSource {
 
-    override suspend fun getDouble(key: String): Result<Double> {
+    override suspend fun getDouble(key: String): Either<Exception, Double> {
         return suspendCoroutine { continuation ->
             try {
                 remoteConfig.remoteConfig.apply {
@@ -20,19 +21,19 @@ class RemoteConfigSourceImpl @Inject constructor(
                         if (it.isSuccessful) {
                             val value = remoteConfig.remoteConfig.getDouble(key)
                             logcat { "$key: $value" }
-                            continuation.resume(Result.success(value))
+                            continuation.resume(Either.Right(value))
                         } else {
-                            continuation.resume(Result.failure(IOException()))
+                            continuation.resume(Either.Left(IOException()))
                         }
                     }
                 }
             } catch (ex: Exception) {
-                continuation.resume(Result.failure(ex))
+                continuation.resume(Either.Left(ex))
             }
         }
     }
 
-    override suspend fun getBoolean(key: String): Result<Boolean> {
+    override suspend fun getBoolean(key: String): Either<Exception, Boolean> {
         return suspendCoroutine { continuation ->
             try {
                 remoteConfig.remoteConfig.apply {
@@ -40,19 +41,19 @@ class RemoteConfigSourceImpl @Inject constructor(
                         if (it.isSuccessful) {
                             val value = remoteConfig.remoteConfig.getBoolean(key)
                             logcat { "$key: $value" }
-                            continuation.resume(Result.success(value))
+                            continuation.resume(Either.Right(value))
                         } else {
-                            continuation.resume(Result.failure(IOException()))
+                            continuation.resume(Either.Left(IOException()))
                         }
                     }
                 }
             } catch (ex: Exception) {
-                continuation.resume(Result.failure(ex))
+                continuation.resume(Either.Left(ex))
             }
         }
     }
 
-    override suspend fun getString(key: String): Result<String> {
+    override suspend fun getString(key: String): Either<Exception, String> {
         return suspendCoroutine { continuation ->
             try {
                 remoteConfig.remoteConfig.apply {
@@ -60,14 +61,15 @@ class RemoteConfigSourceImpl @Inject constructor(
                         if (it.isSuccessful) {
                             val value = remoteConfig.remoteConfig.getString(key)
                             logcat { "$key: $value" }
-                            continuation.resume(Result.success(value))
+                            continuation.resume(Either.Right(value))
                         } else {
-                            continuation.resume(Result.failure(IOException()))
+                            continuation.resume(Either.Left(IOException()))
                         }
                     }
                 }
             } catch (ex: Exception) {
-                continuation.resume(Result.failure(ex))
+                continuation.resume(Either.Left(ex))
+
             }
         }
     }

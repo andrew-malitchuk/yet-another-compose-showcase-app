@@ -18,6 +18,8 @@ import dev.yacsa.domain.impl.mapper.NewStartUpConfigureDomainRepoMapper
 import dev.yacsa.domain.impl.mapper.NewStartUpConfigureDomainRepoMapperImpl
 import dev.yacsa.domain.impl.mapper.analytics.AnalyticsDomainRepoMapper
 import dev.yacsa.domain.impl.mapper.analytics.AnalyticsDomainRepoMapperImpl
+import dev.yacsa.domain.impl.mapper.featureflag.FeatureFlagDomainRepoMapper
+import dev.yacsa.domain.impl.mapper.featureflag.FeatureFlagDomainRepoMapperImpl
 
 @Suppress("UnnecessaryAbstractClass")
 @Module
@@ -57,5 +59,10 @@ class DomainMapperModule {
     @Provides
     fun providesAnalyticsDomainRepoMapper(): AnalyticsDomainRepoMapper {
         return AnalyticsDomainRepoMapperImpl()
+    }
+
+    @Provides
+    fun providesFeatureFlagDomainRepoMapper(): FeatureFlagDomainRepoMapper {
+        return FeatureFlagDomainRepoMapperImpl()
     }
 }

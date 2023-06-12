@@ -180,8 +180,23 @@ private fun HandleEvents(
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewListScreen() {
-    YacsaTheme(useDarkTheme = true) {
+fun PreviewListScreen_Light() {
+    YacsaTheme(false) {
+        ListScreen(
+            {},
+            flowOf(PagingData.empty<BookUiModel>()).collectAsLazyPagingItems(),
+            ListUiState(),
+            {},
+            {},
+            {}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewListScreen_Dark() {
+    YacsaTheme(true) {
         ListScreen(
             {},
             flowOf(PagingData.empty<BookUiModel>()).collectAsLazyPagingItems(),

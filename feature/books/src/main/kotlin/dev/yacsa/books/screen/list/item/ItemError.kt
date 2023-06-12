@@ -74,8 +74,19 @@ fun ItemError(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_ListErrorItem() {
-    YacsaTheme {
+fun Preview_ListErrorItem_Light() {
+    YacsaTheme(false) {
+        ItemError(
+            error = "Lorem ipsum",
+            onRetry = {},
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_ListErrorItem_Dark() {
+    YacsaTheme(true) {
         ItemError(
             error = "Lorem ipsum",
             onRetry = {},

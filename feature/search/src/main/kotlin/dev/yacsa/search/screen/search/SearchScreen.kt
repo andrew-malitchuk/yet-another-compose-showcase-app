@@ -98,8 +98,25 @@ fun SearchScreen(
 
 @Composable
 @Preview(showBackground = true)
-fun Preview_SearchScreen() {
-    YacsaTheme() {
+fun Preview_SearchScreen_Light() {
+    YacsaTheme(false) {
+        SearchScreen(
+            SearchUiState(),
+            "",
+            {},
+            {},
+            {},
+            {},
+            null,
+            {}
+        )
+    }
+}
+
+@Composable
+@Preview(showBackground = true)
+fun Preview_SearchScreen_Dark() {
+    YacsaTheme(true) {
         SearchScreen(
             SearchUiState(),
             "",

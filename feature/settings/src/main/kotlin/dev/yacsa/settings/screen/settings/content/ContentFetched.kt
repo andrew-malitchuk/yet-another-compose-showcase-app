@@ -109,8 +109,24 @@ fun ContentFetched(
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
 @Composable
-fun Preview_ContentFetched() {
-    YacsaTheme {
+fun Preview_ContentFetched_Light() {
+    YacsaTheme(false) {
+        ContentFetched(
+            innerPadding = PaddingValues(YacsaTheme.spacing.small),
+            state = rememberLazyListState(),
+            foo = rememberTopAppBarState(),
+            onFfClick = {},
+            onAnalyticsClick = {},
+            theme = remember { mutableStateOf(null) },
+        )
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview(showBackground = true)
+@Composable
+fun Preview_ContentFetched_Dark() {
+    YacsaTheme(true) {
         ContentFetched(
             innerPadding = PaddingValues(YacsaTheme.spacing.small),
             state = rememberLazyListState(),

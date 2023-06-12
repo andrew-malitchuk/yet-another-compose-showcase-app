@@ -209,8 +209,18 @@ fun ThemeItem(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_ThemeItem() {
-    YacsaTheme {
+fun Preview_ThemeItem_Light() {
+    YacsaTheme(false) {
+        ThemeItem(
+            theme = remember { mutableStateOf(null) },
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_ThemeItem_Dark() {
+    YacsaTheme(true) {
         ThemeItem(
             theme = remember { mutableStateOf(null) },
         )

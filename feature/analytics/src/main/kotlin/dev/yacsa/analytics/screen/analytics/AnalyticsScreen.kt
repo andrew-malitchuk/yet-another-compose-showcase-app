@@ -151,8 +151,20 @@ fun AnalyticsScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_SettingsScreen() {
-    YacsaTheme {
+fun Preview_SettingsScreen_Light() {
+    YacsaTheme(false){
+        AnalyticsScreen(
+            uiState = AnalyticsUiState(),
+            onBackClick = {},
+            onDeleteClick={}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_SettingsScreen_Dark() {
+    YacsaTheme(true){
         AnalyticsScreen(
             uiState = AnalyticsUiState(),
             onBackClick = {},

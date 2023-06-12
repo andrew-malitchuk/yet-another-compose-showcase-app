@@ -60,8 +60,23 @@ fun TwoStateButton(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_TwoStateButton() {
-    YacsaTheme {
+fun Preview_TwoStateButton_Light() {
+    YacsaTheme(false) {
+        TwoStateButton(
+            Modifier,
+            remember { mutableStateOf(false) },
+            R.drawable.icon_search_regular_24,
+            R.drawable.icon_heart_regulat_24,
+            {},
+            YacsaTheme.colors.primary
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_TwoStateButton_Dark() {
+    YacsaTheme(true) {
         TwoStateButton(
             Modifier,
             remember { mutableStateOf(false) },

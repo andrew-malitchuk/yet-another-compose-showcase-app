@@ -83,8 +83,21 @@ fun AnalyticsItem(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_SettingsItem() {
-    YacsaTheme {
+fun Preview_SettingsItem_Light() {
+    YacsaTheme(false) {
+        AnalyticsItem(
+            key = "foobar",
+            value = "foobar",
+            icon = R.drawable.icon_bell_regular_24,
+            onClick = {},
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_SettingsItem_Dark() {
+    YacsaTheme(true) {
         AnalyticsItem(
             key = "foobar",
             value = "foobar",

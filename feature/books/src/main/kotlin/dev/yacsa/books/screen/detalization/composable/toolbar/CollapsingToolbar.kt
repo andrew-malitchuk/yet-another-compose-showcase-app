@@ -226,8 +226,35 @@ fun CollapsingToolbar(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_CollapsingToolbar() {
-    YacsaTheme {
+fun Preview_CollapsingToolbar_Light() {
+    YacsaTheme(false) {
+        CollapsingToolbar(
+            lazyScrollState = rememberLazyListState(),
+            book = BookUiModel(
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                true
+            ),
+            onBackClick = {},
+            onDownloadClick = {},
+            favourite = remember { mutableStateOf(false) }
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_CollapsingToolbar_Dark() {
+    YacsaTheme(true) {
         CollapsingToolbar(
             lazyScrollState = rememberLazyListState(),
             book = BookUiModel(

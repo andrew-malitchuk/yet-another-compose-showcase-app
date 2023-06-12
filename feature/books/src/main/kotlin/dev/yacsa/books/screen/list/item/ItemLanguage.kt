@@ -77,8 +77,19 @@ fun ItemLanguage(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_ItemLanguage() {
-    YacsaTheme {
+fun Preview_ItemLanguage_Light() {
+    YacsaTheme(false) {
+        ItemLanguage(
+            lang = "ua",
+            onClick = {},
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_ItemLanguage_Dark() {
+    YacsaTheme(true) {
         ItemLanguage(
             lang = "ua",
             onClick = {},

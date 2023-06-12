@@ -157,8 +157,22 @@ private fun HandleEvents(events: Flow<DetalizationEvent>) {
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_DetalizationScreen() {
-    YacsaTheme() {
+fun Preview_DetalizationScreen_Light() {
+    YacsaTheme(false) {
+        DetalizationScreen(
+            DetalizationUiState(isLoading = false, isError = false),
+            onBackClick = {},
+            onFormatClick = {},
+            remember { mutableStateOf(false) },
+            remember { mutableStateOf(false) }
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_DetalizationScreen_Dark() {
+    YacsaTheme(true) {
         DetalizationScreen(
             DetalizationUiState(isLoading = false, isError = false),
             onBackClick = {},

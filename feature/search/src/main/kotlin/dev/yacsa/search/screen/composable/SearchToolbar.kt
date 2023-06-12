@@ -103,8 +103,23 @@ fun SearchToolbar(
 @SuppressLint("UnrememberedMutableState")
 @Preview(showBackground = true)
 @Composable
-fun Preview_SearchToolbar() {
-    YacsaTheme {
+fun Preview_SearchToolbar_Light() {
+    YacsaTheme(false) {
+        SearchToolbar(
+            state = rememberLazyListState(),
+            onBackClick = {},
+            onFilterClick = {},
+            filterState = mutableStateOf(false),
+            showSheet = mutableStateOf(false),
+        )
+    }
+}
+
+@SuppressLint("UnrememberedMutableState")
+@Preview(showBackground = true)
+@Composable
+fun Preview_SearchToolbar_Dark() {
+    YacsaTheme(true) {
         SearchToolbar(
             state = rememberLazyListState(),
             onBackClick = {},

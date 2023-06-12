@@ -164,8 +164,22 @@ fun SettingsScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_SettingsScreen() {
-    YacsaTheme {
+fun Preview_SettingsScreen_Light() {
+    YacsaTheme(false) {
+        SettingsScreen(
+            uiState = SettingsUiState(),
+            onBackClick = {},
+            onFfClick = {},
+            onAnalyticsClick = {},
+            theme = remember { mutableStateOf(null) },
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_SettingsScreen_Dark() {
+    YacsaTheme(true) {
         SettingsScreen(
             uiState = SettingsUiState(),
             onBackClick = {},

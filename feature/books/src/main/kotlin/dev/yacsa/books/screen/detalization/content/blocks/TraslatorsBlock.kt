@@ -49,8 +49,32 @@ fun TranslatorsBlock(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_TranslatorsBlock() {
-    YacsaTheme {
+fun Preview_TranslatorsBlock_Light() {
+    YacsaTheme(false) {
+        TranslatorsBlock(
+            book = BookUiModel(
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                true
+            ),
+            onTranslatorClick={}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_TranslatorsBlock_Dark() {
+    YacsaTheme(true) {
         TranslatorsBlock(
             book = BookUiModel(
                 null,

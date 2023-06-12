@@ -52,8 +52,32 @@ fun SubjectsBlock(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_SubjectsBlock() {
-    YacsaTheme {
+fun Preview_SubjectsBlock_Light() {
+    YacsaTheme(false) {
+        SubjectsBlock(
+            book = BookUiModel(
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                true
+            ),
+            onSubjectClick={}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_SubjectsBlock_Dark() {
+    YacsaTheme(true) {
         SubjectsBlock(
             book = BookUiModel(
                 null,

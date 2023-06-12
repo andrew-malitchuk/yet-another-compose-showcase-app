@@ -73,8 +73,21 @@ fun ResultFetched(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_ResultFetched() {
-    YacsaTheme {
+fun Preview_ResultFetched_Light() {
+    YacsaTheme(false) {
+        ResultFetched(
+            resultSearch = emptyList(),
+            onBookClicked = {},
+            state = rememberLazyListState()
+        )
+    }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_ResultFetched_Dark() {
+    YacsaTheme(false) {
         ResultFetched(
             resultSearch = emptyList(),
             onBookClicked = {},

@@ -150,8 +150,26 @@ fun ContentFetchedPortrait(
 
 @Composable
 @Preview(showBackground = true)
-fun Preview_ContentFetchedPortrait() {
-    YacsaTheme {
+fun Preview_ContentFetchedPortrait_Light() {
+    YacsaTheme(false) {
+        ContentFetchedPortrait(
+            book = null,
+            onBackClick = {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            remember { mutableStateOf(false) }
+        )
+    }
+}
+
+@Composable
+@Preview(showBackground = true)
+fun Preview_ContentFetchedPortrait_Dark() {
+    YacsaTheme(true) {
         ContentFetchedPortrait(
             book = null,
             onBackClick = {},

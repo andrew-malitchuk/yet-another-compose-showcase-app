@@ -29,8 +29,18 @@ fun AnimatedDivider(
 
 @Preview
 @Composable
-fun Preview_AnimatedDivider() {
-    YacsaTheme {
+fun Preview_AnimatedDivider_Light() {
+    YacsaTheme(true) {
+        AnimatedDivider(
+            state = rememberLazyListState(),
+        )
+    }
+}
+
+@Preview
+@Composable
+fun Preview_AnimatedDivider_Dark() {
+    YacsaTheme(false) {
         AnimatedDivider(
             state = rememberLazyListState(),
         )

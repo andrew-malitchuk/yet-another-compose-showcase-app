@@ -19,8 +19,16 @@ fun VerticalDivider() {
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_VerticalDivider(){
-    YacsaTheme {
+fun Preview_VerticalDivider_Light(){
+    YacsaTheme(false) {
+        VerticalDivider()
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_VerticalDivider_Dark(){
+    YacsaTheme(true) {
         VerticalDivider()
     }
 }

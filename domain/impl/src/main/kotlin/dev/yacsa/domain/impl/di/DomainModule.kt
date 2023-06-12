@@ -15,6 +15,7 @@ import dev.yacsa.domain.impl.usecase.books.NewLoadBooksUseCaseImpl
 import dev.yacsa.domain.impl.usecase.books.NewSaveBooksUseCaseImpl
 import dev.yacsa.domain.impl.usecase.books.NewSearchBooksUseCaseImpl
 import dev.yacsa.domain.impl.usecase.books.SubscribeToFavouriteImpl
+import dev.yacsa.domain.impl.usecase.featureflag.LoadFeatureFlagUseCaseImpl
 import dev.yacsa.domain.impl.usecase.featureflag.NewFetchFeatureFlagUseCaseImpl
 import dev.yacsa.domain.impl.usecase.featureflag.NewUpdateLocalFeatureFlagUseCaseImpl
 import dev.yacsa.domain.impl.usecase.history.NewClearHistoryUseCaseImpl
@@ -35,6 +36,7 @@ import dev.yacsa.domain.usecase.books.NewLoadBooksUseCase
 import dev.yacsa.domain.usecase.books.NewSaveBooksUseCase
 import dev.yacsa.domain.usecase.books.NewSearchBooksUseCase
 import dev.yacsa.domain.usecase.books.SubscribeToFavourite
+import dev.yacsa.domain.usecase.featureflag.LoadFeatureFlagUseCase
 import dev.yacsa.domain.usecase.featureflag.NewFetchFeatureFlagUseCase
 import dev.yacsa.domain.usecase.featureflag.NewUpdateLocalFeatureFlagUseCase
 import dev.yacsa.domain.usecase.history.NewClearHistoryUseCase
@@ -164,4 +166,10 @@ abstract class DomainModule {
     abstract fun bindSetThemeUseCase(
         setThemeUseCaseImpl: SetThemeUseCaseImpl,
     ): SetThemeUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindLoadFeatureFlagUseCase(
+        loadFeatureFlagUseCaseImpl: LoadFeatureFlagUseCaseImpl,
+    ): LoadFeatureFlagUseCase
 }

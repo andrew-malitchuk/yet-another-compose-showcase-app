@@ -85,12 +85,12 @@ class ListViewModel @Inject constructor(
     private fun checkFeatureStatus(): Flow<ListUiState.PartialState> = flow {
         val isBooksFeatureEnabled = booksFeatureFlag.isFeatureEnabled()
             // TODO: fix
-//        logcat("isBooksFeatureEnabled") { isBooksFeatureEnabled.toString() }
-//        if (isBooksFeatureEnabled) {
+        logcat("isBooksFeatureEnabled") { isBooksFeatureEnabled.toString() }
+        if (isBooksFeatureEnabled) {
             acceptIntent(ListIntent.GetBooks)
-//        } else {
-//            emit(ListUiState.PartialState.Blocked)
-//        }
+        } else {
+            emit(ListUiState.PartialState.Blocked)
+        }
     }
 
     override fun reduceUiState(

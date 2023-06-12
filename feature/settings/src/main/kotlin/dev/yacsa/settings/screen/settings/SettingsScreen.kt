@@ -45,6 +45,7 @@ fun SettingsRoute(
     onBackClick: () -> Unit,
     onFfClick: () -> Unit,
     onAnalyticsClick: () -> Unit,
+    onDeeplinkClick: () -> Unit,
 ) {
     val uiState by settingsViewModel.uiState.collectAsStateWithLifecycle()
 
@@ -67,6 +68,7 @@ fun SettingsRoute(
             onBackClick,
             onFfClick,
             onAnalyticsClick,
+            onDeeplinkClick,
             theme
         )
         }
@@ -81,6 +83,7 @@ fun SettingsScreen(
     onBackClick: () -> Unit,
     onFfClick: () -> Unit,
     onAnalyticsClick: () -> Unit,
+    onDeeplinkClick: () -> Unit,
     theme: MutableState<ThemeUiModel?>,
 ) {
     val systemUiController = rememberSystemUiController()
@@ -153,6 +156,7 @@ fun SettingsScreen(
             foo = foo,
             onFfClick = onFfClick,
             onAnalyticsClick = onAnalyticsClick,
+            onDeeplinkClick = onDeeplinkClick,
             theme = theme,
         )
     }
@@ -160,13 +164,28 @@ fun SettingsScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_SettingsScreen() {
-    YacsaTheme {
+fun Preview_SettingsScreen_Light() {
+    YacsaTheme(false) {
         SettingsScreen(
             uiState = SettingsUiState(),
             onBackClick = {},
             onFfClick = {},
             onAnalyticsClick = {},
+            theme = remember { mutableStateOf(null) },
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_SettingsScreen_Dark() {
+    YacsaTheme(true) {
+        SettingsScreen(
+            uiState = SettingsUiState(),
+            onBackClick = {},
+            onFfClick = {},
+            onAnalyticsClick = {},
+            onDeeplinkClick = {},
             theme = remember { mutableStateOf(null) },
         )
     }

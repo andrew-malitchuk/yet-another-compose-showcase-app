@@ -58,7 +58,8 @@ fun CollapsingToolbar(
     book: BookUiModel,
     onBackClick: () -> Unit,
     onDownloadClick: () -> Unit,
-    favourite: MutableState<Boolean?>
+    favourite: MutableState<Boolean?>,
+    onShareClick:(Int)->Unit
 ) {
     val context = LocalContext.current
     val motionScene = remember {
@@ -202,7 +203,7 @@ fun CollapsingToolbar(
             }
             item {
                 SmallFloatingActionButton(
-                    onClick = { /*TODO*/ },
+                    onClick = { book.id?.let { onShareClick(it) } },
                     containerColor = YacsaTheme.colors.primary,
                     elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
                 ) {
@@ -225,8 +226,8 @@ fun CollapsingToolbar(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_CollapsingToolbar() {
-    YacsaTheme {
+fun Preview_CollapsingToolbar_Light() {
+    YacsaTheme(false) {
         CollapsingToolbar(
             lazyScrollState = rememberLazyListState(),
             book = BookUiModel(
@@ -246,6 +247,34 @@ fun Preview_CollapsingToolbar() {
             onBackClick = {},
             onDownloadClick = {},
             favourite = remember { mutableStateOf(false) }
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_CollapsingToolbar_Dark() {
+    YacsaTheme(true) {
+        CollapsingToolbar(
+            lazyScrollState = rememberLazyListState(),
+            book = BookUiModel(
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                true
+            ),
+            onBackClick = {},
+            onDownloadClick = {},
+            favourite = remember { mutableStateOf(false) },
+            onShareClick = {}
         )
     }
 }

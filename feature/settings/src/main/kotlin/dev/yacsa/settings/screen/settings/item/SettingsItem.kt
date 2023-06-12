@@ -82,8 +82,20 @@ fun SettingsItem(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_SettingsItem() {
-    YacsaTheme {
+fun Preview_SettingsItem_Light() {
+    YacsaTheme(false) {
+        SettingsItem(
+            title = "foobar",
+            icon = R.drawable.icon_gear_six_regular_24,
+            onClick = {},
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_SettingsItem_Dark() {
+    YacsaTheme(true) {
         SettingsItem(
             title = "foobar",
             icon = R.drawable.icon_gear_six_regular_24,

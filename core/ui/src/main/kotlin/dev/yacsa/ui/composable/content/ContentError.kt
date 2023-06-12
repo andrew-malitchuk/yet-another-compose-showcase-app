@@ -104,8 +104,19 @@ fun ContentError(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_ContentError() {
-    YacsaTheme() {
+fun Preview_ContentError_Light() {
+    YacsaTheme(false) {
+        ContentError(
+            errorMessage = "Foobar",
+            onBackClick = {}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_ContentError_Dark() {
+    YacsaTheme(true) {
         ContentError(
             errorMessage = "Foobar",
             onBackClick = {}

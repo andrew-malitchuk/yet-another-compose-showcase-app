@@ -43,6 +43,7 @@ fun ContentFetchedPortrait(
     onSubjectClick: (String) -> Unit,
     onBookshelfClick: (String) -> Unit,
     favourite: MutableState<Boolean?>,
+    onShareClick:(Int)->Unit
 ) {
     val lazyScrollState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
@@ -66,7 +67,8 @@ fun ContentFetchedPortrait(
                                 lazyScrollState.scrollToItem(7, 0)
                             }
                         },
-                        favourite
+                        favourite,
+                        onShareClick
                     )
                 }
             },
@@ -148,8 +150,8 @@ fun ContentFetchedPortrait(
 
 @Composable
 @Preview(showBackground = true)
-fun Preview_ContentFetchedPortrait() {
-    YacsaTheme {
+fun Preview_ContentFetchedPortrait_Light() {
+    YacsaTheme(false) {
         ContentFetchedPortrait(
             book = null,
             onBackClick = {},
@@ -160,6 +162,25 @@ fun Preview_ContentFetchedPortrait() {
             {},
             {},
             remember { mutableStateOf(false) }
+        )
+    }
+}
+
+@Composable
+@Preview(showBackground = true)
+fun Preview_ContentFetchedPortrait_Dark() {
+    YacsaTheme(true) {
+        ContentFetchedPortrait(
+            book = null,
+            onBackClick = {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            remember { mutableStateOf(false) },
+            onShareClick = {}
         )
     }
 }

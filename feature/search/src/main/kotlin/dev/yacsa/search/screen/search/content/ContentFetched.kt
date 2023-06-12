@@ -184,8 +184,25 @@ fun ContentFetched(
 
 @Composable
 @Preview(showBackground = true)
-fun Preview_ContentFetched() {
-    YacsaTheme() {
+fun Preview_ContentFetched_Light() {
+    YacsaTheme(false) {
+        ContentFetched(
+            searchText = "Lorem ipsum",
+            onValueChange = {},
+            uiState = SearchUiState(),
+            onBookClicked = {},
+            onDelete = {},
+            onFilterChanged = {},
+            previousContent = null,
+            onBackClick={}
+        )
+    }
+}
+
+@Composable
+@Preview(showBackground = true)
+fun Preview_ContentFetched_Dark() {
+    YacsaTheme(false) {
         ContentFetched(
             searchText = "Lorem ipsum",
             onValueChange = {},

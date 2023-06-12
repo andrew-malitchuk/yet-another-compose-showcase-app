@@ -111,8 +111,23 @@ fun OnboardingItem(
 @OptIn(ExperimentalPagerApi::class)
 @Preview(showBackground = true)
 @Composable
-fun Preview_OnboardingItem() {
-    YacsaTheme {
+fun Preview_OnboardingItem_Light() {
+    YacsaTheme(false) {
+        OnboardingItem(
+            imageId = R.drawable.illustration_mobile_interface,
+            header = "foo",
+            caption = "bar",
+            state = rememberPagerState(),
+        )
+    }
+}
+
+
+@OptIn(ExperimentalPagerApi::class)
+@Preview(showBackground = true)
+@Composable
+fun Preview_OnboardingItem_Dark() {
+    YacsaTheme(true) {
         OnboardingItem(
             imageId = R.drawable.illustration_mobile_interface,
             header = "foo",

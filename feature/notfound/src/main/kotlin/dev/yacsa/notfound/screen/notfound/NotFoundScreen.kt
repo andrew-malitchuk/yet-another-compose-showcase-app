@@ -15,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -33,19 +32,22 @@ fun NotFoundRoute(
 fun NotFoundScreen(
     onBackClick: () -> Unit,
 ) {
-
-
     Box(
         modifier = Modifier
             .fillMaxSize()
+            .background(YacsaTheme.colors.background)
             .padding(YacsaTheme.spacing.medium),
 
         ) {
-        SmallFloatingActionButton(onClick = { onBackClick() },
-            elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)) {
+        SmallFloatingActionButton(
+            onClick = { onBackClick() },
+            elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp),
+            containerColor = YacsaTheme.colors.accent
+        ) {
             Icon(
                 painter = painterResource(id = R.drawable.icon_caret_left_regular_24),
-                contentDescription = null
+                contentDescription = null,
+                tint = YacsaTheme.colors.primary
             )
         }
 
@@ -55,8 +57,7 @@ fun NotFoundScreen(
                 .aspectRatio(1f)
                 .clip(RoundedCornerShape(size = YacsaTheme.corners.medium))
                 .align(Alignment.Center)
-                    // TODO: fix
-                .background(Color(0xFFE0DFFD)),
+                .background(YacsaTheme.colors.surface),
             contentAlignment = Alignment.Center
 
         ) {
@@ -73,8 +74,16 @@ fun NotFoundScreen(
 
 @Composable
 @Preview(showBackground = true)
-fun Preview_NotFoundScreen() {
-    YacsaTheme() {
+fun Preview_NotFoundScreen_Light() {
+    YacsaTheme(false) {
+        NotFoundScreen({})
+    }
+}
+
+@Composable
+@Preview(showBackground = true)
+fun Preview_NotFoundScreen_Dark() {
+    YacsaTheme(true) {
         NotFoundScreen({})
     }
 }

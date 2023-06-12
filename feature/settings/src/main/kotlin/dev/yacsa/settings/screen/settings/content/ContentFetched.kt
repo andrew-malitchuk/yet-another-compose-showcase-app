@@ -37,6 +37,7 @@ fun ContentFetched(
     foo: TopAppBarState,
     onFfClick: () -> Unit,
     onAnalyticsClick: () -> Unit,
+    onDeeplinkClick: () -> Unit,
     theme: MutableState<ThemeUiModel?>,
 ) {
     val corner = YacsaTheme.corners.medium - (YacsaTheme.corners.medium * abs(foo.collapsedFraction))
@@ -86,6 +87,15 @@ fun ContentFetched(
                     )
                 }
                 item {
+                    SettingsItem(
+                        title = "Deeplink",
+                        icon = R.drawable.icon_link_regular_24,
+                        onClick = {
+                            onDeeplinkClick()
+                        },
+                    )
+                }
+                item {
                     ThemeItem(
                         Modifier,
                         theme
@@ -99,14 +109,31 @@ fun ContentFetched(
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
 @Composable
-fun Preview_ContentFetched() {
-    YacsaTheme {
+fun Preview_ContentFetched_Light() {
+    YacsaTheme(false) {
         ContentFetched(
             innerPadding = PaddingValues(YacsaTheme.spacing.small),
             state = rememberLazyListState(),
             foo = rememberTopAppBarState(),
             onFfClick = {},
             onAnalyticsClick = {},
+            theme = remember { mutableStateOf(null) },
+        )
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview(showBackground = true)
+@Composable
+fun Preview_ContentFetched_Dark() {
+    YacsaTheme(true) {
+        ContentFetched(
+            innerPadding = PaddingValues(YacsaTheme.spacing.small),
+            state = rememberLazyListState(),
+            foo = rememberTopAppBarState(),
+            onFfClick = {},
+            onAnalyticsClick = {},
+            onDeeplinkClick = {},
             theme = remember { mutableStateOf(null) },
         )
     }

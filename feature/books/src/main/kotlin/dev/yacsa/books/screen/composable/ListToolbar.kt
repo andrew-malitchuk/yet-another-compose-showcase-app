@@ -101,8 +101,21 @@ fun ListToolbar(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_ListToolbar() {
-    YacsaTheme {
+fun Preview_ListToolbar_Light() {
+    YacsaTheme(false) {
+        ListToolbar(
+            state = rememberLazyListState(),
+            searchClick = {},
+            settingsClick = {},
+            favouriteClick = {}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_ListToolbar_Dark() {
+    YacsaTheme(true) {
         ListToolbar(
             state = rememberLazyListState(),
             searchClick = {},

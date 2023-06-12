@@ -91,8 +91,32 @@ fun FormatsBlock(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_FormatsBlock() {
-    YacsaTheme {
+fun Preview_FormatsBlock_Light() {
+    YacsaTheme(false) {
+        FormatsBlock(
+            book = BookUiModel(
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                true
+            ),
+            onFormatClick = {}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_FormatsBlock_Dark() {
+    YacsaTheme(true) {
         FormatsBlock(
             book = BookUiModel(
                 null,

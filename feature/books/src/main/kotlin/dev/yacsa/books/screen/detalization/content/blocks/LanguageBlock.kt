@@ -50,8 +50,32 @@ fun LanguageBlock(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_LanguageBlock() {
-    YacsaTheme {
+fun Preview_LanguageBlock_Light() {
+    YacsaTheme(false) {
+        LanguageBlock(
+            book = BookUiModel(
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                true
+            ),
+            onLanguageClick ={}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_LanguageBlock_Dark() {
+    YacsaTheme(true) {
         LanguageBlock(
             book = BookUiModel(
                 null,

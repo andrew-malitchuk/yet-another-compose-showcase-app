@@ -49,8 +49,32 @@ fun BookshelfBlock(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_BookshelfBlock() {
-    YacsaTheme {
+fun Preview_BookshelfBlock_Light() {
+    YacsaTheme(false) {
+        BookshelfBlock(
+            book = BookUiModel(
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                true
+            ),
+            onBookshelfClick={}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_BookshelfBlock_Dark() {
+    YacsaTheme(true) {
         BookshelfBlock(
             book = BookUiModel(
                 null,

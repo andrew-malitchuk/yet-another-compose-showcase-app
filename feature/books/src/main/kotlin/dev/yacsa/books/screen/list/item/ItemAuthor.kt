@@ -90,8 +90,24 @@ fun ItemAuthor(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_SettingsItem() {
-    YacsaTheme {
+fun Preview_SettingsItem_Light() {
+    YacsaTheme(false) {
+        ItemAuthor(
+            person = PersonUiModel(
+                1,
+                1000,
+                2000,
+                "Foobar"
+            ),
+            onClick = {},
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_SettingsItem_Dark() {
+    YacsaTheme(true) {
         ItemAuthor(
             person = PersonUiModel(
                 1,

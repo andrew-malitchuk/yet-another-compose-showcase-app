@@ -43,12 +43,26 @@ fun Chip(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun Preview_Chip() {
-    Chip(
-        isSelected = true,
-        defaultColor = Color.DarkGray,
-        selectedColor = Color.DarkGray,
-    )
+fun Preview_Chip_Light() {
+    YacsaTheme(false) {
+        Chip(
+            isSelected = true,
+            defaultColor = Color.DarkGray,
+            selectedColor = Color.DarkGray,
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_Chip_Dark() {
+    YacsaTheme(true) {
+        Chip(
+            isSelected = true,
+            defaultColor = Color.DarkGray,
+            selectedColor = Color.DarkGray,
+        )
+    }
 }

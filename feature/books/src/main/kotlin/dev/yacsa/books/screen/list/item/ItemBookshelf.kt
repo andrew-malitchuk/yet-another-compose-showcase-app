@@ -76,8 +76,19 @@ fun ItemBookshelf(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_ItemBookshelf() {
-    YacsaTheme {
+fun Preview_ItemBookshelf_Light() {
+    YacsaTheme(false) {
+        ItemBookshelf(
+            bookshelf = "ua",
+            onClick = {},
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_ItemBookshelf_Dark() {
+    YacsaTheme(true) {
         ItemBookshelf(
             bookshelf = "ua",
             onClick = {},

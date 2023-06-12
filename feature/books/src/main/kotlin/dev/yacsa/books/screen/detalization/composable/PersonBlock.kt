@@ -42,8 +42,26 @@ fun PersonBlock(
 
 @Composable
 @Preview(showBackground = true)
-fun Preview_PersonBlock() {
-    YacsaTheme {
+fun Preview_PersonBlock_Light() {
+    YacsaTheme(false) {
+        PersonBlock(
+            authors = listOf(
+                PersonUiModel(
+                    0,
+                    2000,
+                    3000,
+                    "Foo Bar",
+                ),
+            ),
+        )
+    }
+}
+
+
+@Composable
+@Preview(showBackground = true)
+fun Preview_PersonBlock_Dark() {
+    YacsaTheme(true) {
         PersonBlock(
             authors = listOf(
                 PersonUiModel(

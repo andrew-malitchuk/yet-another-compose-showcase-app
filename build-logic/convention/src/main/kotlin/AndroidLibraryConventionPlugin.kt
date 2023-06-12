@@ -16,6 +16,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 apply("org.jetbrains.kotlin.android")
                 apply("com.google.devtools.ksp")
                 apply("org.jmailen.kotlinter")
+                apply("io.gitlab.arturbosch.detekt")
             }
 
             with(extensions) {

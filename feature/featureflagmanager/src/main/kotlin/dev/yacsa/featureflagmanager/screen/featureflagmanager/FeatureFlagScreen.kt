@@ -43,7 +43,7 @@ fun FeatureFlagScreen(
     val systemUiController = rememberSystemUiController()
     if (!uiState.isLoading && !uiState.isError) {
         systemUiController.setSystemBarsColor(
-            color = YacsaTheme.colors.primaryText,
+            color = YacsaTheme.colors.background,
         )
         ContentFetched(
             uiState = uiState,

@@ -43,6 +43,7 @@ fun ContentFetchedPortrait(
     onSubjectClick: (String) -> Unit,
     onBookshelfClick: (String) -> Unit,
     favourite: MutableState<Boolean?>,
+    onShareClick:(Int)->Unit
 ) {
     val lazyScrollState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
@@ -66,7 +67,8 @@ fun ContentFetchedPortrait(
                                 lazyScrollState.scrollToItem(7, 0)
                             }
                         },
-                        favourite
+                        favourite,
+                        onShareClick
                     )
                 }
             },
@@ -159,7 +161,8 @@ fun Preview_ContentFetchedPortrait() {
             {},
             {},
             {},
-            remember { mutableStateOf(false) }
+            remember { mutableStateOf(false) },
+            onShareClick = {}
         )
     }
 }

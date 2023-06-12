@@ -20,6 +20,7 @@ rootProject.name = "YACSA"
 include(":app")
 include(":feature:books")
 include(":feature:main")
+include(":feature:deeplink")
 include(":feature:navigation")
 include(":feature:onboarding")
 include(":feature:featureflagmanager")

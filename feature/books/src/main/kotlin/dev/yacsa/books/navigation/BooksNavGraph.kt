@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import androidx.navigation.navDeepLink
 import androidx.navigation.navigation
 import dev.yacsa.books.screen.detalization.DetalizationRoute
 import dev.yacsa.books.screen.list.ListRoute
@@ -49,6 +50,12 @@ fun NavGraphBuilder.booksNavGraph(navController: NavHostController) {
         }
         composable(
             BooksDirection.Detalization.route,
+            deepLinks = listOf(
+                // adb shell am start -W -a android.intent.action.VIEW -d yacsa://book/11 dev.yacsa.app.debug
+                navDeepLink {
+                    uriPattern="yacsa://book/{bookId}"
+                }
+            ),
             arguments = listOf(
                 navArgument("bookId") { type = NavType.IntType },
             ),

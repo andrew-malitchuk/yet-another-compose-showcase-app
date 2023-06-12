@@ -31,6 +31,7 @@ dependencies {
     implementation(project(":feature:settings"))
     implementation(project(":feature:analytics"))
     implementation(project(":feature:favourite"))
+    implementation(project(":feature:deeplink"))
 
     implementation(project(":core:common"))
     implementation(project(":core:localization"))

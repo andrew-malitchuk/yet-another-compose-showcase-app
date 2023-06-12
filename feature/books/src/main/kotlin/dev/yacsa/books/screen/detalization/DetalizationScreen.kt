@@ -9,6 +9,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -16,6 +17,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.theapache64.rebugger.Rebugger
 import dev.yacsa.books.screen.detalization.content.ContentFetchedPortrait
+import dev.yacsa.books.screen.utils.share
 import dev.yacsa.platform.ext.collectWithLifecycle
 import dev.yacsa.ui.composable.content.ContentIsLoading
 import dev.yacsa.ui.composable.theme.detectThemeMode
@@ -57,7 +59,10 @@ fun DetalizationRoute(
                 detalizationViewModel.acceptIntent(DetalizationIntent.OnLinkClick(it))
             },
             favourite = detalizationViewModel.checked,
-            foo= detalizationViewModel.foo
+            foo= detalizationViewModel.foo,
+            onShareClick = {
+                detalizationViewModel.acceptIntent(DetalizationIntent.OnShareClick(it))
+            }
         )
     }
 }
@@ -69,6 +74,7 @@ fun DetalizationScreen(
     onFormatClick: (String) -> Unit,
     favourite: MutableState<Boolean?>,
     foo: MutableState<Boolean?>,
+    onShareClick:(Int)->Unit
 ) {
     val systemUiController = rememberSystemUiController()
 
@@ -107,7 +113,8 @@ fun DetalizationScreen(
                     onLanguageClick = {},
                     onSubjectClick = {},
                     onBookshelfClick = {},
-                    favourite = favourite
+                    favourite = favourite,
+                    onShareClick = onShareClick
                 )
                 if(favourite.value==true && foo.value==true) {
                     KonfettiView(
@@ -133,10 +140,16 @@ fun DetalizationScreen(
 private fun HandleEvents(events: Flow<DetalizationEvent>) {
     val uriHandler = LocalUriHandler.current
 
+    val context = LocalContext.current
+
     events.collectWithLifecycle {
         when (it) {
             is DetalizationEvent.OpenWebBrowserWithDetails -> {
                 uriHandler.openUri(it.uri)
+            }
+
+            is DetalizationEvent.ShareDeeplink->{
+                context.share(it.uri,"foo")
             }
         }
     }
@@ -151,7 +164,8 @@ fun Preview_DetalizationScreen() {
             onBackClick = {},
             onFormatClick = {},
             remember { mutableStateOf(false) },
-            remember { mutableStateOf(false) }
+            remember { mutableStateOf(false) },
+            onShareClick = {}
         )
     }
 }

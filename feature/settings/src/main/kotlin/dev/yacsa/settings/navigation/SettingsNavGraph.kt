@@ -22,6 +22,9 @@ fun NavGraphBuilder.settingsNavGraph(navController: NavHostController) {
                 },
                 onAnalyticsClick={
                     navController.navigate(NavigationDirection.Analytics.route)
+                },
+                onDeeplinkClick={
+                    navController.navigate(NavigationDirection.Deeplink.route)
                 }
             )
         }

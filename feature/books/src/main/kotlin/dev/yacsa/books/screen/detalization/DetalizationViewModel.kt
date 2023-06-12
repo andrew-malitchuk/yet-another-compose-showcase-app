@@ -50,6 +50,7 @@ class DetalizationViewModel @Inject constructor(
             is DetalizationIntent.GetBook -> getBook(intent.bookId)
             is DetalizationIntent.RefreshBook -> getBook(intent.bookId)
             is DetalizationIntent.OnLinkClick -> onLickClick(intent.link)
+            is DetalizationIntent.OnShareClick -> onShareClick(intent.id)
         }
     }
 
@@ -82,6 +83,11 @@ class DetalizationViewModel @Inject constructor(
 
     private fun onLickClick(uri: String): Flow<DetalizationUiState.PartialState> {
         publishEvent(DetalizationEvent.OpenWebBrowserWithDetails(uri))
+        return emptyFlow()
+    }
+
+    private fun onShareClick(id:Int): Flow<DetalizationUiState.PartialState> {
+        publishEvent(DetalizationEvent.ShareDeeplink(generateDeeplink(id)))
         return emptyFlow()
     }
 
@@ -118,5 +124,10 @@ class DetalizationViewModel @Inject constructor(
                 foo.value=true
             }
         }
+    }
+
+
+    private fun generateDeeplink(id:Int):String{
+        return "yacsa://book/$id"
     }
 }

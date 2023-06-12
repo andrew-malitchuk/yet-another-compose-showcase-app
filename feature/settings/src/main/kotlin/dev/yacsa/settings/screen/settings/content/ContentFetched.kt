@@ -37,6 +37,7 @@ fun ContentFetched(
     foo: TopAppBarState,
     onFfClick: () -> Unit,
     onAnalyticsClick: () -> Unit,
+    onDeeplinkClick: () -> Unit,
     theme: MutableState<ThemeUiModel?>,
 ) {
     val corner = YacsaTheme.corners.medium - (YacsaTheme.corners.medium * abs(foo.collapsedFraction))
@@ -86,6 +87,15 @@ fun ContentFetched(
                     )
                 }
                 item {
+                    SettingsItem(
+                        title = "Deeplink",
+                        icon = R.drawable.icon_link_regular_24,
+                        onClick = {
+                            onDeeplinkClick()
+                        },
+                    )
+                }
+                item {
                     ThemeItem(
                         Modifier,
                         theme
@@ -107,6 +117,7 @@ fun Preview_ContentFetched() {
             foo = rememberTopAppBarState(),
             onFfClick = {},
             onAnalyticsClick = {},
+            onDeeplinkClick = {},
             theme = remember { mutableStateOf(null) },
         )
     }

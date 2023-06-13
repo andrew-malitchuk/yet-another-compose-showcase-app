@@ -93,7 +93,7 @@ dependencies {
     releaseImplementation("com.facebook.flipper:flipper-noop:0.190.0")
     implementation("com.facebook.flipper:flipper-network-plugin:0.190.0")
 
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.11")
+//    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.11")
 
     implementation("androidx.glance:glance:1.0.0-beta01")
     implementation("androidx.glance:glance-appwidget:1.0.0-beta01")

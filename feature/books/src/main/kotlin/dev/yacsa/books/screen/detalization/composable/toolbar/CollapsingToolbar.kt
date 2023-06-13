@@ -246,7 +246,8 @@ fun Preview_CollapsingToolbar_Light() {
             ),
             onBackClick = {},
             onDownloadClick = {},
-            favourite = remember { mutableStateOf(false) }
+            favourite = remember { mutableStateOf(false) },
+            onShareClick = {}
         )
     }
 }

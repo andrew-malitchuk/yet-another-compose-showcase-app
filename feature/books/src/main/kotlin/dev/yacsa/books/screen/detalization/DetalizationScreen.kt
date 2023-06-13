@@ -164,7 +164,8 @@ fun Preview_DetalizationScreen_Light() {
             onBackClick = {},
             onFormatClick = {},
             remember { mutableStateOf(false) },
-            remember { mutableStateOf(false) }
+            remember { mutableStateOf(false) },
+            onShareClick = {}
         )
     }
 }

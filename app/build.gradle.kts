@@ -32,6 +32,7 @@ dependencies {
     implementation(project(":feature:analytics"))
     implementation(project(":feature:favourite"))
     implementation(project(":feature:deeplink"))
+    implementation(project(":feature:widget"))
 
     implementation(project(":core:common"))
     implementation(project(":core:localization"))
@@ -93,4 +94,7 @@ dependencies {
     implementation("com.facebook.flipper:flipper-network-plugin:0.190.0")
 
     debugImplementation("com.squareup.leakcanary:leakcanary-android:2.11")
+
+    implementation("androidx.glance:glance:1.0.0-beta01")
+    implementation("androidx.glance:glance-appwidget:1.0.0-beta01")
 }

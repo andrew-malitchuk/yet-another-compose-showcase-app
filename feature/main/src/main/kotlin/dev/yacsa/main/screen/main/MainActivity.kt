@@ -1,4 +1,4 @@
-package dev.yacsa.main
+package dev.yacsa.main.screen.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -23,6 +23,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
+
     @Inject
     lateinit var prefereDataSource: PreferencesDataStoreSource
 
@@ -32,15 +33,15 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var getThemeUseCase: GetThemeUseCase
 
-    // TODO: add
-//    @Inject
-//    lateinit var networkMonitor: NetworkMonitor
 
     var isSplashShown: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
+
+
+        val state = view
 
         GlobalScope.launch(Dispatchers.Main) {
             val result  = getThemeUseCase()

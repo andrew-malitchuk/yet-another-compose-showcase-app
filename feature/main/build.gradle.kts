@@ -1,6 +1,7 @@
 plugins {
     id("yacsa.android.feature")
     id("yacsa.android.library.compose")
+    id("kotlin-parcelize")
 }
 
 android {

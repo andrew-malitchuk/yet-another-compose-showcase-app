@@ -5,7 +5,7 @@
         android:name=".YacsaApplication"
         android:label="@string/app_name">
         <activity
-            android:name="dev.yacsa.main.MainActivity"
+            android:name="dev.yacsa.main.screen.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

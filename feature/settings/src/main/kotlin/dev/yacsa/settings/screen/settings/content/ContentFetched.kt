@@ -118,6 +118,7 @@ fun Preview_ContentFetched_Light() {
             onFfClick = {},
             onAnalyticsClick = {},
             theme = remember { mutableStateOf(null) },
+            onDeeplinkClick = {}
         )
     }
 }

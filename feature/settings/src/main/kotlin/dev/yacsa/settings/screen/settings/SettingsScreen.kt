@@ -172,6 +172,7 @@ fun Preview_SettingsScreen_Light() {
             onFfClick = {},
             onAnalyticsClick = {},
             theme = remember { mutableStateOf(null) },
+            onDeeplinkClick = {}
         )
     }
 }

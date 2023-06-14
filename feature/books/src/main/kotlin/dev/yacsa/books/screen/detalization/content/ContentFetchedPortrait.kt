@@ -161,7 +161,8 @@ fun Preview_ContentFetchedPortrait_Light() {
             {},
             {},
             {},
-            remember { mutableStateOf(false) }
+            remember { mutableStateOf(false) },
+            {}
         )
     }
 }

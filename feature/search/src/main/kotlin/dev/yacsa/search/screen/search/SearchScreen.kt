@@ -66,7 +66,7 @@ fun SearchScreen(
             color = YacsaTheme.colors.background,
         )
         setNavigationBarColor(
-            color = YacsaTheme.colors.surface,
+            color = YacsaTheme.colors.background,
         )
     }
     if (uiState.isContentLoading) {

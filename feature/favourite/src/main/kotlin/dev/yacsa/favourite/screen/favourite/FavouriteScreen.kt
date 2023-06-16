@@ -26,6 +26,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.theapache64.rebugger.Rebugger
 import dev.yacsa.favourite.screen.favourite.content.ContentFetched
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.ui.R
@@ -44,6 +45,15 @@ fun FavouriteRoute(
 
     val currentTheme  by favouriteViewModel.currentTheme
     val isDarkTheme = currentTheme?.detectThemeMode()?:false
+
+    Rebugger(
+        trackMap = mapOf(
+            "uiState" to uiState,
+            "currentTheme" to currentTheme,
+            "isDarkTheme" to isDarkTheme,
+            "foo" to foo,
+        ),
+    )
 
     YacsaTheme(isDarkTheme) {
         FavouriteScreen(

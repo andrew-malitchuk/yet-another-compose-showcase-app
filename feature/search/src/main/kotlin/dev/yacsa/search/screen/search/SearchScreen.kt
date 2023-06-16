@@ -7,6 +7,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.theapache64.rebugger.Rebugger
 import dev.yacsa.search.screen.search.content.ContentFetched
 import dev.yacsa.search.screen.search.dialog.FilterDialogResult
 import dev.yacsa.ui.composable.content.ContentError
@@ -26,6 +27,16 @@ fun SearchRoute(
     val previousContent by searchViewModel.filterResult.collectAsState()
     val currentTheme  by searchViewModel.currentTheme
     val isDarkTheme = currentTheme?.detectThemeMode()?:false
+
+    Rebugger(
+        trackMap = mapOf(
+            "uiState" to uiState,
+            "currentTheme" to currentTheme,
+            "isDarkTheme" to isDarkTheme,
+            "previousContent" to previousContent,
+            "searchText" to searchText,
+        ),
+    )
 
 
     YacsaTheme(isDarkTheme) {

@@ -12,8 +12,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.pager.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.theapache64.rebugger.Rebugger
 import dev.yacsa.onboarding.screen.onboarding.item.OnboardingItem
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.theme.detectThemeMode
@@ -26,12 +28,20 @@ fun OnboardingRoute(
     onBackClick: () -> Unit,
     onDoneClick: () -> Unit,
 ) {
-
-    // TODO: fix?
     val onboardingViewModel: OnboardingViewModel = hiltViewModel()
+
+    val uiState by onboardingViewModel.uiState.collectAsStateWithLifecycle()
 
     val currentTheme  by onboardingViewModel.currentTheme
     val isDarkTheme = currentTheme?.detectThemeMode()?:false
+
+    Rebugger(
+        trackMap = mapOf(
+            "uiState" to uiState,
+            "currentTheme" to currentTheme,
+            "isDarkTheme" to isDarkTheme,
+        ),
+    )
 
     YacsaTheme(isDarkTheme) {
         OnboardingScreen(

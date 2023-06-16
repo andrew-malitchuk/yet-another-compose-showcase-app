@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.theapache64.rebugger.Rebugger
 import dev.yacsa.deeplink.screen.deeplink.content.ContentFetched
 import dev.yacsa.platform.ext.triggerDeepLink
 import dev.yacsa.ui.R
@@ -44,13 +45,21 @@ fun DeeplinkRoute(
     onBackClick: () -> Unit,
 ) {
     val uiState by DeeplinkViewModel.uiState.collectAsStateWithLifecycle()
-
     val currentTheme  by DeeplinkViewModel.currentTheme
     val isDarkTheme = currentTheme?.detectThemeMode()?:false
 
     val onValueChange:MutableState<String> = remember{ mutableStateOf("") }
 
     val foo = LocalContext.current
+
+    Rebugger(
+        trackMap = mapOf(
+            "uiState" to uiState,
+            "currentTheme" to currentTheme,
+            "isDarkTheme" to isDarkTheme,
+            "onValueChange" to onValueChange,
+        ),
+    )
 
     YacsaTheme(isDarkTheme) {
         DeeplinkScreen(

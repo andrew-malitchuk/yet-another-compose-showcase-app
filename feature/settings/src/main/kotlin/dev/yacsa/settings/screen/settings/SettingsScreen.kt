@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.theapache64.rebugger.Rebugger
 import dev.yacsa.model.model.theme.ThemeUiModel
 import dev.yacsa.settings.screen.settings.content.ContentFetched
 import dev.yacsa.ui.R
@@ -48,7 +49,6 @@ fun SettingsRoute(
     onDeeplinkClick: () -> Unit,
 ) {
     val uiState by settingsViewModel.uiState.collectAsStateWithLifecycle()
-
     val currentTheme  by settingsViewModel.currentTheme
     val isDarkTheme = currentTheme?.detectThemeMode()?:false
 
@@ -57,6 +57,15 @@ fun SettingsRoute(
     theme.value?.let {
         settingsViewModel.changeTheme(it)
     }
+
+    Rebugger(
+        trackMap = mapOf(
+            "uiState" to uiState,
+            "currentTheme" to currentTheme,
+            "isDarkTheme" to isDarkTheme,
+            "theme" to theme,
+        ),
+    )
 
     CircularReveal(
         targetState = isDarkTheme,

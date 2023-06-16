@@ -45,4 +45,5 @@ dependencies {
 
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.28.0")
 
+    implementation("com.github.theapache64:rebugger:1.0.0-alpha02")
 }

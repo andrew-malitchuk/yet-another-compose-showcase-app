@@ -36,20 +36,20 @@ fun DetalizationRoute(
 ) {
     HandleEvents(detalizationViewModel.event)
     val uiState by detalizationViewModel.uiState.collectAsStateWithLifecycle()
-
-//    val checked = remember { detalizationViewModel.checked }
-
     detalizationViewModel.checked.also {
         it.value?.let { it1 -> detalizationViewModel.foo(it1) }
     }
 
+    val currentTheme by detalizationViewModel.currentTheme
+    val isDarkTheme = currentTheme?.detectThemeMode() ?: false
+
     Rebugger(
         trackMap = mapOf(
             "uiState" to uiState,
+            "currentTheme" to currentTheme,
+            "isDarkTheme" to isDarkTheme,
         ),
     )
-    val currentTheme  by detalizationViewModel.currentTheme
-    val isDarkTheme = currentTheme?.detectThemeMode()?:false
 
     YacsaTheme(isDarkTheme) {
         DetalizationScreen(
@@ -59,7 +59,7 @@ fun DetalizationRoute(
                 detalizationViewModel.acceptIntent(DetalizationIntent.OnLinkClick(it))
             },
             favourite = detalizationViewModel.checked,
-            foo= detalizationViewModel.foo,
+            foo = detalizationViewModel.foo,
             onShareClick = {
                 detalizationViewModel.acceptIntent(DetalizationIntent.OnShareClick(it))
             }
@@ -74,7 +74,7 @@ fun DetalizationScreen(
     onFormatClick: (String) -> Unit,
     favourite: MutableState<Boolean?>,
     foo: MutableState<Boolean?>,
-    onShareClick:(Int)->Unit
+    onShareClick: (Int) -> Unit
 ) {
     val systemUiController = rememberSystemUiController()
 
@@ -116,7 +116,7 @@ fun DetalizationScreen(
                     favourite = favourite,
                     onShareClick = onShareClick
                 )
-                if(favourite.value==true && foo.value==true) {
+                if (favourite.value == true && foo.value == true) {
                     KonfettiView(
                         modifier = Modifier.fillMaxSize(),
                         parties = listOf(
@@ -148,8 +148,8 @@ private fun HandleEvents(events: Flow<DetalizationEvent>) {
                 uriHandler.openUri(it.uri)
             }
 
-            is DetalizationEvent.ShareDeeplink->{
-                context.share(it.uri,"foo")
+            is DetalizationEvent.ShareDeeplink -> {
+                context.share(it.uri, "foo")
             }
         }
     }

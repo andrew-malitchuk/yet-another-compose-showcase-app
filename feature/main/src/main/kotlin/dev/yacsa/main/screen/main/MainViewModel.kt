@@ -1,17 +1,19 @@
 package dev.yacsa.main.screen.main
 
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.yacsa.domain.usecase.startupconfigure.NewGetStartUpConfigureUseCase
 import dev.yacsa.platform.Theme
 import dev.yacsa.platform.viewmodel.BaseViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val theme: Theme,
+    val theme: Theme,
     private val getStartUpConfigureUseCase: NewGetStartUpConfigureUseCase,
     savedStateHandle: SavedStateHandle,
     initialState: MainUiState,
@@ -22,6 +24,10 @@ class MainViewModel @Inject constructor(
 
     init {
         acceptIntent(MainIntent.GetStatus)
+        viewModelScope.launch {
+            theme.getTheme()
+
+        }
     }
 
     override fun mapIntents(intent: MainIntent): Flow<MainUiState.PartialState> {

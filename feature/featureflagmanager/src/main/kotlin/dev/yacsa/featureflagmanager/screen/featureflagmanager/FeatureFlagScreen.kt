@@ -73,7 +73,7 @@ fun FeatureFlagScreen(
             color = YacsaTheme.colors.statusBar,
         )
         setNavigationBarColor(
-            color = YacsaTheme.colors.navigationBar,
+            color = YacsaTheme.colors.surface,
         )
     }
     val foo = rememberTopAppBarState()

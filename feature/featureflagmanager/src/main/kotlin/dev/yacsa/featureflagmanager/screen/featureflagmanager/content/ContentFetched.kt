@@ -68,9 +68,14 @@ fun ContentFetched(
         }
 
         else -> {
-            systemUiController.setNavigationBarColor(
-                color = YacsaTheme.colors.statusBar,
-            )
+            systemUiController.apply {
+                setSystemBarsColor(
+                    color = YacsaTheme.colors.statusBar,
+                )
+                setNavigationBarColor(
+                    color = YacsaTheme.colors.surface,
+                )
+            }
             Box(
                 modifier = Modifier
                     .fillMaxSize()

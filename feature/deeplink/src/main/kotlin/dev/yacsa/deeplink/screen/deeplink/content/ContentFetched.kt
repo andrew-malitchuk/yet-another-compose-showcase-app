@@ -79,9 +79,14 @@ fun ContentFetched(
         }
 
         else -> {
-            systemUiController.setNavigationBarColor(
-                color = YacsaTheme.colors.statusBar,
-            )
+            systemUiController.apply {
+                setSystemBarsColor(
+                    color = YacsaTheme.colors.statusBar,
+                )
+                setNavigationBarColor(
+                    color = YacsaTheme.colors.surface,
+                )
+            }
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -90,6 +95,7 @@ fun ContentFetched(
                 OutlinedTextField(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .background(YacsaTheme.colors.background)
                         .padding(
                             start = YacsaTheme.spacing.small,
                             end = YacsaTheme.spacing.extraSmall,

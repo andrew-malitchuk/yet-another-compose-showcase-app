@@ -59,6 +59,9 @@ dependencies {
     implementation(project(":service:featureflag"))
     implementation(project(":service:featureflag:impl"))
 
+    implementation(project(":service:crashlytics"))
+    implementation(project(":service:crashlytics:impl"))
+
     implementation(project(":service:analytics"))
     implementation(project(":service:analytics:dispatcher"))
     implementation(project(":service:analytics:dispatcher:impl"))

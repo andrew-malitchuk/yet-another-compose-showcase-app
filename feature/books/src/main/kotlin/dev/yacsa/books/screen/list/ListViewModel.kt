@@ -9,6 +9,8 @@ import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.yacsa.books.featureflag.BooksFeatureFlag
 import dev.yacsa.books.screen.list.pagination.BooksSource
+import dev.yacsa.crashlytics.provider.CrashlyticsProvider
+import dev.yacsa.crashlytics.provider.LoggerProvider
 import dev.yacsa.domain.usecase.books.NewGetBooksUseCase
 import dev.yacsa.domain.usecase.books.NewLoadBooksUseCase
 import dev.yacsa.domain.usecase.books.NewSaveBooksUseCase
@@ -33,6 +35,8 @@ class ListViewModel @Inject constructor(
     private val bookUiDomainMapper: NewBooksUiDomainMapper,
     private val saveBooksUseCase: NewSaveBooksUseCase,
     private val booksFeatureFlag: BooksFeatureFlag,
+    val crashlyticsProvider: CrashlyticsProvider,
+    val loggerProvider: LoggerProvider,
     var connectivityObserver: ConnectivityObserver,
     private val theme: Theme,
     savedStateHandle: SavedStateHandle,

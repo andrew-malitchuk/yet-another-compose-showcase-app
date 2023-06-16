@@ -37,6 +37,10 @@ fun ListRoute(
     onFavourite: () -> Unit,
     listViewModel: ListViewModel = hiltViewModel(),
 ) {
+
+    listViewModel.crashlyticsProvider.log(NullPointerException())
+    listViewModel.loggerProvider.setProperty("screen_view","ListScreen")
+
     HandleEvents(listViewModel.event, onClick, notFound)
 
     val uiState by listViewModel.uiState.collectAsStateWithLifecycle()

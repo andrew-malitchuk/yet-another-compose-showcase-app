@@ -55,4 +55,6 @@ dependencies {
     implementation("me.saket.telephoto:zoomable:0.3.0")
     implementation("nl.dionsegijn:konfetti-compose:2.0.2")
 
+    implementation(project(":service:crashlytics"))
+
 }

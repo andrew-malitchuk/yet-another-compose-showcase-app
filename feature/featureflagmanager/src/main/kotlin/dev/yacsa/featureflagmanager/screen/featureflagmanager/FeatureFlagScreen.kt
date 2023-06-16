@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.theapache64.rebugger.Rebugger
 import dev.yacsa.featureflag.FeatureFlagModel
 import dev.yacsa.featureflagmanager.screen.featureflagmanager.content.ContentFetched
 import dev.yacsa.ui.R
@@ -43,6 +44,15 @@ fun FeatureFlagRoute(
 
     val currentTheme  by featureFlagViewModel.currentTheme
     val isDarkTheme = currentTheme?.detectThemeMode()?:false
+
+    Rebugger(
+        trackMap = mapOf(
+            "uiState" to uiState,
+            "currentTheme" to currentTheme,
+            "isDarkTheme" to isDarkTheme,
+        ),
+    )
+
     YacsaTheme(isDarkTheme) {
         FeatureFlagScreen(
             uiState,

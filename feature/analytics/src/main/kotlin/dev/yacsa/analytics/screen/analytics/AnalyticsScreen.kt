@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.theapache64.rebugger.Rebugger
 import dev.yacsa.analytics.screen.analytics.content.ContentFetched
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.divider.AnimatedDivider
@@ -40,9 +41,16 @@ fun AnalyticsRoute(
     onBackClick: () -> Unit,
 ) {
     val uiState by analyticsViewModel.uiState.collectAsStateWithLifecycle()
-
     val currentTheme  by analyticsViewModel.currentTheme
     val isDarkTheme = currentTheme?.detectThemeMode()?:false
+
+    Rebugger(
+        trackMap = mapOf(
+            "uiState" to uiState,
+            "currentTheme" to currentTheme,
+            "isDarkTheme" to isDarkTheme,
+        ),
+    )
 
     YacsaTheme(isDarkTheme) {
         AnalyticsScreen(

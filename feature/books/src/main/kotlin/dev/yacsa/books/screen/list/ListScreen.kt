@@ -37,7 +37,6 @@ fun ListRoute(
     onFavourite: () -> Unit,
     listViewModel: ListViewModel = hiltViewModel(),
 ) {
-
     listViewModel.crashlyticsProvider.log(NullPointerException())
     listViewModel.loggerProvider.setProperty("screen_view","ListScreen")
 
@@ -57,7 +56,6 @@ fun ListRoute(
         trackMap = mapOf(
             "uiState" to uiState,
             "pagingState" to pagingState,
-//            "windowInfo" to windowInfo,
         ),
     )
 

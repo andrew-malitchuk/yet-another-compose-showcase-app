@@ -37,4 +37,5 @@ dependencies {
     implementation(project(":service:featureflag"))
     implementation(project(":data:repository"))
 
+   implementation("com.google.accompanist:accompanist-navigation-animation:0.31.3-beta")
 }

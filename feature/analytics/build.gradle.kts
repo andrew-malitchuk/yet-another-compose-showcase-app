@@ -49,4 +49,6 @@ dependencies {
 
     implementation("com.airbnb.android:lottie-compose:6.0.0")
 
+    implementation("com.google.accompanist:accompanist-navigation-animation:0.31.3-beta")
+
 }

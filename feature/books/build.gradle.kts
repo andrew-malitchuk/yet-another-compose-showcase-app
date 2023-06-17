@@ -57,4 +57,5 @@ dependencies {
 
     implementation(project(":service:crashlytics"))
 
+    implementation("com.google.accompanist:accompanist-navigation-animation:0.31.3-beta")
 }

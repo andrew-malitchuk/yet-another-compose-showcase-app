@@ -47,4 +47,6 @@ dependencies {
     implementation("io.arrow-kt:arrow-optics:1.2.0-RC")
     ksp("io.arrow-kt:arrow-optics-ksp-plugin:1.2.0-RC")
 
+    implementation("com.google.accompanist:accompanist-navigation-animation:0.31.3-beta")
+
 }

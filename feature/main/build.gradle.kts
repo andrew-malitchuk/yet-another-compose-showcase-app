@@ -52,4 +52,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
+
+    implementation("com.google.accompanist:accompanist-navigation-animation:0.31.3-beta")
+
+
 }

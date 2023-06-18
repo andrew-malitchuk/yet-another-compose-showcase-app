@@ -10,6 +10,7 @@ import dev.yacsa.domain.usecase.books.MarkFavouriteBook
 import dev.yacsa.domain.usecase.books.NewGetOrLoadBookUseCase
 import dev.yacsa.model.mapper.NewBooksUiDomainMapper
 import dev.yacsa.platform.Theme
+import dev.yacsa.platform.connection.ConnectivityObserver
 import dev.yacsa.platform.viewmodel.BaseViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
@@ -25,6 +26,7 @@ class DetalizationViewModel @Inject constructor(
     private val getOrLoadBookUseCase: NewGetOrLoadBookUseCase,
     private val markFavouriteBook: MarkFavouriteBook,
     private val theme: Theme,
+    var connectivityObserver: ConnectivityObserver,
     savedStateHandle: SavedStateHandle,
     initialState: DetalizationUiState,
 ) : BaseViewModel<DetalizationUiState, DetalizationUiState.PartialState, DetalizationEvent, DetalizationIntent>(

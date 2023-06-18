@@ -18,8 +18,9 @@ fun OfflineSnackbar(
     message: String
 ) {
     val shape = RoundedCornerShape(
-        bottomEnd = YacsaTheme.corners.medium,
-        bottomStart = YacsaTheme.corners.medium
+        YacsaTheme.corners.medium,
+//        bottomEnd = YacsaTheme.corners.medium,
+//        bottomStart = YacsaTheme.corners.medium
     )
     Box(
         modifier = Modifier

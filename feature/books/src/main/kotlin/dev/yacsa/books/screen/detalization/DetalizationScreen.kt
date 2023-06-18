@@ -1,9 +1,11 @@
 package dev.yacsa.books.screen.detalization
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -18,8 +20,10 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.theapache64.rebugger.Rebugger
 import dev.yacsa.books.screen.detalization.content.ContentFetchedPortrait
 import dev.yacsa.books.screen.utils.share
+import dev.yacsa.platform.connection.ConnectivityObserver
 import dev.yacsa.platform.ext.collectWithLifecycle
 import dev.yacsa.ui.composable.content.ContentIsLoading
+import dev.yacsa.ui.composable.snackbar.OfflineSnackbar
 import dev.yacsa.ui.composable.theme.detectThemeMode
 import dev.yacsa.ui.theme.YacsaTheme
 import kotlinx.coroutines.flow.Flow
@@ -43,6 +47,15 @@ fun DetalizationRoute(
     val currentTheme by detalizationViewModel.currentTheme
     val isDarkTheme = currentTheme?.detectThemeMode() ?: false
 
+    val status by detalizationViewModel.connectivityObserver.observe().collectAsState(
+        initial = ConnectivityObserver.Status.Unavailable
+    )
+    val isOfflineMode = when (status) {
+        ConnectivityObserver.Status.Available -> false
+        else -> true
+    }
+    val systemUiController = rememberSystemUiController()
+
     Rebugger(
         trackMap = mapOf(
             "uiState" to uiState,
@@ -52,18 +65,34 @@ fun DetalizationRoute(
     )
 
     YacsaTheme(isDarkTheme) {
-        DetalizationScreen(
-            uiState = uiState,
-            onBackClick = onBackClick,
-            onFormatClick = {
-                detalizationViewModel.acceptIntent(DetalizationIntent.OnLinkClick(it))
-            },
-            favourite = detalizationViewModel.checked,
-            foo = detalizationViewModel.foo,
-            onShareClick = {
-                detalizationViewModel.acceptIntent(DetalizationIntent.OnShareClick(it))
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+            if (isOfflineMode) {
+                systemUiController.setSystemBarsColor(
+                    color = YacsaTheme.colors.primary,
+                )
+                OfflineSnackbar(message = "Offline mode")
+            } else {
+                systemUiController.setSystemBarsColor(
+                    color = YacsaTheme.colors.background,
+                )
             }
-        )
+
+            DetalizationScreen(
+                uiState = uiState,
+                onBackClick = onBackClick,
+                onFormatClick = {
+                    detalizationViewModel.acceptIntent(DetalizationIntent.OnLinkClick(it))
+                },
+                favourite = detalizationViewModel.checked,
+                foo = detalizationViewModel.foo,
+                onShareClick = {
+                    detalizationViewModel.acceptIntent(DetalizationIntent.OnShareClick(it))
+                }
+            )
+        }
     }
 }
 

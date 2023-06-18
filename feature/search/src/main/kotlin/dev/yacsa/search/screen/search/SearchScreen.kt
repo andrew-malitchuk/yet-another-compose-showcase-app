@@ -1,17 +1,22 @@
 package dev.yacsa.search.screen.search
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.theapache64.rebugger.Rebugger
+import dev.yacsa.platform.connection.ConnectivityObserver
 import dev.yacsa.search.screen.search.content.ContentFetched
 import dev.yacsa.search.screen.search.dialog.FilterDialogResult
 import dev.yacsa.ui.composable.content.ContentError
 import dev.yacsa.ui.composable.content.ContentIsLoading
+import dev.yacsa.ui.composable.snackbar.OfflineSnackbar
 import dev.yacsa.ui.composable.theme.detectThemeMode
 import dev.yacsa.ui.theme.YacsaTheme
 
@@ -28,6 +33,15 @@ fun SearchRoute(
     val currentTheme  by searchViewModel.currentTheme
     val isDarkTheme = currentTheme?.detectThemeMode()?:false
 
+    val status by searchViewModel.connectivityObserver.observe().collectAsState(
+        initial = ConnectivityObserver.Status.Unavailable
+    )
+    val isOfflineMode = when (status) {
+        ConnectivityObserver.Status.Available -> false
+        else -> true
+    }
+    val systemUiController = rememberSystemUiController()
+
     Rebugger(
         trackMap = mapOf(
             "uiState" to uiState,
@@ -40,23 +54,39 @@ fun SearchRoute(
 
 
     YacsaTheme(isDarkTheme) {
-        SearchScreen(
-            uiState,
-            searchText,
-            onValueChange = {
-                searchViewModel.searchText.value = it
-            },
-            onBookClicked,
-            onDelete = {
-                searchViewModel.acceptIntent(SearchIntent.ClearSearch)
-            },
-            onFilterChanged = {
-                searchViewModel.filterResult.value = it
-                searchViewModel.acceptIntent(SearchIntent.Search(searchText))
-            },
-            previousContent = previousContent,
-            onBackClick = onBackClick
-        )
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+
+            if (isOfflineMode) {
+                systemUiController.setSystemBarsColor(
+                    color = YacsaTheme.colors.primary,
+                )
+                OfflineSnackbar(message = "Offline mode")
+            } else {
+                systemUiController.setSystemBarsColor(
+                    color = YacsaTheme.colors.background,
+                )
+            }
+            SearchScreen(
+                uiState,
+                searchText,
+                onValueChange = {
+                    searchViewModel.searchText.value = it
+                },
+                onBookClicked,
+                onDelete = {
+                    searchViewModel.acceptIntent(SearchIntent.ClearSearch)
+                },
+                onFilterChanged = {
+                    searchViewModel.filterResult.value = it
+                    searchViewModel.acceptIntent(SearchIntent.Search(searchText))
+                },
+                previousContent = previousContent,
+                onBackClick = onBackClick
+            )
+        }
     }
 }
 

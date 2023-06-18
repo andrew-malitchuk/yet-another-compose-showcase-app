@@ -40,6 +40,7 @@ dependencies {
     implementation(project(":core:platform"))
     implementation(project(":core:model"))
     implementation(project(":core:ui"))
+    implementation(project(":core:localization"))
     implementation(project(":service:featureflag"))
 
     implementation("io.arrow-kt:arrow-core:1.2.0-RC")

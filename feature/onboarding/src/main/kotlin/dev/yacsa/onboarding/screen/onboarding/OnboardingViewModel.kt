@@ -1,6 +1,7 @@
 package dev.yacsa.onboarding.screen.onboarding
 
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -82,25 +83,25 @@ class OnboardingViewModel @Inject constructor(
     var onboardingPages = listOf(
         OnboadringPage(
             R.drawable.illustration_mobile_application,
-            "Search",
-            "Search and filter books",
+            dev.yacsa.localization.R.string.onboarding_item_title_1,
+            dev.yacsa.localization.R.string.onboarding_item_description_1,
         ),
         OnboadringPage(
             R.drawable.illustration_mobile_encryption,
-            "Favourites",
-            "Add books to bookshelf",
+            dev.yacsa.localization.R.string.onboarding_item_title_2,
+            dev.yacsa.localization.R.string.onboarding_item_description_2,
         ),
         OnboadringPage(
             R.drawable.illustration_mobile_interface,
-            "Download",
-            "All books are free to download",
+            dev.yacsa.localization.R.string.onboarding_item_title_3,
+            dev.yacsa.localization.R.string.onboarding_item_description_3,
         ),
     )
 
     data class OnboadringPage(
         @DrawableRes val imageId: Int,
-        val header: String,
-        val caption: String,
+        @StringRes val header: Int,
+        @StringRes val caption: Int,
     )
 
     enum class ButtonType {

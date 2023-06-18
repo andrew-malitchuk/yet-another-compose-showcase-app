@@ -32,13 +32,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.theapache64.rebugger.Rebugger
 import dev.yacsa.model.model.theme.ThemeUiModel
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.settings.screen.settings.content.ContentFetched
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.divider.AnimatedDivider
 import dev.yacsa.ui.composable.theme.CircularReveal
 import dev.yacsa.ui.composable.theme.detectThemeMode
 import dev.yacsa.ui.theme.YacsaTheme
-import logcat.logcat
 
 @Composable
 fun SettingsRoute(
@@ -110,7 +110,6 @@ fun SettingsScreen(
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(foo)
 
-    logcat("foo") { foo.collapsedFraction.toString() }
 
     Scaffold(
         modifier = Modifier
@@ -121,9 +120,8 @@ fun SettingsScreen(
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        // TODO: fix
                         Text(
-                            text = "Settings",
+                            text = UiText.StringResource(dev.yacsa.localization.R.string.settings_settings).asString(),
                             style = YacsaTheme.typography.header,
                             color = YacsaTheme.colors.primary
                         )

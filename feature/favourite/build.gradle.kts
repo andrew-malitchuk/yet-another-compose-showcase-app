@@ -41,6 +41,7 @@ dependencies {
     implementation(project(":feature:navigation"))
     implementation(project(":core:ui"))
     implementation(project(":core:platform"))
+    implementation(project(":core:localization"))
     implementation(project(mapOf("path" to ":core:model")))
 
 

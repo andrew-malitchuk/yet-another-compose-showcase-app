@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="onboarding_item_title_1">Cкачуй</string>
+    <string name="onboarding_item_description_1">Всі книжки можна скачати безкоштовно</string>
+    <string name="onboarding_item_title_2">Шукай</string>
+    <string name="onboarding_item_description_2">Шукай та фільтруй книги</string>
+    <string name="onboarding_item_title_3">Улюблені</string>
+    <string name="onboarding_item_description_3">Додавай книги в список улюблених</string>
+</resources>

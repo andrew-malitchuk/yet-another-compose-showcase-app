@@ -11,6 +11,7 @@ import dev.yacsa.domain.usecase.books.NewGetOrLoadBookUseCase
 import dev.yacsa.model.mapper.NewBooksUiDomainMapper
 import dev.yacsa.platform.Theme
 import dev.yacsa.platform.connection.ConnectivityObserver
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.platform.viewmodel.BaseViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
@@ -65,7 +66,7 @@ class DetalizationViewModel @Inject constructor(
                     }
 
                     else -> {
-                        emit(DetalizationUiState.PartialState.Error(Exception("SWW")))
+                        emit(DetalizationUiState.PartialState.Error(Exception(UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).toString())))
                     }
                 }
             },

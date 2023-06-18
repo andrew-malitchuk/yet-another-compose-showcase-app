@@ -96,7 +96,6 @@ fun ContentFetched(
             ScrollUpFab(
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
-                    // TODO: fix
                     .padding(YacsaTheme.spacing.medium),
                 isVisibleBecauseOfScrolling =
                 if (isGridSelected.value) {

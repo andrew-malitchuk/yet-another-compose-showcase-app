@@ -29,11 +29,11 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.theapache64.rebugger.Rebugger
 import dev.yacsa.featureflag.FeatureFlagModel
 import dev.yacsa.featureflagmanager.screen.featureflagmanager.content.ContentFetched
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.divider.AnimatedDivider
 import dev.yacsa.ui.composable.theme.detectThemeMode
 import dev.yacsa.ui.theme.YacsaTheme
-import logcat.logcat
 
 @Composable
 fun FeatureFlagRoute(
@@ -90,7 +90,6 @@ fun FeatureFlagScreen(
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(foo)
 
-    logcat("foo") { foo.collapsedFraction.toString() }
 
     Scaffold(
         modifier = Modifier
@@ -101,13 +100,11 @@ fun FeatureFlagScreen(
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        // TODO: fix
                         Text(
-                            text = "Feature flags",
+                            text = UiText.StringResource(dev.yacsa.localization.R.string.settings_ff).asString(),
                             style = YacsaTheme.typography.header,
                             color = YacsaTheme.colors.primary
                         )
-                        // TODO: fix
                         Spacer(modifier = Modifier.width(YacsaTheme.spacing.small))
                         androidx.compose.material3.Icon(
                             painterResource(id = R.drawable.icon_command_bold_24),

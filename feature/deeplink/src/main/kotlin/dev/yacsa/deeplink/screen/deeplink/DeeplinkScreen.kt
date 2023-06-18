@@ -33,11 +33,11 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.theapache64.rebugger.Rebugger
 import dev.yacsa.deeplink.screen.deeplink.content.ContentFetched
 import dev.yacsa.platform.ext.triggerDeepLink
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.divider.AnimatedDivider
 import dev.yacsa.ui.composable.theme.detectThemeMode
 import dev.yacsa.ui.theme.YacsaTheme
-import logcat.logcat
 
 @Composable
 fun DeeplinkRoute(
@@ -96,7 +96,6 @@ fun DeeplinkScreen(
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(foo)
 
-    logcat("foo") { foo.collapsedFraction.toString() }
 
     Scaffold(
         modifier = Modifier
@@ -107,9 +106,8 @@ fun DeeplinkScreen(
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        // TODO: fix
                         Text(
-                            text = "Deeplink",
+                            text = UiText.StringResource(dev.yacsa.localization.R.string.deeplink_deeplink).asString(),
                             style = YacsaTheme.typography.header,
                             color = YacsaTheme.colors.primary
                         )

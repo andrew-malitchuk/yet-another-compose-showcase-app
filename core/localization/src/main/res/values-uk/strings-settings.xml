@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_settings">Налаштування</string>
+    <string name="settings_ff">Feature flag</string>
+    <string name="settings_info">Інформація</string>
+    <string name="settings_analytics">Аналітика</string>
+    <string name="settings_deeplink">Deeplink</string>
+    <string name="settings_theme">Тема</string>
+</resources>

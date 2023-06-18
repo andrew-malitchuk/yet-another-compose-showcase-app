@@ -11,6 +11,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import dev.yacsa.books.screen.list.item.ItemLanguage
 import dev.yacsa.model.model.BookUiModel
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.theme.YacsaTheme
 
 
@@ -25,7 +26,7 @@ fun LanguageBlock(
     ) {
         Text(
             modifier = Modifier.fillMaxWidth(),
-            text = "Languages",
+            text = UiText.StringResource(dev.yacsa.localization.R.string.search_language).asString(),
             style = YacsaTheme.typography.title,
             color = YacsaTheme.colors.primary,
             maxLines = 1,

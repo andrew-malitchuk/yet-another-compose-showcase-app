@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
@@ -37,7 +38,7 @@ fun ItemError(
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(
-                text = "SWW",
+                text = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString(),
                 style = YacsaTheme.typography.header,
                 color = YacsaTheme.colors.primary,
             )
@@ -63,7 +64,7 @@ fun ItemError(
                     onRetry()
                 }) {
                 androidx.compose.material.Text(
-                    text = "Okay",
+                    text = UiText.StringResource(dev.yacsa.localization.R.string.general_ok).asString(),
                     style = YacsaTheme.typography.title,
                     color = YacsaTheme.colors.accent
                 )

@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import dev.yacsa.model.model.BookUiModel
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
 
@@ -59,7 +60,7 @@ fun ItemFetchedGrid(
         }
         Spacer(modifier = modifier.height(YacsaTheme.spacing.small))
         Text(
-            text = (book.authors?.firstOrNull()?.name ?: "NI"),
+            text = (book.authors?.firstOrNull()?.name ?: UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString()),
             style = YacsaTheme.typography.caption,
             textAlign = TextAlign.Center,
             maxLines = 1,
@@ -67,7 +68,7 @@ fun ItemFetchedGrid(
         )
         Spacer(modifier = modifier.height(YacsaTheme.spacing.small))
         Text(
-            text = (book.title ?: "NI"),
+            text = (book.title ?: UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString()),
             style = YacsaTheme.typography.title,
             textAlign = TextAlign.Center,
             maxLines = 2,

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_next">Next</string>
+    <string name="general_skip">Skip</string>
+    <string name="general_favourite">Favourite</string>
+    <string name="general_ok">ok</string>
+</resources>
+

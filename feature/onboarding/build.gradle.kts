@@ -33,6 +33,8 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":feature:navigation"))
     implementation(project(":core:ui"))
+    implementation(project(":core:platform"))
+    implementation(project(":core:localization"))
     implementation(project(":service:analytics"))
     implementation(project(":service:analytics:dispatcher"))
     implementation(project(":core:model"))

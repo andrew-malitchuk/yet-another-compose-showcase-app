@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.button.TwoStateButton
 import dev.yacsa.ui.theme.YacsaTheme
@@ -60,7 +61,7 @@ fun SearchToolbar(
                 )
             }
             Text(
-                text = "Search",
+                text = UiText.StringResource(dev.yacsa.localization.R.string.search_search).asString(),
                 style = YacsaTheme.typography.header,
                 color = YacsaTheme.colors.primary
             )

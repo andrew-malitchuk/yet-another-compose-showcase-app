@@ -22,6 +22,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.chrisbanes.snapper.ExperimentalSnapperApi
 import dev.yacsa.analytics.screen.analytics.AnalyticsUiState
 import dev.yacsa.analytics.screen.analytics.item.AnalyticsItem
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.content.ContentError
 import dev.yacsa.ui.composable.content.ContentIsLoading
@@ -55,7 +56,7 @@ fun ContentFetched(
                 color = YacsaTheme.colors.statusBar,
             )
             ContentError(
-                errorMessage = "Moshi moshi?"
+                errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString()
             ){
 
             }
@@ -85,7 +86,7 @@ fun ContentFetched(
 
                     if(uiState.analytics.isEmpty()){
                         ContentNoData(
-                            message = "Nothing to show"
+                            message = UiText.StringResource(dev.yacsa.localization.R.string.errors_no_data).asString()
                         )
 
                     }else {

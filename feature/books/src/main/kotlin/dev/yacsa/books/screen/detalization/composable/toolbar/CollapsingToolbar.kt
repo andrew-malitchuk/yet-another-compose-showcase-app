@@ -48,6 +48,7 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import dev.yacsa.books.R
 import dev.yacsa.model.model.BookUiModel
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.composable.button.TwoStateButton
 import dev.yacsa.ui.theme.YacsaTheme
 
@@ -136,7 +137,7 @@ fun CollapsingToolbar(
             modifier = Modifier
                 .layoutId("title")
                 .basicMarquee(),
-            text = book.title ?: "SWW",
+            text = book.title ?: UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString(),
             style = YacsaTheme.typography.caption,
             color = YacsaTheme.colors.primary,
             maxLines = 2,
@@ -145,7 +146,7 @@ fun CollapsingToolbar(
 
         Text(
             modifier = Modifier.layoutId("author"),
-            text = book?.authors?.firstOrNull()?.name ?: "SWW",
+            text = book?.authors?.firstOrNull()?.name ?: UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString(),
             style = YacsaTheme.typography.title,
             color = YacsaTheme.colors.secondary,
             maxLines = 2,
@@ -164,7 +165,7 @@ fun CollapsingToolbar(
             )
             Spacer(modifier = Modifier.width(YacsaTheme.spacing.extraSmall))
             Text(
-                text = book.downloadCount?.toString() ?: "NI",
+                text = book.downloadCount?.toString() ?: UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString(),
                 style = YacsaTheme.typography.title,
                 color = YacsaTheme.colors.secondary,
             )

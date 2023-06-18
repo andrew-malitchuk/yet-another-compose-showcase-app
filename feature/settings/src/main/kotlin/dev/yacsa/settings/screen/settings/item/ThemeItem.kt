@@ -29,6 +29,7 @@ import dev.yacsa.model.model.theme.ThemeUiModel
 import dev.yacsa.model.model.theme.isAuto
 import dev.yacsa.model.model.theme.isDark
 import dev.yacsa.model.model.theme.isLight
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.modifier.bouncingClickable
 import dev.yacsa.ui.theme.YacsaTheme
@@ -94,7 +95,7 @@ fun ThemeItem(
                     .width(YacsaTheme.spacing.medium),
             )
             Text(
-                text = "Theme",
+                text = UiText.StringResource(dev.yacsa.localization.R.string.settings_theme).asString(),
                 style = YacsaTheme.typography.title,
                 color = YacsaTheme.colors.secondary
             )

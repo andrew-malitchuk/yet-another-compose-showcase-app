@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import dev.yacsa.model.model.BookUiModel
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.swipe.SwipeAction
 import dev.yacsa.ui.composable.swipe.SwipeableActionsBox
@@ -116,8 +117,7 @@ fun ItemFetchedList(
                     ) {
                         Spacer(modifier = modifier.height(YacsaTheme.spacing.small))
                         Text(
-                            // TODO: fix
-                            text = (book.authors?.firstOrNull()?.name ?: "NI"),
+                            text = (book.authors?.firstOrNull()?.name ?: UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString()),
                             style = YacsaTheme.typography.caption,
                             color = YacsaTheme.colors.primary,
                             maxLines = 1,
@@ -126,7 +126,7 @@ fun ItemFetchedList(
                         Spacer(modifier = modifier.height(YacsaTheme.spacing.small))
                         Text(
                             // TODO: fix
-                            text = (book.title ?: "NI"),
+                            text = (book.title ?: UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString()),
                             style = YacsaTheme.typography.title,
                             color = YacsaTheme.colors.secondary,
                             maxLines = 2,
@@ -145,7 +145,7 @@ fun ItemFetchedList(
                             Spacer(modifier = modifier.width(YacsaTheme.spacing.extraSmall))
                             Text(
                                 // TODO: fix
-                                text = book.downloadCount?.toString() ?: "NI",
+                                text = book.downloadCount?.toString() ?: UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString(),
                                 style = YacsaTheme.typography.title,
                                 color = YacsaTheme.colors.secondary
                             )

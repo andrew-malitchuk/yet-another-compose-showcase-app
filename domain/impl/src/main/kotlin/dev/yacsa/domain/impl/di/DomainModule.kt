@@ -21,8 +21,10 @@ import dev.yacsa.domain.impl.usecase.featureflag.NewUpdateLocalFeatureFlagUseCas
 import dev.yacsa.domain.impl.usecase.history.NewClearHistoryUseCaseImpl
 import dev.yacsa.domain.impl.usecase.history.NewGetTopSearchUseCaseImpl
 import dev.yacsa.domain.impl.usecase.history.NewInsertSearchHistoryUseCaseImpl
+import dev.yacsa.domain.impl.usecase.startupconfigure.GetLanguageUseCaseImpl
 import dev.yacsa.domain.impl.usecase.startupconfigure.NewGetStartUpConfigureUseCaseImpl
 import dev.yacsa.domain.impl.usecase.startupconfigure.NewUpdateStartUpConfigureUseCaseImpl
+import dev.yacsa.domain.impl.usecase.startupconfigure.UpdateLanguageUseCaseImpl
 import dev.yacsa.domain.impl.usecase.theme.GetGetThemeUseCaseImpl
 import dev.yacsa.domain.impl.usecase.theme.SetThemeUseCaseImpl
 import dev.yacsa.domain.usecase.*
@@ -42,8 +44,10 @@ import dev.yacsa.domain.usecase.featureflag.NewUpdateLocalFeatureFlagUseCase
 import dev.yacsa.domain.usecase.history.NewClearHistoryUseCase
 import dev.yacsa.domain.usecase.history.NewGetTopSearchUseCase
 import dev.yacsa.domain.usecase.history.NewInsertSearchHistoryUseCase
+import dev.yacsa.domain.usecase.startupconfigure.GetLanguageUseCase
 import dev.yacsa.domain.usecase.startupconfigure.NewGetStartUpConfigureUseCase
 import dev.yacsa.domain.usecase.startupconfigure.NewUpdateStartUpConfigureUseCase
+import dev.yacsa.domain.usecase.startupconfigure.UpdateLanguageUseCase
 import dev.yacsa.domain.usecase.theme.GetThemeUseCase
 import dev.yacsa.domain.usecase.theme.SetThemeUseCase
 import javax.inject.Singleton
@@ -172,4 +176,16 @@ abstract class DomainModule {
     abstract fun bindLoadFeatureFlagUseCase(
         loadFeatureFlagUseCaseImpl: LoadFeatureFlagUseCaseImpl,
     ): LoadFeatureFlagUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindUpdateLanguageUseCase(
+        updateLanguageUseCaseImpl: UpdateLanguageUseCaseImpl,
+    ): UpdateLanguageUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindGetLanguageUseCase(
+        getLanguageUseCaseImpl: GetLanguageUseCaseImpl,
+    ): GetLanguageUseCase
 }

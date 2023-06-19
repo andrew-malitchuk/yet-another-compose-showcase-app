@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="detalization_authors">Authors</string>
+    <string name="detalization_languages">Languages</string>
+    <string name="detalization_subjects">Subjects</string>
+    <string name="detalization_formats">Formats</string>
+    <string name="detalization_bookshelf">Bookshelf</string>
+    <string name="detalization_translators">Translators</string>
+</resources>

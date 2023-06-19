@@ -39,6 +39,8 @@ dependencies {
     implementation(project(":feature:navigation"))
     implementation(project(":core:platform"))
     implementation(project(":core:model"))
+    implementation(project(":core:localization"))
+    implementation(project(":core:platform"))
     implementation(project(":core:ui"))
     implementation(project(":service:featureflag"))
 

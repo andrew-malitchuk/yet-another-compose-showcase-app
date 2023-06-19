@@ -24,6 +24,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.yacsa.featureflag.FeatureFlagModel
 import dev.yacsa.featureflagmanager.screen.featureflagmanager.FeatureFlagUiState
 import dev.yacsa.featureflagmanager.screen.featureflagmanager.item.ItemFetched
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.composable.content.ContentIsLoading
 import dev.yacsa.ui.composable.content.ContentNoData
 import dev.yacsa.ui.theme.YacsaTheme
@@ -61,7 +62,7 @@ fun ContentFetched(
                 color = YacsaTheme.colors.statusBar,
             )
             dev.yacsa.ui.composable.content.ContentError(
-                errorMessage = "Moshi moshi?"
+                errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString()
             ) {
 
             }
@@ -91,7 +92,7 @@ fun ContentFetched(
 
                     if (uiState.featureFlags.isNullOrEmpty()) {
                         ContentNoData(
-                            message = "Nothing to show"
+                            message = UiText.StringResource(dev.yacsa.localization.R.string.errors_no_data).asString()
                         )
 
                     } else {

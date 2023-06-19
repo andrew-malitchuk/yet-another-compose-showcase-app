@@ -12,6 +12,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import dev.yacsa.books.screen.list.item.ItemSubject
 import dev.yacsa.model.model.BookUiModel
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.theme.YacsaTheme
 
 
@@ -27,7 +28,7 @@ fun SubjectsBlock(
     ) {
         Text(
             modifier = Modifier.fillMaxWidth(),
-            text = "Subjects",
+            text = UiText.StringResource(dev.yacsa.localization.R.string.detalization_subjects).asString(),
             style = YacsaTheme.typography.title,
             color = YacsaTheme.colors.primary,
             maxLines = 1,

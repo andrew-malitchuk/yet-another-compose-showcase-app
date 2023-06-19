@@ -25,6 +25,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yacsa.model.model.PersonUiModel
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
 
@@ -74,7 +75,7 @@ fun ItemAuthor(
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = person.name ?: "SWW",
+                    text = person.name ?: UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString(),
                     style = YacsaTheme.typography.title,
                     color = YacsaTheme.colors.secondary
                 )

@@ -11,7 +11,7 @@ import java.io.OutputStream
 object StartupConfigureSerializer : Serializer<StartUpConfigureDataStoreModel> {
 
     override val defaultValue: StartUpConfigureDataStoreModel
-        get() = StartUpConfigureDataStoreModel(false)
+        get() = StartUpConfigureDataStoreModel(false, null)
 
     override suspend fun readFrom(input: InputStream): StartUpConfigureDataStoreModel {
         return try {

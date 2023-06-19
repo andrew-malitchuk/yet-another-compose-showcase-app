@@ -13,6 +13,7 @@ import dev.yacsa.model.mapper.NewBooksUiDomainMapper
 import dev.yacsa.model.mapper.NewSearchHistoryUiDomainMapper
 import dev.yacsa.platform.Theme
 import dev.yacsa.platform.connection.ConnectivityObserver
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.platform.viewmodel.BaseViewModel
 import dev.yacsa.search.screen.search.dialog.FilterDialogResult
 import kotlinx.coroutines.flow.Flow
@@ -88,7 +89,7 @@ class SearchViewModel @Inject constructor(
                     }
 
                     else -> {
-                        emit(SearchUiState.PartialState.Error(Throwable("SWW")))
+                        emit(SearchUiState.PartialState.Error(Throwable(UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).toString())))
                     }
                 }
             }, { result ->
@@ -120,7 +121,7 @@ class SearchViewModel @Inject constructor(
                             }
 
                             else -> {
-                                emit(SearchUiState.PartialState.Error(Throwable("SWW")))
+                                emit(SearchUiState.PartialState.Error(Throwable(UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).toString())))
                             }
                         }
                     },
@@ -136,7 +137,7 @@ class SearchViewModel @Inject constructor(
                     }
 
                     else -> {
-                        emit(SearchUiState.PartialState.Error(Throwable("SWW")))
+                        emit(SearchUiState.PartialState.Error(Throwable(UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).toString())))
                     }
                 }
             })
@@ -157,7 +158,7 @@ class SearchViewModel @Inject constructor(
                         }
 
                         else -> {
-                            emit(SearchUiState.PartialState.Error(Throwable("SWW")))
+                            emit(SearchUiState.PartialState.Error(Throwable(UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).toString())))
                         }
                     }
                 },

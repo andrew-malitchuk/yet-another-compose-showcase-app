@@ -28,6 +28,7 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.pager.ExperimentalPagerApi
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.search.screen.composable.ChipGroup
 import dev.yacsa.search.screen.composable.SearchToolbar
 import dev.yacsa.search.screen.search.SearchUiState
@@ -39,7 +40,6 @@ import dev.yacsa.ui.composable.content.ContentIsLoading
 import dev.yacsa.ui.composable.content.ContentNoData
 import dev.yacsa.ui.composable.keyboard.clearFocusOnKeyboardDismiss
 import dev.yacsa.ui.theme.YacsaTheme
-import logcat.logcat
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalPagerApi::class)
 @Composable
@@ -77,7 +77,6 @@ fun ContentFetched(
                 showSheet.value = false
             },
             onSort = {
-                logcat("foobar") { it.toString() }
                 onFilterChanged(it)
                 filterResult.value = it.isFulfilled()
                 showSheet.value = false
@@ -143,7 +142,7 @@ fun ContentFetched(
                 }
             },
             singleLine = true,
-            placeholder = { Text("Type to search...") },
+            placeholder = { Text(UiText.StringResource(dev.yacsa.localization.R.string.search_type).asString()) },
         )
 
         if (!uiState.topSearch.isNullOrEmpty()) {
@@ -166,9 +165,9 @@ fun ContentFetched(
         } else {
             if (uiState.resultSearch.isNullOrEmpty()) {
                 if (uiState.isError) {
-                    ContentError(errorMessage = "Moshi moshi?"){}
+                    ContentError(errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString()){}
                 } else {
-                    ContentNoData(modifier = Modifier.fillMaxSize(),message = "Nothing to show(")
+                    ContentNoData(modifier = Modifier.fillMaxSize(),message = UiText.StringResource(dev.yacsa.localization.R.string.errors_no_data).asString())
                 }
             } else {
                 ResultFetched(

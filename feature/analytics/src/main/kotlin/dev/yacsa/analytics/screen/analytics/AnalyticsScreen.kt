@@ -29,11 +29,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.theapache64.rebugger.Rebugger
 import dev.yacsa.analytics.screen.analytics.content.ContentFetched
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.divider.AnimatedDivider
 import dev.yacsa.ui.composable.theme.detectThemeMode
 import dev.yacsa.ui.theme.YacsaTheme
-import logcat.logcat
 
 @Composable
 fun AnalyticsRoute(
@@ -85,7 +85,6 @@ fun AnalyticsScreen(
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(foo)
 
-    logcat("foo") { foo.collapsedFraction.toString() }
 
     Scaffold(
         modifier = Modifier
@@ -98,7 +97,7 @@ fun AnalyticsScreen(
                     ) {
                         // TODO: fix
                         Text(
-                            text = "Analytics",
+                            text = UiText.StringResource(dev.yacsa.localization.R.string.settings_analytics).asString(),
                             style = YacsaTheme.typography.header,
                             color = YacsaTheme.colors.primary
                         )

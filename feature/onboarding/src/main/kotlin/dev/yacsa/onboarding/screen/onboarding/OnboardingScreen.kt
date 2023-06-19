@@ -17,6 +17,7 @@ import com.google.accompanist.pager.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.theapache64.rebugger.Rebugger
 import dev.yacsa.onboarding.screen.onboarding.item.OnboardingItem
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.theme.detectThemeMode
 import dev.yacsa.ui.theme.YacsaTheme
@@ -114,8 +115,8 @@ fun OnboardingScreen(
             onboardingViewModel.onboardingPages[page].let {
                 OnboardingItem(
                     it.imageId,
-                    it.header,
-                    it.caption,
+                    UiText.StringResource(it.header).asString(),
+                    UiText.StringResource(it.caption).asString(),
                     state = state,
                 )
             }
@@ -153,12 +154,11 @@ fun TopSection(
             contentPadding = PaddingValues(0.dp),
         ) {
             val textForButton = when (buttonType) {
-                OnboardingViewModel.ButtonType.SKIP -> "Skip"
-                OnboardingViewModel.ButtonType.NEXT -> "Next"
+                OnboardingViewModel.ButtonType.SKIP -> UiText.StringResource(dev.yacsa.localization.R.string.general_skip).asString()
+                OnboardingViewModel.ButtonType.NEXT -> UiText.StringResource(dev.yacsa.localization.R.string.general_next).asString()
             }
 
             Text(
-                // TODO: move
                 text = textForButton,
                 style = YacsaTheme.typography.title,
                 color = YacsaTheme.colors.primary,

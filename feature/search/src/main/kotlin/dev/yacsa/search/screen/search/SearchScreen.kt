@@ -12,6 +12,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.theapache64.rebugger.Rebugger
 import dev.yacsa.platform.connection.ConnectivityObserver
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.search.screen.search.content.ContentFetched
 import dev.yacsa.search.screen.search.dialog.FilterDialogResult
 import dev.yacsa.ui.composable.content.ContentError
@@ -63,7 +64,7 @@ fun SearchRoute(
                 systemUiController.setSystemBarsColor(
                     color = YacsaTheme.colors.primary,
                 )
-                OfflineSnackbar(message = "Offline mode")
+                OfflineSnackbar(message = UiText.StringResource(dev.yacsa.localization.R.string.errors_offline).asString())
             } else {
                 systemUiController.setSystemBarsColor(
                     color = YacsaTheme.colors.background,
@@ -127,7 +128,7 @@ fun SearchScreen(
             )
         } else {
             if (uiState.isError) {
-                ContentError(errorMessage = "Moshi moshi?"){ }
+                ContentError(errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString()){ }
             }else{
                 if(uiState.isResultLoading){
                     ContentIsLoading()

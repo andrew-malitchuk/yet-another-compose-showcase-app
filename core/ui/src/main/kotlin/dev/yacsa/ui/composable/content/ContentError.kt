@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
 
@@ -65,7 +66,7 @@ fun ContentError(
                         contentDescription = null,
                     )
                     Text(
-                        text = "SWW",
+                        text = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString(),
                         style = YacsaTheme.typography.header,
                         color = YacsaTheme.colors.primary,
                     )

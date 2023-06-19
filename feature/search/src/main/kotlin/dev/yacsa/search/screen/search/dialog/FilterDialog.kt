@@ -39,6 +39,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.button.RowToggleButtonGroup
 import dev.yacsa.ui.theme.YacsaTheme
@@ -106,7 +107,7 @@ fun FilterDialogContent(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             androidx.compose.material.Text(
-                text = "Filter stuff",
+                text = UiText.StringResource(dev.yacsa.localization.R.string.search_filter).asString(),
                 style = YacsaTheme.typography.header,
                 color = YacsaTheme.colors.primary
             )
@@ -130,7 +131,7 @@ fun FilterDialogContent(
                 .padding(horizontal = YacsaTheme.spacing.medium)
         ) {
             androidx.compose.material.Text(
-                text = "Language",
+                text = UiText.StringResource(dev.yacsa.localization.R.string.search_language).asString(),
                 style = YacsaTheme.typography.caption,
                 color = YacsaTheme.colors.secondary
             )
@@ -147,7 +148,6 @@ fun FilterDialogContent(
                             labelColor = YacsaTheme.colors.secondary,
                             selectedLabelColor = YacsaTheme.colors.primary,
                         ),
-                        // TODO: fix
                         border = FilterChipDefaults.filterChipBorder(
                             borderColor = YacsaTheme.colors.secondary,
                             selectedBorderColor = YacsaTheme.colors.primary,
@@ -171,7 +171,7 @@ fun FilterDialogContent(
             }
             Spacer(modifier = Modifier.height(YacsaTheme.spacing.small))
             androidx.compose.material.Text(
-                text = "Sort",
+                text = UiText.StringResource(dev.yacsa.localization.R.string.search_sort).asString(),
                 style = YacsaTheme.typography.caption,
                 color = YacsaTheme.colors.secondary
             )
@@ -216,7 +216,7 @@ fun FilterDialogContent(
                 onSort(filterResult)
             }) {
             androidx.compose.material.Text(
-                text = "Sort",
+                text = UiText.StringResource(dev.yacsa.localization.R.string.search_sort).asString(),
                 style = YacsaTheme.typography.caption,
                 color = YacsaTheme.colors.accent
             )

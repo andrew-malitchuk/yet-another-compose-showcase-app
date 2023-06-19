@@ -36,6 +36,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.chrisbanes.snapper.ExperimentalSnapperApi
 import dev.yacsa.deeplink.screen.deeplink.DeeplinkUiState
 import dev.yacsa.deeplink.screen.deeplink.item.DeeplinkItem
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.content.ContentError
 import dev.yacsa.ui.composable.content.ContentIsLoading
@@ -72,7 +73,7 @@ fun ContentFetched(
                 color = YacsaTheme.colors.statusBar,
             )
             ContentError(
-                errorMessage = "Moshi moshi?"
+                errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString()
             ) {
 
             }
@@ -139,7 +140,7 @@ fun ContentFetched(
                         }
                     },
                     singleLine = true,
-                    placeholder = { Text("Type deeplink") },
+                    placeholder = { Text(UiText.StringResource(dev.yacsa.localization.R.string.deeplink_type).asString()) },
                 )
                 Box(
                     modifier = Modifier
@@ -165,7 +166,6 @@ fun ContentFetched(
                                     value = "yacsa://book",
                                     icon = R.drawable.icon_link_regular_24,
                                     onClick = {
-//                                        onDeeplinkClick("yacsa://book")
                                         foobar.value="yacsa://book"
                                     },
                                 )
@@ -175,7 +175,6 @@ fun ContentFetched(
                                     value = "yacsa://favourite",
                                     icon = R.drawable.icon_link_regular_24,
                                     onClick = {
-//                                        onDeeplinkClick("yacsa://favourite")
                                         foobar.value="yacsa://favourite"
                                     },
                                 )

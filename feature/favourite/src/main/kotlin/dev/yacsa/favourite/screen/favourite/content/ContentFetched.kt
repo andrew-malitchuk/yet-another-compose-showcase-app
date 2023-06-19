@@ -22,6 +22,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.yacsa.favourite.screen.favourite.FavouriteUiState
 import dev.yacsa.favourite.screen.favourite.item.ItemFetchedList
 import dev.yacsa.model.model.BookUiModel
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.composable.content.ContentError
 import dev.yacsa.ui.composable.content.ContentIsLoading
 import dev.yacsa.ui.composable.content.ContentNoData
@@ -51,7 +52,7 @@ fun ContentFetched(
 
         uiState.isError -> {
             ContentError(
-                errorMessage = "Moshi moshi?"
+                errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString()
             ){
 
             }
@@ -95,7 +96,7 @@ fun ContentFetched(
                         }
                     } else {
                         ContentNoData(
-                            message = "Nothing to show"
+                            message = UiText.StringResource(dev.yacsa.localization.R.string.errors_no_data).asString()
                         )
                     }
 

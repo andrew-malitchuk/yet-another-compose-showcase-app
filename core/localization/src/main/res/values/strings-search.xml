@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search_search">Search</string>
+    <string name="search_type">Type to search</string>
+    <string name="search_filter">Filter</string>
+    <string name="search_language">Language</string>
+    <string name="search_sort">Sort</string>
+    <string name="search_"></string>
+</resources>

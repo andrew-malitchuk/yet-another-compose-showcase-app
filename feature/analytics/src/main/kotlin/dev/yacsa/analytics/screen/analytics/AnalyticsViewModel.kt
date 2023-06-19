@@ -8,6 +8,7 @@ import dev.yacsa.domain.usecase.analytics.ClearAnalyticsUseCase
 import dev.yacsa.domain.usecase.analytics.GetAnalyticsUseCase
 import dev.yacsa.model.mapper.AnalyticsUiDomainMapper
 import dev.yacsa.platform.Theme
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.platform.viewmodel.BaseViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -52,7 +53,7 @@ class AnalyticsViewModel @Inject constructor(
                         }
 
                         else -> {
-                            emit(AnalyticsUiState.PartialState.Error(Exception("SWW")))
+                            emit(AnalyticsUiState.PartialState.Error(Exception(UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).toString())))
                         }
                     }
                 },
@@ -79,7 +80,7 @@ class AnalyticsViewModel @Inject constructor(
                         }
 
                         else -> {
-                            emit(AnalyticsUiState.PartialState.Error(Throwable("SWW")))
+                            emit(AnalyticsUiState.PartialState.Error(Throwable(UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).toString())))
                         }
                     }
                 }

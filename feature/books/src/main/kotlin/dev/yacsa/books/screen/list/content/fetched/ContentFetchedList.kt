@@ -25,6 +25,7 @@ import dev.yacsa.books.screen.list.item.ItemError
 import dev.yacsa.books.screen.list.item.ItemFetchedList
 import dev.yacsa.books.screen.list.item.ItemLoading
 import dev.yacsa.model.model.BookUiModel
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.theme.YacsaTheme
 import kotlinx.coroutines.flow.flowOf
 
@@ -54,7 +55,6 @@ fun ContentFetchedList(
             state = listState,
             modifier = modifier
                 .fillMaxSize(),
-            // TODO: fix
             contentPadding = PaddingValues(YacsaTheme.spacing.small),
             verticalArrangement = Arrangement.spacedBy(YacsaTheme.spacing.small),
         ) {
@@ -83,7 +83,7 @@ fun ContentFetchedList(
                         val error = lazyPagingItems.loadState.append as? LoadState.Error
                         item {
                             ItemError(
-                                error = error?.error?.localizedMessage ?: "SWW",
+                                error = error?.error?.localizedMessage ?: UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString(),
                                 onRetry = {
                                     retry()
                                 },
@@ -101,7 +101,7 @@ fun ContentFetchedList(
                         val error = lazyPagingItems.loadState.append as LoadState.Error
                         item {
                             ItemError(
-                                error = error.error.localizedMessage ?: "SWW",
+                                error = error.error.localizedMessage ?: UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString(),
                                 onRetry = {
                                     retry()
                                 },

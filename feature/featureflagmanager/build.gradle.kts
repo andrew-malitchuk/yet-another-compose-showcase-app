@@ -44,6 +44,9 @@ dependencies {
     implementation(project(":service:featureflag"))
     implementation(project(":data:repository"))
 
+    implementation(project(":core:platform"))
+    implementation(project(":core:localization"))
+
     implementation("io.arrow-kt:arrow-core:1.2.0-RC")
     implementation("io.arrow-kt:arrow-fx-coroutines:1.2.0-RC")
     implementation("io.arrow-kt:arrow-optics:1.2.0-RC")

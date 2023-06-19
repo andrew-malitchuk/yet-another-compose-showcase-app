@@ -18,15 +18,12 @@ import dev.yacsa.ui.theme.YacsaTheme
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-//    private val mainViewModel: MainViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
 
         setContent {
             val mainViewModel: MainViewModel = hiltViewModel()
-//            val navHostController = rememberNavController()
             val navHostController = rememberAnimatedNavController()
             val uiState by mainViewModel.uiState.collectAsStateWithLifecycle()
             splashScreen.setKeepOnScreenCondition { uiState.isLoading }

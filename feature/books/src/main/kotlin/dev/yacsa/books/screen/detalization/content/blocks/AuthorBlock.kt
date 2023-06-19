@@ -11,6 +11,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import dev.yacsa.books.screen.list.item.ItemAuthor
 import dev.yacsa.model.model.BookUiModel
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
@@ -24,7 +25,7 @@ fun AuthorBlock(
     ) {
         Text(
             modifier = Modifier.fillMaxWidth(),
-            text = "Authors",
+            text = UiText.StringResource(dev.yacsa.localization.R.string.detalization_authors).asString(),
             style = YacsaTheme.typography.title,
             color = YacsaTheme.colors.primary,
             maxLines = 1,

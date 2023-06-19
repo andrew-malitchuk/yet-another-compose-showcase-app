@@ -8,6 +8,7 @@ import dev.yacsa.domain.usecase.featureflag.NewUpdateLocalFeatureFlagUseCase
 import dev.yacsa.featureflag.FeatureFlagModel
 import dev.yacsa.model.mapper.FeatureFlagDomainRepoMapper
 import dev.yacsa.platform.Theme
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.platform.viewmodel.BaseViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -51,7 +52,7 @@ class FeatureFlagViewModel @Inject constructor(
                 { result ->
                     emit(FeatureFlagUiState.PartialState.Fetched(
                         result.map { ff ->
-                            FeatureFlagModel(ff?.key ?: "NI", ff?.value)
+                            FeatureFlagModel(ff?.key ?: UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).toString(), ff?.value)
                         } as ArrayList<FeatureFlagModel>
                     ))
                 }

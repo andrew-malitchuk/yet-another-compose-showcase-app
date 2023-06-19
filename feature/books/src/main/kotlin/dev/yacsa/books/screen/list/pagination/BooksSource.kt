@@ -8,6 +8,7 @@ import dev.yacsa.domain.usecase.books.NewLoadBooksUseCase
 import dev.yacsa.domain.usecase.books.NewSaveBooksUseCase
 import dev.yacsa.model.mapper.NewBooksUiDomainMapper
 import dev.yacsa.model.model.BookUiModel
+import dev.yacsa.platform.string.UiText
 
 class BooksSource(
     private val getBooksUseCase: NewGetBooksUseCase,
@@ -33,7 +34,7 @@ class BooksSource(
                             }
 
                             else -> {
-                                LoadResult.Error(Exception("SWW"))
+                                LoadResult.Error(Exception(UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).toString()))
                             }
                         }
                     },
@@ -63,7 +64,7 @@ class BooksSource(
                                 }
 
                                 else -> {
-                                    LoadResult.Error(Exception("SWW"))
+                                    LoadResult.Error(Exception(UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).toString()))
                                 }
                             }
                         },

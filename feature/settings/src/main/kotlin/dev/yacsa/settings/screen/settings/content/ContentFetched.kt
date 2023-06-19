@@ -22,6 +22,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import dev.chrisbanes.snapper.ExperimentalSnapperApi
 import dev.yacsa.model.model.theme.ThemeUiModel
+import dev.yacsa.platform.string.UiText
+import dev.yacsa.settings.screen.settings.item.LanguageItem
 import dev.yacsa.settings.screen.settings.item.SettingsItem
 import dev.yacsa.settings.screen.settings.item.ThemeItem
 import dev.yacsa.ui.R
@@ -39,6 +41,7 @@ fun ContentFetched(
     onAnalyticsClick: () -> Unit,
     onDeeplinkClick: () -> Unit,
     theme: MutableState<ThemeUiModel?>,
+    language: MutableState<String?>,
 ) {
     val corner = YacsaTheme.corners.medium - (YacsaTheme.corners.medium * abs(foo.collapsedFraction))
     Box(
@@ -62,7 +65,7 @@ fun ContentFetched(
             ) {
                 item {
                     SettingsItem(
-                        title = "Feature flag",
+                        title = UiText.StringResource(dev.yacsa.localization.R.string.settings_ff).asString(),
                         icon = R.drawable.icon_command_regular_24,
                         onClick = {
                             onFfClick()
@@ -71,7 +74,7 @@ fun ContentFetched(
                 }
                 item {
                     SettingsItem(
-                        title = "Information",
+                        title = UiText.StringResource(dev.yacsa.localization.R.string.settings_info).asString(),
                         icon = R.drawable.icon_info_regular_24,
                         onClick = {
                         },
@@ -79,7 +82,7 @@ fun ContentFetched(
                 }
                 item {
                     SettingsItem(
-                        title = "Analytics",
+                        title = UiText.StringResource(dev.yacsa.localization.R.string.settings_analytics).asString(),
                         icon = R.drawable.icon_flask_regular_24,
                         onClick = {
                             onAnalyticsClick()
@@ -88,7 +91,7 @@ fun ContentFetched(
                 }
                 item {
                     SettingsItem(
-                        title = "Deeplink",
+                        title = UiText.StringResource(dev.yacsa.localization.R.string.settings_deeplink).asString(),
                         icon = R.drawable.icon_link_regular_24,
                         onClick = {
                             onDeeplinkClick()
@@ -99,6 +102,12 @@ fun ContentFetched(
                     ThemeItem(
                         Modifier,
                         theme
+                    )
+                }
+                item {
+                    LanguageItem(
+                        Modifier,
+                        language
                     )
                 }
             }
@@ -118,7 +127,10 @@ fun Preview_ContentFetched_Light() {
             onFfClick = {},
             onAnalyticsClick = {},
             theme = remember { mutableStateOf(null) },
-            onDeeplinkClick = {}
+            onDeeplinkClick = {},
+            language = remember {
+                mutableStateOf(null)
+            }
         )
     }
 }
@@ -136,6 +148,9 @@ fun Preview_ContentFetched_Dark() {
             onAnalyticsClick = {},
             onDeeplinkClick = {},
             theme = remember { mutableStateOf(null) },
+            language = remember {
+                mutableStateOf(null)
+            }
         )
     }
 }

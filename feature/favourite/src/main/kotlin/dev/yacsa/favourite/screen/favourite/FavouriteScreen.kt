@@ -29,6 +29,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.theapache64.rebugger.Rebugger
 import dev.yacsa.favourite.screen.favourite.content.ContentFetched
 import dev.yacsa.model.model.BookUiModel
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.divider.AnimatedDivider
 import dev.yacsa.ui.composable.theme.detectThemeMode
@@ -84,20 +85,18 @@ fun FavouriteScreen(
     Scaffold(
         modifier = Modifier
             .nestedScroll(scrollBehavior.nestedScrollConnection)
-            .background( YacsaTheme.colors.background),
+            .background(YacsaTheme.colors.background),
         topBar = {
             LargeTopAppBar(
                 title = {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        // TODO: fix
                         Text(
-                            text = "Favourite",
+                            text = UiText.StringResource(dev.yacsa.localization.R.string.general_favourite).asString(),
                             style = YacsaTheme.typography.header,
                             color = YacsaTheme.colors.primary
                         )
-                        // TODO: fix
                         Spacer(modifier = Modifier.width(YacsaTheme.spacing.small))
                         androidx.compose.material3.Icon(
                             painterResource(id = R.drawable.icon_heart_regulat_24),

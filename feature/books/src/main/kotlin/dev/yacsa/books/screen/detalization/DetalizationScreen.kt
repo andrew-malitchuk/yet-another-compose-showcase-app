@@ -22,6 +22,7 @@ import dev.yacsa.books.screen.detalization.content.ContentFetchedPortrait
 import dev.yacsa.books.screen.utils.share
 import dev.yacsa.platform.connection.ConnectivityObserver
 import dev.yacsa.platform.ext.collectWithLifecycle
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.composable.content.ContentIsLoading
 import dev.yacsa.ui.composable.snackbar.OfflineSnackbar
 import dev.yacsa.ui.composable.theme.detectThemeMode
@@ -73,7 +74,7 @@ fun DetalizationRoute(
                 systemUiController.setSystemBarsColor(
                     color = YacsaTheme.colors.primary,
                 )
-                OfflineSnackbar(message = "Offline mode")
+                OfflineSnackbar(message = UiText.StringResource(dev.yacsa.localization.R.string.errors_offline).asString())
             } else {
                 systemUiController.setSystemBarsColor(
                     color = YacsaTheme.colors.background,

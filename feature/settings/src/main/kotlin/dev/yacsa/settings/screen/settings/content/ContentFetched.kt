@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import dev.chrisbanes.snapper.ExperimentalSnapperApi
 import dev.yacsa.model.model.theme.ThemeUiModel
 import dev.yacsa.platform.string.UiText
+import dev.yacsa.settings.screen.settings.item.LanguageItem
 import dev.yacsa.settings.screen.settings.item.SettingsItem
 import dev.yacsa.settings.screen.settings.item.ThemeItem
 import dev.yacsa.ui.R
@@ -40,6 +41,7 @@ fun ContentFetched(
     onAnalyticsClick: () -> Unit,
     onDeeplinkClick: () -> Unit,
     theme: MutableState<ThemeUiModel?>,
+    language: MutableState<String?>,
 ) {
     val corner = YacsaTheme.corners.medium - (YacsaTheme.corners.medium * abs(foo.collapsedFraction))
     Box(
@@ -102,6 +104,12 @@ fun ContentFetched(
                         theme
                     )
                 }
+                item {
+                    LanguageItem(
+                        Modifier,
+                        language
+                    )
+                }
             }
         }
     }
@@ -119,7 +127,10 @@ fun Preview_ContentFetched_Light() {
             onFfClick = {},
             onAnalyticsClick = {},
             theme = remember { mutableStateOf(null) },
-            onDeeplinkClick = {}
+            onDeeplinkClick = {},
+            language = remember {
+                mutableStateOf(null)
+            }
         )
     }
 }
@@ -137,6 +148,9 @@ fun Preview_ContentFetched_Dark() {
             onAnalyticsClick = {},
             onDeeplinkClick = {},
             theme = remember { mutableStateOf(null) },
+            language = remember {
+                mutableStateOf(null)
+            }
         )
     }
 }

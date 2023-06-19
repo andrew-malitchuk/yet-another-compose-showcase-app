@@ -30,11 +30,11 @@ class OnboardingViewModel @Inject constructor(
     private val updateStartUpConfigureUseCase: NewUpdateStartUpConfigureUseCase,
     private val getStartUpConfigureUseCase: NewGetStartUpConfigureUseCase,
     private val analyticDispatcher: AnalyticDispatcher,
-    private val theme:Theme
+    private val theme: Theme
 ) : BaseViewModel<OnboardingUiState, OnboardingUiState.PartialState, OnboardingEvent, OnboardingIntent>(
     savedStateHandle,
     initialState,
-), Theme by theme{
+), Theme by theme {
 
     init {
         viewModelScope.launch {
@@ -68,7 +68,12 @@ class OnboardingViewModel @Inject constructor(
 
     fun updateStartUpConfigure() {
         viewModelScope.launch {
-            updateStartUpConfigureUseCase(StartUpConfigureDomainModel(true))
+            getStartUpConfigureUseCase().fold({
+
+            }, {
+                updateStartUpConfigureUseCase(StartUpConfigureDomainModel(true, it.language))
+
+            })
         }
     }
 

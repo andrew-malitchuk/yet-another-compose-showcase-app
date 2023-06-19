@@ -6,4 +6,5 @@
     <string name="settings_analytics">Analytics</string>
     <string name="settings_deeplink">Deeplink</string>
     <string name="settings_theme">Theme</string>
+    <string name="settings_lang">Language</string>
 </resources>

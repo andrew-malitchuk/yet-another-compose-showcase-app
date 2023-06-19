@@ -9,11 +9,12 @@ import kotlinx.parcelize.Parcelize
 data class SettingsUiState(
     val isLoading: Boolean = false,
     val isError: Boolean = false,
+    val lang: String?=null,
 ) : Parcelable {
 
     sealed class PartialState {
         object Loading : PartialState()
-        object Fetched : PartialState()
+        data class Fetched(val lang: String?) : PartialState()
         data class Error(val throwable: Throwable) : PartialState()
     }
 }

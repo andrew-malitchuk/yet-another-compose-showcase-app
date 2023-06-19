@@ -6,4 +6,5 @@
     <string name="settings_analytics">Аналітика</string>
     <string name="settings_deeplink">Deeplink</string>
     <string name="settings_theme">Тема</string>
+    <string name="settings_lang">Мова</string>
 </resources>

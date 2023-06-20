@@ -9,6 +9,7 @@ import dev.yacsa.books.navigation.booksNavGraph
 import dev.yacsa.deeplink.navigation.deeplinkNavGraph
 import dev.yacsa.favourite.navigation.favouriteNavGraph
 import dev.yacsa.featureflagmanager.navigation.featureFlagNavGraph
+import dev.yacsa.info.navigation.infoNavGraph
 import dev.yacsa.navigation.NavigationDirection
 import dev.yacsa.notfound.navigation.notFoundNavGraph
 import dev.yacsa.onboarding.navigation.onboardingNavGraph
@@ -36,5 +37,6 @@ fun RootNavigationGraph(
         analyticsNavGraph(navController)
         favouriteNavGraph(navController)
         deeplinkNavGraph(navController)
+        infoNavGraph(navController)
     }
 }

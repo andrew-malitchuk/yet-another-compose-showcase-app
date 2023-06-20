@@ -1,4 +1,4 @@
-package dev.yacsa.settings.navigation
+package dev.yacsa.info.navigation
 
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -7,17 +7,17 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.navigation
 import com.google.accompanist.navigation.animation.composable
+import dev.yacsa.info.screen.info.InfoRoute
 import dev.yacsa.navigation.NavigationDirection
-import dev.yacsa.settings.screen.settings.SettingsRoute
 
 @OptIn(ExperimentalAnimationApi::class)
-fun NavGraphBuilder.settingsNavGraph(navController: NavHostController) {
+fun NavGraphBuilder.infoNavGraph(navController: NavHostController) {
     navigation(
-        startDestination = SettingsDirection.Settings.route,
-        route = NavigationDirection.Settings.route,
+        startDestination = InfoDirections.Info.route,
+        route = NavigationDirection.Info.route,
     ) {
         composable(
-            SettingsDirection.Settings.route,
+            InfoDirections.Info.route,
             enterTransition = {
                 slideIntoContainer(
                     AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween(700)
@@ -29,21 +29,9 @@ fun NavGraphBuilder.settingsNavGraph(navController: NavHostController) {
                 )
             }
         ) {
-            SettingsRoute(
+            InfoRoute(
                 onBackClick = {
                     navController.popBackStack()
-                },
-                onFfClick = {
-                    navController.navigate(NavigationDirection.FeatureFlag.route)
-                },
-                onAnalyticsClick = {
-                    navController.navigate(NavigationDirection.Analytics.route)
-                },
-                onDeeplinkClick = {
-                    navController.navigate(NavigationDirection.Deeplink.route)
-                },
-                onInfoClick = {
-                    navController.navigate(NavigationDirection.Info.route)
                 }
             )
         }

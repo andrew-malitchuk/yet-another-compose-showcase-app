@@ -34,6 +34,7 @@ dependencies {
     implementation(project(":feature:analytics"))
     implementation(project(":feature:favourite"))
     implementation(project(":feature:deeplink"))
+    implementation(project(":feature:info"))
 
     implementation(project(":data:network"))
     implementation(project(":data:datastore"))

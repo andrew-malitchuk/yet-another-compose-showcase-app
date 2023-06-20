@@ -42,6 +42,7 @@ fun ContentFetched(
     onDeeplinkClick: () -> Unit,
     theme: MutableState<ThemeUiModel?>,
     language: MutableState<String?>,
+    onInfoClick:()->Unit
 ) {
     val corner = YacsaTheme.corners.medium - (YacsaTheme.corners.medium * abs(foo.collapsedFraction))
     Box(
@@ -77,6 +78,7 @@ fun ContentFetched(
                         title = UiText.StringResource(dev.yacsa.localization.R.string.settings_info).asString(),
                         icon = R.drawable.icon_info_regular_24,
                         onClick = {
+                            onInfoClick()
                         },
                     )
                 }
@@ -130,7 +132,8 @@ fun Preview_ContentFetched_Light() {
             onDeeplinkClick = {},
             language = remember {
                 mutableStateOf(null)
-            }
+            },
+            onInfoClick = {}
         )
     }
 }
@@ -150,7 +153,8 @@ fun Preview_ContentFetched_Dark() {
             theme = remember { mutableStateOf(null) },
             language = remember {
                 mutableStateOf(null)
-            }
+            },
+            onInfoClick = {}
         )
     }
 }

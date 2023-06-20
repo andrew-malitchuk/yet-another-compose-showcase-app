@@ -53,6 +53,7 @@ fun SettingsRoute(
     onFfClick: () -> Unit,
     onAnalyticsClick: () -> Unit,
     onDeeplinkClick: () -> Unit,
+    onInfoClick:()->Unit
 ) {
     HandleEvents(settingsViewModel.event)
 
@@ -96,7 +97,8 @@ fun SettingsRoute(
                     onAnalyticsClick,
                     onDeeplinkClick,
                     theme,
-                    lang
+                    lang,
+                    onInfoClick
                 )
             }
         }
@@ -127,7 +129,8 @@ fun SettingsScreen(
     onDeeplinkClick: () -> Unit,
     theme: MutableState<ThemeUiModel?>,
     lang: MutableState<String?>,
-) {
+    onInfoClick: () -> Unit,
+    ) {
     val systemUiController = rememberSystemUiController()
     val state = rememberLazyListState()
 
@@ -214,7 +217,8 @@ fun SettingsScreen(
                     onAnalyticsClick = onAnalyticsClick,
                     onDeeplinkClick = onDeeplinkClick,
                     theme = theme,
-                    language = lang
+                    language = lang,
+                    onInfoClick=onInfoClick
                 )
             }
         }
@@ -232,7 +236,8 @@ fun Preview_SettingsScreen_Light() {
             onAnalyticsClick = {},
             theme = remember { mutableStateOf(null) },
             lang = remember { mutableStateOf(null) },
-            onDeeplinkClick = {}
+            onDeeplinkClick = {},
+            onInfoClick = {}
         )
     }
 }
@@ -249,6 +254,7 @@ fun Preview_SettingsScreen_Dark() {
             onDeeplinkClick = {},
             theme = remember { mutableStateOf(null) },
             lang = remember { mutableStateOf(null) },
+            onInfoClick = {}
         )
     }
 }

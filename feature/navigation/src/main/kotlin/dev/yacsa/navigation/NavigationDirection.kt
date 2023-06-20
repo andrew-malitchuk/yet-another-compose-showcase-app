@@ -14,4 +14,5 @@ sealed class NavigationDirection(var route: String) {
     object Analytics : NavigationDirection("analytics")
     object Favourite : NavigationDirection("favourite")
     object Deeplink: NavigationDirection("deeplink")
+    object Info: NavigationDirection("info")
 }

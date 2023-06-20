@@ -32,6 +32,7 @@ dependencies {
     implementation(project(":feature:analytics"))
     implementation(project(":feature:favourite"))
     implementation(project(":feature:deeplink"))
+    implementation(project(":feature:info"))
 
     implementation(project(":core:common"))
     implementation(project(":core:localization"))
@@ -96,4 +97,7 @@ dependencies {
     implementation("com.facebook.flipper:flipper-network-plugin:0.190.0")
 
     debugImplementation("com.squareup.leakcanary:leakcanary-android:2.11")
+    implementation("io.github.kevlar-kt:antipiracy:1.1.0")
+    implementation("io.github.kevlar-kt:rooting:1.1.0")
+    implementation("io.github.kevlar-kt:integrity:1.1.0")
 }

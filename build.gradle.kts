@@ -18,4 +18,5 @@ plugins {
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.ksp) apply false
     id("org.jmailen.kotlinter") version "3.14.0" apply false
+    id("org.jetbrains.kotlinx.kover") version "0.6.1"
 }

@@ -1,5 +1,6 @@
 package dev.yacsa.favourite.screen.favourite.content
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -28,7 +29,9 @@ import dev.yacsa.ui.composable.content.ContentIsLoading
 import dev.yacsa.ui.composable.content.ContentNoData
 import dev.yacsa.ui.theme.YacsaTheme
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class,
+    ExperimentalFoundationApi::class
+)
 @Composable
 fun ContentFetched(
     favouriteFlow: State<List<BookUiModel?>?>?,
@@ -86,8 +89,9 @@ fun ContentFetched(
                                 top = YacsaTheme.spacing.small,
                             )
                         ) {
-                            items(items = favouriteFlow?.value!!) { item ->
+                            items(items = favouriteFlow?.value!!, key={it?.id!!}) { item ->
                                 ItemFetchedList(
+                                    modifier = Modifier.animateItemPlacement(),
                                     book = item!!,
                                     onItemContentClick = { /*TODO*/ },
                                     onFavouriteMark = onFavouriteMark

@@ -50,7 +50,7 @@ fun DeeplinkRoute(
 
     val onValueChange:MutableState<String> = remember{ mutableStateOf("") }
 
-    val foo = LocalContext.current
+    val context = LocalContext.current
 
     Rebugger(
         trackMap = mapOf(
@@ -67,7 +67,7 @@ fun DeeplinkRoute(
             onBackClick,
             onValueChange,
             onDeeplinkRun={
-                foo.triggerDeepLink(onValueChange.value)
+                context.triggerDeepLink(onValueChange.value)
             }
         )
     }
@@ -92,9 +92,9 @@ fun DeeplinkScreen(
             color = YacsaTheme.colors.surface,
         )
     }
-    val foo = rememberTopAppBarState()
+    val topAppBarState = rememberTopAppBarState()
     val scrollBehavior =
-        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(foo)
+        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(topAppBarState)
 
 
     Scaffold(
@@ -146,9 +146,9 @@ fun DeeplinkScreen(
         ContentFetched(
             innerPadding = innerPadding,
             state = state,
-            foo = foo,
+            topAppBarState = topAppBarState,
             uiState=uiState,
-            foobar = onValueChange,
+            deeplinkState = onValueChange,
             onDeeplinkRun=onDeeplinkRun
         )
     }

@@ -22,6 +22,7 @@ import dev.yacsa.info.screen.info.InfoUiState
 import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.composable.content.ContentIsLoading
 import dev.yacsa.ui.theme.YacsaTheme
+import kotlin.math.abs
 
 @OptIn(
     ExperimentalMaterialApi::class, ExperimentalFoundationApi::class,
@@ -32,11 +33,11 @@ fun ContentFetched(
     modifier: Modifier = Modifier.fillMaxSize(),
     innerPadding: PaddingValues,
     state: LazyListState,
-    foo: TopAppBarState,
+    topAppBarState: TopAppBarState,
     uiState: InfoUiState,
 ) {
     val corner =
-        YacsaTheme.corners.medium - (YacsaTheme.corners.medium * Math.abs(foo.collapsedFraction))
+        YacsaTheme.corners.medium - (YacsaTheme.corners.medium * abs(topAppBarState.collapsedFraction))
     val systemUiController = rememberSystemUiController()
 
 
@@ -97,7 +98,7 @@ fun Preview_ContentFetched_Light() {
             uiState = InfoUiState(
             ),
             innerPadding = PaddingValues(YacsaTheme.spacing.small),
-            foo = rememberTopAppBarState(),
+            topAppBarState = rememberTopAppBarState(),
             state = rememberLazyListState(),
             )
     }
@@ -112,7 +113,7 @@ fun Preview_ContentFetched_Dark() {
             uiState = InfoUiState(
             ),
             innerPadding = PaddingValues(YacsaTheme.spacing.small),
-            foo = rememberTopAppBarState(),
+            topAppBarState = rememberTopAppBarState(),
             state = rememberLazyListState(),
             )
     }

@@ -2,6 +2,7 @@ package dev.yacsa.books.screen.list.content.fetched
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -29,6 +30,7 @@ import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.theme.YacsaTheme
 import kotlinx.coroutines.flow.flowOf
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ContentFetchedList(
     modifier: Modifier = Modifier,
@@ -60,9 +62,11 @@ fun ContentFetchedList(
         ) {
             items(
                 lazyPagingItems,
+                key={it.id!!}
             ) { item ->
                 item?.let {
                     ItemFetchedList(
+                        modifier=Modifier.animateItemPlacement(),
                         book = it,
                         onItemContentClick = {
                             // TODO: fix

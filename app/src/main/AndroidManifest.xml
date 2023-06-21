@@ -12,17 +12,30 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
 
-<!--                <data android:scheme="yacsa" android:host="*"/>-->
+                <!--                <data android:scheme="yacsa" android:host="*"/>-->
 
             </intent-filter>
             <intent-filter>
-                <data android:host="*"
+                <data
+                    android:host="*"
                     android:scheme="yacsa" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
+        <service
+            android:name="dev.yacsa.main.tile.FavouriteTileService"
+            android:icon="@drawable/icon_book_regular_24"
+            android:label="@string/general_qt"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

@@ -38,7 +38,7 @@ class DetalizationViewModel @Inject constructor(
     var checked: MutableState<Boolean?> =
         mutableStateOf(null)
 
-    var foo: MutableState<Boolean?> =
+    var favouriteState: MutableState<Boolean?> =
         mutableStateOf(false)
 
     private val bookId: Int = checkNotNull(savedStateHandle["bookId"])
@@ -119,12 +119,12 @@ class DetalizationViewModel @Inject constructor(
         }
     }
 
-    // TODO: remove
-    fun foo(isFavourite: Boolean) {
+    // TODO: recode
+    fun changeFavourite(isFavourite: Boolean) {
         viewModelScope.launch {
             if (uiState.value.book?.isFavourite!=isFavourite) {
                 markFavouriteBook(bookId, isFavourite)
-                foo.value=true
+                favouriteState.value=true
             }
         }
     }

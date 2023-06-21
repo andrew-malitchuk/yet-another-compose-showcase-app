@@ -63,7 +63,6 @@ class SearchViewModel @Inject constructor(
                     "",
                 )
                 .collect {
-                    logcat("foo") { it }
                     if (it.isNotBlank()) {
                         acceptIntent(SearchIntent.Search(it))
                     }

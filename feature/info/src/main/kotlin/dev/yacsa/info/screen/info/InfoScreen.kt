@@ -77,9 +77,9 @@ fun InfoScreen(
             color = YacsaTheme.colors.surface,
         )
     }
-    val foo = rememberTopAppBarState()
+    val topAppBarState = rememberTopAppBarState()
     val scrollBehavior =
-        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(foo)
+        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(topAppBarState)
 
 
     Scaffold(
@@ -131,7 +131,7 @@ fun InfoScreen(
         ContentFetched(
             innerPadding = innerPadding,
             state = state,
-            foo = foo,
+            topAppBarState = topAppBarState,
             uiState=uiState,
         )
     }

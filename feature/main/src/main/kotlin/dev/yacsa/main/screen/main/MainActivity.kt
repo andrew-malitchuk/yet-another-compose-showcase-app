@@ -12,6 +12,7 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.yacsa.main.navigation.RootNavigationGraph
 import dev.yacsa.navigation.NavigationDirection
+import dev.yacsa.platform.ext.triggerDeepLink
 import dev.yacsa.ui.theme.YacsaTheme
 
 @OptIn(ExperimentalAnimationApi::class)
@@ -29,14 +30,20 @@ class MainActivity : ComponentActivity() {
             splashScreen.setKeepOnScreenCondition { uiState.isLoading }
             val isDarkTheme = mainViewModel.theme.isDarkMode
 
+            var deeplink: String? = null
             val startDestination = when {
                 (!uiState.isLoading && !uiState.isError && uiState.routeDestination != null) -> {
                     when (uiState.routeDestination) {
-                        RouteDestination.ONBOARDING -> NavigationDirection.Onboarding.route
-                        RouteDestination.MAIN -> NavigationDirection.Books.route
+                        is RouteDestination.Onboarding -> NavigationDirection.Onboarding.route
+                        is RouteDestination.Main -> NavigationDirection.Books.route
+                        is RouteDestination.Deeplink -> {
+                            deeplink = (uiState.routeDestination as? RouteDestination.Deeplink)?.deeplink
+                            null
+                        }
                         else -> null
                     }
                 }
+
                 (uiState.isError) -> {
                     NavigationDirection.NotFound.route
                 }
@@ -48,11 +55,16 @@ class MainActivity : ComponentActivity() {
             YacsaTheme(
                 isDarkTheme.value,
             ) {
+                if(startDestination.isNullOrEmpty() && !deeplink.isNullOrEmpty()){
+                    this@MainActivity.triggerDeepLink(deeplink, true)
+                }else{
                 startDestination?.let {
                     RootNavigationGraph(
                         navController = navHostController,
                         startDestination = it,
                     )
+                }
+
                 }
             }
         }

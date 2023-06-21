@@ -55,9 +55,9 @@ fun ContentFetched(
     onBackClick:()->Unit
 ) {
 
-    val foo = rememberTopAppBarState()
+    val topAppBarState = rememberTopAppBarState()
     val scrollBehavior =
-        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(foo)
+        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(topAppBarState)
 
     val state = rememberLazyListState()
 

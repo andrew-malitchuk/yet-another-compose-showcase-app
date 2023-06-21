@@ -36,10 +36,10 @@ fun ContentFetched(
     modifier: Modifier = Modifier.fillMaxSize(),
     innerPadding: PaddingValues,
     state: LazyListState,
-    foo: TopAppBarState,
+    topAppBarState: TopAppBarState,
     uiState: AnalyticsUiState,
 ) {
-    val corner = YacsaTheme.corners.medium - (YacsaTheme.corners.medium * abs(foo.collapsedFraction))
+    val corner = YacsaTheme.corners.medium - (YacsaTheme.corners.medium * abs(topAppBarState.collapsedFraction))
     val systemUiController = rememberSystemUiController()
 
 
@@ -126,7 +126,7 @@ fun Preview_ContentFetched_Light() {
         ContentFetched(
             innerPadding = PaddingValues(YacsaTheme.spacing.small),
             state = rememberLazyListState(),
-            foo = rememberTopAppBarState(),
+            topAppBarState = rememberTopAppBarState(),
             uiState = AnalyticsUiState(isError = true),
         )
     }
@@ -140,7 +140,7 @@ fun Preview_ContentFetched_Dark() {
         ContentFetched(
             innerPadding = PaddingValues(YacsaTheme.spacing.small),
             state = rememberLazyListState(),
-            foo = rememberTopAppBarState(),
+            topAppBarState = rememberTopAppBarState(),
             uiState = AnalyticsUiState(isError = true),
         )
     }

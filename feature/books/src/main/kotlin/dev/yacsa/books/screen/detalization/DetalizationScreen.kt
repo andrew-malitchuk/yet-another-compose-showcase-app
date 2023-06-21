@@ -42,7 +42,7 @@ fun DetalizationRoute(
     HandleEvents(detalizationViewModel.event)
     val uiState by detalizationViewModel.uiState.collectAsStateWithLifecycle()
     detalizationViewModel.checked.also {
-        it.value?.let { it1 -> detalizationViewModel.foo(it1) }
+        it.value?.let { it1 -> detalizationViewModel.changeFavourite(it1) }
     }
 
     val currentTheme by detalizationViewModel.currentTheme
@@ -88,7 +88,7 @@ fun DetalizationRoute(
                     detalizationViewModel.acceptIntent(DetalizationIntent.OnLinkClick(it))
                 },
                 favourite = detalizationViewModel.checked,
-                foo = detalizationViewModel.foo,
+                favouriteState = detalizationViewModel.favouriteState,
                 onShareClick = {
                     detalizationViewModel.acceptIntent(DetalizationIntent.OnShareClick(it))
                 }
@@ -103,7 +103,7 @@ fun DetalizationScreen(
     onBackClick: () -> Unit,
     onFormatClick: (String) -> Unit,
     favourite: MutableState<Boolean?>,
-    foo: MutableState<Boolean?>,
+    favouriteState: MutableState<Boolean?>,
     onShareClick: (Int) -> Unit
 ) {
     val systemUiController = rememberSystemUiController()
@@ -146,7 +146,7 @@ fun DetalizationScreen(
                     favourite = favourite,
                     onShareClick = onShareClick
                 )
-                if (favourite.value == true && foo.value == true) {
+                if (favourite.value == true && favouriteState.value == true) {
                     KonfettiView(
                         modifier = Modifier.fillMaxSize(),
                         parties = listOf(

@@ -142,9 +142,9 @@ fun SettingsScreen(
             color = YacsaTheme.colors.background,
         )
     }
-    val foo = rememberTopAppBarState()
+    val topAppBarState = rememberTopAppBarState()
     val scrollBehavior =
-        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(foo)
+        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(topAppBarState)
 
     if (uiState.isLoading) {
         ContentIsLoading()
@@ -212,7 +212,7 @@ fun SettingsScreen(
                 ContentFetched(
                     innerPadding = innerPadding,
                     state = state,
-                    foo = foo,
+                    topAppBarState = topAppBarState,
                     onFfClick = onFfClick,
                     onAnalyticsClick = onAnalyticsClick,
                     onDeeplinkClick = onDeeplinkClick,

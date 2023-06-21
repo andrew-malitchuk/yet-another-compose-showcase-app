@@ -42,7 +42,7 @@ fun FavouriteRoute(
 ) {
     val uiState by favouriteViewModel.uiState.collectAsStateWithLifecycle()
 
-    val foo = favouriteViewModel.flow?.collectAsStateWithLifecycle(null)
+    val favouriteFlow = favouriteViewModel.flow?.collectAsStateWithLifecycle(null)
 
     val currentTheme  by favouriteViewModel.currentTheme
     val isDarkTheme = currentTheme?.detectThemeMode()?:false
@@ -52,14 +52,14 @@ fun FavouriteRoute(
             "uiState" to uiState,
             "currentTheme" to currentTheme,
             "isDarkTheme" to isDarkTheme,
-            "foo" to foo,
+            "favouriteFlow" to favouriteFlow,
         ),
     )
 
     YacsaTheme(isDarkTheme) {
         FavouriteScreen(
             uiState,
-            foo,
+            favouriteFlow,
             onBackClick,
             onFavouriteMark = { id, isFavourite ->
                 favouriteViewModel.acceptIntent(FavouriteIntent.MarkFavourite(id, isFavourite))
@@ -76,9 +76,9 @@ fun FavouriteScreen(
     onBackClick: () -> Unit,
     onFavouriteMark: (Int, Boolean) -> Unit
 ) {
-    val foo = rememberTopAppBarState()
+    val topAppBarState = rememberTopAppBarState()
     val scrollBehavior =
-        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(foo)
+        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(topAppBarState)
     val state = rememberLazyListState()
 
 
@@ -132,7 +132,7 @@ fun FavouriteScreen(
         ContentFetched(
             innerPadding = innerPadding,
             lazyListState = state,
-            topAppBarState = foo,
+            topAppBarState = topAppBarState,
             uiState = uiState,
             favouriteFlow = favouriteFlow,
             onFavouriteMark = onFavouriteMark

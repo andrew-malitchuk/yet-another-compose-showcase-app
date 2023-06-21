@@ -86,9 +86,9 @@ fun FeatureFlagScreen(
             color = YacsaTheme.colors.surface,
         )
     }
-    val foo = rememberTopAppBarState()
+    val topAppBarState = rememberTopAppBarState()
     val scrollBehavior =
-        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(foo)
+        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(topAppBarState)
 
 
     Scaffold(
@@ -140,7 +140,7 @@ fun FeatureFlagScreen(
         ContentFetched(
             innerPadding = innerPadding,
             state = state,
-            foo = foo,
+            topAppBarState = topAppBarState,
             uiState=uiState,
             isActive = isActive,
             isEnabled = isEnabled

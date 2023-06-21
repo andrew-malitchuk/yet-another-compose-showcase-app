@@ -36,7 +36,7 @@ fun ContentFetched(
     modifier: Modifier = Modifier.fillMaxSize(),
     innerPadding: PaddingValues,
     state: LazyListState,
-    foo: TopAppBarState,
+    topAppBarState: TopAppBarState,
     onFfClick: () -> Unit,
     onAnalyticsClick: () -> Unit,
     onDeeplinkClick: () -> Unit,
@@ -44,7 +44,7 @@ fun ContentFetched(
     language: MutableState<String?>,
     onInfoClick:()->Unit
 ) {
-    val corner = YacsaTheme.corners.medium - (YacsaTheme.corners.medium * abs(foo.collapsedFraction))
+    val corner = YacsaTheme.corners.medium - (YacsaTheme.corners.medium * abs(topAppBarState.collapsedFraction))
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -125,7 +125,7 @@ fun Preview_ContentFetched_Light() {
         ContentFetched(
             innerPadding = PaddingValues(YacsaTheme.spacing.small),
             state = rememberLazyListState(),
-            foo = rememberTopAppBarState(),
+            topAppBarState = rememberTopAppBarState(),
             onFfClick = {},
             onAnalyticsClick = {},
             theme = remember { mutableStateOf(null) },
@@ -146,7 +146,7 @@ fun Preview_ContentFetched_Dark() {
         ContentFetched(
             innerPadding = PaddingValues(YacsaTheme.spacing.small),
             state = rememberLazyListState(),
-            foo = rememberTopAppBarState(),
+            topAppBarState = rememberTopAppBarState(),
             onFfClick = {},
             onAnalyticsClick = {},
             onDeeplinkClick = {},

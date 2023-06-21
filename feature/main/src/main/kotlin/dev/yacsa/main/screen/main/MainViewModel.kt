@@ -22,6 +22,9 @@ class MainViewModel @Inject constructor(
     initialState,
 ), Theme by theme {
 
+    private val deeplink: String? = savedStateHandle["deeplink"]
+
+
     init {
         acceptIntent(MainIntent.GetStatus)
         viewModelScope.launch {
@@ -44,10 +47,14 @@ class MainViewModel @Inject constructor(
                 }, { status ->
                     when {
                         status.hasBeenOnboardingShown -> {
-                            emit(MainUiState.PartialState.Fetched(RouteDestination.MAIN))
+                            if(deeplink.isNullOrEmpty()) {
+                                emit(MainUiState.PartialState.Fetched(RouteDestination.Main))
+                            }else{
+                                emit(MainUiState.PartialState.Fetched(RouteDestination.Deeplink(deeplink)))
+                            }
                         }
                         else -> {
-                            emit(MainUiState.PartialState.Fetched(RouteDestination.ONBOARDING))
+                            emit(MainUiState.PartialState.Fetched(RouteDestination.Onboarding))
                         }
                     }
 

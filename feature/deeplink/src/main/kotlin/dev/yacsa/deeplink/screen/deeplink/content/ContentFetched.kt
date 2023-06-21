@@ -50,14 +50,14 @@ fun ContentFetched(
     modifier: Modifier = Modifier.fillMaxSize(),
     innerPadding: PaddingValues,
     state: LazyListState,
-    foo: TopAppBarState,
+    topAppBarState: TopAppBarState,
     uiState: DeeplinkUiState,
-    foobar: MutableState<String>,
+    deeplinkState: MutableState<String>,
     onDeeplinkRun:()->Unit
 
 ) {
     val corner =
-        YacsaTheme.corners.medium - (YacsaTheme.corners.medium * abs(foo.collapsedFraction))
+        YacsaTheme.corners.medium - (YacsaTheme.corners.medium * abs(topAppBarState.collapsedFraction))
     val systemUiController = rememberSystemUiController()
 
     when {
@@ -111,9 +111,9 @@ fun ContentFetched(
                         cursorColor = YacsaTheme.colors.accent,
                         placeholderColor = YacsaTheme.colors.secondary
                     ),
-                    value = foobar.value,
+                    value = deeplinkState.value,
                     onValueChange = {
-                        foobar.value = it
+                        deeplinkState.value = it
                     },
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.None,
@@ -166,7 +166,7 @@ fun ContentFetched(
                                     value = "yacsa://book",
                                     icon = R.drawable.icon_link_regular_24,
                                     onClick = {
-                                        foobar.value="yacsa://book"
+                                        deeplinkState.value="yacsa://book"
                                     },
                                 )
                             }
@@ -175,7 +175,7 @@ fun ContentFetched(
                                     value = "yacsa://favourite",
                                     icon = R.drawable.icon_link_regular_24,
                                     onClick = {
-                                        foobar.value="yacsa://favourite"
+                                        deeplinkState.value="yacsa://favourite"
                                     },
                                 )
                             }
@@ -184,7 +184,7 @@ fun ContentFetched(
                                     value = "yacsa://search",
                                     icon = R.drawable.icon_link_regular_24,
                                     onClick = {
-                                        foobar.value="yacsa://search"
+                                        deeplinkState.value="yacsa://search"
                                     },
                                 )
                             }
@@ -207,9 +207,9 @@ fun Preview_ContentFetched() {
         ContentFetched(
             innerPadding = PaddingValues(YacsaTheme.spacing.small),
             state = rememberLazyListState(),
-            foo = rememberTopAppBarState(),
+            topAppBarState = rememberTopAppBarState(),
             uiState = DeeplinkUiState(isError = true),
-            foobar = remember { mutableStateOf("") },
+            deeplinkState = remember { mutableStateOf("") },
             onDeeplinkRun={}
         )
     }

@@ -27,7 +27,7 @@ import dev.yacsa.ui.theme.YacsaTheme
 @Composable
 fun ItemFormat(
     type: String,
-    link:String,
+    link: String,
     onClick: () -> Unit,
 ) {
     val shape = YacsaTheme.shapes.cornersStyle
@@ -53,12 +53,12 @@ fun ItemFormat(
             SmallFloatingActionButton(
                 onClick = { },
                 containerColor = YacsaTheme.colors.primary,
-                elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
+                elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_file_code_regular_24),
                     contentDescription = null,
-                    tint = YacsaTheme.colors.accent
+                    tint = YacsaTheme.colors.accent,
                 )
             }
             Spacer(
@@ -69,7 +69,7 @@ fun ItemFormat(
             Text(
                 text = type,
                 style = YacsaTheme.typography.title,
-                color = YacsaTheme.colors.secondary
+                color = YacsaTheme.colors.secondary,
             )
         }
     }
@@ -81,7 +81,7 @@ fun Preview_ItemFormat_Light() {
     YacsaTheme(false) {
         ItemFormat(
             type = "foobar.yacsa",
-            link="",
+            link = "",
             onClick = {},
         )
     }
@@ -93,7 +93,7 @@ fun Preview_ItemFormat_Dark() {
     YacsaTheme(true) {
         ItemFormat(
             type = "foobar.yacsa",
-            link="",
+            link = "",
             onClick = {},
         )
     }

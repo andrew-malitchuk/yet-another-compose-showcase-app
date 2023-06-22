@@ -7,7 +7,7 @@ import java.util.Locale
 object LocaleUtils {
 
     // [AppPrefs] is sharedpreferences or datastore
-    fun setLocale(context: Context, language: String?) = updateResources(context, language ) //use locale codes
+    fun setLocale(context: Context, language: String?) = updateResources(context, language) // use locale codes
 
     private fun updateResources(context: Context, language: String?) {
         context.resources.apply {
@@ -21,4 +21,3 @@ object LocaleUtils {
         }
     }
 }
-

@@ -49,7 +49,7 @@ fun DetalizationRoute(
     val isDarkTheme = currentTheme?.detectThemeMode() ?: false
 
     val status by detalizationViewModel.connectivityObserver.observe().collectAsState(
-        initial = ConnectivityObserver.Status.Unavailable
+        initial = ConnectivityObserver.Status.Unavailable,
     )
     val isOfflineMode = when (status) {
         ConnectivityObserver.Status.Available -> false
@@ -68,7 +68,7 @@ fun DetalizationRoute(
     YacsaTheme(isDarkTheme) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxSize(),
         ) {
             if (isOfflineMode) {
                 systemUiController.setSystemBarsColor(
@@ -91,7 +91,7 @@ fun DetalizationRoute(
                 favouriteState = detalizationViewModel.favouriteState,
                 onShareClick = {
                     detalizationViewModel.acceptIntent(DetalizationIntent.OnShareClick(it))
-                }
+                },
             )
         }
     }
@@ -104,7 +104,7 @@ fun DetalizationScreen(
     onFormatClick: (String) -> Unit,
     favourite: MutableState<Boolean?>,
     favouriteState: MutableState<Boolean?>,
-    onShareClick: (Int) -> Unit
+    onShareClick: (Int) -> Unit,
 ) {
     val systemUiController = rememberSystemUiController()
 
@@ -144,7 +144,7 @@ fun DetalizationScreen(
                     onSubjectClick = {},
                     onBookshelfClick = {},
                     favourite = favourite,
-                    onShareClick = onShareClick
+                    onShareClick = onShareClick,
                 )
                 if (favourite.value == true && favouriteState.value == true) {
                     KonfettiView(
@@ -153,10 +153,10 @@ fun DetalizationScreen(
                             Party(
                                 emitter = Emitter(
                                     duration = 1,
-                                    TimeUnit.SECONDS
+                                    TimeUnit.SECONDS,
                                 ).perSecond(30),
-                                position = Position.Relative(0.5, 0.0)
-                            )
+                                position = Position.Relative(0.5, 0.0),
+                            ),
                         ),
                     )
                 }
@@ -164,7 +164,6 @@ fun DetalizationScreen(
         }
     }
 }
-
 
 @Composable
 private fun HandleEvents(events: Flow<DetalizationEvent>) {
@@ -195,7 +194,7 @@ fun Preview_DetalizationScreen_Light() {
             onFormatClick = {},
             remember { mutableStateOf(false) },
             remember { mutableStateOf(false) },
-            onShareClick = {}
+            onShareClick = {},
         )
     }
 }
@@ -210,7 +209,7 @@ fun Preview_DetalizationScreen_Dark() {
             onFormatClick = {},
             remember { mutableStateOf(false) },
             remember { mutableStateOf(false) },
-            onShareClick = {}
+            onShareClick = {},
         )
     }
 }

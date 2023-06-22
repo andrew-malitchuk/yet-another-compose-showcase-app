@@ -10,7 +10,7 @@ import kotlinx.parcelize.Parcelize
 data class AnalyticsUiState(
     val isLoading: Boolean = false,
     val isError: Boolean = false,
-    val analytics: List<AnalyticsUiModel> = emptyList()
+    val analytics: List<AnalyticsUiModel> = emptyList(),
 ) : Parcelable {
 
     sealed class PartialState {

@@ -77,7 +77,7 @@ fun <T> Transition<T>.CircularReveal(
             contentMap[stateForContent] = {
                 val progress by animateFloat(
                     label = "Progress",
-                    transitionSpec = { animationSpec }
+                    transitionSpec = { animationSpec },
                 ) {
                     val targetedContent =
                         stateForContent != currentlyVisible.last() || it == stateForContent
@@ -95,7 +95,7 @@ fun <T> Transition<T>.CircularReveal(
                 if (!started) offset = Offset(it.x, it.y)
             }
             started
-        }
+        },
     ) {
         currentlyVisible.forEach {
             key(it) {
@@ -123,14 +123,16 @@ class CircularRevealShape(
         layoutDirection: LayoutDirection,
         density: Density,
     ): Outline {
-        return Outline.Generic(Path().apply {
-            addCircle(
-                offset?.x ?: (size.width / 2f),
-                offset?.y ?: (size.height / 2f),
-                longestDistanceToACorner(size, offset) * progress,
-                Path.Direction.CW
-            )
-        }.asComposePath())
+        return Outline.Generic(
+            Path().apply {
+                addCircle(
+                    offset?.x ?: (size.width / 2f),
+                    offset?.y ?: (size.height / 2f),
+                    longestDistanceToACorner(size, offset) * progress,
+                    Path.Direction.CW,
+                )
+            }.asComposePath(),
+        )
     }
 
     private fun longestDistanceToACorner(size: Size, offset: Offset?): Float {
@@ -157,16 +159,16 @@ fun CircularRevealAnimationPreview() {
 
     CircularReveal(
         targetState = darkTheme,
-        animationSpec = tween(1500)
+        animationSpec = tween(1500),
     ) { isDark ->
         YacsaTheme(isDark) {
             Surface(
                 modifier = Modifier.fillMaxSize(),
                 color = YacsaTheme.colors.background,
-                onClick = onThemeToggle
+                onClick = onThemeToggle,
             ) {
                 Box(
-                    contentAlignment = Alignment.Center
+                    contentAlignment = Alignment.Center,
                 ) {
                     Icon(
                         modifier = Modifier.size(120.dp),

@@ -18,7 +18,6 @@ interface AnalyticsDbDao {
     @Query("SELECT * FROM ${YacsaDb.Table.ANALYTICS} WHERE id=:id")
     suspend fun get(id: Int): AnalyticsDbModel?
 
-    // TODO: rename to subscribe?
     @Query("SELECT * FROM ${YacsaDb.Table.ANALYTICS}")
     fun subscribe(): Flow<List<AnalyticsDbModel>?>
 

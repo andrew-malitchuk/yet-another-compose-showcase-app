@@ -24,15 +24,15 @@ class FirebaseAnalyticProvider @Inject constructor() : AnalyticProvider {
                 firebaseAnalytics.logEvent(
                     FirebaseAnalytics.Event.SCREEN_VIEW,
                     bundleOf(
-                        FirebaseAnalytics.Param.SCREEN_NAME to event.viewName
-                    )
+                        FirebaseAnalytics.Param.SCREEN_NAME to event.viewName,
+                    ),
                 )
             }
 
             is CustomAnalyticModel -> {
                 firebaseAnalytics.logEvent(
                     event.eventName,
-                    event.getParameters().toBundle()
+                    event.getParameters().toBundle(),
                 )
             }
         }
@@ -41,11 +41,9 @@ class FirebaseAnalyticProvider @Inject constructor() : AnalyticProvider {
     override suspend fun setProperty(property: UserPropertyAnalyticModel) {
         firebaseAnalytics.setUserProperty(
             property.key,
-            property.value.toString()
+            property.value.toString(),
         )
     }
 
     private fun Map<String, Any?>.toBundle(): Bundle = bundleOf(*this.toList().toTypedArray())
-
-
 }

@@ -22,7 +22,7 @@ interface Theme {
 
 open class ThemeDelegate @Inject constructor(
     private var getThemeUseCase: GetThemeUseCase,
-    private var setThemeUseCase: SetThemeUseCase
+    private var setThemeUseCase: SetThemeUseCase,
 ) : Theme {
 
     override var isDarkMode: MutableState<Boolean> = mutableStateOf(false)
@@ -31,7 +31,7 @@ open class ThemeDelegate @Inject constructor(
     override suspend fun getTheme() {
         getThemeUseCase().fold({
             it.toString()
-        },{
+        }, {
             isDarkMode.value = it.name == "DARK"
             currentTheme.value = ThemeUiModel.valueOf(it.name)
 //            true
@@ -48,7 +48,6 @@ open class ThemeDelegate @Inject constructor(
         getThemeUseCase()
         isDarkMode.value = themeUiModel.name == "DARK"
     }
-
 }
 
 @Module
@@ -60,5 +59,4 @@ abstract class FooModule {
     abstract fun bindsFoo(
         themeDelegate: ThemeDelegate,
     ): Theme
-
 }

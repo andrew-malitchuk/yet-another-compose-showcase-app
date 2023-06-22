@@ -34,7 +34,7 @@ fun ListToolbar(
 ) {
     Column(
         modifier = Modifier
-            .background(YacsaTheme.colors.background)
+            .background(YacsaTheme.colors.background),
     ) {
         Row(
             modifier = Modifier
@@ -46,7 +46,7 @@ fun ListToolbar(
             Icon(
                 painter = painterResource(id = R.drawable.icon_book_regular_24),
                 contentDescription = null,
-                tint = YacsaTheme.colors.accent
+                tint = YacsaTheme.colors.accent,
 
             )
             Spacer(
@@ -55,7 +55,7 @@ fun ListToolbar(
             Text(
                 text = "YACSA",
                 style = YacsaTheme.typography.title,
-                color = YacsaTheme.colors.primary
+                color = YacsaTheme.colors.primary,
             )
 
             Spacer(
@@ -65,33 +65,35 @@ fun ListToolbar(
             SmallFloatingActionButton(
                 containerColor = YacsaTheme.colors.primary,
                 onClick = { favouriteClick() },
-                elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
+                elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_heart_regulat_24),
                     contentDescription = null,
-                    tint = YacsaTheme.colors.accent
+                    tint = YacsaTheme.colors.accent,
                 )
             }
             SmallFloatingActionButton(
                 containerColor = YacsaTheme.colors.primary,
                 onClick = { searchClick() },
-                elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)) {
+                elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
+            ) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_search_regular_24),
                     contentDescription = null,
-                    tint = YacsaTheme.colors.accent
+                    tint = YacsaTheme.colors.accent,
 
                 )
             }
             SmallFloatingActionButton(
                 containerColor = YacsaTheme.colors.primary,
                 onClick = { settingsClick() },
-                elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)) {
+                elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
+            ) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_gear_six_regular_24),
                     contentDescription = null,
-                    tint = YacsaTheme.colors.accent
+                    tint = YacsaTheme.colors.accent,
                 )
             }
         }
@@ -107,7 +109,7 @@ fun Preview_ListToolbar_Light() {
             state = rememberLazyListState(),
             searchClick = {},
             settingsClick = {},
-            favouriteClick = {}
+            favouriteClick = {},
         )
     }
 }
@@ -120,7 +122,7 @@ fun Preview_ListToolbar_Dark() {
             state = rememberLazyListState(),
             searchClick = {},
             settingsClick = {},
-            favouriteClick = {}
+            favouriteClick = {},
         )
     }
 }

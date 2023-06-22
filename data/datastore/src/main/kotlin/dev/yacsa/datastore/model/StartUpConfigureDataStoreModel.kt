@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class StartUpConfigureDataStoreModel(
     val hasBeenOnboardingShown: Boolean,
-    val language:String?
+    val language: String?,
 ) : BaseDataStoreModel

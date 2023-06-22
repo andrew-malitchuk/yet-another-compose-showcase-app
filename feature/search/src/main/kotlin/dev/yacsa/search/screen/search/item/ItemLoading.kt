@@ -33,7 +33,7 @@ fun ItemLoading(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         LottieAnimation(
-            modifier=Modifier.height(128.dp).width(128.dp).padding(YacsaTheme.spacing.medium),
+            modifier = Modifier.height(128.dp).width(128.dp).padding(YacsaTheme.spacing.medium),
             composition = composition,
             iterations = LottieConstants.IterateForever,
         )
@@ -55,4 +55,3 @@ fun Preview_ListLoadingItem_Light() {
         ItemLoading()
     }
 }
-

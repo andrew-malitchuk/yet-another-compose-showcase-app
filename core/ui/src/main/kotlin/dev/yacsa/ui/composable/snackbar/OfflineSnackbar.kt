@@ -15,7 +15,7 @@ import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
 fun OfflineSnackbar(
-    message: String
+    message: String,
 ) {
     val shape = RoundedCornerShape(
         YacsaTheme.corners.medium,
@@ -26,7 +26,7 @@ fun OfflineSnackbar(
         modifier = Modifier
             .fillMaxWidth()
             .clip(shape)
-            .background(YacsaTheme.colors.primary)
+            .background(YacsaTheme.colors.primary),
     ) {
         Text(
             modifier = Modifier
@@ -35,19 +35,17 @@ fun OfflineSnackbar(
             text = message,
             style = YacsaTheme.typography.title,
             color = YacsaTheme.colors.background,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
         )
-
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable
 fun Preivew_OfflineSnackbar_Light() {
     YacsaTheme(false) {
         OfflineSnackbar(
-            message = "Foobar"
+            message = "Foobar",
         )
     }
 }
@@ -57,7 +55,7 @@ fun Preivew_OfflineSnackbar_Light() {
 fun Preivew_OfflineSnackbar_Dark() {
     YacsaTheme(true) {
         OfflineSnackbar(
-            message = "Foobar"
+            message = "Foobar",
         )
     }
 }

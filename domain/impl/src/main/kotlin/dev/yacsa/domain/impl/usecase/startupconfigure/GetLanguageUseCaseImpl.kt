@@ -8,7 +8,6 @@ import dev.yacsa.domain.usecase.startupconfigure.GetLanguageUseCase
 import dev.yacsa.repository.repository.StartUpConfigureRepository
 import javax.inject.Inject
 
-
 class GetLanguageUseCaseImpl @Inject constructor(
     private val startUpConfigureRepository: StartUpConfigureRepository,
 ) : GetLanguageUseCase {
@@ -20,7 +19,7 @@ class GetLanguageUseCaseImpl @Inject constructor(
                 Either.Left(NoDataError)
             } else {
                 Either.Right(
-                    result.language
+                    result.language,
                 )
             }
         } catch (ex: Exception) {

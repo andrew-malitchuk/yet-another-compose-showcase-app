@@ -7,7 +7,6 @@ import kotlinx.serialization.json.Json
 import java.io.InputStream
 import java.io.OutputStream
 
-// TODO: somehow remove boilerplate
 object StartupConfigureSerializer : Serializer<StartUpConfigureDataStoreModel> {
 
     override val defaultValue: StartUpConfigureDataStoreModel

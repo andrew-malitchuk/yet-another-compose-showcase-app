@@ -14,9 +14,8 @@ interface PersonDbDao {
     @Query("SELECT * FROM ${YacsaDb.Table.PERSON}")
     suspend fun get(): List<PersonDbModel>?
 
-    // TODO: rename to subscribe?
     @Query("SELECT * FROM ${YacsaDb.Table.PERSON}")
-    fun getFlow(): Flow<List<PersonDbModel>?>
+    fun subscribe(): Flow<List<PersonDbModel>?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(value: PersonDbModel): Long

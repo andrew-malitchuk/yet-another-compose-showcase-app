@@ -33,8 +33,8 @@ fun OnboardingRoute(
 
     val uiState by onboardingViewModel.uiState.collectAsStateWithLifecycle()
 
-    val currentTheme  by onboardingViewModel.currentTheme
-    val isDarkTheme = currentTheme?.detectThemeMode()?:false
+    val currentTheme by onboardingViewModel.currentTheme
+    val isDarkTheme = currentTheme?.detectThemeMode() ?: false
 
     Rebugger(
         trackMap = mapOf(
@@ -48,10 +48,9 @@ fun OnboardingRoute(
         OnboardingScreen(
             onBackClick,
             onDoneClick,
-            onboardingViewModel
+            onboardingViewModel,
         )
     }
-
 }
 
 // TODO: fix & add route
@@ -60,9 +59,8 @@ fun OnboardingRoute(
 fun OnboardingScreen(
     onBackClick: () -> Unit,
     onDoneClick: () -> Unit,
-    onboardingViewModel: OnboardingViewModel
+    onboardingViewModel: OnboardingViewModel,
 ) {
-
     val state = rememberPagerState()
     val scope = rememberCoroutineScope()
 
@@ -70,10 +68,10 @@ fun OnboardingScreen(
 
     with(systemUiController) {
         setSystemBarsColor(
-            color = YacsaTheme.colors.background
+            color = YacsaTheme.colors.background,
         )
         setNavigationBarColor(
-            color = YacsaTheme.colors.background
+            color = YacsaTheme.colors.background,
         )
     }
 
@@ -140,12 +138,12 @@ fun TopSection(
         SmallFloatingActionButton(
             onClick = { onBackClick() },
             containerColor = YacsaTheme.colors.accent,
-            elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
+            elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.icon_caret_left_regular_24),
                 contentDescription = null,
-                tint = YacsaTheme.colors.primary
+                tint = YacsaTheme.colors.primary,
             )
         }
         TextButton(

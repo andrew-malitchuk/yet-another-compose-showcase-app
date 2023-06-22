@@ -53,7 +53,7 @@ fun ContentFetched(
     topAppBarState: TopAppBarState,
     uiState: DeeplinkUiState,
     deeplinkState: MutableState<String>,
-    onDeeplinkRun:()->Unit
+    onDeeplinkRun: () -> Unit,
 
 ) {
     val corner =
@@ -73,9 +73,8 @@ fun ContentFetched(
                 color = YacsaTheme.colors.statusBar,
             )
             ContentError(
-                errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString()
+                errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString(),
             ) {
-
             }
         }
 
@@ -101,7 +100,7 @@ fun ContentFetched(
                             start = YacsaTheme.spacing.small,
                             end = YacsaTheme.spacing.extraSmall,
                             top = YacsaTheme.spacing.small,
-                            bottom = YacsaTheme.spacing.small
+                            bottom = YacsaTheme.spacing.small,
                         )
                         .clearFocusOnKeyboardDismiss(),
                     colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -109,7 +108,7 @@ fun ContentFetched(
                         unfocusedBorderColor = YacsaTheme.colors.primary,
                         textColor = YacsaTheme.colors.primary,
                         cursorColor = YacsaTheme.colors.accent,
-                        placeholderColor = YacsaTheme.colors.secondary
+                        placeholderColor = YacsaTheme.colors.secondary,
                     ),
                     value = deeplinkState.value,
                     onValueChange = {
@@ -146,13 +145,13 @@ fun ContentFetched(
                     modifier = Modifier
                         .fillMaxWidth()
                         .fillMaxHeight(1f)
-                        .background(YacsaTheme.colors.background)
+                        .background(YacsaTheme.colors.background),
                 ) {
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
                             .clip(RoundedCornerShape(topStart = corner, topEnd = corner))
-                            .background(YacsaTheme.colors.surface)
+                            .background(YacsaTheme.colors.surface),
                     ) {
                         LazyColumn(
                             modifier = Modifier
@@ -166,7 +165,7 @@ fun ContentFetched(
                                     value = "yacsa://book",
                                     icon = R.drawable.icon_link_regular_24,
                                     onClick = {
-                                        deeplinkState.value="yacsa://book"
+                                        deeplinkState.value = "yacsa://book"
                                     },
                                 )
                             }
@@ -175,7 +174,7 @@ fun ContentFetched(
                                     value = "yacsa://favourite",
                                     icon = R.drawable.icon_link_regular_24,
                                     onClick = {
-                                        deeplinkState.value="yacsa://favourite"
+                                        deeplinkState.value = "yacsa://favourite"
                                     },
                                 )
                             }
@@ -184,19 +183,16 @@ fun ContentFetched(
                                     value = "yacsa://search",
                                     icon = R.drawable.icon_link_regular_24,
                                     onClick = {
-                                        deeplinkState.value="yacsa://search"
+                                        deeplinkState.value = "yacsa://search"
                                     },
                                 )
                             }
-
                         }
                     }
                 }
             }
         }
     }
-
-
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -210,7 +206,7 @@ fun Preview_ContentFetched() {
             topAppBarState = rememberTopAppBarState(),
             uiState = DeeplinkUiState(isError = true),
             deeplinkState = remember { mutableStateOf("") },
-            onDeeplinkRun={}
+            onDeeplinkRun = {},
         )
     }
 }

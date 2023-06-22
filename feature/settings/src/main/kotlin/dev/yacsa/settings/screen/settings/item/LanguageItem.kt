@@ -31,7 +31,6 @@ import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.modifier.bouncingClickable
 import dev.yacsa.ui.theme.YacsaTheme
 
-
 @Composable
 fun LanguageItem(
     modifier: Modifier = Modifier,
@@ -48,8 +47,8 @@ fun LanguageItem(
             mutableStateOf(null)
         }
 
-    isUk.value = language.value=="uk"
-    isEn.value = language.value=="en" || language.value==null
+    isUk.value = language.value == "uk"
+    isEn.value = language.value == "en" || language.value == null
 
     Card(
         shape = shape,
@@ -69,12 +68,12 @@ fun LanguageItem(
             SmallFloatingActionButton(
                 onClick = { },
                 containerColor = YacsaTheme.colors.primary,
-                elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
+                elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_translate_regular_24),
                     contentDescription = null,
-                    tint = YacsaTheme.colors.accent
+                    tint = YacsaTheme.colors.accent,
                 )
             }
             Spacer(
@@ -84,7 +83,7 @@ fun LanguageItem(
             Text(
                 text = UiText.StringResource(dev.yacsa.localization.R.string.settings_lang).asString(),
                 style = YacsaTheme.typography.title,
-                color = YacsaTheme.colors.secondary
+                color = YacsaTheme.colors.secondary,
             )
             Spacer(
                 modifier = Modifier
@@ -93,36 +92,35 @@ fun LanguageItem(
 
             LazyRow(
                 horizontalArrangement = Arrangement.spacedBy(YacsaTheme.spacing.small),
-                contentPadding = PaddingValues(horizontal = 1.dp)
+                contentPadding = PaddingValues(horizontal = 1.dp),
             ) {
                 item {
-
                     IconToggleButton(
                         checked = isEn.value ?: false,
                         onCheckedChange = {
-                            if(it){
+                            if (it) {
                                 isUk.value = !it
                                 isEn.value = it
-                                language.value="en"
+                                language.value = "en"
                             }
-                        }) {
-
+                        },
+                    ) {
                         Crossfade(
-                            targetState = isEn.value
+                            targetState = isEn.value,
                         ) { isChecked ->
                             if (isChecked == true) {
                                 Text(
                                     text = "En",
                                     style = YacsaTheme.typography.title,
                                     color = YacsaTheme.colors.accent,
-                                    fontWeight = FontWeight.Bold
+                                    fontWeight = FontWeight.Bold,
                                 )
                             } else {
                                 Text(
                                     text = "En",
                                     style = YacsaTheme.typography.title,
                                     color = YacsaTheme.colors.accent,
-                                    fontWeight = FontWeight.Normal
+                                    fontWeight = FontWeight.Normal,
                                 )
                             }
                         }
@@ -132,30 +130,29 @@ fun LanguageItem(
                     IconToggleButton(
                         checked = isUk.value ?: false,
                         onCheckedChange = {
-
-                            if(it){
+                            if (it) {
                                 isUk.value = it
                                 isEn.value = !it
-                                language.value="uk"
+                                language.value = "uk"
                             }
-                        }) {
-
+                        },
+                    ) {
                         Crossfade(
-                            targetState = isUk.value
+                            targetState = isUk.value,
                         ) { isChecked ->
                             if (isChecked == true) {
                                 Text(
                                     text = "Uk",
                                     style = YacsaTheme.typography.title,
                                     color = YacsaTheme.colors.accent,
-                                    fontWeight = FontWeight.Bold
+                                    fontWeight = FontWeight.Bold,
                                 )
                             } else {
                                 Text(
                                     text = "Uk",
                                     style = YacsaTheme.typography.title,
                                     color = YacsaTheme.colors.accent,
-                                    fontWeight = FontWeight.Normal
+                                    fontWeight = FontWeight.Normal,
                                 )
                             }
                         }
@@ -164,8 +161,6 @@ fun LanguageItem(
             }
         }
     }
-
-
 }
 
 @Preview(showBackground = true)

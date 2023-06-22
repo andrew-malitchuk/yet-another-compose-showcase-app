@@ -54,7 +54,7 @@ fun DeeplinkItem(
         shape = YacsaTheme.shapes.cornersStyle,
         elevation = 0.dp,
 
-        ) {
+    ) {
         Row(
             modifier = Modifier
                 .padding(YacsaTheme.spacing.small),
@@ -63,12 +63,12 @@ fun DeeplinkItem(
             SmallFloatingActionButton(
                 onClick = { },
                 containerColor = YacsaTheme.colors.primary,
-                elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp)
+                elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
             ) {
                 Icon(
                     painter = painterResource(id = icon),
                     contentDescription = null,
-                    tint = YacsaTheme.colors.accent
+                    tint = YacsaTheme.colors.accent,
                 )
             }
             Spacer(
@@ -77,8 +77,10 @@ fun DeeplinkItem(
             )
             Column {
                 Text(
-                    text = value, modifier = Modifier.basicMarquee(),
-                    style = YacsaTheme.typography.caption, color = YacsaTheme.colors.primary
+                    text = value,
+                    modifier = Modifier.basicMarquee(),
+                    style = YacsaTheme.typography.caption,
+                    color = YacsaTheme.colors.primary,
                 )
             }
         }

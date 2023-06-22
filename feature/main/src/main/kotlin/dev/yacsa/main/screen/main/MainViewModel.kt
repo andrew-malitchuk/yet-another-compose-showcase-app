@@ -20,16 +20,15 @@ class MainViewModel @Inject constructor(
 ) : BaseViewModel<MainUiState, MainUiState.PartialState, MainEvent, MainIntent>(
     savedStateHandle,
     initialState,
-), Theme by theme {
+),
+    Theme by theme {
 
     private val deeplink: String? = savedStateHandle["deeplink"]
-
 
     init {
         acceptIntent(MainIntent.GetStatus)
         viewModelScope.launch {
             theme.getTheme()
-
         }
     }
 
@@ -44,12 +43,13 @@ class MainViewModel @Inject constructor(
             getStartUpConfigureUseCase().fold(
                 {
                     emit(MainUiState.PartialState.Error(IllegalStateException()))
-                }, { status ->
+                },
+                { status ->
                     when {
                         status.hasBeenOnboardingShown -> {
-                            if(deeplink.isNullOrEmpty()) {
+                            if (deeplink.isNullOrEmpty()) {
                                 emit(MainUiState.PartialState.Fetched(RouteDestination.Main))
-                            }else{
+                            } else {
                                 emit(MainUiState.PartialState.Fetched(RouteDestination.Deeplink(deeplink)))
                             }
                         }
@@ -57,35 +57,33 @@ class MainViewModel @Inject constructor(
                             emit(MainUiState.PartialState.Fetched(RouteDestination.Onboarding))
                         }
                     }
-
-                }
+                },
             )
         }
     }
 
     override fun reduceUiState(
         previousState: MainUiState,
-        partialState: MainUiState.PartialState
+        partialState: MainUiState.PartialState,
     ): MainUiState {
         return when (partialState) {
             is MainUiState.PartialState.Loading -> previousState.copy(
                 isLoading = true,
                 isError = false,
-                routeDestination = null
+                routeDestination = null,
             )
 
             is MainUiState.PartialState.Error -> previousState.copy(
                 isLoading = false,
                 isError = true,
-                routeDestination = null
+                routeDestination = null,
             )
 
             is MainUiState.PartialState.Fetched -> previousState.copy(
                 isLoading = false,
                 isError = false,
-                routeDestination = partialState.routeDestination
+                routeDestination = partialState.routeDestination,
             )
         }
     }
-
 }

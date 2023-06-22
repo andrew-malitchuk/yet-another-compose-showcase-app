@@ -19,10 +19,10 @@ val typography = YacsaTypography(
     ),
     title = TextStyle(
         fontSize = 14.sp,
-        fontWeight = FontWeight.SemiBold
+        fontWeight = FontWeight.SemiBold,
     ),
     body = TextStyle(
         fontSize = 14.sp,
-        fontWeight = FontWeight.Normal
+        fontWeight = FontWeight.Normal,
     ),
 )

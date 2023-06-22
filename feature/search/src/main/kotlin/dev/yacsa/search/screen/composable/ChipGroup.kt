@@ -9,7 +9,6 @@ import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import dev.yacsa.ui.R
@@ -19,8 +18,6 @@ import dev.yacsa.ui.theme.YacsaTheme
 @Composable
 fun ChipGroup(
     values: List<String>,
-    defaultColor: Color,
-    selectedColor: Color,
     onSelectedChanged: (String) -> Unit = {},
     onDelete: (() -> Unit)? = null,
 ) {
@@ -51,7 +48,7 @@ fun ChipGroup(
                     colors = androidx.compose.material3.AssistChipDefaults.assistChipColors(
                         containerColor = YacsaTheme.colors.background,
                         labelColor = YacsaTheme.colors.primary,
-                        leadingIconContentColor = YacsaTheme.colors.primary
+                        leadingIconContentColor = YacsaTheme.colors.primary,
                     ),
                     onClick = {
                         onDelete()
@@ -82,10 +79,7 @@ fun Preview_ChipGroup_Light() {
     YacsaTheme(false) {
         ChipGroup(
             values = listOf("Foo", "Bar"),
-            defaultColor = Color.DarkGray,
-            selectedColor = Color.Cyan,
-            onDelete = {},
-        )
+        ) {}
     }
 }
 
@@ -95,9 +89,6 @@ fun Preview_ChipGroup_Dark() {
     YacsaTheme(true) {
         ChipGroup(
             values = listOf("Foo", "Bar"),
-            defaultColor = Color.DarkGray,
-            selectedColor = Color.Cyan,
-            onDelete = {},
-        )
+        ) {}
     }
 }

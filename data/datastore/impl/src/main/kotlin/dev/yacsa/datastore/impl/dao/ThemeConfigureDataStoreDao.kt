@@ -18,14 +18,12 @@ class ThemeConfigureDataStoreDao @Inject constructor(
     override suspend fun updateData(value: ThemeConfigureDataStoreModel) {
         dataStore.updateData {
             it.copy(
-                theme = value.theme
+                theme = value.theme,
             )
         }
     }
 
-
     companion object {
         const val THEME_CONFIGURE_DATASTORE_FILENAME = "theme.json"
     }
-
 }

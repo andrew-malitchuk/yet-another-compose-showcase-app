@@ -29,7 +29,6 @@ import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
 
-
 @Composable
 fun ItemAuthor(
     person: PersonUiModel,
@@ -58,12 +57,12 @@ fun ItemAuthor(
             SmallFloatingActionButton(
                 onClick = { },
                 containerColor = YacsaTheme.colors.primary,
-                elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
-                ) {
+                elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
+            ) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_user_circle_regular_24),
                     contentDescription = null,
-                    tint = YacsaTheme.colors.accent
+                    tint = YacsaTheme.colors.accent,
                 )
             }
             Spacer(
@@ -72,17 +71,17 @@ fun ItemAuthor(
             )
             Column(
                 modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.Center,
             ) {
                 Text(
                     text = person.name ?: UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString(),
                     style = YacsaTheme.typography.title,
-                    color = YacsaTheme.colors.secondary
+                    color = YacsaTheme.colors.secondary,
                 )
                 Text(
                     text = "${person.birthYear}-${person.deathYear}",
                     style = YacsaTheme.typography.description,
-                    color = YacsaTheme.colors.secondary
+                    color = YacsaTheme.colors.secondary,
                 )
             }
         }
@@ -98,7 +97,7 @@ fun Preview_SettingsItem_Light() {
                 1,
                 1000,
                 2000,
-                "Foobar"
+                "Foobar",
             ),
             onClick = {},
         )
@@ -114,7 +113,7 @@ fun Preview_SettingsItem_Dark() {
                 1,
                 1000,
                 2000,
-                "Foobar"
+                "Foobar",
             ),
             onClick = {},
         )

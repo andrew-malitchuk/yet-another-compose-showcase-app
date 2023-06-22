@@ -24,9 +24,10 @@ class SettingsViewModel @Inject constructor(
 ) : BaseViewModel<SettingsUiState, SettingsUiState.PartialState, SettingsEvent, SettingsIntent>(
     savedStateHandle,
     initialState,
-), Theme by theme {
+),
+    Theme by theme {
 
-    init{
+    init {
         this.acceptIntent(SettingsIntent.GetLang)
     }
 
@@ -42,22 +43,21 @@ class SettingsViewModel @Inject constructor(
         flow {
             getLanguageUseCase().fold(
                 {
-                    // TODO: fix
                     emit(SettingsUiState.PartialState.Error(Exception()))
                 },
                 { result ->
                     emit(SettingsUiState.PartialState.Fetched(result))
-                }
+                },
             )
         }.onStart {
             SettingsUiState.PartialState.Loading
         }
 
-    private fun setLang(lang:String): Flow<SettingsUiState.PartialState> =
+    private fun setLang(lang: String): Flow<SettingsUiState.PartialState> =
         flow {
             updateLanguageUseCase(lang).fold({
                 publishEvent(SettingsEvent.ChangeLang(lang))
-            },{
+            }, {
                 emit(SettingsUiState.PartialState.Error(Exception()))
             })
         }.onStart {
@@ -76,7 +76,7 @@ class SettingsViewModel @Inject constructor(
             is SettingsUiState.PartialState.Fetched -> previousState.copy(
                 isLoading = false,
                 isError = false,
-                lang = partialState.lang
+                lang = partialState.lang,
             )
 
             SettingsUiState.PartialState.Loading -> previousState.copy(
@@ -91,5 +91,4 @@ class SettingsViewModel @Inject constructor(
             theme.setTheme(themeUiModel)
         }
     }
-
 }

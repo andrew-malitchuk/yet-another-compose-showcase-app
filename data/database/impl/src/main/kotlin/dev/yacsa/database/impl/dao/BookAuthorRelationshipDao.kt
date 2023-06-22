@@ -16,7 +16,6 @@ interface BookAuthorRelationshipDao {
     @Query("SELECT * FROM ${YacsaDb.Table.BOOK}")
     suspend fun get(): List<BookAuthorDbModel>
 
-    // TODO: rename to subscribe?
     @Query("SELECT * FROM ${YacsaDb.Table.BOOK}")
     fun getFlow(): Flow<List<BookAuthorDbModel>>
 }

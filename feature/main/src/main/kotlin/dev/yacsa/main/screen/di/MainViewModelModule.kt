@@ -6,7 +6,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dev.yacsa.main.screen.main.MainUiState
 
-
 @Module
 @InstallIn(ViewModelComponent::class)
 object MainViewModelModule {

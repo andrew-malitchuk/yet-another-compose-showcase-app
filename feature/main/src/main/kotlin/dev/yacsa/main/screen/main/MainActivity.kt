@@ -55,20 +55,17 @@ class MainActivity : ComponentActivity() {
             YacsaTheme(
                 isDarkTheme.value,
             ) {
-                if(startDestination.isNullOrEmpty() && !deeplink.isNullOrEmpty()){
+                if (startDestination.isNullOrEmpty() && !deeplink.isNullOrEmpty()) {
                     this@MainActivity.triggerDeepLink(deeplink, true)
-                }else{
-                startDestination?.let {
-                    RootNavigationGraph(
-                        navController = navHostController,
-                        startDestination = it,
-                    )
-                }
-
+                } else {
+                    startDestination?.let {
+                        RootNavigationGraph(
+                            navController = navHostController,
+                            startDestination = it,
+                        )
+                    }
                 }
             }
         }
     }
-
-
 }

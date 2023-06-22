@@ -38,12 +38,12 @@ import dev.yacsa.ui.theme.YacsaTheme
 @Composable
 fun FeatureFlagRoute(
     featureFlagViewModel: FeatureFlagViewModel = hiltViewModel(),
-    onBackClick:()->Unit
+    onBackClick: () -> Unit,
 ) {
     val uiState by featureFlagViewModel.uiState.collectAsStateWithLifecycle()
 
-    val currentTheme  by featureFlagViewModel.currentTheme
-    val isDarkTheme = currentTheme?.detectThemeMode()?:false
+    val currentTheme by featureFlagViewModel.currentTheme
+    val isDarkTheme = currentTheme?.detectThemeMode() ?: false
 
     Rebugger(
         trackMap = mapOf(
@@ -62,7 +62,7 @@ fun FeatureFlagRoute(
             isActive = {
                 featureFlagViewModel.updateFeatureFlag(it)
             },
-            onBackClick = onBackClick
+            onBackClick = onBackClick,
         )
     }
 }
@@ -71,7 +71,7 @@ fun FeatureFlagRoute(
 @Composable
 fun FeatureFlagScreen(
     uiState: FeatureFlagUiState,
-    onBackClick:()->Unit,
+    onBackClick: () -> Unit,
     isEnabled: (FeatureFlagModel) -> Unit,
     isActive: (FeatureFlagModel) -> Unit,
 ) {
@@ -90,7 +90,6 @@ fun FeatureFlagScreen(
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(topAppBarState)
 
-
     Scaffold(
         modifier = Modifier
             .nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -103,13 +102,13 @@ fun FeatureFlagScreen(
                         Text(
                             text = UiText.StringResource(dev.yacsa.localization.R.string.settings_ff).asString(),
                             style = YacsaTheme.typography.header,
-                            color = YacsaTheme.colors.primary
+                            color = YacsaTheme.colors.primary,
                         )
                         Spacer(modifier = Modifier.width(YacsaTheme.spacing.small))
                         androidx.compose.material3.Icon(
                             painterResource(id = R.drawable.icon_command_bold_24),
                             contentDescription = null,
-                            tint = YacsaTheme.colors.accent
+                            tint = YacsaTheme.colors.accent,
                         )
                     }
                 },
@@ -117,12 +116,12 @@ fun FeatureFlagScreen(
                     SmallFloatingActionButton(
                         onClick = { onBackClick() },
                         containerColor = YacsaTheme.colors.accent,
-                        elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
+                        elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
                     ) {
                         Icon(
                             painter = painterResource(id = R.drawable.icon_caret_left_regular_24),
                             contentDescription = null,
-                            tint = YacsaTheme.colors.primary
+                            tint = YacsaTheme.colors.primary,
                         )
                     }
                 },
@@ -136,14 +135,14 @@ fun FeatureFlagScreen(
                 AnimatedDivider(state = state)
             }
         },
-    ) {innerPadding ->
+    ) { innerPadding ->
         ContentFetched(
             innerPadding = innerPadding,
             state = state,
             topAppBarState = topAppBarState,
-            uiState=uiState,
+            uiState = uiState,
             isActive = isActive,
-            isEnabled = isEnabled
+            isEnabled = isEnabled,
         )
     }
 }
@@ -156,7 +155,7 @@ fun Preview_FeatureFlagScreen_Light() {
             FeatureFlagUiState(),
             {},
             {},
-            {}
+            {},
         )
     }
 }
@@ -169,7 +168,7 @@ fun Preview_FeatureFlagScreen_Dark() {
             FeatureFlagUiState(),
             {},
             {},
-            {}
+            {},
         )
     }
 }

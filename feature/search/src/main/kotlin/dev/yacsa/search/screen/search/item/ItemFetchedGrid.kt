@@ -88,7 +88,6 @@ fun Preview_ItemFetchedGrid_Light() {
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun Preview_ItemFetchedGrid_Dark() {

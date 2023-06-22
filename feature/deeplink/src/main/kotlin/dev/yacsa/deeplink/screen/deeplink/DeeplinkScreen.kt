@@ -45,10 +45,10 @@ fun DeeplinkRoute(
     onBackClick: () -> Unit,
 ) {
     val uiState by DeeplinkViewModel.uiState.collectAsStateWithLifecycle()
-    val currentTheme  by DeeplinkViewModel.currentTheme
-    val isDarkTheme = currentTheme?.detectThemeMode()?:false
+    val currentTheme by DeeplinkViewModel.currentTheme
+    val isDarkTheme = currentTheme?.detectThemeMode() ?: false
 
-    val onValueChange:MutableState<String> = remember{ mutableStateOf("") }
+    val onValueChange: MutableState<String> = remember { mutableStateOf("") }
 
     val context = LocalContext.current
 
@@ -66,9 +66,9 @@ fun DeeplinkRoute(
             uiState,
             onBackClick,
             onValueChange,
-            onDeeplinkRun={
+            onDeeplinkRun = {
                 context.triggerDeepLink(onValueChange.value)
-            }
+            },
         )
     }
 }
@@ -78,8 +78,8 @@ fun DeeplinkRoute(
 fun DeeplinkScreen(
     uiState: DeeplinkUiState,
     onBackClick: () -> Unit,
-    onValueChange:MutableState<String>,
-    onDeeplinkRun:()->Unit
+    onValueChange: MutableState<String>,
+    onDeeplinkRun: () -> Unit,
 ) {
     val systemUiController = rememberSystemUiController()
     val state = rememberLazyListState()
@@ -96,7 +96,6 @@ fun DeeplinkScreen(
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(topAppBarState)
 
-
     Scaffold(
         modifier = Modifier
             .nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -109,13 +108,13 @@ fun DeeplinkScreen(
                         Text(
                             text = UiText.StringResource(dev.yacsa.localization.R.string.deeplink_deeplink).asString(),
                             style = YacsaTheme.typography.header,
-                            color = YacsaTheme.colors.primary
+                            color = YacsaTheme.colors.primary,
                         )
                         Spacer(modifier = Modifier.width(YacsaTheme.spacing.small))
                         androidx.compose.material3.Icon(
                             painterResource(id = R.drawable.icon_link_bold_24),
                             contentDescription = null,
-                            tint = YacsaTheme.colors.accent
+                            tint = YacsaTheme.colors.accent,
                         )
                     }
                 },
@@ -123,12 +122,12 @@ fun DeeplinkScreen(
                     SmallFloatingActionButton(
                         onClick = { onBackClick() },
                         containerColor = YacsaTheme.colors.accent,
-                        elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
+                        elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
                     ) {
                         Icon(
                             painter = painterResource(id = R.drawable.icon_caret_left_regular_24),
                             contentDescription = null,
-                            tint = YacsaTheme.colors.primary
+                            tint = YacsaTheme.colors.primary,
                         )
                     }
                 },
@@ -141,15 +140,15 @@ fun DeeplinkScreen(
                 Spacer(modifier = Modifier.height(YacsaTheme.spacing.extraLarge))
                 AnimatedDivider(state = state)
             }
-        }
+        },
     ) { innerPadding ->
         ContentFetched(
             innerPadding = innerPadding,
             state = state,
             topAppBarState = topAppBarState,
-            uiState=uiState,
+            uiState = uiState,
             deeplinkState = onValueChange,
-            onDeeplinkRun=onDeeplinkRun
+            onDeeplinkRun = onDeeplinkRun,
         )
     }
 }
@@ -164,7 +163,7 @@ fun Preview_SettingsScreen() {
             onValueChange = remember {
                 mutableStateOf("")
             },
-            onDeeplinkRun={}
+            onDeeplinkRun = {},
         )
     }
 }

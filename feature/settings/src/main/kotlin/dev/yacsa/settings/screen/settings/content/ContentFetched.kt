@@ -42,14 +42,14 @@ fun ContentFetched(
     onDeeplinkClick: () -> Unit,
     theme: MutableState<ThemeUiModel?>,
     language: MutableState<String?>,
-    onInfoClick:()->Unit
+    onInfoClick: () -> Unit,
 ) {
     val corner = YacsaTheme.corners.medium - (YacsaTheme.corners.medium * abs(topAppBarState.collapsedFraction))
     Box(
         modifier = Modifier
             .fillMaxSize()
             .padding(innerPadding)
-            .background(YacsaTheme.colors.surface)
+            .background(YacsaTheme.colors.surface),
     ) {
         Box(
             modifier = Modifier
@@ -103,13 +103,13 @@ fun ContentFetched(
                 item {
                     ThemeItem(
                         Modifier,
-                        theme
+                        theme,
                     )
                 }
                 item {
                     LanguageItem(
                         Modifier,
-                        language
+                        language,
                     )
                 }
             }
@@ -133,7 +133,7 @@ fun Preview_ContentFetched_Light() {
             language = remember {
                 mutableStateOf(null)
             },
-            onInfoClick = {}
+            onInfoClick = {},
         )
     }
 }
@@ -154,7 +154,7 @@ fun Preview_ContentFetched_Dark() {
             language = remember {
                 mutableStateOf(null)
             },
-            onInfoClick = {}
+            onInfoClick = {},
         )
     }
 }

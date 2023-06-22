@@ -13,13 +13,13 @@ fun VerticalDivider() {
     Divider(
         modifier = Modifier
             .fillMaxHeight()
-            .width(YacsaTheme.dividers.large)
+            .width(YacsaTheme.dividers.large),
     )
 }
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_VerticalDivider_Light(){
+fun Preview_VerticalDivider_Light() {
     YacsaTheme(false) {
         VerticalDivider()
     }
@@ -27,7 +27,7 @@ fun Preview_VerticalDivider_Light(){
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_VerticalDivider_Dark(){
+fun Preview_VerticalDivider_Dark() {
     YacsaTheme(true) {
         VerticalDivider()
     }

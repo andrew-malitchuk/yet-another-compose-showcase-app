@@ -17,11 +17,11 @@ import dev.yacsa.ui.theme.YacsaTheme
 @Composable
 fun AuthorBlock(
     book: BookUiModel,
-    onAuthorClick:(String)->Unit,
-    ) {
+    onAuthorClick: (String) -> Unit,
+) {
     Column(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxWidth(),
     ) {
         Text(
             modifier = Modifier.fillMaxWidth(),
@@ -33,7 +33,7 @@ fun AuthorBlock(
             textAlign = TextAlign.Start,
         )
         Spacer(
-            modifier = Modifier.height(YacsaTheme.spacing.small)
+            modifier = Modifier.height(YacsaTheme.spacing.small),
         )
         book.authors?.forEach { person ->
             person?.let {
@@ -41,10 +41,8 @@ fun AuthorBlock(
                     it.name?.let { it1 -> onAuthorClick(it1) }
                 }
             }
-
         }
     }
-
 }
 
 @Preview(showBackground = true)
@@ -64,9 +62,9 @@ fun Preview_AuthorBlock_Light() {
                 null,
                 null,
                 null,
-                true
+                true,
             ),
-            onAuthorClick={}
+            onAuthorClick = {},
         )
     }
 }
@@ -88,9 +86,9 @@ fun Preview_AuthorBlock_Dark() {
                 null,
                 null,
                 null,
-                true
+                true,
             ),
-            onAuthorClick={}
+            onAuthorClick = {},
         )
     }
 }

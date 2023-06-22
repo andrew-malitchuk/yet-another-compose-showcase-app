@@ -12,7 +12,7 @@ class AnalyticsRepositoryImpl @Inject constructor(
 ) : AnalyticsRepository {
 
     override suspend fun get(): List<AnalyticsRepoModel> {
-        return analyticsDbSource.get()?.map(analyticsRepoDbMapper::toRepo)?: emptyList()
+        return analyticsDbSource.get()?.map(analyticsRepoDbMapper::toRepo) ?: emptyList()
     }
 
     override suspend fun insert(value: AnalyticsRepoModel) {
@@ -22,5 +22,4 @@ class AnalyticsRepositoryImpl @Inject constructor(
     override suspend fun deleteAll() {
         analyticsDbSource.deleteAll()
     }
-
 }

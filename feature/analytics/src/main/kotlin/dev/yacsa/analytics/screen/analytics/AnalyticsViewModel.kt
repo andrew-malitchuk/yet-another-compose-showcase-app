@@ -23,11 +23,12 @@ class AnalyticsViewModel @Inject constructor(
     private val getAnalyticsUseCase: GetAnalyticsUseCase,
     private val clearAnalyticsUseCase: ClearAnalyticsUseCase,
     private val analyticsUiDomainMapper: AnalyticsUiDomainMapper,
-    private val theme:Theme,
-    ) : BaseViewModel<AnalyticsUiState, AnalyticsUiState.PartialState, AnalyticsEvent, AnalyticsIntent>(
+    private val theme: Theme,
+) : BaseViewModel<AnalyticsUiState, AnalyticsUiState.PartialState, AnalyticsEvent, AnalyticsIntent>(
     savedStateHandle,
     initialState,
-) , Theme by theme{
+),
+    Theme by theme {
 
     init {
         acceptIntent(AnalyticsIntent.GetList)
@@ -59,16 +60,14 @@ class AnalyticsViewModel @Inject constructor(
                 },
                 { list ->
                     emit(AnalyticsUiState.PartialState.Fetched(list.map(analyticsUiDomainMapper::toUi)))
-                }
+                },
             )
-
         }.onStart {
             emit(AnalyticsUiState.PartialState.Loading)
         }
 
     private fun clear(): Flow<AnalyticsUiState.PartialState> =
         flow<AnalyticsUiState.PartialState> {
-
             clearAnalyticsUseCase().fold(
                 {
                     emit(AnalyticsUiState.PartialState.Fetched(emptyList()))
@@ -83,9 +82,8 @@ class AnalyticsViewModel @Inject constructor(
                             emit(AnalyticsUiState.PartialState.Error(Throwable(UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).toString())))
                         }
                     }
-                }
+                },
             )
-
         }.onStart {
             emit(AnalyticsUiState.PartialState.Loading)
         }
@@ -103,7 +101,7 @@ class AnalyticsViewModel @Inject constructor(
             is AnalyticsUiState.PartialState.Fetched -> previousState.copy(
                 isLoading = false,
                 isError = false,
-                analytics = partialState.analytics
+                analytics = partialState.analytics,
             )
 
             AnalyticsUiState.PartialState.Loading -> previousState.copy(

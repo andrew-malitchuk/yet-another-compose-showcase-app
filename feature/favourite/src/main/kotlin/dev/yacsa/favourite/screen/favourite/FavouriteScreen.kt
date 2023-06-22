@@ -38,14 +38,14 @@ import dev.yacsa.ui.theme.YacsaTheme
 @Composable
 fun FavouriteRoute(
     favouriteViewModel: FavouriteViewModel = hiltViewModel(),
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
 ) {
     val uiState by favouriteViewModel.uiState.collectAsStateWithLifecycle()
 
     val favouriteFlow = favouriteViewModel.flow?.collectAsStateWithLifecycle(null)
 
-    val currentTheme  by favouriteViewModel.currentTheme
-    val isDarkTheme = currentTheme?.detectThemeMode()?:false
+    val currentTheme by favouriteViewModel.currentTheme
+    val isDarkTheme = currentTheme?.detectThemeMode() ?: false
 
     Rebugger(
         trackMap = mapOf(
@@ -63,7 +63,7 @@ fun FavouriteRoute(
             onBackClick,
             onFavouriteMark = { id, isFavourite ->
                 favouriteViewModel.acceptIntent(FavouriteIntent.MarkFavourite(id, isFavourite))
-            }
+            },
         )
     }
 }
@@ -74,13 +74,12 @@ fun FavouriteScreen(
     uiState: FavouriteUiState,
     favouriteFlow: State<List<BookUiModel?>?>?,
     onBackClick: () -> Unit,
-    onFavouriteMark: (Int, Boolean) -> Unit
+    onFavouriteMark: (Int, Boolean) -> Unit,
 ) {
     val topAppBarState = rememberTopAppBarState()
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(topAppBarState)
     val state = rememberLazyListState()
-
 
     Scaffold(
         modifier = Modifier
@@ -95,13 +94,13 @@ fun FavouriteScreen(
                         Text(
                             text = UiText.StringResource(dev.yacsa.localization.R.string.general_favourite).asString(),
                             style = YacsaTheme.typography.header,
-                            color = YacsaTheme.colors.primary
+                            color = YacsaTheme.colors.primary,
                         )
                         Spacer(modifier = Modifier.width(YacsaTheme.spacing.small))
                         androidx.compose.material3.Icon(
                             painterResource(id = R.drawable.icon_heart_regulat_24),
                             contentDescription = null,
-                            tint = YacsaTheme.colors.accent
+                            tint = YacsaTheme.colors.accent,
                         )
                     }
                 },
@@ -109,12 +108,12 @@ fun FavouriteScreen(
                     SmallFloatingActionButton(
                         onClick = { onBackClick() },
                         containerColor = YacsaTheme.colors.accent,
-                        elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
+                        elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
                     ) {
                         Icon(
                             painter = painterResource(id = R.drawable.icon_caret_left_regular_24),
                             contentDescription = null,
-                            tint = YacsaTheme.colors.primary
+                            tint = YacsaTheme.colors.primary,
                         )
                     }
                 },
@@ -135,7 +134,7 @@ fun FavouriteScreen(
             topAppBarState = topAppBarState,
             uiState = uiState,
             favouriteFlow = favouriteFlow,
-            onFavouriteMark = onFavouriteMark
+            onFavouriteMark = onFavouriteMark,
         )
     }
 }

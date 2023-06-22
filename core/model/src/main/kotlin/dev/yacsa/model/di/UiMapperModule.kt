@@ -50,5 +50,4 @@ class UiMapperModule {
     fun providesFeatureFlagDomainRepoMapper(): FeatureFlagDomainRepoMapper {
         return FeatureFlagDomainRepoMapperImpl()
     }
-
 }

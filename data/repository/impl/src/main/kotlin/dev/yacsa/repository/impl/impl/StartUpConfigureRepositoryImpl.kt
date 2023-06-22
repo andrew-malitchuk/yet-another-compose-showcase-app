@@ -14,7 +14,7 @@ import javax.inject.Inject
 class StartUpConfigureRepositoryImpl @Inject constructor(
     private val startupConfigureDataStoreSource: StartupConfigureDataStoreSource,
     private val startUpConfigureMapper: NewStartUpConfigureRepoDataStoreMapper,
-    private val themeConfigureDataStoreSource: ThemeConfigureDataStoreSource
+    private val themeConfigureDataStoreSource: ThemeConfigureDataStoreSource,
 ) : StartUpConfigureRepository {
 
     override suspend fun getStartUpConfigure(): StartUpConfigureRepoModel? {
@@ -38,8 +38,8 @@ class StartUpConfigureRepositoryImpl @Inject constructor(
     override suspend fun setTheme(theme: ThemeRepoModel) {
         themeConfigureDataStoreSource.updateData(
             ThemeConfigureDataStoreModel(
-                theme = ThemeMode.valueOf(theme.name)
-            )
+                theme = ThemeMode.valueOf(theme.name),
+            ),
         )
     }
 }

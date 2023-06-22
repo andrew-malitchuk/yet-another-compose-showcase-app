@@ -42,7 +42,6 @@ fun ContentFetched(
     val corner = YacsaTheme.corners.medium - (YacsaTheme.corners.medium * abs(topAppBarState.collapsedFraction))
     val systemUiController = rememberSystemUiController()
 
-
     when {
         uiState.isLoading -> {
             systemUiController.setNavigationBarColor(
@@ -56,9 +55,8 @@ fun ContentFetched(
                 color = YacsaTheme.colors.statusBar,
             )
             ContentError(
-                errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString()
-            ){
-
+                errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString(),
+            ) {
             }
         }
 
@@ -81,16 +79,13 @@ fun ContentFetched(
                     modifier = Modifier
                         .fillMaxSize()
                         .clip(RoundedCornerShape(topStart = corner, topEnd = corner))
-                        .background(YacsaTheme.colors.surface)
+                        .background(YacsaTheme.colors.surface),
                 ) {
-
-                    if(uiState.analytics.isEmpty()){
+                    if (uiState.analytics.isEmpty()) {
                         ContentNoData(
-                            message = UiText.StringResource(dev.yacsa.localization.R.string.errors_no_data).asString()
+                            message = UiText.StringResource(dev.yacsa.localization.R.string.errors_no_data).asString(),
                         )
-
-                    }else {
-
+                    } else {
                         LazyColumn(
                             modifier = Modifier
                                 .fillMaxSize(),
@@ -107,15 +102,12 @@ fun ContentFetched(
                                     },
                                 )
                             }
-
                         }
                     }
                 }
             }
         }
     }
-
-
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

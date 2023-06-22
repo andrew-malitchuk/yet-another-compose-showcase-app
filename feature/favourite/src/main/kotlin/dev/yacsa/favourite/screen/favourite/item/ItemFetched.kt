@@ -74,13 +74,12 @@ fun ItemFetchedList(
         shape = YacsaTheme.shapes.cornersStyle,
         elevation = 0.dp,
     ) {
-
         SwipeableActionsBox(
             modifier = modifier,
             startActions = listOf(favouriteAction),
             endActions = listOf(favouriteAction),
             swipeThreshold = 40.dp,
-            backgroundUntilSwipeThreshold = MaterialTheme.colorScheme.surfaceColorAtElevation(0.dp)
+            backgroundUntilSwipeThreshold = MaterialTheme.colorScheme.surfaceColorAtElevation(0.dp),
         ) {
             Card(
                 modifier = Modifier
@@ -140,14 +139,14 @@ fun ItemFetchedList(
                             Icon(
                                 painter = painterResource(id = R.drawable.icon_archive_box_regular_16),
                                 contentDescription = null,
-                                tint = YacsaTheme.colors.accent
+                                tint = YacsaTheme.colors.accent,
                             )
                             Spacer(modifier = modifier.width(YacsaTheme.spacing.extraSmall))
                             Text(
                                 // TODO: fix
                                 text = book.downloadCount?.toString() ?: UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString(),
                                 style = YacsaTheme.typography.title,
-                                color = YacsaTheme.colors.secondary
+                                color = YacsaTheme.colors.secondary,
                             )
                             IconToggleButton(
                                 checked = book.isFavourite == true,
@@ -156,22 +155,22 @@ fun ItemFetchedList(
                                         onFavouriteMark(id, it)
                                     }
                                     /*checkedState.value = it */
-                                }) {
-
+                                },
+                            ) {
                                 Crossfade(
-                                    targetState = book.isFavourite == true
+                                    targetState = book.isFavourite == true,
                                 ) { isChecked ->
                                     if (isChecked == true) {
                                         Icon(
                                             painter = painterResource(id = R.drawable.icon_heart_fill_24),
                                             contentDescription = null,
-                                            tint = YacsaTheme.colors.accent
+                                            tint = YacsaTheme.colors.accent,
                                         )
                                     } else {
                                         Icon(
                                             painter = painterResource(id = R.drawable.icon_heart_regulat_24),
                                             contentDescription = null,
-                                            tint = YacsaTheme.colors.accent
+                                            tint = YacsaTheme.colors.accent,
                                         )
                                     }
                                 }
@@ -193,7 +192,6 @@ fun ItemFetchedList(
             }
         }
     }
-
 }
 
 @Preview(showBackground = true)
@@ -213,11 +211,10 @@ fun Preview_ListItem_Dark() {
                 null,
                 null,
                 10,
-                true
+                true,
             ),
             onItemContentClick = {},
             onFavouriteMark = { _, _ ->
-
             },
         )
     }
@@ -240,11 +237,10 @@ fun Preview_ItemFetchedList_Light() {
                 null,
                 null,
                 10,
-                true
+                true,
             ),
             onItemContentClick = {},
             onFavouriteMark = { _, _ ->
-
             },
         )
     }

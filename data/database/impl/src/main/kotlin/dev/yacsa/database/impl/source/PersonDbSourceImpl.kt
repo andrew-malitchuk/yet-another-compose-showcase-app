@@ -19,7 +19,7 @@ class PersonDbSourceImpl @Inject constructor(
     }
 
     override suspend fun getFlow(): Flow<List<PersonDbModel>?> {
-        return personDao.getFlow()
+        return personDao.subscribe()
     }
 
     override suspend fun insert(value: PersonDbModel): Int {

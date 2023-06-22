@@ -10,7 +10,6 @@ class BookDbSourceImpl @Inject constructor(
     private val booksDao: BookDbDao,
 ) : BookDbSource {
 
-    //
     override suspend fun getPaged(page: Int): List<BookDbModel>? {
         return booksDao.getPaged(page)
     }
@@ -22,29 +21,29 @@ class BookDbSourceImpl @Inject constructor(
     override suspend fun search(
         query: String,
         sort: String?,
-        lang: String?
+        lang: String?,
     ): List<BookDbModel> {
-       return  when(sort){
-            "ascending" ->  booksDao.search(query, lang).sortedBy { it.title }
-           "descending" ->  booksDao.search(query, lang).sortedByDescending { it.title }
-           else-> booksDao.search(query, lang)
-       }
+        return when (sort) {
+            "ascending" -> booksDao.search(query, lang).sortedBy { it.title }
+            "descending" -> booksDao.search(query, lang).sortedByDescending { it.title }
+            else -> booksDao.search(query, lang)
+        }
     }
 
     override suspend fun markFavourite(id: Int, isFavourite: Boolean) {
         booksDao.markFavourite(
-            id, if (isFavourite) {
+            id,
+            if (isFavourite) {
                 1
             } else {
                 0
-            }
+            },
         )
     }
 
     override suspend fun getFavourite(): Flow<List<BookDbModel>?> {
         return booksDao.getFavouriteFlow()
     }
-    //
 
     override suspend fun get(id: Int): BookDbModel? {
         return booksDao.get(id)
@@ -55,7 +54,7 @@ class BookDbSourceImpl @Inject constructor(
     }
 
     override suspend fun getFlow(): Flow<List<BookDbModel>?> {
-        return booksDao.getFlow()
+        return booksDao.subscribe()
     }
 
     override suspend fun insert(value: BookDbModel): Int {

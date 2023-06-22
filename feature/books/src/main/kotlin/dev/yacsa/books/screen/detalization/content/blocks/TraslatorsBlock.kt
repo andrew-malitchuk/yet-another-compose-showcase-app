@@ -17,11 +17,11 @@ import dev.yacsa.ui.theme.YacsaTheme
 @Composable
 fun TranslatorsBlock(
     book: BookUiModel,
-    onTranslatorClick:(String)->Unit,
-    ) {
+    onTranslatorClick: (String) -> Unit,
+) {
     Column(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxWidth(),
     ) {
         Text(
             modifier = Modifier.fillMaxWidth(),
@@ -33,7 +33,7 @@ fun TranslatorsBlock(
             textAlign = TextAlign.Start,
         )
         Spacer(
-            modifier = Modifier.height(YacsaTheme.spacing.small)
+            modifier = Modifier.height(YacsaTheme.spacing.small),
         )
         book.translators?.forEach { person ->
             person?.let {
@@ -42,10 +42,8 @@ fun TranslatorsBlock(
                 }
                 Spacer(modifier = Modifier.height(YacsaTheme.spacing.small))
             }
-
         }
     }
-
 }
 
 @Preview(showBackground = true)
@@ -65,9 +63,9 @@ fun Preview_TranslatorsBlock_Light() {
                 null,
                 null,
                 null,
-                true
+                true,
             ),
-            onTranslatorClick={}
+            onTranslatorClick = {},
         )
     }
 }
@@ -89,9 +87,9 @@ fun Preview_TranslatorsBlock_Dark() {
                 null,
                 null,
                 null,
-                true
+                true,
             ),
-            onTranslatorClick={}
+            onTranslatorClick = {},
         )
     }
 }

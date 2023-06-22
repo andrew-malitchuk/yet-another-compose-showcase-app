@@ -25,8 +25,9 @@ import dev.yacsa.ui.theme.YacsaTheme
 import kotlin.math.abs
 
 @OptIn(
-    ExperimentalMaterialApi::class, ExperimentalFoundationApi::class,
-    ExperimentalMaterial3Api::class
+    ExperimentalMaterialApi::class,
+    ExperimentalFoundationApi::class,
+    ExperimentalMaterial3Api::class,
 )
 @Composable
 fun ContentFetched(
@@ -39,7 +40,6 @@ fun ContentFetched(
     val corner =
         YacsaTheme.corners.medium - (YacsaTheme.corners.medium * abs(topAppBarState.collapsedFraction))
     val systemUiController = rememberSystemUiController()
-
 
     when {
         uiState.isLoading -> {
@@ -54,9 +54,8 @@ fun ContentFetched(
                 color = YacsaTheme.colors.statusBar,
             )
             dev.yacsa.ui.composable.content.ContentError(
-                errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString()
+                errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString(),
             ) {
-
             }
         }
 
@@ -79,14 +78,12 @@ fun ContentFetched(
                     modifier = Modifier
                         .fillMaxSize()
                         .clip(RoundedCornerShape(topStart = corner, topEnd = corner))
-                        .background(YacsaTheme.colors.surface)
+                        .background(YacsaTheme.colors.surface),
                 ) {
-
                 }
             }
         }
     }
-
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -95,12 +92,11 @@ fun ContentFetched(
 fun Preview_ContentFetched_Light() {
     YacsaTheme(false) {
         ContentFetched(
-            uiState = InfoUiState(
-            ),
+            uiState = InfoUiState(),
             innerPadding = PaddingValues(YacsaTheme.spacing.small),
             topAppBarState = rememberTopAppBarState(),
             state = rememberLazyListState(),
-            )
+        )
     }
 }
 
@@ -110,11 +106,10 @@ fun Preview_ContentFetched_Light() {
 fun Preview_ContentFetched_Dark() {
     YacsaTheme(true) {
         ContentFetched(
-            uiState = InfoUiState(
-            ),
+            uiState = InfoUiState(),
             innerPadding = PaddingValues(YacsaTheme.spacing.small),
             topAppBarState = rememberTopAppBarState(),
             state = rememberLazyListState(),
-            )
+        )
     }
 }

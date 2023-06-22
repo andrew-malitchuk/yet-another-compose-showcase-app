@@ -9,7 +9,7 @@ import kotlinx.parcelize.Parcelize
 data class SettingsUiState(
     val isLoading: Boolean = false,
     val isError: Boolean = false,
-    val lang: String?=null,
+    val lang: String? = null,
 ) : Parcelable {
 
     sealed class PartialState {

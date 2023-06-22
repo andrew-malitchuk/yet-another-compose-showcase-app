@@ -47,7 +47,6 @@ fun ItemFetchedList(
                 .build(),
         )
 
-
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -109,13 +108,13 @@ fun ItemFetchedList(
                     Icon(
                         painter = painterResource(id = R.drawable.icon_archive_box_regular_16),
                         contentDescription = null,
-                        tint = YacsaTheme.colors.accent
+                        tint = YacsaTheme.colors.accent,
                     )
                     Spacer(modifier = modifier.width(YacsaTheme.spacing.extraSmall))
                     Text(
                         text = book.downloadCount?.toString() ?: UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString(),
                         style = YacsaTheme.typography.title,
-                        color = YacsaTheme.colors.secondary
+                        color = YacsaTheme.colors.secondary,
                     )
                 }
             }
@@ -140,7 +139,7 @@ fun Preview_ListItem_Dark() {
                 null,
                 null,
                 10,
-                true
+                true,
             ),
             onItemContentClick = {},
         )
@@ -164,7 +163,7 @@ fun Preview_ItemFetchedList_Light() {
                 null,
                 null,
                 10,
-                true
+                true,
             ),
             onItemContentClick = {},
         )

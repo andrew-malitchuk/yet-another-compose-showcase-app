@@ -52,9 +52,8 @@ fun ContentFetched(
     onDelete: () -> Unit,
     onFilterChanged: (FilterDialogResult) -> Unit,
     previousContent: FilterDialogResult?,
-    onBackClick:()->Unit
+    onBackClick: () -> Unit,
 ) {
-
     val topAppBarState = rememberTopAppBarState()
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(topAppBarState)
@@ -86,11 +85,11 @@ fun ContentFetched(
                 onFilterChanged(FilterDialogResult())
                 filterResult.value = false
                 showSheet.value = false
-            }
+            },
         )
     }
     Column(
-        modifier = Modifier.background(YacsaTheme.colors.background)
+        modifier = Modifier.background(YacsaTheme.colors.background),
     ) {
         SearchToolbar(
             state = listState,
@@ -98,10 +97,9 @@ fun ContentFetched(
                 onBackClick()
             },
             onFilterClick = {
-
             },
-            filterState =  filterResult,
-            showSheet= showSheet
+            filterState = filterResult,
+            showSheet = showSheet,
         )
         OutlinedTextField(
             modifier = Modifier
@@ -113,7 +111,7 @@ fun ContentFetched(
                 unfocusedBorderColor = YacsaTheme.colors.primary,
                 textColor = YacsaTheme.colors.primary,
                 cursorColor = YacsaTheme.colors.accent,
-                placeholderColor = YacsaTheme.colors.secondary
+                placeholderColor = YacsaTheme.colors.secondary,
             ),
             value = searchText,
             onValueChange = onValueChange,
@@ -127,7 +125,7 @@ fun ContentFetched(
                 Icon(
                     imageVector = Icons.Outlined.Search,
                     contentDescription = null,
-                    tint = YacsaTheme.colors.accent
+                    tint = YacsaTheme.colors.accent,
                 )
             },
             trailingIcon = {
@@ -137,7 +135,7 @@ fun ContentFetched(
                     Icon(
                         imageVector = Icons.Outlined.Delete,
                         contentDescription = null,
-                        tint = YacsaTheme.colors.accent
+                        tint = YacsaTheme.colors.accent,
                     )
                 }
             },
@@ -149,15 +147,12 @@ fun ContentFetched(
             // TODO: fix
             ChipGroup(
                 values = uiState.topSearch.map { it.query ?: "" },
-                defaultColor = YacsaTheme.colors.background,
-                selectedColor = YacsaTheme.colors.surface,
                 onSelectedChanged = {
                     onValueChange(it)
                 },
-                onDelete = {
-                    onDelete()
-                },
-            )
+            ) {
+                onDelete()
+            }
         }
 
         if (uiState.isResultLoading) {
@@ -165,20 +160,19 @@ fun ContentFetched(
         } else {
             if (uiState.resultSearch.isNullOrEmpty()) {
                 if (uiState.isError) {
-                    ContentError(errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString()){}
+                    ContentError(errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString()) {}
                 } else {
-                    ContentNoData(modifier = Modifier.fillMaxSize(),message = UiText.StringResource(dev.yacsa.localization.R.string.errors_no_data).asString())
+                    ContentNoData(modifier = Modifier.fillMaxSize(), message = UiText.StringResource(dev.yacsa.localization.R.string.errors_no_data).asString())
                 }
             } else {
                 ResultFetched(
                     resultSearch = uiState.resultSearch,
                     onBookClicked = onBookClicked,
-                    state = listState
+                    state = listState,
                 )
             }
         }
     }
-
 }
 
 @Composable
@@ -193,7 +187,7 @@ fun Preview_ContentFetched_Light() {
             onDelete = {},
             onFilterChanged = {},
             previousContent = null,
-            onBackClick={}
+            onBackClick = {},
         )
     }
 }
@@ -210,7 +204,7 @@ fun Preview_ContentFetched_Dark() {
             onDelete = {},
             onFilterChanged = {},
             previousContent = null,
-            onBackClick={}
+            onBackClick = {},
         )
     }
 }

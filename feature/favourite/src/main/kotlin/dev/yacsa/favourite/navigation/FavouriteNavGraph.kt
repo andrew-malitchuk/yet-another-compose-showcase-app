@@ -22,24 +22,26 @@ fun NavGraphBuilder.favouriteNavGraph(navController: NavHostController) {
             deepLinks = listOf(
                 // adb shell am start -W -a android.intent.action.VIEW -d yacsa://favourite dev.yacsa.app.debug
                 navDeepLink {
-                    uriPattern="yacsa://favourite"
-                }
+                    uriPattern = "yacsa://favourite"
+                },
             ),
             enterTransition = {
                 slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween(700)
+                    AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(700),
                 )
             },
             exitTransition = {
                 slideOutOfContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(700)
+                    AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(700),
                 )
-            }
+            },
         ) {
             FavouriteRoute(
                 onBackClick = {
                     navController.popBackStack()
-                }
+                },
             )
         }
     }

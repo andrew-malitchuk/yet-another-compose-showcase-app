@@ -20,42 +20,45 @@ import dev.yacsa.ui.theme.YacsaTheme
 
 @Composable
 fun TwoStateButton(
-    modifier:Modifier=Modifier,
+    modifier: Modifier = Modifier,
     checkedState: MutableState<Boolean?>,
     @DrawableRes
     defaultIcon: Int,
     @DrawableRes
     selectedIcon: Int,
-    onButtonClick: ((Boolean) -> Unit)?=null,
-    containerColor: Color =YacsaTheme.colors.primary
+    onButtonClick: ((Boolean) -> Unit)? = null,
+    containerColor: Color = YacsaTheme.colors.primary,
 
 ) {
 //    val checked = remember { mutableStateOf(false) }
     SmallFloatingActionButton(
         onClick = {
-            onButtonClick?.invoke(checkedState.value?:false)
+            onButtonClick?.invoke(checkedState.value ?: false)
         },
         containerColor = containerColor,
-        elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
+        elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
     ) {
-        IconToggleButton(checked = checkedState.value?:false, onCheckedChange = { checkedState.value = it }) {
-
+        IconToggleButton(checked = checkedState.value ?: false, onCheckedChange = { checkedState.value = it }) {
             Crossfade(
-                targetState = checkedState.value
+                targetState = checkedState.value,
             ) { isChecked ->
                 isChecked?.let { onButtonClick?.invoke(it) }
-                if (isChecked==true) {
+                if (isChecked == true) {
                     Icon(
-                        painter = painterResource(id = selectedIcon), contentDescription = null, tint = YacsaTheme.colors.accent)
+                        painter = painterResource(id = selectedIcon),
+                        contentDescription = null,
+                        tint = YacsaTheme.colors.accent,
+                    )
                 } else {
                     Icon(
-                        painter = painterResource(id = defaultIcon), contentDescription = null,tint = YacsaTheme.colors.accent)
+                        painter = painterResource(id = defaultIcon),
+                        contentDescription = null,
+                        tint = YacsaTheme.colors.accent,
+                    )
                 }
             }
         }
     }
-
-
 }
 
 @Preview(showBackground = true)
@@ -68,7 +71,7 @@ fun Preview_TwoStateButton_Light() {
             R.drawable.icon_search_regular_24,
             R.drawable.icon_heart_regulat_24,
             {},
-            YacsaTheme.colors.primary
+            YacsaTheme.colors.primary,
         )
     }
 }
@@ -83,7 +86,7 @@ fun Preview_TwoStateButton_Dark() {
             R.drawable.icon_search_regular_24,
             R.drawable.icon_heart_regulat_24,
             {},
-            YacsaTheme.colors.primary
+            YacsaTheme.colors.primary,
         )
     }
 }

@@ -30,11 +30,12 @@ class OnboardingViewModel @Inject constructor(
     private val updateStartUpConfigureUseCase: NewUpdateStartUpConfigureUseCase,
     private val getStartUpConfigureUseCase: NewGetStartUpConfigureUseCase,
     private val analyticDispatcher: AnalyticDispatcher,
-    private val theme: Theme
+    private val theme: Theme,
 ) : BaseViewModel<OnboardingUiState, OnboardingUiState.PartialState, OnboardingEvent, OnboardingIntent>(
     savedStateHandle,
     initialState,
-), Theme by theme {
+),
+    Theme by theme {
 
     init {
         viewModelScope.launch {
@@ -44,8 +45,7 @@ class OnboardingViewModel @Inject constructor(
             analyticDispatcher.sendEvent(
                 object : ContentViewAnalyticModel() {
                     override val viewName = "onboarding"
-
-                }
+                },
             )
 
             analyticDispatcher.sendEvent(
@@ -54,10 +54,9 @@ class OnboardingViewModel @Inject constructor(
 
                     override fun getParameters(): Map<String, Any> = mapOf(
                         "bar" to true,
-                        "foo" to 1
+                        "foo" to 1,
                     )
-
-                }
+                },
             )
             analyticDispatcher.setUserProperty(object : UserPropertyAnalyticModel() {
                 override val key: String = "name"
@@ -69,10 +68,8 @@ class OnboardingViewModel @Inject constructor(
     fun updateStartUpConfigure() {
         viewModelScope.launch {
             getStartUpConfigureUseCase().fold({
-
             }, {
                 updateStartUpConfigureUseCase(StartUpConfigureDomainModel(true, it.language))
-
             })
         }
     }

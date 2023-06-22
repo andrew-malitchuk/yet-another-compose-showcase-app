@@ -25,5 +25,4 @@ class LocalAnalyticProvider @Inject constructor() : AnalyticProvider {
     override suspend fun setProperty(property: UserPropertyAnalyticModel) {
         logcat { "CustomAnalyticModel: {${property.key} : ${property.value}}" }
     }
-
 }

@@ -61,12 +61,12 @@ fun AnalyticsItem(
             SmallFloatingActionButton(
                 onClick = { },
                 containerColor = YacsaTheme.colors.primary,
-                elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
+                elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
             ) {
                 Icon(
                     painter = painterResource(id = icon),
                     contentDescription = null,
-                    tint = YacsaTheme.colors.accent
+                    tint = YacsaTheme.colors.accent,
                 )
             }
             Spacer(

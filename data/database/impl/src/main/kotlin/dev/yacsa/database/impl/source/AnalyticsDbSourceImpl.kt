@@ -55,5 +55,4 @@ class AnalyticsDbSourceImpl @Inject constructor(
     override suspend fun deleteAll() {
         analyticsDbDao.deleteAll()
     }
-
 }

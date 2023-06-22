@@ -31,8 +31,9 @@ import dev.yacsa.ui.theme.YacsaTheme
 import logcat.logcat
 
 @OptIn(
-    ExperimentalMaterialApi::class, ExperimentalFoundationApi::class,
-    ExperimentalMaterial3Api::class
+    ExperimentalMaterialApi::class,
+    ExperimentalFoundationApi::class,
+    ExperimentalMaterial3Api::class,
 )
 @Composable
 fun ContentFetched(
@@ -48,7 +49,6 @@ fun ContentFetched(
         YacsaTheme.corners.medium - (YacsaTheme.corners.medium * Math.abs(topAppBarState.collapsedFraction))
     val systemUiController = rememberSystemUiController()
 
-
     when {
         uiState.isLoading -> {
             systemUiController.setNavigationBarColor(
@@ -62,9 +62,8 @@ fun ContentFetched(
                 color = YacsaTheme.colors.statusBar,
             )
             dev.yacsa.ui.composable.content.ContentError(
-                errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString()
+                errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString(),
             ) {
-
             }
         }
 
@@ -87,14 +86,12 @@ fun ContentFetched(
                     modifier = Modifier
                         .fillMaxSize()
                         .clip(RoundedCornerShape(topStart = corner, topEnd = corner))
-                        .background(YacsaTheme.colors.surface)
+                        .background(YacsaTheme.colors.surface),
                 ) {
-
                     if (uiState.featureFlags.isNullOrEmpty()) {
                         ContentNoData(
-                            message = UiText.StringResource(dev.yacsa.localization.R.string.errors_no_data).asString()
+                            message = UiText.StringResource(dev.yacsa.localization.R.string.errors_no_data).asString(),
                         )
-
                     } else {
                         LazyColumn(
                             modifier = Modifier
@@ -126,7 +123,6 @@ fun ContentFetched(
             }
         }
     }
-
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -145,7 +141,7 @@ fun Preview_ContentFetched_Light() {
             innerPadding = PaddingValues(YacsaTheme.spacing.small),
             topAppBarState = rememberTopAppBarState(),
             state = rememberLazyListState(),
-            )
+        )
     }
 }
 
@@ -165,6 +161,6 @@ fun Preview_ContentFetched_Dark() {
             innerPadding = PaddingValues(YacsaTheme.spacing.small),
             topAppBarState = rememberTopAppBarState(),
             state = rememberLazyListState(),
-            )
+        )
     }
 }

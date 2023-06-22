@@ -13,11 +13,12 @@ import javax.inject.Inject
 class InfoViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     initialState: InfoUiState,
-    private val theme:Theme,
-    ) : BaseViewModel<InfoUiState, InfoUiState.PartialState, InfoEvent, InfoIntent>(
+    private val theme: Theme,
+) : BaseViewModel<InfoUiState, InfoUiState.PartialState, InfoEvent, InfoIntent>(
     savedStateHandle,
-    initialState
-) , Theme by theme{
+    initialState,
+),
+    Theme by theme {
 
     init {
         logcat { "init" }

@@ -41,8 +41,8 @@ fun AnalyticsRoute(
     onBackClick: () -> Unit,
 ) {
     val uiState by analyticsViewModel.uiState.collectAsStateWithLifecycle()
-    val currentTheme  by analyticsViewModel.currentTheme
-    val isDarkTheme = currentTheme?.detectThemeMode()?:false
+    val currentTheme by analyticsViewModel.currentTheme
+    val isDarkTheme = currentTheme?.detectThemeMode() ?: false
 
     Rebugger(
         trackMap = mapOf(
@@ -58,7 +58,7 @@ fun AnalyticsRoute(
             onBackClick,
             onDeleteClick = {
                 analyticsViewModel.acceptIntent(AnalyticsIntent.Delete)
-            }
+            },
         )
     }
 }
@@ -68,7 +68,7 @@ fun AnalyticsRoute(
 fun AnalyticsScreen(
     uiState: AnalyticsUiState,
     onBackClick: () -> Unit,
-    onDeleteClick:()->Unit
+    onDeleteClick: () -> Unit,
 ) {
     val systemUiController = rememberSystemUiController()
     val state = rememberLazyListState()
@@ -85,7 +85,6 @@ fun AnalyticsScreen(
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(topAppBarState)
 
-
     Scaffold(
         modifier = Modifier
             .nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -99,14 +98,14 @@ fun AnalyticsScreen(
                         Text(
                             text = UiText.StringResource(dev.yacsa.localization.R.string.settings_analytics).asString(),
                             style = YacsaTheme.typography.header,
-                            color = YacsaTheme.colors.primary
+                            color = YacsaTheme.colors.primary,
                         )
                         // TODO: fix
                         Spacer(modifier = Modifier.width(YacsaTheme.spacing.small))
                         androidx.compose.material3.Icon(
                             painterResource(id = R.drawable.icon_flask_bold_24),
                             contentDescription = null,
-                            tint = YacsaTheme.colors.accent
+                            tint = YacsaTheme.colors.accent,
                         )
                     }
                 },
@@ -114,12 +113,12 @@ fun AnalyticsScreen(
                     SmallFloatingActionButton(
                         onClick = { onBackClick() },
                         containerColor = YacsaTheme.colors.accent,
-                        elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
+                        elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
                     ) {
                         Icon(
                             painter = painterResource(id = R.drawable.icon_caret_left_regular_24),
                             contentDescription = null,
-                            tint = YacsaTheme.colors.primary
+                            tint = YacsaTheme.colors.primary,
                         )
                     }
                 },
@@ -137,21 +136,21 @@ fun AnalyticsScreen(
             FloatingActionButton(
                 onClick = { onDeleteClick() },
                 backgroundColor = YacsaTheme.colors.accent,
-                elevation = androidx.compose.material.FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
+                elevation = androidx.compose.material.FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_trash_bold_24),
                     contentDescription = null,
-                    tint = YacsaTheme.colors.primary
+                    tint = YacsaTheme.colors.primary,
                 )
             }
-        }
+        },
     ) { innerPadding ->
         ContentFetched(
             innerPadding = innerPadding,
             state = state,
             topAppBarState = topAppBarState,
-            uiState=uiState
+            uiState = uiState,
         )
     }
 }
@@ -159,11 +158,11 @@ fun AnalyticsScreen(
 @Preview(showBackground = true)
 @Composable
 fun Preview_SettingsScreen_Light() {
-    YacsaTheme(false){
+    YacsaTheme(false) {
         AnalyticsScreen(
             uiState = AnalyticsUiState(),
             onBackClick = {},
-            onDeleteClick={}
+            onDeleteClick = {},
         )
     }
 }
@@ -171,11 +170,11 @@ fun Preview_SettingsScreen_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_SettingsScreen_Dark() {
-    YacsaTheme(true){
+    YacsaTheme(true) {
         AnalyticsScreen(
             uiState = AnalyticsUiState(),
             onBackClick = {},
-            onDeleteClick={}
+            onDeleteClick = {},
         )
     }
 }

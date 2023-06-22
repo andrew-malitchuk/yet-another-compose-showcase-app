@@ -20,19 +20,21 @@ fun NavGraphBuilder.infoNavGraph(navController: NavHostController) {
             InfoDirections.Info.route,
             enterTransition = {
                 slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween(700)
+                    AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(700),
                 )
             },
             exitTransition = {
                 slideOutOfContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(700)
+                    AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(700),
                 )
-            }
+            },
         ) {
             InfoRoute(
                 onBackClick = {
                     navController.popBackStack()
-                }
+                },
             )
         }
     }

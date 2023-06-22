@@ -6,5 +6,9 @@ import dev.yacsa.domain.model.BookDomainModel
 
 interface NewSearchBooksUseCase {
     @Throws(Throwable::class)
-    suspend operator fun invoke(query: String, sort:String?=null, lang:String?=null): Either<DomainError, List<BookDomainModel>>
+    suspend operator fun invoke(
+        query: String,
+        sort: String? = null,
+        lang: String? = null
+    ): Either<DomainError, List<BookDomainModel>>
 }

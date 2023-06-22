@@ -25,17 +25,17 @@ import dev.yacsa.ui.theme.YacsaTheme
 fun SearchRoute(
     searchViewModel: SearchViewModel = hiltViewModel(),
     onBookClicked: (Int) -> Unit,
-    onBackClick:()->Unit
+    onBackClick: () -> Unit,
 ) {
     val uiState by searchViewModel.uiState.collectAsStateWithLifecycle()
     val searchText by searchViewModel.searchText.collectAsState()
 
     val previousContent by searchViewModel.filterResult.collectAsState()
-    val currentTheme  by searchViewModel.currentTheme
-    val isDarkTheme = currentTheme?.detectThemeMode()?:false
+    val currentTheme by searchViewModel.currentTheme
+    val isDarkTheme = currentTheme?.detectThemeMode() ?: false
 
     val status by searchViewModel.connectivityObserver.observe().collectAsState(
-        initial = ConnectivityObserver.Status.Unavailable
+        initial = ConnectivityObserver.Status.Unavailable,
     )
     val isOfflineMode = when (status) {
         ConnectivityObserver.Status.Available -> false
@@ -53,13 +53,11 @@ fun SearchRoute(
         ),
     )
 
-
     YacsaTheme(isDarkTheme) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxSize(),
         ) {
-
             if (isOfflineMode) {
                 systemUiController.setSystemBarsColor(
                     color = YacsaTheme.colors.primary,
@@ -85,7 +83,7 @@ fun SearchRoute(
                     searchViewModel.acceptIntent(SearchIntent.Search(searchText))
                 },
                 previousContent = previousContent,
-                onBackClick = onBackClick
+                onBackClick = onBackClick,
             )
         }
     }
@@ -100,7 +98,7 @@ fun SearchScreen(
     onDelete: () -> Unit,
     onFilterChanged: (FilterDialogResult) -> Unit,
     previousContent: FilterDialogResult?,
-    onBackClick:()->Unit
+    onBackClick: () -> Unit,
 ) {
     val systemUiController = rememberSystemUiController()
     systemUiController.apply {
@@ -122,15 +120,15 @@ fun SearchScreen(
                 onBookClicked = onBookClicked,
                 onDelete = onDelete,
                 onFilterChanged = onFilterChanged,
-                previousContent=previousContent,
-                onBackClick=    onBackClick
+                previousContent = previousContent,
+                onBackClick = onBackClick,
 
             )
         } else {
             if (uiState.isError) {
-                ContentError(errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString()){ }
-            }else{
-                if(uiState.isResultLoading){
+                ContentError(errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString()) { }
+            } else {
+                if (uiState.isResultLoading) {
                     ContentIsLoading()
                 }
             }
@@ -150,7 +148,7 @@ fun Preview_SearchScreen_Light() {
             {},
             {},
             null,
-            {}
+            {},
         )
     }
 }
@@ -167,7 +165,7 @@ fun Preview_SearchScreen_Dark() {
             {},
             {},
             null,
-            {}
+            {},
         )
     }
 }

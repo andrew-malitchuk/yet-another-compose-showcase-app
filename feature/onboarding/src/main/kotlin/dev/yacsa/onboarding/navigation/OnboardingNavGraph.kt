@@ -20,14 +20,16 @@ fun NavGraphBuilder.onboardingNavGraph(navController: NavHostController) {
             OnboardingDirection.Onboarding.route,
             enterTransition = {
                 slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween(700)
+                    AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(700),
                 )
             },
             exitTransition = {
                 slideOutOfContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(700)
+                    AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(700),
                 )
-            }
+            },
         ) {
             OnboardingRoute(
                 onBackClick = {

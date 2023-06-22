@@ -25,5 +25,4 @@ abstract class ProviderModule {
     abstract fun bindsLoggerProvider(
         loggerProviderImpl: LoggerProviderImpl,
     ): LoggerProvider
-
 }

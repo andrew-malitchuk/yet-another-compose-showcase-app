@@ -22,14 +22,14 @@ import dev.yacsa.ui.theme.YacsaTheme
 @Composable
 fun ContentNoData(
     modifier: Modifier = Modifier,
-    message:String
+    message: String,
 ) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .padding(YacsaTheme.spacing.medium),
 
-        ) {
+    ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -37,12 +37,12 @@ fun ContentNoData(
                 .clip(YacsaTheme.shapes.cornersStyle)
                 .align(Alignment.Center)
                 .background(YacsaTheme.colors.surface),
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.Center,
 
         ) {
             Column(
                 verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Image(
                     modifier = Modifier
@@ -65,7 +65,7 @@ fun ContentNoData(
 fun Preview_ContentNoData_Light() {
     YacsaTheme(false) {
         ContentNoData(
-            message="Foobar"
+            message = "Foobar",
         )
     }
 }
@@ -75,7 +75,7 @@ fun Preview_ContentNoData_Light() {
 fun Preview_ContentNoData_Dark() {
     YacsaTheme(true) {
         ContentNoData(
-            message="Foobar"
+            message = "Foobar",
         )
     }
 }

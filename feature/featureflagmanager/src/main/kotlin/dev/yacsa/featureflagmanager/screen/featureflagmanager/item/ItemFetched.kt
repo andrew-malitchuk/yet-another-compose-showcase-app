@@ -56,12 +56,12 @@ fun ItemFetched(
             SmallFloatingActionButton(
                 onClick = { },
                 containerColor = YacsaTheme.colors.primary,
-                elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp)
+                elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
             ) {
                 Icon(
                     painter = painterResource(id = dev.yacsa.ui.R.drawable.icon_command_regular_24),
                     contentDescription = null,
-                    tint = YacsaTheme.colors.accent
+                    tint = YacsaTheme.colors.accent,
                 )
             }
             Spacer(
@@ -69,13 +69,13 @@ fun ItemFetched(
                     .width(YacsaTheme.spacing.medium),
             )
             Row(
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
                     modifier = Modifier.basicMarquee(),
                     text = item.key,
                     style = YacsaTheme.typography.title,
-                    color = YacsaTheme.colors.primary
+                    color = YacsaTheme.colors.primary,
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 Switch(
@@ -108,7 +108,6 @@ fun ItemFetched(
             }
         }
     }
-
 
 //    Column {
 //        Row(

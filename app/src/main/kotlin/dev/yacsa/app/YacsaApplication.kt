@@ -38,7 +38,6 @@ class YacsaApplication : Application() {
         configureFlipper()
     }
 
-
     private fun configureFlipper() {
         SoLoader.init(this, false)
         with(AndroidFlipperClient.getInstance(this)) {

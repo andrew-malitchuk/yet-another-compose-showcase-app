@@ -22,19 +22,21 @@ fun NavGraphBuilder.searchNavGraph(navController: NavHostController) {
             deepLinks = listOf(
                 // adb shell am start -W -a android.intent.action.VIEW -d yacsa://search dev.yacsa.app.debug
                 navDeepLink {
-                    uriPattern="yacsa://search"
-                }
+                    uriPattern = "yacsa://search"
+                },
             ),
             enterTransition = {
                 slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween(700)
+                    AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(700),
                 )
             },
             exitTransition = {
                 slideOutOfContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(700)
+                    AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(700),
                 )
-            }
+            },
         ) {
             SearchRoute(
                 onBookClicked = {
@@ -47,7 +49,7 @@ fun NavGraphBuilder.searchNavGraph(navController: NavHostController) {
                 },
                 onBackClick = {
                     navController.popBackStack()
-                }
+                },
             )
         }
     }

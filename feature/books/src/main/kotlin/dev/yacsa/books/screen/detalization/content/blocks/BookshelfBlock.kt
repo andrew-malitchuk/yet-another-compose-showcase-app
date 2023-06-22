@@ -17,11 +17,11 @@ import dev.yacsa.ui.theme.YacsaTheme
 @Composable
 fun BookshelfBlock(
     book: BookUiModel,
-    onBookshelfClick:(String)->Unit,
-    ) {
+    onBookshelfClick: (String) -> Unit,
+) {
     Column(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxWidth(),
     ) {
         Text(
             modifier = Modifier.fillMaxWidth(),
@@ -33,19 +33,17 @@ fun BookshelfBlock(
             textAlign = TextAlign.Start,
         )
         Spacer(
-            modifier = Modifier.height(YacsaTheme.spacing.small)
+            modifier = Modifier.height(YacsaTheme.spacing.small),
         )
         book.bookshelves?.forEach { lang ->
             lang?.let {
                 ItemBookshelf(bookshelf = it) {
-                        onBookshelfClick(it)
+                    onBookshelfClick(it)
                 }
                 Spacer(modifier = Modifier.height(YacsaTheme.spacing.small))
             }
-
         }
     }
-
 }
 
 @Preview(showBackground = true)
@@ -65,9 +63,9 @@ fun Preview_BookshelfBlock_Light() {
                 null,
                 null,
                 null,
-                true
+                true,
             ),
-            onBookshelfClick={}
+            onBookshelfClick = {},
         )
     }
 }
@@ -89,9 +87,9 @@ fun Preview_BookshelfBlock_Dark() {
                 null,
                 null,
                 null,
-                true
+                true,
             ),
-            onBookshelfClick={}
+            onBookshelfClick = {},
         )
     }
 }

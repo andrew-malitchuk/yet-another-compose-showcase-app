@@ -33,7 +33,8 @@ class DetalizationViewModel @Inject constructor(
 ) : BaseViewModel<DetalizationUiState, DetalizationUiState.PartialState, DetalizationEvent, DetalizationIntent>(
     savedStateHandle,
     initialState,
-), Theme by theme {
+),
+    Theme by theme {
 
     var checked: MutableState<Boolean?> =
         mutableStateOf(null)
@@ -71,7 +72,7 @@ class DetalizationViewModel @Inject constructor(
                 }
             },
             {
-                checked.value= it.favourite == true
+                checked.value = it.favourite == true
                 emit(
                     DetalizationUiState.PartialState.Fetched(
                         bookUiDomainMapper.toUi(it),
@@ -83,13 +84,12 @@ class DetalizationViewModel @Inject constructor(
         emit(DetalizationUiState.PartialState.Loading)
     }
 
-
     private fun onLickClick(uri: String): Flow<DetalizationUiState.PartialState> {
         publishEvent(DetalizationEvent.OpenWebBrowserWithDetails(uri))
         return emptyFlow()
     }
 
-    private fun onShareClick(id:Int): Flow<DetalizationUiState.PartialState> {
+    private fun onShareClick(id: Int): Flow<DetalizationUiState.PartialState> {
         publishEvent(DetalizationEvent.ShareDeeplink(generateDeeplink(id)))
         return emptyFlow()
     }
@@ -122,15 +122,14 @@ class DetalizationViewModel @Inject constructor(
     // TODO: recode
     fun changeFavourite(isFavourite: Boolean) {
         viewModelScope.launch {
-            if (uiState.value.book?.isFavourite!=isFavourite) {
+            if (uiState.value.book?.isFavourite != isFavourite) {
                 markFavouriteBook(bookId, isFavourite)
-                favouriteState.value=true
+                favouriteState.value = true
             }
         }
     }
 
-
-    private fun generateDeeplink(id:Int):String{
+    private fun generateDeeplink(id: Int): String {
         return "yacsa://book/$id"
     }
 }

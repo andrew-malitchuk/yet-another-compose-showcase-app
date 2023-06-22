@@ -22,5 +22,4 @@ class GetAnalyticsUseCaseImpl @Inject constructor(
             Either.Left(DataError(ex))
         }
     }
-
 }

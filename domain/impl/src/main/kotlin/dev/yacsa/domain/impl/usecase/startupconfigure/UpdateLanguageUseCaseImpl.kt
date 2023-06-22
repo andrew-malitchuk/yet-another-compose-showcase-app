@@ -19,9 +19,8 @@ class UpdateLanguageUseCaseImpl @Inject constructor(
             startUpConfigureRepository.getStartUpConfigure()?.let { previous ->
                 previous.language = value
                 startUpConfigureRepository.updateStartUpConfigure(
-                    previous
+                    previous,
                 )
-
             }
             none()
         } catch (ex: Exception) {

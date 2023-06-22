@@ -14,15 +14,14 @@ import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.theme.YacsaTheme
 
-
 @Composable
 fun FormatsBlock(
     book: BookUiModel,
-    onFormatClick:(String)->Unit
+    onFormatClick: (String) -> Unit,
 ) {
     Column(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxWidth(),
     ) {
         Text(
             modifier = Modifier.fillMaxWidth(),
@@ -34,52 +33,52 @@ fun FormatsBlock(
             textAlign = TextAlign.Start,
         )
         Spacer(
-            modifier = Modifier.height(YacsaTheme.spacing.small)
+            modifier = Modifier.height(YacsaTheme.spacing.small),
         )
-        book.formats?.let {format->
-            format.applicationEpubZip?.let{
+        book.formats?.let { format ->
+            format.applicationEpubZip?.let {
                 ItemFormat(type = ".epub", link = it) {
                     onFormatClick(it)
                 }
                 Spacer(modifier = Modifier.height(YacsaTheme.spacing.small))
             }
-            format.applicationOctetStream?.let{
+            format.applicationOctetStream?.let {
                 ItemFormat(type = "octet-stream", link = it) {
                     onFormatClick(it)
                 }
                 Spacer(modifier = Modifier.height(YacsaTheme.spacing.small))
             }
-            format.applicationRdfXml?.let{
+            format.applicationRdfXml?.let {
                 ItemFormat(type = ".rdf", link = it) {
                     onFormatClick(it)
                 }
                 Spacer(modifier = Modifier.height(YacsaTheme.spacing.small))
             }
-            format.applicationxMobipocketEbook?.let{
+            format.applicationxMobipocketEbook?.let {
                 ItemFormat(type = ".mobi", link = it) {
                     onFormatClick(it)
                 }
                 Spacer(modifier = Modifier.height(YacsaTheme.spacing.small))
             }
-            format.imageJpeg?.let{
+            format.imageJpeg?.let {
                 ItemFormat(type = ".jpeg", link = it) {
                     onFormatClick(it)
                 }
                 Spacer(modifier = Modifier.height(YacsaTheme.spacing.small))
             }
-            format.textHtml?.let{
+            format.textHtml?.let {
                 ItemFormat(type = ".html", link = it) {
                     onFormatClick(it)
                 }
                 Spacer(modifier = Modifier.height(YacsaTheme.spacing.small))
             }
-            format.textPlain?.let{
+            format.textPlain?.let {
                 ItemFormat(type = ".txt", link = it) {
                     onFormatClick(it)
                 }
                 Spacer(modifier = Modifier.height(YacsaTheme.spacing.small))
             }
-            format.textplainCharsetusAscii?.let{
+            format.textplainCharsetusAscii?.let {
                 ItemFormat(type = "ASCII", link = it) {
                     onFormatClick(it)
                 }
@@ -87,7 +86,6 @@ fun FormatsBlock(
             }
         }
     }
-
 }
 
 @Preview(showBackground = true)
@@ -107,9 +105,9 @@ fun Preview_FormatsBlock_Light() {
                 null,
                 null,
                 null,
-                true
+                true,
             ),
-            onFormatClick = {}
+            onFormatClick = {},
         )
     }
 }
@@ -131,9 +129,9 @@ fun Preview_FormatsBlock_Dark() {
                 null,
                 null,
                 null,
-                true
+                true,
             ),
-            onFormatClick = {}
+            onFormatClick = {},
         )
     }
 }

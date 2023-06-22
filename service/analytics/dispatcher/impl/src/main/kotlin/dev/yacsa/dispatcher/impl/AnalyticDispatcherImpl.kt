@@ -7,9 +7,8 @@ import dev.yacsa.provider.AnalyticProvider
 import javax.inject.Inject
 
 class AnalyticDispatcherImpl @Inject constructor(
-    private val analyticProviders: ArrayList<AnalyticProvider>
+    private val analyticProviders: ArrayList<AnalyticProvider>,
 ) : AnalyticDispatcher {
-
 
     override suspend fun setUserProperty(property: UserPropertyAnalyticModel) {
         analyticProviders.forEach {
@@ -22,5 +21,4 @@ class AnalyticDispatcherImpl @Inject constructor(
             it.log(event)
         }
     }
-
 }

@@ -50,7 +50,7 @@ fun ColumnToggleButtonGroup(
     shape: CornerBasedShape = MaterialTheme.shapes.small,
     borderSize: Dp = 1.dp,
     border: BorderStroke = BorderStroke(borderSize, borderColor),
-    elevation: ButtonElevation = ButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp,0.dp),
+    elevation: ButtonElevation = ButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp, 0.dp),
     enabled: Boolean = true,
     buttonHeight: Dp = 60.dp,
     iconPosition: IconPosition = IconPosition.Start,
@@ -114,7 +114,7 @@ fun RowToggleButtonGroup(
     shape: CornerBasedShape = MaterialTheme.shapes.small,
     borderSize: Dp = 1.dp,
     border: BorderStroke = BorderStroke(borderSize, borderColor),
-    elevation: ButtonElevation = ButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp,0.dp),
+    elevation: ButtonElevation = ButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp, 0.dp),
     enabled: Boolean = true,
     buttonHeight: Dp = 60.dp,
     iconPosition: IconPosition = IconPosition.Start,
@@ -238,7 +238,7 @@ private fun RowScope.ButtonWithIconAndText(
     buttonTexts: Array<String>,
     index: Int,
     contentColor: Color,
-    iconPosition: IconPosition
+    iconPosition: IconPosition,
 ) {
     when (iconPosition) {
         IconPosition.Start -> {

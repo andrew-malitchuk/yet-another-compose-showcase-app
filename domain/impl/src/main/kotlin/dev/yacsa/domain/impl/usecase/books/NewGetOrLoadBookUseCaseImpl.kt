@@ -23,7 +23,7 @@ class NewGetOrLoadBookUseCaseImpl @Inject constructor(
                 try {
                     val temp = fromNet.id?.let { booksRepository.loadBook(it) }
 
-                    booksRepository.saveBook(fromNet.also { it.favourite = temp?.favourite; it.page=temp?.page })
+                    booksRepository.saveBook(fromNet.also { it.favourite = temp?.favourite; it.page = temp?.page })
                     Either.Right(bookDomainRepoMapper.toDomain(fromNet))
                 } catch (ex: Exception) {
                     Either.Left(DataError(ex))

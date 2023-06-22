@@ -43,15 +43,14 @@ fun ContentFetchedPortrait(
     onSubjectClick: (String) -> Unit,
     onBookshelfClick: (String) -> Unit,
     favourite: MutableState<Boolean?>,
-    onShareClick:(Int)->Unit
+    onShareClick: (Int) -> Unit,
 ) {
     val lazyScrollState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
 
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
     ) {
-
         Scaffold(
             modifier = Modifier
                 .fillMaxSize()
@@ -68,7 +67,7 @@ fun ContentFetchedPortrait(
                             }
                         },
                         favourite,
-                        onShareClick
+                        onShareClick,
                     )
                 }
             },
@@ -76,7 +75,7 @@ fun ContentFetchedPortrait(
             Column(
                 modifier = Modifier
                     .padding(paddingValues)
-                    .background(YacsaTheme.colors.background)
+                    .background(YacsaTheme.colors.background),
             ) {
                 AnimatedDivider(state = lazyScrollState)
                 LazyColumn(
@@ -87,7 +86,7 @@ fun ContentFetchedPortrait(
                     state = lazyScrollState,
                     contentPadding = PaddingValues(
                         horizontal = YacsaTheme.spacing.medium,
-                        vertical = YacsaTheme.spacing.small
+                        vertical = YacsaTheme.spacing.small,
                     ),
                     verticalArrangement = Arrangement.spacedBy(YacsaTheme.spacing.small),
                 ) {
@@ -123,7 +122,7 @@ fun ContentFetchedPortrait(
                                     book = it,
                                     onFormatClick = {
                                         onFormatClick(it)
-                                    }
+                                    },
                                 )
                             }
                         }
@@ -162,7 +161,7 @@ fun Preview_ContentFetchedPortrait_Light() {
             {},
             {},
             remember { mutableStateOf(false) },
-            {}
+            {},
         )
     }
 }
@@ -181,7 +180,7 @@ fun Preview_ContentFetchedPortrait_Dark() {
             {},
             {},
             remember { mutableStateOf(false) },
-            onShareClick = {}
+            onShareClick = {},
         )
     }
 }

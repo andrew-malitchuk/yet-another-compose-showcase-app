@@ -36,11 +36,11 @@ fun ScrollUpFab(
             ),
         ),
 
-        ) {
+    ) {
         FloatingActionButton(
             onClick = { onClick() },
             backgroundColor = YacsaTheme.colors.accent,
-            elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
+            elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
         ) {
             androidx.compose.material3.Icon(
                 painter = painterResource(id = R.drawable.icon_arrow_up_regular_24),
@@ -60,7 +60,6 @@ fun Preview_ScrollUpFab_Light() {
         ) {}
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable

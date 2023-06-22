@@ -9,7 +9,6 @@ import dev.yacsa.network.source.BooksNetSource
 import dev.yacsa.repository.impl.mapper.book.NewBookRepoDbMapper
 import dev.yacsa.repository.impl.mapper.book.NewBookRepoNetMapper
 import dev.yacsa.repository.impl.mapper.person.NewPersonRepoDbMapper
-import dev.yacsa.repository.impl.mapper.person.NewPersonRepoNetMapper
 import dev.yacsa.repository.model.BookRepoModel
 import dev.yacsa.repository.repository.BooksRepository
 import kotlinx.coroutines.flow.Flow
@@ -22,7 +21,6 @@ class BooksRepositoryImpl @Inject constructor(
     private val bookRepoNetMapper: NewBookRepoNetMapper,
     private val bookRepoDbMapper: NewBookRepoDbMapper,
     private val personDbSource: PersonDbSource,
-    private val personRepoNetMapper: NewPersonRepoNetMapper,
     private val personRepoDbMapper: NewPersonRepoDbMapper,
     private val bookAuthorRelationshipDbSource: BookAuthorRelationshipDbSource,
 ) : BooksRepository {
@@ -133,18 +131,18 @@ class BooksRepositoryImpl @Inject constructor(
     override suspend fun searchOnRemote(
         query: String,
         sort: String?,
-        lang: String?
+        lang: String?,
     ): List<BookRepoModel> {
-        val result = booksNetSource.search(query,sort,lang)?.results ?: emptyList()
+        val result = booksNetSource.search(query, sort, lang)?.results ?: emptyList()
         return result.filterNotNull().map(bookRepoNetMapper::toRepo)
     }
 
     override suspend fun searchOnLocal(
         query: String,
         sort: String?,
-        lang: String?
+        lang: String?,
     ): List<BookRepoModel> {
-        val result = bookDbSource.search(query,sort,lang)
+        val result = bookDbSource.search(query, sort, lang)
         return result.map(bookRepoDbMapper::toRepo)
     }
 
@@ -159,5 +157,4 @@ class BooksRepositoryImpl @Inject constructor(
             }
         }
     }
-
 }

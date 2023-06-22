@@ -38,16 +38,16 @@ fun NotFoundScreen(
             .background(YacsaTheme.colors.background)
             .padding(YacsaTheme.spacing.medium),
 
-        ) {
+    ) {
         SmallFloatingActionButton(
             onClick = { onBackClick() },
-            elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp),
-            containerColor = YacsaTheme.colors.accent
+            elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
+            containerColor = YacsaTheme.colors.accent,
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.icon_caret_left_regular_24),
                 contentDescription = null,
-                tint = YacsaTheme.colors.primary
+                tint = YacsaTheme.colors.primary,
             )
         }
 
@@ -58,7 +58,7 @@ fun NotFoundScreen(
                 .clip(RoundedCornerShape(size = YacsaTheme.corners.medium))
                 .align(Alignment.Center)
                 .background(YacsaTheme.colors.surface),
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.Center,
 
         ) {
             Image(
@@ -69,7 +69,6 @@ fun NotFoundScreen(
             )
         }
     }
-
 }
 
 @Composable

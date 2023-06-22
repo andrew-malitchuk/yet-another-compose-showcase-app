@@ -24,14 +24,16 @@ fun NavGraphBuilder.booksNavGraph(navController: NavHostController) {
             BooksDirection.List.route,
             enterTransition = {
                 slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween(700)
+                    AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(700),
                 )
             },
             exitTransition = {
                 slideOutOfContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(700)
+                    AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(700),
                 )
-            }
+            },
         ) {
             ListRoute(
                 onClick = {
@@ -59,7 +61,12 @@ fun NavGraphBuilder.booksNavGraph(navController: NavHostController) {
                 },
                 onFavourite = {
                     navController.navigate(
-                        NavigationDirection.Favourite.route
+                        NavigationDirection.Favourite.route,
+                    )
+                },
+                onBookClicked = {
+                    navController.navigate(
+                        BooksDirection.Detalization.getRoute(it)
                     )
                 }
             )
@@ -70,21 +77,23 @@ fun NavGraphBuilder.booksNavGraph(navController: NavHostController) {
                 // adb shell am start -W -a android.intent.action.VIEW -d yacsa://book/11 dev.yacsa.app.debug
                 navDeepLink {
                     uriPattern = "yacsa://book/{bookId}"
-                }
+                },
             ),
             arguments = listOf(
                 navArgument("bookId") { type = NavType.IntType },
             ),
             enterTransition = {
                 slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween(700)
+                    AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(700),
                 )
             },
             exitTransition = {
                 slideOutOfContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(700)
+                    AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(700),
                 )
-            }
+            },
         ) {
             DetalizationRoute(
                 onBackClick = {

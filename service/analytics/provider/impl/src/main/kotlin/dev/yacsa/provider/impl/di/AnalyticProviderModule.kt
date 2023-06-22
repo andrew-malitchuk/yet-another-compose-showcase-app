@@ -22,8 +22,7 @@ class AnalyticProviderModule {
         return arrayListOf(
             localAnalyticProvider,
             notificationAnalyticProvider,
-            firebaseAnalyticProvider
+            firebaseAnalyticProvider,
         )
     }
-
 }

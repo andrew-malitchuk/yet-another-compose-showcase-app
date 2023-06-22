@@ -35,7 +35,7 @@ fun ItemError(
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
         ) {
             Text(
                 text = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString(),
@@ -57,16 +57,17 @@ fun ItemError(
                     .padding(horizontal = YacsaTheme.spacing.medium),
                 colors = ButtonDefaults.outlinedButtonColors(
                     backgroundColor = YacsaTheme.colors.surface,
-                    contentColor = YacsaTheme.colors.accent
+                    contentColor = YacsaTheme.colors.accent,
                 ),
                 border = BorderStroke(YacsaTheme.dividers.small, YacsaTheme.colors.accent),
                 onClick = {
                     onRetry()
-                }) {
+                },
+            ) {
                 androidx.compose.material.Text(
                     text = UiText.StringResource(dev.yacsa.localization.R.string.general_ok).asString(),
                     style = YacsaTheme.typography.title,
-                    color = YacsaTheme.colors.accent
+                    color = YacsaTheme.colors.accent,
                 )
             }
         }
@@ -83,7 +84,6 @@ fun Preview_ListErrorItem_Light() {
         )
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable

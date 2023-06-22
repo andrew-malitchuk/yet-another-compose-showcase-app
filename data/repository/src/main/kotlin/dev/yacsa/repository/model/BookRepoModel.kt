@@ -14,6 +14,6 @@ data class BookRepoModel(
     val mediaType: String?,
     val formats: FormatsRepoModel?,
     val downloadCount: Int?,
-    var favourite:Boolean?=false,
-    var page:Int?
+    var favourite: Boolean? = false,
+    var page: Int?,
 ) : BaseRepoModel

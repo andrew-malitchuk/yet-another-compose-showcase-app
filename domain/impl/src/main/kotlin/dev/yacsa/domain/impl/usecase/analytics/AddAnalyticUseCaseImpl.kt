@@ -11,7 +11,6 @@ import dev.yacsa.domain.usecase.analytics.AddAnalyticUseCase
 import dev.yacsa.repository.repository.AnalyticsRepository
 import javax.inject.Inject
 
-
 class AddAnalyticUseCaseImpl @Inject constructor(
     private val analyticsRepository: AnalyticsRepository,
     private val analyticsDomainRepoMapper: AnalyticsDomainRepoMapper,
@@ -21,7 +20,7 @@ class AddAnalyticUseCaseImpl @Inject constructor(
         return try {
             analyticsRepository.insert(
                 analyticsDomainRepoMapper.toRepo(
-                    value
+                    value,
                 ),
             )
             none()

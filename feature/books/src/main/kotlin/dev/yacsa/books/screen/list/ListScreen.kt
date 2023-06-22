@@ -37,6 +37,7 @@ fun ListRoute(
     notFound: () -> Unit,
     onFavourite: () -> Unit,
     listViewModel: ListViewModel = hiltViewModel(),
+    onBookClicked: (Int) -> Unit
 ) {
     listViewModel.crashlyticsProvider.log(NullPointerException())
     listViewModel.loggerProvider.setProperty("screen_view","ListScreen")
@@ -110,9 +111,10 @@ fun ListRoute(
                 }
             } else {
                 ListScreen(
-                    onBookClicked = {
-                        listViewModel.acceptIntent(ListIntent.BookClicked(it))
-                    },
+                    onBookClicked=onBookClicked,
+//                    onBookClicked = {
+//                        listViewModel.acceptIntent(ListIntent.BookClicked(it))
+//                    },
                     pagingState = pagingState,
                     uiState = uiState,
                     onSearch = onSearch,

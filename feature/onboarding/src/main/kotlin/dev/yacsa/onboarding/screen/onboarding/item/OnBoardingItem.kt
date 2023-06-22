@@ -122,7 +122,6 @@ fun Preview_OnboardingItem_Light() {
     }
 }
 
-
 @OptIn(ExperimentalPagerApi::class)
 @Preview(showBackground = true)
 @Composable

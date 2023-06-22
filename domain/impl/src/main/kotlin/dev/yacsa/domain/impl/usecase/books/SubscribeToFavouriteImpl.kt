@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-
 class SubscribeToFavouriteImpl @Inject constructor(
     private val booksRepository: BooksRepository,
     private val bookDomainRepoMapper: NewBookDomainRepoMapper,
@@ -21,15 +20,14 @@ class SubscribeToFavouriteImpl @Inject constructor(
         return try {
             Either.Right(
                 // TODO: fix
-                booksRepository.subscribeFavourite().map {list->
+                booksRepository.subscribeFavourite().map { list ->
                     list?.map {
                         it?.let { it1 -> bookDomainRepoMapper.toDomain(it1) }
                     }
-                }
+                },
             )
-        }catch (ex:Exception){
+        } catch (ex: Exception) {
             Either.Left(DataError(ex))
         }
     }
-
 }

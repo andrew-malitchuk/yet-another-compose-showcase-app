@@ -82,7 +82,7 @@ fun ItemFetchedGrid(
 fun Preview_ItemFetchedGrid_Light() {
     YacsaTheme(false) {
         ItemFetchedGrid(
-            book = BookUiModel(1, "foobar", null, emptyList(), emptyList(), emptyList(), emptyList(), true, null, null, 10,true),
+            book = BookUiModel(1, "foobar", null, emptyList(), emptyList(), emptyList(), emptyList(), true, null, null, 10, true),
             onItemContentClick = {},
         )
     }
@@ -93,7 +93,7 @@ fun Preview_ItemFetchedGrid_Light() {
 fun Preview_ItemFetchedGrid_Dark() {
     YacsaTheme(true) {
         ItemFetchedGrid(
-            book = BookUiModel(1, "foobar", null, emptyList(), emptyList(), emptyList(), emptyList(), true, null, null, 10,true),
+            book = BookUiModel(1, "foobar", null, emptyList(), emptyList(), emptyList(), emptyList(), true, null, null, 10, true),
             onItemContentClick = {},
         )
     }

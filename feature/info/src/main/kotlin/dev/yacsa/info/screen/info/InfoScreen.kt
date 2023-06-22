@@ -37,12 +37,12 @@ import dev.yacsa.ui.theme.YacsaTheme
 @Composable
 fun InfoRoute(
     infoViewModel: InfoViewModel = hiltViewModel(),
-    onBackClick:()->Unit
+    onBackClick: () -> Unit,
 ) {
     val uiState by infoViewModel.uiState.collectAsStateWithLifecycle()
 
-    val currentTheme  by infoViewModel.currentTheme
-    val isDarkTheme = currentTheme?.detectThemeMode()?:false
+    val currentTheme by infoViewModel.currentTheme
+    val isDarkTheme = currentTheme?.detectThemeMode() ?: false
 
     Rebugger(
         trackMap = mapOf(
@@ -55,7 +55,7 @@ fun InfoRoute(
     YacsaTheme(isDarkTheme) {
         InfoScreen(
             uiState,
-            onBackClick = onBackClick
+            onBackClick = onBackClick,
         )
     }
 }
@@ -64,7 +64,7 @@ fun InfoRoute(
 @Composable
 fun InfoScreen(
     uiState: InfoUiState,
-    onBackClick:()->Unit,
+    onBackClick: () -> Unit,
 ) {
     val systemUiController = rememberSystemUiController()
     val state = rememberLazyListState()
@@ -81,7 +81,6 @@ fun InfoScreen(
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(topAppBarState)
 
-
     Scaffold(
         modifier = Modifier
             .nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -94,13 +93,13 @@ fun InfoScreen(
                         Text(
                             text = UiText.StringResource(dev.yacsa.localization.R.string.settings_info).asString(),
                             style = YacsaTheme.typography.header,
-                            color = YacsaTheme.colors.primary
+                            color = YacsaTheme.colors.primary,
                         )
                         Spacer(modifier = Modifier.width(YacsaTheme.spacing.small))
                         androidx.compose.material3.Icon(
                             painterResource(id = R.drawable.icon_info_regular_24),
                             contentDescription = null,
-                            tint = YacsaTheme.colors.accent
+                            tint = YacsaTheme.colors.accent,
                         )
                     }
                 },
@@ -108,12 +107,12 @@ fun InfoScreen(
                     SmallFloatingActionButton(
                         onClick = { onBackClick() },
                         containerColor = YacsaTheme.colors.accent,
-                        elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
+                        elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
                     ) {
                         Icon(
                             painter = painterResource(id = R.drawable.icon_caret_left_regular_24),
                             contentDescription = null,
-                            tint = YacsaTheme.colors.primary
+                            tint = YacsaTheme.colors.primary,
                         )
                     }
                 },
@@ -127,12 +126,12 @@ fun InfoScreen(
                 AnimatedDivider(state = state)
             }
         },
-    ) {innerPadding ->
+    ) { innerPadding ->
         ContentFetched(
             innerPadding = innerPadding,
             state = state,
             topAppBarState = topAppBarState,
-            uiState=uiState,
+            uiState = uiState,
         )
     }
 }

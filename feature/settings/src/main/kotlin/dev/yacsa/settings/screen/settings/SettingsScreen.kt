@@ -53,7 +53,7 @@ fun SettingsRoute(
     onFfClick: () -> Unit,
     onAnalyticsClick: () -> Unit,
     onDeeplinkClick: () -> Unit,
-    onInfoClick:()->Unit
+    onInfoClick: () -> Unit,
 ) {
     HandleEvents(settingsViewModel.event)
 
@@ -75,7 +75,6 @@ fun SettingsRoute(
         settingsViewModel.acceptIntent(SettingsIntent.SetLang(it))
     }
 
-
     Rebugger(
         trackMap = mapOf(
             "uiState" to uiState,
@@ -85,29 +84,27 @@ fun SettingsRoute(
         ),
     )
 
-        CircularReveal(
-            targetState = isDarkTheme,
-            animationSpec = tween(500)
-        ) { isDark ->
-            YacsaTheme(isDark) {
-                SettingsScreen(
-                    uiState,
-                    onBackClick,
-                    onFfClick,
-                    onAnalyticsClick,
-                    onDeeplinkClick,
-                    theme,
-                    lang,
-                    onInfoClick
-                )
-            }
+    CircularReveal(
+        targetState = isDarkTheme,
+        animationSpec = tween(500),
+    ) { isDark ->
+        YacsaTheme(isDark) {
+            SettingsScreen(
+                uiState,
+                onBackClick,
+                onFfClick,
+                onAnalyticsClick,
+                onDeeplinkClick,
+                theme,
+                lang,
+                onInfoClick,
+            )
         }
-
+    }
 }
 
 @Composable
 private fun HandleEvents(events: Flow<SettingsEvent>) {
-
     val context = LocalContext.current
 
     events.collectWithLifecycle {
@@ -130,7 +127,7 @@ fun SettingsScreen(
     theme: MutableState<ThemeUiModel?>,
     lang: MutableState<String?>,
     onInfoClick: () -> Unit,
-    ) {
+) {
     val systemUiController = rememberSystemUiController()
     val state = rememberLazyListState()
 
@@ -152,9 +149,8 @@ fun SettingsScreen(
         if (uiState.isError) {
             ContentError(
                 errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww)
-                    .asString()
+                    .asString(),
             ) {
-
             }
         } else {
             Scaffold(
@@ -170,13 +166,13 @@ fun SettingsScreen(
                                     text = UiText.StringResource(dev.yacsa.localization.R.string.settings_settings)
                                         .asString(),
                                     style = YacsaTheme.typography.header,
-                                    color = YacsaTheme.colors.primary
+                                    color = YacsaTheme.colors.primary,
                                 )
                                 Spacer(modifier = Modifier.width(YacsaTheme.spacing.small))
                                 Icon(
                                     painterResource(id = R.drawable.icon_gear_six_bold_24),
                                     contentDescription = null,
-                                    tint = YacsaTheme.colors.accent
+                                    tint = YacsaTheme.colors.accent,
                                 )
                             }
                         },
@@ -188,13 +184,13 @@ fun SettingsScreen(
                                     0.dp,
                                     0.dp,
                                     0.dp,
-                                    0.dp
-                                )
+                                    0.dp,
+                                ),
                             ) {
                                 Icon(
                                     painter = painterResource(id = R.drawable.icon_caret_left_regular_24),
                                     contentDescription = null,
-                                    tint = YacsaTheme.colors.primary
+                                    tint = YacsaTheme.colors.primary,
                                 )
                             }
                         },
@@ -218,7 +214,7 @@ fun SettingsScreen(
                     onDeeplinkClick = onDeeplinkClick,
                     theme = theme,
                     language = lang,
-                    onInfoClick=onInfoClick
+                    onInfoClick = onInfoClick,
                 )
             }
         }
@@ -237,7 +233,7 @@ fun Preview_SettingsScreen_Light() {
             theme = remember { mutableStateOf(null) },
             lang = remember { mutableStateOf(null) },
             onDeeplinkClick = {},
-            onInfoClick = {}
+            onInfoClick = {},
         )
     }
 }
@@ -254,7 +250,7 @@ fun Preview_SettingsScreen_Dark() {
             onDeeplinkClick = {},
             theme = remember { mutableStateOf(null) },
             lang = remember { mutableStateOf(null) },
-            onInfoClick = {}
+            onInfoClick = {},
         )
     }
 }

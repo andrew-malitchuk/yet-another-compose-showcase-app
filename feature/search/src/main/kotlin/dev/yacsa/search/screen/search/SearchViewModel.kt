@@ -37,15 +37,16 @@ class SearchViewModel @Inject constructor(
     private val getTopSearchUseCase: NewGetTopSearchUseCase,
     private val searchHistoryUiDomainMapper: NewSearchHistoryUiDomainMapper,
     private val clearHistoryUseCase: NewClearHistoryUseCase,
-    private val theme:Theme,
+    private val theme: Theme,
     var connectivityObserver: ConnectivityObserver,
-    ) : BaseViewModel<SearchUiState, SearchUiState.PartialState, SearchEvent, SearchIntent>(
+) : BaseViewModel<SearchUiState, SearchUiState.PartialState, SearchEvent, SearchIntent>(
     savedStateHandle,
     initialState,
-),Theme by theme {
+),
+    Theme by theme {
     val searchText = MutableStateFlow("")
 
-    val filterResult = MutableStateFlow( FilterDialogResult() )
+    val filterResult = MutableStateFlow(FilterDialogResult())
 
     init {
         viewModelScope.launch {
@@ -108,7 +109,7 @@ class SearchViewModel @Inject constructor(
         flow {
             insertSearchHistoryUseCase(query).fold({
                 val filter = filterResult.value
-                searchBooksUseCase(query,filter.sort,filter.lang).fold(
+                searchBooksUseCase(query, filter.sort, filter.lang).fold(
                     { error ->
                         when (error) {
                             is NoDataError -> {

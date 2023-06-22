@@ -44,17 +44,17 @@ fun ExpandableCard(
         onClick = { expanded = !expanded },
         elevation = 0.dp,
 
-        ) {
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .animateContentSize() // edit animation here
-                .padding(horizontal = 16.dp, vertical = 8.dp)
+                .padding(horizontal = 16.dp, vertical = 8.dp),
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween // control the header alignment over here.
+                horizontalArrangement = Arrangement.SpaceBetween, // control the header alignment over here.
             ) {
                 Text(
                     text = header,
@@ -65,12 +65,12 @@ fun ExpandableCard(
                 )
                 IconButton(
                     modifier = Modifier.rotate(rotationState),
-                    onClick = { expanded = !expanded }
+                    onClick = { expanded = !expanded },
                 ) {
                     Icon(
                         imageVector = Icons.Default.KeyboardArrowDown,
                         tint = color, // Icon Color
-                        contentDescription = "Drop Down Arrow"
+                        contentDescription = "Drop Down Arrow",
                     )
                 }
             }

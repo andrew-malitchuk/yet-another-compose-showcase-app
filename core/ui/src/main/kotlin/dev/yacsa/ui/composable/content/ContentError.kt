@@ -32,16 +32,16 @@ import dev.yacsa.ui.theme.YacsaTheme
 fun ContentError(
     modifier: Modifier = Modifier,
     errorMessage: String,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(YacsaTheme.colors.background)
+            .background(YacsaTheme.colors.background),
     ) {
         Box(
             modifier = Modifier
-                .fillMaxHeight(1f)
+                .fillMaxHeight(1f),
 
         ) {
             Box(
@@ -49,15 +49,15 @@ fun ContentError(
                     .padding(YacsaTheme.spacing.medium)
                     .fillMaxWidth()
                     .aspectRatio(1f)
-                    .clip(RoundedCornerShape(size =YacsaTheme.corners.medium))
+                    .clip(RoundedCornerShape(size = YacsaTheme.corners.medium))
                     .align(Alignment.Center)
                     .background(YacsaTheme.colors.surface),
-                contentAlignment = Alignment.Center
+                contentAlignment = Alignment.Center,
 
             ) {
                 Column(
                     verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Image(
                         modifier = Modifier
@@ -85,16 +85,17 @@ fun ContentError(
                             .padding(horizontal = YacsaTheme.spacing.medium),
                         colors = ButtonDefaults.outlinedButtonColors(
                             backgroundColor = YacsaTheme.colors.surface,
-                            contentColor = YacsaTheme.colors.accent
+                            contentColor = YacsaTheme.colors.accent,
                         ),
                         border = BorderStroke(YacsaTheme.dividers.small, YacsaTheme.colors.accent),
                         onClick = {
                             onBackClick()
-                        }) {
+                        },
+                    ) {
                         androidx.compose.material.Text(
                             text = "Okay",
                             style = YacsaTheme.typography.title,
-                            color = YacsaTheme.colors.accent
+                            color = YacsaTheme.colors.accent,
                         )
                     }
                 }
@@ -109,7 +110,7 @@ fun Preview_ContentError_Light() {
     YacsaTheme(false) {
         ContentError(
             errorMessage = "Foobar",
-            onBackClick = {}
+            onBackClick = {},
         )
     }
 }
@@ -120,7 +121,7 @@ fun Preview_ContentError_Dark() {
     YacsaTheme(true) {
         ContentError(
             errorMessage = "Foobar",
-            onBackClick = {}
+            onBackClick = {},
         )
     }
 }

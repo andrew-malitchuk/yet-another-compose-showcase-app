@@ -15,16 +15,15 @@ import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.theme.YacsaTheme
 
-
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SubjectsBlock(
     book: BookUiModel,
-    onSubjectClick:(String)->Unit
+    onSubjectClick: (String) -> Unit,
 ) {
     Column(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxWidth(),
     ) {
         Text(
             modifier = Modifier.fillMaxWidth(),
@@ -36,7 +35,7 @@ fun SubjectsBlock(
             textAlign = TextAlign.Start,
         )
         Spacer(
-            modifier = Modifier.height(YacsaTheme.spacing.small)
+            modifier = Modifier.height(YacsaTheme.spacing.small),
         )
         book.subjects?.forEach { subject ->
             subject?.let {
@@ -45,10 +44,8 @@ fun SubjectsBlock(
                 }
                 Spacer(modifier = Modifier.height(YacsaTheme.spacing.small))
             }
-
         }
     }
-
 }
 
 @Preview(showBackground = true)
@@ -68,9 +65,9 @@ fun Preview_SubjectsBlock_Light() {
                 null,
                 null,
                 null,
-                true
+                true,
             ),
-            onSubjectClick={}
+            onSubjectClick = {},
         )
     }
 }
@@ -92,9 +89,9 @@ fun Preview_SubjectsBlock_Dark() {
                 null,
                 null,
                 null,
-                true
+                true,
             ),
-            onSubjectClick={}
+            onSubjectClick = {},
         )
     }
 }

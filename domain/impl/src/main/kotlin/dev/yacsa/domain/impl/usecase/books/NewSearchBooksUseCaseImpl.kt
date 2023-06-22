@@ -18,7 +18,7 @@ class NewSearchBooksUseCaseImpl @Inject constructor(
     override suspend fun invoke(
         query: String,
         sort: String?,
-        lang: String?
+        lang: String?,
     ): Either<DomainError, List<BookDomainModel>> {
         return try {
             val fromNet = booksRepository.searchOnRemote(query, sort, lang)
@@ -29,7 +29,7 @@ class NewSearchBooksUseCaseImpl @Inject constructor(
             }
         } catch (ex: Exception) {
             try {
-                val fromDb = booksRepository.searchOnLocal(query,sort,lang)
+                val fromDb = booksRepository.searchOnLocal(query, sort, lang)
                 if (fromDb.isEmpty()) {
                     Either.Left(NoDataError)
                 } else {

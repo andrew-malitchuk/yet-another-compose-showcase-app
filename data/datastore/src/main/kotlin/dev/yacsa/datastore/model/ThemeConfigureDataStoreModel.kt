@@ -5,9 +5,9 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ThemeConfigureDataStoreModel(
-    val theme:ThemeMode
+    val theme: ThemeMode,
 ) : BaseDataStoreModel
 
-enum class ThemeMode{
+enum class ThemeMode {
     LIGHT, DARK, AUTO
 }

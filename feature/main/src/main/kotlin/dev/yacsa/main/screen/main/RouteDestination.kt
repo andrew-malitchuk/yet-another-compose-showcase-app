@@ -3,12 +3,12 @@ package dev.yacsa.main.screen.main
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
-//enum class RouteDestination {
+// enum class RouteDestination {
 //    ONBOARDING,
 //    MAIN,
 //    NI,
 //    DEEPLINK
-//}
+// }
 
 @Parcelize
 sealed class RouteDestination : Parcelable {

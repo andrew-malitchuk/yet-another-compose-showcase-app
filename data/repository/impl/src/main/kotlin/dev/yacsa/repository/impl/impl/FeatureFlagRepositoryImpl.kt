@@ -20,7 +20,7 @@ class FeatureFlagRepositoryImpl @Inject constructor(
 
     override suspend fun getFeatureFlagValue(
         key: String,
-        debugKey: String
+        debugKey: String,
     ): Either<Exception, Boolean> {
         return remoteConfigSource.getBoolean(key)
     }

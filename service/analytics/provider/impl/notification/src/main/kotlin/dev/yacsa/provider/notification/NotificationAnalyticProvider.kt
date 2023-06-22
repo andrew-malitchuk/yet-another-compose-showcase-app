@@ -23,10 +23,10 @@ import javax.inject.Inject
 
 class NotificationAnalyticProvider @Inject constructor(
     @ApplicationContext private val context: Context,
-    private val addAnalyticUseCase: AddAnalyticUseCase
+    private val addAnalyticUseCase: AddAnalyticUseCase,
 ) : AnalyticProvider {
 
-    val notificationContent = FiniteList<String>(5)
+    val notificationContent = FiniteList<String>(MAX_AMOUNT)
 
     init {
         createNotificationChannel()
@@ -38,27 +38,26 @@ class NotificationAnalyticProvider @Inject constructor(
             is ContentViewAnalyticModel -> {
                 showNotification(
                     "YACSA Analytics",
-                    getContentViewAnalytic(event)
+                    getContentViewAnalytic(event),
                 )
-                // TODO: fix?
                 addAnalyticUseCase(
                     AnalyticsDomainModel(
                         "content_view",
-                        event.viewName
-                    )
+                        event.viewName,
+                    ),
                 )
             }
 
             is CustomAnalyticModel -> {
                 showNotification(
                     "YACSA Analytics",
-                    getCustomEventAnalytic(event)
+                    getCustomEventAnalytic(event),
                 )
                 addAnalyticUseCase(
                     AnalyticsDomainModel(
                         event.eventName,
-                        getCustomAnalyticsParams(event)
-                    )
+                        getCustomAnalyticsParams(event),
+                    ),
                 )
             }
         }
@@ -67,16 +66,15 @@ class NotificationAnalyticProvider @Inject constructor(
     override suspend fun setProperty(property: UserPropertyAnalyticModel) {
         showNotification(
             "YACSA Analytics",
-            "\uD83E\uDD14 ${getAnalyticProperty(property)}"
+            "\uD83E\uDD14 ${getAnalyticProperty(property)}",
         )
         addAnalyticUseCase(
             AnalyticsDomainModel(
                 "user_property",
-                getAnalyticProperty(property)
-            )
+                getAnalyticProperty(property),
+            ),
         )
     }
-
 
     private fun getAnalyticProperty(property: UserPropertyAnalyticModel): String {
         return "${property.key} : ${property.value}"
@@ -85,7 +83,6 @@ class NotificationAnalyticProvider @Inject constructor(
     private fun getContentViewAnalytic(event: ContentViewAnalyticModel): String {
         return "\uD83D\uDCF1 ${event.viewName}"
     }
-
 
     private fun getCustomEventAnalytic(event: CustomAnalyticModel): String {
         return "\uD83D\uDD14 ${event.eventName} : {${getCustomAnalyticsParams(event)}}"
@@ -100,26 +97,25 @@ class NotificationAnalyticProvider @Inject constructor(
         event.getParameters().forEach {
             params += "${it.key} : ${it.value}, "
         }
-        return "{${params}}"
+        return "{$params}"
     }
 
     @SuppressLint("MissingPermission")
     private fun showNotification(title: String, content: String) {
-
         notificationContent.add(content)
 
         val notification = NotificationCompat.Builder(context, "dev.yacsa")
             .setContentTitle(title)
             .setStyle(
                 NotificationCompat.BigTextStyle()
-                    .bigText(notificationContent.toString())
+                    .bigText(notificationContent.toString()),
             )
             .setSmallIcon(dev.yacsa.ui.R.drawable.notification_icon)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .build()
 
         val notificationManagerCompat = NotificationManagerCompat.from(context)
-        notificationManagerCompat.notify(1010, notification)
+        notificationManagerCompat.notify(NOTIFICATION_ID, notification)
     }
 
     private fun createNotificationChannel() {
@@ -127,7 +123,7 @@ class NotificationAnalyticProvider @Inject constructor(
             val channel = NotificationChannel(
                 "dev.yacsa",
                 "Analytics",
-                NotificationManager.IMPORTANCE_DEFAULT
+                NotificationManager.IMPORTANCE_DEFAULT,
             ).apply {
                 lightColor = Color.BLUE
                 enableLights(true)
@@ -137,4 +133,8 @@ class NotificationAnalyticProvider @Inject constructor(
         }
     }
 
+    companion object{
+        const val MAX_AMOUNT=5
+        const val NOTIFICATION_ID=1010
+    }
 }

@@ -14,7 +14,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class FlipperModule {
 
-
     @Provides
     @Singleton
     fun providesNetworkFlipperPlugin(): NetworkFlipperPlugin {
@@ -24,9 +23,8 @@ class FlipperModule {
     @Provides
     @Named("flipper_okhttp_interceptor")
     fun providesFlipperOkHttpInterceptor(
-        networkFlipperPlugin: NetworkFlipperPlugin
+        networkFlipperPlugin: NetworkFlipperPlugin,
     ): Interceptor {
         return FlipperOkhttpInterceptor(networkFlipperPlugin, true)
     }
-
 }

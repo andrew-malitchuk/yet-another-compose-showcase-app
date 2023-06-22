@@ -23,11 +23,12 @@ class FeatureFlagViewModel @Inject constructor(
     private val updateLocalFeatureFlagUseCase: NewUpdateLocalFeatureFlagUseCase,
     private val loadFeatureFlagUseCase: LoadFeatureFlagUseCase,
     private val featureFlagDomainRepoMapper: FeatureFlagDomainRepoMapper,
-    private val theme:Theme,
-    ) : BaseViewModel<FeatureFlagUiState, FeatureFlagUiState.PartialState, FeatureFlagEvent, FeatureFlagIntent>(
+    private val theme: Theme,
+) : BaseViewModel<FeatureFlagUiState, FeatureFlagUiState.PartialState, FeatureFlagEvent, FeatureFlagIntent>(
     savedStateHandle,
-    initialState
-) , Theme by theme{
+    initialState,
+),
+    Theme by theme {
     init {
         logcat { "init" }
         acceptIntent(FeatureFlagIntent.GetFeatureFlags)
@@ -50,12 +51,14 @@ class FeatureFlagViewModel @Inject constructor(
                     emit(FeatureFlagUiState.PartialState.Error(IllegalAccessError()))
                 },
                 { result ->
-                    emit(FeatureFlagUiState.PartialState.Fetched(
-                        result.map { ff ->
-                            FeatureFlagModel(ff?.key ?: UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).toString(), ff?.value)
-                        } as ArrayList<FeatureFlagModel>
-                    ))
-                }
+                    emit(
+                        FeatureFlagUiState.PartialState.Fetched(
+                            result.map { ff ->
+                                FeatureFlagModel(ff?.key ?: UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).toString(), ff?.value)
+                            } as ArrayList<FeatureFlagModel>,
+                        ),
+                    )
+                },
             )
         }
 

@@ -39,7 +39,7 @@ fun ContentIsLoading(
         contentAlignment = Alignment.Center,
     ) {
         LottieAnimation(
-            modifier=Modifier.height(256.dp).width(256.dp),
+            modifier = Modifier.height(256.dp).width(256.dp),
             composition = composition,
             iterations = LottieConstants.IterateForever,
         )

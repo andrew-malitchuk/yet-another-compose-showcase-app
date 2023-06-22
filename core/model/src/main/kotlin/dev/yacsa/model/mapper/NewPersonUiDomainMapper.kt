@@ -12,6 +12,6 @@ interface NewPersonUiDomainMapper {
     ): PersonDomainModel
 
     fun toUi(
-        PersonDomainModel: PersonDomainModel,
+        personDomainModel: PersonDomainModel,
     ): PersonUiModel
 }

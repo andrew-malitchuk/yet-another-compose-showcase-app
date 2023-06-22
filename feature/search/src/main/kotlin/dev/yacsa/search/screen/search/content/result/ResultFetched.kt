@@ -29,7 +29,7 @@ fun ResultFetched(
     modifier: Modifier = Modifier,
     resultSearch: List<BookUiModel>,
     onBookClicked: (Int) -> Unit,
-    state:LazyListState
+    state: LazyListState,
 ) {
     val isVisible = state.canScrollBackward
     val corner = animateDpAsState(
@@ -78,11 +78,10 @@ fun Preview_ResultFetched_Light() {
         ResultFetched(
             resultSearch = emptyList(),
             onBookClicked = {},
-            state = rememberLazyListState()
+            state = rememberLazyListState(),
         )
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable
@@ -91,7 +90,7 @@ fun Preview_ResultFetched_Dark() {
         ResultFetched(
             resultSearch = emptyList(),
             onBookClicked = {},
-            state = rememberLazyListState()
+            state = rememberLazyListState(),
         )
     }
 }

@@ -20,14 +20,16 @@ fun NavGraphBuilder.settingsNavGraph(navController: NavHostController) {
             SettingsDirection.Settings.route,
             enterTransition = {
                 slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween(700)
+                    AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(700),
                 )
             },
             exitTransition = {
                 slideOutOfContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(700)
+                    AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(700),
                 )
-            }
+            },
         ) {
             SettingsRoute(
                 onBackClick = {
@@ -44,7 +46,7 @@ fun NavGraphBuilder.settingsNavGraph(navController: NavHostController) {
                 },
                 onInfoClick = {
                     navController.navigate(NavigationDirection.Info.route)
-                }
+                },
             )
         }
     }

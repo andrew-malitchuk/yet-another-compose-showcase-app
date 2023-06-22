@@ -52,12 +52,12 @@ fun ItemBookshelf(
             SmallFloatingActionButton(
                 onClick = { },
                 containerColor = YacsaTheme.colors.primary,
-                elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
+                elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_books_regular_24),
                     contentDescription = null,
-                    tint = YacsaTheme.colors.accent
+                    tint = YacsaTheme.colors.accent,
                 )
             }
             Spacer(
@@ -68,7 +68,7 @@ fun ItemBookshelf(
             Text(
                 text = bookshelf,
                 style = YacsaTheme.typography.title,
-                color = YacsaTheme.colors.secondary
+                color = YacsaTheme.colors.secondary,
             )
         }
     }

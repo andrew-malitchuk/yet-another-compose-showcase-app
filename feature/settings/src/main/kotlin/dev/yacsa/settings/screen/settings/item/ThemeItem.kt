@@ -41,7 +41,6 @@ fun ThemeItem(
 ) {
     val shape = YacsaTheme.shapes.cornersStyle
 
-
     var isLight: MutableState<Boolean?> =
         remember {
             mutableStateOf(null)
@@ -82,12 +81,12 @@ fun ThemeItem(
             SmallFloatingActionButton(
                 onClick = { },
                 containerColor = YacsaTheme.colors.primary,
-                elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
+                elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_paint_roller_regular_24),
                     contentDescription = null,
-                    tint = YacsaTheme.colors.accent
+                    tint = YacsaTheme.colors.accent,
                 )
             }
             Spacer(
@@ -97,7 +96,7 @@ fun ThemeItem(
             Text(
                 text = UiText.StringResource(dev.yacsa.localization.R.string.settings_theme).asString(),
                 style = YacsaTheme.typography.title,
-                color = YacsaTheme.colors.secondary
+                color = YacsaTheme.colors.secondary,
             )
             Spacer(
                 modifier = Modifier
@@ -106,35 +105,34 @@ fun ThemeItem(
 
             LazyRow(
                 horizontalArrangement = Arrangement.spacedBy(YacsaTheme.spacing.small),
-                contentPadding = PaddingValues(horizontal = 1.dp)
+                contentPadding = PaddingValues(horizontal = 1.dp),
             ) {
                 item {
-
                     IconToggleButton(
                         checked = isLight.value ?: false,
                         onCheckedChange = {
-                            if(it){
+                            if (it) {
                                 isDark.value = !it
                                 isLight.value = it
                                 isAuto.value = !it
                                 theme.value = ThemeUiModel.LIGHT
                             }
-                        }) {
-
+                        },
+                    ) {
                         Crossfade(
-                            targetState = isLight.value
+                            targetState = isLight.value,
                         ) { isChecked ->
                             if (isChecked == true) {
                                 Icon(
                                     painter = painterResource(id = R.drawable.icon_sun_bold_24),
                                     contentDescription = null,
-                                    tint = YacsaTheme.colors.accent
+                                    tint = YacsaTheme.colors.accent,
                                 )
                             } else {
                                 Icon(
                                     painter = painterResource(id = R.drawable.icon_sun_regular_24),
                                     contentDescription = null,
-                                    tint = YacsaTheme.colors.accent
+                                    tint = YacsaTheme.colors.accent,
                                 )
                             }
                         }
@@ -144,29 +142,28 @@ fun ThemeItem(
                     IconToggleButton(
                         checked = isDark.value ?: false,
                         onCheckedChange = {
-
-                            if(it){
+                            if (it) {
                                 isDark.value = it
                                 isLight.value = !it
                                 isAuto.value = !it
                                 theme.value = ThemeUiModel.DARK
                             }
-                        }) {
-
+                        },
+                    ) {
                         Crossfade(
-                            targetState = isDark.value
+                            targetState = isDark.value,
                         ) { isChecked ->
                             if (isChecked == true) {
                                 Icon(
                                     painter = painterResource(id = R.drawable.icon_moon_bold_24),
                                     contentDescription = null,
-                                    tint = YacsaTheme.colors.accent
+                                    tint = YacsaTheme.colors.accent,
                                 )
                             } else {
                                 Icon(
                                     painter = painterResource(id = R.drawable.icon_moon_regular_24),
                                     contentDescription = null,
-                                    tint = YacsaTheme.colors.accent
+                                    tint = YacsaTheme.colors.accent,
                                 )
                             }
                         }
@@ -174,8 +171,7 @@ fun ThemeItem(
                 }
                 item {
                     IconToggleButton(checked = isAuto.value ?: false, onCheckedChange = {
-
-                        if(it){
+                        if (it) {
                             isDark.value = !it
                             isLight.value = !it
                             isAuto.value = it
@@ -183,19 +179,19 @@ fun ThemeItem(
                         }
                     }) {
                         Crossfade(
-                            targetState = isAuto.value
+                            targetState = isAuto.value,
                         ) { isChecked ->
                             if (isChecked == true) {
                                 Icon(
                                     painter = painterResource(id = R.drawable.icon_android_logo_bold_24),
                                     contentDescription = null,
-                                    tint = YacsaTheme.colors.accent
+                                    tint = YacsaTheme.colors.accent,
                                 )
                             } else {
                                 Icon(
                                     painter = painterResource(id = R.drawable.icon_android_logo_regular_24),
                                     contentDescription = null,
-                                    tint = YacsaTheme.colors.accent
+                                    tint = YacsaTheme.colors.accent,
                                 )
                             }
                         }
@@ -204,8 +200,6 @@ fun ThemeItem(
             }
         }
     }
-
-
 }
 
 @Preview(showBackground = true)

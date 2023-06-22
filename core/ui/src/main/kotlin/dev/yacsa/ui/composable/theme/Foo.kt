@@ -8,9 +8,9 @@ import dev.yacsa.model.model.theme.isDark
 
 @Composable
 fun ThemeUiModel.detectThemeMode(): Boolean {
-    return if(isAuto()){
+    return if (isAuto()) {
         isSystemInDarkTheme()
-    }else{
+    } else {
         isDark()
     }
 }

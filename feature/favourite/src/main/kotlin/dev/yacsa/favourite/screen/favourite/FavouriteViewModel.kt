@@ -19,13 +19,14 @@ class FavouriteViewModel @Inject constructor(
     var subscribeToFavourite: SubscribeToFavourite,
     var bookUiDomainMapper: NewBooksUiDomainMapper,
     var markFavouriteBook: MarkFavouriteBook,
-    private val theme:Theme,
+    private val theme: Theme,
     savedStateHandle: SavedStateHandle,
     initialState: FavouriteUiState,
 ) : BaseViewModel<FavouriteUiState, FavouriteUiState.PartialState, FavouriteEvent, FavouriteIntent>(
     savedStateHandle,
     initialState,
-) , Theme by theme{
+),
+    Theme by theme {
 
     var flow: Flow<List<BookUiModel?>?>? = null
 
@@ -36,13 +37,13 @@ class FavouriteViewModel @Inject constructor(
     override fun mapIntents(intent: FavouriteIntent): Flow<FavouriteUiState.PartialState> {
         return when (intent) {
             FavouriteIntent.GetFavourite -> getFavourite()
-            is FavouriteIntent.MarkFavourite -> markFavourite(intent.bookId,intent.isFavourite)
+            is FavouriteIntent.MarkFavourite -> markFavourite(intent.bookId, intent.isFavourite)
         }
     }
 
     override fun reduceUiState(
         previousState: FavouriteUiState,
-        partialState: FavouriteUiState.PartialState
+        partialState: FavouriteUiState.PartialState,
     ): FavouriteUiState {
         return when (partialState) {
             is FavouriteUiState.PartialState.ContentLoading -> previousState.copy(
@@ -76,28 +77,25 @@ class FavouriteViewModel @Inject constructor(
                         }
                     }
                     emit(FavouriteUiState.PartialState.ContentFetched)
-                }
+                },
             )
         }.onStart {
             FavouriteUiState.PartialState.ContentLoading
         }
 
-
     private fun markFavourite(
         bookId: Int,
-        isFavourite: Boolean
+        isFavourite: Boolean,
     ): Flow<FavouriteUiState.PartialState> {
         return flow {
             markFavouriteBook(bookId, isFavourite).fold({
-                    // TODO: send snackbar
+                // TODO: send snackbar
             }, {
                 emit(FavouriteUiState.PartialState.Error(Exception()))
             })
-
 
 //            val isDetalizationEnabled = booksFeatureFlag.isDetalizationEnabled()
 //            publishEvent(ListEvent.OnBookClick(bookId, isDetalizationEnabled))
         }
     }
-
 }

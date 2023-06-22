@@ -29,8 +29,10 @@ import dev.yacsa.ui.composable.content.ContentIsLoading
 import dev.yacsa.ui.composable.content.ContentNoData
 import dev.yacsa.ui.theme.YacsaTheme
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class,
-    ExperimentalFoundationApi::class
+@OptIn(
+    ExperimentalMaterial3Api::class,
+    ExperimentalMaterialApi::class,
+    ExperimentalFoundationApi::class,
 )
 @Composable
 fun ContentFetched(
@@ -39,9 +41,8 @@ fun ContentFetched(
     innerPadding: PaddingValues,
     topAppBarState: TopAppBarState,
     lazyListState: LazyListState,
-    onFavouriteMark: (Int, Boolean) -> Unit
+    onFavouriteMark: (Int, Boolean) -> Unit,
 ) {
-
     val corner = YacsaTheme.corners.medium - (YacsaTheme.corners.medium * Math.abs(topAppBarState.collapsedFraction))
     val systemUiController = rememberSystemUiController()
 
@@ -55,15 +56,14 @@ fun ContentFetched(
 
         uiState.isError -> {
             ContentError(
-                errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString()
-            ){
-
+                errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString(),
+            ) {
             }
         }
 
         else -> {
             systemUiController.setNavigationBarColor(
-                color =YacsaTheme.colors.surface,
+                color = YacsaTheme.colors.surface,
             )
             Box(
                 modifier = Modifier
@@ -77,7 +77,6 @@ fun ContentFetched(
                         .clip(RoundedCornerShape(topStart = corner, topEnd = corner))
                         .background(YacsaTheme.colors.surface),
                 ) {
-
                     if (!favouriteFlow?.value.isNullOrEmpty()) {
                         LazyColumn(
                             state = lazyListState,
@@ -87,23 +86,22 @@ fun ContentFetched(
                                 bottom = YacsaTheme.spacing.medium,
                                 end = YacsaTheme.spacing.medium,
                                 top = YacsaTheme.spacing.small,
-                            )
+                            ),
                         ) {
-                            items(items = favouriteFlow?.value!!, key={it?.id!!}) { item ->
+                            items(items = favouriteFlow?.value!!, key = { it?.id!! }) { item ->
                                 ItemFetchedList(
                                     modifier = Modifier.animateItemPlacement(),
                                     book = item!!,
                                     onItemContentClick = { /*TODO*/ },
-                                    onFavouriteMark = onFavouriteMark
+                                    onFavouriteMark = onFavouriteMark,
                                 )
                             }
                         }
                     } else {
                         ContentNoData(
-                            message = UiText.StringResource(dev.yacsa.localization.R.string.errors_no_data).asString()
+                            message = UiText.StringResource(dev.yacsa.localization.R.string.errors_no_data).asString(),
                         )
                     }
-
                 }
             }
         }

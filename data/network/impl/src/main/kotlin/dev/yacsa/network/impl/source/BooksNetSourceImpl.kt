@@ -19,6 +19,6 @@ class BooksNetSourceImpl @Inject constructor(
     }
 
     override suspend fun search(query: String, sort: String?, lang: String?): ResultNetModel? {
-        return apiService.search(query,sort,lang)
+        return apiService.search(query, sort, lang)
     }
 }

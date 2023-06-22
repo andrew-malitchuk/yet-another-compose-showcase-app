@@ -14,15 +14,14 @@ import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.theme.YacsaTheme
 
-
 @Composable
 fun LanguageBlock(
     book: BookUiModel,
-    onLanguageClick:(String)->Unit,
-    ) {
+    onLanguageClick: (String) -> Unit,
+) {
     Column(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxWidth(),
     ) {
         Text(
             modifier = Modifier.fillMaxWidth(),
@@ -34,7 +33,7 @@ fun LanguageBlock(
             textAlign = TextAlign.Start,
         )
         Spacer(
-            modifier = Modifier.height(YacsaTheme.spacing.small)
+            modifier = Modifier.height(YacsaTheme.spacing.small),
         )
         book.languages?.forEach { lang ->
             lang?.let {
@@ -43,10 +42,8 @@ fun LanguageBlock(
                 }
                 Spacer(modifier = Modifier.height(YacsaTheme.spacing.small))
             }
-
         }
     }
-
 }
 
 @Preview(showBackground = true)
@@ -66,9 +63,9 @@ fun Preview_LanguageBlock_Light() {
                 null,
                 null,
                 null,
-                true
+                true,
             ),
-            onLanguageClick ={}
+            onLanguageClick = {},
         )
     }
 }
@@ -90,9 +87,9 @@ fun Preview_LanguageBlock_Dark() {
                 null,
                 null,
                 null,
-                true
+                true,
             ),
-            onLanguageClick ={}
+            onLanguageClick = {},
         )
     }
 }

@@ -4,12 +4,13 @@ import android.content.Intent
 import android.service.quicksettings.TileService
 import dev.yacsa.main.screen.main.MainActivity
 
-class FavouriteTileService : TileService(){
+class FavouriteTileService : TileService() {
 
     // Called when the user adds your tile.
     override fun onTileAdded() {
         super.onTileAdded()
     }
+
     // Called when your app can update your tile.
     override fun onStartListening() {
         super.onStartListening()
@@ -26,16 +27,16 @@ class FavouriteTileService : TileService(){
         startActivityAndCollapse(
             Intent(
                 this,
-                MainActivity::class.java
+                MainActivity::class.java,
             ).also {
-                it.flags=Intent.FLAG_ACTIVITY_NEW_TASK
-                it.putExtra("deeplink","yacsa://favourite")
-            }
+                it.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                it.putExtra("deeplink", "yacsa://favourite")
+            },
         )
     }
+
     // Called when the user removes your tile.
     override fun onTileRemoved() {
         super.onTileRemoved()
     }
-
 }

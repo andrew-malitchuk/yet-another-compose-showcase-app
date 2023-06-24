@@ -31,5 +31,5 @@ dependencies {
     implementation(project(":core:platform"))
 
     implementation("com.airbnb.android:lottie-compose:6.0.0")
-
+    implementation("io.github.serpro69:kotlin-faker:1.14.0")
 }

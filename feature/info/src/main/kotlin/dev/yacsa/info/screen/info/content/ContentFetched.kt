@@ -22,6 +22,7 @@ import dev.yacsa.info.screen.info.InfoUiState
 import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.composable.content.ContentIsLoading
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 import kotlin.math.abs
 
 @OptIn(
@@ -90,6 +91,7 @@ fun ContentFetched(
 @Composable
 @Preview(showBackground = true)
 fun Preview_ContentFetched_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ContentFetched(
             uiState = InfoUiState(),
@@ -104,6 +106,7 @@ fun Preview_ContentFetched_Light() {
 @Composable
 @Preview(showBackground = true)
 fun Preview_ContentFetched_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ContentFetched(
             uiState = InfoUiState(),

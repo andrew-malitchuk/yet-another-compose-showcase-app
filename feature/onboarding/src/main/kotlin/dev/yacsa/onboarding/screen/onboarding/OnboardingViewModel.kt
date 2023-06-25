@@ -18,6 +18,7 @@ import dev.yacsa.domain.usecase.startupconfigure.NewUpdateStartUpConfigureUseCas
 import dev.yacsa.platform.Theme
 import dev.yacsa.platform.viewmodel.BaseViewModel
 import dev.yacsa.ui.R
+import io.github.serpro69.kfaker.Faker
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import logcat.logcat
@@ -54,7 +55,7 @@ class OnboardingViewModel @Inject constructor(
 
                     override fun getParameters(): Map<String, Any> = mapOf(
                         "bar" to true,
-                        "foo" to 1,
+                        Faker().quote.fortuneCookie() to 1,
                     )
                 },
             )

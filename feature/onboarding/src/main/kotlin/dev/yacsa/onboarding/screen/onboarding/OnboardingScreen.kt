@@ -21,6 +21,7 @@ import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.theme.detectThemeMode
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 import kotlinx.coroutines.launch
 
 @Composable
@@ -186,6 +187,7 @@ fun BottomSection(state: PagerState) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewOnboardingScreen_Light() {
+    val faker = Faker()
     YacsaTheme(useDarkTheme = false) {
     }
 }
@@ -193,6 +195,7 @@ fun PreviewOnboardingScreen_Light() {
 @Preview(showBackground = true)
 @Composable
 fun PreviewOnboardingScreen_Dark() {
+    val faker = Faker()
     YacsaTheme(useDarkTheme = false) {
     }
 }

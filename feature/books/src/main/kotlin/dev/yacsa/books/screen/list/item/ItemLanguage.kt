@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun ItemLanguage(
@@ -77,6 +78,7 @@ fun ItemLanguage(
 @Preview(showBackground = true)
 @Composable
 fun Preview_ItemLanguage_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ItemLanguage(
             lang = "ua",
@@ -88,6 +90,7 @@ fun Preview_ItemLanguage_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_ItemLanguage_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ItemLanguage(
             lang = "ua",

@@ -42,6 +42,7 @@ import dev.yacsa.ui.composable.content.ContentError
 import dev.yacsa.ui.composable.content.ContentIsLoading
 import dev.yacsa.ui.composable.keyboard.clearFocusOnKeyboardDismiss
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 import java.lang.Math.abs
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalSnapperApi::class)
@@ -199,13 +200,14 @@ fun ContentFetched(
 @Preview(showBackground = true)
 @Composable
 fun Preview_ContentFetched() {
+    val faker = Faker()
     YacsaTheme {
         ContentFetched(
             innerPadding = PaddingValues(YacsaTheme.spacing.small),
             state = rememberLazyListState(),
             topAppBarState = rememberTopAppBarState(),
             uiState = DeeplinkUiState(isError = true),
-            deeplinkState = remember { mutableStateOf("") },
+            deeplinkState = remember { mutableStateOf(faker.quote.fortuneCookie()) },
             onDeeplinkRun = {},
         )
     }

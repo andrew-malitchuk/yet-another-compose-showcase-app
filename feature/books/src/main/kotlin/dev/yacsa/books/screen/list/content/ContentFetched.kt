@@ -29,6 +29,7 @@ import dev.yacsa.books.screen.list.content.fetched.ContentFetchedList
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.ui.composable.fab.ScrollUpFab
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 
@@ -125,6 +126,7 @@ fun ContentFetched(
 @Preview(showBackground = true)
 @Composable
 fun Preview_ContentFetched_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ContentFetched(
             onBookClicked = {},
@@ -139,6 +141,7 @@ fun Preview_ContentFetched_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_ContentFetched_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ContentFetched(
             onBookClicked = {},

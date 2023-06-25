@@ -29,6 +29,7 @@ import dev.yacsa.books.screen.detalization.content.blocks.TranslatorsBlock
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.ui.composable.divider.AnimatedDivider
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -150,6 +151,7 @@ fun ContentFetchedPortrait(
 @Composable
 @Preview(showBackground = true)
 fun Preview_ContentFetchedPortrait_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ContentFetchedPortrait(
             book = null,
@@ -169,6 +171,7 @@ fun Preview_ContentFetchedPortrait_Light() {
 @Composable
 @Preview(showBackground = true)
 fun Preview_ContentFetchedPortrait_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ContentFetchedPortrait(
             book = null,

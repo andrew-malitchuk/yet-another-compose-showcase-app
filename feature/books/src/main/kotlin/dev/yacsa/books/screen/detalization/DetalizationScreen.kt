@@ -27,6 +27,7 @@ import dev.yacsa.ui.composable.content.ContentIsLoading
 import dev.yacsa.ui.composable.snackbar.OfflineSnackbar
 import dev.yacsa.ui.composable.theme.detectThemeMode
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 import kotlinx.coroutines.flow.Flow
 import nl.dionsegijn.konfetti.compose.KonfettiView
 import nl.dionsegijn.konfetti.core.Party
@@ -187,6 +188,7 @@ private fun HandleEvents(events: Flow<DetalizationEvent>) {
 @Preview(showBackground = true)
 @Composable
 fun Preview_DetalizationScreen_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         DetalizationScreen(
             DetalizationUiState(isLoading = false, isError = false),
@@ -202,6 +204,7 @@ fun Preview_DetalizationScreen_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_DetalizationScreen_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         DetalizationScreen(
             DetalizationUiState(isLoading = false, isError = false),

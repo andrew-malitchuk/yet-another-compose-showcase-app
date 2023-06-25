@@ -23,6 +23,7 @@ import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun ItemFetchedGrid(
@@ -80,9 +81,23 @@ fun ItemFetchedGrid(
 @Preview(showBackground = true)
 @Composable
 fun Preview_ItemFetchedGrid_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ItemFetchedGrid(
-            book = BookUiModel(1, "foobar", null, emptyList(), emptyList(), emptyList(), emptyList(), true, null, null, 10, true),
+            book = BookUiModel(
+                faker.hashCode(),
+                faker.quote.fortuneCookie(),
+                listOf( faker.quote.fortuneCookie()),
+                emptyList(),
+                emptyList(),
+                listOf( faker.quote.fortuneCookie()),
+                listOf( faker.quote.fortuneCookie()),
+                true,
+                faker.quote.fortuneCookie(),
+                null,
+                faker.hashCode(),
+                true,
+            ),
             onItemContentClick = {},
         )
     }
@@ -91,9 +106,23 @@ fun Preview_ItemFetchedGrid_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_ItemFetchedGrid_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ItemFetchedGrid(
-            book = BookUiModel(1, "foobar", null, emptyList(), emptyList(), emptyList(), emptyList(), true, null, null, 10, true),
+            book = BookUiModel(
+                faker.hashCode(),
+                faker.quote.fortuneCookie(),
+                listOf( faker.quote.fortuneCookie()),
+                emptyList(),
+                emptyList(),
+                listOf( faker.quote.fortuneCookie()),
+                listOf( faker.quote.fortuneCookie()),
+                true,
+                faker.quote.fortuneCookie(),
+                null,
+                faker.hashCode(),
+                true,
+            ),
             onItemContentClick = {},
         )
     }

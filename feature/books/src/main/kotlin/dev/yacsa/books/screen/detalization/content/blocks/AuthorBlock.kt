@@ -13,6 +13,7 @@ import dev.yacsa.books.screen.list.item.ItemAuthor
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun AuthorBlock(
@@ -48,20 +49,21 @@ fun AuthorBlock(
 @Preview(showBackground = true)
 @Composable
 fun Preview_AuthorBlock_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         AuthorBlock(
             book = BookUiModel(
+                faker.hashCode(),
+                faker.quote.fortuneCookie(),
+                listOf( faker.quote.fortuneCookie()),
+                emptyList(),
+                emptyList(),
+                listOf( faker.quote.fortuneCookie()),
+                listOf( faker.quote.fortuneCookie()),
+                true,
+                faker.quote.fortuneCookie(),
                 null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
+                faker.hashCode(),
                 true,
             ),
             onAuthorClick = {},
@@ -72,20 +74,21 @@ fun Preview_AuthorBlock_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_AuthorBlock_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         AuthorBlock(
             book = BookUiModel(
+                faker.hashCode(),
+                faker.quote.fortuneCookie(),
+                listOf( faker.quote.fortuneCookie()),
+                emptyList(),
+                emptyList(),
+                listOf( faker.quote.fortuneCookie()),
+                listOf( faker.quote.fortuneCookie()),
+                true,
+                faker.quote.fortuneCookie(),
                 null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
+                faker.hashCode(),
                 true,
             ),
             onAuthorClick = {},

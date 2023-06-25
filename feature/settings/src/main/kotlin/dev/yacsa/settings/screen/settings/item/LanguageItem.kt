@@ -30,6 +30,7 @@ import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.modifier.bouncingClickable
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun LanguageItem(
@@ -166,6 +167,7 @@ fun LanguageItem(
 @Preview(showBackground = true)
 @Composable
 fun Preview_LanguageItem_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         LanguageItem(
             language = remember { mutableStateOf("uk") },
@@ -176,6 +178,7 @@ fun Preview_LanguageItem_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_LanguageItem_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         LanguageItem(
             language = remember { mutableStateOf("uk") },

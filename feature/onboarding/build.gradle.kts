@@ -50,4 +50,5 @@ dependencies {
     implementation("com.github.theapache64:rebugger:1.0.0-alpha02")
 
     implementation("com.google.accompanist:accompanist-navigation-animation:0.31.3-beta")
+    implementation("io.github.serpro69:kotlin-faker:1.14.0")
 }

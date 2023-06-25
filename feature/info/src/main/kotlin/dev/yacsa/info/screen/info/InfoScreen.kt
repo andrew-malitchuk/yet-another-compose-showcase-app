@@ -33,6 +33,7 @@ import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.divider.AnimatedDivider
 import dev.yacsa.ui.composable.theme.detectThemeMode
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun InfoRoute(
@@ -139,6 +140,7 @@ fun InfoScreen(
 @Composable
 @Preview(showBackground = true)
 fun Preview_InfoScreen_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         InfoScreen(
             InfoUiState(),
@@ -150,6 +152,7 @@ fun Preview_InfoScreen_Light() {
 @Composable
 @Preview(showBackground = true)
 fun Preview_InfoScreen_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         InfoScreen(
             InfoUiState(),

@@ -1,5 +1,7 @@
 package dev.yacsa.books.screen.list.item
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -28,6 +30,7 @@ import dev.yacsa.model.model.PersonUiModel
 import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun ItemAuthor(
@@ -88,16 +91,18 @@ fun ItemAuthor(
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
 fun Preview_SettingsItem_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ItemAuthor(
             person = PersonUiModel(
-                1,
-                1000,
-                2000,
-                "Foobar",
+                faker.hashCode(),
+                faker.person.birthDate(100).year,
+                faker.person.birthDate(100).year,
+                faker.name.nameWithMiddle(),
             ),
             onClick = {},
         )
@@ -107,13 +112,14 @@ fun Preview_SettingsItem_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_SettingsItem_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ItemAuthor(
             person = PersonUiModel(
-                1,
-                1000,
-                2000,
-                "Foobar",
+                faker.hashCode(),
+                faker.person.birthDate(100).year,
+                faker.person.birthDate(100).year,
+                faker.name.nameWithMiddle(),
             ),
             onClick = {},
         )

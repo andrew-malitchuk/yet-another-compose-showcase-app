@@ -28,6 +28,7 @@ import dev.yacsa.books.screen.list.item.ItemLoading
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 import kotlinx.coroutines.flow.flowOf
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -121,6 +122,7 @@ fun ContentFetchedList(
 @Preview(showBackground = true)
 @Composable
 fun Preview_ContentFetchedList_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ContentFetchedList(
             lazyPagingItems = flowOf(PagingData.empty<BookUiModel>()).collectAsLazyPagingItems(),
@@ -133,6 +135,7 @@ fun Preview_ContentFetchedList_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_ContentFetchedList_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ContentFetchedList(
             lazyPagingItems = flowOf(PagingData.empty<BookUiModel>()).collectAsLazyPagingItems(),

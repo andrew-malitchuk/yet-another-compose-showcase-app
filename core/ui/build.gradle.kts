@@ -8,15 +8,13 @@ android {
 }
 
 dependencies {
-//    implementation(libs.androidx.compose.material3)
-    implementation("androidx.compose.material:material:1.3.1")
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.28.0")
-    implementation("com.google.accompanist:accompanist-pager:0.28.0")
+    implementation(libs.compose.material)
+    implementation(libs.accompanist.systemuicontroller)
+    implementation(libs.accompanist.pager)
 
-
-    implementation("androidx.compose.ui:ui-tooling:1.4.0")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.4.0")
-    implementation("com.squareup.logcat:logcat:0.1")
+    implementation(libs.compose.ui.tooling)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.squareup.logcat)
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
@@ -30,6 +28,6 @@ dependencies {
     implementation(project(":core:localization"))
     implementation(project(":core:platform"))
 
-    implementation("com.airbnb.android:lottie-compose:6.0.0")
-    implementation("io.github.serpro69:kotlin-faker:1.14.0")
+    implementation(libs.airbnb.lottie)
+    implementation(libs.faker)
 }

@@ -28,6 +28,7 @@ import dev.yacsa.ui.composable.content.ContentError
 import dev.yacsa.ui.composable.content.ContentIsLoading
 import dev.yacsa.ui.composable.content.ContentNoData
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 import java.lang.Math.abs
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalSnapperApi::class)
@@ -114,6 +115,7 @@ fun ContentFetched(
 @Preview(showBackground = true)
 @Composable
 fun Preview_ContentFetched_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ContentFetched(
             innerPadding = PaddingValues(YacsaTheme.spacing.small),
@@ -128,6 +130,7 @@ fun Preview_ContentFetched_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_ContentFetched_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ContentFetched(
             innerPadding = PaddingValues(YacsaTheme.spacing.small),

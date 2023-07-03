@@ -27,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun ContentError(
@@ -107,9 +108,10 @@ fun ContentError(
 @Preview(showBackground = true)
 @Composable
 fun Preview_ContentError_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ContentError(
-            errorMessage = "Foobar",
+            errorMessage = faker.quote.fortuneCookie(),
             onBackClick = {},
         )
     }
@@ -118,9 +120,10 @@ fun Preview_ContentError_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_ContentError_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ContentError(
-            errorMessage = "Foobar",
+            errorMessage = faker.quote.fortuneCookie(),
             onBackClick = {},
         )
     }

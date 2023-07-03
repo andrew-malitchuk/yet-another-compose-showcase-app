@@ -15,27 +15,27 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtimeCompose)
     implementation(libs.androidx.navigation.compose)
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.28.0")
-    implementation("io.coil-kt:coil-compose:2.2.2")
+    implementation(libs.android.lifecycle.viewmodel.compose)
+    implementation(libs.hilt.navigation.compose)
+    implementation(libs.accompanist.systemuicontroller)
+    implementation(libs.coil.compose)
 
-    implementation("androidx.compose.ui:ui-tooling:1.4.0")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.4.0")
+    implementation(libs.compose.ui.tooling)
+    implementation(libs.compose.ui.tooling.preview)
 
-    implementation("androidx.datastore:datastore:1.0.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
+    implementation(libs.datastore)
+    implementation(libs.kotlinx.collections.immutable)
+    implementation(libs.kotlinx.serialization.json)
 
 
-    implementation("io.arrow-kt:arrow-core:1.2.0-RC")
-    implementation("io.arrow-kt:arrow-fx-coroutines:1.2.0-RC")
-    implementation("io.arrow-kt:arrow-optics:1.2.0-RC")
-    ksp("io.arrow-kt:arrow-optics-ksp-plugin:1.2.0-RC")
+    implementation(libs.arrow.core)
+    implementation(libs.arrow.fx.coroutines)
+    implementation(libs.arrow.optics)
+    ksp(libs.arrow.optics.ksp.plugin)
 
     implementation(project(":service:crashlytics"))
 
-    implementation("com.google.firebase:firebase-common-ktx:20.3.2")
-    implementation("com.google.firebase:firebase-analytics-ktx:21.2.1")
-    implementation("com.google.firebase:firebase-crashlytics-ktx:18.3.6")
+    implementation(libs.firebase.common)
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
 }

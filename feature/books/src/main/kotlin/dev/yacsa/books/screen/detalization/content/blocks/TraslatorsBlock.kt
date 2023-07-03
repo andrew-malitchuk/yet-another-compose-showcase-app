@@ -13,6 +13,7 @@ import dev.yacsa.books.screen.list.item.ItemAuthor
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun TranslatorsBlock(
@@ -49,20 +50,21 @@ fun TranslatorsBlock(
 @Preview(showBackground = true)
 @Composable
 fun Preview_TranslatorsBlock_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         TranslatorsBlock(
             book = BookUiModel(
+                faker.hashCode(),
+                faker.quote.fortuneCookie(),
+                listOf( faker.quote.fortuneCookie()),
+                emptyList(),
+                emptyList(),
+                listOf( faker.quote.fortuneCookie()),
+                listOf( faker.quote.fortuneCookie()),
+                true,
+                faker.quote.fortuneCookie(),
                 null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
+                faker.hashCode(),
                 true,
             ),
             onTranslatorClick = {},
@@ -73,20 +75,21 @@ fun Preview_TranslatorsBlock_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_TranslatorsBlock_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         TranslatorsBlock(
             book = BookUiModel(
+                faker.hashCode(),
+                faker.quote.fortuneCookie(),
+                listOf( faker.quote.fortuneCookie()),
+                emptyList(),
+                emptyList(),
+                listOf( faker.quote.fortuneCookie()),
+                listOf( faker.quote.fortuneCookie()),
+                true,
+                faker.quote.fortuneCookie(),
                 null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
+                faker.hashCode(),
                 true,
             ),
             onTranslatorClick = {},

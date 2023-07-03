@@ -13,6 +13,7 @@ import dev.yacsa.books.screen.list.item.ItemFormat
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun FormatsBlock(
@@ -91,20 +92,21 @@ fun FormatsBlock(
 @Preview(showBackground = true)
 @Composable
 fun Preview_FormatsBlock_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         FormatsBlock(
             book = BookUiModel(
+                faker.hashCode(),
+                faker.quote.fortuneCookie(),
+                listOf( faker.quote.fortuneCookie()),
+                emptyList(),
+                emptyList(),
+                listOf( faker.quote.fortuneCookie()),
+                listOf( faker.quote.fortuneCookie()),
+                true,
+                faker.quote.fortuneCookie(),
                 null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
+                faker.hashCode(),
                 true,
             ),
             onFormatClick = {},
@@ -115,20 +117,21 @@ fun Preview_FormatsBlock_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_FormatsBlock_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         FormatsBlock(
             book = BookUiModel(
+                faker.hashCode(),
+                faker.quote.fortuneCookie(),
+                listOf( faker.quote.fortuneCookie()),
+                emptyList(),
+                emptyList(),
+                listOf( faker.quote.fortuneCookie()),
+                listOf( faker.quote.fortuneCookie()),
+                true,
+                faker.quote.fortuneCookie(),
                 null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
+                faker.hashCode(),
                 true,
             ),
             onFormatClick = {},

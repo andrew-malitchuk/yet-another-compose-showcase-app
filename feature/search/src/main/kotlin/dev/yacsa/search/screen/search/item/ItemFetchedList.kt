@@ -30,6 +30,7 @@ import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun ItemFetchedList(
@@ -125,20 +126,21 @@ fun ItemFetchedList(
 @Preview(showBackground = true)
 @Composable
 fun Preview_ListItem_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ItemFetchedList(
             book = BookUiModel(
-                1,
-                "foobar",
-                null,
+                faker.hashCode(),
+                faker.quote.fortuneCookie(),
+                listOf( faker.quote.fortuneCookie()),
                 emptyList(),
                 emptyList(),
-                emptyList(),
-                emptyList(),
+                listOf( faker.quote.fortuneCookie()),
+                listOf( faker.quote.fortuneCookie()),
                 true,
+                faker.quote.fortuneCookie(),
                 null,
-                null,
-                10,
+                faker.hashCode(),
                 true,
             ),
             onItemContentClick = {},
@@ -149,20 +151,21 @@ fun Preview_ListItem_Dark() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_ItemFetchedList_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ItemFetchedList(
             book = BookUiModel(
-                1,
-                "foobar",
-                null,
+                faker.hashCode(),
+                faker.quote.fortuneCookie(),
+                listOf( faker.quote.fortuneCookie()),
                 emptyList(),
                 emptyList(),
-                emptyList(),
-                emptyList(),
+                listOf( faker.quote.fortuneCookie()),
+                listOf( faker.quote.fortuneCookie()),
                 true,
+                faker.quote.fortuneCookie(),
                 null,
-                null,
-                10,
+                faker.hashCode(),
                 true,
             ),
             onItemContentClick = {},

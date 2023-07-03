@@ -16,10 +16,8 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.core.splashscreen)
 
-//    implementation(libs.androidx.compose.material3)
-    implementation("androidx.compose.material:material:1.3.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
-
+    implementation(libs.compose.material)
+    implementation(libs.android.lifecycle.viewmodel.compose)
 
     implementation(project(":core:ui"))
     implementation(project(":core:platform"))
@@ -42,19 +40,19 @@ dependencies {
 
     implementation(project(":domain"))
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation(libs.kotlinx.coroutines.core)
 
-    implementation("io.arrow-kt:arrow-core:1.2.0-RC")
-    implementation("io.arrow-kt:arrow-fx-coroutines:1.2.0-RC")
-    implementation("io.arrow-kt:arrow-optics:1.2.0-RC")
-    ksp("io.arrow-kt:arrow-optics-ksp-plugin:1.2.0-RC")
+    implementation(libs.arrow.core)
+    implementation(libs.arrow.fx.coroutines)
+     implementation(libs.arrow.optics)
+    ksp(libs.arrow.optics.ksp.plugin)
 
     implementation("androidx.activity:activity-ktx:1.7.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    implementation(libs.hilt.navigation.compose)
 
 
-    implementation("com.google.accompanist:accompanist-navigation-animation:0.31.3-beta")
+    implementation(libs.accompanist.navigation.animation)
 
 
 }

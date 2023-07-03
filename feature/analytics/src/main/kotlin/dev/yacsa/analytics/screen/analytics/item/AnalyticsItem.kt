@@ -26,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun AnalyticsItem(
@@ -84,10 +85,11 @@ fun AnalyticsItem(
 @Preview(showBackground = true)
 @Composable
 fun Preview_SettingsItem_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         AnalyticsItem(
-            key = "foobar",
-            value = "foobar",
+            key = faker.quote.fortuneCookie(),
+            value = faker.quote.fortuneCookie(),
             icon = R.drawable.icon_bell_regular_24,
             onClick = {},
         )
@@ -97,10 +99,11 @@ fun Preview_SettingsItem_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_SettingsItem_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         AnalyticsItem(
-            key = "foobar",
-            value = "foobar",
+            key = faker.quote.fortuneCookie(),
+            value = faker.quote.fortuneCookie(),
             icon = R.drawable.icon_bell_regular_24,
             onClick = {},
         )

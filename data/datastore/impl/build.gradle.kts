@@ -9,9 +9,9 @@ android {
 }
 
 dependencies {
-    implementation("androidx.datastore:datastore:1.0.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
+    implementation(libs.datastore)
+    implementation(libs.kotlinx.collections.immutable)
+    implementation(libs.kotlinx.serialization.json)
 
     implementation(project(":data:datastore"))
 }

@@ -38,6 +38,7 @@ import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.divider.AnimatedDivider
 import dev.yacsa.ui.composable.theme.detectThemeMode
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun DeeplinkRoute(
@@ -155,13 +156,30 @@ fun DeeplinkScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_SettingsScreen() {
-    YacsaTheme {
+fun Preview_DeeplinkScreen_Light() {
+    val faker = Faker()
+    YacsaTheme(true) {
         DeeplinkScreen(
             uiState = DeeplinkUiState(),
             onBackClick = {},
             onValueChange = remember {
-                mutableStateOf("")
+                mutableStateOf(faker.quote.fortuneCookie())
+            },
+            onDeeplinkRun = {},
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_DeeplinkScreen_Dark() {
+    val faker = Faker()
+    YacsaTheme(false) {
+        DeeplinkScreen(
+            uiState = DeeplinkUiState(),
+            onBackClick = {},
+            onValueChange = remember {
+                mutableStateOf(faker.quote.fortuneCookie())
             },
             onDeeplinkRun = {},
         )

@@ -13,6 +13,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -76,9 +77,10 @@ fun ChipGroup(
 @Preview(showBackground = true)
 @Composable
 fun Preview_ChipGroup_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ChipGroup(
-            values = listOf("Foo", "Bar"),
+            values = listOf(faker.airport.europeanUnion.medium(), faker.airport.europeanUnion.medium()),
         ) {}
     }
 }
@@ -86,9 +88,10 @@ fun Preview_ChipGroup_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_ChipGroup_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ChipGroup(
-            values = listOf("Foo", "Bar"),
-        ) {}
+            values = listOf(faker.airport.europeanUnion.medium(), faker.airport.europeanUnion.medium()),
+            ) {}
     }
 }

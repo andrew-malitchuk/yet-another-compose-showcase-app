@@ -18,6 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun ContentNoData(
@@ -63,9 +64,10 @@ fun ContentNoData(
 @Preview(showBackground = true)
 @Composable
 fun Preview_ContentNoData_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ContentNoData(
-            message = "Foobar",
+            message = faker.quote.fortuneCookie(),
         )
     }
 }
@@ -73,9 +75,10 @@ fun Preview_ContentNoData_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_ContentNoData_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ContentNoData(
-            message = "Foobar",
+            message = faker.quote.fortuneCookie(),
         )
     }
 }

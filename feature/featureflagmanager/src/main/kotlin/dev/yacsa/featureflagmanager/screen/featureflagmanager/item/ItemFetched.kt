@@ -27,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yacsa.featureflag.FeatureFlagModel
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -149,9 +150,10 @@ fun ItemFetched(
 @Composable
 @Preview(showBackground = true)
 fun Preview_ItemFetched_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ItemFetched(
-            item = FeatureFlagModel("foo", true),
+            item = FeatureFlagModel(faker.quote.fortuneCookie(), true),
             isActive = {},
             isEnabled = {},
         )
@@ -161,9 +163,10 @@ fun Preview_ItemFetched_Light() {
 @Composable
 @Preview(showBackground = true)
 fun Preview_ItemFetched_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ItemFetched(
-            item = FeatureFlagModel("foo", true),
+            item = FeatureFlagModel(faker.quote.fortuneCookie(), true),
             isActive = {},
             isEnabled = {},
         )

@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.divider.AnimatedDivider
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun ListToolbar(
@@ -104,6 +105,7 @@ fun ListToolbar(
 @Preview(showBackground = true)
 @Composable
 fun Preview_ListToolbar_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ListToolbar(
             state = rememberLazyListState(),
@@ -117,6 +119,7 @@ fun Preview_ListToolbar_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_ListToolbar_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ListToolbar(
             state = rememberLazyListState(),

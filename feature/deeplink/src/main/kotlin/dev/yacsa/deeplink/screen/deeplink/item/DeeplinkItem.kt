@@ -28,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -89,10 +90,25 @@ fun DeeplinkItem(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_SettingsItem() {
-    YacsaTheme {
+fun Preview_DeeplinkItem_Light() {
+    val faker = Faker()
+    YacsaTheme(true) {
         DeeplinkItem(
-            value = "foobar",
+            value = faker.quote.fortuneCookie(),
+            icon = R.drawable.icon_bell_regular_24,
+            onClick = {},
+        )
+    }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_DeeplinkItem_Dark() {
+    val faker = Faker()
+    YacsaTheme(false) {
+        DeeplinkItem(
+            value = faker.quote.fortuneCookie(),
             icon = R.drawable.icon_bell_regular_24,
             onClick = {},
         )

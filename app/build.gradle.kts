@@ -80,24 +80,22 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.compose.material3)
 
-    implementation("com.squareup.logcat:logcat:0.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
+    implementation(libs.android.lifecycle.viewmodel.compose)
 
-    implementation("com.google.firebase:firebase-common-ktx:20.3.2")
-    implementation("com.google.firebase:firebase-analytics-ktx:21.2.1")
-    implementation("com.google.firebase:firebase-crashlytics-ktx:18.3.6")
-    implementation("androidx.lifecycle:lifecycle-process:2.6.1")
-
-//    implementation("androidx.compose.ui:ui-tooling-preview:1.3.3")
-//    implementation("androidx.compose.ui:ui-tooling:1.3.3")
+    implementation(libs.firebase.common)
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.android.lifecycle.process)
 
     debugImplementation("com.facebook.flipper:flipper:0.190.0")
     debugImplementation("com.facebook.soloader:soloader:0.10.5")
     releaseImplementation("com.facebook.flipper:flipper-noop:0.190.0")
     implementation("com.facebook.flipper:flipper-network-plugin:0.190.0")
 
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.11")
-    implementation("io.github.kevlar-kt:antipiracy:1.1.0")
-    implementation("io.github.kevlar-kt:rooting:1.1.0")
-    implementation("io.github.kevlar-kt:integrity:1.1.0")
+    debugImplementation(libs.squareup.leakcanary)
+    implementation(libs.squareup.logcat)
+
+    implementation(libs.kevlar.antipiracy)
+    implementation(libs.kevlar.rooting)
+    implementation(libs.kevlar.integrity)
 }

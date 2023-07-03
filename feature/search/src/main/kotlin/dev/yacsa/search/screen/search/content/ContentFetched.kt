@@ -40,6 +40,7 @@ import dev.yacsa.ui.composable.content.ContentIsLoading
 import dev.yacsa.ui.composable.content.ContentNoData
 import dev.yacsa.ui.composable.keyboard.clearFocusOnKeyboardDismiss
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalPagerApi::class)
 @Composable
@@ -178,9 +179,10 @@ fun ContentFetched(
 @Composable
 @Preview(showBackground = true)
 fun Preview_ContentFetched_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ContentFetched(
-            searchText = "Lorem ipsum",
+            searchText = faker.quote.fortuneCookie(),
             onValueChange = {},
             uiState = SearchUiState(),
             onBookClicked = {},
@@ -195,9 +197,10 @@ fun Preview_ContentFetched_Light() {
 @Composable
 @Preview(showBackground = true)
 fun Preview_ContentFetched_Dark() {
+    val faker = Faker()
     YacsaTheme(false) {
         ContentFetched(
-            searchText = "Lorem ipsum",
+            searchText = faker.quote.fortuneCookie(),
             onValueChange = {},
             uiState = SearchUiState(),
             onBookClicked = {},

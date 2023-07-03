@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun NotFoundRoute(
@@ -74,6 +75,7 @@ fun NotFoundScreen(
 @Composable
 @Preview(showBackground = true)
 fun Preview_NotFoundScreen_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         NotFoundScreen({})
     }
@@ -82,6 +84,7 @@ fun Preview_NotFoundScreen_Light() {
 @Composable
 @Preview(showBackground = true)
 fun Preview_NotFoundScreen_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         NotFoundScreen({})
     }

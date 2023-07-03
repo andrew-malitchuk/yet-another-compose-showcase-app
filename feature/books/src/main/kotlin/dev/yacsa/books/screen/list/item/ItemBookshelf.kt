@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun ItemBookshelf(
@@ -77,6 +78,7 @@ fun ItemBookshelf(
 @Preview(showBackground = true)
 @Composable
 fun Preview_ItemBookshelf_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ItemBookshelf(
             bookshelf = "ua",
@@ -88,6 +90,7 @@ fun Preview_ItemBookshelf_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_ItemBookshelf_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ItemBookshelf(
             bookshelf = "ua",

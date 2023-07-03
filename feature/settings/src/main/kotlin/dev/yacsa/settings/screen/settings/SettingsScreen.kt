@@ -44,6 +44,7 @@ import dev.yacsa.ui.composable.divider.AnimatedDivider
 import dev.yacsa.ui.composable.theme.CircularReveal
 import dev.yacsa.ui.composable.theme.detectThemeMode
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 import kotlinx.coroutines.flow.Flow
 
 @Composable
@@ -224,6 +225,7 @@ fun SettingsScreen(
 @Preview(showBackground = true)
 @Composable
 fun Preview_SettingsScreen_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         SettingsScreen(
             uiState = SettingsUiState(lang = "uk"),
@@ -241,6 +243,7 @@ fun Preview_SettingsScreen_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_SettingsScreen_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         SettingsScreen(
             uiState = SettingsUiState(lang = "uk"),

@@ -14,6 +14,7 @@ import dev.yacsa.books.screen.list.item.ItemSubject
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -51,20 +52,21 @@ fun SubjectsBlock(
 @Preview(showBackground = true)
 @Composable
 fun Preview_SubjectsBlock_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         SubjectsBlock(
             book = BookUiModel(
+                faker.hashCode(),
+                faker.quote.fortuneCookie(),
+                listOf( faker.quote.fortuneCookie()),
+                emptyList(),
+                emptyList(),
+                listOf( faker.quote.fortuneCookie()),
+                listOf( faker.quote.fortuneCookie()),
+                true,
+                faker.quote.fortuneCookie(),
                 null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
+                faker.hashCode(),
                 true,
             ),
             onSubjectClick = {},
@@ -75,20 +77,21 @@ fun Preview_SubjectsBlock_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_SubjectsBlock_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         SubjectsBlock(
             book = BookUiModel(
+                faker.hashCode(),
+                faker.quote.fortuneCookie(),
+                listOf( faker.quote.fortuneCookie()),
+                emptyList(),
+                emptyList(),
+                listOf( faker.quote.fortuneCookie()),
+                listOf( faker.quote.fortuneCookie()),
+                true,
+                faker.quote.fortuneCookie(),
                 null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
+                faker.hashCode(),
                 true,
             ),
             onSubjectClick = {},

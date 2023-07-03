@@ -29,6 +29,7 @@ import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.button.TwoStateButton
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun SearchToolbar(
@@ -105,6 +106,7 @@ fun SearchToolbar(
 @Preview(showBackground = true)
 @Composable
 fun Preview_SearchToolbar_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         SearchToolbar(
             state = rememberLazyListState(),
@@ -120,6 +122,7 @@ fun Preview_SearchToolbar_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_SearchToolbar_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         SearchToolbar(
             state = rememberLazyListState(),

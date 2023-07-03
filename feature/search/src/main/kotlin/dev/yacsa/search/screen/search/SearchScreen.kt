@@ -20,6 +20,7 @@ import dev.yacsa.ui.composable.content.ContentIsLoading
 import dev.yacsa.ui.composable.snackbar.OfflineSnackbar
 import dev.yacsa.ui.composable.theme.detectThemeMode
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun SearchRoute(
@@ -139,10 +140,11 @@ fun SearchScreen(
 @Composable
 @Preview(showBackground = true)
 fun Preview_SearchScreen_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         SearchScreen(
             SearchUiState(),
-            "",
+            faker.quote.fortuneCookie(),
             {},
             {},
             {},
@@ -156,10 +158,11 @@ fun Preview_SearchScreen_Light() {
 @Composable
 @Preview(showBackground = true)
 fun Preview_SearchScreen_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         SearchScreen(
             SearchUiState(),
-            "",
+            faker.quote.fortuneCookie(),
             {},
             {},
             {},

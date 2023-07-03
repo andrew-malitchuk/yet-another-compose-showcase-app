@@ -9,6 +9,20 @@ android {
 }
 
 dependencies {
+/*    implementation(libs.squareup.moshi)
+    implementation(libs.squareup.moshi.codegen)
+    ksp(libs.squareup.moshi.convertor)
+    implementation(libs.retrofit.core)
+
+    implementation(libs.squareup.okhttp3)
+    implementation(libs.squareup.okhttp3.interceptor)
+
+    debugImplementation("com.github.chuckerteam.chucker:library:3.5.2")
+    releaseImplementation("com.github.chuckerteam.chucker:library-no-op:3.5.2")
+
+    implementation(project(":data:network"))
+    implementation(project(":service:flipper"))*/
+
     implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
     implementation("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
@@ -20,8 +34,6 @@ dependencies {
     debugImplementation("com.github.chuckerteam.chucker:library:3.5.2")
     releaseImplementation("com.github.chuckerteam.chucker:library-no-op:3.5.2")
 
-//    implementation("com.facebook.flipper:flipper-network-plugin:0.190.0")
 
     implementation(project(":data:network"))
-    implementation(project(":service:flipper"))
 }

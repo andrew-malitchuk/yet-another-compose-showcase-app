@@ -28,6 +28,7 @@ import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.composable.content.ContentIsLoading
 import dev.yacsa.ui.composable.content.ContentNoData
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 import logcat.logcat
 
 @OptIn(
@@ -129,11 +130,12 @@ fun ContentFetched(
 @Composable
 @Preview(showBackground = true)
 fun Preview_ContentFetched_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ContentFetched(
             uiState = FeatureFlagUiState(
                 featureFlags = listOf(
-                    FeatureFlagModel("foo"),
+                    FeatureFlagModel(faker.quote.fortuneCookie()),
                 ),
             ),
             isEnabled = {},
@@ -149,11 +151,12 @@ fun Preview_ContentFetched_Light() {
 @Composable
 @Preview(showBackground = true)
 fun Preview_ContentFetched_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ContentFetched(
             uiState = FeatureFlagUiState(
                 featureFlags = listOf(
-                    FeatureFlagModel("foo"),
+                    FeatureFlagModel(faker.quote.fortuneCookie()),
                 ),
             ),
             isEnabled = {},

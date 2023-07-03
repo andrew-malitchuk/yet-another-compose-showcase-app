@@ -43,6 +43,7 @@ import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.button.RowToggleButtonGroup
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -246,6 +247,7 @@ data class FilterDialogResult(
 @Preview(showBackground = true)
 @Composable
 fun Preview_FilterDialogContent_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         FilterDialogContent(
             onSort = {
@@ -259,6 +261,7 @@ fun Preview_FilterDialogContent_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_FilterDialogContent_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         FilterDialogContent(
             onSort = {

@@ -25,6 +25,7 @@ import dev.yacsa.ui.composable.content.ContentIsLoading
 import dev.yacsa.ui.composable.snackbar.OfflineSnackbar
 import dev.yacsa.ui.composable.theme.detectThemeMode
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import logcat.logcat
@@ -185,6 +186,7 @@ private fun HandleEvents(
 @Preview(showBackground = true)
 @Composable
 fun PreviewListScreen_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ListScreen(
             {},
@@ -200,6 +202,7 @@ fun PreviewListScreen_Light() {
 @Preview(showBackground = true)
 @Composable
 fun PreviewListScreen_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ListScreen(
             {},

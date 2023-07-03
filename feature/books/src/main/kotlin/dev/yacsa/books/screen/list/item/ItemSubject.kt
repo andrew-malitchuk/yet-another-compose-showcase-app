@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -81,9 +82,10 @@ fun ItemSubject(
 @Preview(showBackground = true)
 @Composable
 fun Preview_ItemSubject_Ligth() {
+    val faker = Faker()
     YacsaTheme(false) {
         ItemSubject(
-            subject = "Abactus peritus homo est.",
+            subject = faker.quote.fortuneCookie(),
             onClick = {},
         )
     }
@@ -92,9 +94,10 @@ fun Preview_ItemSubject_Ligth() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_ItemSubject_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ItemSubject(
-            subject = "Abactus peritus homo est.",
+            subject = faker.quote.fortuneCookie(),
             onClick = {},
         )
     }

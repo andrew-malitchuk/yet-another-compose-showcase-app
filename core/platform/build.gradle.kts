@@ -9,14 +9,12 @@ android {
 }
 
 dependencies {
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
-
-    implementation("io.arrow-kt:arrow-core:1.2.0-RC")
-    implementation("io.arrow-kt:arrow-fx-coroutines:1.2.0-RC")
-    implementation("io.arrow-kt:arrow-optics:1.2.0-RC")
-    implementation("androidx.core:core-splashscreen:1.0.1")
-    ksp("io.arrow-kt:arrow-optics-ksp-plugin:1.2.0-RC")
+    implementation(libs.android.lifecycle.viewmodel.compose)
+    implementation(libs.android.lifecycle.runtime)
+    implementation(libs.arrow.core)
+    implementation(libs.arrow.fx.coroutines)
+    implementation(libs.arrow.optics)
+    ksp(libs.arrow.optics.ksp.plugin)
 
     implementation(project(":domain"))
     implementation(project(":core:model"))

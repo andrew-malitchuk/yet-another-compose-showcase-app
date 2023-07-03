@@ -51,6 +51,7 @@ import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.composable.button.TwoStateButton
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @OptIn(ExperimentalMotionApi::class, ExperimentalFoundationApi::class)
 @Composable
@@ -225,21 +226,22 @@ fun CollapsingToolbar(
 @Preview(showBackground = true)
 @Composable
 fun Preview_CollapsingToolbar_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         CollapsingToolbar(
             lazyScrollState = rememberLazyListState(),
             book = BookUiModel(
+                faker.hashCode(),
+                faker.quote.fortuneCookie(),
+                listOf( faker.quote.fortuneCookie()),
+                emptyList(),
+                emptyList(),
+                listOf( faker.quote.fortuneCookie()),
+                listOf( faker.quote.fortuneCookie()),
+                true,
+                faker.quote.fortuneCookie(),
                 null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
+                faker.hashCode(),
                 true,
             ),
             onBackClick = {},
@@ -253,21 +255,22 @@ fun Preview_CollapsingToolbar_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_CollapsingToolbar_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         CollapsingToolbar(
             lazyScrollState = rememberLazyListState(),
             book = BookUiModel(
+                faker.hashCode(),
+                faker.quote.fortuneCookie(),
+                listOf( faker.quote.fortuneCookie()),
+                emptyList(),
+                emptyList(),
+                listOf( faker.quote.fortuneCookie()),
+                listOf( faker.quote.fortuneCookie()),
+                true,
+                faker.quote.fortuneCookie(),
                 null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
+                faker.hashCode(),
                 true,
             ),
             onBackClick = {},

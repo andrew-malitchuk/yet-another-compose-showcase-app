@@ -23,6 +23,7 @@ import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.search.screen.search.item.ItemFetchedList
 import dev.yacsa.ui.composable.divider.AnimatedDivider
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun ResultFetched(
@@ -74,6 +75,7 @@ fun ResultFetched(
 @Preview(showBackground = true)
 @Composable
 fun Preview_ResultFetched_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ResultFetched(
             resultSearch = emptyList(),
@@ -86,6 +88,7 @@ fun Preview_ResultFetched_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_ResultFetched_Dark() {
+    val faker = Faker()
     YacsaTheme(false) {
         ResultFetched(
             resultSearch = emptyList(),

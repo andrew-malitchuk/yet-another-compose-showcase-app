@@ -26,6 +26,7 @@ fun NavGraphBuilder.searchNavGraph(navController: NavHostController) {
                 },
             ),
             enterTransition = {
+
                 slideIntoContainer(
                     AnimatedContentTransitionScope.SlideDirection.Left,
                     animationSpec = tween(700),

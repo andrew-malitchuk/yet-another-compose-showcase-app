@@ -9,19 +9,19 @@ android {
 }
 
 dependencies {
-    implementation("androidx.datastore:datastore:1.0.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
+    implementation(libs.datastore)
+    implementation(libs.kotlinx.collections.immutable)
+    implementation(libs.kotlinx.serialization.json)
 
-    implementation("com.google.firebase:firebase-common-ktx:20.3.2")
+    implementation(libs.firebase.common)
     implementation("com.google.firebase:firebase-config-ktx:21.3.0")
-    implementation("com.google.firebase:firebase-analytics-ktx:21.2.1")
+    implementation(libs.firebase.analytics)
 
     implementation(project(":data:remoteconfig"))
 
 
-    implementation("io.arrow-kt:arrow-core:1.2.0-RC")
-    implementation("io.arrow-kt:arrow-fx-coroutines:1.2.0-RC")
-    implementation("io.arrow-kt:arrow-optics:1.2.0-RC")
-    ksp("io.arrow-kt:arrow-optics-ksp-plugin:1.2.0-RC")
+    implementation(libs.arrow.core)
+    implementation(libs.arrow.fx.coroutines)
+     implementation(libs.arrow.optics)
+    ksp(libs.arrow.optics.ksp.plugin)
 }

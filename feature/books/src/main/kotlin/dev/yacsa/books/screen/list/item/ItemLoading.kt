@@ -18,6 +18,7 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun ItemLoading(
@@ -43,6 +44,7 @@ fun ItemLoading(
 @Preview(showBackground = true)
 @Composable
 fun Preview_ListLoadingItem_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ItemLoading()
     }
@@ -51,6 +53,7 @@ fun Preview_ListLoadingItem_Dark() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_ListLoadingItem_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ItemLoading()
     }

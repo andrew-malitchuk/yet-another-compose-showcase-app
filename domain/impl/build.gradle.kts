@@ -12,12 +12,12 @@ dependencies {
     implementation(project(":data:repository"))
     implementation(project(":core:platform"))
 
-    kapt("org.mapstruct:mapstruct-processor:1.5.5.Final")
-    implementation("org.mapstruct:mapstruct:1.5.5.Final")
-    implementation("org.mapstruct:mapstruct-jdk8:1.5.5.Final")
+    kapt(libs.mapstruct.processor) 
+    implementation(libs.mapstruct)
+    implementation(libs.mapstruct.jdk8)
 
-    implementation("io.arrow-kt:arrow-core:1.2.0-RC")
-    implementation("io.arrow-kt:arrow-fx-coroutines:1.2.0-RC")
-    implementation("io.arrow-kt:arrow-optics:1.2.0-RC")
-    ksp("io.arrow-kt:arrow-optics-ksp-plugin:1.2.0-RC")
+    implementation(libs.arrow.core)
+    implementation(libs.arrow.fx.coroutines)
+     implementation(libs.arrow.optics)
+    ksp(libs.arrow.optics.ksp.plugin)
 }

@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun TwoStateButton(
@@ -64,6 +65,7 @@ fun TwoStateButton(
 @Preview(showBackground = true)
 @Composable
 fun Preview_TwoStateButton_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         TwoStateButton(
             Modifier,
@@ -79,6 +81,7 @@ fun Preview_TwoStateButton_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_TwoStateButton_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         TwoStateButton(
             Modifier,

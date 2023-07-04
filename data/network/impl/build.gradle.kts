@@ -5,7 +5,10 @@ plugins {
 }
 
 android {
-    namespace = "dev.yacsa.network.impl"
+    namespace ="dev.yacsa.network.impl"
+    defaultConfig {
+        testInstrumentationRunner = "dev.yacsa.network.impl.MyTestRunner"
+    }
 }
 
 dependencies {
@@ -30,10 +33,20 @@ dependencies {
 
     implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.1")
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.1")
+    implementation("androidx.test:runner:1.5.2")
 
     debugImplementation("com.github.chuckerteam.chucker:library:3.5.2")
     releaseImplementation("com.github.chuckerteam.chucker:library-no-op:3.5.2")
 
 
     implementation(project(":data:network"))
+
+    androidTestImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.44.2")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.44.2")
+    androidTestImplementation("androidx.test:core-ktx:1.5.0")
+
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+
 }

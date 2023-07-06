@@ -57,15 +57,15 @@ dependencies {
     testImplementation("com.google.dagger:hilt-android-testing:2.44.2")
     kaptTest("com.google.dagger:hilt-android-compiler:2.44.2")
     testImplementation("androidx.test:core-ktx:1.5.0")
-
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
-
-    testImplementation("com.squareup.okhttp3:mockwebserver:4.11.0")
-
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.2")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.2")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.7.20")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")
     testImplementation("org.robolectric:robolectric:4.9")
+
+
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.11.0")
 
 }

@@ -9,8 +9,6 @@ import org.mockito.kotlin.mock
 
 class BooksRepositoryTest:BooksRepository {
 
-    https://www.youtube.com/watch?v=w8EfaeeRClA&list=WL&index=16
-
     private val bookDbSource: BookDbSource = mock<BookDbSource>()
     private val booksNetSource: BooksNetSource = mock<BooksNetSource>()
 

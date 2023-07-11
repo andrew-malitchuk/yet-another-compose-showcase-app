@@ -84,7 +84,7 @@ class AnalyticsViewModelTest {
             analyticsUiDomainMapper,
             theme
         )
-
+        https://www.youtube.com/watch?v=-MzqC0jiz7A&list=WL&index=28
         assertNotNull(viewModel)
 //        viewModel.event.test{
 //

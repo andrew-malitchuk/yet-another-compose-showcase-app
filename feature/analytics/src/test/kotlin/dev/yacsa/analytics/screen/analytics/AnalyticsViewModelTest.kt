@@ -1,6 +1,7 @@
 package dev.yacsa.analytics.screen.analytics
 
 import androidx.lifecycle.SavedStateHandle
+import arrow.core.Either
 import dev.yacsa.domain.usecase.analytics.ClearAnalyticsUseCase
 import dev.yacsa.domain.usecase.analytics.GetAnalyticsUseCase
 import dev.yacsa.model.mapper.AnalyticsUiDomainMapper
@@ -23,7 +24,6 @@ import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.api.extension.RegisterExtension
 import org.mockito.Mockito
 import org.mockito.kotlin.mock
-import kotlin.test.assertNotNull
 
 class AnalyticsViewModelTest {
 
@@ -47,7 +47,6 @@ class AnalyticsViewModelTest {
     fun init() {
 
     }
-
 
 
 
@@ -84,11 +83,12 @@ class AnalyticsViewModelTest {
             analyticsUiDomainMapper,
             theme
         )
-        https://www.youtube.com/watch?v=-MzqC0jiz7A&list=WL&index=28
-        assertNotNull(viewModel)
-//        viewModel.event.test{
-//
-//        }
+
+        Mockito.`when`(getAnalyticsUseCase()).thenReturn(
+            Either.Right(emptyList())
+        )
+
+//        viewModel.
     }
 }
 

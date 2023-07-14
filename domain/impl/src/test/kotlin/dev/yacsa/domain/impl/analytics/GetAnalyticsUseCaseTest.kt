@@ -48,6 +48,8 @@ class GetAnalyticsUseCaseTest {
         Mockito.`when`(analyticsRepository.get()).doThrow(NullPointerException())
 
         val actual = useCase().leftOrNull()
+
+        Mockito.verify(analyticsRepository,Mockito.times(1)).get()
         assertNotNull(actual)
     }
 

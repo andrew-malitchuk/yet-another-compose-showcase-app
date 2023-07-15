@@ -7,7 +7,7 @@ plugins {
 android {
     namespace = "dev.yacsa.analytics"
     defaultConfig {
-        testInstrumentationRunner = "dev.yacsa.analytics.HiltTestRunner"
+        testInstrumentationRunner = "dev.yacsa.analytics.screen.analytics.HiltTestRunner"
     }
 }
 
@@ -72,5 +72,14 @@ dependencies {
     testImplementation("io.mockk:mockk:1.13.5")
     implementation(libs.faker)
     testImplementation("org.mockito.kotlin:mockito-kotlin:3.2.0")
+    //
+
+    //
+    // Test rules and transitive dependencies:
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.4.7")
+// Needed for createAndroidComposeRule, but not createComposeRule:
+    debugImplementation("androidx.compose.ui:ui-test-manifest:1.4.7")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.44.2")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.44.2")
     //
 }

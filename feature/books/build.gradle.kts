@@ -83,7 +83,7 @@ dependencies {
     implementation("com.squareup.logcat:logcat:0.1")
 
     implementation("androidx.room:room-paging:2.5.0")
-    implementation("androidx.paging:paging-compose:1.0.0-alpha18")
+    implementation("androidx.paging:paging-compose:3.2.0-rc01")
 
     implementation("com.github.theapache64:rebugger:1.0.0-alpha02")
 

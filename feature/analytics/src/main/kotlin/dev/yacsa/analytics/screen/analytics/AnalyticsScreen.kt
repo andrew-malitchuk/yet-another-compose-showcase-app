@@ -21,6 +21,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -137,6 +138,7 @@ fun AnalyticsScreen(
                 onClick = { onDeleteClick() },
                 backgroundColor = YacsaTheme.colors.accent,
                 elevation = androidx.compose.material.FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
+                modifier = Modifier.testTag("fab")
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_trash_bold_24),

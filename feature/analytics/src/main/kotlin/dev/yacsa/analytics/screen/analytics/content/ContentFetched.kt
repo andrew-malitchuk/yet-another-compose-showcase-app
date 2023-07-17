@@ -17,6 +17,7 @@ import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.chrisbanes.snapper.ExperimentalSnapperApi
@@ -89,7 +90,9 @@ fun ContentFetched(
                     } else {
                         LazyColumn(
                             modifier = Modifier
-                                .fillMaxSize(),
+                                .testTag("bar")
+                                .fillMaxSize()
+                                ,
                             state = state,
                             contentPadding = PaddingValues(YacsaTheme.spacing.small),
                             verticalArrangement = Arrangement.spacedBy(YacsaTheme.spacing.small),

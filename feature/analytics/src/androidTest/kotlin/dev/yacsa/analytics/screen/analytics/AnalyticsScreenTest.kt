@@ -2,7 +2,10 @@ package dev.yacsa.analytics.screen.analytics
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onChildAt
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performClick
+import dev.yacsa.model.model.analytics.AnalyticsUiModel
 import dev.yacsa.ui.theme.YacsaTheme
 import org.junit.Rule
 import org.junit.Test
@@ -17,7 +20,14 @@ class AnalyticsScreenTest {
         composeTestRule.setContent {
             YacsaTheme() {
                 AnalyticsScreen(
-                    uiState = AnalyticsUiState(),
+                    uiState = AnalyticsUiState(
+                        analytics = listOf(
+                            AnalyticsUiModel(
+                                "foo",
+                                "bar"
+                            )
+                        )
+                    ),
                     onBackClick = {},
                     onDeleteClick = {},
                 )
@@ -26,7 +36,9 @@ class AnalyticsScreenTest {
 
 //        composeTestRule.onNodeWithText("Continue").performClick()
 
-        composeTestRule.onNodeWithText("Analytics").assertIsDisplayed()
+        composeTestRule.onNodeWithTag("fab").assertIsDisplayed()
+        composeTestRule.onNodeWithTag("bar").onChildAt(0).assertExists()
+        composeTestRule.onNodeWithTag("fab").performClick()
     }
 
 }

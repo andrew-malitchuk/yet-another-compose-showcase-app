@@ -4,10 +4,10 @@ buildscript {
         mavenCentral()
     }
     dependencies{
-        classpath("org.jetbrains.kotlin:kotlin-serialization:1.8.10")
+        classpath("org.jetbrains.kotlin:kotlin-serialization:1.8.21")
         classpath("com.google.gms:google-services:4.3.15")
-        classpath("com.google.firebase:firebase-crashlytics-gradle:2.9.4")
-        classpath("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.18.1")
+        classpath("com.google.firebase:firebase-crashlytics-gradle:2.9.6")
+        classpath("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.23.0")
     }
 }
 

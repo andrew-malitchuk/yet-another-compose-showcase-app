@@ -21,7 +21,7 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.items
+import androidx.paging.compose.itemKey
 import dev.yacsa.books.screen.list.item.ItemError
 import dev.yacsa.books.screen.list.item.ItemFetchedList
 import dev.yacsa.books.screen.list.item.ItemLoading
@@ -62,13 +62,14 @@ fun ContentFetchedList(
             verticalArrangement = Arrangement.spacedBy(YacsaTheme.spacing.small),
         ) {
             items(
-                lazyPagingItems,
-                key={it.id!!}
-            ) { item ->
+                count = lazyPagingItems.itemCount,
+                key=lazyPagingItems.itemKey { it.id!! }
+            ) { index ->
+                val item = lazyPagingItems[index]
                 item?.let {
                     ItemFetchedList(
                         modifier=Modifier.animateItemPlacement(),
-                        book = it,
+                        book = item,
                         onItemContentClick = {
                             // TODO: fix
                             it.id?.let { it1 -> onBookClicked(it1) }

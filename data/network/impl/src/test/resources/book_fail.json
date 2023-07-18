@@ -1,0 +1,31 @@
+{
+  "id": 1,
+  "title": "The Declaration of Independence of the United States of America",
+  "authors": [
+    {
+      "nam": "Jefferson, Thomas",
+      "birth_year": 1743,
+      "death_year": 1826
+    }
+  ],
+  "translators": [],
+  "subjects": [
+    "United States -- History -- Revolution, 1775-1783 -- Sources",
+    "United States. Declaration of Independence"
+  ],
+  "languages": [
+    "en"
+  ],
+  "copyright": false,
+  "media_type": "Text",
+  "formats": {
+    "application/x-mobipocket-ebook": "https://www.gutenberg.org/ebooks/1.kf8.images",
+    "application/epub+zip": "https://www.gutenberg.org/ebooks/1.epub3.images",
+    "text/html": "https://www.gutenberg.org/ebooks/1.html.images",
+    "image/jpeg": "https://www.gutenberg.org/cache/epub/1/pg1.cover.medium.jpg",
+    "text/plain; charset=us-ascii": "https://www.gutenberg.org/files/1/1-0.txt",
+    "text/plain": "https://www.gutenberg.org/ebooks/1.txt.utf-8",
+    "application/rdf+xml": "https://www.gutenberg.org/ebooks/1.rdf"
+  },
+  "download_count": 1234
+}

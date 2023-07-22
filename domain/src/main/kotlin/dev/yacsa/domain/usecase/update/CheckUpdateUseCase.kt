@@ -6,5 +6,5 @@ import dev.yacsa.domain.model.update.CheckUpdateDomainModel
 
 interface CheckUpdateUseCase {
     @Throws(Throwable::class)
-    suspend operator fun invoke(): Either<DomainError, List<CheckUpdateDomainModel?>>
+    suspend operator fun invoke(): Either<DomainError, CheckUpdateDomainModel>
 }

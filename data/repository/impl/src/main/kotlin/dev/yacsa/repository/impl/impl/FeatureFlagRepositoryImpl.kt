@@ -9,7 +9,6 @@ import dev.yacsa.database.source.FeatureFlagDbSource
 import dev.yacsa.remoteconfig.source.RemoteConfigSource
 import dev.yacsa.repository.impl.mapper.featureflag.NewFeatureFlagRepoDbMapper
 import dev.yacsa.repository.model.FeatureFlagRepoModel
-import dev.yacsa.repository.model.update.CheckUpdateRepoModel
 import dev.yacsa.repository.repository.FeatureFlagRepository
 import javax.inject.Inject
 
@@ -70,12 +69,4 @@ class FeatureFlagRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun checkUpdate(versionCode: String): Either<Exception, CheckUpdateRepoModel> {
-        return try {
-            val result = remoteConfigSource.getString()
-            Either.Right(result?.let { featureFlagRepoDbMapper.toRepo(it) })
-        } catch (ex: Exception) {
-            Either.Left(ex)
-        }
-    }
 }

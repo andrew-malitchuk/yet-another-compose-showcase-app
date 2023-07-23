@@ -14,6 +14,7 @@ import dev.yacsa.crashlytics.provider.LoggerProvider
 import dev.yacsa.domain.usecase.books.NewGetBooksUseCase
 import dev.yacsa.domain.usecase.books.NewLoadBooksUseCase
 import dev.yacsa.domain.usecase.books.NewSaveBooksUseCase
+import dev.yacsa.domain.usecase.update.CheckUpdateUseCase
 import dev.yacsa.model.mapper.NewBooksUiDomainMapper
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.platform.Theme
@@ -38,6 +39,7 @@ class ListViewModel @Inject constructor(
     val crashlyticsProvider: CrashlyticsProvider,
     val loggerProvider: LoggerProvider,
     var connectivityObserver: ConnectivityObserver,
+    private val checkUpdateUseCase: CheckUpdateUseCase,
     private val theme: Theme,
     savedStateHandle: SavedStateHandle,
     initialState: ListUiState,
@@ -49,6 +51,13 @@ class ListViewModel @Inject constructor(
     init {
         logcat { "init" }
         acceptIntent(ListIntent.CheckFeatureBlock)
+        viewModelScope.launch {
+            checkUpdateUseCase().fold({
+                logcat{it.toString()}
+            },{
+                logcat { it.toString() }
+            })
+        }
     }
 
     override fun mapIntents(intent: ListIntent): Flow<ListUiState.PartialState> {

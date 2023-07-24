@@ -38,10 +38,10 @@ fun ListRoute(
     notFound: () -> Unit,
     onFavourite: () -> Unit,
     listViewModel: ListViewModel = hiltViewModel(),
-    onBookClicked: (Int) -> Unit
+    onBookClicked: (Int) -> Unit,
 ) {
     listViewModel.crashlyticsProvider.log(NullPointerException())
-    listViewModel.loggerProvider.setProperty("screen_view","ListScreen")
+    listViewModel.loggerProvider.setProperty("screen_view", "ListScreen")
 
     HandleEvents(listViewModel.event, onClick, notFound)
 
@@ -50,7 +50,7 @@ fun ListRoute(
     val pagingState = listViewModel.pagingDataFlow?.collectAsLazyPagingItems()
 
     val status by listViewModel.connectivityObserver.observe().collectAsState(
-        initial = ConnectivityObserver.Status.Unavailable
+        initial = ConnectivityObserver.Status.Unavailable,
     )
 
     val systemUiController = rememberSystemUiController()
@@ -66,7 +66,6 @@ fun ListRoute(
         ConnectivityObserver.Status.Available -> false
         else -> true
     }
-
 
 //    when (windowInfo.screenHeightInfo) {
 //        WindowInfo.WindowType.Compact -> {
@@ -84,15 +83,14 @@ fun ListRoute(
 
     logcat("ListRoute") { "ListRoute" }
 
-    val currentTheme  by listViewModel.currentTheme
-    val isDarkTheme = currentTheme?.detectThemeMode()?:false
+    val currentTheme by listViewModel.currentTheme
+    val isDarkTheme = currentTheme?.detectThemeMode() ?: false
 
     YacsaTheme(isDarkTheme) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxSize(),
         ) {
-
             if (isOfflineMode) {
                 systemUiController.setSystemBarsColor(
                     color = YacsaTheme.colors.primary,
@@ -104,7 +102,6 @@ fun ListRoute(
                 )
             }
 
-
             if (uiState.isFeatureBlocked) {
                 // https://github.com/googlecodelabs/android-navigation/issues/113
                 LaunchedEffect(Unit) {
@@ -112,7 +109,7 @@ fun ListRoute(
                 }
             } else {
                 ListScreen(
-                    onBookClicked=onBookClicked,
+                    onBookClicked = onBookClicked,
 //                    onBookClicked = {
 //                        listViewModel.acceptIntent(ListIntent.BookClicked(it))
 //                    },
@@ -142,7 +139,7 @@ fun ListScreen(
             lazyPagingItems = pagingState,
             onSearch = onSearch,
             onSettings = onSettings,
-            onFavourite = onFavourite
+            onFavourite = onFavourite,
         )
     } else {
         ListNoContent(uiState = uiState)
@@ -159,7 +156,7 @@ fun ListNoContent(
         }
 
         uiState.isError -> {
-            ContentError(errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString()){}
+            ContentError(errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString()) {}
         }
     }
 }
@@ -194,7 +191,7 @@ fun PreviewListScreen_Light() {
             ListUiState(),
             {},
             {},
-            {}
+            {},
         )
     }
 }
@@ -210,7 +207,7 @@ fun PreviewListScreen_Dark() {
             ListUiState(),
             {},
             {},
-            {}
+            {},
         )
     }
 }

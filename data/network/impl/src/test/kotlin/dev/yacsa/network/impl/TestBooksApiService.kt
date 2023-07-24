@@ -30,14 +30,14 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertNotEquals
 
+/**
+ * https://dzone.com/articles/7-popular-unit-test-naming
+ */
 @ExperimentalCoroutinesApi
 @UninstallModules(NetworkModule::class)
 @HiltAndroidTest
 @Config(application = HiltTestApplication::class)
 @RunWith(RobolectricTestRunner::class)
-/**
- * https://dzone.com/articles/7-popular-unit-test-naming
- */
 class TestBooksApiService {
 
     @get:Rule(order = 0)
@@ -164,7 +164,7 @@ class TestBooksApiService {
     @Test
     fun `(getBook) when response body is empty expect nullable fields`() = runTest {
         //region Arrange
-        val sourceNullable ="{}"
+        val sourceNullable = "{}"
         val sourceBooks = loadFileText(this, "/book_success.json")
         val response = MockResponse()
             .setResponseCode(HttpURLConnection.HTTP_OK)
@@ -181,7 +181,6 @@ class TestBooksApiService {
         assertNotEquals(expected, actual)
         //endregion Act & Assert
     }
-
 
     @Test
     fun `(getBook) when response body is corrupted expect nullable fields`() = runTest {
@@ -203,5 +202,4 @@ class TestBooksApiService {
         assertNotEquals(expected, actual)
         //endregion Act & Assert
     }
-
 }

@@ -9,5 +9,4 @@ class UpdateCheckerImpl @Inject constructor() : UpdateChecker {
     override suspend fun check(): UpdateModel? {
         TODO("Not yet implemented")
     }
-
 }

@@ -133,8 +133,8 @@ class NotificationAnalyticProvider @Inject constructor(
         }
     }
 
-    companion object{
-        const val MAX_AMOUNT=5
-        const val NOTIFICATION_ID=1010
+    companion object {
+        const val MAX_AMOUNT = 5
+        const val NOTIFICATION_ID = 1010
     }
 }

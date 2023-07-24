@@ -24,9 +24,9 @@ class AnalyticsScreenTest {
                         analytics = listOf(
                             AnalyticsUiModel(
                                 "foo",
-                                "bar"
-                            )
-                        )
+                                "bar",
+                            ),
+                        ),
                     ),
                     onBackClick = {},
                     onDeleteClick = {},
@@ -40,5 +40,4 @@ class AnalyticsScreenTest {
         composeTestRule.onNodeWithTag("bar").onChildAt(0).assertExists()
         composeTestRule.onNodeWithTag("fab").performClick()
     }
-
 }

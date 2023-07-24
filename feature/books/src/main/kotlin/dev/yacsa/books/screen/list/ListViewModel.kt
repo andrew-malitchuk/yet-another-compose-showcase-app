@@ -46,15 +46,16 @@ class ListViewModel @Inject constructor(
 ) : BaseViewModel<ListUiState, ListUiState.PartialState, ListEvent, ListIntent>(
     savedStateHandle,
     initialState,
-), Theme by theme {
+),
+    Theme by theme {
 
     init {
         logcat { "init" }
         acceptIntent(ListIntent.CheckFeatureBlock)
         viewModelScope.launch {
             checkUpdateUseCase().fold({
-                logcat{it.toString()}
-            },{
+                logcat { it.toString() }
+            }, {
                 logcat { it.toString() }
             })
         }
@@ -97,7 +98,7 @@ class ListViewModel @Inject constructor(
 
     private fun checkFeatureStatus(): Flow<ListUiState.PartialState> = flow {
         val isBooksFeatureEnabled = booksFeatureFlag.isFeatureEnabled()
-            // TODO: fix
+        // TODO: fix
         logcat("isBooksFeatureEnabled") { isBooksFeatureEnabled.toString() }
         if (isBooksFeatureEnabled) {
             acceptIntent(ListIntent.GetBooks)

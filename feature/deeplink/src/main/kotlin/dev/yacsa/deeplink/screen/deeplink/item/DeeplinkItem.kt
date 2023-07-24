@@ -101,7 +101,6 @@ fun Preview_DeeplinkItem_Light() {
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun Preview_DeeplinkItem_Dark() {

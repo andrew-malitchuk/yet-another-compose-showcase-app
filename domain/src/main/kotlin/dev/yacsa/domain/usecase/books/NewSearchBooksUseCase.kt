@@ -9,6 +9,6 @@ interface NewSearchBooksUseCase {
     suspend operator fun invoke(
         query: String,
         sort: String? = null,
-        lang: String? = null
+        lang: String? = null,
     ): Either<DomainError, List<BookDomainModel>>
 }

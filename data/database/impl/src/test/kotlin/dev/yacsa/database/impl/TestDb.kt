@@ -4,29 +4,22 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.HiltTestApplication
-import dagger.hilt.android.testing.UninstallModules
 import dev.yacsa.database.impl.dao.BookDbDao
 import dev.yacsa.database.model.BookDbModel
 import dev.yacsa.database.model.FormatsDbModel
 import io.github.serpro69.kfaker.Faker
 import io.mockk.every
 import io.mockk.mockk
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.async
 import kotlinx.coroutines.test.runTest
-import logcat.logcat
-import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
-import java.util.concurrent.CountDownLatch
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
-
 
 @ExperimentalCoroutinesApi
 @HiltAndroidTest
@@ -59,7 +52,7 @@ class TestDb {
     fun setupDatabase() {
         database = Room.inMemoryDatabaseBuilder(
             ApplicationProvider.getApplicationContext(),
-            YacsaDb::class.java
+            YacsaDb::class.java,
         ).allowMainThreadQueries().build()
 
         bookDbDao = database.getBookDao()
@@ -113,7 +106,6 @@ class TestDb {
         assertFalse(dbIsEmpty)
         //endregion Assert
     }
-
 
     @Test
     fun `(get) when db contains desired record should be returned this element`() = runTest {
@@ -197,21 +189,19 @@ class TestDb {
         //endregion Assert
     }
 
-        @Test
-        fun `(search) when desired record is in db should be result of search`() = runTest {
-            //region Arrange
-            bookDbDao.deleteAll()
-            bookDbDao.insert(value)
-            //endregion Arrange
+    @Test
+    fun `(search) when desired record is in db should be result of search`() = runTest {
+        //region Arrange
+        bookDbDao.deleteAll()
+        bookDbDao.insert(value)
+        //endregion Arrange
 
-            //region Act
-            val actual = bookDbDao.search(value.title?:"",null).firstOrNull()
-            //endregion Act
+        //region Act
+        val actual = bookDbDao.search(value.title ?: "", null).firstOrNull()
+        //endregion Act
 
-            //region Assert
-            assertEquals(value, actual)
-            //endregion Assert
-        }
-
-
+        //region Assert
+        assertEquals(value, actual)
+        //endregion Assert
+    }
 }

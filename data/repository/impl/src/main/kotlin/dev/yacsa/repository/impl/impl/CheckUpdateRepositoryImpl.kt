@@ -24,11 +24,8 @@ class CheckUpdateRepositoryImpl @Inject constructor(
                 val output = jsonAdapter.fromJson(it)
                 Either.Right(output!!)
             })
-
         } catch (ex: Exception) {
             Either.Left(ex)
         }
     }
-
-
 }

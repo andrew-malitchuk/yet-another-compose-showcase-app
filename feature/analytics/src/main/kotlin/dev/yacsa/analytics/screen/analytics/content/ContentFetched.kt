@@ -91,8 +91,7 @@ fun ContentFetched(
                         LazyColumn(
                             modifier = Modifier
                                 .testTag("bar")
-                                .fillMaxSize()
-                                ,
+                                .fillMaxSize(),
                             state = state,
                             contentPadding = PaddingValues(YacsaTheme.spacing.small),
                             verticalArrangement = Arrangement.spacedBy(YacsaTheme.spacing.small),

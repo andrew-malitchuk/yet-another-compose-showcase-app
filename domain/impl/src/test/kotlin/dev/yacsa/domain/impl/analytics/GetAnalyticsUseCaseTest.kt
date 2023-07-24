@@ -14,7 +14,6 @@ import org.mockito.kotlin.mock
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
-
 class GetAnalyticsUseCaseTest {
 
     lateinit var useCase: GetAnalyticsUseCase
@@ -22,25 +21,23 @@ class GetAnalyticsUseCaseTest {
 
     lateinit var analyticsDomainRepoMapper: AnalyticsDomainRepoMapper
 
-
     @Before
     fun before() {
         analyticsDomainRepoMapper = AnalyticsDomainRepoMapperImpl()
         Mockito.reset(analyticsRepository)
         useCase = GetAnalyticsUseCaseImpl(
             analyticsRepository,
-            analyticsDomainRepoMapper
+            analyticsDomainRepoMapper,
         )
     }
 
     @Test
-    fun `if there is no data usecase returns emptyList`() = runBlocking{
-
+    fun `if there is no data usecase returns emptyList`() = runBlocking {
         Mockito.`when`(analyticsRepository.get()).thenReturn(emptyList())
 
         val actual = useCase()
 
-        assertEquals(emptyList(),actual.getOrNull())
+        assertEquals(emptyList(), actual.getOrNull())
     }
 
     @Test
@@ -49,8 +46,7 @@ class GetAnalyticsUseCaseTest {
 
         val actual = useCase().leftOrNull()
 
-        Mockito.verify(analyticsRepository,Mockito.times(1)).get()
+        Mockito.verify(analyticsRepository, Mockito.times(1)).get()
         assertNotNull(actual)
     }
-
 }

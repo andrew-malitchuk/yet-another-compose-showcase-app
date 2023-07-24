@@ -23,7 +23,7 @@ class CheckUpdateUseCaseImpl @Inject constructor(
                 },
                 { result ->
                     val output = checkUpdateDomainRepoMapper.toDomain(result)
-                    Either.Right(output )
+                    Either.Right(output)
                 },
             )
         } catch (ex: Exception) {

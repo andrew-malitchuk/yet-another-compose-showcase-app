@@ -63,12 +63,12 @@ fun ContentFetchedList(
         ) {
             items(
                 count = lazyPagingItems.itemCount,
-                key=lazyPagingItems.itemKey { it.id!! }
+                key = lazyPagingItems.itemKey { it.id!! },
             ) { index ->
                 val item = lazyPagingItems[index]
                 item?.let {
                     ItemFetchedList(
-                        modifier=Modifier.animateItemPlacement(),
+                        modifier = Modifier.animateItemPlacement(),
                         book = item,
                         onItemContentClick = {
                             // TODO: fix

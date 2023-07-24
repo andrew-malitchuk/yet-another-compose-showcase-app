@@ -17,7 +17,6 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import kotlin.test.assertNotNull
 
-
 @ExperimentalCoroutinesApi
 @HiltAndroidTest
 @Config(application = HiltTestApplication::class)
@@ -35,16 +34,15 @@ class TestRepository {
     lateinit var analyticsRepoDbMapper: AnalyticsRepoDbMapper
 
     @Before
-    fun setup(){
-
+    fun setup() {
         analyticsRepository = AnalyticsRepositoryImpl(
             analyticsDbSource,
-            analyticsRepoDbMapper
+            analyticsRepoDbMapper,
         )
     }
 
     @Test
-    fun foo()=runTest{
+    fun foo() = runTest {
         assertNotNull(analyticsRepository.get())
     }
 
@@ -59,6 +57,4 @@ class TestRepository {
 //        //region Assert
 //        //endregion Assert
 //    }
-
-
 }

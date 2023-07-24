@@ -6,5 +6,5 @@ data class CheckUpdateDomainModel(
     val isSoftUpdate: Boolean,
     val targetVersion: Int,
     val title: String?,
-    val content: String?
+    val content: String?,
 ) : BaseDomainModel

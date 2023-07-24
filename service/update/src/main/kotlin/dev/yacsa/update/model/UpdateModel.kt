@@ -4,5 +4,5 @@ data class UpdateModel(
     val isSoftUpdate: Boolean,
     val targetVersion: Int,
     val title: String?,
-    val content: String?
+    val content: String?,
 ) : BaseUpdateModel

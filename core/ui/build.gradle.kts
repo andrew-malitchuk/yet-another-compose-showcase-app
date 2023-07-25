@@ -27,6 +27,7 @@ dependencies {
     implementation(project(":core:model"))
     implementation(project(":core:localization"))
     implementation(project(":core:platform"))
+    implementation(project(":service:update"))
 
     implementation(libs.airbnb.lottie)
     implementation(libs.faker)

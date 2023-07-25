@@ -6,6 +6,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -22,9 +25,11 @@ import dev.yacsa.platform.ext.collectWithLifecycle
 import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.composable.content.ContentError
 import dev.yacsa.ui.composable.content.ContentIsLoading
+import dev.yacsa.ui.composable.dialog.UpdateDialog
 import dev.yacsa.ui.composable.snackbar.OfflineSnackbar
 import dev.yacsa.ui.composable.theme.detectThemeMode
 import dev.yacsa.ui.theme.YacsaTheme
+import dev.yacsa.update.model.UpdateModel
 import io.github.serpro69.kfaker.Faker
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
@@ -95,7 +100,10 @@ fun ListRoute(
                 systemUiController.setSystemBarsColor(
                     color = YacsaTheme.colors.primary,
                 )
-                OfflineSnackbar(message = UiText.StringResource(dev.yacsa.localization.R.string.errors_offline).asString())
+                OfflineSnackbar(
+                    message = UiText.StringResource(dev.yacsa.localization.R.string.errors_offline)
+                        .asString()
+                )
             } else {
                 systemUiController.setSystemBarsColor(
                     color = YacsaTheme.colors.background,
@@ -133,6 +141,30 @@ fun ListScreen(
     onSettings: () -> Unit,
     onFavourite: () -> Unit,
 ) {
+
+    var showDialog by remember { mutableStateOf(true) }
+
+    if (showDialog) {
+        UpdateDialog(
+            modifier = Modifier,
+            updateModel = UpdateModel(
+                true,
+                1,
+                "title",
+                "content"
+            ),
+            showDialog = {
+                showDialog = false
+            },
+            confirmClick = {
+                showDialog = false
+            },
+            dismissClick = {
+                showDialog = false
+            }
+        )
+    }
+
     if (!uiState.isLoading && !uiState.isError && pagingState != null) {
         ContentFetched(
             onBookClicked = onBookClicked,
@@ -156,7 +188,10 @@ fun ListNoContent(
         }
 
         uiState.isError -> {
-            ContentError(errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString()) {}
+            ContentError(
+                errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww)
+                    .asString()
+            ) {}
         }
     }
 }

@@ -102,7 +102,7 @@ fun ListRoute(
                 )
                 OfflineSnackbar(
                     message = UiText.StringResource(dev.yacsa.localization.R.string.errors_offline)
-                        .asString()
+                        .asString(),
                 )
             } else {
                 systemUiController.setSystemBarsColor(
@@ -141,7 +141,6 @@ fun ListScreen(
     onSettings: () -> Unit,
     onFavourite: () -> Unit,
 ) {
-
     var showDialog by remember { mutableStateOf(true) }
 
     if (showDialog) {
@@ -151,7 +150,7 @@ fun ListScreen(
                 true,
                 1,
                 "title",
-                "content"
+                "content",
             ),
             showDialog = {
                 showDialog = false
@@ -161,7 +160,7 @@ fun ListScreen(
             },
             dismissClick = {
                 showDialog = false
-            }
+            },
         )
     }
 
@@ -190,7 +189,7 @@ fun ListNoContent(
         uiState.isError -> {
             ContentError(
                 errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww)
-                    .asString()
+                    .asString(),
             ) {}
         }
     }

@@ -15,7 +15,7 @@ fun UpdateDialog(
 //    showDialog: MutableStateFlow<Boolean>,
     showDialog: (Boolean) -> Unit,
     confirmClick: () -> Unit,
-    dismissClick: () -> Unit
+    dismissClick: () -> Unit,
 ) {
     AlertDialog(
         onDismissRequest = {
@@ -27,14 +27,14 @@ fun UpdateDialog(
             Text(
                 text = updateModel.title ?: "SWW",
                 style = YacsaTheme.typography.caption,
-                color = YacsaTheme.colors.primary
+                color = YacsaTheme.colors.primary,
             )
         },
         text = {
             Text(
                 text = updateModel.content ?: "SWW",
                 style = YacsaTheme.typography.title,
-                color = YacsaTheme.colors.secondary
+                color = YacsaTheme.colors.secondary,
             )
         },
         confirmButton = {

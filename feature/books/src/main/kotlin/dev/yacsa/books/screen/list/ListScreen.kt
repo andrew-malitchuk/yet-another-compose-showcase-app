@@ -141,30 +141,8 @@ fun ListScreen(
     onSettings: () -> Unit,
     onFavourite: () -> Unit,
 ) {
-    var showDialog by remember { mutableStateOf(true) }
 
-    if (showDialog) {
-        UpdateDialog(
-            modifier = Modifier,
-            updateModel = UpdateModel(
-                true,
-                1,
-                "title",
-                "content",
-            ),
-            showDialog = {
-                showDialog = false
-            },
-            confirmClick = {
-                showDialog = false
-            },
-            dismissClick = {
-                showDialog = false
-            },
-        )
-    }
-
-    if (!uiState.isLoading && !uiState.isError && pagingState != null) {
+    if (!uiState.isLoading && !uiState.isError && pagingState != null && !uiState.isUpdateEnabled) {
         ContentFetched(
             onBookClicked = onBookClicked,
             lazyPagingItems = pagingState,
@@ -191,6 +169,31 @@ fun ListNoContent(
                 errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww)
                     .asString(),
             ) {}
+        }
+
+        uiState.isUpdateEnabled->{
+            var showDialog by remember { mutableStateOf(true) }
+
+            if (showDialog) {
+                UpdateDialog(
+                    modifier = Modifier,
+                    updateModel = UpdateModel(
+                        true,
+                        1,
+                        "title",
+                        "content",
+                    ),
+                    showDialog = {
+                        showDialog = false
+                    },
+                    confirmClick = {
+                        showDialog = false
+                    },
+                    dismissClick = {
+                        showDialog = false
+                    },
+                )
+            }
         }
     }
 }

@@ -6,6 +6,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.yacsa.model.mapper.AnalyticsUiDomainMapper
 import dev.yacsa.model.mapper.AnalyticsUiDomainMapperImpl
+import dev.yacsa.model.mapper.CheckUpdateUiDomainMapper
+import dev.yacsa.model.mapper.CheckUpdateUiDomainMapperImpl
 import dev.yacsa.model.mapper.FeatureFlagDomainRepoMapper
 import dev.yacsa.model.mapper.FeatureFlagDomainRepoMapperImpl
 import dev.yacsa.model.mapper.NewBooksUiDomainMapper
@@ -49,5 +51,10 @@ class UiMapperModule {
     @Provides
     fun providesFeatureFlagDomainRepoMapper(): FeatureFlagDomainRepoMapper {
         return FeatureFlagDomainRepoMapperImpl()
+    }
+
+    @Provides
+    fun providesCheckUpdateUiDomainMapper(): CheckUpdateUiDomainMapper {
+        return CheckUpdateUiDomainMapperImpl()
     }
 }

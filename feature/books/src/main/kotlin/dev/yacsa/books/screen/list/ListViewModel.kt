@@ -15,6 +15,7 @@ import dev.yacsa.domain.usecase.books.NewGetBooksUseCase
 import dev.yacsa.domain.usecase.books.NewLoadBooksUseCase
 import dev.yacsa.domain.usecase.books.NewSaveBooksUseCase
 import dev.yacsa.domain.usecase.update.CheckUpdateUseCase
+import dev.yacsa.model.mapper.CheckUpdateUiDomainMapper
 import dev.yacsa.model.mapper.NewBooksUiDomainMapper
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.platform.Theme
@@ -40,6 +41,7 @@ class ListViewModel @Inject constructor(
     val loggerProvider: LoggerProvider,
     var connectivityObserver: ConnectivityObserver,
     private val checkUpdateUseCase: CheckUpdateUseCase,
+    private val checkUpdateUiDomainMapper: CheckUpdateUiDomainMapper,
     private val theme: Theme,
     savedStateHandle: SavedStateHandle,
     initialState: ListUiState,
@@ -52,13 +54,7 @@ class ListViewModel @Inject constructor(
     init {
         logcat { "init" }
         acceptIntent(ListIntent.CheckFeatureBlock)
-        viewModelScope.launch {
-            checkUpdateUseCase().fold({
-                logcat { it.toString() }
-            }, {
-                logcat { it.toString() }
-            })
-        }
+        acceptIntent(ListIntent.CheckUpdate)
     }
 
     override fun mapIntents(intent: ListIntent): Flow<ListUiState.PartialState> {
@@ -66,6 +62,7 @@ class ListViewModel @Inject constructor(
             is ListIntent.GetBooks -> getBooks()
             is ListIntent.BookClicked -> bookClicked(intent.bookId)
             is ListIntent.CheckFeatureBlock -> checkFeatureStatus()
+            ListIntent.CheckUpdate -> checkUpdate()
         }
     }
 
@@ -107,6 +104,14 @@ class ListViewModel @Inject constructor(
         }
     }
 
+    private fun checkUpdate(): Flow<ListUiState.PartialState> = flow {
+        val checkUpdate = checkUpdateUseCase()
+        checkUpdate.fold({
+        }, {
+            emit(ListUiState.PartialState.Update(checkUpdateUiDomainMapper.toUi(it)))
+        })
+    }
+
     override fun reduceUiState(
         previousState: ListUiState,
         partialState: ListUiState.PartialState,
@@ -134,6 +139,13 @@ class ListViewModel @Inject constructor(
                 isLoading = false,
                 isError = false,
                 isFeatureBlocked = true,
+            )
+
+            is ListUiState.PartialState.Update -> previousState.copy(
+                isLoading = false,
+                isError = false,
+                isFeatureBlocked = false,
+                isUpdateEnabled = true
             )
         }
     }

@@ -171,17 +171,18 @@ fun ListNoContent(
             ) {}
         }
 
-        uiState.isUpdateEnabled->{
+        uiState.isUpdateEnabled -> {
             var showDialog by remember { mutableStateOf(true) }
 
             if (showDialog) {
+                val foo = uiState as? ListUiState
                 UpdateDialog(
                     modifier = Modifier,
                     updateModel = UpdateModel(
-                        true,
-                        1,
-                        "title",
-                        "content",
+                        foo.checkUpdateUiModel.isSoftUpdate,
+                        foo.checkUpdateUiModel.targetVersion,
+                        foo.checkUpdateUiModel.title,
+                        foo.checkUpdateUiModel.content,
                     ),
                     showDialog = {
                         showDialog = false

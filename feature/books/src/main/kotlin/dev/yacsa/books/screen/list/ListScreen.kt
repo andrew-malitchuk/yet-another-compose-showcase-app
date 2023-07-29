@@ -29,7 +29,6 @@ import dev.yacsa.ui.composable.dialog.UpdateDialog
 import dev.yacsa.ui.composable.snackbar.OfflineSnackbar
 import dev.yacsa.ui.composable.theme.detectThemeMode
 import dev.yacsa.ui.theme.YacsaTheme
-import dev.yacsa.update.model.UpdateModel
 import io.github.serpro69.kfaker.Faker
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
@@ -142,7 +141,7 @@ fun ListScreen(
     onFavourite: () -> Unit,
 ) {
 
-    if (!uiState.isLoading && !uiState.isError && pagingState != null && !uiState.isUpdateEnabled) {
+    if (!uiState.isLoading && !uiState.isError && pagingState != null) {
         ContentFetched(
             onBookClicked = onBookClicked,
             lazyPagingItems = pagingState,
@@ -175,25 +174,22 @@ fun ListNoContent(
             var showDialog by remember { mutableStateOf(true) }
 
             if (showDialog) {
-                val foo = uiState as? ListUiState
-                UpdateDialog(
-                    modifier = Modifier,
-                    updateModel = UpdateModel(
-                        foo.checkUpdateUiModel.isSoftUpdate,
-                        foo.checkUpdateUiModel.targetVersion,
-                        foo.checkUpdateUiModel.title,
-                        foo.checkUpdateUiModel.content,
-                    ),
-                    showDialog = {
-                        showDialog = false
-                    },
-                    confirmClick = {
-                        showDialog = false
-                    },
-                    dismissClick = {
-                        showDialog = false
-                    },
-                )
+                uiState.updateModel?.let {
+                    UpdateDialog(
+                        modifier = Modifier,
+                        updateModel = it,
+                        showDialog = {
+                            showDialog = false
+                        },
+                        confirmClick = {
+                            showDialog = false
+                        },
+                        dismissClick = {
+                            showDialog = false
+                        },
+                    )
+                }
+
             }
         }
     }

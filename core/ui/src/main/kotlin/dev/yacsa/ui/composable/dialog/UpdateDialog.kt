@@ -5,13 +5,13 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import dev.yacsa.model.model.update.CheckUpdateUiModel
 import dev.yacsa.ui.theme.YacsaTheme
-import dev.yacsa.update.model.UpdateModel
 
 @Composable
 fun UpdateDialog(
     modifier: Modifier,
-    updateModel: UpdateModel,
+    updateModel: CheckUpdateUiModel,
 //    showDialog: MutableStateFlow<Boolean>,
     showDialog: (Boolean) -> Unit,
     confirmClick: () -> Unit,

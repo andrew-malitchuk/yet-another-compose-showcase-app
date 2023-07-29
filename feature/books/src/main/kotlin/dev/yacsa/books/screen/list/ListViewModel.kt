@@ -145,7 +145,8 @@ class ListViewModel @Inject constructor(
                 isLoading = false,
                 isError = false,
                 isFeatureBlocked = false,
-                isUpdateEnabled = true
+                isUpdateEnabled = true,
+                updateModel = partialState.checkUpdateUiModel
             )
         }
     }

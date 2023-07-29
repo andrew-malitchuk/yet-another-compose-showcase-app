@@ -11,7 +11,8 @@ data class ListUiState(
     val isLoading: Boolean = false,
     val isError: Boolean = false,
     val isFeatureBlocked: Boolean = false,
-    val isUpdateEnabled:Boolean=false
+    val isUpdateEnabled:Boolean=false,
+    val updateModel: CheckUpdateUiModel?=null
 ) : Parcelable {
 
     sealed class PartialState {

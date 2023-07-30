@@ -8,7 +8,6 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
-
 @ExperimentalCoroutinesApi
 @HiltAndroidTest
 @Config(application = HiltTestApplication::class)
@@ -16,7 +15,6 @@ import org.robolectric.annotation.Config
 class TestDatastore {
 
     private val faker = Faker()
-
 
 //    @Test
 //    fun `()`()= runTest{
@@ -29,6 +27,4 @@ class TestDatastore {
 //        //region Assert
 //        //endregion Assert
 //    }
-
-
 }

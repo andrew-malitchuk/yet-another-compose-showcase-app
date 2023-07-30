@@ -92,6 +92,6 @@ fun Preview_ChipGroup_Dark() {
     YacsaTheme(true) {
         ChipGroup(
             values = listOf(faker.airport.europeanUnion.medium(), faker.airport.europeanUnion.medium()),
-            ) {}
+        ) {}
     }
 }

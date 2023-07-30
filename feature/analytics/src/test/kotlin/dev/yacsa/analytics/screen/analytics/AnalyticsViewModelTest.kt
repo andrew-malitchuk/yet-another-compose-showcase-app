@@ -27,7 +27,6 @@ import org.mockito.kotlin.mock
 
 class AnalyticsViewModelTest {
 
-
     @JvmField
     @RegisterExtension
     val mainDispatcherExtension = MainDispatcherExtension()
@@ -45,10 +44,7 @@ class AnalyticsViewModelTest {
 
     @Before
     fun init() {
-
     }
-
-
 
     @AfterEach
     fun afterEach() {
@@ -68,12 +64,12 @@ class AnalyticsViewModelTest {
             getAnalyticsUseCase,
             clearAnalyticsUseCase,
             analyticsUiDomainMapper,
-            theme
+            theme,
         )
     }
 
     @Test
-    fun foo()= runTest {
+    fun foo() = runTest {
         Dispatchers.setMain(Dispatchers.Unconfined)
         viewModel = AnalyticsViewModel(
             savedStateHandle,
@@ -81,11 +77,11 @@ class AnalyticsViewModelTest {
             getAnalyticsUseCase,
             clearAnalyticsUseCase,
             analyticsUiDomainMapper,
-            theme
+            theme,
         )
 
         Mockito.`when`(getAnalyticsUseCase()).thenReturn(
-            Either.Right(emptyList())
+            Either.Right(emptyList()),
         )
 
 //        viewModel.
@@ -93,7 +89,7 @@ class AnalyticsViewModelTest {
 }
 
 class MainDispatcherExtension(
-    private val dispatcher: TestDispatcher = UnconfinedTestDispatcher()
+    private val dispatcher: TestDispatcher = UnconfinedTestDispatcher(),
 ) : BeforeEachCallback, AfterEachCallback {
 
     override fun beforeEach(context: ExtensionContext?) {

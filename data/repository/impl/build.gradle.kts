@@ -27,6 +27,10 @@ dependencies {
      implementation(libs.arrow.optics)
     ksp(libs.arrow.optics.ksp.plugin)
 
+    implementation(libs.squareup.moshi)
+    implementation("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
+    ksp(libs.squareup.moshi.convertor)
+
     //
     testImplementation("junit:junit:4.13.2")
     testImplementation("androidx.test.ext:junit:1.1.5")

@@ -138,7 +138,7 @@ fun AnalyticsScreen(
                 onClick = { onDeleteClick() },
                 backgroundColor = YacsaTheme.colors.accent,
                 elevation = androidx.compose.material.FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
-                modifier = Modifier.testTag("fab")
+                modifier = Modifier.testTag("fab"),
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_trash_bold_24),

@@ -66,9 +66,9 @@ fun NavGraphBuilder.booksNavGraph(navController: NavHostController) {
                 },
                 onBookClicked = {
                     navController.navigate(
-                        BooksDirection.Detalization.getRoute(it)
+                        BooksDirection.Detalization.getRoute(it),
                     )
-                }
+                },
             )
         }
         composable(

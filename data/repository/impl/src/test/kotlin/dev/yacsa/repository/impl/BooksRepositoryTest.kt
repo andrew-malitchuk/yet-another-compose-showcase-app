@@ -7,7 +7,7 @@ import dev.yacsa.repository.repository.BooksRepository
 import kotlinx.coroutines.flow.Flow
 import org.mockito.kotlin.mock
 
-class BooksRepositoryTest:BooksRepository {
+class BooksRepositoryTest : BooksRepository {
 
     private val bookDbSource: BookDbSource = mock<BookDbSource>()
     private val booksNetSource: BooksNetSource = mock<BooksNetSource>()
@@ -59,7 +59,7 @@ class BooksRepositoryTest:BooksRepository {
     override suspend fun searchOnRemote(
         query: String,
         sort: String?,
-        lang: String?
+        lang: String?,
     ): List<BookRepoModel> {
         TODO("Not yet implemented")
     }
@@ -67,7 +67,7 @@ class BooksRepositoryTest:BooksRepository {
     override suspend fun searchOnLocal(
         query: String,
         sort: String?,
-        lang: String?
+        lang: String?,
     ): List<BookRepoModel> {
         TODO("Not yet implemented")
     }
@@ -79,6 +79,4 @@ class BooksRepositoryTest:BooksRepository {
     override suspend fun subscribeFavourite(): Flow<List<BookRepoModel?>?> {
         TODO("Not yet implemented")
     }
-
-
 }

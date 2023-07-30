@@ -57,27 +57,25 @@ fun ContentFetched(
 
     with(systemUiController) {
         setSystemBarsColor(
-            color = dev.yacsa.ui.theme.YacsaTheme.colors.background
+            color = dev.yacsa.ui.theme.YacsaTheme.colors.background,
         )
         setNavigationBarColor(
-            color = dev.yacsa.ui.theme.YacsaTheme.colors.surface
+            color = dev.yacsa.ui.theme.YacsaTheme.colors.surface,
         )
     }
-
-
 
     Column {
         ListToolbar(
             state = listState,
             searchClick = onSearch,
             settingsClick = onSettings,
-            favouriteClick = onFavourite
+            favouriteClick = onFavourite,
         )
 
         Box(
             modifier = Modifier
                 .background(YacsaTheme.colors.background)
-                .pullRefresh(pullRefreshState)
+                .pullRefresh(pullRefreshState),
 
         ) {
             if (isGridSelected.value) {
@@ -133,7 +131,7 @@ fun Preview_ContentFetched_Light() {
             lazyPagingItems = flowOf(PagingData.empty<BookUiModel>()).collectAsLazyPagingItems(),
             onSearch = {},
             onSettings = {},
-            onFavourite = {}
+            onFavourite = {},
         )
     }
 }
@@ -148,7 +146,7 @@ fun Preview_ContentFetched_Dark() {
             lazyPagingItems = flowOf(PagingData.empty<BookUiModel>()).collectAsLazyPagingItems(),
             onSearch = {},
             onSettings = {},
-            onFavourite = {}
+            onFavourite = {},
         )
     }
 }

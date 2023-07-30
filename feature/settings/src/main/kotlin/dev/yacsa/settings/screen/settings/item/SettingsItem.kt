@@ -87,7 +87,7 @@ fun Preview_SettingsItem_Light() {
     val faker = Faker()
     YacsaTheme(false) {
         SettingsItem(
-            title =  faker.quote.fortuneCookie(),
+            title = faker.quote.fortuneCookie(),
             icon = R.drawable.icon_gear_six_regular_24,
             onClick = {},
         )

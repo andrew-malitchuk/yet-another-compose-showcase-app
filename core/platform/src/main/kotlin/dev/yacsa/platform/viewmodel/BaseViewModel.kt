@@ -64,5 +64,4 @@ abstract class BaseViewModel<UI_STATE : Parcelable, PARTIAL_UI_STATE, EVENT, INT
 
     var errorStateFlow: StateFlow<Exception?> = MutableStateFlow(null)
     var loadingStateFlow: StateFlow<Boolean?> = MutableStateFlow(null)
-
 }

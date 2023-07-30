@@ -27,6 +27,7 @@ import dev.yacsa.domain.impl.usecase.startupconfigure.NewUpdateStartUpConfigureU
 import dev.yacsa.domain.impl.usecase.startupconfigure.UpdateLanguageUseCaseImpl
 import dev.yacsa.domain.impl.usecase.theme.GetGetThemeUseCaseImpl
 import dev.yacsa.domain.impl.usecase.theme.SetThemeUseCaseImpl
+import dev.yacsa.domain.impl.usecase.update.CheckUpdateUseCaseImpl
 import dev.yacsa.domain.usecase.*
 import dev.yacsa.domain.usecase.analytics.AddAnalyticUseCase
 import dev.yacsa.domain.usecase.analytics.ClearAnalyticsUseCase
@@ -50,6 +51,7 @@ import dev.yacsa.domain.usecase.startupconfigure.NewUpdateStartUpConfigureUseCas
 import dev.yacsa.domain.usecase.startupconfigure.UpdateLanguageUseCase
 import dev.yacsa.domain.usecase.theme.GetThemeUseCase
 import dev.yacsa.domain.usecase.theme.SetThemeUseCase
+import dev.yacsa.domain.usecase.update.CheckUpdateUseCase
 import javax.inject.Singleton
 
 @Suppress("UnnecessaryAbstractClass")
@@ -188,4 +190,10 @@ abstract class DomainModule {
     abstract fun bindGetLanguageUseCase(
         getLanguageUseCaseImpl: GetLanguageUseCaseImpl,
     ): GetLanguageUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindCheckUpdateUseCase(
+        checkUpdateUseCaseImpl: CheckUpdateUseCaseImpl,
+    ): CheckUpdateUseCase
 }

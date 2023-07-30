@@ -6,6 +6,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -22,6 +25,7 @@ import dev.yacsa.platform.ext.collectWithLifecycle
 import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.composable.content.ContentError
 import dev.yacsa.ui.composable.content.ContentIsLoading
+import dev.yacsa.ui.composable.dialog.UpdateDialog
 import dev.yacsa.ui.composable.snackbar.OfflineSnackbar
 import dev.yacsa.ui.composable.theme.detectThemeMode
 import dev.yacsa.ui.theme.YacsaTheme
@@ -38,10 +42,10 @@ fun ListRoute(
     notFound: () -> Unit,
     onFavourite: () -> Unit,
     listViewModel: ListViewModel = hiltViewModel(),
-    onBookClicked: (Int) -> Unit
+    onBookClicked: (Int) -> Unit,
 ) {
     listViewModel.crashlyticsProvider.log(NullPointerException())
-    listViewModel.loggerProvider.setProperty("screen_view","ListScreen")
+    listViewModel.loggerProvider.setProperty("screen_view", "ListScreen")
 
     HandleEvents(listViewModel.event, onClick, notFound)
 
@@ -50,7 +54,7 @@ fun ListRoute(
     val pagingState = listViewModel.pagingDataFlow?.collectAsLazyPagingItems()
 
     val status by listViewModel.connectivityObserver.observe().collectAsState(
-        initial = ConnectivityObserver.Status.Unavailable
+        initial = ConnectivityObserver.Status.Unavailable,
     )
 
     val systemUiController = rememberSystemUiController()
@@ -66,7 +70,6 @@ fun ListRoute(
         ConnectivityObserver.Status.Available -> false
         else -> true
     }
-
 
 //    when (windowInfo.screenHeightInfo) {
 //        WindowInfo.WindowType.Compact -> {
@@ -84,26 +87,27 @@ fun ListRoute(
 
     logcat("ListRoute") { "ListRoute" }
 
-    val currentTheme  by listViewModel.currentTheme
-    val isDarkTheme = currentTheme?.detectThemeMode()?:false
+    val currentTheme by listViewModel.currentTheme
+    val isDarkTheme = currentTheme?.detectThemeMode() ?: false
 
     YacsaTheme(isDarkTheme) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxSize(),
         ) {
-
             if (isOfflineMode) {
                 systemUiController.setSystemBarsColor(
                     color = YacsaTheme.colors.primary,
                 )
-                OfflineSnackbar(message = UiText.StringResource(dev.yacsa.localization.R.string.errors_offline).asString())
+                OfflineSnackbar(
+                    message = UiText.StringResource(dev.yacsa.localization.R.string.errors_offline)
+                        .asString(),
+                )
             } else {
                 systemUiController.setSystemBarsColor(
                     color = YacsaTheme.colors.background,
                 )
             }
-
 
             if (uiState.isFeatureBlocked) {
                 // https://github.com/googlecodelabs/android-navigation/issues/113
@@ -112,7 +116,7 @@ fun ListRoute(
                 }
             } else {
                 ListScreen(
-                    onBookClicked=onBookClicked,
+                    onBookClicked = onBookClicked,
 //                    onBookClicked = {
 //                        listViewModel.acceptIntent(ListIntent.BookClicked(it))
 //                    },
@@ -136,13 +140,14 @@ fun ListScreen(
     onSettings: () -> Unit,
     onFavourite: () -> Unit,
 ) {
+
     if (!uiState.isLoading && !uiState.isError && pagingState != null) {
         ContentFetched(
             onBookClicked = onBookClicked,
             lazyPagingItems = pagingState,
             onSearch = onSearch,
             onSettings = onSettings,
-            onFavourite = onFavourite
+            onFavourite = onFavourite,
         )
     } else {
         ListNoContent(uiState = uiState)
@@ -159,7 +164,33 @@ fun ListNoContent(
         }
 
         uiState.isError -> {
-            ContentError(errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString()){}
+            ContentError(
+                errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww)
+                    .asString(),
+            ) {}
+        }
+
+        uiState.isUpdateEnabled -> {
+            var showDialog by remember { mutableStateOf(true) }
+
+            if (showDialog) {
+                uiState.updateModel?.let {
+                    UpdateDialog(
+                        modifier = Modifier,
+                        updateModel = it,
+                        showDialog = {
+                            showDialog = false
+                        },
+                        confirmClick = {
+                            showDialog = false
+                        },
+                        dismissClick = {
+                            showDialog = false
+                        },
+                    )
+                }
+
+            }
         }
     }
 }
@@ -194,7 +225,7 @@ fun PreviewListScreen_Light() {
             ListUiState(),
             {},
             {},
-            {}
+            {},
         )
     }
 }
@@ -210,7 +241,7 @@ fun PreviewListScreen_Dark() {
             ListUiState(),
             {},
             {},
-            {}
+            {},
         )
     }
 }

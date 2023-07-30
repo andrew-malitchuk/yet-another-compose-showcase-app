@@ -60,6 +60,9 @@ dependencies {
     implementation(project(":service:featureflag"))
     implementation(project(":service:featureflag:impl"))
 
+    implementation(project(":service:update"))
+    implementation(project(":service:update:impl"))
+
     implementation(project(":service:crashlytics"))
     implementation(project(":service:crashlytics:impl"))
 

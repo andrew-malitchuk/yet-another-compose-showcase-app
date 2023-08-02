@@ -12,8 +12,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
 
-                <!--                <data android:scheme="yacsa" android:host="*"/>-->
-
             </intent-filter>
             <intent-filter>
                 <data
@@ -26,6 +24,7 @@
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
+
         <service
             android:name="dev.yacsa.main.tile.FavouriteTileService"
             android:icon="@drawable/icon_book_regular_24"

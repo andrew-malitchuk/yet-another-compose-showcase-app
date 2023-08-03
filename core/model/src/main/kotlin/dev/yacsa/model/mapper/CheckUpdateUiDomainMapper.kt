@@ -8,10 +8,10 @@ import org.mapstruct.Mapper
 interface CheckUpdateUiDomainMapper {
 
     fun toDomain(
-       checkUpdateUiModel:CheckUpdateUiModel,
+        checkUpdateUiModel: CheckUpdateUiModel,
     ): CheckUpdateDomainModel
 
     fun toUi(
-       checkUpdateDomainModel:CheckUpdateDomainModel,
+        checkUpdateDomainModel: CheckUpdateDomainModel,
     ): CheckUpdateUiModel
 }

@@ -140,7 +140,6 @@ fun ListScreen(
     onSettings: () -> Unit,
     onFavourite: () -> Unit,
 ) {
-
     if (!uiState.isLoading && !uiState.isError && pagingState != null) {
         ContentFetched(
             onBookClicked = onBookClicked,
@@ -189,7 +188,6 @@ fun ListNoContent(
                         },
                     )
                 }
-
             }
         }
     }

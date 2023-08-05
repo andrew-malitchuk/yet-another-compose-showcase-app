@@ -28,6 +28,15 @@ YACSA - Yet Another Compose Showcase Application
 
 ## General information about used technologies and libs
 
+### Tech stack
+
+Used technologies:
+
+- Jetpack Compose;
+- Jetpack DataStore;
+- Jetpack Room;
+- Accompanist;
+
 
 
 ## Application information

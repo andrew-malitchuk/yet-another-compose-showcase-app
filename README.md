@@ -37,7 +37,12 @@ Used technologies:
 - Jetpack Room;
 - Accompanist;
 
+Other stuff:
 
+- Kotlin;
+- MVI;
+- Flow;
+- Coroutines.
 
 ## Application information
 

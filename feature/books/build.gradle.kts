@@ -37,7 +37,7 @@ dependencies {
      implementation(libs.github.theapache64)
 
      implementation(project(":domain"))
-     implementation(project(":feature:navigation"))
+     implementation(project(":core:navigation"))
      implementation(project(":core:platform"))
      implementation(project(":core:model"))
      implementation(project(":core:localization"))
@@ -88,7 +88,7 @@ dependencies {
     implementation("com.github.theapache64:rebugger:1.0.0-alpha02")
 
     implementation(project(":domain"))
-    implementation(project(":feature:navigation"))
+    implementation(project(":core:navigation"))
     implementation(project(":core:platform"))
     implementation(project(":core:model"))
     implementation(project(":core:localization"))

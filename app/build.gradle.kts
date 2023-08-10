@@ -24,7 +24,7 @@ android {
 dependencies {
     implementation(project(":feature:books"))
     implementation(project(":feature:main"))
-    implementation(project(":feature:navigation"))
+    implementation(project(":core:navigation"))
     implementation(project(":feature:featureflagmanager"))
     implementation(project(":feature:notfound"))
     implementation(project(":feature:search"))

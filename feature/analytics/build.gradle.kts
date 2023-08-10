@@ -41,7 +41,7 @@ dependencies {
     implementation(libs.github.theapache64)
 
     implementation(project(":domain"))
-    implementation(project(":feature:navigation"))
+    implementation(project(":core:navigation"))
     implementation(project(":core:platform"))
     implementation(project(":core:model"))
     implementation(project(":core:ui"))

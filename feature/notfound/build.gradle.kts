@@ -30,7 +30,7 @@ dependencies {
      implementation(libs.compose.material3.size)
 
     implementation(project(":domain"))
-    implementation(project(":feature:navigation"))
+    implementation(project(":core:navigation"))
     implementation(project(":core:ui"))
     implementation(project(":core:platform"))
     implementation(project(":service:featureflag:impl"))

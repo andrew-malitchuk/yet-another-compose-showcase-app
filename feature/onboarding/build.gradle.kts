@@ -30,7 +30,7 @@ dependencies {
 
 
     implementation(project(":domain"))
-    implementation(project(":feature:navigation"))
+    implementation(project(":core:navigation"))
     implementation(project(":core:ui"))
     implementation(project(":core:platform"))
     implementation(project(":core:localization"))

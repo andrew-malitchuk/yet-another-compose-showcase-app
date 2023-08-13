@@ -59,7 +59,7 @@ fun SearchRoute(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .testTag("dashboardDeeplinkArgument")
+                .testTag("dashboardDeeplinkArgument"),
         ) {
             if (isOfflineMode) {
                 systemUiController.setSystemBarsColor(

@@ -1,5 +1,6 @@
 package dev.yacsa.remoteconfig.impl.config
 
+import com.google.firebase.BuildConfig
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
@@ -14,8 +15,7 @@ class RemoteConfigure @Inject constructor() {
 
     private val configSettings by lazy {
         FirebaseRemoteConfigSettings.Builder()
-//            .setMinimumFetchIntervalInSeconds((if (BuildConfig.DEBUG) 0 else 3600))
-            .setMinimumFetchIntervalInSeconds(0L)
+            .setMinimumFetchIntervalInSeconds((if (BuildConfig.DEBUG) 0L else FETCH_INTERVAL))
             .build()
     }
 
@@ -24,6 +24,6 @@ class RemoteConfigure @Inject constructor() {
     }
 
     companion object {
-        const val FETCH_INTERVAL = 100L
+        const val FETCH_INTERVAL = 3600L
     }
 }

@@ -12,12 +12,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.pager.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.theapache64.rebugger.Rebugger
 import dev.yacsa.onboarding.screen.onboarding.item.OnboardingItem
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.theme.detectThemeMode
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 import kotlinx.coroutines.launch
 
 @Composable
@@ -26,21 +30,28 @@ fun OnboardingRoute(
     onBackClick: () -> Unit,
     onDoneClick: () -> Unit,
 ) {
-
-    // TODO: fix?
     val onboardingViewModel: OnboardingViewModel = hiltViewModel()
 
-    val currentTheme  by onboardingViewModel.currentTheme
-    val isDarkTheme = currentTheme?.detectThemeMode()?:false
+    val uiState by onboardingViewModel.uiState.collectAsStateWithLifecycle()
+
+    val currentTheme by onboardingViewModel.currentTheme
+    val isDarkTheme = currentTheme?.detectThemeMode() ?: false
+
+    Rebugger(
+        trackMap = mapOf(
+            "uiState" to uiState,
+            "currentTheme" to currentTheme,
+            "isDarkTheme" to isDarkTheme,
+        ),
+    )
 
     YacsaTheme(isDarkTheme) {
         OnboardingScreen(
             onBackClick,
             onDoneClick,
-            onboardingViewModel
+            onboardingViewModel,
         )
     }
-
 }
 
 // TODO: fix & add route
@@ -49,9 +60,8 @@ fun OnboardingRoute(
 fun OnboardingScreen(
     onBackClick: () -> Unit,
     onDoneClick: () -> Unit,
-    onboardingViewModel: OnboardingViewModel
+    onboardingViewModel: OnboardingViewModel,
 ) {
-
     val state = rememberPagerState()
     val scope = rememberCoroutineScope()
 
@@ -59,10 +69,10 @@ fun OnboardingScreen(
 
     with(systemUiController) {
         setSystemBarsColor(
-            color = YacsaTheme.colors.background
+            color = YacsaTheme.colors.background,
         )
         setNavigationBarColor(
-            color = YacsaTheme.colors.background
+            color = YacsaTheme.colors.background,
         )
     }
 
@@ -104,8 +114,8 @@ fun OnboardingScreen(
             onboardingViewModel.onboardingPages[page].let {
                 OnboardingItem(
                     it.imageId,
-                    it.header,
-                    it.caption,
+                    UiText.StringResource(it.header).asString(),
+                    UiText.StringResource(it.caption).asString(),
                     state = state,
                 )
             }
@@ -129,12 +139,12 @@ fun TopSection(
         SmallFloatingActionButton(
             onClick = { onBackClick() },
             containerColor = YacsaTheme.colors.accent,
-            elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
+            elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.icon_caret_left_regular_24),
                 contentDescription = null,
-                tint = YacsaTheme.colors.primary
+                tint = YacsaTheme.colors.primary,
             )
         }
         TextButton(
@@ -143,12 +153,11 @@ fun TopSection(
             contentPadding = PaddingValues(0.dp),
         ) {
             val textForButton = when (buttonType) {
-                OnboardingViewModel.ButtonType.SKIP -> "Skip"
-                OnboardingViewModel.ButtonType.NEXT -> "Next"
+                OnboardingViewModel.ButtonType.SKIP -> UiText.StringResource(dev.yacsa.localization.R.string.general_skip).asString()
+                OnboardingViewModel.ButtonType.NEXT -> UiText.StringResource(dev.yacsa.localization.R.string.general_next).asString()
             }
 
             Text(
-                // TODO: move
                 text = textForButton,
                 style = YacsaTheme.typography.title,
                 color = YacsaTheme.colors.primary,
@@ -178,6 +187,7 @@ fun BottomSection(state: PagerState) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewOnboardingScreen_Light() {
+    val faker = Faker()
     YacsaTheme(useDarkTheme = false) {
     }
 }
@@ -185,6 +195,7 @@ fun PreviewOnboardingScreen_Light() {
 @Preview(showBackground = true)
 @Composable
 fun PreviewOnboardingScreen_Dark() {
+    val faker = Faker()
     YacsaTheme(useDarkTheme = false) {
     }
 }

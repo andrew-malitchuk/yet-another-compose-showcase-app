@@ -31,10 +31,12 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import dev.yacsa.model.model.BookUiModel
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.swipe.SwipeAction
 import dev.yacsa.ui.composable.swipe.SwipeableActionsBox
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun ItemFetchedList(
@@ -73,13 +75,12 @@ fun ItemFetchedList(
         shape = YacsaTheme.shapes.cornersStyle,
         elevation = 0.dp,
     ) {
-
         SwipeableActionsBox(
             modifier = modifier,
             startActions = listOf(favouriteAction),
             endActions = listOf(favouriteAction),
             swipeThreshold = 40.dp,
-            backgroundUntilSwipeThreshold = MaterialTheme.colorScheme.surfaceColorAtElevation(0.dp)
+            backgroundUntilSwipeThreshold = MaterialTheme.colorScheme.surfaceColorAtElevation(0.dp),
         ) {
             Card(
                 modifier = Modifier
@@ -116,8 +117,7 @@ fun ItemFetchedList(
                     ) {
                         Spacer(modifier = modifier.height(YacsaTheme.spacing.small))
                         Text(
-                            // TODO: fix
-                            text = (book.authors?.firstOrNull()?.name ?: "NI"),
+                            text = (book.authors?.firstOrNull()?.name ?: UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString()),
                             style = YacsaTheme.typography.caption,
                             color = YacsaTheme.colors.primary,
                             maxLines = 1,
@@ -126,7 +126,7 @@ fun ItemFetchedList(
                         Spacer(modifier = modifier.height(YacsaTheme.spacing.small))
                         Text(
                             // TODO: fix
-                            text = (book.title ?: "NI"),
+                            text = (book.title ?: UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString()),
                             style = YacsaTheme.typography.title,
                             color = YacsaTheme.colors.secondary,
                             maxLines = 2,
@@ -140,14 +140,14 @@ fun ItemFetchedList(
                             Icon(
                                 painter = painterResource(id = R.drawable.icon_archive_box_regular_16),
                                 contentDescription = null,
-                                tint = YacsaTheme.colors.accent
+                                tint = YacsaTheme.colors.accent,
                             )
                             Spacer(modifier = modifier.width(YacsaTheme.spacing.extraSmall))
                             Text(
                                 // TODO: fix
-                                text = book.downloadCount?.toString() ?: "NI",
+                                text = book.downloadCount?.toString() ?: UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString(),
                                 style = YacsaTheme.typography.title,
-                                color = YacsaTheme.colors.secondary
+                                color = YacsaTheme.colors.secondary,
                             )
                             IconToggleButton(
                                 checked = book.isFavourite == true,
@@ -156,22 +156,22 @@ fun ItemFetchedList(
                                         onFavouriteMark(id, it)
                                     }
                                     /*checkedState.value = it */
-                                }) {
-
+                                },
+                            ) {
                                 Crossfade(
-                                    targetState = book.isFavourite == true
+                                    targetState = book.isFavourite == true,
                                 ) { isChecked ->
                                     if (isChecked == true) {
                                         Icon(
                                             painter = painterResource(id = R.drawable.icon_heart_fill_24),
                                             contentDescription = null,
-                                            tint = YacsaTheme.colors.accent
+                                            tint = YacsaTheme.colors.accent,
                                         )
                                     } else {
                                         Icon(
                                             painter = painterResource(id = R.drawable.icon_heart_regulat_24),
                                             contentDescription = null,
-                                            tint = YacsaTheme.colors.accent
+                                            tint = YacsaTheme.colors.accent,
                                         )
                                     }
                                 }
@@ -193,31 +193,30 @@ fun ItemFetchedList(
             }
         }
     }
-
 }
 
 @Preview(showBackground = true)
 @Composable
 fun Preview_ListItem_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ItemFetchedList(
             book = BookUiModel(
-                1,
-                "foobar",
-                null,
+                faker.hashCode(),
+                faker.quote.fortuneCookie(),
+                listOf(faker.quote.fortuneCookie()),
                 emptyList(),
                 emptyList(),
-                emptyList(),
-                emptyList(),
+                listOf(faker.quote.fortuneCookie()),
+                listOf(faker.quote.fortuneCookie()),
                 true,
+                faker.quote.fortuneCookie(),
                 null,
-                null,
-                10,
-                true
+                faker.hashCode(),
+                true,
             ),
             onItemContentClick = {},
             onFavouriteMark = { _, _ ->
-
             },
         )
     }
@@ -226,25 +225,25 @@ fun Preview_ListItem_Dark() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_ItemFetchedList_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ItemFetchedList(
             book = BookUiModel(
-                1,
-                "foobar",
-                null,
+                faker.hashCode(),
+                faker.quote.fortuneCookie(),
+                listOf(faker.quote.fortuneCookie()),
                 emptyList(),
                 emptyList(),
-                emptyList(),
-                emptyList(),
+                listOf(faker.quote.fortuneCookie()),
+                listOf(faker.quote.fortuneCookie()),
                 true,
+                faker.quote.fortuneCookie(),
                 null,
-                null,
-                10,
-                true
+                faker.hashCode(),
+                true,
             ),
             onItemContentClick = {},
             onFavouriteMark = { _, _ ->
-
             },
         )
     }

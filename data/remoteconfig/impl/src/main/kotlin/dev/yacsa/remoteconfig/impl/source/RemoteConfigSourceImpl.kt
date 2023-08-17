@@ -69,7 +69,6 @@ class RemoteConfigSourceImpl @Inject constructor(
                 }
             } catch (ex: Exception) {
                 continuation.resume(Either.Left(ex))
-
             }
         }
     }

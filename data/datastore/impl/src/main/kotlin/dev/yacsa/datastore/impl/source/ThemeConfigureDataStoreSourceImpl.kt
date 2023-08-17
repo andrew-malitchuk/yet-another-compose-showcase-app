@@ -6,7 +6,6 @@ import dev.yacsa.datastore.source.ThemeConfigureDataStoreSource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-
 class ThemeConfigureDataStoreSourceImpl @Inject constructor(
     private val themeConfigureDataStoreDao: ThemeConfigureDataStoreDao,
 ) : ThemeConfigureDataStoreSource() {

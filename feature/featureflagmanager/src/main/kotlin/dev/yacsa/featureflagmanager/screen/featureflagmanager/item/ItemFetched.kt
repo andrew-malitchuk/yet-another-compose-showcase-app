@@ -27,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yacsa.featureflag.FeatureFlagModel
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -56,12 +57,12 @@ fun ItemFetched(
             SmallFloatingActionButton(
                 onClick = { },
                 containerColor = YacsaTheme.colors.primary,
-                elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp)
+                elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
             ) {
                 Icon(
                     painter = painterResource(id = dev.yacsa.ui.R.drawable.icon_command_regular_24),
                     contentDescription = null,
-                    tint = YacsaTheme.colors.accent
+                    tint = YacsaTheme.colors.accent,
                 )
             }
             Spacer(
@@ -69,13 +70,13 @@ fun ItemFetched(
                     .width(YacsaTheme.spacing.medium),
             )
             Row(
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
                     modifier = Modifier.basicMarquee(),
                     text = item.key,
                     style = YacsaTheme.typography.title,
-                    color = YacsaTheme.colors.primary
+                    color = YacsaTheme.colors.primary,
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 Switch(
@@ -108,7 +109,6 @@ fun ItemFetched(
             }
         }
     }
-
 
 //    Column {
 //        Row(
@@ -150,9 +150,10 @@ fun ItemFetched(
 @Composable
 @Preview(showBackground = true)
 fun Preview_ItemFetched_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ItemFetched(
-            item = FeatureFlagModel("foo", true),
+            item = FeatureFlagModel(faker.quote.fortuneCookie(), true),
             isActive = {},
             isEnabled = {},
         )
@@ -162,9 +163,10 @@ fun Preview_ItemFetched_Light() {
 @Composable
 @Preview(showBackground = true)
 fun Preview_ItemFetched_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ItemFetched(
-            item = FeatureFlagModel("foo", true),
+            item = FeatureFlagModel(faker.quote.fortuneCookie(), true),
             isActive = {},
             isEnabled = {},
         )

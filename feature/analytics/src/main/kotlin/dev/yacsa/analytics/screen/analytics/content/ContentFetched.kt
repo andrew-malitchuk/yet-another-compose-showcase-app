@@ -17,16 +17,19 @@ import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.chrisbanes.snapper.ExperimentalSnapperApi
 import dev.yacsa.analytics.screen.analytics.AnalyticsUiState
 import dev.yacsa.analytics.screen.analytics.item.AnalyticsItem
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.content.ContentError
 import dev.yacsa.ui.composable.content.ContentIsLoading
 import dev.yacsa.ui.composable.content.ContentNoData
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 import java.lang.Math.abs
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalSnapperApi::class)
@@ -35,12 +38,11 @@ fun ContentFetched(
     modifier: Modifier = Modifier.fillMaxSize(),
     innerPadding: PaddingValues,
     state: LazyListState,
-    foo: TopAppBarState,
+    topAppBarState: TopAppBarState,
     uiState: AnalyticsUiState,
 ) {
-    val corner = YacsaTheme.corners.medium - (YacsaTheme.corners.medium * abs(foo.collapsedFraction))
+    val corner = YacsaTheme.corners.medium - (YacsaTheme.corners.medium * abs(topAppBarState.collapsedFraction))
     val systemUiController = rememberSystemUiController()
-
 
     when {
         uiState.isLoading -> {
@@ -55,16 +57,20 @@ fun ContentFetched(
                 color = YacsaTheme.colors.statusBar,
             )
             ContentError(
-                errorMessage = "Moshi moshi?"
-            ){
-
+                errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString(),
+            ) {
             }
         }
 
         else -> {
-            systemUiController.setNavigationBarColor(
-                color = YacsaTheme.colors.statusBar,
+            systemUiController.apply {
+                setSystemBarsColor(
+                    color = YacsaTheme.colors.statusBar,
                 )
+                setNavigationBarColor(
+                    color = YacsaTheme.colors.surface,
+                )
+            }
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -75,18 +81,16 @@ fun ContentFetched(
                     modifier = Modifier
                         .fillMaxSize()
                         .clip(RoundedCornerShape(topStart = corner, topEnd = corner))
-                        .background(YacsaTheme.colors.surface)
+                        .background(YacsaTheme.colors.surface),
                 ) {
-
-                    if(uiState.analytics.isEmpty()){
+                    if (uiState.analytics.isEmpty()) {
                         ContentNoData(
-                            message = "Nothing to show"
+                            message = UiText.StringResource(dev.yacsa.localization.R.string.errors_no_data).asString(),
                         )
-
-                    }else {
-
+                    } else {
                         LazyColumn(
                             modifier = Modifier
+                                .testTag("bar")
                                 .fillMaxSize(),
                             state = state,
                             contentPadding = PaddingValues(YacsaTheme.spacing.small),
@@ -101,26 +105,24 @@ fun ContentFetched(
                                     },
                                 )
                             }
-
                         }
                     }
                 }
             }
         }
     }
-
-
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
 @Composable
 fun Preview_ContentFetched_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ContentFetched(
             innerPadding = PaddingValues(YacsaTheme.spacing.small),
             state = rememberLazyListState(),
-            foo = rememberTopAppBarState(),
+            topAppBarState = rememberTopAppBarState(),
             uiState = AnalyticsUiState(isError = true),
         )
     }
@@ -130,11 +132,12 @@ fun Preview_ContentFetched_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_ContentFetched_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ContentFetched(
             innerPadding = PaddingValues(YacsaTheme.spacing.small),
             state = rememberLazyListState(),
-            foo = rememberTopAppBarState(),
+            topAppBarState = rememberTopAppBarState(),
             uiState = AnalyticsUiState(isError = true),
         )
     }

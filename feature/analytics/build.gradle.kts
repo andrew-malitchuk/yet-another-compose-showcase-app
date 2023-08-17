@@ -6,6 +6,9 @@ plugins {
 
 android {
     namespace = "dev.yacsa.analytics"
+    defaultConfig {
+        testInstrumentationRunner = "dev.yacsa.analytics.screen.analytics.HiltTestRunner"
+    }
 }
 
 dependencies {
@@ -14,39 +17,69 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtimeCompose)
     implementation(libs.androidx.navigation.compose)
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.28.0")
-    implementation("io.coil-kt:coil-compose:2.2.2")
+    implementation(libs.android.lifecycle.viewmodel.compose)
+    implementation(libs.hilt.navigation.compose)
+    implementation(libs.accompanist.systemuicontroller)
+    implementation(libs.coil.compose)
 
-    implementation("androidx.compose.material:material:1.4.0")
-    implementation("com.google.accompanist:accompanist-pager:0.28.0")
-    implementation("com.google.accompanist:accompanist-pager-indicators:0.28.0")
+    implementation(libs.compose.material)
+    implementation(libs.accompanist.pager)
+    implementation(libs.accompanist.pager.indicators)
+    implementation(libs.accompanist.navigation.animation)
 
-    implementation("androidx.compose.material3:material3:1.1.0-rc01")
-    implementation("androidx.compose.material3:material3-window-size-class:1.1.0-rc01")
+    implementation(libs.compose.material3)
+    implementation(libs.compose.material3.size)
 
-    implementation("androidx.compose.ui:ui-tooling:1.4.0")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.4.0")
-    implementation("com.squareup.logcat:logcat:0.1")
+    implementation(libs.compose.ui.tooling)
+    implementation(libs.compose.ui.tooling.preview)
 
-    implementation("androidx.room:room-paging:2.5.0")
-    implementation("androidx.paging:paging-compose:1.0.0-alpha18")
+    implementation(libs.squareup.logcat)
 
-    implementation("com.github.theapache64:rebugger:1.0.0-alpha02")
+    implementation(libs.room.paging)
+    implementation(libs.room.paging.compose)
+
+    implementation(libs.github.theapache64)
 
     implementation(project(":domain"))
-    implementation(project(":feature:navigation"))
+    implementation(project(":core:navigation"))
     implementation(project(":core:platform"))
     implementation(project(":core:model"))
     implementation(project(":core:ui"))
+    implementation(project(":core:localization"))
     implementation(project(":service:featureflag"))
 
-    implementation("io.arrow-kt:arrow-core:1.2.0-RC")
-    implementation("io.arrow-kt:arrow-fx-coroutines:1.2.0-RC")
-    implementation("io.arrow-kt:arrow-optics:1.2.0-RC")
-    ksp("io.arrow-kt:arrow-optics-ksp-plugin:1.2.0-RC")
+    implementation(libs.arrow.core)
+    implementation(libs.arrow.fx.coroutines)
+    implementation(libs.arrow.optics)
+    ksp(libs.arrow.optics.ksp.plugin)
 
-    implementation("com.airbnb.android:lottie-compose:6.0.0")
+    implementation(libs.airbnb.lottie)
 
+    //
+    testImplementation("org.junit.platform:junit-platform-runner:1.6.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
+    testImplementation("androidx.test.ext:junit:1.1.5")
+    testImplementation("com.google.dagger:hilt-android-testing:2.44.2")
+    kaptTest("com.google.dagger:hilt-android-compiler:2.44.2")
+    testImplementation("androidx.test:core-ktx:1.5.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.2")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.2")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.7.20")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")
+    testImplementation("org.robolectric:robolectric:4.9")
+    implementation("androidx.test:runner:1.5.2")
+    testImplementation("io.mockk:mockk:1.13.5")
+    implementation(libs.faker)
+    testImplementation("org.mockito.kotlin:mockito-kotlin:3.2.0")
+    //
+
+    //
+    // Test rules and transitive dependencies:
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.4.7")
+// Needed for createAndroidComposeRule, but not createComposeRule:
+    debugImplementation("androidx.compose.ui:ui-test-manifest:1.4.7")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.44.2")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.44.2")
+    //
 }

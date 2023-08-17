@@ -39,9 +39,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.button.RowToggleButtonGroup
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,7 +51,7 @@ fun FilterDialog(
     onDismiss: () -> Unit,
     onSort: (FilterDialogResult) -> Unit,
     previousContent: FilterDialogResult?,
-    onClear: () -> Unit
+    onClear: () -> Unit,
 ) {
     val modalBottomSheetState = rememberModalBottomSheetState()
     ModalBottomSheet(
@@ -62,23 +64,22 @@ fun FilterDialog(
         FilterDialogContent(
             onSort,
             previousContent,
-            onClear
+            onClear,
         )
     }
-
 }
 
 @OptIn(
-    ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class,
-    ExperimentalMaterialApi::class
+    ExperimentalLayoutApi::class,
+    ExperimentalMaterial3Api::class,
+    ExperimentalMaterialApi::class,
 )
 @Composable
 fun FilterDialogContent(
     onSort: (FilterDialogResult) -> Unit,
     previousContent: FilterDialogResult?,
-    onClear: () -> Unit
+    onClear: () -> Unit,
 ) {
-
     val prevLang = previousContent?.lang
     val prevSort = previousContent?.sort
 
@@ -88,7 +89,7 @@ fun FilterDialogContent(
     val filterResult = remember {
         FilterDialogResult(
             prevLang,
-            prevSort
+            prevSort,
         )
     }
 
@@ -96,7 +97,7 @@ fun FilterDialogContent(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
             .fillMaxSize()
-            .padding(bottom = YacsaTheme.spacing.medium)
+            .padding(bottom = YacsaTheme.spacing.medium),
 
     ) {
         Row(
@@ -106,20 +107,20 @@ fun FilterDialogContent(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             androidx.compose.material.Text(
-                text = "Filter stuff",
+                text = UiText.StringResource(dev.yacsa.localization.R.string.search_filter).asString(),
                 style = YacsaTheme.typography.header,
-                color = YacsaTheme.colors.primary
+                color = YacsaTheme.colors.primary,
             )
             Spacer(modifier = Modifier.weight(1f))
             SmallFloatingActionButton(
                 onClick = { onClear() },
                 containerColor = YacsaTheme.colors.accent,
-                elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
+                elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_trash_regular_24),
                     contentDescription = null,
-                    tint = YacsaTheme.colors.primary
+                    tint = YacsaTheme.colors.primary,
                 )
             }
         }
@@ -127,12 +128,12 @@ fun FilterDialogContent(
         Spacer(modifier = Modifier.height(YacsaTheme.spacing.medium))
         Column(
             modifier = Modifier
-                .padding(horizontal = YacsaTheme.spacing.medium)
+                .padding(horizontal = YacsaTheme.spacing.medium),
         ) {
             androidx.compose.material.Text(
-                text = "Language",
+                text = UiText.StringResource(dev.yacsa.localization.R.string.search_language).asString(),
                 style = YacsaTheme.typography.caption,
-                color = YacsaTheme.colors.secondary
+                color = YacsaTheme.colors.secondary,
             )
             FlowRow(
                 modifier = Modifier
@@ -147,7 +148,6 @@ fun FilterDialogContent(
                             labelColor = YacsaTheme.colors.secondary,
                             selectedLabelColor = YacsaTheme.colors.primary,
                         ),
-                        // TODO: fix
                         border = FilterChipDefaults.filterChipBorder(
                             borderColor = YacsaTheme.colors.secondary,
                             selectedBorderColor = YacsaTheme.colors.primary,
@@ -167,13 +167,12 @@ fun FilterDialogContent(
                         },
                     )
                 }
-
             }
             Spacer(modifier = Modifier.height(YacsaTheme.spacing.small))
             androidx.compose.material.Text(
-                text = "Sort",
+                text = UiText.StringResource(dev.yacsa.localization.R.string.search_sort).asString(),
                 style = YacsaTheme.typography.caption,
-                color = YacsaTheme.colors.secondary
+                color = YacsaTheme.colors.secondary,
             )
             RowToggleButtonGroup(
                 primarySelection = filterResult.getSortIndex(prevSort) ?: -1,
@@ -189,7 +188,7 @@ fun FilterDialogContent(
                     painterResource(id = R.drawable.icon_sort_descending_regular_24),
                     painterResource(id = R.drawable.icon_heart_regulat_24),
                 ),
-                buttonHeight = 36.dp
+                buttonHeight = 36.dp,
             ) { index ->
                 // check index and handle click
                 when (index) {
@@ -209,16 +208,17 @@ fun FilterDialogContent(
                 .padding(horizontal = YacsaTheme.spacing.medium),
             colors = ButtonDefaults.outlinedButtonColors(
                 backgroundColor = YacsaTheme.colors.surface,
-                contentColor = YacsaTheme.colors.accent
+                contentColor = YacsaTheme.colors.accent,
             ),
-            border = BorderStroke(YacsaTheme.dividers.medium, YacsaTheme.colors.accent ),
+            border = BorderStroke(YacsaTheme.dividers.medium, YacsaTheme.colors.accent),
             onClick = {
                 onSort(filterResult)
-            }) {
+            },
+        ) {
             androidx.compose.material.Text(
-                text = "Sort",
+                text = UiText.StringResource(dev.yacsa.localization.R.string.search_sort).asString(),
                 style = YacsaTheme.typography.caption,
-                color = YacsaTheme.colors.accent
+                color = YacsaTheme.colors.accent,
             )
         }
     }
@@ -226,7 +226,7 @@ fun FilterDialogContent(
 
 data class FilterDialogResult(
     var lang: String? = null,
-    var sort: String? = null
+    var sort: String? = null,
 ) {
 
     private val sortTypes = arrayListOf<String>("ascending", "descending", "popular")
@@ -247,13 +247,13 @@ data class FilterDialogResult(
 @Preview(showBackground = true)
 @Composable
 fun Preview_FilterDialogContent_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         FilterDialogContent(
             onSort = {
-
             },
             previousContent = null,
-            {}
+            {},
         )
     }
 }
@@ -261,13 +261,13 @@ fun Preview_FilterDialogContent_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_FilterDialogContent_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         FilterDialogContent(
             onSort = {
-
             },
             previousContent = null,
-            {}
+            {},
         )
     }
 }

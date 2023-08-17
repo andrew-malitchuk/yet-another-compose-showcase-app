@@ -11,21 +11,22 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import dev.yacsa.books.screen.list.item.ItemFormat
 import dev.yacsa.model.model.BookUiModel
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.theme.YacsaTheme
-
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun FormatsBlock(
     book: BookUiModel,
-    onFormatClick:(String)->Unit
+    onFormatClick: (String) -> Unit,
 ) {
     Column(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxWidth(),
     ) {
         Text(
             modifier = Modifier.fillMaxWidth(),
-            text = "Formats",
+            text = UiText.StringResource(dev.yacsa.localization.R.string.detalization_formats).asString(),
             style = YacsaTheme.typography.title,
             color = YacsaTheme.colors.primary,
             maxLines = 1,
@@ -33,52 +34,52 @@ fun FormatsBlock(
             textAlign = TextAlign.Start,
         )
         Spacer(
-            modifier = Modifier.height(YacsaTheme.spacing.small)
+            modifier = Modifier.height(YacsaTheme.spacing.small),
         )
-        book.formats?.let {format->
-            format.applicationEpubZip?.let{
+        book.formats?.let { format ->
+            format.applicationEpubZip?.let {
                 ItemFormat(type = ".epub", link = it) {
                     onFormatClick(it)
                 }
                 Spacer(modifier = Modifier.height(YacsaTheme.spacing.small))
             }
-            format.applicationOctetStream?.let{
+            format.applicationOctetStream?.let {
                 ItemFormat(type = "octet-stream", link = it) {
                     onFormatClick(it)
                 }
                 Spacer(modifier = Modifier.height(YacsaTheme.spacing.small))
             }
-            format.applicationRdfXml?.let{
+            format.applicationRdfXml?.let {
                 ItemFormat(type = ".rdf", link = it) {
                     onFormatClick(it)
                 }
                 Spacer(modifier = Modifier.height(YacsaTheme.spacing.small))
             }
-            format.applicationxMobipocketEbook?.let{
+            format.applicationxMobipocketEbook?.let {
                 ItemFormat(type = ".mobi", link = it) {
                     onFormatClick(it)
                 }
                 Spacer(modifier = Modifier.height(YacsaTheme.spacing.small))
             }
-            format.imageJpeg?.let{
+            format.imageJpeg?.let {
                 ItemFormat(type = ".jpeg", link = it) {
                     onFormatClick(it)
                 }
                 Spacer(modifier = Modifier.height(YacsaTheme.spacing.small))
             }
-            format.textHtml?.let{
+            format.textHtml?.let {
                 ItemFormat(type = ".html", link = it) {
                     onFormatClick(it)
                 }
                 Spacer(modifier = Modifier.height(YacsaTheme.spacing.small))
             }
-            format.textPlain?.let{
+            format.textPlain?.let {
                 ItemFormat(type = ".txt", link = it) {
                     onFormatClick(it)
                 }
                 Spacer(modifier = Modifier.height(YacsaTheme.spacing.small))
             }
-            format.textplainCharsetusAscii?.let{
+            format.textplainCharsetusAscii?.let {
                 ItemFormat(type = "ASCII", link = it) {
                     onFormatClick(it)
                 }
@@ -86,29 +87,29 @@ fun FormatsBlock(
             }
         }
     }
-
 }
 
 @Preview(showBackground = true)
 @Composable
 fun Preview_FormatsBlock_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         FormatsBlock(
             book = BookUiModel(
+                faker.hashCode(),
+                faker.quote.fortuneCookie(),
+                listOf(faker.quote.fortuneCookie()),
+                emptyList(),
+                emptyList(),
+                listOf(faker.quote.fortuneCookie()),
+                listOf(faker.quote.fortuneCookie()),
+                true,
+                faker.quote.fortuneCookie(),
                 null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                true
+                faker.hashCode(),
+                true,
             ),
-            onFormatClick = {}
+            onFormatClick = {},
         )
     }
 }
@@ -116,23 +117,24 @@ fun Preview_FormatsBlock_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_FormatsBlock_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         FormatsBlock(
             book = BookUiModel(
+                faker.hashCode(),
+                faker.quote.fortuneCookie(),
+                listOf(faker.quote.fortuneCookie()),
+                emptyList(),
+                emptyList(),
+                listOf(faker.quote.fortuneCookie()),
+                listOf(faker.quote.fortuneCookie()),
+                true,
+                faker.quote.fortuneCookie(),
                 null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                true
+                faker.hashCode(),
+                true,
             ),
-            onFormatClick = {}
+            onFormatClick = {},
         )
     }
 }

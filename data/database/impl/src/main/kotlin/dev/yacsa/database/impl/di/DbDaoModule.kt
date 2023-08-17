@@ -57,5 +57,4 @@ class DbDaoModule {
     ): AnalyticsDbDao {
         return appDatabase.getAnalyticsDao()
     }
-
 }

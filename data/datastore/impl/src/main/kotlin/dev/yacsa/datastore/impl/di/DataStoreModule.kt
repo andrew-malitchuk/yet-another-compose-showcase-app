@@ -65,5 +65,4 @@ class DataStoreModule {
     ): DataStore<ThemeConfigureDataStoreModel> {
         return applicationContext.themeConfigureDataStore
     }
-
 }

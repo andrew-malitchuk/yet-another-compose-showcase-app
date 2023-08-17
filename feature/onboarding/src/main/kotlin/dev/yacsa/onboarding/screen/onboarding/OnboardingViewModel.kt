@@ -1,6 +1,7 @@
 package dev.yacsa.onboarding.screen.onboarding
 
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -17,6 +18,7 @@ import dev.yacsa.domain.usecase.startupconfigure.NewUpdateStartUpConfigureUseCas
 import dev.yacsa.platform.Theme
 import dev.yacsa.platform.viewmodel.BaseViewModel
 import dev.yacsa.ui.R
+import io.github.serpro69.kfaker.Faker
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import logcat.logcat
@@ -29,11 +31,12 @@ class OnboardingViewModel @Inject constructor(
     private val updateStartUpConfigureUseCase: NewUpdateStartUpConfigureUseCase,
     private val getStartUpConfigureUseCase: NewGetStartUpConfigureUseCase,
     private val analyticDispatcher: AnalyticDispatcher,
-    private val theme:Theme
+    private val theme: Theme,
 ) : BaseViewModel<OnboardingUiState, OnboardingUiState.PartialState, OnboardingEvent, OnboardingIntent>(
     savedStateHandle,
     initialState,
-), Theme by theme{
+),
+    Theme by theme {
 
     init {
         viewModelScope.launch {
@@ -43,8 +46,7 @@ class OnboardingViewModel @Inject constructor(
             analyticDispatcher.sendEvent(
                 object : ContentViewAnalyticModel() {
                     override val viewName = "onboarding"
-
-                }
+                },
             )
 
             analyticDispatcher.sendEvent(
@@ -53,10 +55,9 @@ class OnboardingViewModel @Inject constructor(
 
                     override fun getParameters(): Map<String, Any> = mapOf(
                         "bar" to true,
-                        "foo" to 1
+                        Faker().quote.fortuneCookie() to 1,
                     )
-
-                }
+                },
             )
             analyticDispatcher.setUserProperty(object : UserPropertyAnalyticModel() {
                 override val key: String = "name"
@@ -67,7 +68,10 @@ class OnboardingViewModel @Inject constructor(
 
     fun updateStartUpConfigure() {
         viewModelScope.launch {
-            updateStartUpConfigureUseCase(StartUpConfigureDomainModel(true))
+            getStartUpConfigureUseCase().fold({
+            }, {
+                updateStartUpConfigureUseCase(StartUpConfigureDomainModel(true, it.language))
+            })
         }
     }
 
@@ -82,25 +86,25 @@ class OnboardingViewModel @Inject constructor(
     var onboardingPages = listOf(
         OnboadringPage(
             R.drawable.illustration_mobile_application,
-            "Search",
-            "Search and filter books",
+            dev.yacsa.localization.R.string.onboarding_item_title_1,
+            dev.yacsa.localization.R.string.onboarding_item_description_1,
         ),
         OnboadringPage(
             R.drawable.illustration_mobile_encryption,
-            "Favourites",
-            "Add books to bookshelf",
+            dev.yacsa.localization.R.string.onboarding_item_title_2,
+            dev.yacsa.localization.R.string.onboarding_item_description_2,
         ),
         OnboadringPage(
             R.drawable.illustration_mobile_interface,
-            "Download",
-            "All books are free to download",
+            dev.yacsa.localization.R.string.onboarding_item_title_3,
+            dev.yacsa.localization.R.string.onboarding_item_description_3,
         ),
     )
 
     data class OnboadringPage(
         @DrawableRes val imageId: Int,
-        val header: String,
-        val caption: String,
+        @StringRes val header: Int,
+        @StringRes val caption: Int,
     )
 
     enum class ButtonType {

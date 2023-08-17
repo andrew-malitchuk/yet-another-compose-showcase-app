@@ -19,6 +19,7 @@ class StartupConfigureDataStoreDao @Inject constructor(
         dataStore.updateData {
             it.copy(
                 hasBeenOnboardingShown = value.hasBeenOnboardingShown,
+                language = value.language,
             )
         }
     }

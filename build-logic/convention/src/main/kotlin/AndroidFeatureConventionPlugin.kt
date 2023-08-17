@@ -18,6 +18,8 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
             dependencies {
 //                add("implementation", project(":core:model"))
 //                add("implementation", libs.findLibrary("coil.kt").get())
+                add("implementation", "io.github.serpro69:kotlin-faker:1.14.0")
+
             }
         }
     }

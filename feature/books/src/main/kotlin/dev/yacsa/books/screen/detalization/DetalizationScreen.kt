@@ -1,9 +1,11 @@
 package dev.yacsa.books.screen.detalization
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -18,10 +20,14 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.theapache64.rebugger.Rebugger
 import dev.yacsa.books.screen.detalization.content.ContentFetchedPortrait
 import dev.yacsa.books.screen.utils.share
+import dev.yacsa.platform.connection.ConnectivityObserver
 import dev.yacsa.platform.ext.collectWithLifecycle
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.composable.content.ContentIsLoading
+import dev.yacsa.ui.composable.snackbar.OfflineSnackbar
 import dev.yacsa.ui.composable.theme.detectThemeMode
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 import kotlinx.coroutines.flow.Flow
 import nl.dionsegijn.konfetti.compose.KonfettiView
 import nl.dionsegijn.konfetti.core.Party
@@ -36,34 +42,59 @@ fun DetalizationRoute(
 ) {
     HandleEvents(detalizationViewModel.event)
     val uiState by detalizationViewModel.uiState.collectAsStateWithLifecycle()
-
-//    val checked = remember { detalizationViewModel.checked }
-
     detalizationViewModel.checked.also {
-        it.value?.let { it1 -> detalizationViewModel.foo(it1) }
+        it.value?.let { it1 -> detalizationViewModel.changeFavourite(it1) }
     }
+
+    val currentTheme by detalizationViewModel.currentTheme
+    val isDarkTheme = currentTheme?.detectThemeMode() ?: false
+
+    val status by detalizationViewModel.connectivityObserver.observe().collectAsState(
+        initial = ConnectivityObserver.Status.Unavailable,
+    )
+    val isOfflineMode = when (status) {
+        ConnectivityObserver.Status.Available -> false
+        else -> true
+    }
+    val systemUiController = rememberSystemUiController()
 
     Rebugger(
         trackMap = mapOf(
             "uiState" to uiState,
+            "currentTheme" to currentTheme,
+            "isDarkTheme" to isDarkTheme,
         ),
     )
-    val currentTheme  by detalizationViewModel.currentTheme
-    val isDarkTheme = currentTheme?.detectThemeMode()?:false
 
     YacsaTheme(isDarkTheme) {
-        DetalizationScreen(
-            uiState = uiState,
-            onBackClick = onBackClick,
-            onFormatClick = {
-                detalizationViewModel.acceptIntent(DetalizationIntent.OnLinkClick(it))
-            },
-            favourite = detalizationViewModel.checked,
-            foo= detalizationViewModel.foo,
-            onShareClick = {
-                detalizationViewModel.acceptIntent(DetalizationIntent.OnShareClick(it))
+        Column(
+            modifier = Modifier
+                .fillMaxSize(),
+        ) {
+            if (isOfflineMode) {
+                systemUiController.setSystemBarsColor(
+                    color = YacsaTheme.colors.primary,
+                )
+                OfflineSnackbar(message = UiText.StringResource(dev.yacsa.localization.R.string.errors_offline).asString())
+            } else {
+                systemUiController.setSystemBarsColor(
+                    color = YacsaTheme.colors.background,
+                )
             }
-        )
+
+            DetalizationScreen(
+                uiState = uiState,
+                onBackClick = onBackClick,
+                onFormatClick = {
+                    detalizationViewModel.acceptIntent(DetalizationIntent.OnLinkClick(it))
+                },
+                favourite = detalizationViewModel.checked,
+                favouriteState = detalizationViewModel.favouriteState,
+                onShareClick = {
+                    detalizationViewModel.acceptIntent(DetalizationIntent.OnShareClick(it))
+                },
+            )
+        }
     }
 }
 
@@ -73,8 +104,8 @@ fun DetalizationScreen(
     onBackClick: () -> Unit,
     onFormatClick: (String) -> Unit,
     favourite: MutableState<Boolean?>,
-    foo: MutableState<Boolean?>,
-    onShareClick:(Int)->Unit
+    favouriteState: MutableState<Boolean?>,
+    onShareClick: (Int) -> Unit,
 ) {
     val systemUiController = rememberSystemUiController()
 
@@ -114,19 +145,19 @@ fun DetalizationScreen(
                     onSubjectClick = {},
                     onBookshelfClick = {},
                     favourite = favourite,
-                    onShareClick = onShareClick
+                    onShareClick = onShareClick,
                 )
-                if(favourite.value==true && foo.value==true) {
+                if (favourite.value == true && favouriteState.value == true) {
                     KonfettiView(
                         modifier = Modifier.fillMaxSize(),
                         parties = listOf(
                             Party(
                                 emitter = Emitter(
                                     duration = 1,
-                                    TimeUnit.SECONDS
+                                    TimeUnit.SECONDS,
                                 ).perSecond(30),
-                                position = Position.Relative(0.5, 0.0)
-                            )
+                                position = Position.Relative(0.5, 0.0),
+                            ),
                         ),
                     )
                 }
@@ -134,7 +165,6 @@ fun DetalizationScreen(
         }
     }
 }
-
 
 @Composable
 private fun HandleEvents(events: Flow<DetalizationEvent>) {
@@ -148,8 +178,8 @@ private fun HandleEvents(events: Flow<DetalizationEvent>) {
                 uriHandler.openUri(it.uri)
             }
 
-            is DetalizationEvent.ShareDeeplink->{
-                context.share(it.uri,"foo")
+            is DetalizationEvent.ShareDeeplink -> {
+                context.share(it.uri, "foo")
             }
         }
     }
@@ -158,6 +188,7 @@ private fun HandleEvents(events: Flow<DetalizationEvent>) {
 @Preview(showBackground = true)
 @Composable
 fun Preview_DetalizationScreen_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         DetalizationScreen(
             DetalizationUiState(isLoading = false, isError = false),
@@ -165,7 +196,7 @@ fun Preview_DetalizationScreen_Light() {
             onFormatClick = {},
             remember { mutableStateOf(false) },
             remember { mutableStateOf(false) },
-            onShareClick = {}
+            onShareClick = {},
         )
     }
 }
@@ -173,6 +204,7 @@ fun Preview_DetalizationScreen_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_DetalizationScreen_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         DetalizationScreen(
             DetalizationUiState(isLoading = false, isError = false),
@@ -180,7 +212,7 @@ fun Preview_DetalizationScreen_Dark() {
             onFormatClick = {},
             remember { mutableStateOf(false) },
             remember { mutableStateOf(false) },
-            onShareClick = {}
+            onShareClick = {},
         )
     }
 }

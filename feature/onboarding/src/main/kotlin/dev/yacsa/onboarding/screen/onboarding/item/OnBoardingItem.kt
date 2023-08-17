@@ -25,6 +25,7 @@ import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -112,26 +113,27 @@ fun OnboardingItem(
 @Preview(showBackground = true)
 @Composable
 fun Preview_OnboardingItem_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         OnboardingItem(
             imageId = R.drawable.illustration_mobile_interface,
-            header = "foo",
-            caption = "bar",
+            header = faker.quote.fortuneCookie(),
+            caption = faker.quote.fortuneCookie(),
             state = rememberPagerState(),
         )
     }
 }
 
-
 @OptIn(ExperimentalPagerApi::class)
 @Preview(showBackground = true)
 @Composable
 fun Preview_OnboardingItem_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         OnboardingItem(
             imageId = R.drawable.illustration_mobile_interface,
-            header = "foo",
-            caption = "bar",
+            header = faker.quote.fortuneCookie(),
+            caption = faker.quote.fortuneCookie(),
             state = rememberPagerState(),
         )
     }

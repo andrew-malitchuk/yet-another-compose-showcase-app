@@ -10,10 +10,10 @@ android {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
+    implementation(libs.kotlinx.collections.immutable)
+    implementation(libs.kotlinx.serialization.json)
 
-    implementation("com.google.firebase:firebase-analytics-ktx:21.2.2")
+        implementation(libs.firebase.analytics)
 
     implementation(project(":service:analytics"))
     implementation(project(":service:analytics:provider"))

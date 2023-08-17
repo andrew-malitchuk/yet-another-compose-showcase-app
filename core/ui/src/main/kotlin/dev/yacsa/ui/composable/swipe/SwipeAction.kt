@@ -26,58 +26,58 @@ import dev.yacsa.ui.theme.YacsaTheme
  * actions that can be toggled on and off.
  */
 class SwipeAction(
-  val onSwipe: () -> Unit,
-  val icon: @Composable () -> Unit,
-  val background: Color,
-  val weight: Double = 1.0,
-  val isUndo: Boolean = false
+    val onSwipe: () -> Unit,
+    val icon: @Composable () -> Unit,
+    val background: Color,
+    val weight: Double = 1.0,
+    val isUndo: Boolean = false,
 ) {
-  init {
-    require(weight > 0.0) { "invalid weight $weight; must be greater than zero" }
-  }
+    init {
+        require(weight > 0.0) { "invalid weight $weight; must be greater than zero" }
+    }
 
-  fun copy(
-    onSwipe: () -> Unit = this.onSwipe,
-    icon: @Composable () -> Unit = this.icon,
-    background: Color = this.background,
-    weight: Double = this.weight,
-    isUndo: Boolean = this.isUndo,
-  ) = SwipeAction(
-    onSwipe = onSwipe,
-    icon = icon,
-    background = background,
-    weight = weight,
-    isUndo = isUndo
-  )
+    fun copy(
+        onSwipe: () -> Unit = this.onSwipe,
+        icon: @Composable () -> Unit = this.icon,
+        background: Color = this.background,
+        weight: Double = this.weight,
+        isUndo: Boolean = this.isUndo,
+    ) = SwipeAction(
+        onSwipe = onSwipe,
+        icon = icon,
+        background = background,
+        weight = weight,
+        isUndo = isUndo,
+    )
 }
 
 /**
  * See [SwipeAction] for documentation.
  */
 fun SwipeAction(
-  onSwipe: () -> Unit,
-  icon: Painter,
-  background: Color,
-  weight: Double = 1.0,
-  isUndo: Boolean = false
+    onSwipe: () -> Unit,
+    icon: Painter,
+    background: Color,
+    weight: Double = 1.0,
+    isUndo: Boolean = false,
 ): SwipeAction {
-  return SwipeAction(
-    icon = {
+    return SwipeAction(
+        icon = {
 //      Image(
 //        modifier = Modifier.padding(YacsaTheme.spacing.medium),
 //        painter = icon,
 //        contentDescription = null
 //      )
-      Icon(
-        modifier = Modifier.padding(YacsaTheme.spacing.medium),
-        painter = icon,
-        contentDescription = null,
-        tint = YacsaTheme.colors.accent
-      )
-    },
-    background = background,
-    weight = weight,
-    onSwipe = onSwipe,
-    isUndo = isUndo
-  )
+            Icon(
+                modifier = Modifier.padding(YacsaTheme.spacing.medium),
+                painter = icon,
+                contentDescription = null,
+                tint = YacsaTheme.colors.accent,
+            )
+        },
+        background = background,
+        weight = weight,
+        onSwipe = onSwipe,
+        isUndo = isUndo,
+    )
 }

@@ -14,35 +14,40 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtimeCompose)
     implementation(libs.androidx.navigation.compose)
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    implementation(libs.android.lifecycle.viewmodel.compose)
+    implementation(libs.hilt.navigation.compose)
 
-    implementation("androidx.compose.material:material:1.3.1")
-    implementation("com.google.accompanist:accompanist-pager:0.28.0")
-    implementation("com.google.accompanist:accompanist-pager-indicators:0.28.0")
+    implementation(libs.compose.material)
+    implementation(libs.accompanist.pager)
+    implementation(libs.accompanist.pager.indicators)
 
+    implementation(libs.compose.material3)
+     implementation(libs.compose.material3.size)
 
-    implementation("androidx.compose.material3:material3:1.1.0-rc01")
-    implementation("androidx.compose.material3:material3-window-size-class:1.1.0-rc01")
-
-    implementation("androidx.compose.ui:ui-tooling:1.4.0")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.4.0")
-    implementation("com.squareup.logcat:logcat:0.1")
+    implementation(libs.compose.ui.tooling)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.squareup.logcat)
 
 
     implementation(project(":domain"))
-    implementation(project(":feature:navigation"))
+    implementation(project(":core:navigation"))
     implementation(project(":core:ui"))
+    implementation(project(":core:platform"))
+    implementation(project(":core:localization"))
     implementation(project(":service:analytics"))
     implementation(project(":service:analytics:dispatcher"))
     implementation(project(":core:model"))
 
-    implementation("io.arrow-kt:arrow-core:1.2.0-RC")
-    implementation("io.arrow-kt:arrow-fx-coroutines:1.2.0-RC")
-    implementation("io.arrow-kt:arrow-optics:1.2.0-RC")
+    implementation(libs.arrow.core)
+    implementation(libs.arrow.fx.coroutines)
+     implementation(libs.arrow.optics)
     implementation(project(mapOf("path" to ":core:platform")))
-    ksp("io.arrow-kt:arrow-optics-ksp-plugin:1.2.0-RC")
+    ksp(libs.arrow.optics.ksp.plugin)
 
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.28.0")
+    implementation(libs.accompanist.systemuicontroller)
 
+    implementation(libs.github.theapache64)
+
+    implementation(libs.accompanist.navigation.animation)
+    implementation(libs.faker)
 }

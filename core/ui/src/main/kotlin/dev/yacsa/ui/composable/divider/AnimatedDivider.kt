@@ -22,7 +22,7 @@ fun AnimatedDivider(
         Divider(
             modifier = Modifier,
             thickness = YacsaTheme.dividers.small,
-            color = YacsaTheme.colors.secondary
+            color = YacsaTheme.colors.secondary,
         )
     }
 }

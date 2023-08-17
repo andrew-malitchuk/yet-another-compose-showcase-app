@@ -29,6 +29,7 @@ import dev.yacsa.books.screen.detalization.content.blocks.TranslatorsBlock
 import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.ui.composable.divider.AnimatedDivider
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -43,15 +44,14 @@ fun ContentFetchedPortrait(
     onSubjectClick: (String) -> Unit,
     onBookshelfClick: (String) -> Unit,
     favourite: MutableState<Boolean?>,
-    onShareClick:(Int)->Unit
+    onShareClick: (Int) -> Unit,
 ) {
     val lazyScrollState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
 
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
     ) {
-
         Scaffold(
             modifier = Modifier
                 .fillMaxSize()
@@ -68,7 +68,7 @@ fun ContentFetchedPortrait(
                             }
                         },
                         favourite,
-                        onShareClick
+                        onShareClick,
                     )
                 }
             },
@@ -76,7 +76,7 @@ fun ContentFetchedPortrait(
             Column(
                 modifier = Modifier
                     .padding(paddingValues)
-                    .background(YacsaTheme.colors.background)
+                    .background(YacsaTheme.colors.background),
             ) {
                 AnimatedDivider(state = lazyScrollState)
                 LazyColumn(
@@ -87,7 +87,7 @@ fun ContentFetchedPortrait(
                     state = lazyScrollState,
                     contentPadding = PaddingValues(
                         horizontal = YacsaTheme.spacing.medium,
-                        vertical = YacsaTheme.spacing.small
+                        vertical = YacsaTheme.spacing.small,
                     ),
                     verticalArrangement = Arrangement.spacedBy(YacsaTheme.spacing.small),
                 ) {
@@ -123,7 +123,7 @@ fun ContentFetchedPortrait(
                                     book = it,
                                     onFormatClick = {
                                         onFormatClick(it)
-                                    }
+                                    },
                                 )
                             }
                         }
@@ -151,6 +151,7 @@ fun ContentFetchedPortrait(
 @Composable
 @Preview(showBackground = true)
 fun Preview_ContentFetchedPortrait_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ContentFetchedPortrait(
             book = null,
@@ -162,7 +163,7 @@ fun Preview_ContentFetchedPortrait_Light() {
             {},
             {},
             remember { mutableStateOf(false) },
-            {}
+            {},
         )
     }
 }
@@ -170,6 +171,7 @@ fun Preview_ContentFetchedPortrait_Light() {
 @Composable
 @Preview(showBackground = true)
 fun Preview_ContentFetchedPortrait_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ContentFetchedPortrait(
             book = null,
@@ -181,7 +183,7 @@ fun Preview_ContentFetchedPortrait_Dark() {
             {},
             {},
             remember { mutableStateOf(false) },
-            onShareClick = {}
+            onShareClick = {},
         )
     }
 }

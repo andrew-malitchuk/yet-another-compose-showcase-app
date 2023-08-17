@@ -11,20 +11,22 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import dev.yacsa.books.screen.list.item.ItemBookshelf
 import dev.yacsa.model.model.BookUiModel
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun BookshelfBlock(
     book: BookUiModel,
-    onBookshelfClick:(String)->Unit,
-    ) {
+    onBookshelfClick: (String) -> Unit,
+) {
     Column(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxWidth(),
     ) {
         Text(
             modifier = Modifier.fillMaxWidth(),
-            text = "Bookshelf",
+            text = UiText.StringResource(dev.yacsa.localization.R.string.detalization_bookshelf).asString(),
             style = YacsaTheme.typography.title,
             color = YacsaTheme.colors.primary,
             maxLines = 1,
@@ -32,41 +34,40 @@ fun BookshelfBlock(
             textAlign = TextAlign.Start,
         )
         Spacer(
-            modifier = Modifier.height(YacsaTheme.spacing.small)
+            modifier = Modifier.height(YacsaTheme.spacing.small),
         )
         book.bookshelves?.forEach { lang ->
             lang?.let {
                 ItemBookshelf(bookshelf = it) {
-                        onBookshelfClick(it)
+                    onBookshelfClick(it)
                 }
                 Spacer(modifier = Modifier.height(YacsaTheme.spacing.small))
             }
-
         }
     }
-
 }
 
 @Preview(showBackground = true)
 @Composable
 fun Preview_BookshelfBlock_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         BookshelfBlock(
             book = BookUiModel(
+                faker.hashCode(),
+                faker.quote.fortuneCookie(),
+                listOf(faker.quote.fortuneCookie()),
+                emptyList(),
+                emptyList(),
+                listOf(faker.quote.fortuneCookie()),
+                listOf(faker.quote.fortuneCookie()),
+                true,
+                faker.quote.fortuneCookie(),
                 null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                true
+                faker.hashCode(),
+                true,
             ),
-            onBookshelfClick={}
+            onBookshelfClick = {},
         )
     }
 }
@@ -74,23 +75,24 @@ fun Preview_BookshelfBlock_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_BookshelfBlock_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         BookshelfBlock(
             book = BookUiModel(
+                faker.hashCode(),
+                faker.quote.fortuneCookie(),
+                listOf(faker.quote.fortuneCookie()),
+                emptyList(),
+                emptyList(),
+                listOf(faker.quote.fortuneCookie()),
+                listOf(faker.quote.fortuneCookie()),
+                true,
+                faker.quote.fortuneCookie(),
                 null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                true
+                faker.hashCode(),
+                true,
             ),
-            onBookshelfClick={}
+            onBookshelfClick = {},
         )
     }
 }

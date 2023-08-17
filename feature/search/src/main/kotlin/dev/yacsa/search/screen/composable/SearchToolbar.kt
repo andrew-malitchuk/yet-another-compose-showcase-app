@@ -25,9 +25,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.button.TwoStateButton
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun SearchToolbar(
@@ -36,10 +38,10 @@ fun SearchToolbar(
     onBackClick: () -> Unit,
     onFilterClick: () -> Unit,
     filterState: MutableState<Boolean>,
-    showSheet: MutableState<Boolean?>
+    showSheet: MutableState<Boolean?>,
 ) {
     Column(
-        modifier = Modifier.background(YacsaTheme.colors.background)
+        modifier = Modifier.background(YacsaTheme.colors.background),
     ) {
         Row(
             modifier = Modifier
@@ -51,24 +53,24 @@ fun SearchToolbar(
             SmallFloatingActionButton(
                 onClick = { onBackClick() },
                 containerColor = YacsaTheme.colors.accent,
-                elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
+                elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
             ) {
                 androidx.compose.material.Icon(
                     painter = painterResource(id = R.drawable.icon_caret_left_regular_24),
                     contentDescription = null,
-                    tint = YacsaTheme.colors.primary
+                    tint = YacsaTheme.colors.primary,
                 )
             }
             Text(
-                text = "Search",
+                text = UiText.StringResource(dev.yacsa.localization.R.string.search_search).asString(),
                 style = YacsaTheme.typography.header,
-                color = YacsaTheme.colors.primary
+                color = YacsaTheme.colors.primary,
             )
             Spacer(modifier = Modifier.width(YacsaTheme.spacing.small))
             Icon(
                 painterResource(id = R.drawable.icon_search_bold_24),
                 contentDescription = null,
-                tint = YacsaTheme.colors.accent
+                tint = YacsaTheme.colors.accent,
             )
             Spacer(
                 modifier = Modifier
@@ -78,13 +80,13 @@ fun SearchToolbar(
                 modifier = Modifier.padding(
                     start = YacsaTheme.spacing.extraSmall,
                     top = YacsaTheme.spacing.small,
-                    bottom = YacsaTheme.spacing.small
+                    bottom = YacsaTheme.spacing.small,
                 ),
                 badge = {
                     if (filterState.value) {
                         Badge(contentColor = YacsaTheme.colors.accent)
                     }
-                }
+                },
             ) {
                 TwoStateButton(
                     modifier = Modifier,
@@ -93,7 +95,7 @@ fun SearchToolbar(
                     selectedIcon = R.drawable.icon_filter_bold_24,
                     onButtonClick = {
                         showSheet.value = it
-                    }
+                    },
                 )
             }
         }
@@ -104,6 +106,7 @@ fun SearchToolbar(
 @Preview(showBackground = true)
 @Composable
 fun Preview_SearchToolbar_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         SearchToolbar(
             state = rememberLazyListState(),
@@ -119,6 +122,7 @@ fun Preview_SearchToolbar_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_SearchToolbar_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         SearchToolbar(
             state = rememberLazyListState(),

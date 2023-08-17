@@ -10,6 +10,8 @@ import dev.yacsa.domain.usecase.books.MarkFavouriteBook
 import dev.yacsa.domain.usecase.books.NewGetOrLoadBookUseCase
 import dev.yacsa.model.mapper.NewBooksUiDomainMapper
 import dev.yacsa.platform.Theme
+import dev.yacsa.platform.connection.ConnectivityObserver
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.platform.viewmodel.BaseViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
@@ -25,17 +27,19 @@ class DetalizationViewModel @Inject constructor(
     private val getOrLoadBookUseCase: NewGetOrLoadBookUseCase,
     private val markFavouriteBook: MarkFavouriteBook,
     private val theme: Theme,
+    var connectivityObserver: ConnectivityObserver,
     savedStateHandle: SavedStateHandle,
     initialState: DetalizationUiState,
 ) : BaseViewModel<DetalizationUiState, DetalizationUiState.PartialState, DetalizationEvent, DetalizationIntent>(
     savedStateHandle,
     initialState,
-), Theme by theme {
+),
+    Theme by theme {
 
     var checked: MutableState<Boolean?> =
         mutableStateOf(null)
 
-    var foo: MutableState<Boolean?> =
+    var favouriteState: MutableState<Boolean?> =
         mutableStateOf(false)
 
     private val bookId: Int = checkNotNull(savedStateHandle["bookId"])
@@ -63,12 +67,12 @@ class DetalizationViewModel @Inject constructor(
                     }
 
                     else -> {
-                        emit(DetalizationUiState.PartialState.Error(Exception("SWW")))
+                        emit(DetalizationUiState.PartialState.Error(Exception(UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).toString())))
                     }
                 }
             },
             {
-                checked.value= it.favourite == true
+                checked.value = it.favourite == true
                 emit(
                     DetalizationUiState.PartialState.Fetched(
                         bookUiDomainMapper.toUi(it),
@@ -80,13 +84,12 @@ class DetalizationViewModel @Inject constructor(
         emit(DetalizationUiState.PartialState.Loading)
     }
 
-
     private fun onLickClick(uri: String): Flow<DetalizationUiState.PartialState> {
         publishEvent(DetalizationEvent.OpenWebBrowserWithDetails(uri))
         return emptyFlow()
     }
 
-    private fun onShareClick(id:Int): Flow<DetalizationUiState.PartialState> {
+    private fun onShareClick(id: Int): Flow<DetalizationUiState.PartialState> {
         publishEvent(DetalizationEvent.ShareDeeplink(generateDeeplink(id)))
         return emptyFlow()
     }
@@ -116,18 +119,17 @@ class DetalizationViewModel @Inject constructor(
         }
     }
 
-    // TODO: remove
-    fun foo(isFavourite: Boolean) {
+    // TODO: recode
+    fun changeFavourite(isFavourite: Boolean) {
         viewModelScope.launch {
-            if (uiState.value.book?.isFavourite!=isFavourite) {
+            if (uiState.value.book?.isFavourite != isFavourite) {
                 markFavouriteBook(bookId, isFavourite)
-                foo.value=true
+                favouriteState.value = true
             }
         }
     }
 
-
-    private fun generateDeeplink(id:Int):String{
+    private fun generateDeeplink(id: Int): String {
         return "yacsa://book/$id"
     }
 }

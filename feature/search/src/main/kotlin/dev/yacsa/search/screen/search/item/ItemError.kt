@@ -17,7 +17,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun ItemError(
@@ -34,10 +36,10 @@ fun ItemError(
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
         ) {
             Text(
-                text = "SWW",
+                text = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString(),
                 style = YacsaTheme.typography.header,
                 color = YacsaTheme.colors.primary,
             )
@@ -56,16 +58,17 @@ fun ItemError(
                     .padding(horizontal = YacsaTheme.spacing.medium),
                 colors = ButtonDefaults.outlinedButtonColors(
                     backgroundColor = YacsaTheme.colors.surface,
-                    contentColor = YacsaTheme.colors.accent
+                    contentColor = YacsaTheme.colors.accent,
                 ),
                 border = BorderStroke(YacsaTheme.dividers.small, YacsaTheme.colors.accent),
                 onClick = {
                     onRetry()
-                }) {
+                },
+            ) {
                 androidx.compose.material.Text(
-                    text = "Okay",
+                    text = UiText.StringResource(dev.yacsa.localization.R.string.general_ok).asString(),
                     style = YacsaTheme.typography.title,
-                    color = YacsaTheme.colors.accent
+                    color = YacsaTheme.colors.accent,
                 )
             }
         }
@@ -75,21 +78,22 @@ fun ItemError(
 @Preview(showBackground = true)
 @Composable
 fun Preview_ListErrorItem_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ItemError(
-            error = "Lorem ipsum",
+            error = faker.quote.fortuneCookie(),
             onRetry = {},
         )
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun Preview_ListErrorItem_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ItemError(
-            error = "Lorem ipsum",
+            error = faker.quote.fortuneCookie(),
             onRetry = {},
         )
     }

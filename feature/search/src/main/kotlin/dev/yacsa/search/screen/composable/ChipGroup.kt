@@ -9,18 +9,16 @@ import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ChipGroup(
     values: List<String>,
-    defaultColor: Color,
-    selectedColor: Color,
     onSelectedChanged: (String) -> Unit = {},
     onDelete: (() -> Unit)? = null,
 ) {
@@ -51,7 +49,7 @@ fun ChipGroup(
                     colors = androidx.compose.material3.AssistChipDefaults.assistChipColors(
                         containerColor = YacsaTheme.colors.background,
                         labelColor = YacsaTheme.colors.primary,
-                        leadingIconContentColor = YacsaTheme.colors.primary
+                        leadingIconContentColor = YacsaTheme.colors.primary,
                     ),
                     onClick = {
                         onDelete()
@@ -79,25 +77,21 @@ fun ChipGroup(
 @Preview(showBackground = true)
 @Composable
 fun Preview_ChipGroup_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ChipGroup(
-            values = listOf("Foo", "Bar"),
-            defaultColor = Color.DarkGray,
-            selectedColor = Color.Cyan,
-            onDelete = {},
-        )
+            values = listOf(faker.airport.europeanUnion.medium(), faker.airport.europeanUnion.medium()),
+        ) {}
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun Preview_ChipGroup_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ChipGroup(
-            values = listOf("Foo", "Bar"),
-            defaultColor = Color.DarkGray,
-            selectedColor = Color.Cyan,
-            onDelete = {},
-        )
+            values = listOf(faker.airport.europeanUnion.medium(), faker.airport.europeanUnion.medium()),
+        ) {}
     }
 }

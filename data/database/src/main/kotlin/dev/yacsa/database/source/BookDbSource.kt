@@ -10,7 +10,7 @@ interface BookDbSource : BaseDbSource<BookDbModel> {
     suspend fun search(
         query: String,
         sort: String?,
-        lang: String?
+        lang: String?,
     ): List<BookDbModel>
 
     suspend fun markFavourite(id: Int, isFavourite: Boolean)

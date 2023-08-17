@@ -21,12 +21,11 @@ class NewSaveBooksUseCaseImpl @Inject constructor(
 
             val temp = list
 
-            previous.forEach {cached->
-               temp.find {income->
+            previous.forEach { cached ->
+                temp.find { income ->
                     income.id == cached.id
-                }?.favourite=cached.favourite
+                }?.favourite = cached.favourite
             }
-
 
             booksRepository.removePage(page)
             booksRepository.savePaged(page, temp.map { bookDomainRepoMapper.toRepo(it) })

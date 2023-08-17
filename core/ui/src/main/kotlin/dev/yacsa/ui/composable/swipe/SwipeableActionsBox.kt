@@ -51,7 +51,7 @@ fun SwipeableActionsBox(
     endActions: List<SwipeAction> = emptyList(),
     swipeThreshold: Dp = 40.dp,
     backgroundUntilSwipeThreshold: Color = Color.DarkGray,
-    content: @Composable BoxScope.() -> Unit
+    content: @Composable BoxScope.() -> Unit,
 ) = BoxWithConstraints(modifier) {
     val isRtl = LocalLayoutDirection.current == LayoutDirection.Rtl
     val leftActions = if (isRtl) endActions else startActions
@@ -86,33 +86,33 @@ fun SwipeableActionsBox(
             !thresholdCrossed -> backgroundUntilSwipeThreshold
             visibleAction == null -> Color.Transparent
             else -> visibleAction.value.background
-        }
+        },
     )
 
     Box(
         modifier = Modifier
-          .absoluteOffset { IntOffset(x = offset.roundToInt(), y = 0) }
-          /*.drawOverContent { ripple.draw(scope = this) }*/
-          .draggable(
-            orientation = Horizontal,
-            enabled = !state.isResettingOnRelease,
-            onDragStopped = {
-              if (thresholdCrossed && visibleAction != null) {
-                swipedAction = visibleAction
-                swipedAction!!.value.onSwipe()
+            .absoluteOffset { IntOffset(x = offset.roundToInt(), y = 0) }
+            /*.drawOverContent { ripple.draw(scope = this) }*/
+            .draggable(
+                orientation = Horizontal,
+                enabled = !state.isResettingOnRelease,
+                onDragStopped = {
+                    if (thresholdCrossed && visibleAction != null) {
+                        swipedAction = visibleAction
+                        swipedAction!!.value.onSwipe()
 //                ripple.animate(
 //                  action = swipedAction!!,
 //                  scope = this
 //                )
-              }
-              launch {
-                state.resetOffset()
-                swipedAction = null
-              }
-            },
-            state = state.draggableState,
-          ),
-        content = content
+                    }
+                    launch {
+                        state.resetOffset()
+                        swipedAction = null
+                    }
+                },
+                state = state.draggableState,
+            ),
+        content = content,
     )
 
     (swipedAction ?: visibleAction)?.let { action ->
@@ -121,7 +121,7 @@ fun SwipeableActionsBox(
             action = action,
             offset = offset,
             backgroundColor = backgroundColor,
-            content = { action.value.icon() }
+            content = { action.value.icon() },
         )
     }
 }
@@ -132,20 +132,20 @@ private fun ActionIconBox(
     offset: Float,
     backgroundColor: Color,
     modifier: Modifier = Modifier,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     Row(
         modifier = modifier
-          .layout { measurable, constraints ->
-            val placeable = measurable.measure(constraints)
-            layout(width = placeable.width, height = placeable.height) {
-              // Align icon with the left/right edge of the content being swiped.
-              val iconOffset =
-                if (action.isOnRightSide) constraints.maxWidth + offset else offset - placeable.width
-              placeable.placeRelative(x = iconOffset.roundToInt(), y = 0)
+            .layout { measurable, constraints ->
+                val placeable = measurable.measure(constraints)
+                layout(width = placeable.width, height = placeable.height) {
+                    // Align icon with the left/right edge of the content being swiped.
+                    val iconOffset =
+                        if (action.isOnRightSide) constraints.maxWidth + offset else offset - placeable.width
+                    placeable.placeRelative(x = iconOffset.roundToInt(), y = 0)
+                }
             }
-          }
-          /*.background(color = backgroundColor)*/,
+        /*.background(color = backgroundColor)*/,
         horizontalArrangement = if (action.isOnRightSide) Arrangement.Start else Arrangement.End,
         verticalAlignment = Alignment.CenterVertically,
     ) {

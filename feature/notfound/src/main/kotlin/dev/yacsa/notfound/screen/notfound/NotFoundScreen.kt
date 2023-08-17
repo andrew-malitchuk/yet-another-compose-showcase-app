@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun NotFoundRoute(
@@ -38,16 +39,16 @@ fun NotFoundScreen(
             .background(YacsaTheme.colors.background)
             .padding(YacsaTheme.spacing.medium),
 
-        ) {
+    ) {
         SmallFloatingActionButton(
             onClick = { onBackClick() },
-            elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp),
-            containerColor = YacsaTheme.colors.accent
+            elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
+            containerColor = YacsaTheme.colors.accent,
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.icon_caret_left_regular_24),
                 contentDescription = null,
-                tint = YacsaTheme.colors.primary
+                tint = YacsaTheme.colors.primary,
             )
         }
 
@@ -58,7 +59,7 @@ fun NotFoundScreen(
                 .clip(RoundedCornerShape(size = YacsaTheme.corners.medium))
                 .align(Alignment.Center)
                 .background(YacsaTheme.colors.surface),
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.Center,
 
         ) {
             Image(
@@ -69,12 +70,12 @@ fun NotFoundScreen(
             )
         }
     }
-
 }
 
 @Composable
 @Preview(showBackground = true)
 fun Preview_NotFoundScreen_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         NotFoundScreen({})
     }
@@ -83,6 +84,7 @@ fun Preview_NotFoundScreen_Light() {
 @Composable
 @Preview(showBackground = true)
 fun Preview_NotFoundScreen_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         NotFoundScreen({})
     }

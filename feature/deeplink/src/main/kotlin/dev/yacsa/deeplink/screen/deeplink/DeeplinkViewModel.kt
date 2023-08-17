@@ -12,14 +12,14 @@ import javax.inject.Inject
 class DeeplinkViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     initialState: DeeplinkUiState,
-    private val theme:Theme,
-    ) : BaseViewModel<DeeplinkUiState, DeeplinkUiState.PartialState, DeeplinkEvent, DeeplinkIntent>(
+    private val theme: Theme,
+) : BaseViewModel<DeeplinkUiState, DeeplinkUiState.PartialState, DeeplinkEvent, DeeplinkIntent>(
     savedStateHandle,
     initialState,
-) , Theme by theme{
+),
+    Theme by theme {
 
     init {
-
     }
 
     override fun mapIntents(intent: DeeplinkIntent): Flow<DeeplinkUiState.PartialState> {
@@ -29,8 +29,6 @@ class DeeplinkViewModel @Inject constructor(
 //        }
         return emptyFlow()
     }
-
-
 
     override fun reduceUiState(
         previousState: DeeplinkUiState,

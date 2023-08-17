@@ -8,14 +8,14 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 
 data class YacsaColors(
-    val background:Color,
-    val surface:Color,
-    val accent:Color,
-    val primary:Color,
-    val secondary:Color,
+    val background: Color,
+    val surface: Color,
+    val accent: Color,
+    val primary: Color,
+    val secondary: Color,
 
-    val statusBar:Color,
-    val navigationBar:Color,
+    val statusBar: Color,
+    val navigationBar: Color,
 )
 
 data class YacsaTypography(

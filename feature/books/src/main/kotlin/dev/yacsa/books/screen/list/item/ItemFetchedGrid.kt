@@ -20,8 +20,10 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import dev.yacsa.model.model.BookUiModel
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun ItemFetchedGrid(
@@ -59,7 +61,7 @@ fun ItemFetchedGrid(
         }
         Spacer(modifier = modifier.height(YacsaTheme.spacing.small))
         Text(
-            text = (book.authors?.firstOrNull()?.name ?: "NI"),
+            text = (book.authors?.firstOrNull()?.name ?: UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString()),
             style = YacsaTheme.typography.caption,
             textAlign = TextAlign.Center,
             maxLines = 1,
@@ -67,7 +69,7 @@ fun ItemFetchedGrid(
         )
         Spacer(modifier = modifier.height(YacsaTheme.spacing.small))
         Text(
-            text = (book.title ?: "NI"),
+            text = (book.title ?: UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString()),
             style = YacsaTheme.typography.title,
             textAlign = TextAlign.Center,
             maxLines = 2,
@@ -79,9 +81,23 @@ fun ItemFetchedGrid(
 @Preview(showBackground = true)
 @Composable
 fun Preview_ItemFetchedGrid_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ItemFetchedGrid(
-            book = BookUiModel(1, "foobar", null, emptyList(), emptyList(), emptyList(), emptyList(), true, null, null, 10,true),
+            book = BookUiModel(
+                faker.hashCode(),
+                faker.quote.fortuneCookie(),
+                listOf(faker.quote.fortuneCookie()),
+                emptyList(),
+                emptyList(),
+                listOf(faker.quote.fortuneCookie()),
+                listOf(faker.quote.fortuneCookie()),
+                true,
+                faker.quote.fortuneCookie(),
+                null,
+                faker.hashCode(),
+                true,
+            ),
             onItemContentClick = {},
         )
     }
@@ -90,9 +106,23 @@ fun Preview_ItemFetchedGrid_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_ItemFetchedGrid_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ItemFetchedGrid(
-            book = BookUiModel(1, "foobar", null, emptyList(), emptyList(), emptyList(), emptyList(), true, null, null, 10,true),
+            book = BookUiModel(
+                faker.hashCode(),
+                faker.quote.fortuneCookie(),
+                listOf(faker.quote.fortuneCookie()),
+                emptyList(),
+                emptyList(),
+                listOf(faker.quote.fortuneCookie()),
+                listOf(faker.quote.fortuneCookie()),
+                true,
+                faker.quote.fortuneCookie(),
+                null,
+                faker.hashCode(),
+                true,
+            ),
             onItemContentClick = {},
         )
     }

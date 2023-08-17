@@ -23,13 +23,14 @@ import dev.yacsa.model.model.BookUiModel
 import dev.yacsa.search.screen.search.item.ItemFetchedList
 import dev.yacsa.ui.composable.divider.AnimatedDivider
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun ResultFetched(
     modifier: Modifier = Modifier,
     resultSearch: List<BookUiModel>,
     onBookClicked: (Int) -> Unit,
-    state:LazyListState
+    state: LazyListState,
 ) {
     val isVisible = state.canScrollBackward
     val corner = animateDpAsState(
@@ -74,24 +75,25 @@ fun ResultFetched(
 @Preview(showBackground = true)
 @Composable
 fun Preview_ResultFetched_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ResultFetched(
             resultSearch = emptyList(),
             onBookClicked = {},
-            state = rememberLazyListState()
+            state = rememberLazyListState(),
         )
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun Preview_ResultFetched_Dark() {
+    val faker = Faker()
     YacsaTheme(false) {
         ResultFetched(
             resultSearch = emptyList(),
             onBookClicked = {},
-            state = rememberLazyListState()
+            state = rememberLazyListState(),
         )
     }
 }

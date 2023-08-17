@@ -28,6 +28,7 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.pager.ExperimentalPagerApi
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.search.screen.composable.ChipGroup
 import dev.yacsa.search.screen.composable.SearchToolbar
 import dev.yacsa.search.screen.search.SearchUiState
@@ -39,7 +40,7 @@ import dev.yacsa.ui.composable.content.ContentIsLoading
 import dev.yacsa.ui.composable.content.ContentNoData
 import dev.yacsa.ui.composable.keyboard.clearFocusOnKeyboardDismiss
 import dev.yacsa.ui.theme.YacsaTheme
-import logcat.logcat
+import io.github.serpro69.kfaker.Faker
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalPagerApi::class)
 @Composable
@@ -52,12 +53,11 @@ fun ContentFetched(
     onDelete: () -> Unit,
     onFilterChanged: (FilterDialogResult) -> Unit,
     previousContent: FilterDialogResult?,
-    onBackClick:()->Unit
+    onBackClick: () -> Unit,
 ) {
-
-    val foo = rememberTopAppBarState()
+    val topAppBarState = rememberTopAppBarState()
     val scrollBehavior =
-        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(foo)
+        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(topAppBarState)
 
     val state = rememberLazyListState()
 
@@ -77,7 +77,6 @@ fun ContentFetched(
                 showSheet.value = false
             },
             onSort = {
-                logcat("foobar") { it.toString() }
                 onFilterChanged(it)
                 filterResult.value = it.isFulfilled()
                 showSheet.value = false
@@ -87,11 +86,11 @@ fun ContentFetched(
                 onFilterChanged(FilterDialogResult())
                 filterResult.value = false
                 showSheet.value = false
-            }
+            },
         )
     }
     Column(
-        modifier = Modifier.background(YacsaTheme.colors.background)
+        modifier = Modifier.background(YacsaTheme.colors.background),
     ) {
         SearchToolbar(
             state = listState,
@@ -99,10 +98,9 @@ fun ContentFetched(
                 onBackClick()
             },
             onFilterClick = {
-
             },
-            filterState =  filterResult,
-            showSheet= showSheet
+            filterState = filterResult,
+            showSheet = showSheet,
         )
         OutlinedTextField(
             modifier = Modifier
@@ -114,7 +112,7 @@ fun ContentFetched(
                 unfocusedBorderColor = YacsaTheme.colors.primary,
                 textColor = YacsaTheme.colors.primary,
                 cursorColor = YacsaTheme.colors.accent,
-                placeholderColor = YacsaTheme.colors.secondary
+                placeholderColor = YacsaTheme.colors.secondary,
             ),
             value = searchText,
             onValueChange = onValueChange,
@@ -128,7 +126,7 @@ fun ContentFetched(
                 Icon(
                     imageVector = Icons.Outlined.Search,
                     contentDescription = null,
-                    tint = YacsaTheme.colors.accent
+                    tint = YacsaTheme.colors.accent,
                 )
             },
             trailingIcon = {
@@ -138,27 +136,24 @@ fun ContentFetched(
                     Icon(
                         imageVector = Icons.Outlined.Delete,
                         contentDescription = null,
-                        tint = YacsaTheme.colors.accent
+                        tint = YacsaTheme.colors.accent,
                     )
                 }
             },
             singleLine = true,
-            placeholder = { Text("Type to search...") },
+            placeholder = { Text(UiText.StringResource(dev.yacsa.localization.R.string.search_type).asString()) },
         )
 
         if (!uiState.topSearch.isNullOrEmpty()) {
             // TODO: fix
             ChipGroup(
                 values = uiState.topSearch.map { it.query ?: "" },
-                defaultColor = YacsaTheme.colors.background,
-                selectedColor = YacsaTheme.colors.surface,
                 onSelectedChanged = {
                     onValueChange(it)
                 },
-                onDelete = {
-                    onDelete()
-                },
-            )
+            ) {
+                onDelete()
+            }
         }
 
         if (uiState.isResultLoading) {
@@ -166,35 +161,35 @@ fun ContentFetched(
         } else {
             if (uiState.resultSearch.isNullOrEmpty()) {
                 if (uiState.isError) {
-                    ContentError(errorMessage = "Moshi moshi?"){}
+                    ContentError(errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString()) {}
                 } else {
-                    ContentNoData(modifier = Modifier.fillMaxSize(),message = "Nothing to show(")
+                    ContentNoData(modifier = Modifier.fillMaxSize(), message = UiText.StringResource(dev.yacsa.localization.R.string.errors_no_data).asString())
                 }
             } else {
                 ResultFetched(
                     resultSearch = uiState.resultSearch,
                     onBookClicked = onBookClicked,
-                    state = listState
+                    state = listState,
                 )
             }
         }
     }
-
 }
 
 @Composable
 @Preview(showBackground = true)
 fun Preview_ContentFetched_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ContentFetched(
-            searchText = "Lorem ipsum",
+            searchText = faker.quote.fortuneCookie(),
             onValueChange = {},
             uiState = SearchUiState(),
             onBookClicked = {},
             onDelete = {},
             onFilterChanged = {},
             previousContent = null,
-            onBackClick={}
+            onBackClick = {},
         )
     }
 }
@@ -202,16 +197,17 @@ fun Preview_ContentFetched_Light() {
 @Composable
 @Preview(showBackground = true)
 fun Preview_ContentFetched_Dark() {
+    val faker = Faker()
     YacsaTheme(false) {
         ContentFetched(
-            searchText = "Lorem ipsum",
+            searchText = faker.quote.fortuneCookie(),
             onValueChange = {},
             uiState = SearchUiState(),
             onBookClicked = {},
             onDelete = {},
             onFilterChanged = {},
             previousContent = null,
-            onBackClick={}
+            onBackClick = {},
         )
     }
 }

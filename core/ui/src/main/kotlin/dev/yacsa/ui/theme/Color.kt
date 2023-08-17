@@ -29,7 +29,7 @@ val baseLightColorPalette = YacsaColors(
     primary = yacsa_theme_light_primary,
     secondary = yacsa_theme_light_secondary,
     statusBar = yacsa_theme_light_bar_status,
-    navigationBar = yacsa_theme_light_bar_navigation
+    navigationBar = yacsa_theme_light_bar_navigation,
 )
 
 val baseDarkColorPalette = YacsaColors(
@@ -39,5 +39,5 @@ val baseDarkColorPalette = YacsaColors(
     primary = yacsa_theme_dark_primary,
     secondary = yacsa_theme_dark_secondary,
     statusBar = yacsa_theme_dark_bar_status,
-    navigationBar = yacsa_theme_dark_bar_navigation
+    navigationBar = yacsa_theme_dark_bar_navigation,
 )

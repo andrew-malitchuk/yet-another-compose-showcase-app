@@ -24,23 +24,25 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun ContentError(
     modifier: Modifier = Modifier,
     errorMessage: String,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(YacsaTheme.colors.background)
+            .background(YacsaTheme.colors.background),
     ) {
         Box(
             modifier = Modifier
-                .fillMaxHeight(1f)
+                .fillMaxHeight(1f),
 
         ) {
             Box(
@@ -48,15 +50,15 @@ fun ContentError(
                     .padding(YacsaTheme.spacing.medium)
                     .fillMaxWidth()
                     .aspectRatio(1f)
-                    .clip(RoundedCornerShape(size =YacsaTheme.corners.medium))
+                    .clip(RoundedCornerShape(size = YacsaTheme.corners.medium))
                     .align(Alignment.Center)
                     .background(YacsaTheme.colors.surface),
-                contentAlignment = Alignment.Center
+                contentAlignment = Alignment.Center,
 
             ) {
                 Column(
                     verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Image(
                         modifier = Modifier
@@ -65,7 +67,7 @@ fun ContentError(
                         contentDescription = null,
                     )
                     Text(
-                        text = "SWW",
+                        text = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString(),
                         style = YacsaTheme.typography.header,
                         color = YacsaTheme.colors.primary,
                     )
@@ -84,16 +86,17 @@ fun ContentError(
                             .padding(horizontal = YacsaTheme.spacing.medium),
                         colors = ButtonDefaults.outlinedButtonColors(
                             backgroundColor = YacsaTheme.colors.surface,
-                            contentColor = YacsaTheme.colors.accent
+                            contentColor = YacsaTheme.colors.accent,
                         ),
                         border = BorderStroke(YacsaTheme.dividers.small, YacsaTheme.colors.accent),
                         onClick = {
                             onBackClick()
-                        }) {
+                        },
+                    ) {
                         androidx.compose.material.Text(
                             text = "Okay",
                             style = YacsaTheme.typography.title,
-                            color = YacsaTheme.colors.accent
+                            color = YacsaTheme.colors.accent,
                         )
                     }
                 }
@@ -105,10 +108,11 @@ fun ContentError(
 @Preview(showBackground = true)
 @Composable
 fun Preview_ContentError_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ContentError(
-            errorMessage = "Foobar",
-            onBackClick = {}
+            errorMessage = faker.quote.fortuneCookie(),
+            onBackClick = {},
         )
     }
 }
@@ -116,10 +120,11 @@ fun Preview_ContentError_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_ContentError_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ContentError(
-            errorMessage = "Foobar",
-            onBackClick = {}
+            errorMessage = faker.quote.fortuneCookie(),
+            onBackClick = {},
         )
     }
 }

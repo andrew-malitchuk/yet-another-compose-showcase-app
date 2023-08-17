@@ -9,6 +9,6 @@ interface BooksNetSource {
     suspend fun search(
         query: String,
         sort: String?,
-        lang: String?
+        lang: String?,
     ): ResultNetModel?
 }

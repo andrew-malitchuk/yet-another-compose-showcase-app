@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="onboarding_item_title_1">Download</string>
+    <string name="onboarding_item_description_1">All books are free to download</string>
+    <string name="onboarding_item_title_2">Search</string>
+    <string name="onboarding_item_description_2">Search and filter books</string>
+    <string name="onboarding_item_title_3">Favourites</string>
+    <string name="onboarding_item_description_3">Add books to bookshelf</string>
+</resources>

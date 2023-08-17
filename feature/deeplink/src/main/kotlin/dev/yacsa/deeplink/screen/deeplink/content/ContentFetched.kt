@@ -36,11 +36,13 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.chrisbanes.snapper.ExperimentalSnapperApi
 import dev.yacsa.deeplink.screen.deeplink.DeeplinkUiState
 import dev.yacsa.deeplink.screen.deeplink.item.DeeplinkItem
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.content.ContentError
 import dev.yacsa.ui.composable.content.ContentIsLoading
 import dev.yacsa.ui.composable.keyboard.clearFocusOnKeyboardDismiss
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 import java.lang.Math.abs
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalSnapperApi::class)
@@ -49,14 +51,14 @@ fun ContentFetched(
     modifier: Modifier = Modifier.fillMaxSize(),
     innerPadding: PaddingValues,
     state: LazyListState,
-    foo: TopAppBarState,
+    topAppBarState: TopAppBarState,
     uiState: DeeplinkUiState,
-    foobar: MutableState<String>,
-    onDeeplinkRun:()->Unit
+    deeplinkState: MutableState<String>,
+    onDeeplinkRun: () -> Unit,
 
 ) {
     val corner =
-        YacsaTheme.corners.medium - (YacsaTheme.corners.medium * abs(foo.collapsedFraction))
+        YacsaTheme.corners.medium - (YacsaTheme.corners.medium * abs(topAppBarState.collapsedFraction))
     val systemUiController = rememberSystemUiController()
 
     when {
@@ -72,16 +74,20 @@ fun ContentFetched(
                 color = YacsaTheme.colors.statusBar,
             )
             ContentError(
-                errorMessage = "Moshi moshi?"
+                errorMessage = UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString(),
             ) {
-
             }
         }
 
         else -> {
-            systemUiController.setNavigationBarColor(
-                color = YacsaTheme.colors.statusBar,
-            )
+            systemUiController.apply {
+                setSystemBarsColor(
+                    color = YacsaTheme.colors.statusBar,
+                )
+                setNavigationBarColor(
+                    color = YacsaTheme.colors.surface,
+                )
+            }
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -90,11 +96,12 @@ fun ContentFetched(
                 OutlinedTextField(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .background(YacsaTheme.colors.background)
                         .padding(
                             start = YacsaTheme.spacing.small,
                             end = YacsaTheme.spacing.extraSmall,
                             top = YacsaTheme.spacing.small,
-                            bottom = YacsaTheme.spacing.small
+                            bottom = YacsaTheme.spacing.small,
                         )
                         .clearFocusOnKeyboardDismiss(),
                     colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -102,11 +109,11 @@ fun ContentFetched(
                         unfocusedBorderColor = YacsaTheme.colors.primary,
                         textColor = YacsaTheme.colors.primary,
                         cursorColor = YacsaTheme.colors.accent,
-                        placeholderColor = YacsaTheme.colors.secondary
+                        placeholderColor = YacsaTheme.colors.secondary,
                     ),
-                    value = foobar.value,
+                    value = deeplinkState.value,
                     onValueChange = {
-                        foobar.value = it
+                        deeplinkState.value = it
                     },
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.None,
@@ -133,19 +140,19 @@ fun ContentFetched(
                         }
                     },
                     singleLine = true,
-                    placeholder = { Text("Type deeplink") },
+                    placeholder = { Text(UiText.StringResource(dev.yacsa.localization.R.string.deeplink_type).asString()) },
                 )
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
                         .fillMaxHeight(1f)
-                        .background(YacsaTheme.colors.background)
+                        .background(YacsaTheme.colors.background),
                 ) {
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
                             .clip(RoundedCornerShape(topStart = corner, topEnd = corner))
-                            .background(YacsaTheme.colors.surface)
+                            .background(YacsaTheme.colors.surface),
                     ) {
                         LazyColumn(
                             modifier = Modifier
@@ -159,8 +166,7 @@ fun ContentFetched(
                                     value = "yacsa://book",
                                     icon = R.drawable.icon_link_regular_24,
                                     onClick = {
-//                                        onDeeplinkClick("yacsa://book")
-                                        foobar.value="yacsa://book"
+                                        deeplinkState.value = "yacsa://book"
                                     },
                                 )
                             }
@@ -169,8 +175,7 @@ fun ContentFetched(
                                     value = "yacsa://favourite",
                                     icon = R.drawable.icon_link_regular_24,
                                     onClick = {
-//                                        onDeeplinkClick("yacsa://favourite")
-                                        foobar.value="yacsa://favourite"
+                                        deeplinkState.value = "yacsa://favourite"
                                     },
                                 )
                             }
@@ -179,33 +184,31 @@ fun ContentFetched(
                                     value = "yacsa://search",
                                     icon = R.drawable.icon_link_regular_24,
                                     onClick = {
-                                        foobar.value="yacsa://search"
+                                        deeplinkState.value = "yacsa://search"
                                     },
                                 )
                             }
-
                         }
                     }
                 }
             }
         }
     }
-
-
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
 @Composable
 fun Preview_ContentFetched() {
+    val faker = Faker()
     YacsaTheme {
         ContentFetched(
             innerPadding = PaddingValues(YacsaTheme.spacing.small),
             state = rememberLazyListState(),
-            foo = rememberTopAppBarState(),
+            topAppBarState = rememberTopAppBarState(),
             uiState = DeeplinkUiState(isError = true),
-            foobar = remember { mutableStateOf("") },
-            onDeeplinkRun={}
+            deeplinkState = remember { mutableStateOf(faker.quote.fortuneCookie()) },
+            onDeeplinkRun = {},
         )
     }
 }

@@ -6,11 +6,13 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.yacsa.repository.impl.impl.AnalyticsRepositoryImpl
 import dev.yacsa.repository.impl.impl.BooksRepositoryImpl
+import dev.yacsa.repository.impl.impl.CheckUpdateRepositoryImpl
 import dev.yacsa.repository.impl.impl.FeatureFlagRepositoryImpl
 import dev.yacsa.repository.impl.impl.SearchHistoryRepositoryImpl
 import dev.yacsa.repository.impl.impl.StartUpConfigureRepositoryImpl
 import dev.yacsa.repository.repository.AnalyticsRepository
 import dev.yacsa.repository.repository.BooksRepository
+import dev.yacsa.repository.repository.CheckUpdateRepository
 import dev.yacsa.repository.repository.FeatureFlagRepository
 import dev.yacsa.repository.repository.SearchHistoryRepository
 import dev.yacsa.repository.repository.StartUpConfigureRepository
@@ -44,4 +46,9 @@ abstract class RepositoryModule {
     abstract fun bindsAnalyticsRepository(
         analyticsRepositoryImpl: AnalyticsRepositoryImpl,
     ): AnalyticsRepository
+
+    @Binds
+    abstract fun bindsCheckUpdateRepository(
+        checkUpdateRepositoryImpl: CheckUpdateRepositoryImpl,
+    ): CheckUpdateRepository
 }

@@ -14,9 +14,8 @@ interface BookDbDao {
     @Query("SELECT * FROM ${YacsaDb.Table.BOOK}")
     suspend fun get(): List<BookDbModel>?
 
-    // TODO: rename to subscribe?
     @Query("SELECT * FROM ${YacsaDb.Table.BOOK}")
-    fun getFlow(): Flow<List<BookDbModel>?>
+    fun subscribe(): Flow<List<BookDbModel>?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(value: BookDbModel): Long
@@ -30,13 +29,11 @@ interface BookDbDao {
     @Query("DELETE FROM ${YacsaDb.Table.BOOK}")
     suspend fun deleteAll()
 
-    //
     @Query("SELECT * FROM ${YacsaDb.Table.BOOK} WHERE page = :page")
     suspend fun getPaged(page: Int): List<BookDbModel>?
 
     @Query("DELETE FROM ${YacsaDb.Table.BOOK} WHERE page = :page")
     suspend fun removePage(page: Int)
-    //
 
     @Query(
         """
@@ -51,7 +48,7 @@ interface BookDbDao {
     )
     fun search(
         query: String,
-        lang: String?
+        lang: String?,
     ): List<BookDbModel>
 
     @Query(
@@ -62,9 +59,9 @@ interface BookDbDao {
                 favourite = :isFavourite
             WHERE
                 bookId = :id
-        """
+        """,
     )
-    fun markFavourite(id:Int, isFavourite:Int)
+    fun markFavourite(id: Int, isFavourite: Int)
 
     @Query("SELECT * FROM ${YacsaDb.Table.BOOK} WHERE favourite = 1")
     fun getFavouriteFlow(): Flow<List<BookDbModel>?>

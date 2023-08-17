@@ -30,13 +30,15 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.theapache64.rebugger.Rebugger
 import dev.yacsa.deeplink.screen.deeplink.content.ContentFetched
 import dev.yacsa.platform.ext.triggerDeepLink
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.divider.AnimatedDivider
 import dev.yacsa.ui.composable.theme.detectThemeMode
 import dev.yacsa.ui.theme.YacsaTheme
-import logcat.logcat
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun DeeplinkRoute(
@@ -44,22 +46,30 @@ fun DeeplinkRoute(
     onBackClick: () -> Unit,
 ) {
     val uiState by DeeplinkViewModel.uiState.collectAsStateWithLifecycle()
+    val currentTheme by DeeplinkViewModel.currentTheme
+    val isDarkTheme = currentTheme?.detectThemeMode() ?: false
 
-    val currentTheme  by DeeplinkViewModel.currentTheme
-    val isDarkTheme = currentTheme?.detectThemeMode()?:false
+    val onValueChange: MutableState<String> = remember { mutableStateOf("") }
 
-    val onValueChange:MutableState<String> = remember{ mutableStateOf("") }
+    val context = LocalContext.current
 
-    val foo = LocalContext.current
+    Rebugger(
+        trackMap = mapOf(
+            "uiState" to uiState,
+            "currentTheme" to currentTheme,
+            "isDarkTheme" to isDarkTheme,
+            "onValueChange" to onValueChange,
+        ),
+    )
 
     YacsaTheme(isDarkTheme) {
         DeeplinkScreen(
             uiState,
             onBackClick,
             onValueChange,
-            onDeeplinkRun={
-                foo.triggerDeepLink(onValueChange.value)
-            }
+            onDeeplinkRun = {
+                context.triggerDeepLink(onValueChange.value)
+            },
         )
     }
 }
@@ -69,8 +79,8 @@ fun DeeplinkRoute(
 fun DeeplinkScreen(
     uiState: DeeplinkUiState,
     onBackClick: () -> Unit,
-    onValueChange:MutableState<String>,
-    onDeeplinkRun:()->Unit
+    onValueChange: MutableState<String>,
+    onDeeplinkRun: () -> Unit,
 ) {
     val systemUiController = rememberSystemUiController()
     val state = rememberLazyListState()
@@ -80,14 +90,12 @@ fun DeeplinkScreen(
             color = YacsaTheme.colors.statusBar,
         )
         setNavigationBarColor(
-            color = YacsaTheme.colors.navigationBar,
+            color = YacsaTheme.colors.surface,
         )
     }
-    val foo = rememberTopAppBarState()
+    val topAppBarState = rememberTopAppBarState()
     val scrollBehavior =
-        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(foo)
-
-    logcat("foo") { foo.collapsedFraction.toString() }
+        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(topAppBarState)
 
     Scaffold(
         modifier = Modifier
@@ -98,17 +106,16 @@ fun DeeplinkScreen(
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        // TODO: fix
                         Text(
-                            text = "Deeplink",
+                            text = UiText.StringResource(dev.yacsa.localization.R.string.deeplink_deeplink).asString(),
                             style = YacsaTheme.typography.header,
-                            color = YacsaTheme.colors.primary
+                            color = YacsaTheme.colors.primary,
                         )
                         Spacer(modifier = Modifier.width(YacsaTheme.spacing.small))
                         androidx.compose.material3.Icon(
                             painterResource(id = R.drawable.icon_link_bold_24),
                             contentDescription = null,
-                            tint = YacsaTheme.colors.accent
+                            tint = YacsaTheme.colors.accent,
                         )
                     }
                 },
@@ -116,12 +123,12 @@ fun DeeplinkScreen(
                     SmallFloatingActionButton(
                         onClick = { onBackClick() },
                         containerColor = YacsaTheme.colors.accent,
-                        elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
+                        elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
                     ) {
                         Icon(
                             painter = painterResource(id = R.drawable.icon_caret_left_regular_24),
                             contentDescription = null,
-                            tint = YacsaTheme.colors.primary
+                            tint = YacsaTheme.colors.primary,
                         )
                     }
                 },
@@ -134,30 +141,47 @@ fun DeeplinkScreen(
                 Spacer(modifier = Modifier.height(YacsaTheme.spacing.extraLarge))
                 AnimatedDivider(state = state)
             }
-        }
+        },
     ) { innerPadding ->
         ContentFetched(
             innerPadding = innerPadding,
             state = state,
-            foo = foo,
-            uiState=uiState,
-            foobar = onValueChange,
-            onDeeplinkRun=onDeeplinkRun
+            topAppBarState = topAppBarState,
+            uiState = uiState,
+            deeplinkState = onValueChange,
+            onDeeplinkRun = onDeeplinkRun,
         )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_SettingsScreen() {
-    YacsaTheme {
+fun Preview_DeeplinkScreen_Light() {
+    val faker = Faker()
+    YacsaTheme(true) {
         DeeplinkScreen(
             uiState = DeeplinkUiState(),
             onBackClick = {},
             onValueChange = remember {
-                mutableStateOf("")
+                mutableStateOf(faker.quote.fortuneCookie())
             },
-            onDeeplinkRun={}
+            onDeeplinkRun = {},
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_DeeplinkScreen_Dark() {
+    val faker = Faker()
+    YacsaTheme(false) {
+        DeeplinkScreen(
+            uiState = DeeplinkUiState(),
+            onBackClick = {},
+            onValueChange = remember {
+                mutableStateOf(faker.quote.fortuneCookie())
+            },
+            onDeeplinkRun = {},
         )
     }
 }

@@ -51,5 +51,4 @@ abstract class DbSourceModule {
     abstract fun bindsAnalyticsDbSource(
         analyticsDbSourceImpl: AnalyticsDbSourceImpl,
     ): AnalyticsDbSource
-
 }

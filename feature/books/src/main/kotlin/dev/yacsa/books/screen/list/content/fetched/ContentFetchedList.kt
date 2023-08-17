@@ -2,6 +2,7 @@ package dev.yacsa.books.screen.list.content.fetched
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,14 +21,17 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.items
+import androidx.paging.compose.itemKey
 import dev.yacsa.books.screen.list.item.ItemError
 import dev.yacsa.books.screen.list.item.ItemFetchedList
 import dev.yacsa.books.screen.list.item.ItemLoading
 import dev.yacsa.model.model.BookUiModel
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 import kotlinx.coroutines.flow.flowOf
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ContentFetchedList(
     modifier: Modifier = Modifier,
@@ -54,16 +58,18 @@ fun ContentFetchedList(
             state = listState,
             modifier = modifier
                 .fillMaxSize(),
-            // TODO: fix
             contentPadding = PaddingValues(YacsaTheme.spacing.small),
             verticalArrangement = Arrangement.spacedBy(YacsaTheme.spacing.small),
         ) {
             items(
-                lazyPagingItems,
-            ) { item ->
+                count = lazyPagingItems.itemCount,
+                key = lazyPagingItems.itemKey { it.id!! },
+            ) { index ->
+                val item = lazyPagingItems[index]
                 item?.let {
                     ItemFetchedList(
-                        book = it,
+                        modifier = Modifier.animateItemPlacement(),
+                        book = item,
                         onItemContentClick = {
                             // TODO: fix
                             it.id?.let { it1 -> onBookClicked(it1) }
@@ -83,7 +89,7 @@ fun ContentFetchedList(
                         val error = lazyPagingItems.loadState.append as? LoadState.Error
                         item {
                             ItemError(
-                                error = error?.error?.localizedMessage ?: "SWW",
+                                error = error?.error?.localizedMessage ?: UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString(),
                                 onRetry = {
                                     retry()
                                 },
@@ -101,7 +107,7 @@ fun ContentFetchedList(
                         val error = lazyPagingItems.loadState.append as LoadState.Error
                         item {
                             ItemError(
-                                error = error.error.localizedMessage ?: "SWW",
+                                error = error.error.localizedMessage ?: UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString(),
                                 onRetry = {
                                     retry()
                                 },
@@ -117,6 +123,7 @@ fun ContentFetchedList(
 @Preview(showBackground = true)
 @Composable
 fun Preview_ContentFetchedList_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ContentFetchedList(
             lazyPagingItems = flowOf(PagingData.empty<BookUiModel>()).collectAsLazyPagingItems(),
@@ -129,6 +136,7 @@ fun Preview_ContentFetchedList_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_ContentFetchedList_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ContentFetchedList(
             lazyPagingItems = flowOf(PagingData.empty<BookUiModel>()).collectAsLazyPagingItems(),

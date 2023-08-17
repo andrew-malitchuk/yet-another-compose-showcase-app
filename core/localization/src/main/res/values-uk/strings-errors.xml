@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="errors_no_data">Нема даних</string>
+    <string name="errors_sww">ШПН</string>
+    <string name="errors_offline">Офлайн</string>
+</resources>

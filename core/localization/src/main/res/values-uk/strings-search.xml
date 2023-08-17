@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search_search">Пошук</string>
+    <string name="search_type">Пошук...</string>
+    <string name="search_filter">Фільтр</string>
+    <string name="search_language">Мова</string>
+    <string name="search_sort">Сортування</string>
+</resources>

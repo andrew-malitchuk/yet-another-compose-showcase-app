@@ -18,18 +18,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun ContentNoData(
     modifier: Modifier = Modifier,
-    message:String
+    message: String,
 ) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .padding(YacsaTheme.spacing.medium),
 
-        ) {
+    ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -37,12 +38,12 @@ fun ContentNoData(
                 .clip(YacsaTheme.shapes.cornersStyle)
                 .align(Alignment.Center)
                 .background(YacsaTheme.colors.surface),
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.Center,
 
         ) {
             Column(
                 verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Image(
                     modifier = Modifier
@@ -63,9 +64,10 @@ fun ContentNoData(
 @Preview(showBackground = true)
 @Composable
 fun Preview_ContentNoData_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ContentNoData(
-            message="Foobar"
+            message = faker.quote.fortuneCookie(),
         )
     }
 }
@@ -73,9 +75,10 @@ fun Preview_ContentNoData_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_ContentNoData_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ContentNoData(
-            message="Foobar"
+            message = faker.quote.fortuneCookie(),
         )
     }
 }

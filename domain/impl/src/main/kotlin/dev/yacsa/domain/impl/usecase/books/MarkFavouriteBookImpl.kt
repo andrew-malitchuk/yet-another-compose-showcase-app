@@ -9,7 +9,6 @@ import dev.yacsa.domain.usecase.books.MarkFavouriteBook
 import dev.yacsa.repository.repository.BooksRepository
 import javax.inject.Inject
 
-
 class MarkFavouriteBookImpl @Inject constructor(
     private val booksRepository: BooksRepository,
 ) : MarkFavouriteBook {
@@ -22,5 +21,4 @@ class MarkFavouriteBookImpl @Inject constructor(
             DataError(ex).some()
         }
     }
-
 }

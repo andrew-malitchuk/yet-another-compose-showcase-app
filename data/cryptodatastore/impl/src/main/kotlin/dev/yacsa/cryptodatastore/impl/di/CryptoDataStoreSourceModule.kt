@@ -13,6 +13,6 @@ abstract class CryptoDataStoreSourceModule {
 
     @Binds
     abstract fun bindsAccessTokenCryptoDataStoreSource(
-        AccessTokenCryptoDataStoreSourceImpl: AccessTokenCryptoDataStoreSourceImpl,
+        accessTokenCryptoDataStoreSourceImpl: AccessTokenCryptoDataStoreSourceImpl,
     ): AccessTokenCryptoDataStoreSource
 }

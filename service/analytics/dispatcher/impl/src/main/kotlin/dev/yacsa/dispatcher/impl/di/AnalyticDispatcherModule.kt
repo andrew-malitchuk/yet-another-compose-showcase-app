@@ -17,5 +17,4 @@ abstract class AnalyticDispatcherModule {
     abstract fun bindsAnalyticDispatcher(
         analyticDispatcherImpl: AnalyticDispatcherImpl,
     ): AnalyticDispatcher
-
 }

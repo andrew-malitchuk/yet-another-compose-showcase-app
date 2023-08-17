@@ -12,6 +12,8 @@ import dev.yacsa.domain.usecase.history.NewInsertSearchHistoryUseCase
 import dev.yacsa.model.mapper.NewBooksUiDomainMapper
 import dev.yacsa.model.mapper.NewSearchHistoryUiDomainMapper
 import dev.yacsa.platform.Theme
+import dev.yacsa.platform.connection.ConnectivityObserver
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.platform.viewmodel.BaseViewModel
 import dev.yacsa.search.screen.search.dialog.FilterDialogResult
 import kotlinx.coroutines.flow.Flow
@@ -35,14 +37,16 @@ class SearchViewModel @Inject constructor(
     private val getTopSearchUseCase: NewGetTopSearchUseCase,
     private val searchHistoryUiDomainMapper: NewSearchHistoryUiDomainMapper,
     private val clearHistoryUseCase: NewClearHistoryUseCase,
-    private val theme:Theme
+    private val theme: Theme,
+    var connectivityObserver: ConnectivityObserver,
 ) : BaseViewModel<SearchUiState, SearchUiState.PartialState, SearchEvent, SearchIntent>(
     savedStateHandle,
     initialState,
-),Theme by theme {
+),
+    Theme by theme {
     val searchText = MutableStateFlow("")
 
-    val filterResult = MutableStateFlow( FilterDialogResult() )
+    val filterResult = MutableStateFlow(FilterDialogResult())
 
     init {
         viewModelScope.launch {
@@ -60,7 +64,6 @@ class SearchViewModel @Inject constructor(
                     "",
                 )
                 .collect {
-                    logcat("foo") { it }
                     if (it.isNotBlank()) {
                         acceptIntent(SearchIntent.Search(it))
                     }
@@ -86,7 +89,7 @@ class SearchViewModel @Inject constructor(
                     }
 
                     else -> {
-                        emit(SearchUiState.PartialState.Error(Throwable("SWW")))
+                        emit(SearchUiState.PartialState.Error(Throwable(UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).toString())))
                     }
                 }
             }, { result ->
@@ -106,7 +109,7 @@ class SearchViewModel @Inject constructor(
         flow {
             insertSearchHistoryUseCase(query).fold({
                 val filter = filterResult.value
-                searchBooksUseCase(query,filter.sort,filter.lang).fold(
+                searchBooksUseCase(query, filter.sort, filter.lang).fold(
                     { error ->
                         when (error) {
                             is NoDataError -> {
@@ -118,7 +121,7 @@ class SearchViewModel @Inject constructor(
                             }
 
                             else -> {
-                                emit(SearchUiState.PartialState.Error(Throwable("SWW")))
+                                emit(SearchUiState.PartialState.Error(Throwable(UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).toString())))
                             }
                         }
                     },
@@ -134,7 +137,7 @@ class SearchViewModel @Inject constructor(
                     }
 
                     else -> {
-                        emit(SearchUiState.PartialState.Error(Throwable("SWW")))
+                        emit(SearchUiState.PartialState.Error(Throwable(UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).toString())))
                     }
                 }
             })
@@ -155,7 +158,7 @@ class SearchViewModel @Inject constructor(
                         }
 
                         else -> {
-                            emit(SearchUiState.PartialState.Error(Throwable("SWW")))
+                            emit(SearchUiState.PartialState.Error(Throwable(UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).toString())))
                         }
                     }
                 },

@@ -11,20 +11,22 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import dev.yacsa.books.screen.list.item.ItemAuthor
 import dev.yacsa.model.model.BookUiModel
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun TranslatorsBlock(
     book: BookUiModel,
-    onTranslatorClick:(String)->Unit,
-    ) {
+    onTranslatorClick: (String) -> Unit,
+) {
     Column(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxWidth(),
     ) {
         Text(
             modifier = Modifier.fillMaxWidth(),
-            text = "Translators",
+            text = UiText.StringResource(dev.yacsa.localization.R.string.detalization_translators).asString(),
             style = YacsaTheme.typography.title,
             color = YacsaTheme.colors.primary,
             maxLines = 1,
@@ -32,7 +34,7 @@ fun TranslatorsBlock(
             textAlign = TextAlign.Start,
         )
         Spacer(
-            modifier = Modifier.height(YacsaTheme.spacing.small)
+            modifier = Modifier.height(YacsaTheme.spacing.small),
         )
         book.translators?.forEach { person ->
             person?.let {
@@ -41,32 +43,31 @@ fun TranslatorsBlock(
                 }
                 Spacer(modifier = Modifier.height(YacsaTheme.spacing.small))
             }
-
         }
     }
-
 }
 
 @Preview(showBackground = true)
 @Composable
 fun Preview_TranslatorsBlock_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         TranslatorsBlock(
             book = BookUiModel(
+                faker.hashCode(),
+                faker.quote.fortuneCookie(),
+                listOf(faker.quote.fortuneCookie()),
+                emptyList(),
+                emptyList(),
+                listOf(faker.quote.fortuneCookie()),
+                listOf(faker.quote.fortuneCookie()),
+                true,
+                faker.quote.fortuneCookie(),
                 null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                true
+                faker.hashCode(),
+                true,
             ),
-            onTranslatorClick={}
+            onTranslatorClick = {},
         )
     }
 }
@@ -74,23 +75,24 @@ fun Preview_TranslatorsBlock_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_TranslatorsBlock_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         TranslatorsBlock(
             book = BookUiModel(
+                faker.hashCode(),
+                faker.quote.fortuneCookie(),
+                listOf(faker.quote.fortuneCookie()),
+                emptyList(),
+                emptyList(),
+                listOf(faker.quote.fortuneCookie()),
+                listOf(faker.quote.fortuneCookie()),
+                true,
+                faker.quote.fortuneCookie(),
                 null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                true
+                faker.hashCode(),
+                true,
             ),
-            onTranslatorClick={}
+            onTranslatorClick = {},
         )
     }
 }

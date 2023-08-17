@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="detalization_authors">Автори</string>
+    <string name="detalization_languages">Мови</string>
+    <string name="detalization_subjects">Теми</string>
+    <string name="detalization_formats">Формати</string>
+    <string name="detalization_bookshelf">Полиці</string>
+    <string name="detalization_translators">Перекладачі</string>
+</resources>

@@ -24,17 +24,16 @@ interface BooksRepository {
     suspend fun searchOnRemote(
         query: String,
         sort: String?,
-        lang: String?
+        lang: String?,
     ): List<BookRepoModel>
 
     suspend fun searchOnLocal(
         query: String,
         sort: String?,
-        lang: String?
+        lang: String?,
     ): List<BookRepoModel>
 
-    suspend fun markFavourite(id:Int, favourite:Boolean)
+    suspend fun markFavourite(id: Int, favourite: Boolean)
 
     suspend fun subscribeFavourite(): Flow<List<BookRepoModel?>?>
-
 }

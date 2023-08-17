@@ -28,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -54,7 +55,7 @@ fun DeeplinkItem(
         shape = YacsaTheme.shapes.cornersStyle,
         elevation = 0.dp,
 
-        ) {
+    ) {
         Row(
             modifier = Modifier
                 .padding(YacsaTheme.spacing.small),
@@ -63,12 +64,12 @@ fun DeeplinkItem(
             SmallFloatingActionButton(
                 onClick = { },
                 containerColor = YacsaTheme.colors.primary,
-                elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp)
+                elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
             ) {
                 Icon(
                     painter = painterResource(id = icon),
                     contentDescription = null,
-                    tint = YacsaTheme.colors.accent
+                    tint = YacsaTheme.colors.accent,
                 )
             }
             Spacer(
@@ -77,8 +78,10 @@ fun DeeplinkItem(
             )
             Column {
                 Text(
-                    text = value, modifier = Modifier.basicMarquee(),
-                    style = YacsaTheme.typography.caption, color = YacsaTheme.colors.primary
+                    text = value,
+                    modifier = Modifier.basicMarquee(),
+                    style = YacsaTheme.typography.caption,
+                    color = YacsaTheme.colors.primary,
                 )
             }
         }
@@ -87,10 +90,24 @@ fun DeeplinkItem(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_SettingsItem() {
-    YacsaTheme {
+fun Preview_DeeplinkItem_Light() {
+    val faker = Faker()
+    YacsaTheme(true) {
         DeeplinkItem(
-            value = "foobar",
+            value = faker.quote.fortuneCookie(),
+            icon = R.drawable.icon_bell_regular_24,
+            onClick = {},
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_DeeplinkItem_Dark() {
+    val faker = Faker()
+    YacsaTheme(false) {
+        DeeplinkItem(
+            value = faker.quote.fortuneCookie(),
             icon = R.drawable.icon_bell_regular_24,
             onClick = {},
         )

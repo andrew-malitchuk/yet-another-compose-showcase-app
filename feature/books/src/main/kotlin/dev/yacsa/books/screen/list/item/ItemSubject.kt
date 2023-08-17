@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -55,12 +56,12 @@ fun ItemSubject(
             SmallFloatingActionButton(
                 onClick = { },
                 containerColor = YacsaTheme.colors.primary,
-                elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
+                elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_mask_happy_regular_24),
                     contentDescription = null,
-                    tint = YacsaTheme.colors.accent
+                    tint = YacsaTheme.colors.accent,
                 )
             }
             Spacer(
@@ -72,7 +73,7 @@ fun ItemSubject(
                 modifier = Modifier.basicMarquee(),
                 text = subject,
                 style = YacsaTheme.typography.title,
-                color = YacsaTheme.colors.secondary
+                color = YacsaTheme.colors.secondary,
             )
         }
     }
@@ -81,9 +82,10 @@ fun ItemSubject(
 @Preview(showBackground = true)
 @Composable
 fun Preview_ItemSubject_Ligth() {
+    val faker = Faker()
     YacsaTheme(false) {
         ItemSubject(
-            subject= "Abactus peritus homo est.",
+            subject = faker.quote.fortuneCookie(),
             onClick = {},
         )
     }
@@ -92,9 +94,10 @@ fun Preview_ItemSubject_Ligth() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_ItemSubject_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ItemSubject(
-            subject= "Abactus peritus homo est.",
+            subject = faker.quote.fortuneCookie(),
             onClick = {},
         )
     }

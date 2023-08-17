@@ -1,25 +1,29 @@
 package dev.yacsa.main.navigation
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
+import com.google.accompanist.navigation.animation.AnimatedNavHost
 import dev.yacsa.analytics.navigation.analyticsNavGraph
 import dev.yacsa.books.navigation.booksNavGraph
 import dev.yacsa.deeplink.navigation.deeplinkNavGraph
 import dev.yacsa.favourite.navigation.favouriteNavGraph
 import dev.yacsa.featureflagmanager.navigation.featureFlagNavGraph
+import dev.yacsa.info.navigation.infoNavGraph
 import dev.yacsa.navigation.NavigationDirection
 import dev.yacsa.notfound.navigation.notFoundNavGraph
 import dev.yacsa.onboarding.navigation.onboardingNavGraph
 import dev.yacsa.search.navigation.searchNavGraph
 import dev.yacsa.settings.navigation.settingsNavGraph
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun RootNavigationGraph(
     navController: NavHostController,
     startDestination: String,
 ) {
-    NavHost(
+//    NavHost(
+    AnimatedNavHost(
         navController = navController,
         route = NavigationDirection.Root.route,
         startDestination = startDestination,
@@ -33,5 +37,6 @@ fun RootNavigationGraph(
         analyticsNavGraph(navController)
         favouriteNavGraph(navController)
         deeplinkNavGraph(navController)
+        infoNavGraph(navController)
     }
 }

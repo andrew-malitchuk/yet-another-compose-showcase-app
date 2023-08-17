@@ -11,21 +11,22 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import dev.yacsa.books.screen.list.item.ItemLanguage
 import dev.yacsa.model.model.BookUiModel
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.theme.YacsaTheme
-
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun LanguageBlock(
     book: BookUiModel,
-    onLanguageClick:(String)->Unit,
-    ) {
+    onLanguageClick: (String) -> Unit,
+) {
     Column(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxWidth(),
     ) {
         Text(
             modifier = Modifier.fillMaxWidth(),
-            text = "Languages",
+            text = UiText.StringResource(dev.yacsa.localization.R.string.search_language).asString(),
             style = YacsaTheme.typography.title,
             color = YacsaTheme.colors.primary,
             maxLines = 1,
@@ -33,7 +34,7 @@ fun LanguageBlock(
             textAlign = TextAlign.Start,
         )
         Spacer(
-            modifier = Modifier.height(YacsaTheme.spacing.small)
+            modifier = Modifier.height(YacsaTheme.spacing.small),
         )
         book.languages?.forEach { lang ->
             lang?.let {
@@ -42,32 +43,31 @@ fun LanguageBlock(
                 }
                 Spacer(modifier = Modifier.height(YacsaTheme.spacing.small))
             }
-
         }
     }
-
 }
 
 @Preview(showBackground = true)
 @Composable
 fun Preview_LanguageBlock_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         LanguageBlock(
             book = BookUiModel(
+                faker.hashCode(),
+                faker.quote.fortuneCookie(),
+                listOf(faker.quote.fortuneCookie()),
+                emptyList(),
+                emptyList(),
+                listOf(faker.quote.fortuneCookie()),
+                listOf(faker.quote.fortuneCookie()),
+                true,
+                faker.quote.fortuneCookie(),
                 null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                true
+                faker.hashCode(),
+                true,
             ),
-            onLanguageClick ={}
+            onLanguageClick = {},
         )
     }
 }
@@ -75,23 +75,24 @@ fun Preview_LanguageBlock_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_LanguageBlock_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         LanguageBlock(
             book = BookUiModel(
+                faker.hashCode(),
+                faker.quote.fortuneCookie(),
+                listOf(faker.quote.fortuneCookie()),
+                emptyList(),
+                emptyList(),
+                listOf(faker.quote.fortuneCookie()),
+                listOf(faker.quote.fortuneCookie()),
+                true,
+                faker.quote.fortuneCookie(),
                 null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                true
+                faker.hashCode(),
+                true,
             ),
-            onLanguageClick ={}
+            onLanguageClick = {},
         )
     }
 }

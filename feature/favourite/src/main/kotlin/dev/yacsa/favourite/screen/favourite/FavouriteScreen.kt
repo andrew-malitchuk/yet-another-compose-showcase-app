@@ -26,8 +26,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.theapache64.rebugger.Rebugger
 import dev.yacsa.favourite.screen.favourite.content.ContentFetched
 import dev.yacsa.model.model.BookUiModel
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.composable.divider.AnimatedDivider
 import dev.yacsa.ui.composable.theme.detectThemeMode
@@ -36,23 +38,32 @@ import dev.yacsa.ui.theme.YacsaTheme
 @Composable
 fun FavouriteRoute(
     favouriteViewModel: FavouriteViewModel = hiltViewModel(),
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
 ) {
     val uiState by favouriteViewModel.uiState.collectAsStateWithLifecycle()
 
-    val foo = favouriteViewModel.flow?.collectAsStateWithLifecycle(null)
+    val favouriteFlow = favouriteViewModel.flow?.collectAsStateWithLifecycle(null)
 
-    val currentTheme  by favouriteViewModel.currentTheme
-    val isDarkTheme = currentTheme?.detectThemeMode()?:false
+    val currentTheme by favouriteViewModel.currentTheme
+    val isDarkTheme = currentTheme?.detectThemeMode() ?: false
+
+    Rebugger(
+        trackMap = mapOf(
+            "uiState" to uiState,
+            "currentTheme" to currentTheme,
+            "isDarkTheme" to isDarkTheme,
+            "favouriteFlow" to favouriteFlow,
+        ),
+    )
 
     YacsaTheme(isDarkTheme) {
         FavouriteScreen(
             uiState,
-            foo,
+            favouriteFlow,
             onBackClick,
             onFavouriteMark = { id, isFavourite ->
                 favouriteViewModel.acceptIntent(FavouriteIntent.MarkFavourite(id, isFavourite))
-            }
+            },
         )
     }
 }
@@ -63,36 +74,33 @@ fun FavouriteScreen(
     uiState: FavouriteUiState,
     favouriteFlow: State<List<BookUiModel?>?>?,
     onBackClick: () -> Unit,
-    onFavouriteMark: (Int, Boolean) -> Unit
+    onFavouriteMark: (Int, Boolean) -> Unit,
 ) {
-    val foo = rememberTopAppBarState()
+    val topAppBarState = rememberTopAppBarState()
     val scrollBehavior =
-        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(foo)
+        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(topAppBarState)
     val state = rememberLazyListState()
-
 
     Scaffold(
         modifier = Modifier
             .nestedScroll(scrollBehavior.nestedScrollConnection)
-            .background( YacsaTheme.colors.background),
+            .background(YacsaTheme.colors.background),
         topBar = {
             LargeTopAppBar(
                 title = {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        // TODO: fix
                         Text(
-                            text = "Favourite",
+                            text = UiText.StringResource(dev.yacsa.localization.R.string.general_favourite).asString(),
                             style = YacsaTheme.typography.header,
-                            color = YacsaTheme.colors.primary
+                            color = YacsaTheme.colors.primary,
                         )
-                        // TODO: fix
                         Spacer(modifier = Modifier.width(YacsaTheme.spacing.small))
                         androidx.compose.material3.Icon(
                             painterResource(id = R.drawable.icon_heart_regulat_24),
                             contentDescription = null,
-                            tint = YacsaTheme.colors.accent
+                            tint = YacsaTheme.colors.accent,
                         )
                     }
                 },
@@ -100,12 +108,12 @@ fun FavouriteScreen(
                     SmallFloatingActionButton(
                         onClick = { onBackClick() },
                         containerColor = YacsaTheme.colors.accent,
-                        elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
+                        elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
                     ) {
                         Icon(
                             painter = painterResource(id = R.drawable.icon_caret_left_regular_24),
                             contentDescription = null,
-                            tint = YacsaTheme.colors.primary
+                            tint = YacsaTheme.colors.primary,
                         )
                     }
                 },
@@ -123,10 +131,10 @@ fun FavouriteScreen(
         ContentFetched(
             innerPadding = innerPadding,
             lazyListState = state,
-            topAppBarState = foo,
+            topAppBarState = topAppBarState,
             uiState = uiState,
             favouriteFlow = favouriteFlow,
-            onFavouriteMark = onFavouriteMark
+            onFavouriteMark = onFavouriteMark,
         )
     }
 }

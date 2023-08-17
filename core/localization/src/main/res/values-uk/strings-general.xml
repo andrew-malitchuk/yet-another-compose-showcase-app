@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_next">Далі</string>
+    <string name="general_skip">Пропустити</string>
+    <string name="general_favourite">Улюблені</string>
+    <string name="general_ok">ok</string>
+    <string name="general_qt">Улюблені</string>
+</resources>
+

@@ -12,20 +12,22 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun OfflineSnackbar(
-    message: String
+    message: String,
 ) {
     val shape = RoundedCornerShape(
-        bottomEnd = YacsaTheme.corners.medium,
-        bottomStart = YacsaTheme.corners.medium
+        YacsaTheme.corners.medium,
+//        bottomEnd = YacsaTheme.corners.medium,
+//        bottomStart = YacsaTheme.corners.medium
     )
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .clip(shape)
-            .background(YacsaTheme.colors.primary)
+            .background(YacsaTheme.colors.primary),
     ) {
         Text(
             modifier = Modifier
@@ -34,19 +36,18 @@ fun OfflineSnackbar(
             text = message,
             style = YacsaTheme.typography.title,
             color = YacsaTheme.colors.background,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
         )
-
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable
 fun Preivew_OfflineSnackbar_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         OfflineSnackbar(
-            message = "Foobar"
+            message = faker.quote.fortuneCookie(),
         )
     }
 }
@@ -54,9 +55,10 @@ fun Preivew_OfflineSnackbar_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preivew_OfflineSnackbar_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         OfflineSnackbar(
-            message = "Foobar"
+            message = faker.quote.fortuneCookie(),
         )
     }
 }

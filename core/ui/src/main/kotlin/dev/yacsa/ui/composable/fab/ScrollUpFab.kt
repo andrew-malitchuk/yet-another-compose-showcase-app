@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun ScrollUpFab(
@@ -36,11 +37,11 @@ fun ScrollUpFab(
             ),
         ),
 
-        ) {
+    ) {
         FloatingActionButton(
             onClick = { onClick() },
             backgroundColor = YacsaTheme.colors.accent,
-            elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
+            elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
         ) {
             androidx.compose.material3.Icon(
                 painter = painterResource(id = R.drawable.icon_arrow_up_regular_24),
@@ -53,6 +54,7 @@ fun ScrollUpFab(
 @Preview(showBackground = true)
 @Composable
 fun Preview_ScrollUpFab_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ScrollUpFab(
             modifier = Modifier,
@@ -61,10 +63,10 @@ fun Preview_ScrollUpFab_Light() {
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun Preview_ScrollUpFab_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ScrollUpFab(
             modifier = Modifier,

@@ -1,5 +1,7 @@
 package dev.yacsa.books.screen.list.item
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -25,9 +27,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yacsa.model.model.PersonUiModel
+import dev.yacsa.platform.string.UiText
 import dev.yacsa.ui.R
 import dev.yacsa.ui.theme.YacsaTheme
-
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun ItemAuthor(
@@ -57,12 +60,12 @@ fun ItemAuthor(
             SmallFloatingActionButton(
                 onClick = { },
                 containerColor = YacsaTheme.colors.primary,
-                elevation = FloatingActionButtonDefaults.elevation(0.dp,0.dp,0.dp,0.dp)
-                ) {
+                elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
+            ) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_user_circle_regular_24),
                     contentDescription = null,
-                    tint = YacsaTheme.colors.accent
+                    tint = YacsaTheme.colors.accent,
                 )
             }
             Spacer(
@@ -71,33 +74,35 @@ fun ItemAuthor(
             )
             Column(
                 modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.Center,
             ) {
                 Text(
-                    text = person.name ?: "SWW",
+                    text = person.name ?: UiText.StringResource(dev.yacsa.localization.R.string.errors_sww).asString(),
                     style = YacsaTheme.typography.title,
-                    color = YacsaTheme.colors.secondary
+                    color = YacsaTheme.colors.secondary,
                 )
                 Text(
                     text = "${person.birthYear}-${person.deathYear}",
                     style = YacsaTheme.typography.description,
-                    color = YacsaTheme.colors.secondary
+                    color = YacsaTheme.colors.secondary,
                 )
             }
         }
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
 fun Preview_SettingsItem_Light() {
+    val faker = Faker()
     YacsaTheme(false) {
         ItemAuthor(
             person = PersonUiModel(
-                1,
-                1000,
-                2000,
-                "Foobar"
+                faker.hashCode(),
+                faker.person.birthDate(100).year,
+                faker.person.birthDate(100).year,
+                faker.name.nameWithMiddle(),
             ),
             onClick = {},
         )
@@ -107,13 +112,14 @@ fun Preview_SettingsItem_Light() {
 @Preview(showBackground = true)
 @Composable
 fun Preview_SettingsItem_Dark() {
+    val faker = Faker()
     YacsaTheme(true) {
         ItemAuthor(
             person = PersonUiModel(
-                1,
-                1000,
-                2000,
-                "Foobar"
+                faker.hashCode(),
+                faker.person.birthDate(100).year,
+                faker.person.birthDate(100).year,
+                faker.name.nameWithMiddle(),
             ),
             onClick = {},
         )

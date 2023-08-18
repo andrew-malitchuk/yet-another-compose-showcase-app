@@ -25,6 +25,18 @@
             </intent-filter>
         </activity>
 
+        <receiver
+            android:name="dev.yacsa.widget.favourite.FavouriteBooksAppWidgetReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/favourite_books_widget_info" />
+        </receiver>
+
         <service
             android:name="dev.yacsa.main.tile.FavouriteTileService"
             android:icon="@drawable/icon_book_regular_24"
